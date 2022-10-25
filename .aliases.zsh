@@ -8,6 +8,8 @@ alias getId='swaymsg -t get_tree'
 # dotfiles
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias dotsave='dotfiles push -u origin main'
+alias dotc='dotfiles commit -m'
+alias dota='dotfiles add'
 
 # arch
 alias search='pacman -Ss'
