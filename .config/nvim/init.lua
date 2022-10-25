@@ -7,11 +7,7 @@ o.number = true
 o.termguicolors = true
 vim.g.mapleader = " " 
 
-vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
-
-require("catppuccin").setup()
-
-vim.cmd [[colorscheme catppuccin]]
+vim.cmd [[colorscheme nord]]
 
 vim.api.nvim_set_keymap("n", "<leader>ff", ":Telescope find_files<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>fb", ":Telescope buffers<CR>", { noremap = true })

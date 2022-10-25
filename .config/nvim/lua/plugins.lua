@@ -35,12 +35,12 @@ return require('packer').startup(function(use)
   'nvim-lualine/lualine.nvim',
   requires = { 'kyazdani42/nvim-web-devicons', opt = true },
   config = function() require('lualine').setup{
-    options = { theme = 'catppuccin' }
+    options = { theme = 'nord' }
   } 
   end 
   }
 
-  use { "catppuccin/nvim", as = "catppuccin" }
+  use 'shaunsingh/nord.nvim'
 
   use { "beauwilliams/focus.nvim", config = function() require("focus").setup() end }
 end)
