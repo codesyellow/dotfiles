@@ -42,8 +42,8 @@ static const Rule rules[] = {
 	{ "firefox",  NULL,       NULL,       1 << 1,       0,           -1,        50,50,500,500,        5 },
 	{ "YouTube Music",  NULL,       NULL,       1 << 2,       0,           -1,        50,50,500,500,        5 },
 	/* class      instance    title       tags mask     isfloating   monitor    scratch key */
-	{ NULL,       NULL,   "scratchpad",   0,           1,           -1,          's',         50,50,1200,300,        5 },
-	{ "btop",     NULL,       NULL,   0,            1,           -1,          'b',         50,50,1200,600,        5 },
+	{ NULL,       NULL,   "scratchpad",   0,           1,           -1,          's',         70,50,1200,300,        5 },
+	{ "btop",     NULL,       NULL,   0,            1,           -1,          'b',         70,50,1200,600,        5 },
 };
 
 /* layout(s) */
