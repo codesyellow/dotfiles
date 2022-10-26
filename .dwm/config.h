@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
@@ -18,8 +18,8 @@ static const char *fonts[]          = {
    };
 static const char dmenufont[]       = "CaskadiaCove Nerd Font:size=12";
 static const char col_gray1[]       = "#2e3440";
-static const char col_gray2[]       = "#4c566a";
-static const char col_gray3[]       = "#bf616a";
+static const char col_gray2[]       = "#bf616a";
+static const char col_gray3[]       = "#999999";
 static const char col_gray4[]       = "#ffffff";
 static const char col_cyan[]        = "#88c0d0";
 static const char *colors[][3]      = {
@@ -79,7 +79,7 @@ static const char *voldw[]  = { "volume.sh", "down", NULL };
 static const char *loudness[]  = { "easyeffects", "-l", "LoudnessEqualizer", NULL };
 static const char *music[]  = { "easyeffects", "-l", "Heavy Bass", NULL };
 // scratchpad
-static const char *scratchpadcmd[] = {"s", "st", "-t", "scratchpad", NULL}; 
+static const char *scratchpadcmd[] = {"s", "st", "-A", ".6", "-t", "scratchpad", NULL}; 
 static const char *scratchpadbtop[] = {"b", "st", "-c", "btop", "btop", NULL}; 
 
 static Keychord *keychords[] = {
