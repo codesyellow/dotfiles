@@ -4,9 +4,8 @@ HISTSIZE=1000
 SAVEHIST=1000
 
 export XDG_RUNTIME_DIR=/run/user/$(id -u)
-export EDITOR=/usr/bin/vim
-export VISUAL=/usr/bin/vim
-export XDG_CURRENT_DESKTOP=Unity
+export EDITOR=/usr/bin/nvim
+export VISUAL=/usr/bin/nvim
 setopt autocd beep extendedglob nomatch
 
 bindkey -v
