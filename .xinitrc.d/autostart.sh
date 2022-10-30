@@ -1,6 +1,6 @@
 #!/bin/sh
 xrandr --output VGA-1 --gamma 1.0:0.88:0.90 --brightness 0.95 &
-hsetroot -cover ~/.wallpapers/rainnight.jpg &
+hsetroot -cover ~/.wallpapers/mountains.jpg &
 easyeffects --gapplication-service &
 xset led on &
 keyd-application-mapper -d
