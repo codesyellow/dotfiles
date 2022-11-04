@@ -10,4 +10,4 @@ run_xidlehook &
 safeeyes &
 easyeffects -l 'LoudnessEqualizer' &
 picom --experimental-backend &
-alacritty &
+nm-applet &
