@@ -11,3 +11,4 @@ safeeyes &
 easyeffects -l 'LoudnessEqualizer' &
 picom --experimental-backend &
 nm-applet &
+cpupower frequency-set -g performance &

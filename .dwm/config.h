@@ -48,6 +48,7 @@ static const Rule rules[] = {
   // floating
 	{ "Lxappearance",  NULL,       NULL,       0,       1,           -1,     5,   280,124,800,500 },
 	{ "easyeffects",  NULL,       NULL,       0,       1,           -1,     5,   280,124,800,500 },
+	{ "ProtonUp-Qt",  NULL,       NULL,       0,       1,           -1,     5,   280,124,800,500 },
 	/* class      instance    title       tags mask     isfloating   monitor    scratch key */
 	{ NULL,       NULL,   "scratchpad",   0,           1,           -1,          's',         80,224,1200,300,        5 },
 	{ "btop",     NULL,       NULL,   0,            1,           -1,          'b',         80,74,1200,600,        5 },
