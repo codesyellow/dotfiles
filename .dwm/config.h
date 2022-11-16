@@ -29,7 +29,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", " ", "", "", "", "", "", "" };
+static const char *tags[] = { "", "", "", "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -37,18 +37,23 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor    float x,y,w,h         floatborderpx*/
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1,        50,50,500,500,        5 },
+	{ "Gimp",     NULL,       NULL,       1 << 5,            0,           -1,        50,50,500,500,        5 },
   // to tag
 	{ "firefox",  NULL,       NULL,       1 << 1,       0,           -1,        50,50,500,500,        5 },
 	{ "YouTube Music",  NULL,       NULL,       1 << 2,       1,           -1,     5,   80,74,1200,600         },
 	{ "libreoffice-writer",  NULL,       NULL,       1 << 3,       0,           -1,        50,50,500,500,        5 },
 	{ "st-256color",  NULL,       NULL,       1 << 6,       0,           -1,        50,50,1200,400,        5 },
 	{ "Steam",  NULL,       NULL,       1 << 7,       0,           -1,        50,50,500,500,        5 },
+	{ "kdenlive",  NULL,       NULL,       1 << 4,       0,           -1,        50,50,500,500,        5 },
 	{ NULL,  NULL,       "Steam",       1 << 7,       0,           -1,        50,50,500,500,        5 },
   // floating
 	{ "Lxappearance",  NULL,       NULL,       0,       1,           -1,     5,   280,124,800,500 },
 	{ "easyeffects",  NULL,       NULL,       0,       1,           -1,     5,   280,124,800,500 },
-	{ "ProtonUp-Qt",  NULL,       NULL,       0,       1,           -1,     5,   280,124,800,500 },
+	{ "ProtonUp-Qt",  NULL,       NULL,       1 << 7,       1,           -1,     5,   280,124,800,500 },
+	{ "heroic",  NULL,       NULL,       1 << 7,       1,           -1,     5,   80,84,1200,600 },
+	{ "bottles",  NULL,       NULL,       1 << 7,       1,           -1,     5,   80,84,1200,600 },
+	{ "Gamehub",  NULL,       NULL,       1 << 7,       1,           -1,     5,   80,84,1200,600 },
+	{ "Deluge-gtk",  NULL,       NULL,      0,       1,           -1,     5,   80,84,1200,600 },
 	/* class      instance    title       tags mask     isfloating   monitor    scratch key */
 	{ NULL,       NULL,   "scratchpad",   0,           1,           -1,          's',         80,224,1200,300,        5 },
 	{ "btop",     NULL,       NULL,   0,            1,           -1,          'b',         80,74,1200,600,        5 },
