@@ -1,18 +1,93 @@
 #!/bin/sh
-
+sud=doas
 curDir=${pwd}
 
-echo 'installing essensials tools using pacman:'; sleep 2
-doas pacman --needed -S xorg-server xorg-xset xorg-xmodmap xorg-setxkbmap xorg-xrandr xorg-xprop git base-devel pamixer ttf-font-awesome imlib2 opendoas zsh zsh-completions zsh-syntax-highlighting zsh-autosuggestions neovim easyeffects pipewire pipewire-pulse pipewire pipewire-pulse pipewire-alsa wireplumber pipewire-jack firefox alsa-utils pavucontrol curl steam
+function startService() {
+  systemctl enable --now "$@"
+}
 
-echo 'enabling multilib:'; sleep 2
+function startUserService() {
+  systemctl --user enable --now "$@" 
+}
+
+function printing() {
+  echo $1':'; sleep 2
+}
+
+function append() {
+  echo $1 | sudo tee -a $2; sleep 2
+}
+
+printing 'installing chaotic aur'
+$sud pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com
+$sud pacman-key --lsign-key FBA220DFC880C036
+$sud pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+append '
+[chaotic-aur]
+Include = /etc/pacman.d/chaotic-mirrorlist' /etc/pacman.conf
+
+printing 'enabling multilib'
 doas nvim /etc/pacman.conf && doas pacman -Syu
 
-echo 'installing some multilib packages:'; sleep 2
-# pacman -needed -S lib32-pipewire lib32-pipewire-jack
+echo 'installing essensials tools using pacman:'; sleep 2
+doas pacman --needed -S xorg-server xorg-xset xorg-xmodmap xorg-setxkbmap xorg-xrandr xorg-xprop git base-devel pamixer ttf-font-awesome imlib2 opendoas zsh zsh-completions zsh-syntax-highlighting zsh-autosuggestions neovim easyeffects pipewire pipewire-pulse pipewire pipewire-pulse pipewire-alsa wireplumber pipewire-jack firefox alsa-utils pavucontrol curl steam calf irqbalance earlyoom git github-cli libva-intel-driver libva-vdpau-driver libva-utils vdpauinfo lib32-pipewire lib32-pipewire-jack heroic-games-launcher-bin linux-tkg-bmq linux-tkg-bmq-headers wine-tkg-staging-fsync-git bottles
 
-echo 'enabling services pipewire services:'; sleep 2
-# systemctl --user enable --now pipewire pipewire-pulse wireplumber
+printing 'installing yay'
+#git clone https://aur.archlinux.org/yay.git
+#cd yay && makepkg -sri && cd $curDir
+
+printing 'installing keyd'
+#yay -S keyd-git
+
+printing 'installing packer for nvim'
+# yay -S nvim-packer-git
+
+printing 'installing ananicy'
+# yay -S ananicy-cpp
+
+printing 'installing xidlehook'
+#yay -S xidlehook-git
+
+printing 'enabling pipewire services'
+# startUserService pipewire pipewire-pulse wireplumber
+
+printing 'enabling ananicy service'
+#systemctl enable --now ananicy-cpp
+
+printing 'enabling irqbalance service'
+#systemctl enable --now irqbalance
+
+printing 'enabling earlyoom service'
+#startService earlyoom
+
+printing 'kernel parameters. read the filer ~/.paremeters for reference'
+echo 'mitigation=off resume=UUID=61ad2324-f01d-4f57-94bc-494139d13cb7 nowatchdog' >> ~/.parameters && doasedit /etc/default/grub
+rm ~/.parameters
+
+printing 'video acceleration'
+append 'VDPAU_DRIVER=va_gl' '/etc/environment'
+vainfo | less
+vdpauinfo | less
+$sud pacman -Rs vdpauinfo libva-utils
+
+exit 1
+echo 'zram' | sudo tee -a /etc/modules-load.d/zram.conf; sleep 2
+echo 'options zram num_devices=4' | sudo tee -a /etc/modprobe.d/zram.conf 
+echo '
+KERNEL=="zram0", ATTR{disksize}="512M" RUN="/usr/bin/mkswap /dev/zram0", TAG+="systemd"
+KERNEL=="zram1", ATTR{disksize}="512M" RUN="/usr/bin/mkswap /dev/zram1", TAG+="systemd"
+KERNEL=="zram2", ATTR{disksize}="512M" RUN="/usr/bin/mkswap /dev/zram2", TAG+="systemd"
+KERNEL=="zram3", ATTR{disksize}="512M" RUN="/usr/bin/mkswap /dev/zram3", TAG+="systemd"
+' | sudo tee -a /etc/udev/rules.d/99-zram.rules
+
+echo '
+/dev/zram0 none swap defaults 0 0
+/dev/zram1 none swap defaults 0 0
+/dev/zram2 none swap defaults 0 0
+/dev/zram3 none swap defaults 0 0
+' | sudo tee -a /etc/fstab
+
+
 
 echo 'disabling mouse acceleration:'; sleep 2
 echo '
@@ -25,11 +100,6 @@ Section "InputClass"
 EndSection' >> ~/.mouseacc && doas cp -r ~/.mouseacc /etc/X11/xorg.conf.d/50-mouse-acceleration.conf && rm ~/.mouseacc
 
 exit 1
-echo 'installing keyd:'; sleep 2
-yay -S keyd-git
-
-echo 'installing packer for nvim:'
-yay -S nvim-packer-git
 
 echo 'configuring keyd:'
 echo '[ids]
@@ -53,32 +123,31 @@ echo 'enabling keyd service:'
 doas systemctl enable keyd && doas systemctl start keyd
 
 echo 'setting zsh as default:'
-# chsh -s /bin/zsh
+chsh -s /bin/zsh
 
-echo 'installing yay:'
-# git clone https://aur.archlinux.org/yay.git
-# cd yay && makepkg -sri && cd $curDir
 
 echo 'installing font using yay:'
-# yay -S nerd-fonts-cascadia-code
+yay -S nerd-fonts-cascadia-code
 
 echo 'installing wifi dongle driver using yay:'
-# yay -S https://aur.archlinux.org/8188fu-kelebek333-dkms-git.git
+yay -S https://aur.archlinux.org/8188fu-kelebek333-dkms-git.git
 
 echo 'cloning the dotfiles repo to a .dotfiles directory:'
-# git clone https://github.com/codesyellow/dotfiles ~/.dotfiles
+git clone https://github.com/codesyellow/dotfiles ~/.dotfiles
 
 echo 'coping dotfiles to the home directory:'
-# cp -r ~/.dotfiles/. ~/
+cp -r ~/.dotfiles/. ~/
 
 echo 'installing dwm, st, dmenu and slock:'
-# cd ~/.dwm && doas make install
-# cd ~/.st && doas make install
-# cd ~/.dmenu && doas make install
-# cd ~/.slock && doas make install && cd $curDir
+cd ~/.dwm && doas make install
+cd ~/.st && doas make install
+cd ~/.dmenu && doas make install
+cd ~/.slock && doas make install && cd $curDir
 
 echo 'downloading and moving some easyeffects presets:'
-#bash -c "$(curl -fsSL https://raw.githubusercontent.com/JackHack96/PulseEffects-Presets/master/install.sh)"
-#git clone https://github.com/Rabcor/Heavy-Bass-EE ~/ && mv ~/Heavy-Bass-EE/*.json ~/.config/easyeffects/output
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/JackHack96/PulseEffects-Presets/master/install.sh)"
+git clone https://github.com/Rabcor/Heavy-Bass-EE ~/ && mv ~/Heavy-Bass-EE/*.json ~/.config/easyeffects/output
 
+echo 'uninstalling sudo:'; sleep 2
+doas pacman -Rs sudo
 echo 'done!'
