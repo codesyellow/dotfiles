@@ -3,7 +3,7 @@ sud=doas
 curDir=${pwd}
 pkg='xorg-server xorg-xset xorg-xmodmap xorg-setxkbmap xorg-xrandr xorg-xprop git base-devel pamixer ttf-font-awesome imlib2 opendoas zsh zsh-completions zsh-syntax-highlighting zsh-autosuggestions neovim easyeffects pipewire pipewire-pulse pipewire pipewire-pulse pipewire-alsa wireplumber pipewire-jack firefox alsa-utils pavucontrol curl steam calf irqbalance earlyoom git github-cli libva-intel-driver libva-vdpau-driver libva-utils vdpauinfo lib32-pipewire lib32-pipewire-jack heroic-games-launcher-bin linux-tkg-bmq linux-tkg-bmq-headers wine-tkg-staging-fsync-git bottles gamemode lib32-gamemode'
 
-yayPkg='mangohud-git keyd-git nvim-packer-git ananicy-cpp xidlehook-git'
+yayPkg='mangohud-git keyd-git nvim-packer-git ananicy-cpp xidlehook-git nerd-fonts-cascadia-code'
 
 function startService() {
   systemctl enable --now "$@"
@@ -51,18 +51,11 @@ printing 'installing yay'
 printing 'installing packages from yay'
 yay -S --noconfirm --nocleanmenu --nodiffmenu $yayPkg --needed
 
-exit
-printing 'enabling pipewire services'
-# startUserService pipewire pipewire-pulse wireplumber
+printing 'enabling user services'
+startUserService pipewire pipewire-pulse wireplumber
 
-printing 'enabling ananicy service'
-#systemctl enable --now ananicy-cpp
-
-printing 'enabling irqbalance service'
-#systemctl enable --now irqbalance
-
-printing 'enabling earlyoom service'
-#startService earlyoom
+printing 'enabling system service'
+#systemctl enable --now ananicy-cpp irqbalance earlyoom
 
 printing 'kernel parameters. read the filer ~/.paremeters for reference'
 echo 'mitigation=off resume=UUID=61ad2324-f01d-4f57-94bc-494139d13cb7 nowatchdog' >> ~/.parameters && doasedit /etc/default/grub
@@ -124,17 +117,18 @@ insert = S-insert' >> ~/.keyd.conf
 doas ln -s ~/.keyd.conf /etc/keyd/default.conf
 
 echo 'enabling keyd service:'
-doas systemctl enable keyd && doas systemctl start keyd
+startService keyd
 
 echo 'setting zsh as default:'
 chsh -s /bin/zsh
 
-
-echo 'installing font using yay:'
-yay -S nerd-fonts-cascadia-code
-
 echo 'installing wifi dongle driver using yay:'
 yay -S https://aur.archlinux.org/8188fu-kelebek333-dkms-git.git
+
+printing 'cloning the bare repo'
+echo ".cfg" ~/.gitignore
+git clone --bare https://github.com/codesyellow/dotfiles ~/.cfg
+dotfiles checkout
 
 echo 'cloning the dotfiles repo to a .dotfiles directory:'
 git clone https://github.com/codesyellow/dotfiles ~/.dotfiles
