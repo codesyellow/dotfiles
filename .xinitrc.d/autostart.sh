@@ -12,3 +12,4 @@ nm-applet &
 cpupower frequency-set -g performance &
 easyeffects --gapplication-service &
 easyeffects -l 'LoudnessEqualizer' &
+run_xidlehook &

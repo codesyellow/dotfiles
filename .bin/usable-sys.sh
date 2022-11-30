@@ -35,6 +35,19 @@ function packages() {
   doas pacman --needed -S "$@"
 }
 
+function zram() {
+  echo 'zram' | sudo tee -a /etc/modules-load.d/zram.conf; sleep 2
+  echo 'options zram num_devices=4' | sudo tee -a /etc/modprobe.d/zram.conf 
+  echo 'KERNEL=="zram0", ATTR{disksize}="512M" RUN="/usr/bin/mkswap /dev/zram0", TAG+="systemd"
+  KERNEL=="zram1", ATTR{disksize}="512M" RUN="/usr/bin/mkswap /dev/zram1", TAG+="systemd"
+  KERNEL=="zram2", ATTR{disksize}="512M" RUN="/usr/bin/mkswap /dev/zram2", TAG+="systemd"
+  KERNEL=="zram3", ATTR{disksize}="512M" RUN="/usr/bin/mkswap /dev/zram3", TAG+="systemd"' | sudo tee -a /etc/udev/rules.d/99-zram.rules
+  echo '/dev/zram0 none swap defaults 0 0
+  /dev/zram1 none swap defaults 0 0
+  /dev/zram2 none swap defaults 0 0
+  /dev/zram3 none swap defaults 0 0' | sudo tee -a /etc/fstab
+}
+
 printing 'installing chaotic aur'
 #chaotic
 
@@ -55,7 +68,7 @@ printing 'enabling user services'
 startUserService pipewire pipewire-pulse wireplumber
 
 printing 'enabling system service'
-#systemctl enable --now ananicy-cpp irqbalance earlyoom
+startService ananicy-cpp irqbalance earlyoom
 
 printing 'kernel parameters. read the filer ~/.paremeters for reference'
 echo 'mitigation=off resume=UUID=61ad2324-f01d-4f57-94bc-494139d13cb7 nowatchdog' >> ~/.parameters && doasedit /etc/default/grub
@@ -67,25 +80,6 @@ vainfo | less
 vdpauinfo | less
 $sud pacman -Rs vdpauinfo libva-utils
 
-exit 1
-echo 'zram' | sudo tee -a /etc/modules-load.d/zram.conf; sleep 2
-echo 'options zram num_devices=4' | sudo tee -a /etc/modprobe.d/zram.conf 
-echo '
-KERNEL=="zram0", ATTR{disksize}="512M" RUN="/usr/bin/mkswap /dev/zram0", TAG+="systemd"
-KERNEL=="zram1", ATTR{disksize}="512M" RUN="/usr/bin/mkswap /dev/zram1", TAG+="systemd"
-KERNEL=="zram2", ATTR{disksize}="512M" RUN="/usr/bin/mkswap /dev/zram2", TAG+="systemd"
-KERNEL=="zram3", ATTR{disksize}="512M" RUN="/usr/bin/mkswap /dev/zram3", TAG+="systemd"
-' | sudo tee -a /etc/udev/rules.d/99-zram.rules
-
-echo '
-/dev/zram0 none swap defaults 0 0
-/dev/zram1 none swap defaults 0 0
-/dev/zram2 none swap defaults 0 0
-/dev/zram3 none swap defaults 0 0
-' | sudo tee -a /etc/fstab
-
-
-
 echo 'disabling mouse acceleration:'; sleep 2
 echo '
 Section "InputClass"
@@ -95,8 +89,6 @@ Section "InputClass"
 	Option "AccelerationScheme" "none"
 	Option "AccelSpeed" "-1"
 EndSection' >> ~/.mouseacc && doas cp -r ~/.mouseacc /etc/X11/xorg.conf.d/50-mouse-acceleration.conf && rm ~/.mouseacc
-
-exit 1
 
 echo 'configuring keyd:'
 echo '[ids]
@@ -117,7 +109,10 @@ insert = S-insert' >> ~/.keyd.conf
 doas ln -s ~/.keyd.conf /etc/keyd/default.conf
 
 echo 'enabling keyd service:'
-startService keyd
+startService keyd; sleep 2
+# this is cuz keyd changes my keyboard layout and mod keyd
+setxkbmap -layout "br(nodeadkeys),br" -option "grp:alt_shift_toggle"
+xmodmap ~/.Xmodmap
 
 echo 'setting zsh as default:'
 chsh -s /bin/zsh
