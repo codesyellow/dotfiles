@@ -1,6 +1,9 @@
 #!/bin/sh
 sud=doas
 curDir=${pwd}
+pkg='xorg-server xorg-xset xorg-xmodmap xorg-setxkbmap xorg-xrandr xorg-xprop git base-devel pamixer ttf-font-awesome imlib2 opendoas zsh zsh-completions zsh-syntax-highlighting zsh-autosuggestions neovim easyeffects pipewire pipewire-pulse pipewire pipewire-pulse pipewire-alsa wireplumber pipewire-jack firefox alsa-utils pavucontrol curl steam calf irqbalance earlyoom git github-cli libva-intel-driver libva-vdpau-driver libva-utils vdpauinfo lib32-pipewire lib32-pipewire-jack heroic-games-launcher-bin linux-tkg-bmq linux-tkg-bmq-headers wine-tkg-staging-fsync-git bottles gamemode lib32-gamemode'
+
+yayPkg='mangohud-git keyd-git nvim-packer-git ananicy-cpp xidlehook-git'
 
 function startService() {
   systemctl enable --now "$@"
@@ -18,36 +21,37 @@ function append() {
   echo $1 | sudo tee -a $2; sleep 2
 }
 
+function chaotic() {
+  $sud pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com
+  $sud pacman-key --lsign-key FBA220DFC880C036
+  $sud pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+  append '
+  [chaotic-aur]
+  Include = /etc/pacman.d/chaotic-mirrorlist' /etc/pacman.conf
+}
+
+function packages() {
+  echo "$@"
+  doas pacman --needed -S "$@"
+}
+
 printing 'installing chaotic aur'
-$sud pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com
-$sud pacman-key --lsign-key FBA220DFC880C036
-$sud pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
-append '
-[chaotic-aur]
-Include = /etc/pacman.d/chaotic-mirrorlist' /etc/pacman.conf
+#chaotic
 
 printing 'enabling multilib'
-doas nvim /etc/pacman.conf && doas pacman -Syu
+#doas nvim /etc/pacman.conf && doas pacman -Syu
 
 echo 'installing essensials tools using pacman:'; sleep 2
-doas pacman --needed -S xorg-server xorg-xset xorg-xmodmap xorg-setxkbmap xorg-xrandr xorg-xprop git base-devel pamixer ttf-font-awesome imlib2 opendoas zsh zsh-completions zsh-syntax-highlighting zsh-autosuggestions neovim easyeffects pipewire pipewire-pulse pipewire pipewire-pulse pipewire-alsa wireplumber pipewire-jack firefox alsa-utils pavucontrol curl steam calf irqbalance earlyoom git github-cli libva-intel-driver libva-vdpau-driver libva-utils vdpauinfo lib32-pipewire lib32-pipewire-jack heroic-games-launcher-bin linux-tkg-bmq linux-tkg-bmq-headers wine-tkg-staging-fsync-git bottles
+packages $pkg
 
 printing 'installing yay'
 #git clone https://aur.archlinux.org/yay.git
 #cd yay && makepkg -sri && cd $curDir
 
-printing 'installing keyd'
-#yay -S keyd-git
+printing 'installing packages from yay'
+yay -S --noconfirm --nocleanmenu --nodiffmenu $yayPkg --needed
 
-printing 'installing packer for nvim'
-# yay -S nvim-packer-git
-
-printing 'installing ananicy'
-# yay -S ananicy-cpp
-
-printing 'installing xidlehook'
-#yay -S xidlehook-git
-
+exit
 printing 'enabling pipewire services'
 # startUserService pipewire pipewire-pulse wireplumber
 
