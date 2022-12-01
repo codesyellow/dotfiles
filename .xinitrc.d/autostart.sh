@@ -1,4 +1,5 @@
 #!/bin/sh
+easyeffects --gapplication-service &
 xrandr --output VGA-1 --gamma 1.0:0.88:0.90 --brightness 0.95 &
 hsetroot -cover ~/.wallpapers/mountains.jpg &
 xset led on &
@@ -10,6 +11,5 @@ safeeyes &
 picom --experimental-backend &
 nm-applet &
 cpupower frequency-set -g performance &
-easyeffects --gapplication-service &
-easyeffects -l 'LoudnessEqualizer' &
 run_xidlehook &
+easyeffects -l 'LoudnessEqualizer' &
