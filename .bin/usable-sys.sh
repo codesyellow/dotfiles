@@ -1,9 +1,9 @@
 #!/bin/sh
 sud=doas
 curDir=${pwd}
-pkg='xorg-server xorg-xset xorg-xmodmap xorg-setxkbmap xorg-xrandr xorg-xprop git base-devel pamixer ttf-font-awesome imlib2 opendoas zsh zsh-completions zsh-syntax-highlighting zsh-autosuggestions neovim easyeffects pipewire pipewire-pulse pipewire pipewire-pulse pipewire-alsa wireplumber pipewire-jack firefox alsa-utils pavucontrol curl steam calf irqbalance earlyoom git github-cli libva-intel-driver libva-vdpau-driver libva-utils vdpauinfo lib32-pipewire lib32-pipewire-jack heroic-games-launcher-bin linux-tkg-bmq linux-tkg-bmq-headers wine-tkg-staging-fsync-git bottles gamemode lib32-gamemode lxappearance-gtk3'
+pkg='xorg-server xorg-xset xorg-xmodmap xorg-setxkbmap xorg-xrandr xorg-xprop git base-devel pamixer ttf-font-awesome imlib2 opendoas zsh zsh-completions zsh-syntax-highlighting zsh-autosuggestions neovim easyeffects pipewire pipewire-pulse pipewire pipewire-pulse pipewire-alsa wireplumber pipewire-jack firefox alsa-utils pavucontrol curl steam calf irqbalance earlyoom git github-cli libva-intel-driver libva-vdpau-driver libva-utils vdpauinfo lib32-pipewire lib32-pipewire-jack heroic-games-launcher-bin linux-tkg-bmq linux-tkg-bmq-headers wine-tkg-staging-fsync-git bottles gamemode lib32-gamemode lxappearance-gtk3 translate-shell espeak-ng mpv yt-dlp'
 
-yayPkg='mangohud-git keyd-git nvim-packer-git ananicy-cpp xidlehook-git nerd-fonts-cascadia-code googledot-cursor-theme'
+yayPkg='mangohud-git keyd-git nvim-packer-git ananicy-cpp xidlehook-git nerd-fonts-cascadia-code googledot-cursor-theme notify-send.sh'
 
 function startService() {
   systemctl enable --now "$@"
