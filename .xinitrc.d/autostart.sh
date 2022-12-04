@@ -13,3 +13,4 @@ nm-applet &
 cpupower frequency-set -g performance &
 run_xidlehook &
 easyeffects -l 'LoudnessEqualizer' &
+alsactl --file ~/.config/asound.state restore &
