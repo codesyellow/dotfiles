@@ -147,6 +147,8 @@ echo 'downloading and moving some easyeffects presets:'
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/JackHack96/PulseEffects-Presets/master/install.sh)"
 git clone https://github.com/Rabcor/Heavy-Bass-EE ~/ && mv ~/Heavy-Bass-EE/*.json ~/.config/easyeffects/output
 
+# alsamixer
+
 echo 'uninstalling sudo:'; sleep 2
 doas pacman -Rs sudo
 echo 'done!'
