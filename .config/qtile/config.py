@@ -1,6 +1,6 @@
 import os, subprocess
 from libqtile import bar, layout, hook, widget
-from libqtile.config import Click, Drag, Group, ScratchPad, DropDown, Key, Match, Screen
+from libqtile.config import Click, Drag, Group, ScratchPad, DropDown, Key, Match, Screen, KeyChord
 from libqtile.lazy import lazy
 from libqtile.backend.wayland import InputConfig
 from libqtile.log_utils import logger
@@ -43,7 +43,7 @@ def opacity(c):
         if not x.has_focus: 
             x.cmd_opacity(0.5) 
         elif x.name == 'scratchpad':
-            x.cmd_opacity(0.7)
+            x.cmd_opacity(0.8)
         else: 
             x.cmd_opacity(1)
         if x.get_wm_class()[0] == 'firefox':
@@ -172,7 +172,9 @@ keys = [
     Key([mod], "d", lazy.spawn(runner), desc="Launch runner"),
     Key([mod, 'shift'], "a", lazy.spawn('volume.sh up'), desc="Raise volume"),
     Key([mod, 'shift'], "d", lazy.spawn('volume.sh down'), desc="Lower volume"),
-    Key([mod], 'u', lazy.group['scratchpad'].dropdown_toggle('term')),
+    KeyChord([mod], "s", [
+        Key([], "u", lazy.group['scratchpad'].dropdown_toggle('term'))
+    ])
 ]
 
 def latest_group(qtile):
