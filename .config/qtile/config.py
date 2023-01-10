@@ -1,6 +1,6 @@
 import os, subprocess
 from libqtile import bar, layout, hook, widget
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile.config import Click, Drag, Group, ScratchPad, DropDown, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.backend.wayland import InputConfig
 from libqtile.log_utils import logger
@@ -39,8 +39,15 @@ terminal = 'foot'
 @hook.subscribe.client_focus
 def func(c):
     for x in c.qtile.current_group.windows:
-        if not x.has_focus: x.cmd_opacity(0.5)
-        else: x.cmd_opacity(1)
+#        logger.warning(x.get_wm_class()[0])
+        if not x.has_focus: 
+            x.cmd_opacity(0.5) 
+        elif x.name == 'scratchpad':
+            x.cmd_opacity(0.7)
+        else: 
+            x.cmd_opacity(1)
+        if x.get_wm_class()[0] == 'firefox':
+            x.cmd_opacity(1)
 
 @hook.subscribe.client_new
 def func(c):
@@ -163,6 +170,9 @@ keys = [
     Key([mod, 'shift'], "d", lazy.spawn('volume.sh down'), desc="Launch runner"),
     Key([mod, 'shift'], "a", lazy.spawn('volume.sh up'), desc="Launch runner"),
     Key([mod], "d", lazy.spawn(runner), desc="Launch runner"),
+    Key([mod, 'shift'], "a", lazy.spawn('volume.sh up'), desc="Raise volume"),
+    Key([mod, 'shift'], "d", lazy.spawn('volume.sh down'), desc="Lower volume"),
+    Key([mod], 'u', lazy.group['scratchpad'].dropdown_toggle('term')),
 ]
 
 def latest_group(qtile):
@@ -171,14 +181,22 @@ def latest_group(qtile):
 keys += [Key([mod], "Tab", lazy.function(latest_group))]
 
 groups = [
-    Group("", layout="max",        matches=[Match(wm_class=["navigator", "firefox", "vivaldi-stable", "chromium", "brave"])]),
-    Group("", layout="monadwide",  matches=[Match(wm_class=["emacs", "geany", "subl"])]),
+    Group("", layout="max",        matches=[Match(wm_class=["navigator", "firefox", "vivaldi-stable", "chromium", "brave"])]),
+    Group("", layout="monadwide",  matches=[Match(wm_class=["emacs", "geany", "subl"])]),
     Group("", layout="monadwide",  matches=[Match(wm_class=["inkscape", "nomacs", "ristretto", "nitrogen"])]),
     Group("", layout="monadwide",  matches=[Match(wm_class=["qpdfview", "thunar", "nemo", "caja", "pcmanfm"])]),
     Group("", layout="max",        matches=[Match(wm_class=["telegramDesktop"])]),
     Group("", layout="max"),
     Group("", layout="max",        matches=[Match(wm_class=["spotify", "pragha", "clementine", "deadbeef", "audacious"]), Match(title=["VLC media player"])]),
     Group("", layout="max"),
+    ScratchPad("scratchpad", [
+        # define a drop down terminal.
+        # it is placed in the upper third of screen by default.
+        DropDown("term", "foot -T scratchpad", opacity=0.4),
+
+        # define another terminal exclusively for ``qtile shell` at different position
+        ]),
+    Group("a"),
 ]
 
 for k, group in zip(["1", "2", "3", "4", "5", "6", "7", "8"], groups):
@@ -189,8 +207,8 @@ layouts = my_layouts()
 
 widget_defaults = dict(
     background=bg,
-    font="VictorMono Nerd Font Mono",
-    fontsize=12,
+    font="CaskadiaCove Nerd Font",
+    fontsize=15,
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
