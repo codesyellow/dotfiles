@@ -35,7 +35,7 @@ return require('packer').startup(function(use)
   'nvim-lualine/lualine.nvim',
   requires = { 'kyazdani42/nvim-web-devicons', opt = true },
   config = function() require('lualine').setup{
-    options = { theme = 'nord' }
+    options = { theme = 'everforest' }
   } 
   end 
   }
@@ -43,4 +43,12 @@ return require('packer').startup(function(use)
   use 'shaunsingh/nord.nvim'
 
   use { "beauwilliams/focus.nvim", config = function() require("focus").setup() end }
+
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = function()
+      local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+      ts_update()
+    end,
+   }
 end)
