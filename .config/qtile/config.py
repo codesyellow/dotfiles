@@ -33,11 +33,11 @@ act='D3C6AA'
 pad=10
 inac='475258'
 mod = "mod4"
-runner = 'bemenu-run -i --fn "VictorMono Nerd Font Mono"'
-terminal = 'foot'
+runner = 'kickoff'
+terminal = 'alacritty'
 
 @hook.subscribe.client_focus
-def func(c):
+def opacity(c):
     for x in c.qtile.current_group.windows:
 #        logger.warning(x.get_wm_class()[0])
         if not x.has_focus: 
@@ -192,7 +192,7 @@ groups = [
     ScratchPad("scratchpad", [
         # define a drop down terminal.
         # it is placed in the upper third of screen by default.
-        DropDown("term", "foot -T scratchpad", opacity=0.4),
+        DropDown("term", "alacritty -t scratchpad"),
 
         # define another terminal exclusively for ``qtile shell` at different position
         ]),
