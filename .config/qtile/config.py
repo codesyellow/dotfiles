@@ -27,10 +27,10 @@ def init_colors():
 
 colors = init_colors()
 
-bg='2D353B'
-fg='4F585f'
-act='D3C6AA'
-pad=10
+bg ='2D353B'
+fg ='4F585f'
+act ='D3C6AA'
+pad = 10
 inac='475258'
 mod = "mod4"
 runner = 'kickoff'
@@ -48,15 +48,6 @@ def opacity(c):
             x.cmd_opacity(1)
         if x.get_wm_class()[0] == 'firefox':
             x.cmd_opacity(1)
-
-@hook.subscribe.client_new
-def func(c):
-    if c.get_wm_class()[1] == "firefox":
-        c.togroup("a")
-    elif c.name == "Steam":
-        c.togroup("l")
-    elif c.get_wm_class == "qutebrowser":
-        c.togroup("a")
 
 @hook.subscribe.startup_once
 def autostart():
@@ -172,6 +163,7 @@ keys = [
     Key([mod], "d", lazy.spawn(runner), desc="Launch runner"),
     Key([mod, 'shift'], "a", lazy.spawn('volume.sh up'), desc="Raise volume"),
     Key([mod, 'shift'], "d", lazy.spawn('volume.sh down'), desc="Lower volume"),
+    Key([mod, 'shift'], "g", lazy.function(change_info_status), desc="Lower volume"),
     KeyChord([mod], "s", [
         Key([], "u", lazy.group['scratchpad'].dropdown_toggle('term'))
     ])
@@ -184,7 +176,7 @@ keys += [Key([mod], "Tab", lazy.function(latest_group))]
 
 groups = [
     Group("", layout="max",        matches=[Match(wm_class=["navigator", "firefox", "vivaldi-stable", "chromium", "brave"])]),
-    Group("", layout="monadwide",  matches=[Match(wm_class=["emacs", "geany", "subl"])]),
+    Group("", layout="monadwide",  matches=[Match(wm_class=["Emacs", "geany", "subl"])]),
     Group("", layout="monadwide",  matches=[Match(wm_class=["inkscape", "nomacs", "ristretto", "nitrogen"])]),
     Group("", layout="monadwide",  matches=[Match(wm_class=["qpdfview", "thunar", "nemo", "caja", "pcmanfm"])]),
     Group("", layout="max",        matches=[Match(wm_class=["telegramDesktop"])]),
