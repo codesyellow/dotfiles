@@ -86,30 +86,25 @@ def my_widgets():
             widget.Spacer(),
             widget.Clock(format='%d/%m/%y %H:%M'),
             widget.Spacer(),
-            widget.DF(visible_on_warn=False),
-            widget.CPU(
-                background='543A48',
-                foreground='ffffff',
-                format='{freq_current}GHz|{load_percent}%',
-                padding=pad,
+            widget.DF(
+                foreground=colors[14],
+                visible_on_warn=False,
             ),
+            widget.Spacer(length=2),
+            widget.CPU(
+                foreground=colors[12],
+                format='{freq_current}GHz|{load_percent}%',
+            ),
+            widget.Spacer(length=-4),
             widget.Memory(
-                background='4D4C43',
-                foreground='ffffff',
-                padding=pad,
+                foreground=colors[16],
                 format='{MemUsed: .0f}{mm}',
             ),
-            widget.CheckUpdates(
-                no_update_string='', 
-                distro='Arch',
-                colour_no_updates='ff5555',
-                colour_have_updates='50fa7b',
-                display_format=' {updates}',
-                update_interval=10
-            ),
+            widget.Spacer(length=4),
             widget.QuickExit(
                 default_text='🚪', countdown_format='{}'
             ),
+            widget.Spacer(length=6),
     ]
 
 my_rules = [
@@ -200,7 +195,7 @@ for k, group in zip(["1", "2", "3", "4", "5", "6", "7", "8"], groups):
 layouts = my_layouts()
 
 widget_defaults = dict(
-    background=bg,
+    background=colors[0],
     font="CaskadiaCove Nerd Font",
     fontsize=15,
     padding=3,
