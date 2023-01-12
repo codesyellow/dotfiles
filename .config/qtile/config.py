@@ -180,7 +180,8 @@ keys = [
     Key([mod, 'shift'], "a", lazy.spawn('volume.sh up'), desc="Raise volume"),
     Key([mod, 'shift'], "d", lazy.spawn('volume.sh down'), desc="Lower volume"),
     KeyChord([mod], "s", [
-        Key([], "u", lazy.group['scratchpad'].dropdown_toggle('term'))
+        Key([], "u", lazy.group['scratchpad'].dropdown_toggle('term')),
+        Key([], "t", lazy.group['scratchpad'].dropdown_toggle('trayer')),
     ])
 ]
 
@@ -200,6 +201,7 @@ groups = [
     ScratchPad("scratchpad", [
         # add a alternative config file for transparency to work properly on wayland
         DropDown("term", "alacritty --config-file /home/cse/.config/alacritty/alacritty2.yml -t scratchpad", y=0.6),
+        DropDown("trayer", "trayer --widthtype request", x=0.5, y=0.9),
         ]),
 ]
 
@@ -239,7 +241,13 @@ dgroups_app_rules = []  # type: list
 follow_mouse_focus = False
 bring_front_click = False
 cursor_warp = False
-floating_layout = layout.Floating(float_rules=my_rules)
+floating_layout = layout.Floating(
+    border_focus = colors[9],
+    border_normal = '#98971a',
+    border_width = 2,
+    margin = 2,
+    float_rules=my_rules,
+)
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
