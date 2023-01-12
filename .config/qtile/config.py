@@ -49,6 +49,7 @@ def my_layouts():
                 align=1,
                 border_focus=colors[4],
                 border_normal=colors[7],
+                border_width=0,
                 new_client_position='before_current',
                 ratio=.7,
                 single_border_width=0,
@@ -192,9 +193,9 @@ groups = [
     Group("", layout="max",        matches=[Match(wm_class=["navigator", "firefox", "brave"])]),
     Group("", layout="monadwide",  matches=[Match(wm_class=["Emacs"])]),
     Group("", layout="treetab",  matches=[Match(wm_class=['mpv'])]),
-    Group("", layout="monadwide",  matches=[Match(wm_class=['zathura'])]),
+    Group("", layout="treetab",  matches=[Match(wm_class=['zathura'])]),
     Group("", layout="treetab",        matches=[Match(wm_class=["audacious"])]),
-    Group("", layout="monadwide",        matches=[Match(wm_class=["alacritty"])]),
+    Group("", layout="monadwide",        matches=[Match(wm_class=["Alacritty"])]),
     Group("", layout="treetab", matches=[Match(wm_class=["heroic", "Steam"])]),
     ScratchPad("scratchpad", [
         # define a drop down terminal.
@@ -240,7 +241,7 @@ dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
 follow_mouse_focus = False
 bring_front_click = False
-cursor_warp = True
+cursor_warp = False
 floating_layout = layout.Floating(float_rules=my_rules)
 auto_fullscreen = True
 focus_on_window_activation = "smart"
