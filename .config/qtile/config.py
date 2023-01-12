@@ -55,7 +55,14 @@ def my_layouts():
                 single_margin=0,
                 ),
             layout.Max(),
-            layout.TreeTab(),
+            layout.TreeTab(
+                bg_color=colors[0],
+                border_width=0,
+                place_right=True,
+                section_fg=colors[0],
+                active_bg=colors[5],
+                active_fg=colors[0],
+            ),
     ]
 
 def my_widgets():
@@ -186,7 +193,7 @@ groups = [
     Group("", layout="monadwide",  matches=[Match(wm_class=["Emacs"])]),
     Group("", layout="treetab",  matches=[Match(wm_class=['mpv'])]),
     Group("", layout="monadwide",  matches=[Match(wm_class=['zathura'])]),
-    Group("", layout="treetab",        matches=[Match(wm_class=["audacious"]), Match(title=["VLC media player"])]),
+    Group("", layout="treetab",        matches=[Match(wm_class=["audacious"])]),
     Group("", layout="monadwide",        matches=[Match(wm_class=["alacritty"])]),
     Group("", layout="treetab", matches=[Match(wm_class=["heroic", "Steam"])]),
     ScratchPad("scratchpad", [
