@@ -120,6 +120,7 @@ my_rules = [
         Match(wm_class="makebranch"),  # gitk
         Match(wm_class="maketag"),  # gitk
         Match(wm_class="ssh-askpass"),  # ssh-askpass
+        Match(wm_class="com.github.wwmm.easyeffects"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
 ]
@@ -159,12 +160,9 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     # apps
-    Key([mod, 'shift'], "d", lazy.spawn('volume.sh down'), desc="Launch runner"),
-    Key([mod, 'shift'], "a", lazy.spawn('volume.sh up'), desc="Launch runner"),
     Key([mod], "d", lazy.spawn(runner), desc="Launch runner"),
     Key([mod, 'shift'], "a", lazy.spawn('volume.sh up'), desc="Raise volume"),
     Key([mod, 'shift'], "d", lazy.spawn('volume.sh down'), desc="Lower volume"),
-    Key([mod, 'shift'], "g", lazy.function(change_info_status), desc="Lower volume"),
     KeyChord([mod], "s", [
         Key([], "u", lazy.group['scratchpad'].dropdown_toggle('term'))
     ])
