@@ -75,10 +75,10 @@ def my_layouts():
 def my_widgets():
     return [
             widget.GroupBox(
-                active=act,
-                inactive=inac,
+                active=colors[11],
+                inactive=colors[4],
                 highlight_method='block',
-                block_highlight_text_color=bg,
+                block_highlight_text_color=colors[5],
             ),
             widget.CurrentLayoutIcon(),
             # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
@@ -90,7 +90,7 @@ def my_widgets():
                 foreground=colors[14],
                 visible_on_warn=False,
             ),
-            widget.Spacer(length=2),
+            widget.Spacer(length=4),
             widget.CPU(
                 foreground=colors[12],
                 format='{freq_current}GHz|{load_percent}%',
@@ -196,8 +196,8 @@ layouts = my_layouts()
 
 widget_defaults = dict(
     background=colors[0],
-    font="CaskadiaCove Nerd Font",
-    fontsize=15,
+    font="CaskaydiaCove Nerd Font Mono",
+    fontsize=20,
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
