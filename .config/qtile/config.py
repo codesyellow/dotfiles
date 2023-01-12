@@ -112,8 +112,8 @@ def opacity(c):
     for x in c.qtile.current_group.windows:
         if not x.has_focus:
             x.cmd_opacity(0.5) 
-        elif x.name == 'scratchpad':
-            x.cmd_opacity(0.8)
+#        elif x.name == 'scratchpad':
+#            x.cmd_opacity(0.8)
         else: 
             x.cmd_opacity(1)
         if x.get_wm_class()[0] == 'firefox':
@@ -190,19 +190,16 @@ def latest_group(qtile):
 keys += [Key([mod], "Tab", lazy.function(latest_group))]
 
 groups = [
-    Group("", layout="max",        matches=[Match(wm_class=["navigator", "firefox", "brave"])]),
-    Group("", layout="monadwide",  matches=[Match(wm_class=["Emacs"])]),
-    Group("", layout="treetab",  matches=[Match(wm_class=['mpv'])]),
-    Group("", layout="treetab",  matches=[Match(wm_class=['zathura'])]),
-    Group("", layout="treetab",        matches=[Match(wm_class=["audacious"])]),
-    Group("", layout="monadwide",        matches=[Match(wm_class=["Alacritty"])]),
+    Group("", layout="max", matches=[Match(wm_class=["navigator", "firefox", "brave"])]),
+    Group("", layout="monadwide", matches=[Match(wm_class=["Emacs"])]),
+    Group("", layout="treetab", matches=[Match(wm_class=['mpv'])]),
+    Group("", layout="treetab", matches=[Match(wm_class=['zathura'])]),
+    Group("", layout="treetab", matches=[Match(wm_class=["audacious"])]),
+    Group("", layout="monadwide", matches=[Match(wm_class=["Alacritty"])]),
     Group("", layout="treetab", matches=[Match(wm_class=["heroic", "Steam"])]),
     ScratchPad("scratchpad", [
-        # define a drop down terminal.
-        # it is placed in the upper third of screen by default.
-        DropDown("term", "alacritty -t scratchpad", y=0.6),
-
-        # define another terminal exclusively for ``qtile shell` at different position
+        # add a alternative config file for transparency to work properly on wayland
+        DropDown("term", "alacritty --config-file /home/cse/.config/alacritty/alacritty2.yml -t scratchpad", y=0.6),
         ]),
 ]
 
