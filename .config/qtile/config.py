@@ -84,20 +84,26 @@ def my_widgets():
             # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
             # widget.StatusNotifier(),
             widget.Spacer(),
-            widget.Clock(format='%d/%m/%y %H:%M'),
+            widget.Clock(
+                format='%d/%m/%y %H:%M',
+                font="CaskaydiaCove Nerd Font Mono",
+            ),
             widget.Spacer(),
             widget.DF(
                 foreground=colors[14],
                 visible_on_warn=False,
+                font="CaskaydiaCove Nerd Font Mono",
             ),
             widget.Spacer(length=4),
             widget.CPU(
                 foreground=colors[12],
+                font="CaskaydiaCove Nerd Font Mono",
                 format='{freq_current}GHz|{load_percent}%',
             ),
             widget.Spacer(length=-4),
             widget.Memory(
                 foreground=colors[16],
+                font="CaskaydiaCove Nerd Font Mono",
                 format='{MemUsed: .0f}{mm}',
             ),
             widget.Spacer(length=4),
@@ -170,14 +176,12 @@ def latest_group(qtile):
 keys += [Key([mod], "Tab", lazy.function(latest_group))]
 
 groups = [
-    Group("", layout="max",        matches=[Match(wm_class=["navigator", "firefox", "vivaldi-stable", "chromium", "brave"])]),
+    Group("", layout="max",        matches=[Match(wm_class=["navigator", "firefox", "vivaldi-stable", "chromium", "brave"])]),
     Group("", layout="monadwide",  matches=[Match(wm_class=["Emacs", "geany", "subl"])]),
     Group("", layout="monadwide",  matches=[Match(wm_class=["inkscape", "nomacs", "ristretto", "nitrogen"])]),
     Group("", layout="monadwide",  matches=[Match(wm_class=["qpdfview", "thunar", "nemo", "caja", "pcmanfm"])]),
-    Group("", layout="max",        matches=[Match(wm_class=["telegramDesktop"])]),
     Group("", layout="max"),
     Group("", layout="max",        matches=[Match(wm_class=["spotify", "pragha", "clementine", "deadbeef", "audacious"]), Match(title=["VLC media player"])]),
-    Group("", layout="max"),
     ScratchPad("scratchpad", [
         # define a drop down terminal.
         # it is placed in the upper third of screen by default.
@@ -185,10 +189,9 @@ groups = [
 
         # define another terminal exclusively for ``qtile shell` at different position
         ]),
-    Group("a"),
 ]
 
-for k, group in zip(["1", "2", "3", "4", "5", "6", "7", "8"], groups):
+for k, group in zip(["1", "2", "3", "4", "5", "6"], groups):
     keys.append(Key([mod], k, lazy.group[group.name].toscreen()))
     keys.append(Key([mod, 'shift'], k, lazy.window.togroup(group.name)))
 
@@ -196,9 +199,9 @@ layouts = my_layouts()
 
 widget_defaults = dict(
     background=colors[0],
-    font="CaskaydiaCove Nerd Font Mono",
-    fontsize=20,
-    padding=3,
+    font="Font Awesome 6 Free Solid",
+    fontsize=18,
+    padding=4,
 )
 extension_defaults = widget_defaults.copy()
 
@@ -207,7 +210,7 @@ screens = [
         top=bar.Bar(
             my_widgets()
             ,
-            24,
+            20,
         ),
     ),
 ]
