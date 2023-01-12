@@ -10,6 +10,17 @@ pad = 10
 runner = 'kickoff'
 terminal = 'alacritty'
 
+@lazy.function
+def set_layout(qtile):
+    group_layout = qtile.current_layout.info()['name']
+    logger.warning(dir(qtile.current_group.cmd_setlayout))
+    logger.warning(qtile.current_group.cmd_setlayout('treetab'))
+    # if layout == max go back to prev
+    if group_layout == 'max':
+        return qtile.cmd_prev_layout()
+    qtile.cmd_to_layout_index(1)
+
+
 #Colors for the bar
 def init_colors():
     return [["#2e3440", "#2e3440"], # color 0  background color
@@ -36,14 +47,15 @@ def my_layouts():
     return [
             layout.MonadWide(
                 align=1,
-                border_focus=act,
-                border_normal=inac,
+                border_focus=colors[4],
+                border_normal=colors[7],
                 new_client_position='before_current',
                 ratio=.7,
                 single_border_width=0,
                 single_margin=0,
                 ),
             layout.Max(),
+            layout.TreeTab(),
     ]
 
 def my_widgets():
@@ -155,6 +167,7 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     # apps
+    Key([mod, 'shift'], "f", set_layout, desc="Launch runner"),
     Key([mod], "d", lazy.spawn(runner), desc="Launch runner"),
     Key([mod, 'shift'], "a", lazy.spawn('volume.sh up'), desc="Raise volume"),
     Key([mod, 'shift'], "d", lazy.spawn('volume.sh down'), desc="Lower volume"),
@@ -169,12 +182,13 @@ def latest_group(qtile):
 keys += [Key([mod], "Tab", lazy.function(latest_group))]
 
 groups = [
-    Group("", layout="max",        matches=[Match(wm_class=["navigator", "firefox", "vivaldi-stable", "chromium", "brave"])]),
-    Group("", layout="monadwide",  matches=[Match(wm_class=["Emacs", "geany", "subl"])]),
-    Group("", layout="monadwide",  matches=[Match(wm_class=["inkscape", "nomacs", "ristretto", "nitrogen"])]),
-    Group("", layout="monadwide",  matches=[Match(wm_class=["qpdfview", "thunar", "nemo", "caja", "pcmanfm"])]),
-    Group("", layout="max", matches=[Match(wm_class=["heroic", "Steam"])]),
-    Group("", layout="max",        matches=[Match(wm_class=["spotify", "pragha", "clementine", "deadbeef", "audacious"]), Match(title=["VLC media player"])]),
+    Group("", layout="max",        matches=[Match(wm_class=["navigator", "firefox", "brave"])]),
+    Group("", layout="monadwide",  matches=[Match(wm_class=["Emacs"])]),
+    Group("", layout="treetab",  matches=[Match(wm_class=['mpv'])]),
+    Group("", layout="monadwide",  matches=[Match(wm_class=['zathura'])]),
+    Group("", layout="treetab",        matches=[Match(wm_class=["audacious"]), Match(title=["VLC media player"])]),
+    Group("", layout="monadwide",        matches=[Match(wm_class=["alacritty"])]),
+    Group("", layout="treetab", matches=[Match(wm_class=["heroic", "Steam"])]),
     ScratchPad("scratchpad", [
         # define a drop down terminal.
         # it is placed in the upper third of screen by default.
@@ -184,7 +198,7 @@ groups = [
         ]),
 ]
 
-for k, group in zip(["1", "2", "3", "4", "5", "6"], groups):
+for k, group in zip(["1", "2", "3", "4", "5", "q", "g"], groups):
     keys.append(Key([mod], k, lazy.group[group.name].toscreen()))
     keys.append(Key([mod, 'shift'], k, lazy.window.togroup(group.name)))
 
