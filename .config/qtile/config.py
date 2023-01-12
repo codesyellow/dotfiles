@@ -5,6 +5,11 @@ from libqtile.lazy import lazy
 from libqtile.backend.wayland import InputConfig
 from libqtile.log_utils import logger
 
+mod = "mod4"
+pad = 10
+runner = 'kickoff'
+terminal = 'alacritty'
+
 #Colors for the bar
 def init_colors():
     return [["#2e3440", "#2e3440"], # color 0  background color
@@ -27,39 +32,8 @@ def init_colors():
 
 colors = init_colors()
 
-bg ='2D353B'
-fg ='4F585f'
-act ='D3C6AA'
-pad = 10
-inac='475258'
-mod = "mod4"
-runner = 'kickoff'
-terminal = 'alacritty'
-
-@hook.subscribe.client_focus
-def opacity(c):
-    for x in c.qtile.current_group.windows:
-#        logger.warning(x.get_wm_class()[0])
-        if not x.has_focus: 
-            x.cmd_opacity(0.5) 
-        elif x.name == 'scratchpad':
-            x.cmd_opacity(0.8)
-        else: 
-            x.cmd_opacity(1)
-        if x.get_wm_class()[0] == 'firefox':
-            x.cmd_opacity(1)
-
-@hook.subscribe.startup_once
-def autostart():
-    home = os.path.expanduser('~/.config/qtile/autostart.sh')
-    subprocess.Popen([home])
-
-wl_input_rules = {
-    "type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt", kb_layout="br(nodeadkeys)"),
-}
-
 def my_layouts():
-    return [ 
+    return [
             layout.MonadWide(
                 align=1,
                 border_focus=act,
@@ -76,34 +50,34 @@ def my_widgets():
     return [
             widget.GroupBox(
                 active=colors[11],
-                inactive=colors[4],
-                highlight_method='block',
                 block_highlight_text_color=colors[5],
+                highlight_method='block',
+                inactive=colors[4],
             ),
             widget.CurrentLayoutIcon(),
             # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
             # widget.StatusNotifier(),
             widget.Spacer(),
             widget.Clock(
-                format='%d/%m/%y %H:%M',
                 font="CaskaydiaCove Nerd Font Mono",
+                format='%d/%m/%y %H:%M',
             ),
             widget.Spacer(),
             widget.DF(
+                font="CaskaydiaCove Nerd Font Mono",
                 foreground=colors[14],
                 visible_on_warn=False,
-                font="CaskaydiaCove Nerd Font Mono",
             ),
             widget.Spacer(length=4),
             widget.CPU(
-                foreground=colors[12],
                 font="CaskaydiaCove Nerd Font Mono",
+                foreground=colors[12],
                 format='{freq_current}GHz|{load_percent}%',
             ),
             widget.Spacer(length=-4),
             widget.Memory(
-                foreground=colors[16],
                 font="CaskaydiaCove Nerd Font Mono",
+                foreground=colors[16],
                 format='{MemUsed: .0f}{mm}',
             ),
             widget.Spacer(length=4),
@@ -112,6 +86,27 @@ def my_widgets():
             ),
             widget.Spacer(length=6),
     ]
+
+@hook.subscribe.client_focus
+def opacity(c):
+    for x in c.qtile.current_group.windows:
+        if not x.has_focus:
+            x.cmd_opacity(0.5) 
+        elif x.name == 'scratchpad':
+            x.cmd_opacity(0.8)
+        else: 
+            x.cmd_opacity(1)
+        if x.get_wm_class()[0] == 'firefox':
+            x.cmd_opacity(1)
+
+@hook.subscribe.startup_once
+def autostart():
+    home = os.path.expanduser('~/.config/qtile/autostart.sh')
+    subprocess.Popen([home])
+
+wl_input_rules = {
+    "type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt", kb_layout="br(nodeadkeys)"),
+}
 
 my_rules = [
         # Run the utility of `xprop` to see the wm class and name of an X client.
@@ -178,12 +173,12 @@ groups = [
     Group("", layout="monadwide",  matches=[Match(wm_class=["Emacs", "geany", "subl"])]),
     Group("", layout="monadwide",  matches=[Match(wm_class=["inkscape", "nomacs", "ristretto", "nitrogen"])]),
     Group("", layout="monadwide",  matches=[Match(wm_class=["qpdfview", "thunar", "nemo", "caja", "pcmanfm"])]),
-    Group("", layout="max"),
+    Group("", layout="max", matches=[Match(wm_class=["heroic", "Steam"])]),
     Group("", layout="max",        matches=[Match(wm_class=["spotify", "pragha", "clementine", "deadbeef", "audacious"]), Match(title=["VLC media player"])]),
     ScratchPad("scratchpad", [
         # define a drop down terminal.
         # it is placed in the upper third of screen by default.
-        DropDown("term", "alacritty -t scratchpad"),
+        DropDown("term", "alacritty -t scratchpad", y=0.6),
 
         # define another terminal exclusively for ``qtile shell` at different position
         ]),
@@ -198,7 +193,7 @@ layouts = my_layouts()
 widget_defaults = dict(
     background=colors[0],
     font="Font Awesome 6 Free Solid",
-    fontsize=18,
+    fontsize=14,
     padding=4,
 )
 extension_defaults = widget_defaults.copy()
