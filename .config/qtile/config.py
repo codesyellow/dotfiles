@@ -101,7 +101,7 @@ def my_widgets():
             ),
             widget.Spacer(length=4),
             widget.QuickExit(
-                default_text='🚪', countdown_format='{}'
+                default_text='🚪', countdown_format=''
             ),
             widget.Spacer(length=6),
     ]
@@ -111,9 +111,7 @@ def opacity(c):
     for x in c.qtile.current_group.windows:
         if not x.has_focus:
             x.cmd_opacity(0.5) 
-#        elif x.name == 'scratchpad':
-#            x.cmd_opacity(0.8)
-        else: 
+        else:
             x.cmd_opacity(1)
         if x.get_wm_class()[0] == 'firefox':
             x.cmd_opacity(1)
