@@ -10,14 +10,26 @@ pad = 10
 runner = 'kickoff'
 terminal = 'alacritty'
 
+icons = [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+]
+
 @lazy.function
 def set_layout(qtile):
     group_layout = qtile.current_layout.info()['name']
-    logger.warning(dir(qtile.current_group.cmd_setlayout))
-    logger.warning(qtile.current_group.cmd_setlayout('treetab'))
+    g_name = qtile.current_group.name
     # if layout == max go back to prev
-    if group_layout == 'max':
-        return qtile.cmd_prev_layout()
+    if group_layout == 'max' and not g_name == icons[0]:
+        if g_name == icons[1] or g_name == icons[5]:
+            return qtile.cmd_to_layout_index(0)
+        else:
+            return qtile.cmd_to_layout_index(2)
     qtile.cmd_to_layout_index(1)
 
 #Colors for the bar
