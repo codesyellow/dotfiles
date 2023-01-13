@@ -20,7 +20,6 @@ def set_layout(qtile):
         return qtile.cmd_prev_layout()
     qtile.cmd_to_layout_index(1)
 
-
 #Colors for the bar
 def init_colors():
     return [["#2e3440", "#2e3440"], # color 0  background color
@@ -176,6 +175,8 @@ keys = [
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     # apps
     Key([mod, 'shift'], "f", set_layout, desc="Launch runner"),
+    Key([mod, 'shift'], "m", lazy.spawn('alacritty -t fm-video -e lf /home/cse/.courses'), desc="Launch runner"),
+    Key([mod, 'shift'], "e", lazy.spawn('alacritty -t fm-pdf -e lf /home/cse/.ebooks'), desc="Launch runner"),
     Key([mod], "d", lazy.spawn(runner), desc="Launch runner"),
     Key([mod, 'shift'], "a", lazy.spawn('volume.sh up'), desc="Raise volume"),
     Key([mod, 'shift'], "d", lazy.spawn('volume.sh down'), desc="Lower volume"),
@@ -193,8 +194,8 @@ keys += [Key([mod], "Tab", lazy.function(latest_group))]
 groups = [
     Group("", layout="max", matches=[Match(wm_class=["navigator", "firefox", "brave"])]),
     Group("", layout="monadwide", matches=[Match(wm_class=["Emacs"])]),
-    Group("", layout="treetab", matches=[Match(wm_class=['mpv'])]),
-    Group("", layout="treetab", matches=[Match(wm_class=['zathura'])]),
+    Group("", layout="treetab", matches=[Match(wm_class=['mpv']), Match(title=['fm-video'])]),
+    Group("", layout="treetab", matches=[Match(wm_class=['zathura']), Match(title=['fm-pdf'])]),
     Group("", layout="treetab", matches=[Match(wm_class=["audacious"])]),
     Group("", layout="monadwide", matches=[Match(wm_class=["Alacritty"])]),
     Group("", layout="treetab", matches=[Match(wm_class=["heroic", "Steam"])]),
