@@ -20,6 +20,9 @@ icons = [
     "",
 ]
 
+def latest_group(qtile):
+    qtile.current_screen.set_group(qtile.current_screen.previous_group)
+
 @lazy.function
 def set_layout(qtile):
     group_layout = qtile.current_layout.info()['name']
@@ -138,21 +141,12 @@ wl_input_rules = {
 }
 
 my_rules = [
-        # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
-        Match(wm_class="confirmreset"),  # gitk
-        Match(wm_class="makebranch"),  # gitk
-        Match(wm_class="maketag"),  # gitk
-        Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(wm_class="com.github.wwmm.easyeffects"),  # ssh-askpass
-        Match(title="branchdialog"),  # gitk
-        Match(title="pinentry"),  # GPG key password entry
+        Match(title="clima"), 
 ]
 
 keys = [
-    # A list of available commands that can be bound to keys can be found
-    # at https://docs.qtile.org/en/latest/manual/config/lazy.html
-    # Switch between windows
     Key([mod], "h", lazy.layout.left()),
     Key([mod], "l", lazy.layout.right()),
     Key([mod], "j", lazy.layout.down()),
@@ -166,40 +160,28 @@ keys = [
     Key([mod], "n", lazy.layout.normalize()),
     Key([mod], "o", lazy.layout.maximize()),
     Key([mod, "shift"], "space", lazy.layout.flip()),
-    # Toggle between split and unsplit sides of stack.
-    # Split = all windows displayed
-    # Unsplit = 1 window displayed, like Max layout, but still with
-    # multiple stack panes
-    Key(
-        [mod, "shift"],
-        "Return",
-        lazy.layout.toggle_split(),
-        desc="Toggle between split and unsplit sides of stack",
-    ),
-    Key([mod], "t", lazy.spawn(terminal), desc="Launch terminal"),
+    Key( [mod, "shift"], "Return", lazy.layout.toggle_split()),
+    Key([mod], "t", lazy.spawn(terminal)),
     # Toggle between different layouts as defined below
-    Key([mod], "0", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
-    Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key([mod], "0", lazy.next_layout()),
+    Key([mod], "w", lazy.window.kill()),
+    Key([mod, "control"], "r", lazy.reload_config()),
+    Key([mod, "control"], "q", lazy.shutdown()),
+    Key([mod], "r", lazy.spawncmd()),
     # apps
-    Key([mod], "f", set_layout, desc="Launch runner"),
-    Key([mod, 'shift'], "m", lazy.spawn('alacritty -t fm-video -e lf /home/cse/.courses'), desc="Launch runner"),
-    Key([mod, 'shift'], "e", lazy.spawn('alacritty -t fm-pdf -e lf /home/cse/.ebooks'), desc="Launch runner"),
-    Key([mod], "d", lazy.spawn(runner), desc="Launch runner"),
-    Key([mod, 'shift'], "a", lazy.spawn('volume.sh up'), desc="Raise volume"),
-    Key([mod, 'shift'], "d", lazy.spawn('volume.sh down'), desc="Lower volume"),
+    Key([mod], "f", set_layout),
+    Key([mod, 'shift'], "m", lazy.spawn('alacritty -t fm-video -e lf /home/cse/.courses')),
+    Key([mod, 'shift'], "e", lazy.spawn('alacritty -t fm-pdf -e lf /home/cse/.ebooks')),
+    Key([mod], "d", lazy.spawn(runner)),
+    Key([mod, 'shift'], "a", lazy.spawn('volume.sh up')),
+    Key([mod, 'shift'], "d", lazy.spawn('volume.sh down')),
+    Key([mod, 'shift'], "t", lazy.spawn(terminal + ' --config-file /home/cse/.config/alacritty/clima.yml -t clima')),
+    Key([mod], "Tab", lazy.function(latest_group)),
     KeyChord([mod], "s", [
         Key([], "u", lazy.group['scratchpad'].dropdown_toggle('term')),
         Key([], "t", lazy.group['scratchpad'].dropdown_toggle('trayer')),
     ])
 ]
-
-def latest_group(qtile):
-    qtile.current_screen.set_group(qtile.current_screen.previous_group)
-
-keys += [Key([mod], "Tab", lazy.function(latest_group))]
 
 groups = [
     Group("", layout="max", matches=[Match(wm_class=["navigator", "firefox", "brave"])]),
@@ -240,7 +222,6 @@ screens = [
     ),
 ]
 
-# Drag floating layouts.
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
     Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
@@ -263,18 +244,6 @@ auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
 
-# If things like steam games want to auto-minimize themselves when losing
-# focus, should we respect this or not?
 auto_minimize = True
 
-# When using the Wayland backend, this can be used to configure input devices.
-
-# XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
-# string besides java UI toolkits; you can see several discussions on the
-# mailing lists, GitHub issues, and other WM documentation that suggest setting
-# this string if your java app doesn't work correctly. We may as well just lie
-# and say that we're a working one by default.
-
-# We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
-# java that happens to be on java's whitelist.
 wmname = "LG3D"
