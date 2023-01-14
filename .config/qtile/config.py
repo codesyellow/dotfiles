@@ -178,13 +178,13 @@ keys = [
     ),
     Key([mod], "t", lazy.spawn(terminal), desc="Launch terminal"),
     # Toggle between different layouts as defined below
-    Key([mod], "f", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([mod], "0", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     # apps
-    Key([mod, 'shift'], "f", set_layout, desc="Launch runner"),
+    Key([mod], "f", set_layout, desc="Launch runner"),
     Key([mod, 'shift'], "m", lazy.spawn('alacritty -t fm-video -e lf /home/cse/.courses'), desc="Launch runner"),
     Key([mod, 'shift'], "e", lazy.spawn('alacritty -t fm-pdf -e lf /home/cse/.ebooks'), desc="Launch runner"),
     Key([mod], "d", lazy.spawn(runner), desc="Launch runner"),
