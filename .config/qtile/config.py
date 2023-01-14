@@ -180,6 +180,7 @@ keys = [
     KeyChord([mod], "s", [
         Key([], "u", lazy.group['scratchpad'].dropdown_toggle('term')),
         Key([], "t", lazy.group['scratchpad'].dropdown_toggle('trayer')),
+        Key([], "m", lazy.group['scratchpad'].dropdown_toggle('btop')),
     ])
 ]
 
@@ -195,6 +196,7 @@ groups = [
         # add a alternative config file for transparency to work properly on wayland
         DropDown("term", "alacritty --config-file /home/cse/.config/alacritty/alacritty2.yml -t scratchpad", y=0.6),
         DropDown("trayer", "trayer --widthtype request", x=0.5, y=0.9),
+        DropDown("btop", terminal + " -t btop -e btop", height=0.6, y=0.2),
         ]),
 ]
 
