@@ -10,6 +10,8 @@ pad = 10
 runner = 'kickoff'
 terminal = 'alacritty'
 
+print('oi')
+
 icons = [
     "",
     "",
@@ -22,6 +24,10 @@ icons = [
 
 def latest_group(qtile):
     qtile.current_screen.set_group(qtile.current_screen.previous_group)
+
+def swap_main(qtile):
+    logger.warning(dir(qtile.current_layout))
+    qtile.current_layout.cmd_swap_main()
 
 @lazy.function
 def set_layout(qtile):
@@ -89,8 +95,6 @@ def my_widgets():
                 inactive=colors[4],
             ),
             widget.CurrentLayoutIcon(),
-            # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-            # widget.StatusNotifier(),
             widget.Spacer(),
             widget.Clock(
                 font="CaskaydiaCove Nerd Font Mono",
@@ -119,10 +123,11 @@ def my_widgets():
                 default_text='🚪', countdown_format=''
             ),
             widget.Spacer(length=6),
-    ]
+]
 
 @hook.subscribe.client_focus
 def opacity(c):
+    logger.warning(dir(c.core.qtile))
     for x in c.qtile.current_group.windows:
         if not x.has_focus:
             x.cmd_opacity(0.5) 
@@ -159,6 +164,7 @@ keys = [
     Key([mod], "m", lazy.layout.shrink()),
     Key([mod], "n", lazy.layout.normalize()),
     Key([mod], "o", lazy.layout.maximize()),
+    Key([mod, 'shift'], "s", lazy.function(swap_main)),
     Key([mod, "shift"], "space", lazy.layout.flip()),
     Key( [mod, "shift"], "Return", lazy.layout.toggle_split()),
     Key([mod], "t", lazy.spawn(terminal)),
@@ -235,6 +241,9 @@ dgroups_app_rules = []  # type: list
 follow_mouse_focus = False
 bring_front_click = False
 cursor_warp = False
+auto_fullscreen = True
+focus_on_window_activation = "smart"
+reconfigure_screens = True
 floating_layout = layout.Floating(
     border_focus = colors[9],
     border_normal = '#98971a',
@@ -242,10 +251,6 @@ floating_layout = layout.Floating(
     margin = 2,
     float_rules=my_rules,
 )
-auto_fullscreen = True
-focus_on_window_activation = "smart"
-reconfigure_screens = True
-
 auto_minimize = True
 
 wmname = "LG3D"
