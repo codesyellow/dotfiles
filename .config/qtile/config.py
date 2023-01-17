@@ -32,8 +32,6 @@ def swap_main(qtile):
 def set_layout(qtile):
     group_layout = qtile.current_layout.info()['name']
     g_name = qtile.current_group.name
-    # if layout == max go back to prev
-    logger.warning(dir(qtile.cmd_hide_show_bar()))
     if group_layout == 'max' and not g_name == icons[0]:
         if g_name == icons[1] or g_name == icons[5]:
             qtile.cmd_to_layout_index(0)
