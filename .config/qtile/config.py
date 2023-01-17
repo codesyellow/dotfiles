@@ -5,13 +5,11 @@ from libqtile.lazy import lazy
 from libqtile.backend.wayland import InputConfig
 from libqtile.log_utils import logger
 
+# important variables
 mod = "mod4"
 pad = 10
 runner = 'kickoff'
 terminal = 'alacritty'
-
-print('oi')
-
 icons = [
     "",
     "",
@@ -22,6 +20,7 @@ icons = [
     "",
 ]
 
+# functions
 def latest_group(qtile):
     qtile.current_screen.set_group(qtile.current_screen.previous_group)
 
@@ -44,28 +43,6 @@ def set_layout(qtile):
             return bar.show(True)
     qtile.cmd_to_layout_index(1)
     bar.show(True)
-
-#Colors for the bar
-def init_colors():
-    return [["#2e3440", "#2e3440"], # color 0  background color
-            ["#2e3440", "#2e3440"], # color 1  dark grayish blue
-            ["#3b4252", "#3b4252"], # color 2  very dark grayish blue
-            ["#434c5e", "#434c5e"], # color 3  very dark grayish blue
-            ["#4c566a", "#4c566a"], # color 4  very dark grayish blue
-            ["#d8dee9", "#d8dee9"], # color 5  grayish blue
-            ["#e5e9f0", "#e5e9f0"], # color 6  light grayish blue
-            ["#eceff4", "#eceff4"], # color 7  light grayish blue
-            ["#8fbcbb", "#8fbcbb"], # color 8  grayish cyan
-            ["#88c0d0", "#88c0d0"], # color 9  desaturated cyan
-            ["#81a1c1", "#81a1c1"], # color 10 desaturated blue
-            ["#5e81ac", "#5e81ac"], # color 11 dark moderate blue
-            ["#bf616a", "#bf616a"], # color 12 slightly desaturated red
-            ["#d08770", "#d08770"], # color 13 desaturated red
-            ["#ebcb8b", "#ebcb8b"], # color 14 soft orange
-            ["#a3be8c", "#a3be8c"], # color 15 desaturated green
-            ["#b48ead", "#b48ead"]] # color 16 grayish magenta
-
-colors = init_colors()
 
 def my_layouts():
     return [
@@ -128,6 +105,29 @@ def my_widgets():
             widget.Spacer(length=6),
 ]
 
+#Colors for the bar
+def init_colors():
+    return [["#2e3440", "#2e3440"], # color 0  background color
+            ["#2e3440", "#2e3440"], # color 1  dark grayish blue
+            ["#3b4252", "#3b4252"], # color 2  very dark grayish blue
+            ["#434c5e", "#434c5e"], # color 3  very dark grayish blue
+            ["#4c566a", "#4c566a"], # color 4  very dark grayish blue
+            ["#d8dee9", "#d8dee9"], # color 5  grayish blue
+            ["#e5e9f0", "#e5e9f0"], # color 6  light grayish blue
+            ["#eceff4", "#eceff4"], # color 7  light grayish blue
+            ["#8fbcbb", "#8fbcbb"], # color 8  grayish cyan
+            ["#88c0d0", "#88c0d0"], # color 9  desaturated cyan
+            ["#81a1c1", "#81a1c1"], # color 10 desaturated blue
+            ["#5e81ac", "#5e81ac"], # color 11 dark moderate blue
+            ["#bf616a", "#bf616a"], # color 12 slightly desaturated red
+            ["#d08770", "#d08770"], # color 13 desaturated red
+            ["#ebcb8b", "#ebcb8b"], # color 14 soft orange
+            ["#a3be8c", "#a3be8c"], # color 15 desaturated green
+            ["#b48ead", "#b48ead"]] # color 16 grayish magenta
+
+colors = init_colors()
+
+# hooks
 @hook.subscribe.client_focus
 def opacity(c):
     for x in c.qtile.current_group.windows:
@@ -143,16 +143,17 @@ def autostart():
     home = os.path.expanduser('~/.config/qtile/autostart.sh')
     subprocess.Popen([home])
 
+# rules
 wl_input_rules = {
     "type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt", kb_layout="br(nodeadkeys)"),
 }
-
 my_rules = [
         *layout.Floating.default_float_rules,
         Match(wm_class="com.github.wwmm.easyeffects"),  # ssh-askpass
         Match(title="clima"), 
 ]
 
+# bindings
 keys = [
     Key([mod], "h", lazy.layout.left()),
     Key([mod], "l", lazy.layout.right()),
@@ -239,6 +240,13 @@ mouse = [
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
+floating_layout = layout.Floating(
+    border_focus = colors[9],
+    border_normal = '#98971a',
+    border_width = 2,
+    margin = 2,
+    float_rules=my_rules,
+)
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
 follow_mouse_focus = False
@@ -247,13 +255,6 @@ cursor_warp = False
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
-floating_layout = layout.Floating(
-    border_focus = colors[9],
-    border_normal = '#98971a',
-    border_width = 2,
-    margin = 2,
-    float_rules=my_rules,
-)
 auto_minimize = True
 
 wmname = "LG3D"
