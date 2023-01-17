@@ -34,12 +34,16 @@ def set_layout(qtile):
     group_layout = qtile.current_layout.info()['name']
     g_name = qtile.current_group.name
     # if layout == max go back to prev
+    logger.warning(dir(qtile.cmd_hide_show_bar()))
     if group_layout == 'max' and not g_name == icons[0]:
         if g_name == icons[1] or g_name == icons[5]:
-            return qtile.cmd_to_layout_index(0)
+            qtile.cmd_to_layout_index(0)
+            return bar.show(False)
         else:
-            return qtile.cmd_to_layout_index(2)
+            qtile.cmd_to_layout_index(2)
+            return bar.show(True)
     qtile.cmd_to_layout_index(1)
+    bar.show(True)
 
 #Colors for the bar
 def init_colors():
@@ -66,12 +70,11 @@ colors = init_colors()
 def my_layouts():
     return [
             layout.MonadWide(
-                align=1,
                 border_focus=colors[4],
                 border_normal=colors[7],
                 border_width=0,
                 new_client_position='before_current',
-                ratio=.7,
+                ratio=.6,
                 single_border_width=0,
                 single_margin=0,
                 ),
@@ -89,7 +92,7 @@ def my_layouts():
 def my_widgets():
     return [
             widget.GroupBox(
-                active=colors[11],
+                active=colors[12],
                 block_highlight_text_color=colors[5],
                 highlight_method='block',
                 inactive=colors[4],
@@ -127,7 +130,6 @@ def my_widgets():
 
 @hook.subscribe.client_focus
 def opacity(c):
-    logger.warning(dir(c.core.qtile))
     for x in c.qtile.current_group.windows:
         if not x.has_focus:
             x.cmd_opacity(0.5) 
@@ -154,16 +156,17 @@ my_rules = [
 keys = [
     Key([mod], "h", lazy.layout.left()),
     Key([mod], "l", lazy.layout.right()),
-    Key([mod], "k", lazy.layout.down()),
-    Key([mod], "j", lazy.layout.up()),
+    Key([mod], "j", lazy.layout.down()),
+    Key([mod], "k", lazy.layout.up()),
     Key([mod, "shift"], "h", lazy.layout.swap_left()),
     Key([mod, "shift"], "l", lazy.layout.swap_right()),
-    Key([mod, "shift"], "k", lazy.layout.shuffle_down()),
-    Key([mod, "shift"], "j", lazy.layout.shuffle_up()),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
     Key([mod], "i", lazy.layout.grow()),
     Key([mod], "m", lazy.layout.shrink()),
     Key([mod], "n", lazy.layout.normalize()),
     Key([mod], "o", lazy.layout.maximize()),
+    Key([mod], "9", lazy.layout.reset()),
     Key([mod, 'shift'], "s", lazy.function(swap_main)),
     Key([mod, "shift"], "space", lazy.layout.flip()),
     Key( [mod, "shift"], "Return", lazy.layout.toggle_split()),
