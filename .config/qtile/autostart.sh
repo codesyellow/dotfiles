@@ -1,8 +1,7 @@
 #!/bin/sh
-mkfifo /tmp/wobpipe && tail -f /tmp/wobpipe | wob &
 easyeffects --gapplication-service &
 wlsunset -t 4000 &
-swaybg -i ~/.wallpapers/mountains.jpg &
+swaybg -i ~/Downloads/wallpaperflare.com_wallpaper.jpg &
 dunst &
-alacritty &
-alacritty &
+easyeffects -l LoudnessEqualizer &
+nm-applet &

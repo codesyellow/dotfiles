@@ -25,7 +25,6 @@ def latest_group(qtile):
     qtile.current_screen.set_group(qtile.current_screen.previous_group)
 
 def swap_main(qtile):
-    logger.warning(dir(qtile.current_layout))
     qtile.current_layout.cmd_swap_main()
 
 @lazy.function
@@ -45,9 +44,9 @@ def set_layout(qtile):
 def my_layouts():
     return [
             layout.MonadWide(
-                border_focus=colors[4],
-                border_normal=colors[7],
-                border_width=0,
+                border_focus=colors[12],
+                border_normal=colors[4],
+                border_width=2,
                 new_client_position='before_current',
                 ratio=.6,
                 single_border_width=0,
@@ -141,15 +140,22 @@ def autostart():
     home = os.path.expanduser('~/.config/qtile/autostart.sh')
     subprocess.Popen([home])
 
+@hook.subscribe.client_managed
+def center_float(c):
+    if c.floating:
+        c.cmd_center()
+
+#@hook.subscribe.client_managed
+#def make_float(c):
+  #  for x in c.qtile.current_group.windows:
+  #      if x.get_wm_class()[0] == 'com.github.wwmm.easyeffects':
+  #          logger.warning(dir(x))
+  #          x.cmd_enable_floating()
+
 # rules
 wl_input_rules = {
     "type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt", kb_layout="br(nodeadkeys)"),
 }
-my_rules = [
-        *layout.Floating.default_float_rules,
-        Match(wm_class="com.github.wwmm.easyeffects"),  # ssh-askpass
-        Match(title="clima"), 
-]
 
 # bindings
 keys = [
@@ -195,11 +201,15 @@ keys = [
 groups = [
     Group("", layout="max", matches=[Match(wm_class=["navigator", "firefox", "brave"])]),
     Group("", layout="monadwide", matches=[Match(wm_class=["Emacs"])]),
-    Group("", layout="treetab", matches=[Match(wm_class=['mpv']), Match(title=['fm-video'])]),
-    Group("", layout="treetab", matches=[Match(wm_class=['zathura']), Match(title=['fm-pdf'])]),
+    Group("", layout="treetab", matches=[Match(wm_class=['mpv']), 
+                                            Match(title=['fm-video'])]),
+    Group("", layout="treetab", matches=[Match(wm_class=['zathura']), 
+                                            Match(title=['fm-pdf'])]),
     Group("", layout="treetab", matches=[Match(wm_class=["audacious"])]),
     Group("", layout="monadwide", matches=[Match(wm_class=["Alacritty"])]),
-    Group("", layout="treetab", matches=[Match(wm_class=["heroic", "Steam"])]),
+    Group("", layout="treetab", matches=[Match(wm_class=["heroic", "Steam"]), 
+                                            Match(title=['Steam - Self Updater', 
+                                                         'Steam setup', 'Steam'] )]),
     ScratchPad("scratchpad", [
         # add a alternative config file for transparency to work properly on wayland
         DropDown("term", "alacritty --config-file /home/cse/.config/alacritty/alacritty2.yml -t scratchpad", y=0.6),
@@ -243,7 +253,18 @@ floating_layout = layout.Floating(
     border_normal = '#98971a',
     border_width = 2,
     margin = 2,
-    float_rules=my_rules,
+    float_rules=[
+        # Run the utility of `xprop` to see the wm class and name of an X client.
+        *layout.Floating.default_float_rules,
+        Match(wm_class="confirmreset"),  # gitk
+        Match(wm_class="makebranch"),  # gitk
+        Match(wm_class="maketag"),  # gitk
+        Match(wm_class="ssh-askpass"),  # ssh-askpass
+        Match(wm_class="pavucontrol"),  # ssh-askpass
+        Match(wm_class="com.github.wwmm.easyeffects"),  # ssh-askpass
+        Match(title="branchdialog"),  # gitk
+        Match(title="pinentry"),  # GPG key password entry
+    ]
 )
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
