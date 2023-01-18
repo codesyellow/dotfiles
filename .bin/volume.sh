@@ -12,8 +12,6 @@ if [ "$1" == "mute" ]; then
 fi
 
 VOLUME=$(pamixer --get-volume)
-echo $VOLUME >> /tmp/wobpipe
-echo $VOLUME
 MUTE=$(echo $AMIXER | grep -o '\[off\]' | tail -n 1)
 if [ "$VOLUME" -le 20 ]; then
     ICON=audio-volume-low
@@ -27,8 +25,8 @@ if [ "$MUTE" == "[off]" ]; then
     ICON=audio-volume-muted
 fi
 
-#notify-send.sh $VOLUME% \
-#  --replace=22 \
-#  -u low \
-#  -a volume \
-#  -i /usr/share/icons/Adwaita/32x32/legacy/$ICON.png
+notify-send.sh $VOLUME% \
+  --replace=22 \
+  -u low \
+  -a volume \
+  -i /usr/share/icons/Adwaita/32x32/legacy/$ICON.png
