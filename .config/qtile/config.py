@@ -149,13 +149,6 @@ def center_float(c):
     if c.floating:
         c.cmd_center()
 
-#@hook.subscribe.client_managed
-#def make_float(c):
-  #  for x in c.qtile.current_group.windows:
-  #      if x.get_wm_class()[0] == 'com.github.wwmm.easyeffects':
-  #          logger.warning(dir(x))
-  #          x.cmd_enable_floating()
-
 # rules
 wl_input_rules = {
     "type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt", kb_layout="br(nodeadkeys)"),
@@ -203,7 +196,7 @@ keys = [
 ]
 
 groups = [
-    Group("", layout="max", matches=[Match(wm_class=["navigator", "firefox", "brave"])]),
+    Group("", layout="max", matches=[Match(wm_class=["navigator", "firefox", "brave", "qutebrowser"])]),
     Group("", layout="monadwide", matches=[Match(wm_class=["Emacs"])]),
     Group("", layout="treetab", matches=[Match(wm_class=['mpv']), 
                                             Match(title=['fm-video'])]),
