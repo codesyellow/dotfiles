@@ -31,15 +31,17 @@ def swap_main(qtile):
 def set_layout(qtile):
     group_layout = qtile.current_layout.info()['name']
     g_name = qtile.current_group.name
+    my_bar = qtile.current_screen.top
     if group_layout == 'max' and not g_name == icons[0]:
         if g_name == icons[1] or g_name == icons[5]:
             qtile.cmd_to_layout_index(0)
-            return bar.show(False)
+            return my_bar.show(True)
         else:
-            qtile.cmd_to_layout_index(2)
-            return bar.show(True)
+            #logger.warning(dir(bar))
+            my_bar.show(False)
+            return qtile.cmd_to_layout_index(2)
     qtile.cmd_to_layout_index(1)
-    bar.show(True)
+    my_bar.show(False)
 
 def my_layouts():
     return [
