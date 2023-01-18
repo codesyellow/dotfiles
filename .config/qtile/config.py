@@ -128,12 +128,14 @@ colors = init_colors()
 @hook.subscribe.client_focus
 def opacity(c):
     for x in c.qtile.current_group.windows:
+        set_opacity = x.cmd_opacity
+        wm_class = x.get_wm_class()[0]
         if not x.has_focus:
-            x.cmd_opacity(0.5) 
+            set_opacity(0.5) 
         else:
-            x.cmd_opacity(1)
-        if x.get_wm_class()[0] == 'firefox':
-            x.cmd_opacity(1)
+            set_opacity(1) 
+        if wm_class == 'firefox' or wm_class == 'qutebrowser':
+            set_opacity(1) 
 
 @hook.subscribe.startup_once
 def autostart():
@@ -262,6 +264,7 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(wm_class="pavucontrol"),  # ssh-askpass
         Match(wm_class="com.github.wwmm.easyeffects"),  # ssh-askpass
+        Match(wm_class="ProtonUp-Qt"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
     ]
