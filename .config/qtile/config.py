@@ -37,11 +37,11 @@ def set_layout(qtile):
             qtile.cmd_to_layout_index(0)
             return my_bar.show(True)
         else:
-            #logger.warning(dir(bar))
             qtile.cmd_to_layout_index(2)
             return my_bar.show(True)
-    qtile.cmd_to_layout_index(1)
-    my_bar.show(False)
+    if not g_name == icons[0]:
+        qtile.cmd_to_layout_index(1)
+        my_bar.show(False)
 
 def my_layouts():
     return [
