@@ -1,5 +1,5 @@
 import os, subprocess
-from libqtile import bar, layout, hook, widget
+from libqtile import bar, layout, hook, widget 
 from libqtile.config import Click, Drag, Group, ScratchPad, DropDown, Key, Match, Screen, KeyChord
 from libqtile.lazy import lazy
 from libqtile.backend.wayland import InputConfig
@@ -46,6 +46,7 @@ def set_layout(qtile):
 def my_layouts():
     return [
             layout.MonadWide(
+                align=1,
                 border_focus=colors[12],
                 border_normal=colors[4],
                 border_width=2,
@@ -149,6 +150,12 @@ def center_float(c):
     if c.floating:
         c.cmd_center()
 
+### to do
+    ## change virtual console
+    ## if layout if max show number of windows on widgets
+    ## focus main window
+    ## hide cursor automacally
+
 # rules
 wl_input_rules = {
     "type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt", kb_layout="br(nodeadkeys)"),
@@ -192,7 +199,12 @@ keys = [
         Key([], "u", lazy.group['scratchpad'].dropdown_toggle('term')),
         Key([], "t", lazy.group['scratchpad'].dropdown_toggle('trayer')),
         Key([], "m", lazy.group['scratchpad'].dropdown_toggle('btop')),
-    ])
+    ]),
+    # actions
+    KeyChord([mod], "a", [
+        Key([], "h", lazy.core.hide_cursor()),
+        Key([], "s", lazy.core.unhide_cursor()),
+    ]),
 ]
 
 groups = [
