@@ -27,22 +27,6 @@ def latest_group(qtile):
 def swap_main(qtile):
     qtile.current_layout.cmd_swap_main()
 
-@lazy.function
-def set_layout(qtile):
-    group_layout = qtile.current_layout.info()['name']
-    g_name = qtile.current_group.name
-    my_bar = qtile.current_screen.top
-    if group_layout == 'max' and not g_name == icons[0]:
-        if g_name == icons[1] or g_name == icons[5]:
-            qtile.cmd_to_layout_index(0)
-            return my_bar.show(True)
-        else:
-            qtile.cmd_to_layout_index(2)
-            return my_bar.show(True)
-    if not g_name == icons[0]:
-        qtile.cmd_to_layout_index(1)
-        my_bar.show(False)
-
 #Colors for the bar
 def init_colors():
     return [["#2e3440", "#2e3440"], # color 0  background color
@@ -192,7 +176,7 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown()),
     Key([mod], "r", lazy.spawncmd()),
     # apps
-    Key([mod], "f", set_layout),
+    Key([mod], "f", lazy.window.toggle_fullscreen()),
     Key([mod, 'shift'], "m", lazy.spawn('alacritty -t fm-video -e lf /home/cse/.courses')),
     Key([mod, 'shift'], "e", lazy.spawn('alacritty -t fm-pdf -e lf /home/cse/.ebooks')),
     Key([mod], "d", lazy.spawn(runner)),
