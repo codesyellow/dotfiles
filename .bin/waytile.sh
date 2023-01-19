@@ -3,7 +3,7 @@
 cd ~
 
 # Tell XWayland to use a cursor theme
-export XCURSOR_THEME=GoogleDot-White
+#export XCURSOR_THEME=GoogleDot-White
 
 # Set a cursor size
 export XCURSOR_SIZE=24
