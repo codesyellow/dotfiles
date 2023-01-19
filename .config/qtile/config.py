@@ -5,22 +5,17 @@ from libqtile.lazy import lazy
 from libqtile.backend.wayland import InputConfig
 from libqtile.log_utils import logger
 
-
 # to do
 ## focus main window
+    ## maybe focus by name in group doc
 ## change virtual console
-## if layout if max show number of windows on widgets
+## if on max show number of windows on widget
 ## hide cursor automacally
-## maybe focus by name in group doc
 ## not transparency when scratchpad on top of a terminal window
 
 # important variables
-mod = "mod4"
-pad = 10
-runner = 'kickoff'
-terminal = 'alacritty'
 icons = [
-    "",
+    "",
     "",
     "",
     "",
@@ -28,6 +23,12 @@ icons = [
     "",
     "",
 ]
+my_font = 'GoMono Nerd Font Mono'
+mod = "mod4"
+pad = 10
+runner = 'kickoff'
+terminal = 'alacritty'
+
 
 # functions
 def latest_group(qtile):
@@ -93,24 +94,24 @@ def my_widgets():
             widget.CurrentLayoutIcon(),
             widget.Spacer(),
             widget.Clock(
-                font="CaskaydiaCove Nerd Font Mono",
+                font=my_font,
                 format='%d/%m/%y %H:%M',
             ),
             widget.Spacer(),
             widget.DF(
-                font="CaskaydiaCove Nerd Font Mono",
+                font=my_font,
                 foreground=colors[14],
                 visible_on_warn=False,
             ),
             widget.Spacer(length=4),
             widget.CPU(
-                font="CaskaydiaCove Nerd Font Mono",
+                font=my_font,
                 foreground=colors[12],
                 format='{freq_current}GHz|{load_percent}%',
             ),
             widget.Spacer(length=-4),
             widget.Memory(
-                font="CaskaydiaCove Nerd Font Mono",
+                font=my_font,
                 foreground=colors[16],
                 format='{MemUsed: .0f}{mm}',
             ),
@@ -199,15 +200,15 @@ keys = [
 ]
 
 groups = [
-    Group("", layout="max", matches=[Match(wm_class=["navigator", "firefox", "brave", "qutebrowser"])]),
-    Group("", layout="monadwide", matches=[Match(wm_class=["Emacs"])]),
-    Group("", layout="treetab", matches=[Match(wm_class=['mpv']), 
+    Group(icons[0], layout="max", matches=[Match(wm_class=["navigator", "firefox", "brave", "qutebrowser"])]),
+    Group(icons[1], layout="monadwide", matches=[Match(wm_class=["Emacs"])]),
+    Group(icons[2], layout="treetab", matches=[Match(wm_class=['mpv']), 
                                             Match(title=['fm-video'])]),
-    Group("", layout="treetab", matches=[Match(wm_class=['zathura']), 
+    Group(icons[3], layout="treetab", matches=[Match(wm_class=['zathura']), 
                                             Match(title=['fm-pdf'])]),
-    Group("", layout="treetab", matches=[Match(wm_class=["audacious"])]),
-    Group("", layout="monadwide", matches=[Match(wm_class=["Alacritty"])]),
-    Group("", layout="treetab", matches=[Match(wm_class=["heroic", "Steam"]), 
+    Group(icons[4], layout="treetab", matches=[Match(wm_class=["audacious"])]),
+    Group(icons[5], layout="monadwide", matches=[Match(wm_class=["Alacritty"])]),
+    Group(icons[6], layout="treetab", matches=[Match(wm_class=["heroic", "Steam"]), 
                                             Match(title=['Steam - Self Updater', 
                                                          'Steam setup', 'Steam'] )]),
     ScratchPad("scratchpad", [
@@ -226,7 +227,7 @@ layouts = my_layouts()
 
 widget_defaults = dict(
     background=colors[0],
-    font="Font Awesome 6 Free Solid",
+    font='Font Awesome 6 Free',
     fontsize=14,
     padding=4,
 )
