@@ -5,6 +5,15 @@ from libqtile.lazy import lazy
 from libqtile.backend.wayland import InputConfig
 from libqtile.log_utils import logger
 
+
+# to do
+## focus main window
+## change virtual console
+## if layout if max show number of windows on widgets
+## hide cursor automacally
+## maybe focus by name in group doc
+## not transparency when scratchpad on top of a terminal window
+
 # important variables
 mod = "mod4"
 pad = 10
@@ -112,8 +121,6 @@ def my_widgets():
             widget.Spacer(length=6),
 ]
 
-
-
 # hooks
 @hook.subscribe.client_focus
 def opacity(c):
@@ -136,14 +143,6 @@ def autostart():
 def center_float(c):
     if c.floating:
         c.cmd_center()
-
-### to do
-    ## change virtual console
-    ## if layout if max show number of windows on widgets
-    ## focus main window
-    ## hide cursor automacally
-
-## not transparency when scratchpad on top of a terminal window
 
 # rules
 wl_input_rules = {
@@ -175,6 +174,7 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config()),
     Key([mod, "control"], "q", lazy.shutdown()),
     Key([mod], "r", lazy.spawncmd()),
+    Key([mod], "b", lazy.group.focus_back()),
     # apps
     Key([mod], "f", lazy.window.toggle_fullscreen()),
     Key([mod, 'shift'], "m", lazy.spawn('alacritty -t fm-video -e lf /home/cse/.courses')),
