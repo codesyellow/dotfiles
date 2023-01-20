@@ -145,6 +145,21 @@ def center_float(c):
     if c.floating:
         c.cmd_center()
 
+# this is to fix a problem that happens after restart qtile. Clients that are 
+# on other groups apear on the group you are on and sometimes they just vanish.
+@hook.subscribe.startup
+def func(c):
+    the_class = c.get_wm_class()[0]
+    the_name = c.name
+    if the_class == 'firefox' or the_class == 'org.qutebrowser.qutebrowser':
+        c.togroup(icons[0])
+    elif(the_class == 'heroic' 
+        or the_class == 'Steam' 
+        or the_name == 'Steam - Self Updater' 
+        or the_name == 'Steam setup'
+    or the_name == 'Steam'):
+        c.togroup(icons[6])
+
 # rules
 wl_input_rules = {
     "type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt", kb_layout="br(nodeadkeys)"),
