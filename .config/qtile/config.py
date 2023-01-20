@@ -16,9 +16,9 @@ from libqtile.log_utils import logger
 # important variables
 icons = [
     "",
-    "",
+    "",
     "",
-    "",
+    "",
     "",
     "",
     "",
