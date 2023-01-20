@@ -11,6 +11,12 @@ settings:
       normal:
         ',M': hint links spawn mpv {hint-url}
         ',m': spawn mpv {url}
+  colors.webpage.bg:
+    global: black
+  colors.webpage.preferred_color_scheme:
+    global: dark
+  content.notifications.enabled:
+    https://www.youtube.com: false
   statusbar.position:
     global: bottom
   statusbar.show:
