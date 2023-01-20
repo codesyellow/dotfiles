@@ -37,6 +37,12 @@ def latest_group(qtile):
 def swap_main(qtile):
     qtile.current_layout.cmd_swap_main()
 
+def has_class(c):
+    return Match(wm_class=c)
+
+def has_name(c):
+    return Match(title=c)
+
 #Colors for the bar
 def init_colors():
     return [["#2e3440", "#2e3440"], # color 0  background color
@@ -215,16 +221,14 @@ keys = [
 ]
 
 groups = [
-    Group(icons[0], layout="max", matches=[Match(wm_class=["navigator", "firefox", "brave", "qutebrowser"])]),
-    Group(icons[1], layout="monadwide", matches=[Match(wm_class=["Emacs"])]),
-    Group(icons[2], layout="treetab", matches=[Match(wm_class=['mpv']), 
-                                            Match(title=['fm-video'])]),
-    Group(icons[3], layout="treetab", matches=[Match(wm_class=['zathura']), 
-                                            Match(title=['fm-pdf'])]),
-    Group(icons[4], layout="treetab", matches=[Match(wm_class=["audacious"])]),
-    Group(icons[5], layout="monadwide", matches=[Match(wm_class=["Alacritty"])]),
-    Group(icons[6], layout="treetab", matches=[Match(wm_class=["heroic", "Steam"]), 
-                                            Match(title=['Steam - Self Updater', 
+    Group(icons[0], layout="max", matches=[has_class(["navigator", "firefox", "brave", "qutebrowser"])]),
+    Group(icons[1], layout="monadwide", matches=[has_class(["Emacs"])]),
+    Group(icons[2], layout="treetab", matches=[has_class(['mpv'])]), 
+    Group(icons[3], layout="treetab", matches=[has_class(['zathura'])]), 
+    Group(icons[4], layout="treetab", matches=[has_class(["audacious"])]),
+    Group(icons[5], layout="monadwide", matches=[has_class(["Alacritty"])]),
+    Group(icons[6], layout="treetab", matches=[has_class(["heroic", "Steam"]), 
+                                            has_name(['Steam - Self Updater', 
                                                          'Steam setup', 'Steam'] )]),
     ScratchPad("scratchpad", [
         # add a alternative config file for transparency to work properly on wayland
