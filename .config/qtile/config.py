@@ -24,7 +24,7 @@ icons = [
     '',
     '',
 ]
-my_font = 'GoMono Nerd Font Mono'
+my_font = 'JetBrainsMono Nerd Font'
 mod = "mod4"
 pad = 10
 runner = 'kickoff'
@@ -104,6 +104,11 @@ def my_widgets():
                 format='%d/%m/%y %H:%M',
             ),
             widget.Spacer(),
+            widget.PulseVolume(
+                font=my_font,
+                foreground=colors[11]
+                ),
+            widget.Spacer(length=4),
             widget.DF(
                 font=my_font,
                 foreground=colors[14],
@@ -156,7 +161,11 @@ def center_float(c):
 @hook.subscribe.startup
 def func():
     logger.warning('vai')
-    logger.warning(dir(qtile.core))
+    logger.warning(dir(qtile))
+    logger.warning(dir(qtile.current_layout.clients))
+    logger.warning(dir(qtile.current_group.current_window))
+    logger.warning(qtile.current_group.current_window)
+#    logger.warning(dir(qtile.focus_window))
 #    the_class = c.get_wm_class()[0]
 #    the_name = c.name
 #    if the_class == 'firefox' or the_class == 'org.qutebrowser.qutebrowser':
@@ -223,8 +232,8 @@ keys = [
 ]
 
 groups = [
-    Group(icons[0], layout="max", matches=[has_class(["navigator", "firefox", "brave", "qutebrowser"])]),
-    Group(icons[1], layout="monadwide", matches=[has_class(["Emacs"])]),
+    Group(icons[0], layout="max", matches=[has_class(['navigator', 'firefox', 'brave', 'qutebrowser', 'org.qutebrowser.qutebrowser'])]),
+    Group(icons[1], layout="monadwide", matches=[has_class(['Emacs'])]),
     Group(icons[2], layout="treetab", matches=[has_class(['mpv'])]), 
     Group(icons[3], layout="treetab", matches=[has_class(['zathura'])]), 
     Group(icons[4], layout="treetab", matches=[has_class(["audacious"])]),
