@@ -1,5 +1,5 @@
 import os, subprocess
-from libqtile import bar, layout, hook, widget 
+from libqtile import bar, layout, hook, widget, qtile
 from libqtile.config import Click, Drag, Group, ScratchPad, DropDown, Key, Match, Screen, KeyChord
 from libqtile.lazy import lazy
 from libqtile.backend.wayland import InputConfig
@@ -14,21 +14,21 @@ from libqtile.log_utils import logger
 ## not transparency when scratchpad on top of a terminal window
 
 # important variables
+bar_icons_font = 'Symbols Nerd Font Mono'
 icons = [
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
 ]
 my_font = 'GoMono Nerd Font Mono'
 mod = "mod4"
 pad = 10
 runner = 'kickoff'
 terminal = 'alacritty'
-
 
 # functions
 def latest_group(qtile):
@@ -154,17 +154,19 @@ def center_float(c):
 # this is to fix a problem that happens after restart qtile. Clients that are 
 # on other groups apear on the group you are on and sometimes they just vanish.
 @hook.subscribe.startup
-def func(c):
-    the_class = c.get_wm_class()[0]
-    the_name = c.name
-    if the_class == 'firefox' or the_class == 'org.qutebrowser.qutebrowser':
-        c.togroup(icons[0])
-    elif(the_class == 'heroic' 
-        or the_class == 'Steam' 
-        or the_name == 'Steam - Self Updater' 
-        or the_name == 'Steam setup'
-    or the_name == 'Steam'):
-        c.togroup(icons[6])
+def func():
+    logger.warning('vai')
+    logger.warning(dir(qtile.core))
+#    the_class = c.get_wm_class()[0]
+#    the_name = c.name
+#    if the_class == 'firefox' or the_class == 'org.qutebrowser.qutebrowser':
+#        c.togroup(icons[0])
+#    elif(the_class == 'heroic' 
+#        or the_class == 'Steam' 
+#        or the_name == 'Steam - Self Updater' 
+#        or the_name == 'Steam setup'
+#    or the_name == 'Steam'):
+#        c.togroup(icons[6])
 
 # rules
 wl_input_rules = {
@@ -233,7 +235,7 @@ groups = [
     ScratchPad("scratchpad", [
         # add a alternative config file for transparency to work properly on wayland
         DropDown("term", "alacritty --config-file /home/cse/.config/alacritty/alacritty2.yml -t scratchpad", y=0.6),
-        DropDown("trayer", "trayer --widthtype request", x=0.5, y=0.9),
+        DropDown("trayer", "trayer --widthtype request --transparent true --alpha 255", x=0.5, y=0.9),
         DropDown("btop", terminal + " -t btop -e btop", height=0.6, y=0.2),
         ]),
 ]
@@ -246,7 +248,7 @@ layouts = my_layouts()
 
 widget_defaults = dict(
     background=colors[0],
-    font='Font Awesome 6 Free',
+    font=bar_icons_font,
     fontsize=14,
     padding=4,
 )
@@ -276,15 +278,9 @@ floating_layout = layout.Floating(
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
-        Match(wm_class="confirmreset"),  # gitk
-        Match(wm_class="makebranch"),  # gitk
-        Match(wm_class="maketag"),  # gitk
-        Match(wm_class="ssh-askpass"),  # ssh-askpass
-        Match(wm_class="pavucontrol"),  # ssh-askpass
-        Match(wm_class="com.github.wwmm.easyeffects"),  # ssh-askpass
-        Match(wm_class="ProtonUp-Qt"),  # ssh-askpass
-        Match(title="branchdialog"),  # gitk
-        Match(title="pinentry"),  # GPG key password entry
+        has_class("pavucontrol"),
+        has_class("com.github.wwmm.easyeffects"),
+        has_class("net.davidotek.pupgui2"),
     ]
 )
 dgroups_key_binder = None

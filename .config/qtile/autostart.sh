@@ -5,3 +5,4 @@ swaybg -i ~/.wallpapers/house.jpg &
 dunst &
 easyeffects -l LoudnessEqualizer &
 nm-applet &
+alsactl --file ~/.config/asound.state restore &
