@@ -1,7 +1,7 @@
 #!/bin/sh
 easyeffects --gapplication-service &
 xrandr --output VGA-1 --gamma 1.0:0.88:0.90 --brightness 0.95 &
-hsetroot -cover ~/.wallpapers/mountains.jpg &
+hsetroot -cover ~/.wallpapers/house.jpg &
 xset led on &
 keyd-application-mapper -d
 dunst &
@@ -14,3 +14,4 @@ cpupower frequency-set -g performance &
 run_xidlehook &
 easyeffects -l 'LoudnessEqualizer' &
 alsactl --file ~/.config/asound.state restore &
+st &
