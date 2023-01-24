@@ -10,8 +10,10 @@ from libqtile.log_utils import logger
     ## maybe focus by name in group doc
 ## change virtual console
 ## if on max show number of windows on widget
-## hide cursor automacally
 ## not transparency when scratchpad on top of a terminal window
+
+# wayland
+## hide cursor automacally
 
 # important variables
 bar_icons_font = 'Symbols Nerd Font Mono'
@@ -25,9 +27,13 @@ icons = [
     '',
 ]
 my_font = 'JetBrainsMono Nerd Font'
-mod = "mod4"
 pad = 10
-runner = 'kickoff'
+if qtile.core.name == "x11":
+    mod = 'mod3'
+    runner = 'dmenu_run'
+elif qtile.core.name == "wayland":
+    mod = 'mod4'
+    runner = 'kickoff'
 terminal = 'alacritty'
 
 # functions
@@ -146,41 +152,23 @@ def opacity(c):
         if wm_class == 'firefox' or wm_class == 'org.qutebrowser.qutebrowser':
             set_opacity(1) 
 
-@hook.subscribe.startup_once
-def autostart():
-    home = os.path.expanduser('~/.config/qtile/autostart.sh')
-    subprocess.Popen([home])
+if qtile.core.name == "wayland":
+    @hook.subscribe.startup_once
+    def autostart():
+        home = os.path.expanduser('~/.config/qtile/wl_autostart.sh')
+        subprocess.Popen([home])
 
 @hook.subscribe.client_managed
 def center_float(c):
     if c.floating:
         c.cmd_center()
 
-# this is to fix a problem that happens after restart qtile. Clients that are 
-# on other groups apear on the group you are on and sometimes they just vanish.
-@hook.subscribe.startup
-def func():
-    logger.warning('vai')
-    logger.warning(dir(qtile))
-    logger.warning(dir(qtile.current_layout.clients))
-    logger.warning(dir(qtile.current_group.current_window))
-    logger.warning(qtile.current_group.current_window)
-#    logger.warning(dir(qtile.focus_window))
-#    the_class = c.get_wm_class()[0]
-#    the_name = c.name
-#    if the_class == 'firefox' or the_class == 'org.qutebrowser.qutebrowser':
-#        c.togroup(icons[0])
-#    elif(the_class == 'heroic' 
-#        or the_class == 'Steam' 
-#        or the_name == 'Steam - Self Updater' 
-#        or the_name == 'Steam setup'
-#    or the_name == 'Steam'):
-#        c.togroup(icons[6])
-
+if qtile.core.name == "wayland":
 # rules
-wl_input_rules = {
-    "type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt", kb_layout="br(nodeadkeys)"),
-}
+    wl_input_rules = {
+        "*": InputConfig(pointer_accel=False),
+        "type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt", kb_layout="br(nodeadkeys)"),
+    }
 
 # bindings
 keys = [
