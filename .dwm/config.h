@@ -44,7 +44,6 @@ static const Rule rules[] = {
 	{ "libreoffice-writer",  NULL,       NULL,       1 << 3,       0,           -1,        50,50,500,500,        5 },
 	{ "st-256color",  NULL,       NULL,       1 << 6,       0,           -1,        50,50,1200,400,        5 },
 	{ "kdenlive",  NULL,       NULL,       1 << 4,       0,           -1,        50,50,500,500,        5 },
-	//{ NULL,  NULL,       "Steam",       1 << 7,       0,           -1,        50,50,500,500,        5 },
   // floating
 	{ "Lxappearance",  NULL,       NULL,       0,       1,           -1,     5,   280,124,800,500 },
 	{ "easyeffects",  NULL,       NULL,       0,       1,           -1,     5,   280,124,800,500 },
