@@ -30,7 +30,7 @@ my_font = 'JetBrainsMono Nerd Font'
 pad = 10
 if qtile.core.name == "x11":
     mod = 'mod3'
-    runner = 'dmenu_run'
+    runner = f'dmenu_run -dim 0.3 -fn "{my_font}"' 
 elif qtile.core.name == "wayland":
     mod = 'mod4'
     runner = 'kickoff'
@@ -149,7 +149,9 @@ def opacity(c):
             set_opacity(0.5) 
         else:
             set_opacity(1) 
-        if wm_class == 'firefox' or wm_class == 'org.qutebrowser.qutebrowser':
+        if (wm_class == 'firefox' 
+            or wm_class == 'org.qutebrowser.qutebrowser'
+            or wm_class == 'qutebrowser'):
             set_opacity(1) 
 
 if qtile.core.name == "wayland":
@@ -278,6 +280,7 @@ floating_layout = layout.Floating(
         has_class("pavucontrol"),
         has_class("com.github.wwmm.easyeffects"),
         has_class("net.davidotek.pupgui2"),
+        has_class("moderndeck"),
     ]
 )
 dgroups_key_binder = None
