@@ -218,6 +218,10 @@ keys = [
         Key([], "s", lazy.core.unhide_cursor()),
         Key([], "e", lazy.spawn('easyeffects -l LoudnessEqualizer')),
         Key([], "b", lazy.spawn('easyeffects -l "Heavy Bass"')),
+        KeyChord([], 'l', [
+            Key([], "o", lazy.spawn('xset led on')),
+            Key([], "f", lazy.spawn('xset led off')),
+            ])
     ]),
 ]
 
