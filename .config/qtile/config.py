@@ -27,6 +27,7 @@ icons = [
     '',
 ]
 my_font = 'JetBrainsMono Nerd Font'
+alternative_font = 'Font Awesome 6 Free'
 pad = 10
 if qtile.core.name == "x11":
     mod = 'mod3'
@@ -35,6 +36,13 @@ elif qtile.core.name == "wayland":
     mod = 'mod4'
     runner = 'kickoff'
 terminal = 'alacritty'
+dropdown = [
+        # add a alternative config file for transparency to work properly on wayland
+        DropDown("term", "alacritty --config-file /home/cse/.config/alacritty/alacritty2.yml -t scratchpad", y=0.6),
+        ]
+
+if qtile.core.name == 'wayland':
+    dropdown.append(DropDown("trayer", "trayer --widthtype request --transparent true --alpha 255", x=0.5, y=0.9))
 
 # functions
 def latest_group(qtile):
@@ -133,8 +141,11 @@ def my_widgets():
                 format='{MemUsed: .0f}{mm}',
             ),
             widget.Spacer(length=4),
+            widget.Systray(),
+            widget.Spacer(length=4),
             widget.QuickExit(
-                default_text='🚪', countdown_format=''
+                default_text='🚪', countdown_format='',
+                font=alternative_font,
             ),
             widget.Spacer(length=6),
 ]
@@ -235,12 +246,7 @@ groups = [
     Group(icons[6], layout="treetab", matches=[has_class(["heroic", "Steam"]), 
                                             has_name(['Steam - Self Updater', 
                                                          'Steam setup', 'Steam'] )]),
-    ScratchPad("scratchpad", [
-        # add a alternative config file for transparency to work properly on wayland
-        DropDown("term", "alacritty --config-file /home/cse/.config/alacritty/alacritty2.yml -t scratchpad", y=0.6),
-        DropDown("trayer", "trayer --widthtype request --transparent true --alpha 255", x=0.5, y=0.9),
-        DropDown("btop", terminal + " -t btop -e btop", height=0.6, y=0.2),
-        ]),
+    ScratchPad("scratchpad", dropdown),
 ]
 
 for k, group in zip(["1", "2", "3", "4", "5", "q", "g"], groups):
