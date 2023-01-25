@@ -34,15 +34,5 @@ if [ -d $HOME/.xinitrc.d ] ; then
  unset f
 fi
 
-# Statusbar loop
-while true; do
-  dwm-bar.sh
-  sleep 1s    # Update time every minute
-done &
-
-while :; do
-	ssh-agent dwm
-done
-
-exec dwm
+exec qtile start
 
