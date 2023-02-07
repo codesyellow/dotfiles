@@ -118,6 +118,11 @@ def my_widgets():
                 format='%d/%m/%y %H:%M',
             ),
             widget.Spacer(),
+            widget.Net(
+                foreground=colors[8],
+                format=' {down} |  {up}',
+                ),
+            widget.Spacer(length=4),
             widget.PulseVolume(
                 font=my_font,
                 foreground=colors[11]
@@ -243,7 +248,7 @@ groups = [
     Group(icons[3], layout="treetab", matches=[has_class(['zathura'])]), 
     Group(icons[4], layout="treetab", matches=[has_class(["audacious"])]),
     Group(icons[5], layout="monadwide", matches=[has_class(["Alacritty"])]),
-    Group(icons[6], layout="treetab", matches=[has_class(["heroic", "Steam"]), 
+    Group(icons[6], layout="treetab", matches=[has_class(["heroic", "Steam", 'bottles']), 
                                             has_name(['Steam - Self Updater', 
                                                          'Steam setup', 'Steam'] )]),
     ScratchPad("scratchpad", dropdown),
