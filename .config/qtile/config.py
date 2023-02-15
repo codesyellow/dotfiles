@@ -17,6 +17,7 @@ from libqtile.log_utils import logger
 
 # important variables
 bar_icons_font = 'Symbols Nerd Font Mono'
+alt_mod = 'mod3'
 icons = [
     '',
     '',
@@ -219,6 +220,7 @@ keys = [
     Key([mod, 'shift'], "m", lazy.spawn('alacritty -t fm-video -e lf /home/cse/.courses')),
     Key([mod, 'shift'], "e", lazy.spawn('alacritty -t fm-pdf -e lf /home/cse/.ebooks')),
     Key([mod], "d", lazy.spawn(runner)),
+    Key([alt_mod], "d", lazy.spawn(runner)),
     Key([mod, 'shift'], "a", lazy.spawn('volume.sh up')),
     Key([mod, 'shift'], "d", lazy.spawn('volume.sh down')),
     Key([mod, 'shift'], "t", lazy.spawn(terminal + ' --config-file /home/cse/.config/alacritty/clima.yml -t clima')),
@@ -248,7 +250,7 @@ groups = [
     Group(icons[3], layout="treetab", matches=[has_class(['zathura'])]), 
     Group(icons[4], layout="treetab", matches=[has_class(["audacious"])]),
     Group(icons[5], layout="monadwide", matches=[has_class(["Alacritty"])]),
-    Group(icons[6], layout="treetab", matches=[has_class(["heroic", "Steam", 'bottles']), 
+    Group(icons[6], layout="treetab", matches=[has_class(["heroic", "Steam", 'bottles', 'ProtonUp-Qt', 'Lutris']), 
                                             has_name(['Steam - Self Updater', 
                                                          'Steam setup', 'Steam'] )]),
     ScratchPad("scratchpad", dropdown),
@@ -295,7 +297,8 @@ floating_layout = layout.Floating(
         has_class("pavucontrol"),
         has_class("com.github.wwmm.easyeffects"),
         has_class("net.davidotek.pupgui2"),
-        has_class("moderndeck"),
+        has_class('moderndeck'),
+        has_class('ProtonUp-Qt'),
     ]
 )
 dgroups_key_binder = None
