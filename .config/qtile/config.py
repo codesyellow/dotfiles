@@ -299,6 +299,7 @@ floating_layout = layout.Floating(
         has_class("net.davidotek.pupgui2"),
         has_class('moderndeck'),
         has_class('ProtonUp-Qt'),
+        has_class('monophony'),
     ]
 )
 dgroups_key_binder = None
