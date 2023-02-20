@@ -10,12 +10,12 @@ alias dotc='dotfiles commit -m'
 alias dota='dotfiles add'
 
 # qtile
-alias getInfo='qtile cmd-obj -o cmd -f windows | less'
+alias getWInfo='qtile cmd-obj -o cmd -f windows | less'
 
 # arch
 alias search='pacman -Ss'
-alias lsm="exa -al --color=always --group-directories-first"
-alias ls="exa"
+alias lsm="exa -al --color=always --group-directories-first --icons"
+alias ls="exa --icons"
 alias up='$sud pacman -Syu && gopreload-batch-refresh.sh'
 alias i='$sud pacman -S'
 alias r='$sud pacman -Rs'
