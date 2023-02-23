@@ -16,3 +16,5 @@ easyeffects -l 'LoudnessEqualizer' &
 alsactl --file ~/.config/asound.state restore &
 # this is for fixing firefox slow startup
 dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY &
+emulate_xbox.sh &
+alacritty &
