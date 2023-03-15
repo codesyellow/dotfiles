@@ -3,9 +3,10 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 
-export XDG_RUNTIME_DIR=/run/user/$(id -u)
+export XDG_CURRENT_DESKTOP=qtile
 export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim
+export VDPAU_DRIVER=va_gl
 setopt autocd beep extendedglob nomatch
 
 bindkey -v
