@@ -17,6 +17,7 @@ from libqtile.log_utils import logger
 
 # important variables
 bar_icons_font = 'Symbols Nerd Font Mono'
+browser = 'qutebrowser'
 alt_mod = 'mod3'
 icons = [
     '',
@@ -27,7 +28,7 @@ icons = [
     '',
     '',
 ]
-my_font = 'JetBrainsMono Nerd Font'
+my_font = 'JetBrainMono Nerd Font'
 alternative_font = 'Font Awesome 6 Free'
 pad = 10
 if qtile.core.name == "x11":
@@ -39,7 +40,7 @@ elif qtile.core.name == "wayland":
 terminal = 'alacritty'
 dropdown = [
         # add a alternative config file for transparency to work properly on wayland
-        DropDown("term", "alacritty --config-file /home/cse/.config/alacritty/alacritty2.yml -t scratchpad", y=0.6),
+        DropDown("term", "alacritty --config-file /home/codesyellow/.config/alacritty/alacritty2.yml -t scratchpad", y=0.6),
         ]
 
 if qtile.core.name == 'wayland':
@@ -206,16 +207,17 @@ keys = [
     Key([mod], "9", lazy.layout.reset()),
     Key([mod, 'shift'], "s", lazy.function(swap_main)),
     Key([mod, "shift"], "space", lazy.layout.flip()),
-    Key( [mod, "shift"], "Return", lazy.layout.toggle_split()),
+    Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
     Key([mod], "t", lazy.spawn(terminal)),
     # Toggle between different layouts as defined below
     Key([mod], "0", lazy.next_layout()),
-    Key([mod], "w", lazy.window.kill()),
+    Key([mod, 'shift'], "c", lazy.window.kill()),
     Key([mod, "control"], "r", lazy.reload_config()),
     Key([mod, "control"], "q", lazy.shutdown()),
     Key([mod], "r", lazy.spawncmd()),
     Key([mod], "b", lazy.group.focus_back()),
     # apps
+    Key([mod], "w", lazy.spawn(browser)),
     Key([mod], "f", lazy.window.toggle_fullscreen()),
     Key([mod, 'shift'], "m", lazy.spawn('alacritty -t fm-video -e lf /home/cse/.courses')),
     Key([mod, 'shift'], "e", lazy.spawn('alacritty -t fm-pdf -e lf /home/cse/.ebooks')),
@@ -244,7 +246,7 @@ keys = [
 ]
 
 groups = [
-    Group(icons[0], layout="max", matches=[has_class(['navigator', 'firefox', 'brave', 'qutebrowser', 'org.qutebrowser.qutebrowser'])]),
+    Group(icons[0], layout="max", matches=[has_class(['navigator', 'firefox', 'Brave-browser', 'qutebrowser', 'org.qutebrowser.qutebrowser'])]),
     Group(icons[1], layout="monadwide", matches=[has_class(['Emacs'])]),
     Group(icons[2], layout="treetab", matches=[has_class(['mpv'])]), 
     Group(icons[3], layout="treetab", matches=[has_class(['zathura'])]), 
