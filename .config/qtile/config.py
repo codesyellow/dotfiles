@@ -18,6 +18,7 @@ from libqtile.log_utils import logger
 # important variables
 bar_icons_font = 'Symbols Nerd Font Mono'
 browser = 'qutebrowser'
+mod = 'mod4'
 alt_mod = 'mod3'
 icons = [
     '',
@@ -32,15 +33,14 @@ my_font = 'JetBrainMono Nerd Font'
 alternative_font = 'Font Awesome 6 Free'
 pad = 10
 if qtile.core.name == "x11":
-    mod = 'mod3'
     runner = f'dmenu_run -dim 0.3 -fn "{my_font}"' 
 elif qtile.core.name == "wayland":
-    mod = 'mod4'
     runner = 'kickoff'
 terminal = 'alacritty'
 dropdown = [
         # add a alternative config file for transparency to work properly on wayland
         DropDown("term", "alacritty --config-file /home/codesyellow/.config/alacritty/alacritty2.yml -t scratchpad", y=0.6),
+        DropDown("gpterm", "alacritty --class ScratchPad -e gpterm", height=0.9, width=0.9, opacity=0.9),
         ]
 
 if qtile.core.name == 'wayland':
@@ -51,7 +51,7 @@ def latest_group(qtile):
     qtile.current_screen.set_group(qtile.current_screen.previous_group)
 
 def swap_main(qtile):
-    qtile.current_layout.cmd_swap_main()
+    lazy.layout.swap_main()
 
 def has_class(c):
     return Match(wm_class=c)
@@ -205,7 +205,7 @@ keys = [
     Key([mod], "n", lazy.layout.normalize()),
     Key([mod], "o", lazy.layout.maximize()),
     Key([mod], "9", lazy.layout.reset()),
-    Key([mod, 'shift'], "s", lazy.function(swap_main)),
+    Key([mod, 'shift'], "s", lazy.layout.swap_main()),
     Key([mod, "shift"], "space", lazy.layout.flip()),
     Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
     Key([mod], "t", lazy.spawn(terminal)),
@@ -220,7 +220,7 @@ keys = [
     Key([mod], "w", lazy.spawn(browser)),
     Key([mod], "f", lazy.window.toggle_fullscreen()),
     Key([mod, 'shift'], "m", lazy.spawn('alacritty -t fm-video -e lf /home/cse/.courses')),
-    Key([mod, 'shift'], "e", lazy.spawn('alacritty -t fm-pdf -e lf /home/cse/.ebooks')),
+    Key([mod, 'shift'], "e", lazy.core.change_vt(1)),
     Key([mod], "d", lazy.spawn(runner)),
     Key([alt_mod], "d", lazy.spawn(runner)),
     Key([mod, 'shift'], "a", lazy.spawn('volume.sh up')),
@@ -229,6 +229,7 @@ keys = [
     Key([mod], "Tab", lazy.function(latest_group)),
     KeyChord([mod], "s", [
         Key([], "u", lazy.group['scratchpad'].dropdown_toggle('term')),
+        Key([], "g", lazy.group['scratchpad'].dropdown_toggle('gpterm')),
         Key([], "t", lazy.group['scratchpad'].dropdown_toggle('trayer')),
         Key([], "m", lazy.group['scratchpad'].dropdown_toggle('btop')),
     ]),
@@ -252,7 +253,7 @@ groups = [
     Group(icons[3], layout="treetab", matches=[has_class(['zathura'])]), 
     Group(icons[4], layout="treetab", matches=[has_class(["audacious"])]),
     Group(icons[5], layout="monadwide", matches=[has_class(["Alacritty"])]),
-    Group(icons[6], layout="treetab", matches=[has_class(["heroic", "Steam", 'bottles', 'ProtonUp-Qt', 'Lutris']), 
+    Group(icons[6], layout="treetab", matches=[has_class(["heroic", "Steam", 'bottles', 'ProtonUp-Qt', 'lutris']), 
                                             has_name(['Steam - Self Updater', 
                                                          'Steam setup', 'Steam'] )]),
     ScratchPad("scratchpad", dropdown),
