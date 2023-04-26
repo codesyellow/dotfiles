@@ -8,11 +8,16 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use {
+  'nvim-lualine/lualine.nvim',
+  requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+  }
+
+  use {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.0',
 	  -- or                            , branch = '0.1.x',
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
-  use 'shaunsingh/nord.nvim'
+
   use {
 	  'nvim-treesitter/nvim-treesitter',
 	  run = function()
@@ -20,6 +25,7 @@ return require('packer').startup(function(use)
 		  ts_update()
 	  end,
   }
+
   use {
 	  'VonHeikemen/lsp-zero.nvim',
 	  requires = {
@@ -42,6 +48,7 @@ return require('packer').startup(function(use)
 		  {'rafamadriz/friendly-snippets'},
 	  }
   }
+
   use 'norcalli/nvim-colorizer.lua'
 
   use { "beauwilliams/focus.nvim", config = function() require("focus").setup() end }
