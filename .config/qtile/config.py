@@ -35,7 +35,7 @@ pad = 10
 if qtile.core.name == "x11":
     runner = f'dmenu_run -dim 0.3 -fn "{my_font}"' 
 elif qtile.core.name == "wayland":
-    runner = 'kickoff'
+    runner = 'dmenu_run -h 20 -nb #2e3440 -fn "JetBrainMono Nerd Font"'
 terminal = 'alacritty'
 dropdown = [
         # add a alternative config file for transparency to work properly on wayland
@@ -61,7 +61,7 @@ def has_name(c):
 
 #Colors for the bar
 def init_colors():
-    return [["#2e3440", "#2e3440"], # color 0  background color
+    return [["#272e33", "#272e33"], # color 0  background color
             ["#2e3440", "#2e3440"], # color 1  dark grayish blue
             ["#3b4252", "#3b4252"], # color 2  very dark grayish blue
             ["#434c5e", "#434c5e"], # color 3  very dark grayish blue
@@ -117,7 +117,7 @@ def my_widgets():
             widget.Spacer(),
             widget.Clock(
                 font=my_font,
-                format='%d/%m/%y %H:%M',
+                format='%d|%b %H:%M %a',
             ),
             widget.Spacer(),
             widget.Net(
@@ -219,6 +219,7 @@ keys = [
     # apps
     Key([mod], "w", lazy.spawn(browser)),
     Key([mod], "f", lazy.window.toggle_fullscreen()),
+    Key([mod, 'shift'], "f", lazy.window.toggle_floating()),
     Key([mod, 'shift'], "m", lazy.spawn('alacritty -t fm-video -e lf /home/cse/.courses')),
     Key([mod, 'shift'], "e", lazy.core.change_vt(1)),
     Key([mod], "d", lazy.spawn(runner)),
@@ -253,7 +254,7 @@ groups = [
     Group(icons[3], layout="treetab", matches=[has_class(['zathura'])]), 
     Group(icons[4], layout="treetab", matches=[has_class(["audacious"])]),
     Group(icons[5], layout="monadwide", matches=[has_class(["Alacritty"])]),
-    Group(icons[6], layout="treetab", matches=[has_class(["heroic", "Steam", 'bottles', 'ProtonUp-Qt', 'lutris']), 
+    Group(icons[6], layout="treetab", matches=[has_class(["heroic", "Steam", 'amazon games ui.exe', 'bottles', 'ProtonUp-Qt', 'lutris']), 
                                             has_name(['Steam - Self Updater', 
                                                          'Steam setup', 'Steam'] )]),
     ScratchPad("scratchpad", dropdown),
