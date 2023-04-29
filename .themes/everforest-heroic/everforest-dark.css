@@ -1,0 +1,70 @@
+:root {
+    --bg: #272e33;
+    --bg_alt: #2E383C;
+    --fg: #D3C6AA;
+    --active_bg: #414B50;
+    --active_fg: #D699B6;
+    --ready: #83C092;
+    --icon: #E67E80;
+}
+body {
+    --background: var(--bg);
+    --body-background:var(--bg);
+    --background-lighter: var(--bg_alt);
+    --input-background: var(--bg_alt);
+}
+
+.Dialog__element[open] {
+    background-color: var(--bg_alt);
+}
+
+.playIcon {
+    background-color: var(--ready);
+}
+
+.settingsIcon:hover {
+    background-color: var(--bg) !important;
+}
+
+.gameTools {
+    background-color: var(--bg_alt) !important;
+}
+
+.gameTools:hover {
+    border: 1px solid var(--fg);
+}
+
+.is-sucess {
+    background-color: var(--fg) !important;
+}
+
+.MuiMenu-list {
+    background-color: var(--bg_alt) !important;
+}
+
+.MuiMenuItem-root:hover {
+     background-color: var(--fg) !important;
+     color: var(--bg);
+}
+
+.active {
+    background-color: var(--active_bg) !important;
+    color: var(--active_fg) !important;
+}
+
+button:hover {
+    background-color: var(--fg) !important;
+    color: var(--bg) !important;
+}
+
+svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
+    color: var(--icon);
+}
+
+.sideloadGameButton {
+    background-color: var(--ready);
+}
+
+.libraryHeaderWrapper {
+    background-color: var(--bg);
+}
