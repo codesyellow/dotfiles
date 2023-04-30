@@ -18,6 +18,6 @@ xidlehook \
     'xrandr --output VGA-1 --gamma 1.0:0.88:0.76 --brightness 0.95; xset -display :0.0 dpms force off; slock;' \
     'xset -display :0.0 dpms force on' \
   `# Finally, suspend an hour after it locks` \
-  --timer 3600 \
-    'systemctl hibernate' \
-    'xrandr --output VGA-1 --gamma 1.0:0.88:0.60 --brightness 0.95;'
+ # --timer 3600 \
+ #   'systemctl hibernate' \
+ #   'xrandr --output VGA-1 --gamma 1.0:0.88:0.60 --brightness 0.95;'
