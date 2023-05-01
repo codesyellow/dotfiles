@@ -49,6 +49,10 @@ if qtile.core.name == 'wayland':
 def latest_group(qtile):
     qtile.current_screen.set_group(qtile.current_screen.previous_group)
 
+def focus_main(qtile):
+    window = qtile.current_group.layout.focus_first()
+    qtile.current_group.focus(window)
+
 def swap_main(qtile):
     lazy.layout.swap_main()
 
@@ -86,7 +90,7 @@ def my_layouts():
                 align=1,
                 border_focus=colors[12],
                 border_normal=colors[4],
-                border_width=2,
+                border_width=1,
                 new_client_position='before_current',
                 ratio=.6,
                 single_border_width=0,
@@ -160,16 +164,11 @@ def my_widgets():
 @hook.subscribe.client_focus
 def opacity(c):
     for x in c.qtile.current_group.windows:
-        logger.warning('Below')
-        logger.warning(dir(x.group.windows))
-        logger.warning(x.group.windows)
         set_opacity = x.set_opacity
         wm_class = x.get_wm_class()[0]
         if x.has_focus and x.name == 'scratchpad':
             for w in x.group.windows:
                 w.set_opacity(1)
-            logger.warning('esta')
-            logger.warning(x.name)
         elif not x.has_focus:
             set_opacity(0.5)
         else:
@@ -235,6 +234,7 @@ keys = [
     Key([mod, 'shift'], "d", lazy.spawn('volume.sh down')),
     Key([mod, 'shift'], "t", lazy.spawn(terminal + ' --config-file /home/cse/.config/alacritty/clima.yml -t clima')),
     Key([mod], "Tab", lazy.function(latest_group)),
+    Key([mod, 'shift'], "p", lazy.function(focus_main)),
     KeyChord([mod], "s", [
         Key([], "u", lazy.group['scratchpad'].dropdown_toggle('term')),
         Key([], "g", lazy.group['scratchpad'].dropdown_toggle('gpterm')),
@@ -253,6 +253,7 @@ keys = [
             ])
     ]),
 ]
+
 
 groups = [
     Group(icons[0], layout="max", matches=[has_class(['navigator', 'firefox', 'Brave-browser', 'qutebrowser', 'org.qutebrowser.qutebrowser'])]),
