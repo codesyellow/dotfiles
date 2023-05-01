@@ -161,12 +161,17 @@ def my_widgets():
 def opacity(c):
     for x in c.qtile.current_group.windows:
         logger.warning('Below')
+        logger.warning(dir(x.group.windows))
+        logger.warning(x.group.windows)
         set_opacity = x.set_opacity
         wm_class = x.get_wm_class()[0]
-        logger.warning(dir(x))
-        logger.warning(x.set_opacity(0.8))
-        if not x.has_focus:
-            set_opacity(0.5) 
+        if x.has_focus and x.name == 'scratchpad':
+            for w in x.group.windows:
+                w.set_opacity(1)
+            logger.warning('esta')
+            logger.warning(x.name)
+        elif not x.has_focus:
+            set_opacity(0.5)
         else:
             set_opacity(1) 
         if (wm_class == 'firefox' 
@@ -186,7 +191,6 @@ def center_float(c):
         c.cmd_center()
 
 if qtile.core.name == "wayland":
-# rules
     wl_input_rules = {
         "*": InputConfig(pointer_accel=False),
         "type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt", kb_layout="br(nodeadkeys)"),
@@ -212,7 +216,6 @@ keys = [
     Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
     Key([mod], "t", lazy.spawn(terminal)),
     Key([alt_mod], "t", lazy.spawn(terminal)),
-    # Toggle between different layouts as defined below
     Key([mod], "0", lazy.next_layout()),
     Key([mod, 'shift'], "c", lazy.window.kill()),
     Key([mod, "control"], "r", lazy.reload_config()),
