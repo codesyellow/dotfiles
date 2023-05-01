@@ -11,15 +11,14 @@ from libqtile.log_utils import logger
 ## change virtual console
 ## if on max show number of windows on widget
 ## not transparency when scratchpad on top of a terminal window
-
 # wayland
 ## hide cursor automacally
 
 # important variables
 bar_icons_font = 'Symbols Nerd Font Mono'
 browser = 'qutebrowser'
-mod = 'mod4'
-alt_mod = 'mod3'
+mod = 'mod3'
+alt_mod = 'mod4'
 icons = [
     '',
     '',
@@ -161,8 +160,11 @@ def my_widgets():
 @hook.subscribe.client_focus
 def opacity(c):
     for x in c.qtile.current_group.windows:
-        set_opacity = x.cmd_opacity
+        logger.warning('Below')
+        set_opacity = x.set_opacity
         wm_class = x.get_wm_class()[0]
+        logger.warning(dir(x))
+        logger.warning(x.set_opacity(0.8))
         if not x.has_focus:
             set_opacity(0.5) 
         else:
@@ -209,6 +211,7 @@ keys = [
     Key([mod, "shift"], "space", lazy.layout.flip()),
     Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
     Key([mod], "t", lazy.spawn(terminal)),
+    Key([alt_mod], "t", lazy.spawn(terminal)),
     # Toggle between different layouts as defined below
     Key([mod], "0", lazy.next_layout()),
     Key([mod, 'shift'], "c", lazy.window.kill()),
@@ -220,6 +223,7 @@ keys = [
     Key([mod], "w", lazy.spawn(browser)),
     Key([mod], "f", lazy.window.toggle_fullscreen()),
     Key([mod, 'shift'], "f", lazy.window.toggle_floating()),
+    Key([mod], "c", lazy.window.center()),
     Key([mod, 'shift'], "m", lazy.spawn('alacritty -t fm-video -e lf /home/cse/.courses')),
     Key([mod, 'shift'], "e", lazy.core.change_vt(1)),
     Key([mod], "d", lazy.spawn(runner)),
