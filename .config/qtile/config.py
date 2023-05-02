@@ -6,8 +6,6 @@ from libqtile.backend.wayland import InputConfig
 from libqtile.log_utils import logger
 
 # to do
-## focus main window
-    ## maybe focus by name in group doc
 ## change virtual console
 ## if on max show number of windows on widget
 ## not transparency when scratchpad on top of a terminal window
@@ -39,7 +37,7 @@ terminal = 'alacritty'
 dropdown = [
         # add a alternative config file for transparency to work properly on wayland
         DropDown("term", "alacritty --config-file /home/codesyellow/.config/alacritty/alacritty2.yml -t scratchpad", y=0.6),
-        DropDown("gpterm", "alacritty --class ScratchPad -e gpterm", height=0.9, width=0.9, opacity=0.9),
+        DropDown("gpterm", "alacritty --title chatgpt -e tgpt chat", height=0.9, width=0.5, opacity=0.9, x=0.25),
         ]
 
 if qtile.core.name == 'wayland':
@@ -90,7 +88,7 @@ def my_layouts():
                 align=1,
                 border_focus=colors[12],
                 border_normal=colors[4],
-                border_width=1,
+                border_width=2,
                 new_client_position='before_current',
                 ratio=.6,
                 single_border_width=0,
@@ -170,12 +168,12 @@ def opacity(c):
             or wm_class == 'org.qutebrowser.qutebrowser'
             or wm_class == 'qutebrowser'):
             set_opacity(1) 
-        if x.has_focus and x.name == 'scratchpad':
+        if x.has_focus and x.name == 'scratchpad' or x.name == 'chatgpt':
             for w in x.group.windows:
                 w.set_opacity(1)
         elif not x.has_focus:
             set_opacity(0.5)
-        elif x.has_focus:
+        else:
             set_opacity(1) 
         
 if qtile.core.name == "wayland":
