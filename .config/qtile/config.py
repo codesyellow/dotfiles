@@ -15,8 +15,8 @@ from libqtile.log_utils import logger
 # important variables
 bar_icons_font = 'Symbols Nerd Font Mono'
 browser = 'qutebrowser'
-mod = 'mod3'
-alt_mod = 'mod4'
+mod = 'mod4'
+alt_mod = 'mod3'
 icons = [
     '',
     '',
@@ -175,17 +175,21 @@ def opacity(c):
             set_opacity(0.5)
         else:
             set_opacity(1) 
+
+@hook.subscribe.client_focus
+def is_floating(c):
+    for x in c.qtile.current_group.windows:
+        if x.has_focus and x.floating and x.name != 'scratchpad':
+            if x.get_wm_class()[0] == 'firefox':
+                logger.warning(dir(x))
+                logger.warning(x.set_size_floating(500,680))
+            logger.warning(x.center())
         
 if qtile.core.name == "wayland":
     @hook.subscribe.startup_once
     def autostart():
         home = os.path.expanduser('~/.config/qtile/wl_autostart.sh')
         subprocess.Popen([home])
-
-@hook.subscribe.client_managed
-def center_float(c):
-    if c.floating:
-        c.cmd_center()
 
 if qtile.core.name == "wayland":
     wl_input_rules = {
@@ -225,7 +229,7 @@ keys = [
     Key([mod, 'shift'], "f", lazy.window.toggle_floating()),
     Key([mod], "c", lazy.window.center()),
     Key([mod, 'shift'], "m", lazy.spawn('alacritty -t fm-video -e lf /home/cse/.courses')),
-    Key([mod, 'shift'], "e", lazy.core.change_vt(1)),
+    Key([mod, 'shift'], "e", lazy.core.change_vt(2)),
     Key([mod], "d", lazy.spawn(runner)),
     Key([alt_mod], "d", lazy.spawn(runner)),
     Key([mod, 'shift'], "a", lazy.spawn('volume.sh up')),
