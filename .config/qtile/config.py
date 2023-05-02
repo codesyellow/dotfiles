@@ -26,13 +26,13 @@ icons = [
     '',
     '',
 ]
+exit_icon_font = 'Font Awesome 6 Free'
 my_font = 'JetBrainMono Nerd Font'
-alternative_font = 'Font Awesome 6 Free'
 pad = 10
 if qtile.core.name == "x11":
     runner = f'dmenu_run -dim 0.3 -fn "{my_font}"' 
 elif qtile.core.name == "wayland":
-    runner = 'dmenu_run -h 20 -nb #2e3440 -fn "JetBrainMono Nerd Font"'
+    runner = f'dmenu_run -h 20 -nb #272e33 -fn "{my_font}"'
 terminal = 'alacritty'
 dropdown = [
         # add a alternative config file for transparency to work properly on wayland
@@ -153,7 +153,7 @@ def my_widgets():
             widget.Spacer(length=4),
             widget.QuickExit(
                 default_text='🚪', countdown_format='',
-                font=alternative_font,
+                font=exit_icon_font,
             ),
             widget.Spacer(length=6),
 ]
