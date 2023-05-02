@@ -51,7 +51,7 @@ def focus_main(qtile):
     window = qtile.current_group.layout.focus_first()
     qtile.current_group.focus(window)
 
-def swap_main(qtile):
+def swap_main():
     lazy.layout.swap_main()
 
 def has_class(c):
@@ -181,9 +181,8 @@ def is_floating(c):
     for x in c.qtile.current_group.windows:
         if x.has_focus and x.floating and x.name != 'scratchpad':
             if x.get_wm_class()[0] == 'firefox':
-                logger.warning(dir(x))
-                logger.warning(x.set_size_floating(500,680))
-            logger.warning(x.center())
+                x.set_size_floating(500,680)
+            x.center()
         
 if qtile.core.name == "wayland":
     @hook.subscribe.startup_once
