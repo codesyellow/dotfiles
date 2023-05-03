@@ -1,8 +1,6 @@
-from libqtile import bar 
-from libqtile.config import Screen
-from configs.bindings import keys, mouse
-from configs.layouts import layouts
-from configs.groups import groups
+from configs.bindings import *
+from configs.layouts import *
+from configs.groups import *
 from configs.widgets import *
 from configs.hooks import *
 from configs.screens import *
