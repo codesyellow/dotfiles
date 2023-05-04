@@ -5,8 +5,8 @@ from .functions import has_class
 layouts = [
         layout.MonadWide(
             align=1,
-            border_focus=colors[8],
-            border_normal=colors[4],
+            border_focus=colors[12],
+            border_normal=colors[15],
             border_width=2,
             new_client_position='before_current',
             ratio=.6,
@@ -15,12 +15,15 @@ layouts = [
             ),
         layout.Max(),
         layout.TreeTab(
-            active_bg=colors[5],
+            active_bg=colors[12],
             active_fg=colors[0],
             border_width=0,
-            bg_color=colors[0],
+            bg_color=colors[1],
             inactive_bg=colors[0],
             place_right=True,
+            sections=[''],
+            vspace=0,
+            previous_on_rm=True,
             section_fg=colors[0],
             ),
         ] 

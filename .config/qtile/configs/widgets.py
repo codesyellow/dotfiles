@@ -4,8 +4,8 @@ from .variables import colors, my_font, exit_icon_font, bar_icons_font
 my_widgets = [
         widget.GroupBox(
             background=colors[1],
-            active=colors[22],
-            block_highlight_text_color=colors[20],
+            active=colors[20],
+            block_highlight_text_color=colors[22],
             highlight_method='line',
             inactive=colors[6],
             ),

@@ -1,4 +1,4 @@
-from libqtile import bar, hook
+from libqtile import hook
 
 @hook.subscribe.client_focus
 def opacity(c):
