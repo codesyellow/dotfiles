@@ -21,10 +21,10 @@ layouts = [
             bg_color=colors[1],
             inactive_bg=colors[0],
             place_right=True,
-            sections=[''],
-            vspace=0,
             previous_on_rm=True,
+            sections=[''],
             section_fg=colors[0],
+            vspace=0,
             ),
         ] 
 
@@ -42,5 +42,6 @@ floating_layout = layout.Floating(
         has_class('moderndeck'),
         has_class('ProtonUp-Qt'),
         has_class('monophony'),
+        has_class('Whatsapp-for-linux'),
         ]
         )
