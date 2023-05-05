@@ -14,5 +14,4 @@ run_xidlehook &
 easyeffects -l 'LoudnessEqualizer' &
 dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY &
 alsactl --file ~/.config/asound.state restore &
-easyeffects --gapplication-service &
 emulate_xbox.sh &
