@@ -40,7 +40,6 @@ floating_layout = layout.Floating(
         has_class("com.github.wwmm.easyeffects"),
         has_class("net.davidotek.pupgui2"),
         has_class('moderndeck'),
-        has_class('ProtonUp-Qt'),
         has_class('monophony'),
         has_class('Whatsapp-for-linux'),
         ]

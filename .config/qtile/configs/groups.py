@@ -1,5 +1,5 @@
 from libqtile.config import Group, ScratchPad, Key, DropDown
-from .variables import icons, mod
+from .variables import icons, mod, home
 from .functions import has_class, has_name
 from .bindings import keys
 from libqtile.lazy import lazy
@@ -16,8 +16,8 @@ groups = [
                                                          'Steam setup', 'Steam', 'Sign in to Steam'] )]),
     ScratchPad("scratchpad", [
         # add a alternative config file for transparency to work properly on wayland
-        DropDown("term", "alacritty --config-file /home/codesyellow/.config/alacritty/alacritty2.yml -t scratchpad", y=0.6),
-        DropDown("gpterm", "alacritty --title chatgpt -e tgpt chat", height=0.9, width=0.5, opacity=0.9, x=0.25),
+        DropDown("term", f"alacritty --config-file {home}.config/alacritty/alacritty2.yml -t scratchpad", y=0.6),
+        DropDown("gpterm", "alacritty --title chatgpt -e aichat", height=0.9, width=0.5, opacity=0.9, x=0.25),
         ]
     ),
 ]

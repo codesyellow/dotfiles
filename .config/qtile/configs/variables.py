@@ -1,7 +1,8 @@
-bar_icons_font = 'Symbols Nerd Font Mono'
-browser = 'qutebrowser'
+import os
+
+browser = 'brave'
 mod = 'mod4'
-alt_mod = 'mod3'
+alt_mod = 'mod1'
 icons = [
     '',
     '',
@@ -9,7 +10,7 @@ icons = [
     '',
     '',
     '',
-    '',
+    '',
 ]
 colors = ['#1E2326', # bg_dim 0
           '#272E33', # bg0 1
@@ -38,8 +39,9 @@ colors = ['#1E2326', # bg_dim 0
           '#859289', # gray1 24
           '#9DA9A0', # gray2 25
         ]
-exit_icon_font = 'Font Awesome 6 Free'
+exit_icon_font = 'Font Awesome 6 Free Regular'
 my_font = 'JetBrainMono Nerd Font'
 pad = 10
 runner = f'dmenu_run -dim 0.3 -fn "{my_font}"'
 terminal = 'alacritty'
+home = os.path.expanduser('~/')

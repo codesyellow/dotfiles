@@ -2,6 +2,7 @@ from configs.bindings import *
 from configs.layouts import *
 from configs.groups import *
 from configs.hooks import *
+from configs.widgets import *
 from configs.screens import *
 
 dgroups_key_binder = None

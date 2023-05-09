@@ -1,5 +1,5 @@
 from libqtile import widget
-from .variables import colors, my_font, exit_icon_font, bar_icons_font
+from .variables import colors, my_font, exit_icon_font
 
 my_widgets = [
         widget.GroupBox(
@@ -33,14 +33,6 @@ my_widgets = [
             visible_on_warn=False,
             ),
         widget.Spacer(length=4),
-        widget.DF(
-            font=my_font,
-            foreground=colors[12],
-            format='  ({uf}{m}|{r:.0f}%)',
-            partition='/home',
-            visible_on_warn=False,
-            ),
-        widget.Spacer(length=4),
         widget.CPU(
             font=my_font,
             foreground=colors[13],
@@ -56,14 +48,14 @@ my_widgets = [
         widget.Systray(),
         widget.Spacer(length=4),
         widget.QuickExit(
-            default_text='🚪', countdown_format='',
+            default_text='', countdown_format='',
             font=exit_icon_font,
             ),
         widget.Spacer(length=6),
         ]
 widget_defaults = dict(
     background=colors[1],
-    font=bar_icons_font,
+    font=my_font,
     fontsize=14,
     padding=4,
 )
