@@ -7,10 +7,30 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
+  use({
+      "jackMort/ChatGPT.nvim",
+      config = function()
+          require("chatgpt").setup()
+      end,
+      requires = {
+          "MunifTanjim/nui.nvim",
+          "nvim-lua/plenary.nvim",
+          "nvim-telescope/telescope.nvim"
+      }
+  })
+
   use {
   'nvim-lualine/lualine.nvim',
   requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
+
+  use({
+      "neanias/everforest-nvim",
+      -- Optional; default configuration will be used if setup isn't called.
+      config = function()
+          require("everforest").setup()
+      end,
+  })
 
   use {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.0',
