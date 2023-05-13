@@ -36,6 +36,9 @@ function git_branch_name()
   fi
 }
 
+# pipe it to less
+function l { $@ | less }
+
 # Enable substitution in the prompt.
 setopt prompt_subst
 
