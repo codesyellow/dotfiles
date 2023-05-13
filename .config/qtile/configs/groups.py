@@ -11,13 +11,13 @@ groups = [
     Group(icons[3], layout='treetab', matches=[has_class(['zathura'])]), 
     Group(icons[4], layout='treetab', matches=[has_class(['audacious'])]),
     Group(icons[5], layout='monadwide', matches=[has_class(['Alacritty'])]),
-    Group(icons[6], layout='treetab', matches=[has_class(['heroic', 'Steam', 'amazon games ui.exe', 'bottles', 'ProtonUp-Qt', 'lutris']), 
+    Group(icons[6], layout='treetab', matches=[has_class(['heroic', 'Steam', 'amazon games ui.exe', 'bottles', 'ProtonUp-Qt', 'lutris', 'amazongamessetup.exe']), 
                                             has_name(['Steam - Self Updater', 
                                                          'Steam setup', 'Steam', 'Sign in to Steam'] )]),
     ScratchPad('scratchpad', [
         # add a alternative config file for transparency to work properly on wayland
         DropDown('term', f'alacritty --config-file {home}.config/alacritty/alacritty2.yml -t scratchpad', y=0.6),
-        DropDown('gpterm', 'alacritty --title chatgpt -e aichat', height=0.9, width=0.5, opacity=0.9, x=0.25),
+        DropDown('gpterm', 'alacritty --title chatgpt -e edge-gpt --cookie-file ~/.cookies.json', height=0.9, width=0.5, opacity=0.9, x=0.25),
         ]
     ),
 ]

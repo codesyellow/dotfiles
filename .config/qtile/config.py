@@ -4,6 +4,12 @@ from configs.groups import *
 from configs.hooks import *
 from configs.widgets import *
 from configs.screens import *
+from libqtile.backend.wayland  import InputConfig
+
+wl_input_rules = {
+    '12625:4098:YICHIP Wireless Device Consumer ': InputConfig(pointer_accel=True),
+    "type:keyboard": InputConfig(kb_layout="br(nodeadkeys)", kb_options="ctrl:nocaps,compose:ralt" ),
+}
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list

@@ -4,10 +4,11 @@ from libqtile.log_utils import logger
 @hook.subscribe.client_focus
 def opacity(c):
     for x in c.qtile.current_group.windows:
-        wm_class = x.get_wm_class()[1]
+        wm_class = x.get_wm_class()[0]
         if (wm_class == 'firefox' 
             or wm_class == 'org.qutebrowser.qutebrowser'
-            or wm_class == 'qutebrowser'):
+            or wm_class == 'qutebrowser'
+            or wm_class == 'Brave-browser'):
             x.opacity = 1
         if x.has_focus and x.name == 'scratchpad' or x.name == 'chatgpt':
             for w in x.group.windows:
@@ -21,7 +22,7 @@ def opacity(c):
 def is_floating(c):
     for x in c.qtile.current_group.windows:
         if x.has_focus and x.floating and x.name != 'scratchpad' and not x.fullscreen:
-            if x.get_wm_class()[0] == 'Navigator' or x.get_wm_class()[1] == 'Brave-browser':
+            if x.get_wm_class()[0] == 'Navigator' or x.get_wm_class()[0] == 'Brave-browser':
                 x.cmd_set_size_floating(500,680)
             x.cmd_center()
 

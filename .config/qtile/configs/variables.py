@@ -1,4 +1,5 @@
 import os
+from libqtile import qtile
 
 browser = 'brave'
 mod = 'mod4'
@@ -45,3 +46,8 @@ pad = 10
 runner = f'dmenu_run -dim 0.3 -fn "{my_font}"'
 terminal = 'alacritty'
 home = os.path.expanduser('~/')
+if qtile.core.name == "x11":
+    runner = f'dmenu_run -dim 0.3 -fn "{my_font}"'
+elif qtile.core.name == "wayland":
+    runner = 'kickoff'
+
