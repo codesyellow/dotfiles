@@ -1,16 +1,20 @@
+import os, subprocess
+from libqtile import qtile
+from configs.variables import wl_input_rules
 from configs.bindings import *
 from configs.layouts import *
 from configs.groups import *
 from configs.hooks import *
 from configs.widgets import *
 from configs.screens import *
-from libqtile.backend.wayland  import InputConfig
 
-wl_input_rules = {
-    '12625:4098:YICHIP Wireless Device Consumer ': InputConfig(pointer_accel=True),
-    "type:keyboard": InputConfig(kb_layout="br(nodeadkeys)", kb_options="ctrl:nocaps,compose:ralt" ),
-}
+if qtile.core.name == "wayland":
+    @hook.subscribe.startup_once
+    def autostart():
+        home = os.path.expanduser('~/.config/qtile/wl_autostart.sh' )
+        subprocess.Popen([home])
 
+wl_input_rules = wl_input_rules
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
 follow_mouse_focus = False

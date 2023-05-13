@@ -1,4 +1,4 @@
-from libqtile import hook
+from libqtile import hook, qtile
 from libqtile.log_utils import logger
 
 @hook.subscribe.client_focus
