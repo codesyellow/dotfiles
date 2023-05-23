@@ -45,7 +45,7 @@ exit_icon_font = 'Font Awesome 6 Free Regular'
 my_font = 'JetBrainMono Nerd Font'
 pad = 10
 runner = f'dmenu_run -dim 0.3 -fn "{my_font}"'
-terminal = 'alacritty'
+terminal = 'foot'
 home = os.path.expanduser('~/')
 
 if qtile.core.name == "x11":
@@ -56,6 +56,7 @@ elif qtile.core.name == "wayland":
 if qtile.core.name == "wayland":
     wl_input_rules = {
         '*': InputConfig(pointer_accel=False),
-        "type:keyboard": InputConfig(kb_layout="br(nodeadkeys)", kb_options="ctrl:nocaps,compose:ralt" ),
+        "type:keyboard": InputConfig(
+            kb_layout="br(nodeadkeys), br", 
+            kb_options="grp_led:scroll,compose:ralt,ctrl:nocaps,compose:ralt" ),
     }
-

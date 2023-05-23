@@ -1,5 +1,14 @@
 from libqtile import hook, qtile
 from libqtile.log_utils import logger
+import re
+
+if qtile.core.name == "wayland":
+    # create a function to close winedbg.exe/Program Error
+    @hook.subscribe.client_managed
+    def gamesFullscreen(c):
+        for x in c.qtile.current_group.windows:
+            if re.search("^steam_app.", x.get_wm_class()[0]) and not x.name == 'Amazon Games':
+                x.cmd_enable_fullscreen()
 
 @hook.subscribe.client_focus
 def opacity(c):

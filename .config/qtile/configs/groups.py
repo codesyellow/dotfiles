@@ -10,7 +10,7 @@ groups = [
     Group(icons[2], layout='treetab', matches=[has_class(['mpv'])]), 
     Group(icons[3], layout='treetab', matches=[has_class(['zathura'])]), 
     Group(icons[4], layout='treetab', matches=[has_class(['audacious'])]),
-    Group(icons[5], layout='monadwide', matches=[has_class(['Alacritty'])]),
+    Group(icons[5], layout='monadwide', matches=[has_class(['Alacritty', 'foot'])]),
     Group(icons[6], layout='treetab', matches=[has_class(['heroic', 'Steam', 'amazon games ui.exe', 'bottles', 'ProtonUp-Qt', 'lutris', 'amazongamessetup.exe']), 
                                             has_name(['Steam - Self Updater', 
                                                          'Steam setup', 'Steam', 'Sign in to Steam'] )]),
