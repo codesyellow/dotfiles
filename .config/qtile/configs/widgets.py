@@ -1,4 +1,5 @@
-from libqtile import widget
+#from libqtile import widget
+from qtile_extras import widget
 from .variables import colors, my_font, exit_icon_font
 
 my_widgets = [
@@ -21,6 +22,16 @@ my_widgets = [
             format=' {down} |  {up}',
             ),
         widget.Spacer(length=4),
+        widget.ALSAWidget(
+            bar_colour_high=colors[13],
+            bar_colour_loud=colors[12],
+            bar_colour_mute=colors[0],
+            bar_colour_normal=colors[16],
+            font=my_font,
+            foreground=colors[15],
+            mode='bar',
+            update_interval=2,
+            ),
         widget.PulseVolume(
             font=my_font,
             foreground=colors[15]
@@ -30,6 +41,12 @@ my_widgets = [
             font=my_font,
             foreground=colors[16],
             partition='/',
+            visible_on_warn=False,
+            ),
+        widget.DF(
+            font=my_font,
+            foreground=colors[16],
+            partition='/home',
             visible_on_warn=False,
             ),
         widget.Spacer(length=4),
@@ -44,8 +61,6 @@ my_widgets = [
             foreground=colors[14],
             format=' 󰍛{MemUsed: .0f}{mm}',
             ),
-        widget.Spacer(length=4),
-        widget.Systray(),
         widget.Spacer(length=4),
         widget.QuickExit(
             default_text='', countdown_format='',

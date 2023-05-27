@@ -1,4 +1,3 @@
-from libqtile.backend.wayland  import InputConfig
 from libqtile import qtile
 import os
 
@@ -45,18 +44,7 @@ exit_icon_font = 'Font Awesome 6 Free Regular'
 my_font = 'JetBrainMono Nerd Font'
 pad = 10
 runner = f'dmenu_run -dim 0.3 -fn "{my_font}"'
-terminal = 'foot'
+terminal = 'alacritty'
 home = os.path.expanduser('~/')
 
-if qtile.core.name == "x11":
-    runner = f'dmenu_run -dim 0.3 -fn "{my_font}"'
-elif qtile.core.name == "wayland":
-    runner = 'kickoff'
-
-if qtile.core.name == "wayland":
-    wl_input_rules = {
-        '*': InputConfig(pointer_accel=False),
-        "type:keyboard": InputConfig(
-            kb_layout="br(nodeadkeys), br", 
-            kb_options="grp_led:scroll,compose:ralt,ctrl:nocaps,compose:ralt" ),
-    }
+runner = f'dmenu_run -dim 0.3 -fn "{my_font}"'

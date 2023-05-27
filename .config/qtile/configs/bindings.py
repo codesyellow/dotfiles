@@ -49,6 +49,7 @@ keys = [
     KeyChord([mod], 's', [
         Key([], 'u', lazy.group['scratchpad'].dropdown_toggle('term')),
         Key([], 'g', lazy.group['scratchpad'].dropdown_toggle('gpterm')),
+        Key([], 'n', lazy.group['scratchpad'].dropdown_toggle('neorg')),
         Key([], 't', lazy.group['scratchpad'].dropdown_toggle('trayer')),
         Key([], 'm', lazy.group['scratchpad'].dropdown_toggle('btop')),
     ]),
