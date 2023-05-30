@@ -62,6 +62,8 @@ my_widgets = [
             format=' 󰍛{MemUsed: .0f}{mm}',
             ),
         widget.Spacer(length=4),
+        widget.Systray(),
+        widget.Spacer(length=4),
         widget.QuickExit(
             default_text='', countdown_format='',
             font=exit_icon_font,

@@ -6,4 +6,5 @@ alsactl --file ~/.config/asound.state restore &
 gammastep -O 4000 &
 easyeffects --gapplication-service &
 wl-copy &
-polkit-dumb-agent-git &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+

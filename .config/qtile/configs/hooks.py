@@ -1,5 +1,6 @@
 from libqtile import hook, qtile
 from libqtile.log_utils import logger
+from .variables import icons, mod 
 
 @hook.subscribe.client_focus
 def opacity(c):
@@ -22,7 +23,7 @@ def opacity(c):
 def is_floating(c):
     for x in c.qtile.current_group.windows:
         if x.has_focus and x.floating and x.name != 'scratchpad' and not x.fullscreen:
-            if x.get_wm_class()[0] == 'Navigator' or x.get_wm_class()[0] == 'Brave-browser':
+            if x.get_wm_class()[0] == 'firefox' or x.get_wm_class()[0] == 'Brave-browser':
                 x.set_size_floating(500,680)
             x.center()
 

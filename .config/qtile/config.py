@@ -6,13 +6,14 @@ from configs.groups import *
 from configs.hooks import *
 from configs.widgets import *
 from configs.screens import *
-'''
+from configs.variables import wl_input_rules
+
 if qtile.core.name == "wayland":
     @hook.subscribe.startup_once
     def autostart():
         home = os.path.expanduser('~/.config/qtile/wl_autostart.sh' )
         subprocess.Popen([home])
-'''
+wl_input_rules = wl_input_rules
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
 follow_mouse_focus = False

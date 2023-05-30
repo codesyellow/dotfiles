@@ -42,5 +42,6 @@ floating_layout = layout.Floating(
         has_class('moderndeck'),
         has_class('monophony'),
         has_class('Whatsapp-for-linux'),
+        has_class('tuned-gui'),
         ]
         )

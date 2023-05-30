@@ -1,12 +1,21 @@
 from libqtile import qtile
 import os
+from libqtile.backend.wayland import InputConfig
 
-browser = 'brave'
+wl_input_rules = {
+    "*": InputConfig(pointer_accel=True),
+    "type:keyboard": InputConfig(
+        kb_options="ctrl:nocaps,compose:ralt",
+        kb_layout="br(nodeadkeys)"
+        ),
+}
+
+browser = 'firefox'
 mod = 'mod4'
 alt_mod = 'mod1'
 icons = [
     '',
-    '',
+    '󰶞',
     '',
     '',
     '',

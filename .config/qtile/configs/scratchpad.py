@@ -14,7 +14,8 @@ scratchpads = [
             width=0.3,
             opacity=0.5,
             x=0.7,
-            y=0
+            y=0,
+            on_focus_lost_hide=False
             ),
         DropDown(
             'neorg', 

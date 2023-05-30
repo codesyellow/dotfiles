@@ -8,7 +8,7 @@ from libqtile.lazy import lazy
 groups = [
     Group(icons[0], layout='max', matches=[has_class(['navigator', 'firefox', 'Brave-browser', 'qutebrowser', 'org.qutebrowser.qutebrowser'])]),
     Group(icons[1], layout='monadwide', matches=[has_class(['Emacs'])]),
-    Group(icons[2], layout='treetab', matches=[has_class(['mpv'])]), 
+    Group(icons[2], layout='treetab', matches=[has_class(['mpv', 'Microsoft-edge'])]), 
     Group(icons[3], layout='treetab', matches=[has_class(['zathura'])]), 
     Group(icons[4], layout='treetab', matches=[has_class(['audacious'])]),
     Group(icons[5], layout='monadwide', matches=[has_class(['Alacritty', 'foot'])]),
