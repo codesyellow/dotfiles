@@ -12,6 +12,9 @@ return require('packer').startup(function(use)
   requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
 
+  use 'nvim-tree/nvim-tree.lua'
+  use 'nvim-tree/nvim-web-devicons'
+
   use({
       "neanias/everforest-nvim",
       -- Optional; default configuration will be used if setup isn't called.
