@@ -17,6 +17,21 @@ my_widgets = [
             format='%d|%b %H:%M %a',
             ),
         widget.Spacer(length=4),
+        widget.CheckUpdates(
+            distro='Arch',
+            foreground=colors[13],
+            no_update_string='No updates',
+            ),
+        widget.Spacer(length=4),
+        widget.KeyboardLayout(
+            configured_keyboards=['br nodeadkeys', 'br'],
+            display_map={
+                'br nodeadkeys':'BRNDK',
+                },
+            foreground=colors[17],
+            option='compose:menu,grp_led:scroll',
+            ),
+        widget.Spacer(length=4),
         widget.Net(
             foreground=colors[18],
             format=' {down} |  {up}',

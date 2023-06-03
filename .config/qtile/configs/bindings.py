@@ -43,7 +43,7 @@ keys = [
     Key([mod, 'shift'], 'd', lazy.spawn('volume.sh down')),
     Key([alt_mod, 'shift'], 'a', lazy.spawn('volume.sh up')),
     Key([alt_mod, 'shift'], 'd', lazy.spawn('volume.sh down')),
-#    Key([mod, 'shift'], 't', lazy.spawn(terminal + ' --config-file /home/cse/.config/alacritty/clima.yml -t clima')),
+    Key([mod], "space", lazy.widget["keyboardlayout"].next_keyboard(), desc="Next keyboard layout."),
     Key([mod], 'e', lazy.spawn(terminal + ' --class code -e nvim -c "cd ~/.code | NvimTreeToggle"')),
     Key([mod], 'Tab', lazy.function(latest_group)),
     Key([mod, 'shift'], 'p', lazy.function(focus_main)),
