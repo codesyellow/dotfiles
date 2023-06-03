@@ -8,6 +8,28 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use {
+      "nvim-neorg/neorg",
+      config = function()
+          require('neorg').setup {
+              load = {
+                  ["core.defaults"] = {}, -- Loads default behaviour
+                  ["core.concealer"] = {}, -- Adds pretty icons to your documents
+                  ["core.dirman"] = { -- Manages Neorg workspaces
+                  config = {
+                      workspaces = {
+                          work = "~/.notes/work",
+                          home = "~/.notes/home",
+                      },
+                  },
+              },
+          },
+      }
+  end,
+  run = ":Neorg sync-parsers",
+  requires = "nvim-lua/plenary.nvim",
+  }
+
+  use {
   'nvim-lualine/lualine.nvim',
   requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
