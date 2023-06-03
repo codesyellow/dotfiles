@@ -5,6 +5,13 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "<leader>n", ":NvimTreeToggle<CR>")
 
+-- Neorg
+vim.keymap.set("n", "<leader>gth", ":Neorg workspace home<CR>")
+vim.keymap.set("n", "<leader>gtw", ":Neorg workspace work<CR>")
+
+vim.keymap.set("n", "<leader>bp", ":bp<CR>")
+vim.keymap.set("n", "<leader>bn", ":bn<CR>")
+
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
