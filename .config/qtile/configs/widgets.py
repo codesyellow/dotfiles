@@ -1,4 +1,3 @@
-#from libqtile import widget
 from qtile_extras import widget
 from .variables import colors, my_font, exit_icon_font
 
@@ -14,19 +13,14 @@ my_widgets = [
         widget.Spacer(),
         widget.Clock(
             font=my_font,
-            format='%d|%b %H:%M %a',
-            ),
-        widget.Spacer(length=4),
-        widget.CheckUpdates(
-            distro='Arch',
-            foreground=colors[13],
-            no_update_string='No updates',
+            format=' %d|%b  %H:%M  %a',
             ),
         widget.Spacer(length=4),
         widget.KeyboardLayout(
             configured_keyboards=['br nodeadkeys', 'br'],
             display_map={
-                'br nodeadkeys':'BRNDK',
+                'br nodeadkeys':' BRNDK',
+                'br':' BR',
                 },
             foreground=colors[17],
             option='compose:menu,grp_led:scroll',
@@ -34,9 +28,9 @@ my_widgets = [
         widget.Spacer(length=4),
         widget.Net(
             foreground=colors[18],
-            format=' {down} |  {up}',
+            format=' {down}',
             ),
-        widget.Spacer(length=4),
+        widget.Spacer(length=2),
         widget.ALSAWidget(
             bar_colour_high=colors[13],
             bar_colour_loud=colors[12],
@@ -47,21 +41,19 @@ my_widgets = [
             mode='bar',
             update_interval=2,
             ),
-        widget.PulseVolume(
-            font=my_font,
-            foreground=colors[15]
-            ),
         widget.Spacer(length=4),
         widget.DF(
             font=my_font,
             foreground=colors[16],
             partition='/',
+            format=' {uf}{m}',
             visible_on_warn=False,
             ),
         widget.DF(
             font=my_font,
-            foreground=colors[16],
+            foreground=colors[19],
             partition='/home',
+            format=' {uf}{m}',
             visible_on_warn=False,
             ),
         widget.Spacer(length=4),
