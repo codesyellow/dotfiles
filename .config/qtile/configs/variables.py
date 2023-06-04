@@ -2,15 +2,7 @@ from libqtile import qtile
 import os
 from libqtile.backend.wayland import InputConfig
 
-wl_input_rules = {
-    "*": InputConfig(pointer_accel=True),
-    "type:keyboard": InputConfig(
-        kb_options="ctrl:nocaps,compose:ralt",
-        kb_layout="br(nodeadkeys)"
-        ),
-}
-
-browser = 'firefox'
+browser = 'brave'
 mod = 'mod4'
 alt_mod = 'mod1'
 icons = [

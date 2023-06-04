@@ -58,8 +58,8 @@ keys = [
     KeyChord([mod], 'a', [
         Key([], 'h', lazy.core.hide_cursor()),
         Key([], 's', lazy.core.unhide_cursor()),
-        Key([], 'e', lazy.spawn('easyeffects -l LoudnessEqualizer')),
-        Key([], 'b', lazy.spawn('easyeffects -l "Heavy Bass"')),
+        Key([], 'e', lazy.spawn('easy_preset.sh LoudnessEqualizer')),
+        Key([], 'b', lazy.spawn('easy_preset.sh "HeavyBass"')),
         KeyChord([], 'l', [
             Key([], 'o', lazy.spawn('xset led on')),
             Key([], 'f', lazy.spawn('xset led off')),

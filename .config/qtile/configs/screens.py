@@ -4,7 +4,7 @@ from .widgets import my_widgets
 
 screens = [
         Screen(
-            top=bar.Bar(
+            bottom=bar.Bar(
                 my_widgets
                 ,
                 20,
