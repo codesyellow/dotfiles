@@ -1,5 +1,7 @@
 from qtile_extras import widget
-from .variables import colors, my_font, exit_icon_font
+from .variables import colors, my_font, exit_icon_font, home
+import subprocess
+
 
 my_widgets = [
         widget.GroupBox(
@@ -14,6 +16,15 @@ my_widgets = [
         widget.Clock(
             font=my_font,
             format=' %d|%b  %H:%M  %a',
+            ),
+        widget.GenPollText(
+            update_interval=1,
+            #            name = "test",
+            func=lambda: subprocess.check_output(
+                home + ".bin/easy_preset.sh",
+                ).decode("utf-8"),
+            #  fmt = "{}",
+            markup = False,
             ),
         widget.Spacer(length=4),
         widget.KeyboardLayout(
@@ -49,6 +60,7 @@ my_widgets = [
             format=' {uf}{m}',
             visible_on_warn=False,
             ),
+        widget.Spacer(length=2),
         widget.DF(
             font=my_font,
             foreground=colors[19],
