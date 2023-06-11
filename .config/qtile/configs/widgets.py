@@ -1,7 +1,10 @@
 from qtile_extras import widget
-from .variables import colors, my_font, exit_icon_font, home
 import subprocess
-
+from .variables import colors, my_font, exit_icon_font, home
+def get_cur_grp_name():
+    result = subprocess.run(["/home/cie/.bin/easy_preset.sh"], capture_output=True, shell=True, text=True)
+    output = result.stdout
+    return output
 
 my_widgets = [
         widget.GroupBox(
@@ -11,20 +14,23 @@ my_widgets = [
             highlight_method='line',
             inactive=colors[6],
             ),
+        widget.WidgetBox(widgets=[
+            widget.TextBox(text="This widget is in the box"),
+            widget.Memory()
+            ]
+                         ),
         widget.CurrentLayoutIcon(),
         widget.Spacer(),
         widget.Clock(
             font=my_font,
             format=' %d|%b  %H:%M  %a',
             ),
+        widget.Spacer(length=4),
         widget.GenPollText(
+            func=get_cur_grp_name,
             update_interval=1,
-            #            name = "test",
-            func=lambda: subprocess.check_output(
-                home + ".bin/easy_preset.sh",
-                ).decode("utf-8"),
-            #  fmt = "{}",
-            markup = False,
+            foreground=colors[12],
+            padding=1, 
             ),
         widget.Spacer(length=4),
         widget.KeyboardLayout(

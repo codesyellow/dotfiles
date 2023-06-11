@@ -50,16 +50,16 @@ keys = [
     KeyChord([mod], 's', [
         Key([], 'u', lazy.group['scratchpad'].dropdown_toggle('term')),
         Key([], 'g', lazy.group['scratchpad'].dropdown_toggle('gpterm')),
+        Key([], 't', lazy.group['scratchpad'].dropdown_toggle('translator')),
         Key([], 'n', lazy.group['scratchpad'].dropdown_toggle('neorg')),
-        Key([], 't', lazy.group['scratchpad'].dropdown_toggle('trayer')),
         Key([], 'm', lazy.group['scratchpad'].dropdown_toggle('btop')),
     ]),
     # actions
     KeyChord([mod], 'a', [
         Key([], 'h', lazy.core.hide_cursor()),
         Key([], 's', lazy.core.unhide_cursor()),
-#        Key([], 'e', lazy.spawn('easy_preset.sh LoudnessEqualizer')),
-#        Key([], 'b', lazy.spawn('easy_preset.sh "HeavyBass"')),
+        Key([], 'e', lazy.spawn('easy_preset.sh LoudnessEqualizer')),
+        Key([], 'b', lazy.spawn('easy_preset.sh "HeavyBass"')),
         KeyChord([], 'l', [
             Key([], 'o', lazy.spawn('xset led on')),
             Key([], 'f', lazy.spawn('xset led off')),
