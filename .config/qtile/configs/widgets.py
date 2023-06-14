@@ -14,11 +14,6 @@ my_widgets = [
             highlight_method='line',
             inactive=colors[6],
             ),
-        widget.WidgetBox(widgets=[
-            widget.TextBox(text="This widget is in the box"),
-            widget.Memory()
-            ]
-                         ),
         widget.CurrentLayoutIcon(),
         widget.Spacer(),
         widget.Clock(
