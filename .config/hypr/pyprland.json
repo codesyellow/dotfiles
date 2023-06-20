@@ -1,0 +1,21 @@
+{
+  "pyprland": {
+    "plugins": [
+      "scratchpads",
+      "magnify"
+    ]
+  },
+  "scratchpads": {
+      "term": {
+          "command": "alacritty --class alacritty-dropterm",
+          "animation": "fromTop",
+          "unfocus": "hide"
+      },
+      "edge-gpt": {
+          "command": "alacritty --class edge-gpt -e edge-gpt",
+          "animation": "fromLeft",
+          "unfocus": "hide"
+      }
+  }
+}
+
