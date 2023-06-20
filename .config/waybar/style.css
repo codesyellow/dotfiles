@@ -1,0 +1,72 @@
+window#waybar {
+    background-color: #141b1e;
+    font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+}
+
+#workspaces {
+    margin: 10px;
+    padding: 7px;
+    padding-right: 10px;
+    background-color: #232a2d;
+    font-size: 18px;  
+}
+
+#workspaces button {
+  color: #e57474;
+}
+
+#workspaces button:hover {
+    border-radius: 0;
+  color: #fff;
+}
+
+#workspaces button.active {
+  color: #fff;
+}
+
+#custom-power {
+    color: #141b1e;
+    background-color: #e57474; 
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 10px 0px;
+    margin: 0px 10px;
+    margin-bottom: 5px;
+}
+
+#clock {
+    color: #dadada;
+    font-size: 1.2em;
+    margin-bottom: 8px;
+}
+
+#custom-separator {
+    color: #dadada; 
+}
+
+#memory {
+    color: #fff;
+    font-size: 17px;
+}
+
+#disk {
+    color: #fff;
+}
+
+#submap {
+    color: #fff;
+}
+
+#cpu {
+    color: #fff;
+    font-size: 17px;
+}
+
+#custom-wofi {
+    border-radius: 50px;
+    margin: 10px;
+    font-size:17px;
+    padding: 7px;
+    background-color: #232a2d;
+    color: #dadada;
+}

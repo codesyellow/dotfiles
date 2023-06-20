@@ -1,0 +1,59 @@
+{
+    "layer": "top",
+    "position": "right",
+    "modules-left": ["wlr/workspaces"],
+    "modules-right": ["hyprland/submap", "disk", "cpu", "memory", "tray", "custom/separator", "clock", "custom/power"],
+    "wlr/workspaces": {
+        "active-only": false,
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{icon}",
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "urgent": "",
+            "focused": "",
+            "default": ""
+        },
+        "on-click": "activate"
+    },
+    "hyprland/submap": {
+        "format": "",
+        "max-length": 8,
+        "tooltip": false
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    },
+    "custom/power": {
+        "format": "⏻",
+        "on-click": "loginctl poweroff"
+    },
+    "clock": {
+        "format": "{:%H\n%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    },
+    "custom/separator": {
+        "format": "──────"
+    },
+    "memory": {
+        "format": "{}%"
+    },
+    "cpu": {
+        "format": "{usage}%",
+        "interval": 1,
+    },
+    "disk": {
+        "interval": 30,
+        "format": "/{percentage_free}%",
+        "path": "/"
+    },
+    "custom/wofi": {
+        "format": "",
+        "on-click": "wofi --show run"
+    }
+}
