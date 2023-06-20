@@ -2,7 +2,7 @@
     "layer": "top",
     "position": "right",
     "modules-left": ["wlr/workspaces"],
-    "modules-right": ["hyprland/submap", "disk", "cpu", "memory", "tray", "custom/separator", "clock", "custom/power"],
+    "modules-right": ["hyprland/submap", "disk", "cpu", "memory", "custom/separator", "tray", "custom/separator", "clock", "custom/power"],
     "wlr/workspaces": {
         "active-only": false,
         "disable-scroll": true,
@@ -52,8 +52,4 @@
         "format": "/{percentage_free}%",
         "path": "/"
     },
-    "custom/wofi": {
-        "format": "",
-        "on-click": "wofi --show run"
-    }
 }
