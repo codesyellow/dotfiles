@@ -1,69 +1,79 @@
 {
-    "layer": "top",
+  "layer": "top",
     "height": 600,
     "position": "right",
     "modules-left": ["wlr/workspaces"],
     "modules-right": ["hyprland/submap", "custom/disk-root", "disk", "custom/disk-home", "disk#home", "custom/cpu-icon", "cpu","custom/ram-icon", "memory", "custom/separator", "tray", "custom/separator", "clock", "clock#day", "custom/power"],
     "wlr/workspaces": {
-        "active-only": false,
-        "disable-scroll": true,
-        "all-outputs": true,
-        "format": "{icon}",
-        "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
-            "4": "",
-            "5": "",
-            "urgent": "",
-            "focused": "",
-            "default": ""
-        },
-        "on-click": "activate"
+      "active-only": false,
+      "disable-scroll": true,
+      "all-outputs": true,
+      "format": "{icon}",
+      "format-icons": {
+        "1": "",
+        "2": "",
+        "3": "",
+        "4": "",
+        "5": "",
+        "urgent": "",
+        "focused": "",
+        "default": ""
+      },
+      "on-click": "activate"
     },
     "hyprland/submap": {
-        "format": "",
-        "max-length": 8,
-        "tooltip": false
+      "format": "",
+      "max-length": 8,
+      "tooltip": false
     },
     "tray": {
-        "icon-size": 21,
-        "spacing": 10
-    },
-    "custom/power": {
-        "format": "⏻",
-        "on-click": "loginctl poweroff"
+      "icon-size": 21,
+      "spacing": 10
     },
     "clock#day": {
       "format": "{:%d}",
+      "tooltip-format": "<tt><small>{calendar}</small></tt>",
+      "calendar": {
+        "mode"          : "month",
+        "mode-mon-col"  : 1,
+        "weeks-pos"     : "right",
+        "on-scroll"     : 1,
+        "format": {
+          "months":     "<span color='#ffead3'><b>{}</b></span>",
+          "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+          "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+          "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+          "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+        }
+      },
     },
     "clock": {
-        "format": "{:%H\n%M}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+      "format": "{:%H\n%M}",
+      
     },
     "custom/separator": {
-        "format": "──────"
+      "format": "──────"
     },
     "custom/ram-icon": {
-        "format": ""
-      },
+      "format": ""
+    },
     "memory": {
-        "format": "{}%"
+      "format": "{}%"
     },
     "custom/cpu-icon": {
       "format": ""
     },
     "cpu": {
       "format": "{usage}%",
-        "interval": 1,
+      "interval": 1,
     },
     "custom/disk-root": {
       "format": ""
     },
     "disk": {
-        "interval": 30,
-        "format": "{percentage_free}%",
-        "path": "/"
+      "interval": 30,
+      "format": "{percentage_free}%",
+      "path": "/"
     },
     "custom/disk-home": {
       "format": ""
