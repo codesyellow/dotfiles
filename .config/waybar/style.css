@@ -2,6 +2,8 @@ window#waybar {
   background: transparent;
   font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
   font-weight: bold;
+  border-radius: 15px;
+  background-color: rgba(30, 35, 38, .2);
 }
 
 #workspaces {
@@ -10,7 +12,7 @@ window#waybar {
 }
 
 #workspaces button {
-  color: #e57474;
+  color: #fff;
 }
 
 #workspaces button:hover {
@@ -19,7 +21,8 @@ window#waybar {
 }
 
 #workspaces button.active {
-  color: #fff;
+  background-color: rgba(30, 35, 38, .5);
+  color: #83C092;
 }
 
 #custom-separator {
@@ -35,6 +38,7 @@ window#waybar {
 
 #custom-disk-root {
   color: #D3C6AA;
+  margin-right: 4px;
 }
 
 /* home */
