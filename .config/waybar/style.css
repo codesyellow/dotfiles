@@ -30,12 +30,13 @@ window#waybar {
 }
 
 #gamemode {
-  color: #fff;
-  background-color: #444;
+  margin-right: -40px;
+  color: #7A8478;
 }
 
 #gamemode.running {
-  color: #fff;
+  margin-right: -40px;
+  color: #D699B6;
 }
 
 #pulseaudio {
@@ -46,14 +47,14 @@ window#waybar {
 
 #pulseaudio.icon {
   color: #DBBC7F;
-  margin-right: 8px;
+  margin-right: 1px;
   margin-bottom: -2px;
 }
 /* root */
 #disk {
   color: #D3C6AA;
   margin-bottom: 8px;
-  margin-right: -8px;
+  margin-right: -7px;
 }
 
 #custom-disk-root {
@@ -84,7 +85,7 @@ window#waybar {
 }
 
 #custom-cpu-icon {
-  margin-right: 6px;
+  margin-right: 4px;
   color: #7FBBB3;
 }
 
@@ -95,6 +96,7 @@ window#waybar {
 
 #custom-ram-icon {
   color: #E67E80;
+  margin-right: -2px;
 }
 
 #clock {

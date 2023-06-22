@@ -1,6 +1,6 @@
 {
   "layer": "top",
-    "height": 600,
+    "height": 650,
     "position": "right",
     "modules-left": ["wlr/workspaces"],
     "modules-right": ["hyprland/submap", "gamemode", "pulseaudio#icon", "pulseaudio", "custom/disk-root", "disk", "custom/disk-home", "disk#home", "custom/cpu-icon", "cpu","custom/ram-icon", "memory", "custom/separator", "tray", "custom/separator", "clock", "clock#day", "custom/power"],
@@ -54,7 +54,7 @@
       "format": "{glyph}",
       "format-alt": "{glyph} {count}",
       "glyph": "",
-      "hide-not-running": true,
+      "hide-not-running": false,
       "use-icon": true,
       "icon-name": "input-gaming-symbolic",
       "icon-spacing": 4,
