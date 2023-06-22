@@ -1,11 +1,12 @@
 #!/bin/bash
+gammastep -O 4000 &
 swaybg -i ~/.wallpapers/forest_stairs.jpg &
 pypr &
 waybar &
 doas python /home/cie/.bin/ledToggler.py /dev/input/event6 scrolllock scrolllock 1 1 &
 dunst &
 alsactl --file ~/.config/asound.state restore &
-gammastep -O 4000 &
 easyeffects --gapplication-service &
 wl-copy &
 /usr/lib/polkit-kde-authentication-agent-1 &
+swayidle timeout 300 lockscreen.sh &
