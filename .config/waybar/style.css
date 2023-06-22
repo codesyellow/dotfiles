@@ -1,3 +1,12 @@
+@define-color pulsa #A7C080;
+@define-color cpu #D3C6AA; 
+@define-color ram #83C092; 
+@define-color home #D699B6; 
+@define-color root #7FBBB3; 
+@define-color normal #fff; 
+@define-color gamemode_inac #9DA9A0; 
+@define-color gamemode_act #E67E80; 
+
 window#waybar {
   background: transparent;
   font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
@@ -12,7 +21,7 @@ window#waybar {
 }
 
 #workspaces button {
-  color: #fff;
+  color: @normal;
 }
 
 #workspaces button:hover {
@@ -31,45 +40,45 @@ window#waybar {
 
 #gamemode {
   margin-right: -40px;
-  color: #7A8478;
+  color: @gamemode_inac;
 }
 
 #gamemode.running {
   margin-right: -40px;
-  color: #D699B6;
+  color: @gamemode_act;
 }
 
 #pulseaudio {
-  color: #DBBC7F;
+  color: @pulsa;
   margin-bottom: 4px;
   margin-right: -8px;
 }
 
 #pulseaudio.icon {
-  color: #DBBC7F;
-  margin-right: 1px;
+  color: @pulsa;
+  margin-right: 3px;
   margin-bottom: -2px;
 }
 /* root */
 #disk {
-  color: #D3C6AA;
+  color: @root;
   margin-bottom: 8px;
   margin-right: -7px;
 }
 
 #custom-disk-root {
-  color: #D3C6AA;
+  color: @root;
   margin-right: 4px;
 }
 
 /* home */
 #disk.home {
-  color: #A7C080;
+  color: @home;
   margin-bottom: 8px;
 }
 
 #custom-disk-home {
-  color: #A7C080;
+  color: @home;
   margin-bottom: 2px;
 }
 
@@ -79,28 +88,28 @@ window#waybar {
 }
 
 #cpu {
-  color: #7FBBB3;
+  color: @cpu;
   margin-bottom: 8px;
   margin-right: -8px;
 }
 
 #custom-cpu-icon {
+  color: @cpu;
   margin-right: 4px;
-  color: #7FBBB3;
 }
 
 #memory {
-  color: #E67E80;
+  color: @ram;
   margin-right: -8px;
 }
 
 #custom-ram-icon {
-  color: #E67E80;
+  color: @ram;
   margin-right: -2px;
 }
 
 #clock {
-  color: #dadada;
+  color: @normal;
   font-size: 1.2em;
   margin-bottom: 8px;
 }
