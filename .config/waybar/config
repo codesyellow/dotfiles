@@ -3,7 +3,7 @@
     "height": 600,
     "position": "right",
     "modules-left": ["wlr/workspaces"],
-    "modules-right": ["hyprland/submap", "custom/disk-root", "disk", "custom/disk-home", "disk#home", "custom/cpu-icon", "cpu","custom/ram-icon", "memory", "custom/separator", "tray", "custom/separator", "clock", "clock#day", "custom/power"],
+    "modules-right": ["hyprland/submap", "gamemode", "custom/disk-root", "disk", "custom/disk-home", "disk#home", "custom/cpu-icon", "cpu","custom/ram-icon", "memory", "custom/separator", "tray", "custom/separator", "clock", "clock#day", "custom/power"],
     "wlr/workspaces": {
       "active-only": false,
       "disable-scroll": true,
@@ -25,6 +25,18 @@
       "format": "",
       "max-length": 8,
       "tooltip": false
+    },
+    "gamemode": {
+      "format": "{glyph}",
+      "format-alt": "{glyph} {count}",
+      "glyph": "",
+      "hide-not-running": true,
+      "use-icon": true,
+      "icon-name": "input-gaming-symbolic",
+      "icon-spacing": 4,
+      "icon-size": 20,
+      "tooltip": true,
+      "tooltip-format": "Games running: {count}"
     },
     "tray": {
       "icon-size": 21,
@@ -52,15 +64,18 @@
       
     },
     "custom/separator": {
-      "format": "──────"
+      "format": "──────",
+      "tooltip": false,
     },
     "custom/ram-icon": {
+      "tooltip": false,
       "format": ""
     },
     "memory": {
       "format": "{}%"
     },
     "custom/cpu-icon": {
+      "tooltip": false,
       "format": ""
     },
     "cpu": {
@@ -68,6 +83,7 @@
       "interval": 1,
     },
     "custom/disk-root": {
+      "tooltip": false,
       "format": ""
     },
     "disk": {
@@ -76,6 +92,7 @@
       "path": "/"
     },
     "custom/disk-home": {
+      "tooltip": false,
       "format": ""
     },
     "disk#home": {

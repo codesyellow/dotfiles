@@ -29,6 +29,14 @@ window#waybar {
   color: #dadada; 
 }
 
+#gamemode {
+  color: #fff;
+  background-color: #444;
+}
+
+#gamemode.running {
+  color: #fff;
+}
 /* root */
 #disk {
   color: #D3C6AA;
@@ -70,7 +78,7 @@ window#waybar {
 
 #memory {
   color: #E67E80;
-  margin-right: -10px;
+  margin-right: -8px;
 }
 
 #custom-ram-icon {
@@ -81,7 +89,6 @@ window#waybar {
   color: #dadada;
   font-size: 1.2em;
   margin-bottom: 8px;
-  font-weight: normal;
 }
 
 #clock.day {
