@@ -37,6 +37,18 @@ window#waybar {
 #gamemode.running {
   color: #fff;
 }
+
+#pulseaudio {
+  color: #DBBC7F;
+  margin-bottom: 4px;
+  margin-right: -8px;
+}
+
+#pulseaudio.icon {
+  color: #DBBC7F;
+  margin-right: 8px;
+  margin-bottom: -2px;
+}
 /* root */
 #disk {
   color: #D3C6AA;

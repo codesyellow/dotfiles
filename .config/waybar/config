@@ -3,7 +3,7 @@
     "height": 600,
     "position": "right",
     "modules-left": ["wlr/workspaces"],
-    "modules-right": ["hyprland/submap", "gamemode", "custom/disk-root", "disk", "custom/disk-home", "disk#home", "custom/cpu-icon", "cpu","custom/ram-icon", "memory", "custom/separator", "tray", "custom/separator", "clock", "clock#day", "custom/power"],
+    "modules-right": ["hyprland/submap", "gamemode", "pulseaudio#icon", "pulseaudio", "custom/disk-root", "disk", "custom/disk-home", "disk#home", "custom/cpu-icon", "cpu","custom/ram-icon", "memory", "custom/separator", "tray", "custom/separator", "clock", "clock#day", "custom/power"],
     "wlr/workspaces": {
       "active-only": false,
       "disable-scroll": true,
@@ -20,6 +20,30 @@
         "default": ""
       },
       "on-click": "activate"
+    },
+    "pulseaudio#icon": {
+      "format": "{icon}",
+      "format-bluetooth": "{icon}",
+      "format-muted": "",
+      "format-icons": {
+        "headphone": "",
+        "hands-free": "",
+        "headset": "",
+        "phone": "",
+        "portable": "",
+        "car": "",
+        "default": ["", ""]
+      },
+      "scroll-step": 1,
+      "on-click": "pavucontrol",
+      "ignored-sinks": ["Easy Effects Sink"]
+    },
+    "pulseaudio": {
+      "format": "{volume}%",
+      "format-bluetooth": "{volume}%",
+      "scroll-step": 1,
+      "on-click": "pavucontrol",
+      "ignored-sinks": ["Easy Effects Sink"]
     },
     "hyprland/submap": {
       "format": "",
