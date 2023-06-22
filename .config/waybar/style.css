@@ -1,23 +1,23 @@
-@define-color pulsa #A7C080;
 @define-color cpu #D3C6AA; 
-@define-color ram #83C092; 
-@define-color home #D699B6; 
-@define-color root #7FBBB3; 
-@define-color normal #fff; 
 @define-color gamemode_inac #9DA9A0; 
 @define-color gamemode_act #E67E80; 
+@define-color home #D699B6; 
+@define-color normal #fff; 
+@define-color pulsa #A7C080;
+@define-color ram #83C092; 
+@define-color root #7FBBB3; 
 
 window#waybar {
   background: transparent;
+  background-color: rgba(30, 35, 38, .2);
+  border-radius: 15px;
   font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
   font-weight: bold;
-  border-radius: 15px;
-  background-color: rgba(30, 35, 38, .2);
 }
 
 #workspaces {
-  margin-left: -8px;
   font-size: 18px;  
+  margin-left: -8px;
 }
 
 #workspaces button {
@@ -38,32 +38,33 @@ window#waybar {
   color: #dadada; 
 }
 
+#submap {
+  color: #D699B6;
+  margin-bottom: 8px;
+}
+
 #gamemode {
-  margin-right: -40px;
   color: @gamemode_inac;
+  margin-bottom: 4px;
+  margin-right: -40px;
 }
 
 #gamemode.running {
-  margin-right: -40px;
   color: @gamemode_act;
+  margin-bottom: 8px;
+  margin-right: -40px;
 }
 
 #pulseaudio {
   color: @pulsa;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
   margin-right: -8px;
 }
 
 #pulseaudio.icon {
   color: @pulsa;
-  margin-right: 3px;
   margin-bottom: -2px;
-}
-/* root */
-#disk {
-  color: @root;
-  margin-bottom: 8px;
-  margin-right: -7px;
+  margin-right: 3px;
 }
 
 #custom-disk-root {
@@ -71,7 +72,12 @@ window#waybar {
   margin-right: 4px;
 }
 
-/* home */
+#disk {
+  color: @root;
+  margin-bottom: 8px;
+  margin-right: -7px;
+}
+
 #disk.home {
   color: @home;
   margin-bottom: 8px;
@@ -80,11 +86,6 @@ window#waybar {
 #custom-disk-home {
   color: @home;
   margin-bottom: 2px;
-}
-
-#submap {
-  color: #D699B6;
-  margin-bottom: 8px;
 }
 
 #cpu {
@@ -98,14 +99,14 @@ window#waybar {
   margin-right: 4px;
 }
 
-#memory {
-  color: @ram;
-  margin-right: -8px;
-}
-
 #custom-ram-icon {
   color: @ram;
   margin-right: -2px;
+}
+
+#memory {
+  color: @ram;
+  margin-right: -8px;
 }
 
 #clock {
@@ -115,7 +116,7 @@ window#waybar {
 }
 
 #clock.day {
-  margin-top: -6px;
   color: #1E2326;
   background-color: #E69875;
+  margin-top: -6px;
 }
