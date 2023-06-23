@@ -1,11 +1,14 @@
-@define-color cpu #D3C6AA; 
+@define-color cpu-week #D3C6AA; 
 @define-color gamemode_inac #9DA9A0; 
 @define-color gamemode_act #E67E80; 
 @define-color home #D699B6; 
 @define-color normal #fff; 
+@define-color bg #7A8478;
 @define-color pulsa #A7C080;
 @define-color ram #83C092; 
 @define-color root #7FBBB3; 
+@define-color day-week-fg #1E2326;
+@define-color day-bg #E69875;
 
 window#waybar {
   background: transparent;
@@ -34,6 +37,11 @@ window#waybar {
   color: #83C092;
 }
 
+#workspaces button.active:first-child{
+  border-top-left-radius: 30px;
+  border-top-right-radius: 20px;
+}
+
 #custom-separator {
   color: #dadada; 
 }
@@ -51,7 +59,7 @@ window#waybar {
 
 #gamemode.running {
   color: @gamemode_act;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   margin-right: -40px;
 }
 
@@ -89,13 +97,13 @@ window#waybar {
 }
 
 #cpu {
-  color: @cpu;
+  color: @cpu-week;
   margin-bottom: 8px;
   margin-right: -8px;
 }
 
 #custom-cpu-icon {
-  color: @cpu;
+  color: @cpu-week;
   margin-right: 4px;
 }
 
@@ -109,14 +117,25 @@ window#waybar {
   margin-right: -8px;
 }
 
+#tray {
+  margin-top: 8px;
+}
+
 #clock {
   color: @normal;
   font-size: 1.2em;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 #clock.day {
-  color: #1E2326;
-  background-color: #E69875;
+  background-color: @day-bg;
+  color: @day-week-fg;
   margin-top: -6px;
+}
+
+#clock.week-day {
+  background: @cpu-week;
+  color: @day-week-fg;
+  margin-top: -12px;
+  border-top: 1px solid #444;
 }

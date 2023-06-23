@@ -3,7 +3,7 @@
     "height": 650,
     "position": "right",
     "modules-left": ["wlr/workspaces"],
-    "modules-right": ["hyprland/submap", "gamemode", "pulseaudio#icon", "pulseaudio", "custom/disk-root", "disk", "custom/disk-home", "disk#home", "custom/cpu-icon", "cpu","custom/ram-icon", "memory", "custom/separator", "tray", "custom/separator", "clock", "clock#day", "custom/power"],
+    "modules-right": ["hyprland/submap", "gamemode", "pulseaudio#icon", "pulseaudio", "custom/disk-root", "disk", "custom/disk-home", "disk#home", "custom/cpu-icon", "cpu","custom/ram-icon", "memory", "tray", "custom/separator", "clock", "clock#day", "clock#week-day","custom/power"],
     "wlr/workspaces": {
       "active-only": false,
       "disable-scroll": true,
@@ -13,8 +13,9 @@
         "1": "",
         "2": "",
         "3": "",
-        "4": "",
-        "5": "",
+        "4": "",
+        "5": "",
+        "6": "",
         "urgent": "",
         "focused": "",
         "default": ""
@@ -85,7 +86,9 @@
     },
     "clock": {
       "format": "{:%H\n%M}",
-      
+    },
+    "clock#week-day": {
+      "format": "{:%a}",
     },
     "custom/separator": {
       "format": "──────",
