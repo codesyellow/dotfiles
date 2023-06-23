@@ -1,5 +1,5 @@
 #!/bin/bash
-gammastep -O 4000 &
+gammastep -O 2000 &
 swaybg -i ~/.wallpapers/forest_stairs.jpg &
 pypr &
 waybar &
