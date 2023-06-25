@@ -11,9 +11,7 @@
 @define-color day-bg #E69875;
 
 window#waybar {
-  background: transparent;
-  background-color: rgba(30, 35, 38, .2);
-  border-radius: 15px;
+  background-color: rgba(30, 35, 38, .5);
   font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
   font-weight: bold;
 }
@@ -37,105 +35,102 @@ window#waybar {
   color: #83C092;
 }
 
-#workspaces button.active:first-child{
-  border-top-left-radius: 30px;
-  border-top-right-radius: 20px;
-}
-
 #custom-separator {
   color: #dadada; 
 }
 
 #submap {
   color: #D699B6;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 #gamemode {
   color: @gamemode_inac;
+  margin-left: 13px;
   margin-bottom: 4px;
-  margin-right: -40px;
 }
 
 #gamemode.running {
   color: @gamemode_act;
+  margin-left: 13px;
   margin-bottom: 4px;
-  margin-right: -40px;
-}
-
-#pulseaudio {
-  color: @pulsa;
-  margin-bottom: 8px;
-  margin-right: -8px;
 }
 
 #pulseaudio.icon {
   color: @pulsa;
+  margin-right: 6px;
   margin-bottom: -2px;
-  margin-right: 3px;
+}
+
+#pulseaudio {
+  color: @pulsa;
+  margin-left: 3px;
+  margin-bottom: 6px;
 }
 
 #custom-disk-root {
   color: @root;
-  margin-right: 4px;
+  margin-right: 3px;
 }
 
 #disk {
   color: @root;
-  margin-bottom: 8px;
-  margin-right: -7px;
+  margin-left: 3px;
+  margin-bottom: 6px;
 }
 
-#disk.home {
-  color: @home;
-  margin-bottom: 8px;
-}
 
 #custom-disk-home {
   color: @home;
   margin-bottom: 2px;
 }
 
-#cpu {
-  color: @cpu-week;
-  margin-bottom: 8px;
-  margin-right: -8px;
+#disk.home {
+  color: @home;
+  margin-left: 3px;
+  margin-bottom: 6px;
 }
 
 #custom-cpu-icon {
   color: @cpu-week;
-  margin-right: 4px;
+  margin-right: 5px;
+}
+
+#cpu {
+  color: @cpu-week;
+  margin-left: 3px;
+  margin-bottom: 6px;
 }
 
 #custom-ram-icon {
   color: @ram;
-  margin-right: -2px;
 }
 
 #memory {
   color: @ram;
-  margin-right: -8px;
+  margin-left: 3px;
 }
 
 #tray {
-  margin-top: 8px;
+  margin: 8px -2px 0 0;
 }
 
 #clock {
   color: @normal;
   font-size: 1.2em;
-  margin-bottom: 12px;
+  margin: 0 -2px 12px 0;
 }
 
 #clock.day {
   background-color: @day-bg;
   color: @day-week-fg;
   margin-top: -6px;
+  margin-right: -2px;
 }
 
 #clock.week-day {
   background: @cpu-week;
-  color: @day-week-fg;
-  margin-top: -12px;
   border-top: 1px solid #444;
+  color: @day-week-fg;
+  margin: -12px -2px 0 0;
 }

@@ -1,6 +1,5 @@
 {
   "layer": "top",
-    "height": 650,
     "position": "right",
     "modules-left": ["wlr/workspaces"],
     "modules-right": ["hyprland/submap", "gamemode", "pulseaudio#icon", "pulseaudio", "custom/disk-root", "disk", "custom/disk-home", "disk#home", "custom/cpu-icon", "cpu","custom/ram-icon", "memory", "tray", "custom/separator", "clock", "clock#day", "clock#week-day","custom/power"],
@@ -60,8 +59,6 @@
       "icon-name": "input-gaming-symbolic",
       "icon-spacing": 4,
       "icon-size": 20,
-      "tooltip": true,
-      "tooltip-format": "Games running: {count}"
     },
     "tray": {
       "icon-size": 21,
