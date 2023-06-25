@@ -52,12 +52,13 @@
     },
     "gamemode": {
       "format": "{glyph}",
-      "format-alt": "{glyph} {count}",
       "glyph": "",
+      "format-alt": "",
       "hide-not-running": false,
       "use-icon": true,
       "icon-name": "input-gaming-symbolic",
       "icon-spacing": 4,
+      "tooltip": false,
       "icon-size": 20,
     },
     "tray": {
