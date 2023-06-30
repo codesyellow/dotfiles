@@ -2,7 +2,7 @@
   "layer": "top",
     "position": "right",
     "modules-left": ["wlr/workspaces"],
-    "modules-right": ["hyprland/submap", "gamemode", "pulseaudio#icon", "pulseaudio", "custom/disk-root", "disk", "custom/disk-home", "disk#home", "custom/cpu-icon", "cpu","custom/ram-icon", "memory", "tray", "custom/separator", "clock", "clock#day", "clock#week-day","custom/power"],
+    "modules-right": ["hyprland/submap", "custom/updates-icon", "custom/updates", "gamemode", "pulseaudio#icon", "pulseaudio", "custom/disk-root", "disk", "custom/disk-home", "disk#home", "custom/cpu-icon", "cpu","custom/ram-icon", "memory", "tray", "custom/separator", "clock", "clock#day", "clock#week-day","custom/power"],
     "wlr/workspaces": {
       "active-only": false,
       "disable-scroll": true,
@@ -20,6 +20,14 @@
         "default": ""
       },
       "on-click": "activate"
+    },
+    "custom/updates": {
+      "format": "{}",
+      "interval": 3600,
+      "exec": "~/.bin/updatecheck",
+      "return-type": "json",
+      "exec-if": "exit 0",
+      "signal": 8
     },
     "pulseaudio#icon": {
       "format": "{icon}",

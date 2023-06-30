@@ -35,25 +35,45 @@ window#waybar {
   color: #83C092;
 }
 
+#submap, 
+#disk, 
+#disk-home,
+#pulseaudio,
+#custom-updates,
+#cpu {
+  margin-bottom: 6px;
+}
+
+#gamemode,
+#gamemode.running {
+  margin: 0 0 4px 13px;
+}
+
+#pulseaudio,
+#disk,
+#disk-home,
+#cpu,
+#memory {
+  margin-left: 3px;
+}
+
 #custom-separator {
   color: #dadada; 
 }
 
+#custom-updates {
+  color: #dadada; 
+}
 #submap {
-  color: #D699B6;
-  margin-bottom: 6px;
+  color: @home;
 }
 
 #gamemode {
   color: @gamemode_inac;
-  margin-left: 13px;
-  margin-bottom: 4px;
 }
 
 #gamemode.running {
   color: @gamemode_act;
-  margin-left: 13px;
-  margin-bottom: 4px;
 }
 
 #pulseaudio.icon {
@@ -64,8 +84,6 @@ window#waybar {
 
 #pulseaudio {
   color: @pulsa;
-  margin-left: 3px;
-  margin-bottom: 6px;
 }
 
 #custom-disk-root {
@@ -75,8 +93,6 @@ window#waybar {
 
 #disk {
   color: @root;
-  margin-left: 3px;
-  margin-bottom: 6px;
 }
 
 
@@ -87,8 +103,6 @@ window#waybar {
 
 #disk.home {
   color: @home;
-  margin-left: 3px;
-  margin-bottom: 6px;
 }
 
 #custom-cpu-icon {
@@ -98,8 +112,6 @@ window#waybar {
 
 #cpu {
   color: @cpu-week;
-  margin-left: 3px;
-  margin-bottom: 6px;
 }
 
 #custom-ram-icon {
@@ -108,7 +120,6 @@ window#waybar {
 
 #memory {
   color: @ram;
-  margin-left: 3px;
 }
 
 #tray {
