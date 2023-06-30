@@ -1,0 +1,13 @@
+{
+  "term": {
+    "command": "alacritty --class alacritty-dropterm",
+    "class": "alacritty-dropterm",
+    "offset": 800,
+    "unfocus": "hide"
+  },
+  "edge-gpt": {
+    "command": "alacritty --class edge-gpt --title edge-gpt -e edge-gpt",
+    "class": "edge-gpt",
+    "offset": 1200
+  }
+}
