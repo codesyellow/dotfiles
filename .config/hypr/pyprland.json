@@ -1,0 +1,19 @@
+{
+  "pyprland": {
+    "plugins": [
+      "scratchpads"
+    ]
+  },
+  "scratchpads": {
+    "term": {
+      "command": "alacritty --class alacritty-dropterm",
+      "animation": "fromTop",
+      "unfocus": "hide"
+    },
+    "task": {
+      "command": "alacritty --class task-tui -e /usr/bin/taskwarrior-tui",
+      "unfocus": "hide",
+      "animation": "fromRight"
+    }
+  }
+}

@@ -1,13 +1,13 @@
 #!/bin/bash
+/usr/lib/kdeconnectd &
+swww init &
 waybar &
 mkfifo /tmp/wobpipe && tail -f /tmp/wobpipe | wob &
 gammastep -O 3000 &
-swaybg -i ~/.wallpapers/forest_stairs.jpg &
 pypr &
-doas python /home/cie/.bin/ledToggler.py /dev/input/event6 scrolllock scrolllock 1 1 &
+doas python ~/.bin/ledToggler.py /dev/input/event6 scrolllock scrolllock 1 1 &
 dunst &
-alsactl --file ~/.config/asound.state restore &
 easyeffects --gapplication-service &
 wl-copy &
 /usr/lib/polkit-kde-authentication-agent-1 &
-emulate_xbox.sh &
+/usr/bin/kdeconnect-indicator &
