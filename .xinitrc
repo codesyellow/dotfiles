@@ -34,5 +34,7 @@ if [ -d $HOME/.xinitrc.d ] ; then
  unset f
 fi
 
+systemctl --user start X.target
+
 exec qtile start
 
