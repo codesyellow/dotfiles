@@ -1,6 +1,5 @@
 #!/bin/sh
 xrandr --output VGA-1 --gamma 1.0:0.88:0.50 --brightness 0.95 &
-hsetroot -cover ~/.wallpapers/forest_stairs.jpg &
 xset led on &
 keyd-application-mapper -d
 dunst &
