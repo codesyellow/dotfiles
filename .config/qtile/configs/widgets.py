@@ -1,4 +1,4 @@
-from qtile_extras import widget
+from libqtile import widget
 import subprocess
 from .variables import colors, my_font, exit_icon_font, home
 def get_cur_grp_name():
@@ -41,17 +41,6 @@ my_widgets = [
         widget.Net(
             foreground=colors[18],
             format=' {down}',
-            ),
-        widget.Spacer(length=2),
-        widget.ALSAWidget(
-            bar_colour_high=colors[13],
-            bar_colour_loud=colors[12],
-            bar_colour_mute=colors[0],
-            bar_colour_normal=colors[16],
-            font=my_font,
-            foreground=colors[15],
-            mode='bar',
-            update_interval=2,
             ),
         widget.Spacer(length=4),
         widget.DF(

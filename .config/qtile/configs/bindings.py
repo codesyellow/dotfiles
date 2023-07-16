@@ -39,8 +39,13 @@ keys = [
     Key([mod, 'shift'], 'e', lazy.core.change_vt(2)),
     Key([mod], 'd', lazy.spawn(runner)),
     Key([alt_mod], 'd', lazy.spawn(runner)),
-    Key([mod, 'shift'], 'a', lazy.spawn('volume.sh up')),
-    Key([mod, 'shift'], 'd', lazy.spawn('volume.sh down')),
+    KeyChord([mod], "v", [
+        Key([], 'k', lazy.spawn('volume.sh up')),
+        Key([], 'j', lazy.spawn('volume.sh down')),
+        ],
+        mode=True,
+        name="Windows"
+    ),
     Key([alt_mod, 'shift'], 'a', lazy.spawn('volume.sh up')),
     Key([alt_mod, 'shift'], 'd', lazy.spawn('volume.sh down')),
     Key([mod], "space", lazy.widget["keyboardlayout"].next_keyboard(), desc="Next keyboard layout."),

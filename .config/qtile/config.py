@@ -6,9 +6,6 @@ from configs.groups import *
 from configs.hooks import *
 from configs.widgets import *
 from configs.screens import *
-from libqtile.log_utils import logger
-from time import sleep
-import threading
 
 if qtile.core.name == "wayland":
     @hook.subscribe.startup_once
