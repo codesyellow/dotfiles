@@ -3,7 +3,13 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 
-export XDG_CURRENT_DESKTOP=qtile
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_STATE_HOME=$HOME/.local/state
+export XDG_CACHE_HOME=$HOME/.cache
+export CARGO_HOME="$XDG_DATA_HOME"/cargo
+export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
+export QT_QPA_PLATFORM=wayland
 export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim
 export VDPAU_DRIVER=va_gl
@@ -13,6 +19,7 @@ bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/aedigo/.zshrc'
+zstyle :compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -49,28 +56,8 @@ autoload -Uz compinit colors && colors
 PROMPT='%{$fg[red]%}%~ %{$fg[white]%}$(git_branch_name) 
 '
 
- if [ "$TERM" = "linux" ]; then
-     printf %b '\e[40m' '\e[8]' # set default background to color 0 'dracula-bg'
-     printf %b '\e[37m' '\e[8]' # set default foreground to color 7 'dracula-fg'
-     printf %b '\e]P0282a36'    # redefine 'black'          as 'dracula-bg'
-     printf %b '\e]P86272a4'    # redefine 'bright-black'   as 'dracula-comment'
-     printf %b '\e]P1ff5555'    # redefine 'red'            as 'dracula-red'
-     printf %b '\e]P9ff7777'    # redefine 'bright-red'     as '#ff7777'
-     printf %b '\e]P250fa7b'    # redefine 'green'          as 'dracula-green'
-     printf %b '\e]PA70fa9b'    # redefine 'bright-green'   as '#70fa9b'
-     printf %b '\e]P3f1fa8c'    # redefine 'brown'          as 'dracula-yellow'
-     printf %b '\e]PBffb86c'    # redefine 'bright-brown'   as 'dracula-orange'
-     printf %b '\e]P4bd93f9'    # redefine 'blue'           as 'dracula-purple'
-     printf %b '\e]PCcfa9ff'    # redefine 'bright-blue'    as '#cfa9ff'
-     printf %b '\e]P5ff79c6'    # redefine 'magenta'        as 'dracula-pink'
-     printf %b '\e]PDff88e8'    # redefine 'bright-magenta' as '#ff88e8'
-     printf %b '\e]P68be9fd'    # redefine 'cyan'           as 'dracula-cyan'
-     printf %b '\e]PE97e2ff'    # redefine 'bright-cyan'    as '#97e2ff'
-     printf %b '\e]P7f8f8f2'    # redefine 'white'          as 'dracula-fg'
-     printf %b '\e]PFffffff'    # redefine 'bright-white'   as '#ffffff'
-     clear
- fi
-
 compinit
 # End of lines added by compinstall
 
+
+eval $(thefuck --alias)
