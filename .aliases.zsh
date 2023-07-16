@@ -1,4 +1,4 @@
-sud=doas
+sud=sudo
 
 alias update-grub='$sud grub-mkconfig -o /boot/grub/grub.cfg'
 
