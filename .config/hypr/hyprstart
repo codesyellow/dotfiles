@@ -1,13 +1,16 @@
 #!/bin/bash
-/usr/lib/kdeconnectd &
-swww init &
 waybar &
+hyprshade on blue-light-filter &
+swaybg -i ~/.wallpapers/sun.jpg &
+/usr/lib/kdeconnectd &
 mkfifo /tmp/wobpipe && tail -f /tmp/wobpipe | wob &
 gammastep -O 3000 &
 pypr &
-doas python ~/.bin/ledToggler.py /dev/input/event6 scrolllock scrolllock 1 1 &
+light-keys.sh &
 dunst &
 easyeffects --gapplication-service &
 wl-copy &
 /usr/lib/polkit-kde-authentication-agent-1 &
 /usr/bin/kdeconnect-indicator &
+safeeyes &
+wl-paste --watch cliphist store &
