@@ -56,3 +56,7 @@ alias tb="trans -p -brief pt-br:en"
 translate() {
   trans -brief $1:$2 $3
 }
+
+re_iso() {
+    chdman createcd -i $1 -o $2
+}
