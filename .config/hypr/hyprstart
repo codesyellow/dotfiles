@@ -1,10 +1,9 @@
 #!/bin/bash
+swaybg -i ~/.wallpapers/shaded_landscape.png &
 waybar &
 hyprshade on blue-light-filter &
-swaybg -i ~/.wallpapers/sun.jpg &
 /usr/lib/kdeconnectd &
 mkfifo /tmp/wobpipe && tail -f /tmp/wobpipe | wob &
-gammastep -O 3000 &
 pypr &
 light-keys.sh &
 dunst &
@@ -12,5 +11,5 @@ easyeffects --gapplication-service &
 wl-copy &
 /usr/lib/polkit-kde-authentication-agent-1 &
 /usr/bin/kdeconnect-indicator &
-safeeyes &
 wl-paste --watch cliphist store &
+ianny &
