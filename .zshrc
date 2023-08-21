@@ -58,6 +58,3 @@ PROMPT='%{$fg[red]%}%~ %{$fg[white]%}$(git_branch_name)
 
 compinit
 # End of lines added by compinstall
-
-
-eval $(thefuck --alias)
