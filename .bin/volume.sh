@@ -26,6 +26,7 @@ if [ "$MUTE" == "[off]" ]; then
 fi
 
 echo $VOLUME > /tmp/wobpipe
+exit 1
 '
 notify-send.sh $VOLUME% \
   --replace=22 \
