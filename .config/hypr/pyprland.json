@@ -14,6 +14,11 @@
       "command": "alacritty --class task-tui -e /usr/bin/taskwarrior-tui",
       "unfocus": "hide",
       "animation": "fromRight"
+    },
+    "c-info": {
+        "command": "fdm",
+        "unfocus": "hide",
+        "animation": "fromBottom"
     }
   }
 }
