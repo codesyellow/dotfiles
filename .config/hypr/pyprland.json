@@ -1,24 +1,24 @@
 {
-  "pyprland": {
-    "plugins": [
-      "scratchpads"
-    ]
-  },
-  "scratchpads": {
-    "term": {
-      "command": "alacritty --class alacritty-dropterm",
-      "animation": "fromTop",
-      "unfocus": "hide"
+    "pyprland": {
+        "plugins": [
+            "scratchpads"
+        ]
     },
-    "task": {
-      "command": "alacritty --class task-tui -e /usr/bin/taskwarrior-tui",
-      "unfocus": "hide",
-      "animation": "fromRight"
-    },
-    "c-info": {
-        "command": "fdm",
-        "unfocus": "hide",
-        "animation": "fromBottom"
-    }
-  }
+    "scratchpads": {
+        "term": {
+            "command": "alacritty --class alacritty-dropterm",
+            "animation": "fromTop",
+            "unfocus": "hide"
+        },
+        "neorg": {
+            "command": "alacritty --class neorg -e /usr/bin/nvim -c ':Neorg workspace home'",
+            "animation": "fromBottom",
+            "unfocus": "hide"
+        },
+        "task": {
+            "command": "alacritty --class task-tui -e /usr/bin/taskwarrior-tui",
+            "unfocus": "hide",
+            "animation": "fromRight"
+        }
+      }
 }

@@ -5,7 +5,6 @@ hyprshade on blue-light-filter &
 /usr/lib/kdeconnectd &
 mkfifo /tmp/wobpipe && tail -f /tmp/wobpipe | wob &
 pypr &
-light-keys.sh &
 dunst &
 flatpak run com.github.wwmm.easyeffects --gapplication-service &
 wl-copy &
@@ -18,3 +17,4 @@ swayidle -w \
     timeout 600 'hyprctl dispatch dpms off"' \
     resume 'hyprctl dispatch dpms off"' \
     before-sleep 'swaylock -i ~/.wallpapers/shaded_landscape.png' &
+syncthing &
