@@ -17,3 +17,4 @@ swayidle -w \
 syncthing &
 sway-audio-idle-inhibit &
 swayosd-server &
+play -q ~/.audios/retro-audio-logo-94648.mp3 &

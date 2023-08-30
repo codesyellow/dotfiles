@@ -19,6 +19,11 @@
             "command": "alacritty --class task-tui -e /usr/bin/taskwarrior-tui",
             "unfocus": "hide",
             "animation": "fromRight"
+        },
+        "btop": {
+            "command": "foot -a btop -e btop",
+            "unfocus": "hide",
+            "animation": "fromRight"
         }
-      }
+    }
 }
