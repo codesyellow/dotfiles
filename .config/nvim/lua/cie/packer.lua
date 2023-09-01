@@ -76,4 +76,6 @@ return require('packer').startup(function(use)
   use 'norcalli/nvim-colorizer.lua'
 
   use { "beauwilliams/focus.nvim", config = function() require("focus").setup() end }
+
+  use { "luckasRanarison/tree-sitter-hypr" }
 end)
