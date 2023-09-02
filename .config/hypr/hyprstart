@@ -1,11 +1,11 @@
 #!/bin/bash
 light-keys.sh &
-swaybg -i ~/.wallpapers/shaded_landscape.png &
+swaybg -i ~/.wallpapers/forrest.png &
 waybar &
-hyprshade on blue-light-filter &
+#hyprshade auto
 pypr &
 dunst &
-flatpak run com.github.wwmm.easyeffects --gapplication-service &
+easyeffects --gapplication-service &
 wl-copy &
 /usr/lib/polkit-kde-authentication-agent-1 &
 wl-paste --watch cliphist store &
