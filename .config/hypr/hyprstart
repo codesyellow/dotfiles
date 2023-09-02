@@ -10,11 +10,12 @@ wl-copy &
 /usr/lib/polkit-kde-authentication-agent-1 &
 wl-paste --watch cliphist store &
 swayidle -w \
-    timeout 300 'swaylock -i ~/.wallpapers/shaded_landscape.png' \
+    timeout 300 'swaylock -i ~/.wallpapers/forrest.png' \
     timeout 600 'hyprctl dispatch dpms off"' \
     resume 'hyprctl dispatch dpms off"' \
-    before-sleep 'swaylock -i ~/.wallpapers/shaded_landscape.png' &
+    before-sleep 'swaylock -i ~/.wallpapers/forrest.png' &
 syncthing &
 sway-audio-idle-inhibit &
 swayosd-server &
 play -q ~/.audios/retro-audio-logo-94648.mp3 &
+kuro &
