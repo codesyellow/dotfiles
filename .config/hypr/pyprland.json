@@ -24,11 +24,6 @@
             "command": "foot -a btop -e btop",
             "unfocus": "hide",
             "animation": "fromRight"
-        },
-        "kuro": {
-            "command": "kuro",
-            "unfocus": "hide",
-            "animation": "fromBottom"
         }
     }
 }
