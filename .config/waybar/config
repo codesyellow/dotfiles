@@ -2,9 +2,9 @@
     "layer": "top",
     "width": 40,
         "position": "right",
-        "modules-left": ["wlr/workspaces"],
+        "modules-left": ["hyprland/workspaces"],
         "modules-right": ["hyprland/submap", "pulseaudio#icon", "pulseaudio", "custom/disk-root", "disk", "custom/disk-home", "disk#home", "custom/cpu-icon", "cpu","custom/ram-icon", "memory", "tray", "custom/separator", "clock", "clock#day", "clock#week-day"],
-        "wlr/workspaces": {
+        "hyprland/workspaces": {
             "active-only": false,
             "disable-scroll": true,
             "all-outputs": true,
