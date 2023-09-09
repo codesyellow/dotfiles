@@ -3,7 +3,7 @@
     "width": 40,
         "position": "right",
         "modules-left": ["hyprland/workspaces"],
-        "modules-right": ["hyprland/submap", "pulseaudio#icon", "pulseaudio", "custom/disk-root", "disk", "custom/disk-home", "disk#home", "custom/cpu-icon", "cpu","custom/ram-icon", "memory", "tray", "custom/separator", "clock", "clock#day", "clock#week-day"],
+        "modules-right": ["hyprland/submap", "gamemode", "pulseaudio#icon", "pulseaudio", "custom/disk-root", "disk", "custom/disk-home", "disk#home", "custom/cpu-icon", "cpu","custom/ram-icon", "memory", "tray", "custom/separator", "clock", "clock#day", "clock#week-day"],
         "hyprland/workspaces": {
             "all-outputs": false,
             "active-only": false,
@@ -47,6 +47,18 @@
                     "VGA-1"
                 ]
             }
+        },
+        "gamemode": {
+            "format": "{glyph}",
+            "format-alt": "{glyph} {count}",
+            "glyph": "",
+            "hide-not-running": false,
+            "use-icon": true,
+            "icon-name": "input-gaming-symbolic",
+            "icon-spacing": 4,
+            "icon-size": 20,
+            "tooltip": true,
+            "tooltip-format": "Games running: {count}"
         },
         "pulseaudio#icon": {
             "format": "{icon}",
