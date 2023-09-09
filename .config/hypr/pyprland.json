@@ -15,6 +15,11 @@
             "animation": "fromBottom",
             "unfocus": "hide"
         },
+        "bard": {
+            "command": "foot -a bard -e bard-cli -i",
+            "animation": "fromTop",
+            "unfocus": "hide"
+        },
         "task": {
             "command": "foot -a task-tui -e /usr/bin/taskwarrior-tui",
             "unfocus": "hide",
