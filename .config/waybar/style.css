@@ -22,18 +22,25 @@ window#waybar {
   margin-left: -4px;
 }
 
-#workspaces button {
-  color: @normal;
+#workspaces button.persistent {
+    color: @normal;
 }
 
 #workspaces button:hover {
   border-radius: 0;
-  color: #444;
+  color: #fff;
 }
 
 #workspaces button.active {
   background-color: rgba(30, 35, 38, .5);
   color: #83C092;
+}
+
+#language {
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
 }
 
 #submap, 
