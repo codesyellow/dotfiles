@@ -14,8 +14,7 @@ swayidle -w \
     timeout 600 'hyprctl dispatch dpms off"' \
     resume 'hyprctl dispatch dpms off"' \
     before-sleep 'swaylock -i ~/.wallpapers/forrest.png' &
-syncthing &
 sway-audio-idle-inhibit &
 swayosd-server &
 play -q ~/.audios/retro-audio-logo-94648.mp3 &
-kuro &
+blueman-applet &
