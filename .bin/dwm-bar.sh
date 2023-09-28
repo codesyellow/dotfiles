@@ -64,4 +64,5 @@ fi
 
 status+=" $normal_home$home_icon|$home "
 status+=" $normal_date$date_icon|$date"
-xprop -root -set WM_NAME "$status "
+#xprop -root -set WM_NAME "$status "
+dwlb -status all $status

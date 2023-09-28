@@ -6,6 +6,11 @@ directory="/home/cie/.mindmaps/games/"
 # Get a list of files in the directory
 files=$(ls "$directory")
 
+if [ $1 = '-c' ]; then
+    touch $directory/$2
+    exit 1
+fi
+
 # Use dmenu to select a file
 selected_file=$(echo "$files" | bemenu -p "Select a file:")
 

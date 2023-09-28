@@ -1,3 +1,3 @@
 #!/bin/sh
 
-alacritty -e h-m-m ~/.mindmaps/games/$1
+foot -a h-m-m -e h-m-m ~/.mindmaps/games/$1
