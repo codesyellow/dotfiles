@@ -2,10 +2,9 @@
 light-keys.sh &
 swaybg -i ~/.wallpapers/forrest.png &
 waybar &
-#hyprshade auto
 pypr &
 dunst &
-easyeffects --gapplication-service &
+flatpak run com.github.wwmm.easyeffects --gapplication-service &
 wl-copy &
 /usr/lib/polkit-kde-authentication-agent-1 &
 wl-paste --watch cliphist store &

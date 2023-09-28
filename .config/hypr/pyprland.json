@@ -8,17 +8,17 @@
         "term": {
             "command": "alacritty --class alacritty-dropterm",
             "animation": "fromTop",
-            "unfocus": "hide"
+            "unfocus": "false"
         },
         "neorg": {
             "command": "foot -a neorg -e /usr/bin/nvim -c ':Neorg workspace home'",
             "animation": "fromBottom",
-            "unfocus": "hide"
+            "unfocus": "false"
         },
         "bard": {
             "command": "foot -a bard -e bard-cli -i",
             "animation": "fromTop",
-            "unfocus": "hide"
+            "unfocus": "false"
         },
         "task": {
             "command": "foot -a task-tui -e /usr/bin/taskwarrior-tui",
