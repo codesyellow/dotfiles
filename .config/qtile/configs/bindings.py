@@ -40,8 +40,8 @@ keys = [
     Key([mod], 'd', lazy.spawn(runner)),
     Key([alt_mod], 'd', lazy.spawn(runner)),
     KeyChord([mod], "v", [
-        Key([], 'k', lazy.spawn('volume.sh up')),
-        Key([], 'j', lazy.spawn('volume.sh down')),
+        Key([], 'k', lazy.spawn('swayosd-client --output-volume raise')),
+        Key([], 'j', lazy.spawn('swayosd-client --output-volume lower')),
         ],
         mode=True,
         name="Windows"
