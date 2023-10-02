@@ -1,10 +1,15 @@
-#!/bin/sh
-swaybg -m center -i ~/.wallpapers/forest_stairs.jpg &
+#!/bin/bash
+light-keys.sh &
+swaybg -i ~/.wallpapers/forrest.png &
 dunst &
-nm-applet &
-alsactl --file ~/.config/asound.state restore &
-gammastep -O 4000 &
-easyeffects --gapplication-service &
+flatpak run com.github.wwmm.easyeffects --gapplication-service &
 wl-copy &
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-
+/usr/lib/polkit-kde-authentication-agent-1 &
+wl-paste --watch cliphist store &
+swayidle -w \
+    timeout 300 'swaylock -i ~/.wallpapers/forrest.png' \
+    before-sleep 'swaylock -i ~/.wallpapers/forrest.png' &
+sway-audio-idle-inhibit &
+swayosd-server &
+paplay ~/.audios/retro-audio-logo-94648.mp3 &
+blueman-applet &
