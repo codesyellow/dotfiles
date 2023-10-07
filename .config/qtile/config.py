@@ -1,10 +1,11 @@
 from libqtile.config import Click, Drag, Group, Key, Match, Screen, KeyChord, ScratchPad
 from libqtile.lazy import lazy
-from libqtile import hook, qtile
+from libqtile import hook, qtile, layout, bar
 from libqtile.config import DropDown
 import os
 import subprocess
 from libqtile.log_utils import logger
+from qtile_extras import widget
 
 
 @hook.subscribe.startup_once
@@ -20,6 +21,7 @@ icons = [
     '',
     '',
     '',
+    '',
 ]
 exit_icon_font = 'Font Awesome 6 Free Regular'
 my_font = 'JetBrainMono Nerd Font'
@@ -30,6 +32,7 @@ home = os.path.expanduser('~/')
 def opacity(c):
     for x in c.qtile.current_group.windows:
         wm_class = x.get_wm_class()[0]
+        logger.warning(x.get_wm_class())
         if (wm_class == 'firefox' 
             or wm_class == 'org.qutebrowser.qutebrowser'
             or wm_class == 'qutebrowser'
@@ -47,7 +50,7 @@ def opacity(c):
 def is_floating(c):
     for x in c.qtile.current_group.windows:
         if x.has_focus and x.floating and x.name != 'scratchpad' and not x.fullscreen:
-            if x.get_wm_class()[0] == 'firefox' or x.get_wm_class()[1] == 'Brave-browser' or x.get_wm_class()[0] == 'Navigator':
+            if x.get_wm_class()[0] == 'firefox' or x.get_wm_class()[0] == 'Navigator':
                 x.set_size_floating(500,680)
             x.center()
 
@@ -71,7 +74,7 @@ scratchpads = [
             ),
         DropDown(
             'task',
-            'foot -T task-tui -e /usr/bin/taskwarrior-tui',
+            'foot -T scratchpad -e taskwarrior-tui',
             height=0.995,
             width=0.3,
             opacity=0.5,
@@ -81,12 +84,12 @@ scratchpads = [
             ),
         DropDown(
             'btop',
-            'foot -T btop -e btop',
-            height=0.8,
-            width=0.7,
+            'foot -T scratchpad -e btop',
+            height=0.9,
+            width=0.9,
             opacity=0.5,
-            x=0.2,
-            y=0.1,
+            x=0,
+            y=0,
             on_focus_lost_hide=False
             ),
         DropDown(
@@ -145,8 +148,20 @@ mod = "mod4"
 alt_mod = "mod1"
 terminal = 'alacritty'
 browser = 'firefox'
-runner = 'dmenu-wl_run'
-
+runner = 'kickoff'
+groups = [
+    Group(icons[0], layout='max', matches=[has_class(['navigator', 'firefox', 'Brave-browser', 'qutebrowser', 'org.qutebrowser.qutebrowser'])]),
+    Group(icons[1], layout='monadwide', matches=[has_class(['Emacs', 'code'])]),
+    Group(icons[2], layout='treetab', matches=[has_class(['mpv', 'Microsoft-edge'])]), 
+    Group(icons[3], layout='treetab', matches=[has_class(['zathura'])]), 
+    Group(icons[4], layout='treetab', matches=[has_class(['audacious'])]),
+    Group(icons[5], layout='monadwide', matches=[has_class(['Alacritty', 'foot'])]),
+    Group(icons[6], layout='treetab', matches=[has_class(['heroic', 'Steam', 'amazon games ui.exe', 'bottles', 'ProtonUp-Qt', 'lutris', 'amazongamessetup.exe']), 
+                                            has_name(['Steam - Self Updater', 
+                                                         'Steam setup', 'Steam', 'Sign in to Steam'] )]),
+    Group(icons[7], layout='max', matches=[has_class(['Waydroid'])]),
+    ScratchPad('scratchpad', scratchpads),
+]
 # bindings
 keys = [
     Key([mod], 'h', lazy.layout.left()),
@@ -190,7 +205,14 @@ keys = [
         name="Windows"
     ),
     Key([mod], "space", lazy.widget["keyboardlayout"].next_keyboard(), desc="Next keyboard layout."),
-    Key([mod], 'e', lazy.spawn(terminal + ' --class code -e nvim -c "cd ~/.code | NvimTreeToggle"')),
+    #Key([mod], 'e', lazy.spawn(terminal + ' --class code -e nvim -c "cd ~/.code | NvimTreeToggle"')),
+    KeyChord([mod], 'e',[
+        KeyChord([], 'g', [
+            Key([], 's', lazy.spawn('steam')),
+            Key([], 'h', lazy.spawn('heroic')),
+            Key([], 'w', lazy.spawn('waydroid show-full-ui')),
+            ])
+        ]),
     Key([mod], 'Tab', lazy.function(latest_group)),
     Key([mod, 'shift'], 'p', lazy.function(focus_main)),
     KeyChord([mod], 's', [
@@ -208,6 +230,7 @@ keys = [
                       Key([], 'e', lazy.group[groups[4].name].toscreen()),
                       Key([], 't', lazy.group[groups[5].name].toscreen()),
                       Key([], 'g', lazy.group[groups[6].name].toscreen()),
+                      Key([], 'w', lazy.group[groups[7].name].toscreen()),
                       ]),
     KeyChord([mod, 'shift'], 'w', [ 
                       Key([], 'b',  lazy.window.togroup(groups[0].name)),
@@ -217,6 +240,7 @@ keys = [
                       Key([], 'e',  lazy.window.togroup(groups[4].name)),
                       Key([], 't',  lazy.window.togroup(groups[5].name)),
                       Key([], 'g',  lazy.window.togroup(groups[6].name)),
+                      Key([], 'w',  lazy.window.togroup(groups[7].name)),
                       ]),
 
 # actions
@@ -232,25 +256,14 @@ keys = [
     ]),
 ]
 
-groups = [
-    Group(icons[0], layout='max', matches=[has_class(['navigator', 'firefox', 'Brave-browser', 'qutebrowser', 'org.qutebrowser.qutebrowser'])]),
-    Group(icons[1], layout='monadwide', matches=[has_class(['Emacs', 'code'])]),
-    Group(icons[2], layout='treetab', matches=[has_class(['mpv', 'Microsoft-edge'])]), 
-    Group(icons[3], layout='treetab', matches=[has_class(['zathura'])]), 
-    Group(icons[4], layout='treetab', matches=[has_class(['audacious'])]),
-    Group(icons[5], layout='monadwide', matches=[has_class(['Alacritty', 'foot'])]),
-    Group(icons[6], layout='treetab', matches=[has_class(['heroic', 'Steam', 'amazon games ui.exe', 'bottles', 'ProtonUp-Qt', 'lutris', 'amazongamessetup.exe']), 
-                                            has_name(['Steam - Self Updater', 
-                                                         'Steam setup', 'Steam', 'Sign in to Steam'] )]),
-    ScratchPad('scratchpad', scratchpads),
-]
+
 
 layouts = [
         layout.MonadWide(
             align=1,
             border_focus=colors[12],
             border_normal=colors[15],
-            border_width=0,
+            border_width=2,
             new_client_position='before_current',
             ratio=.6,
             single_border_width=0,
@@ -299,6 +312,8 @@ my_widgets = [
             ),
         widget.CurrentLayoutIcon(),
         widget.Spacer(),
+        widget.GenPollText(update_interval=60, func=lambda: subprocess.check_output(os.path.expanduser("~/.bin/psbat.sh")).decode("utf-8")),
+        widget.Spacer(length=4),
         widget.Clock(
             font=my_font,
             format=' %d|%b  %H:%M  %a',
@@ -312,11 +327,6 @@ my_widgets = [
                 },
             foreground=colors[17],
             option='compose:menu,grp_led:scroll',
-            ),
-        widget.Spacer(length=4),
-        widget.Net(
-            foreground=colors[18],
-            format=' {down}',
             ),
         widget.Spacer(length=4),
         widget.DF(
@@ -347,7 +357,7 @@ my_widgets = [
             format=' 󰍛{MemUsed: .0f}{mm}',
             ),
         widget.Spacer(length=4),
-        widget.Systray(),
+        widget.StatusNotifier(),
         widget.Spacer(length=4),
         widget.QuickExit(
             default_text='', countdown_format='',
