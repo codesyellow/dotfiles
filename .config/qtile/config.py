@@ -1,17 +1,38 @@
-from libqtile.config import Click, Drag, Group, Key, Match, Screen, KeyChord, ScratchPad
+# imports
+import os, subprocess
+from libqtile import hook, layout, bar, qtile
+from libqtile.config import Click, Drag, Group, Key, Match, Screen, KeyChord, ScratchPad, DropDown
 from libqtile.lazy import lazy
-from libqtile import hook, qtile, layout, bar
-from libqtile.config import DropDown
-import os
-import subprocess
 from libqtile.log_utils import logger
 from qtile_extras import widget
+from libqtile.backend.wayland import InputConfig
 
+# variables
+alt_mod = "mod1"
+browser = 'firefox'
+exit_icon_font = 'Font Awesome 6 Free Regular'
+home = os.path.expanduser('~/')
+mod = "mod4"
+my_font = 'JetBrainMono Nerd Font'
+pad = 10
+terminal = 'alacritty'
+runner=''
 
-@hook.subscribe.startup_once
-def autostart():
-    home = os.path.expanduser('~/.config/qtile/wl_autostart.sh')
-    subprocess.Popen([home])
+# wayland, x11
+if qtile.core.name == "x11":
+    term = "urxvt"
+    runner = 'dmenu_run'
+elif qtile.core.name == "wayland":
+    term = "foot"
+    runner = 'dmenu-wl_run'
+    @hook.subscribe.startup_once
+    def autostart():
+        home = os.path.expanduser('~/.config/qtile/wl_autostart.sh')
+        subprocess.Popen([home])
+    wl_input_rules = {
+        "*": InputConfig(left_handed=False, pointer_accel=False),
+        "type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt", kb_layout=("br")),
+    }
 
 icons = [
     '',
@@ -23,11 +44,8 @@ icons = [
     '',
     '',
 ]
-exit_icon_font = 'Font Awesome 6 Free Regular'
-my_font = 'JetBrainMono Nerd Font'
-pad = 10
-home = os.path.expanduser('~/')
 
+# hooks
 @hook.subscribe.client_focus
 def opacity(c):
     for x in c.qtile.current_group.windows:
@@ -64,7 +82,7 @@ scratchpads = [
             ),
         DropDown(
             'gpterm',
-            'foot -T scratchpad -e bard-cli -i',
+            'alacritty -t scratchpad -e bard-cli -i',
             height=0.995,
             width=0.3,
             opacity=0.5,
@@ -144,11 +162,7 @@ def has_class(c):
 def has_name(c):
     return Match(title=c)
 
-mod = "mod4"
-alt_mod = "mod1"
-terminal = 'alacritty'
-browser = 'firefox'
-runner = 'kickoff'
+
 groups = [
     Group(icons[0], layout='max', matches=[has_class(['navigator', 'firefox', 'Brave-browser', 'qutebrowser', 'org.qutebrowser.qutebrowser'])]),
     Group(icons[1], layout='monadwide', matches=[has_class(['Emacs', 'code'])]),
@@ -256,8 +270,6 @@ keys = [
     ]),
 ]
 
-
-
 layouts = [
         layout.MonadWide(
             align=1,
@@ -274,7 +286,7 @@ layouts = [
             active_bg=colors[12],
             active_fg=colors[0],
             border_width=0,
-            bg_color=colors[1],
+            bg_color='#303842',
             inactive_bg=colors[0],
             place_right=True,
             previous_on_rm=True,
@@ -412,20 +424,5 @@ floating_layout = layout.Floating(
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
-
-# If things like steam games want to auto-minimize themselves when losing
-# focus, should we respect this or not?
 auto_minimize = True
-
-# When using the Wayland backend, this can be used to configure input devices.
-wl_input_rules = None
-
-# XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
-# string besides java UI toolkits; you can see several discussions on the
-# mailing lists, GitHub issues, and other WM documentation that suggest setting
-# this string if your java app doesn't work correctly. We may as well just lie
-# and say that we're a working one by default.
-#
-# We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
-# java that happens to be on java's whitelist.
 wmname = "LG3D"
