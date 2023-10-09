@@ -15,3 +15,4 @@ paplay ~/.audios/retro-audio-logo-94648.mp3 &
 blueman-applet &
 easyeffects -l 'LoudnessEqualizer' &
 recharge_ps4.sh &
+/usr/lib/xdg-desktop-portal-wlr &
