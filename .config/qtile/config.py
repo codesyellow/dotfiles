@@ -31,7 +31,7 @@ elif qtile.core.name == "wayland":
         subprocess.Popen([home])
     wl_input_rules = {
         "*": InputConfig(left_handed=False, pointer_accel=False),
-        "type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt", kb_layout=("br")),
+        "type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt", kb_layout=('br'), kb_variant=('nodeadkeys')),
     }
 
 icons = [
@@ -324,11 +324,10 @@ my_widgets = [
             ),
         widget.CurrentLayoutIcon(),
         widget.Spacer(),
-        widget.GenPollText(update_interval=60, func=lambda: subprocess.check_output(os.path.expanduser("~/.bin/psbat.sh")).decode("utf-8")),
-        widget.Spacer(length=4),
         widget.Clock(
             font=my_font,
-            format=' %d|%b  %H:%M  %a',
+            foreground=colors[18],
+            format='%d|%H:%M|%a',
             ),
         widget.Spacer(length=4),
         widget.KeyboardLayout(
@@ -340,6 +339,11 @@ my_widgets = [
             foreground=colors[17],
             option='compose:menu,grp_led:scroll',
             ),
+        widget.Spacer(length=4),
+        widget.GenPollText(
+            foreground=colors[21],
+            update_interval=60, 
+            func=lambda: subprocess.check_output(os.path.expanduser("~/.bin/psbat.sh")).decode("utf-8")),
         widget.Spacer(length=4),
         widget.DF(
             font=my_font,
