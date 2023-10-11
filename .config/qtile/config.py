@@ -287,8 +287,8 @@ keys = [
 if qtile.core.name == "x11":
     keys.append(
             KeyChord([mod], "v", [
-                Key([], 'k', lazy.spawn('volume.sh down')),
-                Key([], 'j', lazy.spawn('volume.sh up')),
+                Key([], 'j', lazy.spawn('volume.sh down')),
+                Key([], 'k', lazy.spawn('volume.sh up')),
                 ],
                      mode=True,
                      name="Volume"

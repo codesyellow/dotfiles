@@ -11,7 +11,6 @@ swayidle -w \
     before-sleep 'swaylock -i ~/.wallpapers/house.jpg' &
 sway-audio-idle-inhibit &
 swayosd-server &
-paplay ~/.audios/retro-audio-logo-94648.mp3 &
 blueman-applet &
 easyeffects -l 'LoudnessEqualizer' &
 recharge_ps4.sh &
