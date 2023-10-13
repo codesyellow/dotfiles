@@ -5,7 +5,6 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen, KeyChord, Sc
 from libqtile.lazy import lazy
 from libqtile.log_utils import logger
 from qtile_extras import widget
-from libqtile.backend.wayland import InputConfig
 
 # variables
 alt_mod = "mod1"
@@ -16,23 +15,7 @@ mod = "mod4"
 my_font = 'JetBrainMono Nerd Font'
 pad = 10
 terminal = 'alacritty'
-runner=''
-
-# wayland, x11
-if qtile.core.name == "x11":
-    term = "urxvt"
-    runner = 'dmenu_run'
-elif qtile.core.name == "wayland":
-    term = "foot"
-    runner = 'dmenu-wl_run'
-    @hook.subscribe.startup_once
-    def autostart():
-        home = os.path.expanduser('~/.config/qtile/wl_autostart.sh')
-        subprocess.Popen([home])
-    wl_input_rules = {
-            "*": InputConfig(left_handed=False, pointer_accel=False),
-            "type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt", kb_layout=('br'), kb_variant=('nodeadkeys')),
-            }
+runner = 'dmenu_run'
 
 icons = [
         '',
@@ -92,7 +75,7 @@ scratchpads = [
             ),
         DropDown(
             'task',
-            'foot -T scratchpad -e taskwarrior-tui',
+            'st -T scratchpad -e taskwarrior-tui',
             height=0.995,
             width=0.3,
             opacity=0.5,
@@ -102,7 +85,7 @@ scratchpads = [
             ),
         DropDown(
             'btop',
-            'foot -T scratchpad -e btop',
+            'st -T scratchpad -e btop',
             height=0.9,
             width=0.9,
             opacity=0.5,
@@ -112,7 +95,7 @@ scratchpads = [
             ),
         DropDown(
             'neorg', 
-            'foot -T neorg -e /usr/bin/nvim -c ":Neorg workspace home"', 
+            'st -T neorg -e /usr/bin/nvim -c ":Neorg workspace home"', 
             x=0.001,
             height=0.992,
             width=0.3,
@@ -165,11 +148,11 @@ def has_name(c):
 groups = [
         Group(icons[0], layout='max', matches=[has_class(['navigator', 'firefox', 'Brave-browser', 'qutebrowser', 'org.qutebrowser.qutebrowser'])]),
         Group(icons[1], layout='monadwide', matches=[has_class(['Emacs', 'code'])]),
-        Group(icons[2], layout='treetab', matches=[has_class(['mpv', 'Microsoft-edge'])]), 
-        Group(icons[3], layout='treetab', matches=[has_class(['zathura'])]), 
-        Group(icons[4], layout='treetab', matches=[has_class(['audacious'])]),
+        Group(icons[2], layout='floating', matches=[has_class(['mpv', 'Microsoft-edge'])]), 
+        Group(icons[3], layout='floating', matches=[has_class(['zathura'])]), 
+        Group(icons[4], layout='floating', matches=[has_class(['audacious'])]),
         Group(icons[5], layout='monadwide', matches=[has_class(['Alacritty', 'foot'])]),
-        Group(icons[6], layout='treetab', matches=[has_class(['heroic', 'Steam', 'amazon games ui.exe', 'bottles', 'ProtonUp-Qt', 'lutris', 'amazongamessetup.exe']), 
+        Group(icons[6], layout='floating', matches=[has_class(['heroic', 'Steam', 'amazon games ui.exe', 'bottles', 'ProtonUp-Qt', 'lutris', 'amazongamessetup.exe']), 
                                                    has_name(['Steam - Self Updater', 
                                                              'Steam setup', 'Steam', 'Sign in to Steam'] )]),
                                                    Group(icons[7], layout='max', matches=[has_class(['Waydroid'])]),
@@ -215,8 +198,8 @@ keys = [
         Key([mod], 'd', lazy.spawn(runner)),
         Key([alt_mod], 'd', lazy.spawn(runner)),
         KeyChord([mod], "v", [
-            Key([], 'k', lazy.spawn('swayosd-client --output-volume raise')),
-            Key([], 'j', lazy.spawn('swayosd-client --output-volume lower')),
+            Key([], 'j', lazy.spawn('volume.sh down')),
+            Key([], 'k', lazy.spawn('volume.sh up')),
             ],
                  mode=True,
                  name="Volume"
@@ -284,16 +267,6 @@ keys = [
         ]),
 ]
 
-if qtile.core.name == "x11":
-    keys.append(
-            KeyChord([mod], "v", [
-                Key([], 'j', lazy.spawn('volume.sh down')),
-                Key([], 'k', lazy.spawn('volume.sh up')),
-                ],
-                     mode=True,
-                     name="Volume"
-                     ))
-
 layouts = [
         layout.MonadWide(
             align=1,
@@ -306,18 +279,19 @@ layouts = [
             single_margin=0,
             ),
         layout.Max(),
-        layout.TreeTab(
-            active_bg=colors[12],
-            active_fg=colors[0],
-            border_width=0,
-            bg_color='#303842',
-            inactive_bg=colors[0],
-            place_right=True,
-            previous_on_rm=True,
-            sections=[''],
-            section_fg=colors[0],
-            vspace=0,
-            ),
+        # layout.TreeTab(
+        #     active_bg=colors[12],
+        #     active_fg=colors[0],
+        #     border_width=0,
+        #     bg_color='#303842',
+        #     inactive_bg=colors[0],
+        #     place_right=True,
+        #     previous_on_rm=True,
+        #     sections=[''],
+        #     section_fg=colors[0],
+        #     vspace=0,
+        #     ),
+        layout.Floating(),
         ] 
 
 floating_layout = layout.Floating(
@@ -365,7 +339,7 @@ my_widgets = [
         widget.KeyboardLayout(
             configured_keyboards=['br nodeadkeys', 'br'],
             display_map={
-                'br nodeadkeys':' BRNDK',
+                'br nodeadkeys':'  BRNDK',
                 'br':' BR',
                 },
             foreground=colors[17],
@@ -408,7 +382,7 @@ my_widgets = [
                 format=' 󰍛{MemUsed: .0f}{mm}',
                 ),
         widget.Spacer(length=4),
-        widget.StatusNotifier(),
+        widget.Systray(),
         widget.Spacer(length=4),
         widget.QuickExit(
                 default_text='', countdown_format='',
