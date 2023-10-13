@@ -1,6 +1,10 @@
 #!/bin/bash
 
-text=$(dsbattery)
+text=$(sbattery)
 result=$(echo "$text" | grep -o '[0-9]*%')
-printf '%s' "$result"
+if [[ -z "$result" ]]; then
+  printf 'NO  '
+else
+  printf '%s' " $result"
+fi
 
