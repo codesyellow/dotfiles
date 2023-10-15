@@ -5,3 +5,4 @@
 reload("user.plugins")
 reload("user.options")
 reload("user.configs.neorg")
+reload("user.configs.everforest-nvim")
