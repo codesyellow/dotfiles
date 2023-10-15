@@ -9,10 +9,8 @@ export XDG_STATE_HOME=$HOME/.local/state
 export XDG_CACHE_HOME=$HOME/.cache
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
-export QT_QPA_PLATFORM=wayland
-export EDITOR=/usr/bin/nvim
-export VISUAL=/usr/bin/nvim
-export VDPAU_DRIVER=va_gl
+export EDITOR=$HOME/.local/bin/lvim
+export VISUAL=$HOME/.local/bin/lvim
 setopt autocd beep extendedglob nomatch
 
 bindkey -v
