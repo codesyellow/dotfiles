@@ -33,7 +33,7 @@ icons = [
 def opacity(c):
     for x in c.qtile.current_group.windows:
         wm_class = x.get_wm_class()[0]
-        logger.warning(x.get_wm_class())
+        #logger.warning(x.get_wm_class())
         if (wm_class == 'firefox' 
             or wm_class == 'org.qutebrowser.qutebrowser'
             or wm_class == 'qutebrowser'
@@ -95,7 +95,7 @@ scratchpads = [
             ),
         DropDown(
             'neorg', 
-            'st -T neorg -e /usr/bin/nvim -c ":Neorg workspace home"', 
+            'st -T scratchpad -e /home/cie/.local/bin/lvim -c ":Neorg workspace home"', 
             x=0.001,
             height=0.992,
             width=0.3,
@@ -279,7 +279,7 @@ layouts = [
             single_margin=0,
             ),
         layout.Max(),
-        # layout.TreeTab(
+        # layout.floating(
         #     active_bg=colors[12],
         #     active_fg=colors[0],
         #     border_width=0,
@@ -319,6 +319,7 @@ my_widgets = [
         widget.GroupBox(
             background=colors[1],
             active=colors[20],
+            disable_drag=True,
             block_highlight_text_color=colors[22],
             highlight_method='line',
             inactive=colors[6],
