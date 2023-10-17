@@ -15,7 +15,7 @@ mod = "mod4"
 my_font = 'JetBrainMono Nerd Font'
 pad = 10
 terminal = 'alacritty'
-runner = 'dmenu_run'
+runner = "dmenu_run -nb '#1E2326' -nf '#D3C6AA' -sb '#D3C6AA' -sf '#1E2326' -fn 'JetBrainMono Nerd Font' -dim 0.2"
 
 icons = [
         '',
@@ -24,7 +24,7 @@ icons = [
         '',
         '',
         '',
-        '',
+        ' ',
         '',
         ]
 
@@ -89,8 +89,8 @@ scratchpads = [
             height=0.9,
             width=0.9,
             opacity=0.5,
-            x=0,
-            y=0,
+            x=0.05,
+            y=0.03,
             on_focus_lost_hide=False
             ),
         DropDown(
@@ -153,11 +153,11 @@ groups = [
         Group(icons[4], layout='floating', matches=[has_class(['audacious'])]),
         Group(icons[5], layout='monadwide', matches=[has_class(['Alacritty', 'foot'])]),
         Group(icons[6], layout='floating', matches=[has_class(['heroic', 'Steam', 'amazon games ui.exe', 'bottles', 'ProtonUp-Qt', 'lutris', 'amazongamessetup.exe']), 
-                                                   has_name(['Steam - Self Updater', 
-                                                             'Steam setup', 'Steam', 'Sign in to Steam'] )]),
-                                                   Group(icons[7], layout='max', matches=[has_class(['Waydroid'])]),
-                                                   ScratchPad('scratchpad', scratchpads),
-                                                   ]
+                                                    has_name(['Steam - Self Updater', 
+                                                              'Steam setup', 'Steam', 'Sign in to Steam'] )]),
+                                                    Group(icons[7], layout='max', matches=[has_class(['Waydroid'])]),
+                                                    ScratchPad('scratchpad', scratchpads),
+                                                    ]
 # bindings
 keys = [
         Key([mod], 'h', lazy.layout.left()),
@@ -280,17 +280,17 @@ layouts = [
             ),
         layout.Max(),
         # layout.floating(
-        #     active_bg=colors[12],
-        #     active_fg=colors[0],
-        #     border_width=0,
-        #     bg_color='#303842',
-        #     inactive_bg=colors[0],
-        #     place_right=True,
-        #     previous_on_rm=True,
-        #     sections=[''],
-        #     section_fg=colors[0],
-        #     vspace=0,
-        #     ),
+            #     active_bg=colors[12],
+            #     active_fg=colors[0],
+            #     border_width=0,
+            #     bg_color='#303842',
+            #     inactive_bg=colors[0],
+            #     place_right=True,
+            #     previous_on_rm=True,
+            #     sections=[''],
+            #     section_fg=colors[0],
+            #     vspace=0,
+            #     ),
         layout.Floating(),
         ] 
 
@@ -372,10 +372,10 @@ my_widgets = [
             ),
         widget.Spacer(length=4),
         widget.CPU(
-            font=my_font,
-            foreground=colors[13],
-            format='  {freq_current}GHz|{load_percent}%',
-            ),
+                font=my_font,
+                foreground=colors[13],
+                format='  {freq_current}GHz|{load_percent}%',
+                ),
         widget.Spacer(length=-4),
         widget.Memory(
                 font=my_font,
