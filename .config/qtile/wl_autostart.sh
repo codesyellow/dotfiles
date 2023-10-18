@@ -1,4 +1,5 @@
 #!/bin/bash
+wlsunset -T 4000 -g 1.1 &
 light-keys.sh &
 swaybg -i ~/.wallpapers/house.jpg &
 dunst &

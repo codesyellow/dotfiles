@@ -1,10 +1,26 @@
 # imports
 import os, subprocess
-from libqtile import hook, layout, bar, qtile
+from libqtile import hook, layout, bar, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen, KeyChord, ScratchPad, DropDown
 from libqtile.lazy import lazy
 from libqtile.log_utils import logger
 from qtile_extras import widget
+from qtile_extras.widget.decorations import BorderDecoration
+
+if qtile.core.name == "x11":
+    term = "alacritty"
+    runner = "dmenu_run -nb '#1E2326' -nf '#D3C6AA' -sb '#D3C6AA' -sf '#1E2326' -fn 'JetBrainMono Nerd Font' -dim 0.2"
+elif qtile.core.name == "wayland":
+    term = "alacritty"
+    runner = "dmenu-wl_run -nb '#1E2326' -nf '#D3C6AA' -sb '#D3C6AA' -sf '#1E2326'"
+    @hook.subscribe.startup_once
+    def autostart_once():
+        subprocess.run('/home/cie/.config/qtile/wl_autostart.sh')
+    from libqtile.backend.wayland import InputConfig
+    wl_input_rules = {
+        "*": InputConfig(left_handed=False, pointer_accel=True),
+        "type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt", kb_layout="br", kb_variant="nodeadkeys"),
+        }
 
 # variables
 alt_mod = "mod1"
@@ -15,7 +31,6 @@ mod = "mod4"
 my_font = 'JetBrainMono Nerd Font'
 pad = 10
 terminal = 'alacritty'
-runner = "dmenu_run -nb '#1E2326' -nf '#D3C6AA' -sb '#D3C6AA' -sf '#1E2326' -fn 'JetBrainMono Nerd Font' -dim 0.2"
 
 icons = [
         '',
@@ -75,7 +90,7 @@ scratchpads = [
             ),
         DropDown(
             'task',
-            'st -T scratchpad -e taskwarrior-tui',
+            'foot -T scratchpad -e taskwarrior-tui',
             height=0.995,
             width=0.3,
             opacity=0.5,
@@ -85,7 +100,7 @@ scratchpads = [
             ),
         DropDown(
             'btop',
-            'st -T scratchpad -e btop',
+            'foot -T scratchpad -e btop',
             height=0.9,
             width=0.9,
             opacity=0.5,
@@ -95,7 +110,7 @@ scratchpads = [
             ),
         DropDown(
             'neorg', 
-            'st -T scratchpad -e /home/cie/.local/bin/lvim -c ":Neorg workspace home"', 
+            'foot -T scratchpad -e /home/cie/.local/bin/lvim -c ":Neorg workspace home"', 
             x=0.001,
             height=0.992,
             width=0.3,
@@ -148,11 +163,11 @@ def has_name(c):
 groups = [
         Group(icons[0], layout='max', matches=[has_class(['navigator', 'firefox', 'Brave-browser', 'qutebrowser', 'org.qutebrowser.qutebrowser'])]),
         Group(icons[1], layout='monadwide', matches=[has_class(['Emacs', 'code'])]),
-        Group(icons[2], layout='floating', matches=[has_class(['mpv', 'Microsoft-edge'])]), 
-        Group(icons[3], layout='floating', matches=[has_class(['zathura'])]), 
-        Group(icons[4], layout='floating', matches=[has_class(['audacious'])]),
+        Group(icons[2], layout='treetab', matches=[has_class(['mpv', 'Microsoft-edge'])]), 
+        Group(icons[3], layout='treetab', matches=[has_class(['zathura'])]), 
+        Group(icons[4], layout='treetab', matches=[has_class(['audacious'])]),
         Group(icons[5], layout='monadwide', matches=[has_class(['Alacritty', 'foot'])]),
-        Group(icons[6], layout='floating', matches=[has_class(['heroic', 'Steam', 'amazon games ui.exe', 'bottles', 'ProtonUp-Qt', 'lutris', 'amazongamessetup.exe']), 
+        Group(icons[6], layout='treetab', matches=[has_class(['heroic', 'Steam', 'amazon games ui.exe', 'bottles', 'ProtonUp-Qt', 'lutris', 'amazongamessetup.exe']), 
                                                     has_name(['Steam - Self Updater', 
                                                               'Steam setup', 'Steam', 'Sign in to Steam'] )]),
                                                     Group(icons[7], layout='max', matches=[has_class(['Waydroid'])]),
@@ -198,8 +213,9 @@ keys = [
         Key([mod], 'd', lazy.spawn(runner)),
         Key([alt_mod], 'd', lazy.spawn(runner)),
         KeyChord([mod], "v", [
-            Key([], 'j', lazy.spawn('volume.sh down')),
-            Key([], 'k', lazy.spawn('volume.sh up')),
+            Key([], 'j', lazy.spawn('swayosd-client --output-volume lower')),
+            Key([], 'k', lazy.spawn('swayosd-client --output-volume raise')),
+            Key([], 'm', lazy.spawn('swayosd-client --output-volume mute-toggle')),
             ],
                  mode=True,
                  name="Volume"
@@ -279,19 +295,18 @@ layouts = [
             single_margin=0,
             ),
         layout.Max(),
-        # layout.floating(
-            #     active_bg=colors[12],
-            #     active_fg=colors[0],
-            #     border_width=0,
-            #     bg_color='#303842',
-            #     inactive_bg=colors[0],
-            #     place_right=True,
-            #     previous_on_rm=True,
-            #     sections=[''],
-            #     section_fg=colors[0],
-            #     vspace=0,
-            #     ),
-        layout.Floating(),
+        layout.TreeTab(
+                active_bg=colors[12],
+                active_fg=colors[0],
+                border_width=0,
+                bg_color='#303842',
+                inactive_bg=colors[0],
+                place_right=True,
+                previous_on_rm=True,
+                sections=[''],
+                section_fg=colors[0],
+                vspace=0,
+                ),
         ] 
 
 floating_layout = layout.Floating(
@@ -312,7 +327,7 @@ floating_layout = layout.Floating(
             ]
         )
 
-def open_calendar():  # spawn calendar widget
+def desconnect_ds4():  
     qtile.cmd_spawn('dsbattery -d')
 
 my_widgets = [
@@ -333,28 +348,23 @@ my_widgets = [
             ),
         widget.Spacer(),
         widget.Chord(
-            background=colors[20],
-            foreground=colors[4],
+            foreground=colors[20],
             ),
-        widget.Spacer(length=4),
         widget.KeyboardLayout(
             configured_keyboards=['br nodeadkeys', 'br'],
             display_map={
                 'br nodeadkeys':'  BRNDK',
-                'br':' BR',
+                'br':'  BR',
                 },
-            foreground=colors[17],
+            foreground=colors[18],
             option='compose:menu,grp_led:scroll',
             ),
-        widget.Spacer(length=4),
         widget.GenPollText(
             foreground=colors[21],
             update_interval=60, 
             func=lambda: subprocess.check_output(os.path.expanduser("~/.bin/psbat.sh")).decode("utf-8"),
-            mouse_callbacks={'Button1': open_calendar }
+            mouse_callbacks={'Button1': desconnect_ds4 },
             ),
-
-        widget.Spacer(length=4),
         widget.DF(
             font=my_font,
             foreground=colors[16],
