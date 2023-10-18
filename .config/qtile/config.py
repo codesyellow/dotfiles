@@ -18,10 +18,9 @@ elif qtile.core.name == "wayland":
         subprocess.run('/home/cie/.config/qtile/wl_autostart.sh')
     from libqtile.backend.wayland import InputConfig
     wl_input_rules = {
-        "*": InputConfig(left_handed=False, pointer_accel=True),
-        "type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt", kb_layout="br", kb_variant="nodeadkeys"),
-        }
-
+            "*": InputConfig(left_handed=False, pointer_accel=True),
+            "type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt", kb_layout="br", kb_variant="nodeadkeys"),
+            }
 
 # variables
 alt_mod = "mod1"
@@ -169,11 +168,11 @@ groups = [
         Group(icons[4], layout='treetab', matches=[has_class(['audacious'])]),
         Group(icons[5], layout='monadwide', matches=[has_class(['Alacritty', 'foot'])]),
         Group(icons[6], layout='treetab', matches=[has_class(['heroic', 'Steam', 'amazon games ui.exe', 'bottles', 'ProtonUp-Qt', 'lutris', 'amazongamessetup.exe']), 
-                                                    has_name(['Steam - Self Updater', 
-                                                              'Steam setup', 'Steam', 'Sign in to Steam'] )]),
-                                                    Group(icons[7], layout='max', matches=[has_class(['Waydroid'])]),
-                                                    ScratchPad('scratchpad', scratchpads),
-                                                    ]
+                                                   has_name(['Steam - Self Updater', 
+                                                             'Steam setup', 'Steam', 'Sign in to Steam'] )]),
+                                                   Group(icons[7], layout='max', matches=[has_class(['Waydroid'])]),
+                                                   ScratchPad('scratchpad', scratchpads),
+                                                   ]
 # bindings
 keys = [
         Key([mod], 'h', lazy.layout.left()),
@@ -211,7 +210,6 @@ keys = [
         Key([mod], 'c', lazy.window.center()),
         Key([mod, 'shift'], 'm', lazy.spawn('alacritty -t fm-video -e lf /home/cse/.courses')),
         Key([mod, 'shift'], 'e', lazy.core.change_vt(2)),
-        Key([mod], 'd', lazy.spawn(runner)),
         Key([alt_mod], 'd', lazy.spawn(runner)),
         KeyChord([mod], "v", [
             Key([], 'j', lazy.spawn('swayosd-client --output-volume lower')),
@@ -222,14 +220,23 @@ keys = [
                  name="Volume"
                  ),
         Key([mod], "space", lazy.widget["keyboardlayout"].next_keyboard(), desc="Next keyboard layout."),
-        #Key([mod], 'e', lazy.spawn(terminal + ' --class code -e nvim -c "cd ~/.code | NvimTreeToggle"')),
+        #Key([mod], 'e', lazy.spawn(terminal + ' --class code -e lvim -c "cd ~/.code | NvimTreeToggle"')),
         KeyChord([mod], 'e',[
+            Key([], 'r', lazy.spawn(runner)),
             KeyChord([], 'g', [
                 Key([], 's', lazy.spawn('steam')),
                 Key([], 'h', lazy.spawn('heroic')),
                 Key([], 'w', lazy.spawn('waydroid show-full-ui')),
-                ]),
-            Key([], 'p', lazy.spawn('pymor -l 3')),
+                Key([], 'd', lazy.spawn('dsbattery -d')),
+                ],
+                     name="GAMES"
+                     ),
+            KeyChord([], 'p', [
+                Key([], 's', lazy.spawn('pymor -l 3')),
+                Key([], 'c', lazy.spawn('pymor -c')),
+                ],
+                 name="PYMOR"
+                     ),
             Key([], 'n', lazy.spawn('dunstctl close-all')),
             ],
 
@@ -297,17 +304,17 @@ layouts = [
             ),
         layout.Max(),
         layout.TreeTab(
-                active_bg=colors[12],
-                active_fg=colors[0],
-                border_width=0,
-                bg_color='#303842',
-                inactive_bg=colors[0],
-                place_right=True,
-                previous_on_rm=True,
-                sections=[''],
-                section_fg=colors[0],
-                vspace=0,
-                ),
+            active_bg=colors[12],
+            active_fg=colors[0],
+            border_width=0,
+            bg_color='#303842',
+            inactive_bg=colors[0],
+            place_right=True,
+            previous_on_rm=True,
+            sections=[''],
+            section_fg=colors[0],
+            vspace=0,
+            ),
         ] 
 
 floating_layout = layout.Floating(
@@ -382,19 +389,19 @@ my_widgets = [
             visible_on_warn=False,
             ),
         widget.Spacer(length=4),
-        widget.CPU(
-                font=my_font,
-                foreground=colors[13],
-                format='  {freq_current}GHz|{load_percent}%',
-                ),
-        widget.Spacer(length=-4),
+widget.CPU(
+        font=my_font,
+        foreground=colors[13],
+        format='  {freq_current}GHz|{load_percent}%',
+        ),
+widget.Spacer(length=-4),
         widget.Memory(
                 font=my_font,
                 foreground=colors[14],
                 format=' 󰍛{MemUsed: .0f}{mm}',
                 ),
         widget.Spacer(length=4),
-        widget.Systray(),
+        widget.StatusNotifier(),
         widget.Spacer(length=4),
         widget.QuickExit(
                 default_text='', countdown_format='',
