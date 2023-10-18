@@ -22,6 +22,7 @@ elif qtile.core.name == "wayland":
         "type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt", kb_layout="br", kb_variant="nodeadkeys"),
         }
 
+
 # variables
 alt_mod = "mod1"
 browser = 'firefox'
