@@ -191,7 +191,7 @@ keys = [
             Key([], 'r', lazy.layout.reset()),
             ],
                  mode=True,
-                 name="Resize"
+                 name="󰙕"
                  ),
         Key([mod, 'shift'], 's', lazy.layout.swap_main()),
         Key([mod, 'shift'], 'space', lazy.layout.flip()),
@@ -217,7 +217,7 @@ keys = [
             Key([], 'm', lazy.spawn('swayosd-client --output-volume mute-toggle')),
             ],
                  mode=True,
-                 name="Volume"
+                 name="󰕾"
                  ),
         Key([mod], "space", lazy.widget["keyboardlayout"].next_keyboard(), desc="Next keyboard layout."),
         #Key([mod], 'e', lazy.spawn(terminal + ' --class code -e lvim -c "cd ~/.code | NvimTreeToggle"')),
@@ -229,18 +229,18 @@ keys = [
                 Key([], 'w', lazy.spawn('waydroid show-full-ui')),
                 Key([], 'd', lazy.spawn('dsbattery -d')),
                 ],
-                     name="GAMES"
+                     name="󱎓"
                      ),
             KeyChord([], 'p', [
                 Key([], 's', lazy.spawn('pymor -l 3')),
                 Key([], 'c', lazy.spawn('pymor -c')),
                 ],
-                 name="PYMOR"
+                 name="󰁫"
                      ),
             Key([], 'n', lazy.spawn('dunstctl close-all')),
             ],
 
-                 name="EXEC"
+                 name="󰳽"
                  ),
     Key([mod], 'Tab', lazy.function(latest_group)),
     Key([mod, 'shift'], 'p', lazy.function(focus_main)),
@@ -251,7 +251,7 @@ keys = [
         Key([], 'n', lazy.group['scratchpad'].dropdown_toggle('neorg')),
         Key([], 'm', lazy.group['scratchpad'].dropdown_toggle('btop')),
         ],
-             name="SCRATCH"
+             name="󰊠"
              ),
     KeyChord([mod], 'w', [ 
                           Key([], 'b', lazy.group[groups[0].name].toscreen()),
@@ -263,7 +263,7 @@ keys = [
                           Key([], 'g', lazy.group[groups[6].name].toscreen()),
                           Key([], 'w', lazy.group[groups[7].name].toscreen()),
                           ],
-             name="WKS"
+             name=""
              ),
     KeyChord([mod, 'shift'], 'w', [ 
                                    Key([], 'b',  lazy.window.togroup(groups[0].name)),
@@ -275,20 +275,26 @@ keys = [
                                    Key([], 'g',  lazy.window.togroup(groups[6].name)),
                                    Key([], 'w',  lazy.window.togroup(groups[7].name)),
                                    ],
-             name="MWKS"
+             name=""
              ),
 
 # actions
     KeyChord([mod], 'a', [
         Key([], 'h', lazy.core.hide_cursor()),
         Key([], 's', lazy.core.unhide_cursor()),
-        Key([], 'e', lazy.spawn('easy_preset.sh LoudnessEqualizer')),
-        Key([], 'b', lazy.spawn('easy_preset.sh "HeavyBass"')),
+        KeyChord([], 'e', [
+            Key([], 'e', lazy.spawn('flatpak run com.github.wwmm.easyeffects -l LoudnessEqualizer')),
+            Key([], 'b', lazy.spawn('flatpak run com.github.wwmm.easyeffects -l "Heavy Bass"')),
+            ],
+                 name=""
+                 ),
         KeyChord([], 'l', [
             Key([], 'o', lazy.spawn('xset led on')),
             Key([], 'f', lazy.spawn('xset led off')),
             ])
-        ]),
+        ],
+             name=""
+             ),
 ]
 
 layouts = [
