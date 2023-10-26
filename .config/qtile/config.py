@@ -5,7 +5,6 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen, KeyChord, Sc
 from libqtile.lazy import lazy
 from libqtile.log_utils import logger
 from qtile_extras import widget
-from qtile_extras.widget.decorations import BorderDecoration
 
 if qtile.core.name == "x11":
     term = "alacritty"
@@ -13,6 +12,7 @@ if qtile.core.name == "x11":
 elif qtile.core.name == "wayland":
     term = "alacritty"
     runner = "dmenu-wl_run -nb '#1E2326' -nf '#D3C6AA' -sb '#D3C6AA' -sf '#1E2326'"
+    copy_hist="cliphist list | dmenu-wl -nb '#1E2326' -nf '#D3C6AA' -sb '#D3C6AA' -sf '#1E2326' | cliphist decode | wl-copy"
     @hook.subscribe.startup_once
     def autostart_once():
         subprocess.run('/home/cie/.config/qtile/wl_autostart.sh')
@@ -33,14 +33,14 @@ pad = 10
 terminal = 'alacritty'
 
 icons = [
-        '',
-        '󰶞',
-        '',
-        '',
-        '',
-        '',
-        ' ',
-        '',
+        'WWW',
+        '</>',
+        'VID',
+        'BOOKS',
+        'EDIT',
+        'TERMINAL',
+        'GAMES',
+        'ANDROID',
         ]
 
 # hooks
@@ -48,17 +48,16 @@ icons = [
 def opacity(c):
     for x in c.qtile.current_group.windows:
         wm_class = x.get_wm_class()[0]
-        #logger.warning(x.get_wm_class())
         if (wm_class == 'firefox' 
             or wm_class == 'org.qutebrowser.qutebrowser'
             or wm_class == 'qutebrowser'
             or wm_class == 'Brave-browser'):
-            x.opacity = 1
+            x.set_opacity(1)
         if x.has_focus and x.name == 'scratchpad' or x.name == 'chatgpt':
             for w in x.group.windows:
                 w.opacity = 1
         elif not x.has_focus:
-            x.opacity = 0.5
+            x.set_opacity(0.5)
         else:
             x.opacity = 1 
 
@@ -69,7 +68,6 @@ def is_floating(c):
             if x.get_wm_class()[0] == 'firefox' or x.get_wm_class()[0] == 'Navigator':
                 x.set_size_floating(500,680)
             x.center()
-
 
 scratchpads = [
         # add a alternative config file for transparency to work properly on wayland
@@ -101,6 +99,16 @@ scratchpads = [
         DropDown(
             'btop',
             'foot -T scratchpad -e btop',
+            height=0.9,
+            width=0.9,
+            opacity=0.5,
+            x=0.05,
+            y=0.03,
+            on_focus_lost_hide=False
+            ),
+        DropDown(
+            'tt',
+            'foot -T scratchpad -e tt -t 60',
             height=0.9,
             width=0.9,
             opacity=0.5,
@@ -163,11 +171,11 @@ def has_name(c):
 groups = [
         Group(icons[0], layout='max', matches=[has_class(['navigator', 'firefox', 'Brave-browser', 'qutebrowser', 'org.qutebrowser.qutebrowser'])]),
         Group(icons[1], layout='monadwide', matches=[has_class(['Emacs', 'code'])]),
-        Group(icons[2], layout='treetab', matches=[has_class(['mpv', 'Microsoft-edge'])]), 
+        Group(icons[2], layout='treetab', matches=[has_class(['mpv', 'Microsoft-edge', 'YouTube Music'])]), 
         Group(icons[3], layout='treetab', matches=[has_class(['zathura'])]), 
         Group(icons[4], layout='treetab', matches=[has_class(['audacious'])]),
         Group(icons[5], layout='monadwide', matches=[has_class(['Alacritty', 'foot'])]),
-        Group(icons[6], layout='treetab', matches=[has_class(['heroic', 'Steam', 'amazon games ui.exe', 'bottles', 'ProtonUp-Qt', 'lutris', 'amazongamessetup.exe']), 
+        Group(icons[6], layout='treetab', matches=[has_class(['heroic', 'Steam', 'amazon games ui.exe', 'bottles', 'ProtonUp-Qt', 'lutris', 'amazongamessetup.exe', 'net.davidotek.pupgui2']), 
                                                    has_name(['Steam - Self Updater', 
                                                              'Steam setup', 'Steam', 'Sign in to Steam'] )]),
                                                    Group(icons[7], layout='max', matches=[has_class(['Waydroid'])]),
@@ -175,12 +183,8 @@ groups = [
                                                    ]
 # bindings
 keys = [
-        Key([mod], 'h', lazy.layout.left()),
-        Key([mod], 'l', lazy.layout.right()),
         Key([mod], 'j', lazy.layout.down()),
         Key([mod], 'k', lazy.layout.up()),
-        Key([mod, 'shift'], 'h', lazy.layout.swap_left()),
-        Key([mod, 'shift'], 'l', lazy.layout.swap_right()),
         Key([mod, 'shift'], 'j', lazy.layout.shuffle_down()),
         Key([mod, 'shift'], 'k', lazy.layout.shuffle_up()),
         KeyChord([mod], "r", [
@@ -195,10 +199,8 @@ keys = [
                  ),
         Key([mod, 'shift'], 's', lazy.layout.swap_main()),
         Key([mod, 'shift'], 'space', lazy.layout.flip()),
-        Key([mod, 'shift'], 'Return', lazy.layout.toggle_split()),
         Key([mod], 't', lazy.spawn(terminal)),
         Key([alt_mod], 't', lazy.spawn(terminal)),
-        Key([mod], '0', lazy.next_layout()),
         Key([mod, 'shift'], 'c', lazy.window.kill()),
         Key([mod, 'control'], 'r', lazy.reload_config()),
         Key([alt_mod, 'control'], 'r', lazy.reload_config()),
@@ -223,6 +225,7 @@ keys = [
         #Key([mod], 'e', lazy.spawn(terminal + ' --class code -e lvim -c "cd ~/.code | NvimTreeToggle"')),
         KeyChord([mod], 'e',[
             Key([], 'r', lazy.spawn(runner)),
+            Key([], 'h', lazy.spawn(copy_hist)),
             KeyChord([], 'g', [
                 Key([], 's', lazy.spawn('steam')),
                 Key([], 'h', lazy.spawn('heroic')),
@@ -250,6 +253,7 @@ keys = [
         Key([], 't', lazy.group['scratchpad'].dropdown_toggle('task'), lazy.spawn('task sync')),
         Key([], 'n', lazy.group['scratchpad'].dropdown_toggle('neorg')),
         Key([], 'm', lazy.group['scratchpad'].dropdown_toggle('btop')),
+        Key([], 'i', lazy.group['scratchpad'].dropdown_toggle('tt')),
         ],
              name="󰊠"
              ),
@@ -300,11 +304,11 @@ keys = [
 layouts = [
         layout.MonadWide(
             align=1,
-            border_focus=colors[12],
-            border_normal=colors[15],
+            border_focus=colors[18],
+            border_normal=colors[1],
             border_width=2,
             new_client_position='before_current',
-            ratio=.8,
+            ratio=.7,
             single_border_width=0,
             single_margin=0,
             ),
@@ -323,34 +327,18 @@ layouts = [
             ),
         ] 
 
-floating_layout = layout.Floating(
-        border_focus = colors[4],
-        border_normal = '#98971a',
-        border_width = 2,
-        margin = 2,
-        float_rules=[
-            # Run the utility of `xprop` to see the wm class and name of an X client.
-            *layout.Floating.default_float_rules,
-            has_class("pavucontrol"),
-            has_class("com.github.wwmm.easyeffects"),
-            has_class("net.davidotek.pupgui2"),
-            has_class('moderndeck'),
-            has_class('monophony'),
-            has_class('Whatsapp-for-linux'),
-            has_class('tuned-gui'),
-            ]
-        )
-
 def desconnect_ds4():  
     qtile.cmd_spawn('dsbattery -d')
 
 my_widgets = [
         widget.GroupBox(
-            background=colors[1],
             active=colors[20],
+            background=colors[1],
+            block_highlight_text_color=colors[1],
             disable_drag=True,
-            block_highlight_text_color=colors[22],
             highlight_method='line',
+            highlight_color=[colors[15]],
+            fontsize=14,
             inactive=colors[6],
             use_mouse_wheel=False,
             ),
@@ -376,15 +364,15 @@ my_widgets = [
             ),
         widget.GenPollText(
             foreground=colors[21],
-            update_interval=60, 
             func=lambda: subprocess.check_output(os.path.expanduser("~/.bin/psbat.sh")).decode("utf-8"),
             mouse_callbacks={'Button1': desconnect_ds4 },
+            update_interval=60, 
             ),
         widget.DF(
             font=my_font,
             foreground=colors[16],
-            partition='/',
             format=' {uf}{m}',
+            partition='/',
             visible_on_warn=False,
             ),
         widget.Spacer(length=2),
@@ -457,6 +445,7 @@ floating_layout = layout.Floating(
             Match(wm_class="ssh-askpass"),  # ssh-askpass
             Match(title="branchdialog"),  # gitk
             Match(title="pinentry"),  # GPG key password entry
+            Match(wm_class='blueman-manager')
             ]
         )
 auto_fullscreen = True
