@@ -21,8 +21,8 @@ window#waybar {
   margin-left: -4px;
 }
 
-#workspaces button.persistent {
-    color: @normal;
+#workspaces button {
+  color: #fff;
 }
 
 #workspaces button:hover {
@@ -31,7 +31,7 @@ window#waybar {
 }
 
 #workspaces button.active {
-  background-color: rgba(30, 35, 38, .5);
+  background-color: rgba(30, 35, 38, .7);
   color: #83C092;
 }
 
@@ -50,10 +50,12 @@ window#waybar {
 #custom-dsbattery,
 #cpu {
   margin-bottom: 6px;
+  font-size: 14px;
 }
 
 #custom-dsbattery {
-    color: #a6e3a1;
+  color: #a6e3a1;
+  margin-bottom: 3px;
 }
 
 #gamemode,
@@ -91,7 +93,7 @@ window#waybar {
 #pulseaudio.icon {
   color: @pulsa;
   margin-right: 6px;
-  margin-bottom: -2px;
+  margin-bottom: 1px;
 }
 
 #pulseaudio {
@@ -101,16 +103,16 @@ window#waybar {
 #custom-disk-root {
   color: @root;
   margin-right: 3px;
+  margin-bottom: 3px;
 }
 
 #disk {
   color: @root;
 }
 
-
 #custom-disk-home {
   color: @home;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 
 #disk.home {
@@ -119,7 +121,8 @@ window#waybar {
 
 #custom-cpu-icon {
   color: @cpu-week;
-  margin-right: 5px;
+  margin-right: 2px;
+  margin-bottom: 2px;
 }
 
 #cpu {
@@ -128,6 +131,7 @@ window#waybar {
 
 #custom-ram-icon {
   color: @ram;
+  margin-bottom: 3px;
 }
 
 #memory {
@@ -135,7 +139,7 @@ window#waybar {
 }
 
 #tray {
-  margin: 8px 0 0 0;
+  margin: 3px 0 0 0;
 }
 
 #clock {
