@@ -11,7 +11,7 @@
 @define-color day-bg #E69875;
 
 window#waybar {
-  background-color: rgba(30, 35, 38, .5);
+  background-color: rgba(30, 35, 38, .6);
   font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
   font-weight: bold;
 }
@@ -48,6 +48,7 @@ window#waybar {
 #pulseaudio,
 #custom-updates,
 #custom-dsbattery,
+#temperature,
 #cpu {
   margin-bottom: 6px;
   font-size: 14px;
@@ -78,11 +79,22 @@ window#waybar {
 #custom-updates {
   color: #dadada; 
 }
+
 #submap {
   color: @home;
 }
 
 #gamemode {
+  color: #fff;
+}
+
+#custom-temperature-icon {
+  color: #fff;
+  margin-right: 4px;
+  margin-bottom: 4px;
+}
+
+#temperature {
   color: #fff;
 }
 
@@ -139,7 +151,7 @@ window#waybar {
 }
 
 #tray {
-  margin: 3px 0 0 0;
+  margin: 5px 0 0 0;
 }
 
 #clock {
