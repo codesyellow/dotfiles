@@ -1,6 +1,7 @@
 #!/bin/bash
 light-keys.sh &
-swaybg -i ~/.wallpapers/forrest.png &
+#swaybg -i ~/.wallpapers/car_rain.png &
+swww-daemon &
 waybar &
 pypr &
 dunst &
@@ -15,5 +16,5 @@ swayidle -w \
     before-sleep 'swaylock -i ~/.wallpapers/forrest.png' &
 sway-audio-idle-inhibit &
 swayosd-server &
-play -q ~/.audios/retro-audio-logo-94648.mp3 &
+paplay ~/.audios/retro-audio-logo-94648.mp3 &
 blueman-applet &

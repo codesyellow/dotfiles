@@ -6,7 +6,7 @@
     },
     "scratchpads": {
         "term": {
-            "command": "alacritty --class alacritty-dropterm",
+            "command": "alacritty --config-file ~/.config/alacritty/alacritty2.yml --class alacritty-dropterm",
             "animation": "fromTop",
             "unfocus": "false"
         },
