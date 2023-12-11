@@ -1,27 +1,13 @@
-# imports
 import os, subprocess
+# imports
 from libqtile import hook, layout, bar, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen, KeyChord, ScratchPad, DropDown
 from libqtile.lazy import lazy
 from libqtile.log_utils import logger
 from qtile_extras import widget
 
-if qtile.core.name == "x11":
-    term = "alacritty"
-    runner = "dmenu_run -nb '#1E2326' -nf '#D3C6AA' -sb '#D3C6AA' -sf '#1E2326' -fn 'JetBrainMono Nerd Font' -dim 0.2"
-elif qtile.core.name == "wayland":
-    term = "alacritty"
-    runner = "dmenu-wl_run -nb '#1E2326' -nf '#D3C6AA' -sb '#D3C6AA' -sf '#1E2326'"
-    copy_hist="cliphist list | dmenu-wl -nb '#1E2326' -nf '#D3C6AA' -sb '#D3C6AA' -sf '#1E2326' | cliphist decode | wl-copy"
-    @hook.subscribe.startup_once
-    def autostart_once():
-        subprocess.run('/home/cie/.config/qtile/wl_autostart.sh')
-    from libqtile.backend.wayland import InputConfig
-    wl_input_rules = {
-            "*": InputConfig(left_handed=False, pointer_accel=True),
-            "type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt", kb_layout="br", kb_variant="nodeadkeys"),
-            }
-
+term = "alacritty"
+runner = "dmenu_run -nb '#272E33' -nf '#D3C6AA' -sb '#D3C6AA' -sf '#1E2326' -fn 'JetBrainMono Nerd Font' -dim 0.2"
 # variables
 alt_mod = "mod1"
 browser = 'firefox'
@@ -169,7 +155,7 @@ def has_name(c):
 
 
 groups = [
-        Group(icons[0], layout='max', matches=[has_class(['navigator', 'firefox', 'Brave-browser', 'qutebrowser', 'org.qutebrowser.qutebrowser'])]),
+        Group(icons[0], layout='max', matches=[has_class(['navigator', 'firefox', 'Brave-browser', 'qutebrowser', 'org.qutebrowser.qutebrowser', 'floorp'])]),
         Group(icons[1], layout='monadwide', matches=[has_class(['Emacs', 'code'])]),
         Group(icons[2], layout='treetab', matches=[has_class(['mpv', 'Microsoft-edge', 'YouTube Music'])]), 
         Group(icons[3], layout='treetab', matches=[has_class(['zathura'])]), 
@@ -187,16 +173,6 @@ keys = [
         Key([mod], 'k', lazy.layout.up()),
         Key([mod, 'shift'], 'j', lazy.layout.shuffle_down()),
         Key([mod, 'shift'], 'k', lazy.layout.shuffle_up()),
-        KeyChord([mod], "r", [
-            Key([], 'i', lazy.layout.grow()),
-            Key([], 'd', lazy.layout.shrink()),
-            Key([], 'n', lazy.layout.normalize()),
-            Key([], 'm', lazy.layout.maximize()),
-            Key([], 'r', lazy.layout.reset()),
-            ],
-                 mode=True,
-                 name="󰙕"
-                 ),
         Key([mod, 'shift'], 's', lazy.layout.swap_main()),
         Key([mod, 'shift'], 'space', lazy.layout.flip()),
         Key([mod], 't', lazy.spawn(terminal)),
@@ -214,8 +190,8 @@ keys = [
         Key([mod, 'shift'], 'e', lazy.core.change_vt(2)),
         Key([alt_mod], 'd', lazy.spawn(runner)),
         KeyChord([mod], "v", [
-            Key([], 'j', lazy.spawn('swayosd-client --output-volume lower')),
-            Key([], 'k', lazy.spawn('swayosd-client --output-volume raise')),
+            Key([], 'j', lazy.spawn('volume.sh down')),
+            Key([], 'k', lazy.spawn('volume.sh up')),
             Key([], 'm', lazy.spawn('swayosd-client --output-volume mute-toggle')),
             ],
                  mode=True,
@@ -225,12 +201,12 @@ keys = [
         #Key([mod], 'e', lazy.spawn(terminal + ' --class code -e lvim -c "cd ~/.code | NvimTreeToggle"')),
         KeyChord([mod], 'e',[
             Key([], 'r', lazy.spawn(runner)),
-            Key([], 'h', lazy.spawn(copy_hist)),
             KeyChord([], 'g', [
                 Key([], 's', lazy.spawn('steam')),
                 Key([], 'h', lazy.spawn('heroic')),
                 Key([], 'w', lazy.spawn('waydroid show-full-ui')),
                 Key([], 'd', lazy.spawn('dsbattery -d')),
+                Key([], 'r', lazy.spawn('flatpak run io.github.vinegarhq.Vinegar player')),
                 ],
                      name="󱎓"
                      ),
@@ -286,6 +262,25 @@ keys = [
     KeyChord([mod], 'a', [
         Key([], 'h', lazy.core.hide_cursor()),
         Key([], 's', lazy.core.unhide_cursor()),
+        KeyChord([], 'w', [
+            Key([], 'k', lazy.window.kill()),
+            KeyChord([], "r", [
+                Key([], 'i', lazy.layout.grow()),
+                Key([], 'd', lazy.layout.shrink()),
+                Key([], 'n', lazy.layout.normalize()),
+                Key([], 'm', lazy.layout.maximize()),
+                Key([], 'r', lazy.layout.reset()),
+                ],
+                     mode=True,
+                     name=""
+                     ),
+            ],
+                 name=''),
+        KeyChord([], 'q', [
+            Key([], 'r', lazy.reload_config()),
+            Key([], 'q', lazy.shutdown()),
+            ],
+                 name=''),
         KeyChord([], 'e', [
             Key([], 'e', lazy.spawn('flatpak run com.github.wwmm.easyeffects -l LoudnessEqualizer')),
             Key([], 'b', lazy.spawn('flatpak run com.github.wwmm.easyeffects -l "my-heavy-bass"')),
@@ -353,11 +348,12 @@ my_widgets = [
         widget.Chord(
             foreground=colors[20],
             ),
+        widget.Spacer(length=3),
         widget.KeyboardLayout(
-            configured_keyboards=['br nodeadkeys', 'br'],
+            configured_keyboards=['us', 'us intl'],
             display_map={
-                'br nodeadkeys':'  BRNDK',
-                'br':'  BR',
+                'us':'  US',
+                'us intl':'  USI',
                 },
             foreground=colors[18],
             option='compose:menu,grp_led:scroll',
@@ -445,7 +441,9 @@ floating_layout = layout.Floating(
             Match(wm_class="ssh-askpass"),  # ssh-askpass
             Match(title="branchdialog"),  # gitk
             Match(title="pinentry"),  # GPG key password entry
-            Match(wm_class='blueman-manager')
+            Match(wm_class='blueman-manager'),
+            Match(wm_class='org.kde.polkit-kde-authentication-agent-1'),
+            Match(wm_class='CachyOSHello'),
             ]
         )
 auto_fullscreen = True
