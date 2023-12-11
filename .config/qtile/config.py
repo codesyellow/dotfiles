@@ -171,15 +171,14 @@ groups = [
 keys = [
         Key([mod], 'j', lazy.layout.down()),
         Key([mod], 'k', lazy.layout.up()),
-        Key([mod, 'shift'], 'j', lazy.layout.shuffle_down()),
-        Key([mod, 'shift'], 'k', lazy.layout.shuffle_up()),
+        Key([mod, 'shift'], 'k', lazy.layout.shuffle_down()),
+        Key([mod, 'shift'], 'j', lazy.layout.shuffle_up()),
         Key([mod, 'shift'], 's', lazy.layout.swap_main()),
         Key([mod, 'shift'], 'space', lazy.layout.flip()),
         Key([mod], 't', lazy.spawn(terminal)),
         Key([alt_mod], 't', lazy.spawn(terminal)),
         Key([mod, 'shift'], 'c', lazy.window.kill()),
         Key([mod, 'control'], 'r', lazy.reload_config()),
-        Key([alt_mod, 'control'], 'r', lazy.reload_config()),
         Key([mod, 'control'], 'q', lazy.shutdown()),
         Key([mod], 'b', lazy.group.focus_back()),
         # apps
@@ -262,6 +261,13 @@ keys = [
     KeyChord([mod], 'a', [
         Key([], 'h', lazy.core.hide_cursor()),
         Key([], 's', lazy.core.unhide_cursor()),
+        KeyChord([], 'l', [
+            Key([], 'k', lazy.layout.shuffle_down()),
+            Key([], 'j', lazy.layout.shuffle_up()),
+            Key([], 's', lazy.layout.swap_main()),
+            Key([], 'space', lazy.layout.flip()),
+            ],
+                 name=''),
         KeyChord([], 'w', [
             Key([], 'k', lazy.window.kill()),
             KeyChord([], "r", [
@@ -287,10 +293,6 @@ keys = [
             ],
                  name=""
                  ),
-        KeyChord([], 'l', [
-            Key([], 'o', lazy.spawn('xset led on')),
-            Key([], 'f', lazy.spawn('xset led off')),
-            ])
         ],
              name=""
              ),
