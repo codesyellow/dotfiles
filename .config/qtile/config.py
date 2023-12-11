@@ -74,7 +74,7 @@ scratchpads = [
             ),
         DropDown(
             'task',
-            'foot -T scratchpad -e taskwarrior-tui',
+            'st -T scratchpad -e taskwarrior-tui',
             height=0.995,
             width=0.3,
             opacity=0.5,
@@ -84,7 +84,7 @@ scratchpads = [
             ),
         DropDown(
             'btop',
-            'foot -T scratchpad -e btop',
+            'st -T scratchpad -e btop',
             height=0.9,
             width=0.9,
             opacity=0.5,
@@ -94,7 +94,7 @@ scratchpads = [
             ),
         DropDown(
             'tt',
-            'foot -T scratchpad -e tt -t 60',
+            'st -T scratchpad -e tt -t 60',
             height=0.9,
             width=0.9,
             opacity=0.5,
@@ -104,7 +104,7 @@ scratchpads = [
             ),
         DropDown(
             'neorg', 
-            'foot -T scratchpad -e /home/cie/.local/bin/lvim -c ":Neorg workspace home"', 
+            'st -T scratchpad -e /home/cie/.local/bin/lvim -c ":Neorg workspace home"', 
             x=0.001,
             height=0.992,
             width=0.3,
@@ -160,7 +160,7 @@ groups = [
         Group(icons[2], layout='treetab', matches=[has_class(['mpv', 'Microsoft-edge', 'YouTube Music'])]), 
         Group(icons[3], layout='treetab', matches=[has_class(['zathura'])]), 
         Group(icons[4], layout='treetab', matches=[has_class(['audacious'])]),
-        Group(icons[5], layout='monadwide', matches=[has_class(['Alacritty', 'foot'])]),
+        Group(icons[5], layout='monadwide', matches=[has_class(['Alacritty', 'st'])]),
         Group(icons[6], layout='treetab', matches=[has_class(['heroic', 'Steam', 'amazon games ui.exe', 'bottles', 'ProtonUp-Qt', 'lutris', 'amazongamessetup.exe', 'net.davidotek.pupgui2']), 
                                                    has_name(['Steam - Self Updater', 
                                                              'Steam setup', 'Steam', 'Sign in to Steam'] )]),
