@@ -1,158 +1,20 @@
 import os, subprocess
 # imports
-from libqtile import hook, layout, bar, qtile, widget
+from libqtile import layout, bar, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen, KeyChord, ScratchPad, DropDown
 from libqtile.lazy import lazy
-from libqtile.log_utils import logger
 from qtile_extras import widget
+from libqtile.backend.wayland import InputConfig
+from configs.variables import *
+from configs.hooks import *
+from configs.scratchpads import *
+from configs.functions import *
+from configs.layouts import *
 
-term = "alacritty"
-runner = "dmenu_run -nb '#272E33' -nf '#D3C6AA' -sb '#D3C6AA' -sf '#1E2326' -fn 'JetBrainMono Nerd Font' -dim 0.2"
-# variables
-alt_mod = "mod1"
-browser = 'firefox'
-exit_icon_font = 'Font Awesome 6 Free Regular'
-home = os.path.expanduser('~/')
-mod = "mod4"
-my_font = 'JetBrainMono Nerd Font'
-pad = 10
-terminal = 'alacritty'
-
-icons = [
-        'WWW',
-        '</>',
-        'VID',
-        'BOOKS',
-        'EDIT',
-        'TERMINAL',
-        'GAMES',
-        'ANDROID',
-        ]
-
-# hooks
-@hook.subscribe.client_focus
-def opacity(c):
-    for x in c.qtile.current_group.windows:
-        wm_class = x.get_wm_class()[0]
-        if (wm_class == 'firefox' 
-            or wm_class == 'org.qutebrowser.qutebrowser'
-            or wm_class == 'qutebrowser'
-            or wm_class == 'Brave-browser'):
-            x.set_opacity(1)
-        if x.has_focus and x.name == 'scratchpad' or x.name == 'chatgpt':
-            for w in x.group.windows:
-                w.opacity = 1
-        elif not x.has_focus:
-            x.set_opacity(0.5)
-        else:
-            x.opacity = 1 
-
-@hook.subscribe.client_focus
-def is_floating(c):
-    for x in c.qtile.current_group.windows:
-        if x.has_focus and x.floating and x.name != 'scratchpad' and not x.fullscreen:
-            if x.get_wm_class()[0] == 'firefox' or x.get_wm_class()[0] == 'Navigator':
-                x.set_size_floating(500,680)
-            x.center()
-
-scratchpads = [
-        # add a alternative config file for transparency to work properly on wayland
-        DropDown(
-            'term', 
-            f'alacritty --config-file {home}.config/alacritty/alacritty2.yml -t scratchpad',
-            y=0,
-            ),
-        DropDown(
-            'gpterm',
-            'alacritty -t scratchpad -e bard-cli -i',
-            height=0.995,
-            width=0.3,
-            opacity=0.5,
-            x=0.698,
-            y=0,
-            on_focus_lost_hide=False
-            ),
-        DropDown(
-            'task',
-            'st -T scratchpad -e taskwarrior-tui',
-            height=0.995,
-            width=0.3,
-            opacity=0.5,
-            x=0.698,
-            y=0,
-            on_focus_lost_hide=False
-            ),
-        DropDown(
-            'btop',
-            'st -T scratchpad -e btop',
-            height=0.9,
-            width=0.9,
-            opacity=0.5,
-            x=0.05,
-            y=0.03,
-            on_focus_lost_hide=False
-            ),
-        DropDown(
-            'tt',
-            'st -T scratchpad -e tt -t 60',
-            height=0.9,
-            width=0.9,
-            opacity=0.5,
-            x=0.05,
-            y=0.03,
-            on_focus_lost_hide=False
-            ),
-        DropDown(
-            'neorg', 
-            'st -T scratchpad -e /home/cie/.local/bin/lvim -c ":Neorg workspace home"', 
-            x=0.001,
-            height=0.992,
-            width=0.3,
-            opacity=0.9,
-            on_focus_lost_hide=False),
-        ]
-
-colors = ['#1E2326', # bg_dim 0
-          '#272E33', # bg0 1
-          '#2E383C', # bg1 2
-          '#374145', # bg2 3
-          '#414B50', # bg3 4
-          '#495156', # bg4 5
-          '#4F5B58', # bg5 6
-          '#4C3743', # bg_red 7
-          '#493B40', # bg_visual 8
-          '#45443C', # bg_yellow 9
-          '#3C4841', # bg_green 10
-          '#384B55', # bg_blue 11
-          '#E67E80', # red 12
-          '#E69875', # orange 13
-          '#DBBC7F', # yellow 14
-          '#A7C080', # green 15
-          '#7FBBB3', # blue 16
-          '#83C092', # aqua 17
-          '#D699B6', # purple 18
-          '#D3C6AA', # fg 19
-          '#A7C080', # statusline1 20
-          '#D3C6AA', # statusline2 21
-          '#E67E80', # statusline3 22
-          '#7A8478', # gray0 23
-          '#859289', # gray1 24
-          '#9DA9A0', # gray2 25
-          ]
-
-def latest_group(qtile):
-    qtile.current_screen.set_group(qtile.current_screen.previous_group)
-
-def focus_main(qtile):
-    window = qtile.current_group.layout.focus_first()
-    qtile.current_group.focus(window)
-
-def has_class(c):
-    return Match(wm_class=c)
-
-def has_name(c):
-    return Match(title=c)
-
+wl_input_rules = {
+    "*": InputConfig(left_handed=False, pointer_accel=True),
+    "type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt"),
+}
 
 groups = [
         Group(icons[0], layout='max', matches=[has_class(['navigator', 'firefox', 'Brave-browser', 'qutebrowser', 'org.qutebrowser.qutebrowser', 'floorp'])]),
@@ -175,8 +37,8 @@ keys = [
         Key([mod, 'shift'], 'j', lazy.layout.shuffle_up()),
         Key([mod, 'shift'], 's', lazy.layout.swap_main()),
         Key([mod, 'shift'], 'space', lazy.layout.flip()),
-        Key([mod], 't', lazy.spawn(terminal)),
-        Key([alt_mod], 't', lazy.spawn(terminal)),
+        Key([mod], 't', lazy.spawn(term)),
+        Key([alt_mod], 't', lazy.spawn(term)),
         Key([mod, 'shift'], 'c', lazy.window.kill()),
         Key([mod, 'control'], 'r', lazy.reload_config()),
         Key([mod, 'control'], 'q', lazy.shutdown()),
@@ -197,7 +59,7 @@ keys = [
                  name="󰕾"
                  ),
         Key([mod], "space", lazy.widget["keyboardlayout"].next_keyboard(), desc="Next keyboard layout."),
-        #Key([mod], 'e', lazy.spawn(terminal + ' --class code -e lvim -c "cd ~/.code | NvimTreeToggle"')),
+        #Key([mod], 'e', lazy.spawn(term + ' --class code -e lvim -c "cd ~/.code | NvimTreeToggle"')),
         KeyChord([mod], 'e',[
             Key([], 'r', lazy.spawn(runner)),
             KeyChord([], 'g', [
@@ -210,7 +72,8 @@ keys = [
                      name="󱎓"
                      ),
             KeyChord([], 'p', [
-                Key([], 's', lazy.spawn('pymor -l 3')),
+                Key([], 'l', lazy.spawn('pymor -l 3')),
+                Key([], 's', lazy.spawn('pymor')),
                 Key([], 'c', lazy.spawn('pymor -c')),
                 ],
                  name="󰁫"
@@ -298,60 +161,37 @@ keys = [
              ),
 ]
 
-layouts = [
-        layout.MonadWide(
-            align=1,
-            border_focus=colors[18],
-            border_normal=colors[1],
-            border_width=2,
-            new_client_position='before_current',
-            ratio=.7,
-            single_border_width=0,
-            single_margin=0,
-            ),
-        layout.Max(),
-        layout.TreeTab(
-            active_bg=colors[12],
-            active_fg=colors[0],
-            border_width=0,
-            bg_color='#303842',
-            inactive_bg=colors[0],
-            place_right=True,
-            previous_on_rm=True,
-            sections=[''],
-            section_fg=colors[0],
-            vspace=0,
-            ),
-        ] 
-
-def desconnect_ds4():  
-    qtile.cmd_spawn('dsbattery -d')
-
 my_widgets = [
         widget.GroupBox(
             active=colors[20],
-            background=colors[1],
+            background=bg,
             block_highlight_text_color=colors[1],
             disable_drag=True,
             highlight_method='line',
             highlight_color=[colors[15]],
             fontsize=14,
-            inactive=colors[6],
+            inactive=colors[12],
             use_mouse_wheel=False,
             ),
         widget.CurrentLayoutIcon(),
-        widget.Spacer(),
+        widget.Spacer(
+            background="#00000069",
+            ),
         widget.Clock(
             font=my_font,
+            background=bg,
             foreground=colors[18],
             format='%d|%H:%M|%a',
             ),
-        widget.Spacer(),
+        widget.Spacer(
+            background="#00000069",
+            ),
         widget.Chord(
+            background=bg,
             foreground=colors[20],
             ),
-        widget.Spacer(length=3),
         widget.KeyboardLayout(
+            background=bg,
             configured_keyboards=['us', 'us intl'],
             display_map={
                 'us':'  US',
@@ -361,33 +201,36 @@ my_widgets = [
             option='compose:menu,grp_led:scroll',
             ),
         widget.GenPollText(
+            background=bg,
             foreground=colors[21],
             func=lambda: subprocess.check_output(os.path.expanduser("~/.bin/psbat.sh")).decode("utf-8"),
             mouse_callbacks={'Button1': desconnect_ds4 },
             update_interval=60, 
             ),
         widget.DF(
+            background=bg,
             font=my_font,
             foreground=colors[16],
             format=' {uf}{m}',
             partition='/',
             visible_on_warn=False,
             ),
-        widget.Spacer(length=2),
         widget.DF(
+            background=bg,
             font=my_font,
             foreground=colors[19],
             partition='/home',
             format='  {uf}{m}',
             visible_on_warn=False,
             ),
-        widget.Spacer(length=2),
         widget.CPU(
+            background=bg,
                 font=my_font,
                 foreground=colors[13],
                 format='  {freq_current}GHz|{load_percent}%',
                 ),
         widget.Memory(
+            background=bg,
                 font=my_font,
                 foreground=colors[14],
                 format='󰍛{MemUsed: .0f}{mm}',
@@ -396,6 +239,7 @@ my_widgets = [
         widget.StatusNotifier(),
         widget.Spacer(length=2),
         widget.QuickExit(
+            background=bg,
                 default_text='', countdown_format='',
                 font=exit_icon_font,
                 ),
@@ -403,7 +247,7 @@ my_widgets = [
         ]
 
 widget_defaults = dict(
-        background=colors[1],
+        background="#00000069",
         font=my_font,
         fontsize=14,
         padding=4,
