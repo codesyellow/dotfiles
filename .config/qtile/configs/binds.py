@@ -10,14 +10,10 @@ keys = [
         Key([mod], 'k', lazy.layout.up()),
         Key([mod, 'shift'], 'k', lazy.layout.shuffle_down()),
         Key([mod, 'shift'], 'j', lazy.layout.shuffle_up()),
-        Key([mod, 'shift'], 's', lazy.layout.swap_main()),
-        Key([mod, 'shift'], 'space', lazy.layout.flip()),
         Key([mod], 't', lazy.spawn(term)),
         Key([alt_mod], 't', lazy.spawn(term)),
-        Key([mod, 'shift'], 'c', lazy.window.kill()),
         Key([mod, 'control'], 'r', lazy.reload_config()),
         Key([mod, 'control'], 'q', lazy.shutdown()),
-        Key([mod], 'b', lazy.group.focus_back()),
         # apps
         Key([mod], 'f', lazy.window.toggle_fullscreen()),
         Key([mod, 'shift'], 'f', lazy.window.toggle_floating()),
@@ -103,6 +99,8 @@ keys = [
             Key([], 'k', lazy.layout.shuffle_down()),
             Key([], 'j', lazy.layout.shuffle_up()),
             Key([], 's', lazy.layout.swap_main()),
+            Key([], 'm', lazy.function(focus_main)),
+            Key([], 'b', lazy.group.focus_back()),
             Key([], 'space', lazy.layout.flip()),
             ],
                  name=''),
@@ -122,7 +120,7 @@ keys = [
                  name=''),
         KeyChord([], 'q', [
             Key([], 'r', lazy.reload_config()),
-            Key([], 'q', lazy.shutdown()),
+            Key([], '.', lazy.shutdown()),
             ],
                  name=''),
         KeyChord([], 'e', [

@@ -49,7 +49,7 @@ home = os.path.expanduser('~/')
 mod = "mod4"
 my_font = 'JetBrainMono Nerd Font'
 pad = 10
-runner = "bemenu-run"
+runner = "bemenu-run -c -l 10 -i -M 300 --fn 'IBM Plex Mono 14' -p '' --hp 8 --nb '#10000000' --nf '#fff' --ab '#66000000' -- │ hf '#66000000' --hb '#66000000' --fb '#66000000' -B 1 --bdr '#66000000'"
 term = "alacritty"
 
 # qtile default variables
