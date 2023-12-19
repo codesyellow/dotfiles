@@ -17,7 +17,7 @@ my_widgets = [
             ),
         widget.CurrentLayoutIcon(),
         widget.Spacer(
-            background="#00000069",
+            background=bg
             ),
         widget.Clock(
             font=my_font,
@@ -26,7 +26,7 @@ my_widgets = [
             format='%d|%H:%M|%a',
             ),
         widget.Spacer(
-            background="#00000069",
+            background=bg
             ),
         widget.Chord(
             background=bg,

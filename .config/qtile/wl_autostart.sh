@@ -12,3 +12,4 @@ recharge_ps4.sh &
 /usr/lib/xdg-desktop-portal-wlr &
 flatpak run com.github.wwmm.easyeffects -l 'LoudnessEqualizer' &
 swww img ~/.wallpapers/wall2.gif &
+disable_keyd.sh &
