@@ -1,6 +1,6 @@
 from libqtile.backend.wayland import InputConfig
 wl_input_rules = {
-    "*": InputConfig(left_handed=False, pointer_accel=True),
+    "*": InputConfig(left_handed=False, pointer_accel=False),
     "type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt"),
 }
 

@@ -1,18 +1,20 @@
 import os, subprocess
 from libqtile import widget
-from .variables import colors, bg, my_font, exit_icon_font
+from .variables import colors, bg, my_font, exit_icon_font, group_font
 from .functions import desconnect_ds4
 
 my_widgets = [
         widget.GroupBox(
-            active=colors[20],
+            active=colors[15],
             background=bg,
             block_highlight_text_color=colors[1],
             disable_drag=True,
-            highlight_method='line',
+            highlight_method='text',
             highlight_color=[colors[15]],
-            fontsize=14,
-            inactive=colors[12],
+            foreground=colors[18],
+            font=group_font,
+            fontsize=16,
+            inactive=colors[14],
             use_mouse_wheel=False,
             ),
         widget.CurrentLayoutIcon(),
@@ -47,7 +49,7 @@ my_widgets = [
             foreground=colors[21],
             func=lambda: subprocess.check_output(os.path.expanduser("~/.bin/psbat.sh")).decode("utf-8"),
             mouse_callbacks={'Button1': desconnect_ds4 },
-            update_interval=60, 
+            update_interval=30, 
             ),
         widget.DF(
             background=bg,

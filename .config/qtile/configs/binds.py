@@ -22,8 +22,8 @@ keys = [
         Key([mod, 'shift'], 'e', lazy.core.change_vt(2)),
         Key([alt_mod], 'd', lazy.spawn(runner)),
         KeyChord([mod], "v", [
-            Key([], 'j', lazy.spawn('volume.sh down')),
-            Key([], 'k', lazy.spawn('volume.sh up')),
+            Key([], 'j', lazy.spawn('swayosd-client --output-volume lower')), 
+            Key([], 'k', lazy.spawn('swayosd-client --output-volume raise')),
             Key([], 'm', lazy.spawn('swayosd-client --output-volume mute-toggle')),
             ],
                  mode=True,
@@ -74,7 +74,7 @@ keys = [
                           Key([], 'e', lazy.group[groups[4].name].toscreen()),
                           Key([], 't', lazy.group[groups[5].name].toscreen()),
                           Key([], 'g', lazy.group[groups[6].name].toscreen()),
-                          Key([], 'w', lazy.group[groups[7].name].toscreen()),
+                          Key([], 'a', lazy.group[groups[7].name].toscreen()),
                           ],
              name=""
              ),
@@ -86,7 +86,7 @@ keys = [
                                    Key([], 'e',  lazy.window.togroup(groups[4].name)),
                                    Key([], 't',  lazy.window.togroup(groups[5].name)),
                                    Key([], 'g',  lazy.window.togroup(groups[6].name)),
-                                   Key([], 'w',  lazy.window.togroup(groups[7].name)),
+                                   Key([], 'a',  lazy.window.togroup(groups[7].name)),
                                    ],
              name=""
              ),

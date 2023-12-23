@@ -3,7 +3,7 @@ from libqtile.config import Match
 from libqtile import layout
 
 alt_mod = "mod1"
-bg = '#00000090'
+bg = '#00000095'
 browser = 'floorp'
 colors = ['#1E2326', # bg_dim 0
           '#272E33', # bg0 1
@@ -34,22 +34,23 @@ colors = ['#1E2326', # bg_dim 0
           ]
 exit_icon_font = 'Font Awesome 6 Free Regular'
 icons = [
-        'WWW',
-        '</>',
-        'VID',
-        'BOOKS',
-        'EDIT',
-        'TERMINAL',
-        'GAMES',
-        'ANDROID',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
         ]
 home = os.path.expanduser('~/')
-#runner = "dmenu_run -nb '#272E33' -nf '#D3C6AA' -sb '#D3C6AA' -sf '#1E2326' -fn 'JetBrainMono Nerd Font' -dim 0.2"
+#runner = "dmenu_run -nb '#272E33' -nf '#D3C6AA' -sb '#D3C6AA' -sf '#1E2326' -fn '' -dim 0.2"
 # variables
 mod = "mod4"
-my_font = 'JetBrainMono Nerd Font'
 pad = 10
-runner = "bemenu-run -c -l 10 -i -M 300 --fn 'IBM Plex Mono 14' -p '' --hp 8 --nb '#10000000' --nf '#fff' --ab '#66000000' -- │ hf '#66000000' --hb '#66000000' --fb '#66000000' -B 1 --bdr '#66000000'"
+group_font = 'Font Awesome 6 Free Regular'
+my_font = 'JetBrainMono Nerd Font'
+runner = f"bemenu-run -c -l 10 -i -M 300 --fn 'IBM Plex Mono 14' -p '' --hp 8 --nb {bg} --nf '#fff' --ab {bg} -- │ hf {bg} --hb {bg} --fb {bg} -B 1 --bdr {bg}"
 term = "alacritty"
 
 # qtile default variables
@@ -71,6 +72,7 @@ floating_layout = layout.Floating(
             Match(wm_class='blueman-manager'),
             Match(wm_class='org.kde.polkit-kde-authentication-agent-1'),
             Match(wm_class='CachyOSHello'),
+            Match(wm_class='org.cachyos.cachyos-kernel-manager'),
             ]
         )
 auto_fullscreen = True
