@@ -2,6 +2,7 @@ from libqtile.lazy import lazy
 from libqtile.config import Click, Drag, Key, KeyChord 
 from .variables import mod, alt_mod, runner, term
 from .functions import latest_group, focus_main
+from libqtile import  qtile
 from .groups import groups
 
 # bindings
@@ -20,7 +21,6 @@ keys = [
         Key([mod], 'c', lazy.window.center()),
         Key([mod, 'shift'], 'm', lazy.spawn('alacritty -t fm-video -e lf /home/cse/.courses')),
         Key([mod, 'shift'], 'e', lazy.core.change_vt(2)),
-        Key([alt_mod], 'd', lazy.spawn(runner)),
         KeyChord([mod], "v", [
             Key([], 'j', lazy.spawn('swayosd-client --output-volume lower')), 
             Key([], 'k', lazy.spawn('swayosd-client --output-volume raise')),
@@ -31,6 +31,7 @@ keys = [
                  ),
         Key([mod], "space", lazy.widget["keyboardlayout"].next_keyboard(), desc="Next keyboard layout."),
         #Key([mod], 'e', lazy.spawn(term + ' --class code -e lvim -c "cd ~/.code | NvimTreeToggle"')),
+        # exec
         KeyChord([mod], 'e',[
             Key([], 'r', lazy.spawn(runner)),
             KeyChord([], 'g', [
@@ -62,6 +63,7 @@ keys = [
         Key([], 't', lazy.group['scratchpad'].dropdown_toggle('task'), lazy.spawn('task sync')),
         Key([], 'n', lazy.group['scratchpad'].dropdown_toggle('neorg')),
         Key([], 'm', lazy.group['scratchpad'].dropdown_toggle('btop')),
+        Key([], 'n', lazy.group['scratchpad'].dropdown_toggle('nnn')),
         Key([], 'i', lazy.group['scratchpad'].dropdown_toggle('tt')),
         ],
              name="󰊠"

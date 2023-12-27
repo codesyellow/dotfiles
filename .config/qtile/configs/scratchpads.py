@@ -19,7 +19,7 @@ scratchpads = [
             ),
         DropDown(
             'task',
-            'st -T scratchpad -e taskwarrior-tui',
+            'foot -T scratchpad -e taskwarrior-tui',
             height=0.995,
             width=0.3,
             opacity=0.5,
@@ -29,7 +29,17 @@ scratchpads = [
             ),
         DropDown(
             'btop',
-            'st -T scratchpad -e btop',
+            'foot -T scratchpad -e btop',
+            height=0.9,
+            width=0.9,
+            opacity=0.5,
+            x=0.05,
+            y=0.03,
+            on_focus_lost_hide=False
+            ),
+        DropDown(
+            'nnn',
+            'foot -T scratchpad -e nnn',
             height=0.9,
             width=0.9,
             opacity=0.5,
@@ -39,7 +49,7 @@ scratchpads = [
             ),
         DropDown(
             'tt',
-            'st -T scratchpad -e tt -t 60',
+            'foot -T scratchpad -e tt -t 60',
             height=0.9,
             width=0.9,
             opacity=0.5,
@@ -49,7 +59,7 @@ scratchpads = [
             ),
         DropDown(
             'neorg', 
-            'st -T scratchpad -e /home/cie/.local/bin/lvim -c ":Neorg workspace home"', 
+            'foot -T scratchpad -e /home/cie/.local/bin/lvim -c ":Neorg workspace home"', 
             x=0.001,
             height=0.992,
             width=0.3,

@@ -1,6 +1,6 @@
 import os
 from libqtile.config import Match
-from libqtile import layout
+from libqtile import layout, qtile
 
 alt_mod = "mod1"
 bg = '#00000095'
@@ -50,7 +50,11 @@ mod = "mod4"
 pad = 10
 group_font = 'Font Awesome 6 Free Regular'
 my_font = 'JetBrainMono Nerd Font'
-runner = f"bemenu-run -c -l 10 -i -M 300 --fn 'IBM Plex Mono 14' -p '' --hp 8 --nb {bg} --nf '#fff' --ab {bg} -- │ hf {bg} --hb {bg} --fb {bg} -B 1 --bdr {bg}"
+runner = ''
+if qtile.core.name == "x11":
+    runner = 'dmenu_run'
+elif qtile.core.name == "wayland":
+    runner = f"bemenu-run -c -l 10 -i -M 300 --fn 'IBM Plex Mono 14' -p '' --hp 8 --nb {bg} --nf '#fff' --ab {bg} -- │ hf {bg} --hb {bg} --fb {bg} -B 1 --bdr {bg}"
 term = "alacritty"
 
 # qtile default variables
