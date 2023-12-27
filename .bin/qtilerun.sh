@@ -2,7 +2,8 @@
 export QT_QPA_PLATFORM=wayland
 export SDL_VIDEODRIVER=wayland
 export XDG_SESSION_TYPE=wayland
-export XDG_CURRENT_DESKTOP=Hyprland 
-export MOZ_ENABLE_WAYLAND=1 
+export XDG_CURRENT_DESKTOP=qtile 
 export BEMENU_BACKEND=wayland
+export MOZ_ENABLE_WAYLAND=1 
+export ANKI_WAYLAND=1
 dbus-run-session qtile start -b wayland

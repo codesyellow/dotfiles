@@ -10,14 +10,14 @@ while true; do
     if systemctl is-active --quiet $SERVICE_NAME; then
       # Service is also running, disable it
       doas systemctl stop $SERVICE_NAME
-      echo "Steam is running, disabled service $SERVICE_NAME"
+      notify-send.sh "Keyd was disabled"
     fi
   else
     # Steam is not running, check service status
     if ! systemctl is-active --quiet $SERVICE_NAME; then
       # Service is also not running, enable it
       doas systemctl start $SERVICE_NAME
-      echo "Steam is not running, enabled service $SERVICE_NAME"
+      notify-send.sh "Keyd was enabled"
     fi
   fi
 
