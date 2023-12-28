@@ -15,10 +15,10 @@ full_path="$search_dir/$file_name"
 # Check if the file exists
 if [ -e "$full_path" ]; then
     # File exists, open it with a specific software (e.g., vim)
-    foot -e h-m-m "$full_path"
+    foot -T 'maps' -e h-m-m "$full_path"
 else
     # File does not exist, create it and then open with a specific software
     mkdir -p "$(dirname "$full_path")" # Create the directory if it doesn't exist
     touch "$full_path"
-    foot -e h-m-m "$full_path"
+    foot -T 'maps' -e h-m-m "$full_path"
 fi
