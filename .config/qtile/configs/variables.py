@@ -77,6 +77,8 @@ floating_layout = layout.Floating(
             Match(wm_class='org.kde.polkit-kde-authentication-agent-1'),
             Match(wm_class='CachyOSHello'),
             Match(wm_class='org.cachyos.cachyos-kernel-manager'),
+            Match(title='anki-vim'),
+            Match(title='maps'),
             ]
         )
 auto_fullscreen = True

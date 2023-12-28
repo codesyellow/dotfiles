@@ -43,6 +43,13 @@ keys = [
                 ],
                      name="󱎓"
                      ),
+            KeyChord([], 's', [
+                Key([], 'a', lazy.spawn('anki')),
+                Key([], 'm', lazy.spawn('maps.sh')),
+                Key([], 'v', lazy.spawn('ankiv.sh')),
+                ],
+                     name="󱎓"
+                     ),
             KeyChord([], 'p', [
                 Key([], 'l', lazy.spawn('pymor -l 3')),
                 Key([], 's', lazy.spawn('pymor')),

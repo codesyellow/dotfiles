@@ -4,7 +4,7 @@ scratchpads = [
         # add a alternative config file for transparency to work properly on wayland
         DropDown(
             'term', 
-            f'alacritty --config-file {home}.config/alacritty/alacritty2.yml -t scratchpad',
+            f'alacritty -t scratchpad',
             y=0,
             ),
         DropDown(
