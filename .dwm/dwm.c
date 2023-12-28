@@ -930,6 +930,8 @@ drawbar(Monitor *m)
 	int x, w, tw = 0, stw = 0;
 	int boxs = drw->fonts->h / 9;
 	int boxw = drw->fonts->h / 6 + 2;
+  unsigned int a= 0, s= 0;
+	char posbuf[10];
 	unsigned int i, occ = 0, urg = 0;
 	Client *c;
 
@@ -938,6 +940,18 @@ drawbar(Monitor *m)
 
 	if(showsystray && m == systraytomon(m) && !systrayonleft)
 		stw = getsystraywidth();
+
+	if(m->lt[m->sellt]->arrange == monocle){
+		for(c= nexttiled(m->clients), a= 0, s= 0; c; c= nexttiled(c->next), a++)
+			if(c == m->stack)
+				s= a;
+		if(!s && a)
+			s= a;
+		snprintf(posbuf, LENGTH(posbuf), "[%d/%d]", s, a);
+		dc.w= TEXTW(posbuf);
+		drawtext(posbuf, dc.norm, False);
+		x= dc.x + dc.w;
+	}
 
 	/* draw status first so it can be overdrawn by tags later */
 	if (m == selmon) { /* status is only drawn on selected monitor */
