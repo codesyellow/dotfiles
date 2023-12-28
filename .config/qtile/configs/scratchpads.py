@@ -9,7 +9,7 @@ scratchpads = [
             ),
         DropDown(
             'gpterm',
-            'alacritty -t scratchpad -e /home/cie/.local/share/cargo/bin/bard-rs -e /home/cie/.env-bard -p ./',
+            'alacritty -t scratchpad -e /home/cie/.local/share/cargo/bin/bard-rs -e /home/cie/.env-bard',
             height=0.995,
             width=0.3,
             opacity=0.5,
