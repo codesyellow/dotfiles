@@ -446,3 +446,6 @@ frame_color = "#FAB387"
 #    set_stack_tag = "volume"
 #
 # vim: ft=cfg
+[play_sound]
+    summary = "*"
+    script = ~/.bin/alert.sh

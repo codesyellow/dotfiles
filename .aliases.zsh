@@ -1,6 +1,8 @@
-sud=sudo
+sud=doas
 
 alias update-grub='$sud grub-mkconfig -o /boot/grub/grub.cfg'
+alias nvim='lvim'
+alias gtamod='~/.games/gta-sa/modloader/'
 
 # dotfiles
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'

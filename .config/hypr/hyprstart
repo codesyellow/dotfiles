@@ -2,9 +2,8 @@
 swww init &
 paplay ~/.audios/retro-audio-logo-94648.mp3 &
 light-keys.sh &
-pypr &
 dunst &
-easyeffects --gapplication-service &
+flatpak run com.github.wwmm.easyeffects --gapplication-service &
 wl-copy &
 /usr/lib/polkit-kde-authentication-agent-1 &
 wl-paste --watch cliphist store &
@@ -17,3 +16,5 @@ swayosd-server &
 sway-audio-idle-inhibit &
 blueman-applet &
 waybar &
+pypr &
+flatpak run com.github.wwmm.easyeffects -l 'LoudnessEqualizer' &
