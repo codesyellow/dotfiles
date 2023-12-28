@@ -1,6 +1,4 @@
 @define-color cpu-week #D3C6AA; 
-@define-color gamemode_inac #fff; 
-@define-color gamemode_act #E67E80; 
 @define-color home #D699B6; 
 @define-color normal #fff; 
 @define-color bg #7A8478;
@@ -11,7 +9,7 @@
 @define-color day-bg #E69875;
 
 window#waybar {
-  background-color: rgba(30, 35, 38, .6);
+  background-color: rgba(30, 35, 38, .5);
   font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
   font-weight: bold;
 }
@@ -22,6 +20,7 @@ window#waybar {
 }
 
 #workspaces button {
+  border-radius: 0;
   color: #fff;
 }
 
@@ -48,7 +47,6 @@ window#waybar {
 #pulseaudio,
 #custom-updates,
 #custom-dsbattery,
-#temperature,
 #cpu {
   margin-bottom: 6px;
   font-size: 14px;
@@ -57,11 +55,6 @@ window#waybar {
 #custom-dsbattery {
   color: #a6e3a1;
   margin-bottom: 3px;
-}
-
-#gamemode,
-#gamemode.running {
-  margin: 0 0 8px 8px;
 }
 
 #pulseaudio,
@@ -82,24 +75,6 @@ window#waybar {
 
 #submap {
   color: @home;
-}
-
-#gamemode {
-  color: #fff;
-}
-
-#custom-temperature-icon {
-  color: #fff;
-  margin-right: 4px;
-  margin-bottom: 4px;
-}
-
-#temperature {
-  color: #fff;
-}
-
-#gamemode.running {
-  color: @gamemode_act;
 }
 
 #pulseaudio.icon {
@@ -151,7 +126,7 @@ window#waybar {
 }
 
 #tray {
-  margin: 5px 0 0 0;
+  margin: 2px 0 0 0;
 }
 
 #clock {

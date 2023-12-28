@@ -9,5 +9,14 @@ lvim.plugins = {
     version = false,
     lazy = false,
     priority = 1000, -- make sure to load this before all the other start plugins
-  }
+  },
+  {
+    "luckasRanarison/tree-sitter-hypr",
+  },
+  {
+    'barrett-ruth/live-server.nvim',
+    build = 'yarn global add live-server',
+    config = true
+  },
+  { 'nvim-focus/focus.nvim', version = false },
 }
