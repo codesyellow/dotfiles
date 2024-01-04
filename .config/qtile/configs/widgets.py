@@ -1,6 +1,6 @@
 import os, subprocess
 from libqtile import widget
-from .variables import colors, bg, my_font, exit_icon_font, group_font
+from .variables import colors, bg, my_font, exit_icon_font, group_font, widget_icons
 from .functions import desconnect_ds4
 
 my_widgets = [
@@ -34,16 +34,6 @@ my_widgets = [
             background=bg,
             foreground=colors[20],
             ),
-        widget.KeyboardLayout(
-            background=bg,
-            configured_keyboards=['us', 'us intl'],
-            display_map={
-                'us':'  US',
-                'us intl':'  USI',
-                },
-            foreground=colors[18],
-            option='compose:menu,grp_led:scroll',
-            ),
         widget.GenPollText(
             background=bg,
             foreground=colors[21],
@@ -51,11 +41,21 @@ my_widgets = [
             mouse_callbacks={'Button1': desconnect_ds4 },
             update_interval=30, 
             ),
+        widget.KeyboardLayout(
+            background=bg,
+            configured_keyboards=['us', 'us intl'],
+            display_map={
+                'us':f'{widget_icons[0]} US',
+                'us intl':'  USI',
+                },
+            foreground=colors[18],
+            option='compose:menu,grp_led:scroll',
+            ),
         widget.DF(
             background=bg,
             font=my_font,
             foreground=colors[16],
-            format=' {uf}{m}',
+            format=f'{widget_icons[1]}' + ' {uf}{m}',
             partition='/',
             visible_on_warn=False,
             ),
@@ -64,27 +64,27 @@ my_widgets = [
             font=my_font,
             foreground=colors[19],
             partition='/home',
-            format='  {uf}{m}',
+            format=f'{widget_icons[2]}' + '  {uf}{m}',
             visible_on_warn=False,
             ),
         widget.CPU(
             background=bg,
                 font=my_font,
                 foreground=colors[13],
-                format='  {freq_current}GHz|{load_percent}%',
+                format=f'{widget_icons[3]}' + '  {freq_current}GHz|{load_percent}%',
                 ),
         widget.Memory(
             background=bg,
                 font=my_font,
                 foreground=colors[14],
-                format='󰍛{MemUsed: .0f}{mm}',
+                format=f'{widget_icons[4]}' + '{MemUsed: .0f}{mm}',
                 ),
         widget.Spacer(length=2),
         widget.StatusNotifier(),
         widget.Spacer(length=2),
         widget.QuickExit(
             background=bg,
-                default_text='', countdown_format='',
+                default_text=f'{widget_icons[5]}', countdown_format=f'{widget_icons[6]}',
                 font=exit_icon_font,
                 ),
         widget.Spacer(length=6),

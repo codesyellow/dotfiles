@@ -55,7 +55,7 @@ keys = [
                 Key([], 's', lazy.spawn('pymor')),
                 Key([], 'c', lazy.spawn('pymor -c')),
                 ],
-                 name="󰁫"
+                     name="󰁫"
                      ),
             Key([], 'n', lazy.spawn('dunstctl close-all')),
             ],
@@ -70,7 +70,8 @@ keys = [
         Key([], 't', lazy.group['scratchpad'].dropdown_toggle('task'), lazy.spawn('task sync')),
         Key([], 'n', lazy.group['scratchpad'].dropdown_toggle('neorg')),
         Key([], 'm', lazy.group['scratchpad'].dropdown_toggle('btop')),
-        Key([], 'n', lazy.group['scratchpad'].dropdown_toggle('nnn')),
+        Key([], 'v', lazy.group['scratchpad'].dropdown_toggle('vimiv')),
+        Key([], 'f', lazy.group['scratchpad'].dropdown_toggle('nnn')),
         Key([], 'i', lazy.group['scratchpad'].dropdown_toggle('tt')),
         ],
              name="󰊠"
@@ -84,6 +85,7 @@ keys = [
                           Key([], 't', lazy.group[groups[5].name].toscreen()),
                           Key([], 'g', lazy.group[groups[6].name].toscreen()),
                           Key([], 'a', lazy.group[groups[7].name].toscreen()),
+                          Key([], 'm', lazy.group[groups[8].name].toscreen()),
                           ],
              name=""
              ),
@@ -96,6 +98,7 @@ keys = [
                                    Key([], 't',  lazy.window.togroup(groups[5].name)),
                                    Key([], 'g',  lazy.window.togroup(groups[6].name)),
                                    Key([], 'a',  lazy.window.togroup(groups[7].name)),
+                                   Key([], 'm',  lazy.window.togroup(groups[8].name)),
                                    ],
              name=""
              ),

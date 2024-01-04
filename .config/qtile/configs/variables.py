@@ -38,10 +38,20 @@ icons = [
         '',
         '',
         '',
-        '',
+        '',
         '',
         '',
         '',
+        '',
+        ]
+widget_icons = [
+        ' ',
+        ' ',
+        '',
+        '',
+        '',
+        '',
+        '',
         ]
 home = os.path.expanduser('~/')
 #runner = "dmenu_run -nb '#272E33' -nf '#D3C6AA' -sb '#D3C6AA' -sf '#1E2326' -fn '' -dim 0.2"
