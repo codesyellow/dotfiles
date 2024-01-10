@@ -12,4 +12,4 @@ recharge_ps4.sh &
 /usr/lib/xdg-desktop-portal-wlr &
 disable_keyd.sh &
 swww img ~/.wallpapers/wall2.gif &
-sleep 5 && flatpak run wwmm.easyeffects --gapplication-service &
+sleep 5 && easyeffects --gapplication-service &

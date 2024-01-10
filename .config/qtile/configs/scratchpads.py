@@ -70,10 +70,12 @@ scratchpads = [
         DropDown(
                 'neorg', 
                 f'foot -T scratchpad -e {home}.local/bin/lvim -c ":Neorg workspace home"', 
-                x=0.001,
-                height=0.992,
-                width=0.3,
-                opacity=0.9,
-                on_focus_lost_hide=False),
+                height=0.9,
+                width=0.9,
+                opacity=0.5,
+                x=0.05,
+                y=0.03,
+                on_focus_lost_hide=False
+                ),
         ]
 
