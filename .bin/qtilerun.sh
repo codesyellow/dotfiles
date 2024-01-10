@@ -6,4 +6,5 @@ export XDG_CURRENT_DESKTOP=qtile
 export BEMENU_BACKEND=wayland
 export MOZ_ENABLE_WAYLAND=1 
 export ANKI_WAYLAND=1
-dbus-run-session qtile start -b wayland
+export LD_BIND_NOW=1
+qtile start -b wayland
