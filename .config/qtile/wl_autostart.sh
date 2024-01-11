@@ -11,5 +11,5 @@ blueman-applet &
 recharge_ps4.sh &
 /usr/lib/xdg-desktop-portal-wlr &
 disable_keyd.sh &
-swww img ~/.wallpapers/wall2.gif &
+swww img ~/.wallpapers/coffee_rain.gif &
 sleep 5 && easyeffects --gapplication-service &

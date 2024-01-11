@@ -1,7 +1,10 @@
 import os, subprocess
 from libqtile import widget
 from .variables import colors, bg, my_font, exit_icon_font, group_font, widget_icons
-from .functions import desconnect_ds4
+from .functions import desconnect_ds4, run_easy, stop_easy
+script_path = os.path.expanduser("~/.bin/easyon.sh")
+arguments = ["easyeffects"]
+output = subprocess.check_output([script_path] + arguments).decode("utf-8")
 
 my_widgets = [
         widget.GroupBox(
@@ -36,21 +39,32 @@ my_widgets = [
             background=bg,
             foreground=colors[20],
             ),
-        widget.Volume(
-            background=bg,
-            ),
-        widget.CheckUpdates(
-            background=bg,
-            distro="Arch_yay",
-            display_format="",
-            no_update_string='',
-            ),
         widget.GenPollText(
             background=bg,
             func=lambda: subprocess.check_output(os.path.expanduser("~/.bin/psbat.sh")).decode("utf-8"),
             foreground=colors[21],
             mouse_callbacks={'Button1': desconnect_ds4 },
             update_interval=30, 
+            ),
+        widget.GenPollText(
+            background=bg,
+            func=lambda: subprocess.check_output(os.path.expanduser("~/.bin/easyon.sh")).decode("utf-8"),
+            foreground=colors[21],
+            mouse_callbacks={
+                'Button1': run_easy,
+                'Button2': stop_easy,
+                },
+            update_interval=60, 
+            ),
+        widget.Volume(
+            background=bg,
+            fmt=' {}'
+            ),
+        widget.CheckUpdates(
+            background=bg,
+            distro="Arch_yay",
+            display_format=" {updates}",
+            no_update_string='',
             ),
         widget.KeyboardLayout(
             background=bg,
@@ -66,7 +80,7 @@ my_widgets = [
             background=bg,
             font=my_font,
             foreground=colors[16],
-            format=f'{widget_icons[1]}' + ' {uf}{m}',
+            format=f'{widget_icons[1]}' + '{uf}{m}',
             partition='/',
             visible_on_warn=False,
             ),

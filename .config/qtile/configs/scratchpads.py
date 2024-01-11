@@ -1,7 +1,6 @@
 from libqtile.config import DropDown
 from .variables import home
 scratchpads = [
-        # add a alternative config file for transparency to work properly on wayland
         DropDown(
             'term', 
             'alacritty -t scratchpad',

@@ -4,6 +4,12 @@ from libqtile.config import Match
 def desconnect_ds4():  
     qtile.cmd_spawn('dsbattery -d')
 
+def run_easy():
+    qtile.cmd_spawn('easyeffects --gapplication-service')
+
+def stop_easy():
+    qtile.cmd_spawn('killall easyeffects')
+
 def latest_group(qtile):
     qtile.current_screen.set_group(qtile.current_screen.previous_group)
 
