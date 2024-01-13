@@ -39,6 +39,12 @@ my_widgets = [
             background=bg,
             foreground=colors[20],
             ),
+        widget.CheckUpdates(
+            background=bg,
+            distro="Arch_yay",
+            display_format=" {updates}",
+            no_update_string='',
+            ),
         widget.GenPollText(
             background=bg,
             func=lambda: subprocess.check_output(os.path.expanduser("~/.bin/psbat.sh")).decode("utf-8"),
@@ -49,7 +55,7 @@ my_widgets = [
         widget.GenPollText(
             background=bg,
             func=lambda: subprocess.check_output(os.path.expanduser("~/.bin/easyon.sh")).decode("utf-8"),
-            foreground=colors[21],
+            foreground=colors[22],
             mouse_callbacks={
                 'Button1': run_easy,
                 'Button2': stop_easy,
@@ -58,20 +64,16 @@ my_widgets = [
             ),
         widget.Volume(
             background=bg,
+            foreground=colors[15],
             fmt=' {}'
             ),
-        widget.CheckUpdates(
-            background=bg,
-            distro="Arch_yay",
-            display_format=" {updates}",
-            no_update_string='',
-            ),
+
         widget.KeyboardLayout(
             background=bg,
             configured_keyboards=['us', 'us intl'],
             display_map={
                 'us':f'{widget_icons[0]}US',
-                'us intl':'  USI',
+                'us intl':' USI',
                 },
             foreground=colors[18],
             option='compose:menu,grp_led:scroll',

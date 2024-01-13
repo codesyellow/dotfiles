@@ -1,5 +1,5 @@
 from libqtile.config import DropDown
-from .variables import home
+from .variables import home, sterm
 scratchpads = [
         DropDown(
             'term', 
@@ -18,7 +18,7 @@ scratchpads = [
             ),
         DropDown(
             'task',
-            'foot -T scratchpad -e taskwarrior-tui',
+            f'{sterm} -T scratchpad -e taskwarrior-tui',
             height=0.995,
             width=0.3,
             opacity=0.5,
@@ -28,7 +28,7 @@ scratchpads = [
             ),
         DropDown(
             'btop',
-            'foot -T scratchpad -e btop',
+            f'{sterm} -T scratchpad -e btop',
             height=0.9,
             width=0.9,
             opacity=0.5,
@@ -38,7 +38,7 @@ scratchpads = [
             ),
         DropDown(
             'nnn',
-            'foot -T scratchpad -e nnn',
+            f'{sterm} -T scratchpad -e nnn',
             height=0.9,
             width=0.9,
             opacity=0.5,
@@ -58,7 +58,7 @@ scratchpads = [
             ),
         DropDown(
                 'tt',
-                'foot -T scratchpad -e tt -t 60',
+                f'{sterm} -T scratchpad -e tt -t 60',
                 height=0.9,
                 width=0.9,
                 opacity=0.5,
@@ -68,7 +68,7 @@ scratchpads = [
                 ),
         DropDown(
                 'neorg', 
-                f'foot -T scratchpad -e {home}.local/bin/lvim -c ":Neorg workspace home"', 
+                f'{sterm} -T scratchpad -e {home}.local/bin/lvim -c ":Neorg workspace home"', 
                 height=0.9,
                 width=0.9,
                 opacity=0.5,

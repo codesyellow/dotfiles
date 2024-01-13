@@ -21,14 +21,6 @@ keys = [
         Key([mod], 'c', lazy.window.center()),
         Key([mod, 'shift'], 'm', lazy.spawn('alacritty -t fm-video -e lf /home/cse/.courses')),
         Key([mod, 'shift'], 'e', lazy.core.change_vt(2)),
-        KeyChord([mod], "v", [
-            Key([], 'j', lazy.spawn('swayosd-client --output-volume lower')), 
-            Key([], 'k', lazy.spawn('swayosd-client --output-volume raise')),
-            Key([], 'm', lazy.spawn('swayosd-client --output-volume mute-toggle')),
-            ],
-                 mode=True,
-                 name="󰕾"
-                 ),
         Key([mod], "space", lazy.widget["keyboardlayout"].next_keyboard(), desc="Next keyboard layout."),
         #Key([mod], 'e', lazy.spawn(term + ' --class code -e lvim -c "cd ~/.code | NvimTreeToggle"')),
         # exec
@@ -133,6 +125,7 @@ keys = [
         KeyChord([], 'q', [
             Key([], 'r', lazy.reload_config()),
             Key([], '.', lazy.shutdown()),
+            Key([], 'i', lazy.spawn('getwindow.sh')),
             ],
                  name=''),
         KeyChord([], 'e', [
@@ -145,6 +138,25 @@ keys = [
              name=""
              ),
 ]
+if qtile.core.name == "x11":
+    keys.append(KeyChord([mod], "v", [
+        Key([], 'j', lazy.spawn('volume.sh down')), 
+        Key([], 'k', lazy.spawn('volume.sh up')),
+        Key([], 'm', lazy.spawn('volume.sh mute')),
+        ],
+             mode=True,
+             name="󰕾"
+             ))
+elif qtile.core.name == "wayland":
+    keys.append(KeyChord([mod], "v", [
+        Key([], 'j', lazy.spawn('swayosd-client --output-volume lower')), 
+        Key([], 'k', lazy.spawn('swayosd-client --output-volume raise')),
+        Key([], 'm', lazy.spawn('swayosd-client --output-volume mute-toggle')),
+        ],
+             mode=True,
+             name="󰕾"
+             ))
+
 
 mouse = [
         Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),

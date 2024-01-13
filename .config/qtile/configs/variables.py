@@ -61,6 +61,12 @@ pad = 10
 group_font = 'Font Awesome 6 Free Regular'
 my_font = 'JetBrainMono Nerd Font'
 runner = ''
+sterm = ''
+if qtile.core.name == "x11":
+    sterm = 'st'
+if qtile.core.name == "wayland":
+    sterm = 'foot'
+
 if qtile.core.name == "x11":
     runner = 'dmenu_run'
 elif qtile.core.name == "wayland":
