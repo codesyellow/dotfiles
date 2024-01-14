@@ -65,7 +65,7 @@ my_widgets = [
         widget.Volume(
             background=bg,
             foreground=colors[15],
-            fmt=' {}'
+            fmt='  {}'
             ),
 
         widget.KeyboardLayout(
@@ -73,7 +73,7 @@ my_widgets = [
             configured_keyboards=['us', 'us intl'],
             display_map={
                 'us':f'{widget_icons[0]}US',
-                'us intl':' USI',
+                'us intl':'  USI',
                 },
             foreground=colors[18],
             option='compose:menu,grp_led:scroll',

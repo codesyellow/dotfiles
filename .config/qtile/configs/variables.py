@@ -68,7 +68,8 @@ if qtile.core.name == "wayland":
     sterm = 'foot'
 
 if qtile.core.name == "x11":
-    runner = 'dmenu_run'
+    runner = "dmenu_run -fn 'IBM Plex Mono 14' -p '' -nb '#000000' -nf '#fff'"
+
 elif qtile.core.name == "wayland":
     runner = f"bemenu-run -c -l 10 -i -M 300 --fn 'IBM Plex Mono 14' -p '' --hp 8 --nb {bg} --nf '#fff' --ab {bg} -- │ hf {bg} --hb {bg} --fb {bg} -B 1 --bdr {bg}"
 term = "alacritty"
