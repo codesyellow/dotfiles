@@ -8,6 +8,7 @@ screens = [
                 my_widgets
                 ,
                 20,
+                background='#00000096',
                 ),
             ),
         ]
