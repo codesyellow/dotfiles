@@ -65,14 +65,14 @@ my_widgets = [
         widget.Volume(
             background=bg,
             foreground=colors[15],
-            fmt='  {}'
+            fmt=' {}'
             ),
 
         widget.KeyboardLayout(
             background=bg,
             configured_keyboards=['us', 'us intl'],
             display_map={
-                'us':f'{widget_icons[0]}US',
+                'us':f'{widget_icons[0]} US',
                 'us intl':'  USI',
                 },
             foreground=colors[18],
@@ -82,7 +82,7 @@ my_widgets = [
             background=bg,
             font=my_font,
             foreground=colors[16],
-            format=f'{widget_icons[1]}' + '{uf}{m}',
+            format=f'{widget_icons[1]}'+ '{uf}{m}',
             partition='/',
             visible_on_warn=False,
             ),
@@ -91,7 +91,7 @@ my_widgets = [
             font=my_font,
             foreground=colors[19],
             partition='/home',
-            format=f'{widget_icons[2]}' + ' {uf}{m}',
+            format=f'{widget_icons[2]}' + '{uf}{m}',
             visible_on_warn=False,
             ),
         widget.CPU(
@@ -104,7 +104,7 @@ my_widgets = [
             background=bg,
                 font=my_font,
                 foreground=colors[14],
-                format=f'{widget_icons[4]}' + '{MemUsed: .0f}{mm}',
+                format=f'{widget_icons[4]}' + '{MemUsed:.0f}{mm}',
                 ),
         widget.Spacer(length=2),
         widget.StatusNotifier(

@@ -16,7 +16,7 @@ groups = [
                                                              'Steam setup', 'Steam', 'Sign in to Steam'] )]),
                                                    Group(icons[7], layout='max', matches=[has_class(['Waydroid'])]),
 
-        Group(icons[8], layout='treetab', matches=[has_class(['Youtube Music'])]),
+        Group(icons[8], layout='treetab', matches=[has_class(['Youtube Music']) , has_class(['youtube music'])]),
                                                    ScratchPad('scratchpad', scratchpads),
                                                    ]
 

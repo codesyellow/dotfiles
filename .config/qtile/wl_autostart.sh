@@ -1,6 +1,6 @@
 #!/bin/bash
+swww-init
 paplay ~/.audios/retro-audio-logo-94648.mp3 &
-swww init &
 swayosd-server &
 wlsunset -t 4000 &
 dunst &
@@ -11,5 +11,4 @@ blueman-applet &
 recharge_ps4.sh &
 /usr/lib/xdg-desktop-portal-wlr &
 disable_keyd.sh &
-swww img ~/.wallpapers/coffee_rain.gif &
 sleep 5 && easyeffects --gapplication-service &

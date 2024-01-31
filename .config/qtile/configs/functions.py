@@ -5,7 +5,7 @@ def desconnect_ds4():
     qtile.cmd_spawn('dsbattery -d')
 
 def run_easy():
-    qtile.cmd_spawn('easyeffects --gapplication-service')
+    qtile.cmd_spawn('flatpak run com.github.wwmm.easyeffects --gapplication-service')
 
 def stop_easy():
     qtile.cmd_spawn('killall easyeffects')
