@@ -29,7 +29,7 @@ my_widgets = [
         widget.Clock(
             font=my_font,
             background=bg,
-            foreground=colors[18],
+            foreground='#fff',
             format='%d|%H:%M|%a',
             ),
         widget.Spacer(
@@ -38,12 +38,6 @@ my_widgets = [
         widget.Chord(
             background=bg,
             foreground=colors[20],
-            ),
-        widget.CheckUpdates(
-            background=bg,
-            distro="Arch_yay",
-            display_format=" {updates}",
-            no_update_string='',
             ),
         widget.GenPollText(
             background=bg,
