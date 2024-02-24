@@ -1,6 +1,5 @@
 {
     "layer": "top",
-        "width": 40,
         "position": "right",
         "modules-left": ["hyprland/workspaces"],
         "modules-right": ["hyprland/submap", "custom/dsbattery-icon", "custom/dsbattery", "pulseaudio#icon", "pulseaudio", "custom/disk-root", "disk", "custom/disk-home", "disk#home", "custom/cpu-icon", "cpu","custom/ram-icon", "memory", "custom/separator", "tray", "custom/separator", "clock", "clock#day", "clock#week-day"],
@@ -9,18 +8,18 @@
             "active-only": false,
             "format": "{icon}",
             "format-icons": {
-                "1": " ",
-                "2": " ",
-                "3": " ",
-                "4": " ",
-                "5": " ",
-                "6": "",
-                "7": " ",
+                "1": " ",
+                "2": " ",
+                "3": "",
+                "4": " ",
+                "5": " ",
+                "6": "  ",
+                "7": " ",
                 "urgent": "",
                 "default": "",
                 "persistent": "persistent",
             },
-            "persistent_workspaces": {
+            "persistent-workspaces": {
                 "1": [
                     "VGA-1"
                 ],
@@ -128,7 +127,7 @@
             "format": "{:%a}",
         },
         "custom/separator": {
-            "format": "────",
+            "format": "",
             "tooltip": false,
         },
         "custom/ram-icon": {

@@ -9,14 +9,13 @@
 @define-color day-bg #E69875;
 
 window#waybar {
-  background-color: rgba(30, 35, 38, .5);
-  font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+  background-color: rgba(30, 35, 38, .2);
+  font-family: 'Font Awesome 6 Free Solid';
   font-weight: bold;
 }
 
 #workspaces {
   font-size: 18px;  
-  margin-left: -4px;
 }
 
 #workspaces button {
@@ -34,13 +33,6 @@ window#waybar {
   color: #83C092;
 }
 
-#language {
-    border-radius: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
-    color: white;
-}
-
 #submap, 
 #disk, 
 #disk-home,
@@ -52,17 +44,18 @@ window#waybar {
   font-size: 14px;
 }
 
+#disk,
+#disk-home,
+#pulseaudio,
+#cpu,
+#memory {
+  margin-right: 4px;
+}
+
+
 #custom-dsbattery {
   color: #a6e3a1;
   margin-bottom: 3px;
-}
-
-#pulseaudio,
-#disk,
-#disk-home,
-#cpu,
-#memory {
-  margin-left: 3px;
 }
 
 #custom-separator {
@@ -89,7 +82,7 @@ window#waybar {
 
 #custom-disk-root {
   color: @root;
-  margin-right: 3px;
+  margin-right: 10px;
   margin-bottom: 3px;
 }
 
@@ -100,6 +93,7 @@ window#waybar {
 #custom-disk-home {
   color: @home;
   margin-bottom: 4px;
+  margin-right: 6px;
 }
 
 #disk.home {
@@ -108,7 +102,7 @@ window#waybar {
 
 #custom-cpu-icon {
   color: @cpu-week;
-  margin-right: 2px;
+  margin-right: 5px;
   margin-bottom: 2px;
 }
 
@@ -118,7 +112,7 @@ window#waybar {
 
 #custom-ram-icon {
   color: @ram;
-  margin-bottom: 3px;
+  margin-right: 5px;
 }
 
 #memory {
@@ -126,13 +120,13 @@ window#waybar {
 }
 
 #tray {
-  margin: 2px 0 0 0;
+  margin: 6px 6px 0px 0;
 }
 
 #clock {
   color: @normal;
   font-size: 1.2em;
-  margin: 0 -2px 12px 0;
+  margin: 6px 6px 12px 0;
 }
 
 #clock.day {
@@ -146,6 +140,6 @@ window#waybar {
   background: @cpu-week;
   border-top: 1px solid #444;
   color: @day-week-fg;
-  margin: -12px -2px 0px 0;
+  margin: -12px 6px 0px 0;
   padding: 6px;
 }
