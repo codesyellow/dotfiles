@@ -9,7 +9,7 @@
 @define-color day-bg #E69875;
 
 window#waybar {
-  background-color: rgba(30, 35, 38, .2);
+  background-color: rgba(0, 0, 0, .1);
   font-family: 'Font Awesome 6 Free Solid';
   font-weight: bold;
 }
@@ -120,7 +120,7 @@ window#waybar {
 }
 
 #tray {
-  margin: 6px 6px 0px 0;
+  margin: 6px 10px 0 0;
 }
 
 #clock {
