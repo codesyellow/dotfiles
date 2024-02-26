@@ -73,7 +73,7 @@ window#waybar {
 #pulseaudio.icon {
   color: @pulsa;
   margin-right: 6px;
-  margin-bottom: 1px;
+  margin-bottom: 2px;
 }
 
 #pulseaudio {
@@ -92,7 +92,7 @@ window#waybar {
 
 #custom-disk-home {
   color: @home;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   margin-right: 6px;
 }
 
