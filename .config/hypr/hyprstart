@@ -1,20 +1,15 @@
 #!/bin/bash
+systemctl --user import-environment PATH &
 swww init &
+waybar &
 paplay ~/.audios/retro-audio-logo-94648.mp3 &
-light-keys.sh &
 dunst &
-flatpak run com.github.wwmm.easyeffects --gapplication-service &
 wl-copy &
 /usr/lib/polkit-kde-authentication-agent-1 &
 wl-paste --watch cliphist store &
-swayidle -w \
-    timeout 300 'swaylock -i ~/.wallpapers/forrest.png' \
-    timeout 600 'hyprctl dispatch dpms off"' \
-    resume 'hyprctl dispatch dpms off"' \
-    before-sleep 'swaylock -i ~/.wallpapers/forrest.png' &
 swayosd-server &
 sway-audio-idle-inhibit &
 blueman-applet &
-waybar &
 pypr &
-flatpak run com.github.wwmm.easyeffects -l 'LoudnessEqualizer' &
+ianny &
+sleep 5 && flatpak run com.github.wwmm.easyeffects --gapplication-service &
