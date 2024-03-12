@@ -10,7 +10,7 @@
 @define-color day-bg #E69875;
 
 window#waybar {
-  background-color: rgba(0, 0, 0, .1);
+  background-color: rgba(0, 0, 0, .3);
   font-family: 'Font Awesome 6 Free Solid';
   font-weight: bold;
 }
@@ -25,8 +25,7 @@ window#waybar {
 }
 
 #workspaces button.empty {
-  background-color: rgba(20, 25, 28, .7);
-  color: #444;
+  color: #78A083;
 }
 
 #workspaces button:hover {
@@ -36,7 +35,7 @@ window#waybar {
 
 #workspaces button.active {
   background-color: rgba(30, 35, 38, .7);
-  color: #83C092;
+  color: #59D5E0;
 }
 
 #submap, 
