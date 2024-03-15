@@ -12,4 +12,5 @@ sway-audio-idle-inhibit &
 blueman-applet &
 pypr &
 ianny &
+flatpak run com.github.eneshecan.WhatsAppForLinux &
 sleep 5 && flatpak run com.github.wwmm.easyeffects --gapplication-service &

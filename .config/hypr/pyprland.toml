@@ -1,10 +1,17 @@
 [pyprland]
 plugins = [
   "scratchpads",
+  "toggle_dpms",
 ]
 [scratchpads.term]
 animation = "fromTop"
 command = "alacritty --config-file ~/.config/alacritty/alacritty2.toml --class alacritty-dropterm"
+size = "75% 60%"
+margin = 50
+
+[scratchpads.canki]
+animation = "fromTop"
+command = "alacritty -T canki -e ~/.bin/canki.sh"
 size = "75% 60%"
 margin = 50
 
