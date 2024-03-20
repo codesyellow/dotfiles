@@ -10,7 +10,7 @@
 @define-color day-bg #E69875;
 
 window#waybar {
-  background-color: rgba(0, 0, 0, .3);
+  background-color: rgba(0, 0, 0, .1);
   font-family: 'Font Awesome 6 Free Solid';
   font-weight: bold;
 }
