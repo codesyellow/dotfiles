@@ -1,3 +1,4 @@
+@define-color fg #FFF3C7;
 @define-color cpu-week #D3C6AA; 
 @define-color home #D699B6; 
 @define-color normal #fff; 
@@ -9,6 +10,11 @@
 @define-color day-week-fg #1E2326;
 @define-color day-bg #E69875;
 
+@define-color button #FFEDD8;
+@define-color inactive #6196A6;
+@define-color active #F7418F;
+@define-color hover #891652;
+
 window#waybar {
   background-color: rgba(0, 0, 0, .1);
   font-family: 'Font Awesome 6 Free Solid';
@@ -16,149 +22,103 @@ window#waybar {
 }
 
 #workspaces {
-  font-size: 18px;  
+  font-size: 14px;  
 }
 
 #workspaces button {
   border-radius: 0;
-  color: #fff;
+  margin-right: -4px;
+  color: @button;
 }
 
 #workspaces button.empty {
-  color: #78A083;
+  color: @inactive;
 }
 
 #workspaces button:hover {
   border-radius: 0;
-  color: #fff;
+  color: @hover;
+  background-color: @fg;
 }
 
 #workspaces button.active {
   background-color: rgba(30, 35, 38, .7);
-  color: #59D5E0;
+  color: @active;
 }
 
-#submap, 
-#disk, 
-#disk-home,
 #pulseaudio,
-#custom-updates,
-#custom-dsbattery,
-#cpu {
-  margin-bottom: 6px;
-  font-size: 14px;
-}
-
 #disk,
-#disk-home,
-#pulseaudio,
-#cpu,
 #temperature,
+#cpu,
 #memory {
-  margin-right: 4px;
+  font-size: 12px;
 }
 
-#custom-dsbattery {
-  color: #a6e3a1;
-  margin-bottom: 3px;
-}
-
-#custom-separator {
-  color: #dadada; 
-}
-
-#custom-updates {
-  color: #dadada; 
-}
-
-#submap {
-  color: @home;
-  margin-right: 6px;
-}
-
+#pulseaudio-icon,
+#custom-cpu-icon,
+#custom-disk-home,
+#custom-ram-icon,
+#tray,
+#custom-disk-root, 
 #custom-temp-icon {
-  color: @temp;
-  margin-right: 5px;
-}
-
-#temperature {
-  color: @temp;
-  margin-bottom: 2px;
-}
-#temperature.critical {
-  color: red;
-}
-
-#pulseaudio.icon {
-  color: @pulsa;
-  margin-right: 6px;
-  margin-bottom: 2px;
-}
-
-#pulseaudio {
-  color: @pulsa;
+  margin-right: 2px;
+  margin-top: 4px;
 }
 
 #custom-disk-root {
-  color: @root;
-  margin-right: 10px;
-  margin-bottom: 3px;
+  margin-right: 4px;
 }
 
+#pulseaudio-icon {
+  font-size: 10px;
+}
+
+#pulseaudio,
+#pulseaudio-icon {
+  color: @pulsa;
+}
+
+#custom-disk-root,
 #disk {
   color: @root;
 }
 
-#custom-disk-home {
-  color: @home;
-  margin-bottom: 2px;
-  margin-right: 6px;
-}
-
+#custom-disk-home,
 #disk.home {
   color: @home;
 }
 
+#temperature,
+#custom-temp-icon {
+  color: @temp;
+}
+
+#cpu,
 #custom-cpu-icon {
-  color: @cpu-week;
-  margin-right: 5px;
-  margin-bottom: 2px;
+  color: @cpu;
 }
 
-#cpu {
-  color: @cpu-week;
-}
-
+#memory,
 #custom-ram-icon {
-  color: @ram;
-  margin-right: 5px;
-}
-
-#memory {
   color: @ram;
 }
 
 #tray {
-  margin: 6px 10px 0 0;
+  margin-bottom: 4px;
 }
 
 #clock {
   color: @normal;
-  font-size: 1.2em;
-  margin: 6px 6px 12px 0;
 }
 
 #clock.day {
-  background-color: @day-bg;
-  color: @day-week-fg;
-  margin-top: -6px;
-  padding: 6px 8px 6px 6px;
+  color: @day-bg;
+  margin-bottom: 4px;
 }
 
 #clock.week-day {
-  background: @cpu-week;
-  border-top: 1px solid #444;
-  color: @day-week-fg;
-  margin: -12px 6px 0px 0;
-  padding: 6px;
+  background-color: @day-bg;
+  color: #000;
+  font-size: 12px;
+  padding: 4px;
 }
