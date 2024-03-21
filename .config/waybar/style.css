@@ -54,15 +54,14 @@ window#waybar {
   font-size: 12px;
 }
 
-#pulseaudio-icon,
+#pulseaudio.icon,
 #custom-cpu-icon,
 #custom-disk-home,
 #custom-ram-icon,
 #tray,
 #custom-disk-root, 
 #custom-temp-icon {
-  margin-right: 2px;
-  margin-top: 4px;
+  margin: 4px 2px 2px 0;
 }
 
 #custom-disk-root {
@@ -121,4 +120,8 @@ window#waybar {
   color: #000;
   font-size: 12px;
   padding: 4px;
+}
+
+#custom-weather {
+  color: #fff;
 }
