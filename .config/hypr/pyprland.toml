@@ -20,6 +20,13 @@ command = "foot -a task-tui -e /usr/bin/taskwarrior-tui"
 unfocus = "hide"
 animation = "fromRight"
 
+[scratchpads.tt]
+command = "foot -a tt -e tt -t 60"
+unfocus = "hide"
+animation = "fromTop"
+size = "90% 70%"
+margin = 120
+
 [scratchpads.btop]
 command = "foot -a btop -e btop"
 unfocus = "hide"
