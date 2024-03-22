@@ -60,6 +60,7 @@ window#waybar {
 #custom-ram-icon,
 #tray,
 #custom-disk-root, 
+#submap,
 #custom-temp-icon {
   margin: 4px 2px 2px 0;
 }
