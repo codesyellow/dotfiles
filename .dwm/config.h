@@ -43,17 +43,21 @@ static const Rule rules[] = {
    */
   /* class      instance    title       tags mask     isfloating   monitor    float x,y,w,h         floatborderpx*/
   { "Gimp",     NULL,       NULL,       0,            1,           -1,        50,50,500,500,        5 },
-  { "org.mozilla.firefox",  NULL,       NULL,       1 << 0,       0,           -1,        50,50,500,500,        5,      0},
-  { "Firefox",  NULL,       NULL,       1 << 0,       0,           -1,        50,50,500,500,        5,      0},
-  { "Alacritty",  NULL,       NULL,       1 << 1,       0,           -1,        50,50,500,500,        5,      0},
+  { "firefox",  NULL,       NULL,       1 << 0,       0,           -1,        50,50,500,500,        5,      0},
+  { "Alacritty",NULL,       NULL,       1 << 1,       0,           -1,        50,50,500,500,        5,      0},
+  { "st",       NULL,       NULL,       1 << 1,       0,           -1,        50,50,500,500,        5,      0},
   { "Zathura",  NULL,       NULL,       1 << 2,       0,           -1,        50,50,500,500,        5,      0},
-  { "steam",  NULL,       NULL,       1 << 3,       0,           -1,        50,50,500,500,        5,      0},
-  { "heroic",  NULL,       NULL,       1 << 3,       0,           -1,        50,50,500,500,        5,      0},
-  { "Youtube Music",  NULL,       NULL,       1 << 4,       0,           -1,        50,50,500,500,        5,      0},
+  { "steam",    "steamwebhelper",       NULL,       1 << 3,       0,           -1,        50,50,500,500,        5,      0},
+  { NULL,    NULL,       "Steam",       1 << 3,       0,           -1,        50,50,500,500,        5,      0},
+  { NULL,    NULL,       "Steam setup",       1 << 3,       0,           -1,        50,50,500,500,        5,      0},
+  { "heroic",   NULL,       NULL,       1 << 3,       0,           -1,        50,50,500,500,        5,      0},
+  { NULL,  "youtube music",       NULL,       1 << 4,       0,           -1,        50,50,500,500,        5,      0},
   /* class      instance    title       tags mask     isfloating   monitor    scratch key */
-  { NULL,       NULL,   "scratchpad",   0,            1,           -1,   's', 50,50,500,500,        5,   },
-  { NULL,       NULL,   "btop",   0,            1,           -1,   'b', 50,50,1200,500,        5,   },
-
+  { NULL,       NULL,   "scratchpad",   0,            1,           -1,   's', 90,50,1200,400,        5,   },
+  { NULL,       NULL,   "task-tui",   0,            1,           -1,   't', 800,50,500,600,        5,   },
+  { NULL,       NULL,   "btop",   0,            1,           -1,   'b', 90,50,1200,600,        5,   },
+  { NULL,       NULL,   "neorg",   0,            1,           -1,   'n', 90,50,1200,600,        5,   },
+  { NULL,       NULL,   "tt",   0,            1,           -1,   'e', 90,50,1200,600,        5,   },
 };
 
 /* layout(s) */
@@ -88,11 +92,13 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *bass[] = { "flatpak", "run", "com.github.wwmm.easyeffects", "-l", "my-heavy-bass", NULL};
 static const char *loudness[] = { "flatpak", "run", "com.github.wwmm.easyeffects", "-l", "LoudnessEqualizer", NULL};
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *termcmd[]  = { "st", "-A", "0.70", NULL };
 /*First arg only serves to match against key in rules*/
-static const char *scratchpadcmd[] = {"s", "st", "-t", "scratchpad", NULL}; 
+static const char *scratchpadcmd[] = {"s", "alacritty", "--config-file", "/home/cie/.config/alacritty/alacritty2.toml", "-t" "scratchpad", NULL}; 
 static const char *scratchpadbtop[] = {"b", "st", "-t", "btop", "-e", "btop", NULL}; 
-
+static const char *scratchpadtask[] = {"t", "st", "-t", "task-tui", "-e", "/usr/bin/taskwarrior-tui", NULL}; 
+static const char *scratchpadneorg[] = {"n", "st", "-t", "neorg", "-e", "/usr/bin/nvim -c ':Neorg workspace home'", NULL}; 
+static const char *scratchpadtt[] = {"e", "st", "-t", "tt", "-e", "tt", "-t", "60", NULL}; 
 
 #include "movestack.c"
 static Keychord *keychords[] = {
@@ -112,10 +118,14 @@ static Keychord *keychords[] = {
   &((Keychord){1, {{MODKEY, XK_j}},                                       movestack,     {.i = +1 } }),
   &((Keychord){1, {{MODKEY, XK_k}},                                       movestack,     {.i = -1 } }),
   // scratch
-  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_j}},                            spawn,          SHCMD("volume.sh down")}),
-  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_k}},                            spawn,          SHCMD("volume.sh up")}),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_u}},                            togglescratch,  {.v = scratchpadcmd } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_b}},                            togglescratch,  {.v = scratchpadbtop } }),
+  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_t}},                            togglescratch,  {.v = scratchpadtask } }),
+  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_i}},                            togglescratch,  {.v = scratchpadneorg } }),
+  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_e}},                            togglescratch,  {.v = scratchpadtt } }),
+
+  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_j}},                            spawn,          SHCMD("volume.sh down")}),
+  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_k}},                            spawn,          SHCMD("volume.sh up")}),
   // normal
   &((Keychord){1, {{MODKEY, XK_t}},                                       spawn,          {.v = termcmd } }),
   &((Keychord){1, {{MODKEY, XK_b}},                                       togglebar,      {0} }),
