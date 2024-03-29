@@ -13,10 +13,7 @@ static const int showtab			= showtab_auto;        /* Default tab bar show mode *
 static const int toptab				= False;               /* False means bottom tab bar */
 
 static const char *fonts[]          = { 
-  "CaskadiaCove Nerd Font:size=10",
-  "Font Awesome 6 Free Solid:size=10",
-  "Font Awesome 6 Free Regular:size=10",
-  "Font Awesome 6 Brands:size=10"
+  "JetBrainsMono Nerd Font:size=10"
    };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
