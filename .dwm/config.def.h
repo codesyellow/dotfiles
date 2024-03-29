@@ -93,7 +93,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *bass[] = { "flatpak", "run", "com.github.wwmm.easyeffects", "-l", "my-heavy-bass", NULL};
 static const char *loudness[] = { "flatpak", "run", "com.github.wwmm.easyeffects", "-l", "LoudnessEqualizer", NULL};
-static const char *termcmd[]  = { "st", "-A", "0.70", NULL };
+static const char *termcmd[]  = { "st", "-A", "0.50", NULL };
 /*First arg only serves to match against key in rules*/
 static const char *scratchpadcmd[] = {"s", "alacritty", "--config-file", "/home/cie/.config/alacritty/alacritty2.toml", "-t" "scratchpad", NULL}; 
 static const char *scratchpadbtop[] = {"b", "st", "-t", "btop", "-e", "btop", NULL}; 
@@ -115,6 +115,12 @@ static Keychord *keychords[] = {
 
   // clients
   &((Keychord){3, {{MODKEY, XK_a}, {0, XK_c}, {0, XK_f}},                  togglefullscr,  {0}}),
+    // layouts
+  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_1}},                  setlayout,  {.v = &layouts[0]}}),
+  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_2}},                  setlayout,  {.v = &layouts[1]}}),
+  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_3}},                  setlayout,  {.v = &layouts[2]}}),
+  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_4}},                  setlayout,  {.v = &layouts[3]}}),
+  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_5}},                  setlayout,  {.v = &layouts[4]}}),
 
   // scratchs
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_u}},                            togglescratch,  {.v = scratchpadcmd } }),
@@ -133,9 +139,6 @@ static Keychord *keychords[] = {
   &((Keychord){1, {{MODKEY, XK_Return}},                                  zoom,           {0} }),
   &((Keychord){1, {{MODKEY, XK_Tab}},                                     view,           {0} }),
   &((Keychord){1, {{MODKEY|ShiftMask, XK_c}},                             killclient,     {0} }),
-  &((Keychord){1, {{MODKEY, XK_t}},                                       setlayout,      {.v = &layouts[0]} }),
-  &((Keychord){1, {{MODKEY, XK_f}},                                       setlayout,      {.v = &layouts[1]} }),
-  &((Keychord){1, {{MODKEY, XK_m}},                                       setlayout,      {.v = &layouts[2]} }),
   &((Keychord){1, {{MODKEY, XK_space}},                                   setlayout,      {0} }),
   &((Keychord){1, {{MODKEY|ShiftMask, XK_space}},                         togglefloating, {0} }),
   &((Keychord){1, {{MODKEY, XK_0}},                                       view,           {.ui = ~0 } }),
