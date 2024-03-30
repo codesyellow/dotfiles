@@ -34,6 +34,14 @@ margin = 120
 size = "90% 70%"
 animation = "fromTop"
 
+[scratchpads.noi]
+command = "Noi_linux_0.4.0.AppImage"
+unfocus = "hide"
+margin = 60
+class = "noi"
+size = "40% 90%"
+animation = "fromRight"
+
 [scratchpads.neorg]
 command = "foot -a neorg -e /usr/bin/nvim -c ':Neorg workspace home'"
 animation = "fromBottom"

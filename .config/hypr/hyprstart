@@ -1,17 +1,17 @@
 #!/bin/bash
-clipse -listen
-systemctl --user import-environment PATH
-swww init
-waybar
-paplay ~/.audios/retro-audio-logo-94648.mp3
-dunst
-wl-copy
-/usr/lib/polkit-kde-authentication-agent-1 
+clipse -listen &
+systemctl --user import-environment PATH &
+swww init &
+waybar &
+paplay ~/.audios/retro-audio-logo-94648.mp3 &
+dunst &
+wl-copy &
+/usr/lib/polkit-kde-authentication-agent-1 &
 #wl-paste --watch cliphist store
-swayosd-server
-sway-audio-idle-inhibit
-blueman-applet
-pypr
-ianny
-flatpak run com.github.eneshecan.WhatsAppForLinux
-sleep 5 && flatpak run com.github.wwmm.easyeffects --gapplication-service
+swayosd-server &
+sway-audio-idle-inhibit &
+blueman-applet &
+pypr &
+ianny &
+flatpak run com.github.eneshecan.WhatsAppForLinux &
+sleep 5 && flatpak run com.github.wwmm.easyeffects --gapplication-service &
