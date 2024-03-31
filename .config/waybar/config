@@ -24,10 +24,10 @@
       }
     },
     "custom/weather": {
-      "format": "{}",
+      "format": "{}°",
       "tooltip": true,
       "interval": 3600,
-      "exec": "wttrbar --vertical-view",
+      "exec": "wttrbar --vertical-view --location 'Santos'",
       "return-type": "json"
     },
     "pulseaudio#icon": {
