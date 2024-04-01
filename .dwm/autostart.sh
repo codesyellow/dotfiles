@@ -6,6 +6,7 @@ picom --animations -b &
 xrandr --output VGA-1 --gamma 1.0:0.88:0.50 --brightness 0.95 &
 dunst &
 unclutter &
+caffeine &
 run_xidlehook &
 recharge_ps4.sh &
 /usr/lib/polkit-kde-authentication-agent-1 &

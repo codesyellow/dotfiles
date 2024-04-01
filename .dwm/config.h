@@ -29,7 +29,7 @@ static const char *colors[][3]      = {
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6" };
-static const int taglayouts[] = { 0, 0, 3, 0, 2, 0  };
+static const int taglayouts[] = { 0, 2, 3, 0, 2, 0  };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -40,15 +40,17 @@ static const Rule rules[] = {
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1,   0,     50,50,500,500,        5 },
 	{ "firefox",  NULL,       NULL,       1 << 1,       0,           -1,   0,     50,50,500,500,        5 },
 	{ "st-256color",  NULL,       NULL,       1 << 2,       0,           -1,   0,     50,50,500,500,        5 },
-  { "Alacritty",NULL,       NULL,       1 << 1,       0,           -1,        50,50,500,500,        5,      0},
+  { "Alacritty",       "Alacritty",       NULL,       1 << 2,       0,           -1,0,        50,50,500,500,        5 },
   { "Zathura",  NULL,       NULL,       1 << 3,       0,           -1,        50,50,500,500,        5,      0},
-  { "steam",    "steamwebhelper",       NULL,       1 << 4,       0,           -1,        50,50,500,500,        5,      0},
-  { NULL,    NULL,       "Steam",       1 << 4,       0,           -1,        50,50,500,500,        5,      0},
-  { NULL,    NULL,       "Steam setup",       1 << 4,       0,           -1,        50,50,500,500,        5,      0},
-  { "heroic",   NULL,       NULL,       1 << 4,       0,           -1,        50,50,500,500,        5,      0},
-  { NULL,  "youtube music",       NULL,       1 << 5,       0,           -1,        50,50,500,500,        5,      0},
+  { "steam",    "steamwebhelper",       NULL,       1 << 4,       0,           -1, 0,        50,50,500,500,        5},
+  { NULL,    NULL,       "Steam",       1 << 4,       0,           -1,     0,   50,50,500,500,        5},
+  { NULL,    NULL,       "Steam setup",       1 << 4,       0,           -1,        50,50,500,500,        50},
+  { "heroic",   NULL,       NULL,       1 << 4,       0,           -1,    0,    50,50,500,500,        5},
+  { NULL,  "youtube music",       NULL,       1 << 5,       0,           -1, 0,       50,50,500,500,        5},
   { NULL,       NULL,   "scratchpad",   0,            1,           -1,   's', 90,50,1200,400,        5,   },
   { NULL,       NULL,   "task-tui",   0,            1,           -1,   't', 800,50,500,600,        5,   },
+  { "Noi",       NULL,   NULL,   0,            1,           -1,   'i', 800,50,500,600,        5,   },
+  { NULL,       NULL,   "Kuro",   0,            1,           -1,   'k', 750,60,600,600,        5,   },
   { NULL,       NULL,   "pulsemixer",   0,            1,           -1,   'p', 800,50,800,600,        5,   },
   { NULL,       NULL,   "btop",   0,            1,           -1,   'b', 90,50,1200,600,        5,   },
   { NULL,       NULL,   "neorg",   0,            1,           -1,   'n', 90,50,1200,600,        5,   },
@@ -94,10 +96,12 @@ static const char *termcmd[]  = { "st", "-A", "0.50", NULL };
 /*First arg only serves to match against key in rules*/
 static const char *scratchpadcmd[] = {"s", "alacritty", "--config-file", "/home/cie/.config/alacritty/alacritty2.toml", "-t" "scratchpad", NULL}; 
 static const char *scratchpadbtop[] = {"b", "st", "-t", "btop", "-e", "btop", NULL}; 
-static const char *scratchpadtask[] = {"t", "st", "-t", "task-tui", "-e", "/usr/bin/taskwarrior-tui", NULL}; 
+//static const char *scratchpadtask[] = {"t", "st", "-t", "task-tui", "-e", "/usr/bin/taskwarrior-tui", NULL}; 
+static const char *scratchpadkuro[] = {"k", "Kuro.AppImage", NULL}; 
 static const char *scratchpadmixer[] = {"p", "st", "-t", "pulsemixer", "-e", "/usr/local/bin/pulsemixer", NULL}; 
 static const char *scratchpadneorg[] = {"n", "st", "-t", "neorg", "-e", "/usr/bin/nvim -c ':Neorg workspace home'", NULL}; 
 static const char *scratchpadtt[] = {"e", "st", "-t", "tt", "-e", "tt", "-t", "60", NULL}; 
+static const char *scratchpadia[] = {"i", "Noi_linux_0.4.0.AppImage", NULL}; 
 
 static Keychord *keychords[] = {
   /* Keys        function        argument */
@@ -122,10 +126,12 @@ static Keychord *keychords[] = {
   // scratchs
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_u}},                            togglescratch,  {.v = scratchpadcmd } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_b}},                            togglescratch,  {.v = scratchpadbtop } }),
-  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_t}},                            togglescratch,  {.v = scratchpadtask } }),
-  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_i}},                            togglescratch,  {.v = scratchpadneorg } }),
+//  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_t}},                            togglescratch,  {.v = scratchpadtask } }),
+  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_s}},                            togglescratch,  {.v = scratchpadneorg } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_e}},                            togglescratch,  {.v = scratchpadtt } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_p}},                            togglescratch,  {.v = scratchpadmixer } }),
+  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_t}},                            togglescratch,  {.v = scratchpadkuro } }),
+  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_i}},                            togglescratch,  {.v = scratchpadia } }),
 
   // exec
   &((Keychord){2, {{MODKEY, XK_e}, {0, XK_r}},                            spawn,  {.v = dmenucmd } }),
