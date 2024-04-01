@@ -11,7 +11,6 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 enum showtab_modes { showtab_never, showtab_auto, showtab_nmodes, showtab_always};
 static const int showtab			= showtab_auto;        /* Default tab bar show mode */
 static const int toptab				= False;               /* False means bottom tab bar */
-
 static const char *fonts[]          = { 
   "JetBrainsMono Nerd Font:size=10"
    };
@@ -49,8 +48,8 @@ static const Rule rules[] = {
   { NULL,  "youtube music",       NULL,       1 << 5,       0,           -1, 0,       50,50,500,500,        5},
   { NULL,       NULL,   "scratchpad",   0,            1,           -1,   's', 90,50,1200,400,        5,   },
   { NULL,       NULL,   "task-tui",   0,            1,           -1,   't', 800,50,500,600,        5,   },
-  { "Noi",       NULL,   NULL,   0,            1,           -1,   'i', 800,50,500,600,        5,   },
-  { NULL,       NULL,   "Kuro",   0,            1,           -1,   'k', 750,60,600,600,        5,   },
+  { "Noi",       NULL,   NULL,   0,            1,           -1,   'i', 800,50,500,700,        5,   },
+  { NULL,       NULL,   "Kuro",   0,            1,           -1,   'k', 750,60,500,600,        5,   },
   { NULL,       NULL,   "pulsemixer",   0,            1,           -1,   'p', 800,50,800,600,        5,   },
   { NULL,       NULL,   "btop",   0,            1,           -1,   'b', 90,50,1200,600,        5,   },
   { NULL,       NULL,   "neorg",   0,            1,           -1,   'n', 90,50,1200,600,        5,   },
