@@ -4,6 +4,8 @@ alias update-grub='$sud grub-mkconfig -o /boot/grub/grub.cfg'
 alias nvim='lvim'
 alias gtamod='~/.games/gta-sa/modloader/'
 
+alias change_title='xdotool selectwindow set_window --name "scratchpad"'
+
 # dotfiles
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias dots='dotfiles push -u origin main'
@@ -19,7 +21,7 @@ alias search='pacman -Ss'
 alias lsm="exa -al --color=always --group-directories-first --icons"
 alias ls="exa --icons"
 alias up='$sud pacman -Syu && gopreload-batch-refresh.sh'
-alias i='$sud pacman -S'
+alias i='doas pacman -S'
 alias r='$sud pacman -Rs'
 alias orphans='$sud pacman -Qtdq | $sud pacman -Rns -'
 
