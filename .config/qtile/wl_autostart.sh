@@ -1,5 +1,6 @@
 #!/bin/bash
-swww-init
+way-displays > /tmp/way-displays.${XDG_VTNR}.${USER}.log 2>&1 &
+swww-daemon &
 paplay ~/.audios/retro-audio-logo-94648.mp3 &
 swayosd-server &
 wlsunset -t 4000 &

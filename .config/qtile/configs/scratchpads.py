@@ -27,6 +27,26 @@ scratchpads = [
             on_focus_lost_hide=False
             ),
         DropDown(
+            'Kuro',
+            'Kuro.AppImage',
+            height=0.9,
+            width=0.3,
+            opacity=0.1,
+            x=0.68,
+            y=0.05,
+            on_focus_lost_hide=False
+            ),
+        DropDown(
+            'noi',
+            'Noi_linux_0.4.0.AppImage',
+            match='noi',
+            height=0.9,
+            width=0.5,
+            x=0.8,
+            y=0.4,
+            on_focus_lost_hide=False
+            ),
+        DropDown(
             'btop',
             f'{sterm} -T scratchpad -e btop',
             height=0.9,
@@ -34,28 +54,28 @@ scratchpads = [
             opacity=0.5,
             x=0.05,
             y=0.03,
-            on_focus_lost_hide=False
+            on_focus_lost_hide=True
             ),
         DropDown(
-            'nnn',
-            f'{sterm} -T scratchpad -e nnn',
-            height=0.9,
-            width=0.9,
-            opacity=0.5,
-            x=0.05,
-            y=0.03,
-            on_focus_lost_hide=False
-            ),
+                'nnn',
+                f'{sterm} -T scratchpad -e nnn',
+                height=0.9,
+                width=0.9,
+                opacity=0.5,
+                x=0.05,
+                y=0.03,
+                on_focus_lost_hide=False
+                ),
         DropDown(
-            'vimiv',
-            f'vimiv {home}.code/',
-            height=0.9,
-            width=0.9,
-            opacity=0.5,
-            x=0.05,
-            y=0.03,
-            on_focus_lost_hide=False
-            ),
+                'vimiv',
+                f'vimiv {home}.code/',
+                height=0.9,
+                width=0.4,
+                opacity=0.5,
+                on_focus_lost_hide=False,
+                x=0.8,
+                y=0,
+                ),
         DropDown(
                 'tt',
                 f'{sterm} -T scratchpad -e tt -t 60',
@@ -70,10 +90,11 @@ scratchpads = [
                 'neorg', 
                 f'{sterm} -T scratchpad -e {home}.local/bin/lvim -c ":Neorg workspace home"', 
                 height=0.9,
-                width=0.9,
+                width=0.5,
                 opacity=0.5,
-                x=0.05,
-                y=0.03,
+                x=0.8,
+                y=0.0,
+                relative=True,
                 on_focus_lost_hide=False
                 ),
         ]

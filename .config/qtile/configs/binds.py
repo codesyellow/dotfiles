@@ -59,12 +59,14 @@ keys = [
     KeyChord([mod], 's', [
         Key([], 'u', lazy.group['scratchpad'].dropdown_toggle('term')),
         Key([], 'g', lazy.group['scratchpad'].dropdown_toggle('gpterm')),
-        Key([], 't', lazy.group['scratchpad'].dropdown_toggle('task'), lazy.spawn('task sync')),
+#       Key([], 't', lazy.group['scratchpad'].dropdown_toggle('task'), lazy.spawn('task sync')),
         Key([], 'n', lazy.group['scratchpad'].dropdown_toggle('neorg')),
         Key([], 'm', lazy.group['scratchpad'].dropdown_toggle('btop')),
         Key([], 'v', lazy.group['scratchpad'].dropdown_toggle('vimiv')),
         Key([], 'f', lazy.group['scratchpad'].dropdown_toggle('nnn')),
-        Key([], 'i', lazy.group['scratchpad'].dropdown_toggle('tt')),
+        Key([], 'e', lazy.group['scratchpad'].dropdown_toggle('tt')),
+        Key([], 't', lazy.group['scratchpad'].dropdown_toggle('Kuro')),
+        Key([], 'i', lazy.group['scratchpad'].dropdown_toggle('noi')),
         ],
              name="󰊠"
              ),
@@ -127,7 +129,7 @@ keys = [
             ],
                  name=''),
         KeyChord([], 'e', [
-            Key([], 'e', lazy.spawn('flatpak run com.github.wwmm.easyeffects -l LoudnessEqualizer')),
+            Key([], 'l', lazy.spawn('flatpak run com.github.wwmm.easyeffects -l LoudnessEqualizer')),
             Key([], 'b', lazy.spawn('flatpak run com.github.wwmm.easyeffects -l "my-heavy-bass"')),
             ],
                  name=""
