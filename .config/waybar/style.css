@@ -16,7 +16,7 @@
 @define-color hover #891652;
 
 window#waybar {
-  background-color: rgba(0, 0, 0, .1);
+  background-color: rgba(0, 0, 0, 0.3);
   font-family: 'Font Awesome 6 Free Solid';
   font-weight: bold;
 }
@@ -127,5 +127,5 @@ window#waybar {
 #custom-weather {
   color: #fff;
   margin-bottom: -1px;
-  font-size: 13px;
+  font-size: 12px;
 }
