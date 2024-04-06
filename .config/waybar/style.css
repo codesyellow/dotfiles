@@ -16,33 +16,56 @@
 @define-color hover #891652;
 
 window#waybar {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.1);
   font-family: 'Font Awesome 6 Free Solid';
   font-weight: bold;
 }
 
 #workspaces {
+  margin-top: 11px;
   font-size: 14px;  
+}
+
+#workspaces button:first-child {
+  border-radius: 10px 10px 0 0;
+  padding-top: 6px;
+}
+
+#workspaces button:last-child {
+  border-radius: 0 0 10px 10px;
+  padding-bottom: 4px;
+  padding-right: 8px;
+}
+
+#workspaces button:nth-child(6) {
+  padding-left: 7px;
 }
 
 #workspaces button {
   border-radius: 0;
   margin-right: -4px;
   color: @button;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 #workspaces button.empty {
   color: @inactive;
 }
 
+#workspaces button.empty:first-child {
+  border-radius: 15px 26px 0 0;
+}
+
+#workspaces button.empty:last-child {
+  border-radius: 0 0 20px 16px;
+}
+
 #workspaces button:hover {
-  border-radius: 0;
   color: @hover;
   background-color: @fg;
 }
 
 #workspaces button.active {
-  background-color: rgba(30, 35, 38, .7);
   color: @active;
 }
 
@@ -122,10 +145,13 @@ window#waybar {
   color: #000;
   font-size: 12px;
   padding: 4px;
+  margin-bottom: 12px;
+  border-radius: 0 0 10px 10px;
 }
 
 #custom-weather {
   color: #fff;
   margin-bottom: -1px;
-  font-size: 12px;
+  margin-left: 1px;
+  font-size: 11px;
 }

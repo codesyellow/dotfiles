@@ -1,6 +1,7 @@
 {
   "layer": "top",
     "position": "right",
+    "margin-right": 8,
     "modules-left": ["hyprland/workspaces"],
     "modules-right": ["hyprland/submap", "custom/weather", "pulseaudio#icon", "pulseaudio", "custom/disk-root", "disk", "custom/disk-home", "disk#home", "custom/temp-icon", "temperature", "custom/cpu-icon", "cpu","custom/ram-icon", "memory","custom/separator", "tray", "custom/separator", "clock", "clock#day", "clock#week-day"],
     "hyprland/workspaces": {
