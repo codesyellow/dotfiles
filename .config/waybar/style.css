@@ -27,37 +27,34 @@ window#waybar {
 }
 
 #workspaces button:first-child {
-  border-radius: 10px 10px 0 0;
+  border-radius: 15px 25px 0 0;
   padding-top: 6px;
 }
 
 #workspaces button:last-child {
-  border-radius: 0 0 10px 10px;
   padding-bottom: 4px;
   padding-right: 8px;
 }
 
 #workspaces button:nth-child(6) {
-  padding-left: 7px;
+  padding-left: 10px;
 }
 
 #workspaces button {
   border-radius: 0;
   margin-right: -4px;
   color: @button;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 #workspaces button.empty {
   color: @inactive;
 }
 
-#workspaces button.empty:first-child {
-  border-radius: 15px 26px 0 0;
-}
-
 #workspaces button.empty:last-child {
-  border-radius: 0 0 20px 16px;
+  border-radius: 0 0 24px 18px;
+  padding-right: 11px;
+  padding-bottom: 6px;
 }
 
 #workspaces button:hover {
@@ -93,6 +90,10 @@ window#waybar {
   margin-right: 4px;
 }
 
+#submap {
+  color: @day-bg;
+  background-color: rgba(0, 0, 0, 0.01);
+}
 #pulseaudio-icon {
   font-size: 10px;
 }
