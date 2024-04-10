@@ -27,6 +27,14 @@ animation = "fromTop"
 size = "90% 70%"
 margin = 120
 
+[scratchpads.todo]
+command = "/opt/Kuro-9.0.0.AppImage"
+unfocus = "hide"
+animation = "fromRight"
+class = "Kuro"
+size = "40% 90%"
+margin = 60
+
 [scratchpads.btop]
 command = "foot -a btop -e btop"
 unfocus = "hide"
@@ -35,7 +43,7 @@ size = "90% 70%"
 animation = "fromTop"
 
 [scratchpads.noi]
-command = "Noi_linux_0.4.0.AppImage"
+command = "/opt/Noi_linux_0.4.0.AppImage"
 unfocus = "hide"
 margin = 60
 class = "noi"
@@ -43,7 +51,7 @@ size = "40% 90%"
 animation = "fromRight"
 
 [scratchpads.neorg]
-command = "foot -a neorg -e /usr/bin/nvim -c ':Neorg workspace home'"
+command = "foot -a neorg -e lvim -c ':Neorg workspace home'"
 animation = "fromBottom"
 unfocus = "false"
 
