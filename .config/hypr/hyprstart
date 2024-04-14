@@ -1,9 +1,8 @@
 #!/bin/bash
-hyprpaper &
+swww-daemon &
 waybar &
 pypr &
 paplay ~/.audios/retro-audio-logo-94648.mp3 &
-clipse -listen &
 systemctl --user import-environment PATH &
 dunst &
 wl-copy &
