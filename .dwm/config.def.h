@@ -45,6 +45,7 @@ static const Rule rules[] = {
   { NULL,    NULL,       "Steam",       1 << 4,       0,           -1,     0,   50,50,500,500,        5},
   { NULL,    NULL,       "Steam setup",       1 << 4,       0,           -1,        50,50,500,500,        50},
   { "heroic",   NULL,       NULL,       1 << 4,       0,           -1,    0,    50,50,500,500,        5},
+  { "lutris",   NULL,       NULL,       1 << 4,       0,           -1,    0,    50,50,500,500,        5},
   { NULL,  "youtube music",       NULL,       1 << 5,       0,           -1, 0,       50,50,500,500,        5},
   { NULL,       NULL,   "scratchpad",   0,            1,           -1,   's', 90,50,1200,400,        5,   },
   { NULL,       NULL,   "task-tui",   0,            1,           -1,   't', 800,50,500,600,        5,   },

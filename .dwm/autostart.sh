@@ -1,5 +1,4 @@
 #!/bin/sh
-fixrandr.sh &
 xgifwallpaper -d 5 -s FILL ~/.wallpapers/coffee_rain.gif &
 paplay ~/.audios/retro-audio-logo-94648.mp3 &
 picom --animations -b &
