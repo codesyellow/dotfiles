@@ -12,7 +12,7 @@ enum showtab_modes { showtab_never, showtab_auto, showtab_nmodes, showtab_always
 static const int showtab			= showtab_auto;        /* Default tab bar show mode */
 static const int toptab				= False;               /* False means bottom tab bar */
 static const char *fonts[]          = { 
-  "JetBrainsMono Nerd Font:size=10"
+  "Font Awesome 6 Free Solid:size=10",
    };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
@@ -90,15 +90,15 @@ static const char *monocles[] = { "[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *bass[] = { "flatpak", "run", "com.github.wwmm.easyeffects", "-l", "my-heavy-bass", NULL};
+static const char *bass[] = { "flatpak", "run", "com.github.wwmm.easyeffects", "-l", "Heavy Bass", NULL};
 static const char *loudness[] = { "flatpak", "run", "com.github.wwmm.easyeffects", "-l", "LoudnessEqualizer", NULL};
 static const char *termcmd[]  = { "st", "-A", "0.50", NULL };
 /*First arg only serves to match against key in rules*/
-static const char *scratchpadcmd[] = {"s", "alacritty", "--config-file", "/home/cie/.config/alacritty/alacritty2.toml", "-t" "scratchpad", NULL}; 
+static const char *scratchpadcmd[] = {"s", "st", "-A", "0.50", "-t", "scratchpad", NULL}; 
 static const char *scratchpadbtop[] = {"b", "st", "-t", "btop", "-e", "btop", NULL}; 
 //static const char *scratchpadtask[] = {"t", "st", "-t", "task-tui", "-e", "/usr/bin/taskwarrior-tui", NULL}; 
-static const char *scratchpadkuro[] = {"k", "Kuro.AppImage", NULL}; 
-static const char *scratchpadmixer[] = {"p", "st", "-t", "pulsemixer", "-e", "/usr/local/bin/pulsemixer", NULL}; 
+static const char *scratchpadkuro[] = {"k", "kuro", NULL}; 
+static const char *scratchpadmixer[] = {"p", "st", "-t", "pulsemixer", "-e", "pulsemixer", NULL}; 
 static const char *scratchpadneorg[] = {"n", "st", "-t", "neorg", "-e", "/usr/bin/nvim -c ':Neorg workspace home'", NULL}; 
 static const char *scratchpadtt[] = {"e", "st", "-t", "tt", "-e", "tt", "-t", "60", NULL}; 
 static const char *scratchpadia[] = {"i", "Noi_linux_0.4.0.AppImage", NULL}; 
@@ -125,7 +125,7 @@ static Keychord *keychords[] = {
 
   // scratchs
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_u}},                            togglescratch,  {.v = scratchpadcmd } }),
-  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_b}},                            togglescratch,  {.v = scratchpadbtop } }),
+  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_m}},                            togglescratch,  {.v = scratchpadbtop } }),
 //  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_t}},                            togglescratch,  {.v = scratchpadtask } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_s}},                            togglescratch,  {.v = scratchpadneorg } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_e}},                            togglescratch,  {.v = scratchpadtt } }),
