@@ -46,10 +46,9 @@ while true; do
                 status+="|$root_int""g " 
             fi
 
-            status+="|$home "
-            status+="|$date"
+            status+="^bg(444444)|$date^bg()"
 
             dwlb -status all "$status"
-            echo 'true'
+            echo '$home'
             sleep 1s    # Update time every minute
         done

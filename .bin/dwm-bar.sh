@@ -10,14 +10,14 @@ alarming="^c#f1fa8c^"
 
 ram_icon=
 cpu_icon=
-root_icon=
+root_icon=
 home_icon=
 date_icon=
 
 volume=$(pamixer --get-volume)
 root=$(df -h | awk '{ if ($6 == "/") print $4 }')
 root_int=${root::-1}
-home=$(df -h | awk '{ if ($6 == "/home") print $4 }')
+#home=$(df -h | awk '{ if ($6 == "/home") print $4 }')
 freemen_per=$(free -m | awk 'NR==2{print $3*100/$2 }')
 freemen_per_int=$(printf "%.0f\n" "$freemen_per")
 date=$(date +"%m/%d %H:%M")
@@ -27,41 +27,40 @@ cpu_per_int=$(printf "%.0f\n" "$cpu")
 
 status=""
 
-if [[ $volume -ge 110 ]]; then
-  status+="   $urgent|$volume% "
-elif [[ $volume -le 15 && $volume -gt 0 ]]; then
-  status+="   $urgent $volume% "
+if [[ $volume -ge 55 ]]; then
+  status+="   $urgent $volume%"
+elif [[ $volume -le 20 && $volume -gt 0 ]]; then
+  status+="   $urgent$volume% "
 elif [[ $volume -eq 0 ]]; then
-  status+="   $urgent|$volume% "
-elif [[ $volume -ge 95 ]]; then
-  status+="   $alarming|$volume% "
+  status+="   $urgent$volume% "
+elif [[ $volume -ge 50 ]]; then
+  status+="   $alarming $volume% "
 else
-  status+="   $normal|$volume% " 
+  status+="   $normal $volume% " 
 fi
 
 if [[ $cpu_per_int -ge 80 ]]; then
-  status+="$urgent$cpu_icon|$cpu_per_int% "
+  status+=" $urgent$cpu_icon $cpu_per_int% "
 else
-  status+="$normal_cpu$cpu_icon|$cpu_per_int% "
+  status+=" $normal_cpu$cpu_icon $cpu_per_int% "
 fi
 
 if [[ $freemen_per_int -ge 70 ]]; then
-  status+=" $urgent$ram_icon|$freemen_per_int% "
+  status+=" $urgent$ram_icon $freemen_per_int% "
 elif [[ $freemen_per_int -ge 60 ]]; then
-  status+=" $alarming$ram_icon|$freemen_per_int% "
+  status+=" $alarming$ram_icon $freemen_per_int% "
 else
-  status+=" $normal_men$ram_icon|$freemen_per_int% "
+  status+=" $normal_men$ram_icon $freemen_per_int% "
 fi
 
 if [[ $(echo "$root_int < 5" | bc) -ne 0 ]]; then
   echo E
-  status+=" $alarming$root_icon|$root_int""g " 
+  status+=" $alarming$root_icon $root_int""g" 
 elif [[ $(echo "$root_int < 2" | bc) -ne 0 ]]; then 
-  status+=" $urgent$root_icon|$root_int""g " 
+  status+=" $urgent$root_icon $root_int""g" 
 else
-  status+=" $normal_root$root_icon|$root_int""g " 
+  status+=" $normal_root$root_icon $root_int""g" 
 fi
 
-status+=" $normal_home$home_icon|$home "
-status+=" $normal_date$date_icon|$date"
-xprop -root -set WM_NAME "$status "
+status+=" $normal_date$date_icon $date"
+xprop -root -set WM_NAME "$status"

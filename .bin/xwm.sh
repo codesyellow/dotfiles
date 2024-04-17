@@ -1,2 +1,2 @@
 #!/bin/sh
-Xwayland -noreset -host-grab :12
+Xwayland -fullscreen -noreset -host-grab :12
