@@ -12,7 +12,7 @@ enum showtab_modes { showtab_never, showtab_auto, showtab_nmodes, showtab_always
 static const int showtab			= showtab_auto;        /* Default tab bar show mode */
 static const int toptab				= False;               /* False means bottom tab bar */
 static const char *fonts[]          = { 
-  "Font Awesome 6 Free Solid:size=10",
+  "Font Awesome 6 Free Solid:size=11",
    };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
@@ -27,8 +27,8 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6" };
-static const int taglayouts[] = { 0, 2, 3, 0, 2, 0  };
+static const char *tags[] = { "I", "II", "IV", "V", "VI" };
+static const int taglayouts[] = { 3, 3, 2, 2, 2, };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -37,16 +37,16 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor    float x,y,w,h         floatborderpx*/
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1,   0,     50,50,500,500,        5 },
-	{ "firefox",  NULL,       NULL,       1 << 1,       0,           -1,   0,     50,50,500,500,        5 },
-	{ "st-256color",  NULL,       NULL,       1 << 2,       0,           -1,   0,     50,50,500,500,        5 },
-  { "Alacritty",       "Alacritty",       NULL,       1 << 2,       0,           -1,0,        50,50,500,500,        5 },
-  { "Zathura",  NULL,       NULL,       1 << 3,       0,           -1,        50,50,500,500,        5,      0},
-  { "steam",    "steamwebhelper",       NULL,       1 << 4,       0,           -1, 0,        50,50,500,500,        5},
-  { NULL,    NULL,       "Steam",       1 << 4,       0,           -1,     0,   50,50,500,500,        5},
-  { NULL,    NULL,       "Steam setup",       1 << 4,       0,           -1,        50,50,500,500,        50},
-  { "heroic",   NULL,       NULL,       1 << 4,       0,           -1,    0,    50,50,500,500,        5},
-  { "lutris",   NULL,       NULL,       1 << 4,       0,           -1,    0,    50,50,500,500,        5},
-  { NULL,  "youtube music",       NULL,       1 << 5,       0,           -1, 0,       50,50,500,500,        5},
+	{ "firefox",  NULL,       NULL,       1 << 0,       0,           -1,   0,     50,50,500,500,        5 },
+	{ "st-256color",  NULL,       NULL,       1 << 1,       0,           -1,   0,     50,50,500,500,        5 },
+  { "Alacritty",       "Alacritty",       NULL,       1 << 1,       0,           -1,0,        50,50,500,500,        5 },
+  { "Zathura",  NULL,       NULL,       1 << 2,       0,           -1,        50,50,500,500,        5,      0},
+  { "steam",    "steamwebhelper",       NULL,       1 << 3,       0,           -1, 0,        50,50,500,500,        5},
+  { NULL,    NULL,       "Steam",       1 << 3,       0,           -1,     0,   50,50,500,500,        5},
+  { NULL,    NULL,       "Steam setup",       1 << 3,       0,           -1,        50,50,500,500,        50},
+  { "heroic",   NULL,       NULL,       1 << 3,       0,           -1,    0,    50,50,500,500,        5},
+  { "lutris",   NULL,       NULL,       1 << 3,       0,           -1,    0,    50,50,500,500,        5},
+  { NULL,  "youtube music",       NULL,       1 << 3,       0,           -1, 0,       50,50,500,500,        5},
   { NULL,       NULL,   "scratchpad",   0,            1,           -1,   's', 90,50,1200,400,        5,   },
   { NULL,       NULL,   "task-tui",   0,            1,           -1,   't', 800,50,500,600,        5,   },
   { "Noi",       NULL,   NULL,   0,            1,           -1,   'i', 800,50,500,700,        5,   },
@@ -61,21 +61,20 @@ static const Rule rules[] = {
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
-static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
+static const int lockfullscreen = 0; /* 1 will force focus on the fullscreen window */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "",      monocle },
+	{ "",      monocle },
 	{ "TTT",      bstack },
 	{ "===",      bstackhoriz },
 };
 
 /* custom symbols for nr. of clients in monocle layout */
 /* when clients >= LENGTH(monocles), uses the last element */
-static const char *monocles[] = { "[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]", "[8]", "[9]", "[9+]" };
-
+static const char *monocles[] = { "A", "B", "C", "D", "F", "G", "H", "I", "J", "K+" };
 /* key definitions */
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG)                                                                                               \
@@ -116,11 +115,12 @@ static Keychord *keychords[] = {
 
   // clients
   &((Keychord){3, {{MODKEY, XK_a}, {0, XK_c}, {0, XK_f}},                  togglefullscr,  {0}}),
+
     // layouts
   &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_1}},                  setlayout,  {.v = &layouts[0]}}),
   &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_2}},                  setlayout,  {.v = &layouts[1]}}),
-  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_3}},                  setlayout,  {.v = &layouts[2]}}),
-  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_4}},                  setlayout,  {.v = &layouts[3]}}),
+  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_t}},                  setlayout,  {.v = &layouts[2]}}),
+  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_b}},                  setlayout,  {.v = &layouts[3]}}),
   &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_5}},                  setlayout,  {.v = &layouts[4]}}),
 
   // scratchs
