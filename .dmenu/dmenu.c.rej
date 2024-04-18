@@ -1,0 +1,10 @@
+--- dmenu.c	2022-10-04 10:36:58.000000000 -0700
++++ dmenu.c	2024-03-23 19:39:53.173081139 -0700
+@@ -714,6 +717,7 @@
+ usage(void)
+ {
+ 	die("usage: dmenu [-bfiv] [-l lines] [-p prompt] [-fn font] [-m monitor]\n"
++	      "             [-x xoffset] [-y yoffset] [-z width]\n"
+ 	    "             [-nb color] [-nf color] [-sb color] [-sf color] [-w windowid]");
+ }
+ 
