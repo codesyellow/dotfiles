@@ -1,6 +1,6 @@
 #!/bin/sh
 
-setxkbmap -layout "br(nodeadkeys),br" -option "grp:alt_shift_toggle"
+setxkbmap -layout "us,us" -variant ",intl" -option "grp:alt_shift_toggle,caps:ctrl_modifier,caps:escape"
 
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
@@ -34,7 +34,10 @@ if [ -d $HOME/.xinitrc.d ] ; then
  unset f
 fi
 
-systemctl --user start X.target
+while true; do
+  dwm-bar.sh
+  sleep 1s    
+done &
 
-exec qtile start
+exec startdwm
 
