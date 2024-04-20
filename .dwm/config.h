@@ -15,14 +15,14 @@ static const char *fonts[]          = {
   "Font Awesome 6 Free Solid:size=11",
    };
 static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+static const char bg1[]       = "#000000";
+static const char col_gray2[]       = "#000000";
+static const char col_gray3[]       = "#E4C59E";
+static const char col_gray4[]       = "#ffffff";
+static const char col_cyan[]        = "#543A48";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
+	[SchemeNorm] = { col_gray3, bg1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 
@@ -46,7 +46,7 @@ static const Rule rules[] = {
   { NULL,    NULL,       "Steam setup",       1 << 3,       0,           -1,        50,50,500,500,        50},
   { "heroic",   NULL,       NULL,       1 << 3,       0,           -1,    0,    50,50,500,500,        5},
   { "lutris",   NULL,       NULL,       1 << 3,       0,           -1,    0,    50,50,500,500,        5},
-  { NULL,  "youtube music",       NULL,       1 << 3,       0,           -1, 0,       50,50,500,500,        5},
+  { NULL,  "youtube music",       NULL,       1 << 4,       0,           -1, 0,       50,50,500,500,        5},
   { NULL,       NULL,   "scratchpad",   0,            1,           -1,   's', 90,50,1200,400,        5,   },
   { NULL,       NULL,   "task-tui",   0,            1,           -1,   't', 800,50,500,600,        5,   },
   { "Noi",       NULL,   NULL,   0,            1,           -1,   'i', 800,50,500,700,        5,   },
@@ -55,20 +55,22 @@ static const Rule rules[] = {
   { NULL,       NULL,   "btop",   0,            1,           -1,   'b', 90,50,1200,600,        5,   },
   { NULL,       NULL,   "neorg",   0,            1,           -1,   'n', 90,50,1200,600,        5,   },
   { NULL,       NULL,   "tt",   0,            1,           -1,   'e', 90,50,1200,600,        5,   },
+  { NULL,       NULL,   "Exercise Timer",   0,            1,           -1,   't', 500,50,400,400,        5,   },
+  { "trayer",       NULL,   "panel",   0,            1,           -1,   'q', 500,50,400,400,        5,   },
 };
 
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
-static const int lockfullscreen = 0; /* 1 will force focus on the fullscreen window */
+static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "",      monocle },
-	{ "TTT",      bstack },
+	{ "",      bstack },
 	{ "===",      bstackhoriz },
 };
 
@@ -88,10 +90,20 @@ static const char *monocles[] = { "A", "B", "C", "D", "F", "G", "H", "I", "J", "
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+//static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", bg1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-nb", "#000", "-z", "700", "-x", "230", "-y", "2", NULL };
+static const char *clipmenucmd[] = { "clipmenu", "-nb", "#000", "-z", "700", "-x", "230", "-y", "4", NULL };
 static const char *bass[] = { "flatpak", "run", "com.github.wwmm.easyeffects", "-l", "Heavy Bass", NULL};
 static const char *loudness[] = { "flatpak", "run", "com.github.wwmm.easyeffects", "-l", "LoudnessEqualizer", NULL};
 static const char *termcmd[]  = { "st", "-A", "0.50", NULL };
+static const char *pymors[]  = { "pymor", NULL };
+static const char *pymorl[]  = { "pymor", "-l", "3", NULL };
+static const char *pymorc[]  = { "pymor", "-c", NULL };
+static const char *dunst[]  = { "dunstctl", "close-all", NULL };
+static const char *rotatemouse[]  = { "360.sh", "252", NULL };
+static const char *volup[]  = { "volume.sh", "up", NULL };
+static const char *voldw[]  = { "volume.sh", "down", NULL };
+static const char *volm[]  = { "volume.sh", "mute", NULL };
 /*First arg only serves to match against key in rules*/
 static const char *scratchpadcmd[] = {"s", "st", "-A", "0.50", "-t", "scratchpad", NULL}; 
 static const char *scratchpadbtop[] = {"b", "st", "-t", "btop", "-e", "btop", NULL}; 
@@ -100,7 +112,9 @@ static const char *scratchpadkuro[] = {"k", "kuro", NULL};
 static const char *scratchpadmixer[] = {"p", "st", "-t", "pulsemixer", "-e", "pulsemixer", NULL}; 
 static const char *scratchpadneorg[] = {"n", "st", "-t", "neorg", "-e", "/usr/bin/nvim -c ':Neorg workspace home'", NULL}; 
 static const char *scratchpadtt[] = {"e", "st", "-t", "tt", "-e", "tt", "-t", "60", NULL}; 
-static const char *scratchpadia[] = {"i", "Noi_linux_0.4.0.AppImage", NULL}; 
+static const char *scratchpadia[] = {"i", "noi", NULL}; 
+static const char *scratchpadstretch[] = {"t", "flatpak", "run", "xyz.safeworlds.hiit", NULL}; 
+static const char *scratchpadtrayer[] = {"q", "trayer", "--widthtype", "pixel", "--transparent", "true", "--alpha", "255", "--distance", "10", NULL}; 
 
 static Keychord *keychords[] = {
   /* Keys        function        argument */
@@ -112,32 +126,41 @@ static Keychord *keychords[] = {
   &((Keychord){1, {{MODKEY, XK_i}},                                       incnmaster,     {.i = +1 } }),
   &((Keychord){1, {{MODKEY, XK_d}},                                       incnmaster,     {.i = -1 } }),
   &((Keychord){1, {{MODKEY, XK_h}},                                       setmfact,       {.f = -0.05} }),
-
   // clients
-  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_c}, {0, XK_f}},                  togglefullscr,  {0}}),
-
-    // layouts
-  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_1}},                  setlayout,  {.v = &layouts[0]}}),
-  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_2}},                  setlayout,  {.v = &layouts[1]}}),
-  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_t}},                  setlayout,  {.v = &layouts[2]}}),
-  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_b}},                  setlayout,  {.v = &layouts[3]}}),
-  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_5}},                  setlayout,  {.v = &layouts[4]}}),
-
+  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_c}, {0, XK_f}},                 togglefullscr,  {0}}),
+  &((Keychord){1, {{MODKEY|ShiftMask, XK_f}},           togglefullscr,  {0}}),
+  // layouts
+  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_1}},                 setlayout,  {.v = &layouts[0]}}),
+  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_2}},                 setlayout,  {.v = &layouts[1]}}),
+  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_t}},                 setlayout,  {.v = &layouts[2]}}),
+  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_b}},                 setlayout,  {.v = &layouts[3]}}),
+  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_5}},                 setlayout,  {.v = &layouts[4]}}),
   // scratchs
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_u}},                            togglescratch,  {.v = scratchpadcmd } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_m}},                            togglescratch,  {.v = scratchpadbtop } }),
-//  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_t}},                            togglescratch,  {.v = scratchpadtask } }),
-  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_s}},                            togglescratch,  {.v = scratchpadneorg } }),
+  //  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_t}},                            togglescratch,  {.v = scratchpadtask } }),
+//  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_s}},                            togglescratch,  {.v = scratchpadneorg } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_e}},                            togglescratch,  {.v = scratchpadtt } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_p}},                            togglescratch,  {.v = scratchpadmixer } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_t}},                            togglescratch,  {.v = scratchpadkuro } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_i}},                            togglescratch,  {.v = scratchpadia } }),
-
+  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_c}},                            togglescratch,  {.v = scratchpadstretch } }),
+  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_s}},                            togglescratch,  {.v = scratchpadtrayer } }),
+  // volume
+  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_j}},                            spawn,  {.v = voldw } }),
+  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_k}},                            spawn,  {.v = volup } }),
+  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_m}},                            spawn,  {.v = volm } }),
   // exec
   &((Keychord){2, {{MODKEY, XK_e}, {0, XK_r}},                            spawn,  {.v = dmenucmd } }),
-  &((Keychord){3, {{MODKEY, XK_e}, {0, XK_e}, {0, XK_b}},                                       spawn,          {.v = bass } }),
-  &((Keychord){3, {{MODKEY, XK_e}, {0, XK_e}, {0, XK_l}},                                       spawn,          {.v = loudness } }),
-
+  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_h}},                            spawn,  {.v = clipmenucmd } }),
+  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_n}},                            spawn,  {.v = dunst } }),
+  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_m}},                            spawn,  {.v = rotatemouse } }),
+  &((Keychord){3, {{MODKEY, XK_e}, {0, XK_e}, {0, XK_b}},                 spawn,          {.v = bass } }),
+  &((Keychord){3, {{MODKEY, XK_e}, {0, XK_e}, {0, XK_l}},                 spawn,          {.v = loudness } }),
+  &((Keychord){3, {{MODKEY, XK_e}, {0, XK_p}, {0, XK_s}},                 spawn,          {.v = pymors } }),
+  &((Keychord){3, {{MODKEY, XK_e}, {0, XK_p}, {0, XK_l}},                 spawn,          {.v = pymorl } }),
+  &((Keychord){3, {{MODKEY, XK_e}, {0, XK_p}, {0, XK_c}},                 spawn,          {.v = pymorc } }),
+  //rest
   &((Keychord){1, {{MODKEY, XK_l}},                                       setmfact,       {.f = +0.05} }),
   &((Keychord){1, {{MODKEY, XK_Return}},                                  zoom,           {0} }),
   &((Keychord){1, {{MODKEY, XK_Tab}},                                     view,           {0} }),

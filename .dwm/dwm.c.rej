@@ -1,10 +1,11 @@
 --- dwm.c
 +++ dwm.c
-@@ -228,7 +228,6 @@ static void updatetitle(Client *c);
- static void updatewindowtype(Client *c);
- static void updatewmhints(Client *c);
- static void view(const Arg *arg);
--static void warp(const Client *c);
- static Client *wintoclient(Window w);
- static Monitor *wintomon(Window w);
- static int xerror(Display *dpy, XErrorEvent *ee);
+@@ -1619,7 +1641,7 @@ showhide(Client *c)
+ 	if (ISVISIBLE(c)) {
+ 		/* show clients top down */
+ 		XMoveWindow(dpy, c->win, c->x, c->y);
+-		if (!c->mon->lt[c->mon->sellt]->arrange || c->isfloating)
++		if ((!c->mon->lt[c->mon->sellt]->arrange || c->isfloating) && !c->isfullscreen)
+ 			resize(c, c->x, c->y, c->w, c->h, 0);
+ 		showhide(c->snext);
+ 	} else {
