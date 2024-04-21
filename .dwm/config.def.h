@@ -48,6 +48,7 @@ static const Rule rules[] = {
   { "lutris",   NULL,       NULL,       1 << 3,       0,           -1,    0,    50,50,500,500,        5},
   { NULL,  "youtube music",       NULL,       1 << 4,       0,           -1, 0,       50,50,500,500,        5},
   { NULL,       NULL,   "scratchpad",   0,            1,           -1,   's', 90,50,1200,400,        5,   },
+  { NULL,       NULL,   "habits",   0,            1,           -1,   'h', 90,50,1200,400,        5,   },
   { NULL,       NULL,   "task-tui",   0,            1,           -1,   't', 800,50,500,600,        5,   },
   { "Noi",       NULL,   NULL,   0,            1,           -1,   'i', 800,50,500,700,        5,   },
   { NULL,       NULL,   "Kuro",   0,            1,           -1,   'k', 750,60,500,600,        5,   },
@@ -56,6 +57,7 @@ static const Rule rules[] = {
   { NULL,       NULL,   "neorg",   0,            1,           -1,   'n', 90,50,1200,600,        5,   },
   { NULL,       NULL,   "tt",   0,            1,           -1,   'e', 90,50,1200,600,        5,   },
   { NULL,       NULL,   "Exercise Timer",   0,            1,           -1,   't', 500,50,400,400,        5,   },
+  { NULL,       NULL,   "clock",   0,            1,           -1,   'c', 500,50,400,400,        5,   },
   { "trayer",       NULL,   "panel",   0,            1,           -1,   'q', 500,50,400,400,        5,   },
 };
 
@@ -106,6 +108,8 @@ static const char *voldw[]  = { "volume.sh", "down", NULL };
 static const char *volm[]  = { "volume.sh", "mute", NULL };
 /*First arg only serves to match against key in rules*/
 static const char *scratchpadcmd[] = {"s", "st", "-A", "0.50", "-t", "scratchpad", NULL}; 
+static const char *scratchpadclock[] = {"c", "st", "-A", "0.50", "-t", "clock", "-e", "tclock_timer.sh", NULL}; 
+static const char *scratchpadhabit[] = {"h", "st", "-A", "0.70", "-t", "habits", "-e", "lvim", "/home/digo/.vimwiki/Habits.wiki", NULL}; 
 static const char *scratchpadbtop[] = {"b", "st", "-t", "btop", "-e", "btop", NULL}; 
 //static const char *scratchpadtask[] = {"t", "st", "-t", "task-tui", "-e", "/usr/bin/taskwarrior-tui", NULL}; 
 static const char *scratchpadkuro[] = {"k", "kuro", NULL}; 
@@ -146,6 +150,8 @@ static Keychord *keychords[] = {
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_i}},                            togglescratch,  {.v = scratchpadia } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_c}},                            togglescratch,  {.v = scratchpadstretch } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_s}},                            togglescratch,  {.v = scratchpadtrayer } }),
+  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_h}},                            togglescratch,  {.v = scratchpadhabit } }),
+  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_r}},                            togglescratch,  {.v = scratchpadclock } }),
   // volume
   &((Keychord){2, {{MODKEY, XK_v}, {0, XK_j}},                            spawn,  {.v = voldw } }),
   &((Keychord){2, {{MODKEY, XK_v}, {0, XK_k}},                            spawn,  {.v = volup } }),
