@@ -11,10 +11,10 @@ then
     current_effect=$(cat $file_path)
     if [ "LoudnessEqualizer" = "$current_effect" ]
     then
-        printf ' Eq'
+        echo "eq"
         exit 1
     else
-        printf ' Bass'
+        echo "bass"
         exit 1
     fi
 else

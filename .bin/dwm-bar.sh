@@ -9,11 +9,10 @@ low_temp="^c#4793AF^"
 mid_temp="^c#FFC470^"
 high_temp="^c#DD5746^"
 urgent="^c#ff5555^"
-early_hour="^c#FFF5E0^"
+early_hour="^c#E4C59E^"
 afternoon_hour="^c#8DECB4^"
-night_hour="^c#41B06E^"
+night_hour="^c#FFC470^"
 alarming="^c#f1fa8c^"
-hour_colored=""
 
 ram_icon=
 cpu_icon=
@@ -25,6 +24,7 @@ cpu_temp_mid=
 cpu_temp_high= 
 
 volume=$(pamixer --get-volume)
+easy=$(easy_preset.sh)
 cputemp=$(cat /sys/class/thermal/thermal_zone2/temp | cut -c 1-2)
 root=$(df -h | awk '{ if ($6 == "/") print $4 }')
 root_int=${root::-1}
@@ -32,12 +32,20 @@ root_int=${root::-1}
 freemen_per=$(free -m | awk 'NR==2{print $3*100/$2 }')
 freemen_per_int=$(printf "%.0f\n" "$freemen_per")
 date=$(date +"%m[%d]")
-hour=$(date +"%H:%M")
+hour=$(date +"%H:%M" | cut -c 1-2)
+houre=$(date +"%H:%M")
 cpu=$(awk '{u=$2+$4; t=$2+$4+$5; if (NR==1){u1=u; t1=t;} else print ($2+$4-u1) * 100 / (t-t1) "%"; }' \
 <(grep 'cpu ' /proc/stat) <(sleep 1;grep 'cpu ' /proc/stat))
 cpu_per_int=$(printf "%.0f\n" "$cpu")
 
 status=""
+
+if [[ $easy = "eq" ]]; then
+  status+=" "
+else 
+  status+=" "
+fi
+
 
 if [[ $volume -ge 55 ]]; then
   status+="   $urgent $volume %"
@@ -73,22 +81,21 @@ else
   status+=" $normal_men$ram_icon $freemen_per_int % "
 fi
 
-if [[ $hour -le "12:00" ]]; then
-    hour_colored+="$early_hour$hour"
-elif [[ $hour -ge "12:01" && $hour -le "18:00" ]]; then
-    hour_colored+="$afternoon_hour$hour"
-else
-    hour_colored+="$night_hour$hour"
-fi
-
-if [[ $(echo "$root_int < 5" | bc) -ne 0 ]]; then
+if [[ $(echo "$root_int < 20" | bc) -ne 0 ]]; then
   echo E
   status+=" $alarming$root_icon $root_int""g" 
-elif [[ $(echo "$root_int < 2" | bc) -ne 0 ]]; then 
+elif [[ $(echo "$root_int < 5" | bc) -ne 0 ]]; then 
   status+=" $urgent$root_icon $root_int""g" 
 else
   status+=" $normal_root$root_icon $root_int""g" 
 fi
 
-status+=" $normal_date$date_icon $date $hour_colored"
+if [[ $hour -ge "05" && $hour -le "12" ]]; then
+  status+=" $normal_date$date_icon $date $early_hour$houre"
+elif [[ $hour -ge "12" && $hour -le "18" ]]; then
+  status+=" $normal_date$date_icon $date $afternoon_hour$houre"
+else
+  status+=" $normal_date$date_icon $date $night_hour$houre"
+fi
+
 xprop -root -set WM_NAME "$status"
