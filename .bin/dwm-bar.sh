@@ -13,6 +13,10 @@ early_hour="^c#E4C59E^"
 afternoon_hour="^c#8DECB4^"
 night_hour="^c#FFC470^"
 alarming="^c#f1fa8c^"
+bass="^c#F27BBD^"
+equalizer="^c#FFFBDA^"
+cold="^c#F5EFE6^"
+hot="^c#FA7070^"
 
 ram_icon=
 cpu_icon=
@@ -24,6 +28,7 @@ cpu_temp_mid=
 cpu_temp_high= 
 
 volume=$(pamixer --get-volume)
+climate=$(curl 'wttr.in/Santos?format="%t"' | sed 's/[^0-9]*//g')
 easy=$(easy_preset.sh)
 cputemp=$(cat /sys/class/thermal/thermal_zone2/temp | cut -c 1-2)
 root=$(df -h | awk '{ if ($6 == "/") print $4 }')
@@ -41,22 +46,27 @@ cpu_per_int=$(printf "%.0f\n" "$cpu")
 status=""
 
 if [[ $easy = "eq" ]]; then
-  status+=" "
-else 
-  status+=" "
+  status+="$equalizer"
+else
+  status+="$bass"
 fi
 
+if [[ $climate -le 25 ]]; then
+  status+="  $cold$climate°"
+else 
+  status+="  $hot$climate°"
+fi
 
 if [[ $volume -ge 55 ]]; then
-  status+="   $urgent $volume %"
+  status+="  $urgent $volume %"
 elif [[ $volume -le 20 && $volume -gt 0 ]]; then
-  status+="   $urgent$volume % "
+  status+="  $urgent$volume % "
 elif [[ $volume -eq 0 ]]; then
-  status+="   $urgent$volume % "
+  status+="  $urgent$volume % "
 elif [[ $volume -ge 50 ]]; then
-  status+="   $alarming $volume % "
+  status+="  $alarming $volume % "
 else
-  status+="   $normal $volume % " 
+  status+="  $normal $volume % " 
 fi
 
 if [[ $cputemp -le 40 ]]; then
