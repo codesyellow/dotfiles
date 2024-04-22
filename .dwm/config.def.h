@@ -15,7 +15,7 @@ static const char *fonts[]          = {
   "Font Awesome 6 Free Solid:size=11",
    };
 static const char dmenufont[]       = "monospace:size=10";
-static const char bg1[]       = "#000000";
+static const char bg1[]       = "#322C2B";
 static const char col_gray2[]       = "#000000";
 static const char col_gray3[]       = "#E4C59E";
 static const char col_gray4[]       = "#ffffff";
@@ -92,11 +92,10 @@ static const char *monocles[] = { "A", "B", "C", "D", "F", "G", "H", "I", "J", "
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-//static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", bg1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *dmenucmd[] = { "dmenu_run", "-nb", "#000", "-z", "700", "-x", "230", "-y", "2", NULL };
 static const char *clipmenucmd[] = { "clipmenu", "-nb", "#000", "-z", "700", "-x", "230", "-y", "4", NULL };
-static const char *bass[] = { "flatpak", "run", "com.github.wwmm.easyeffects", "-l", "Heavy Bass", NULL};
-static const char *loudness[] = { "flatpak", "run", "com.github.wwmm.easyeffects", "-l", "LoudnessEqualizer", NULL};
+static const char *bass[] = { "easy_preset.sh", "HeavyBass", NULL};
+static const char *loudness[] = { "easy_preset.sh", "LoudnessEqualizer", NULL};
 static const char *termcmd[]  = { "st", "-A", "0.50", NULL };
 static const char *pymors[]  = { "pymor", NULL };
 static const char *pymorl[]  = { "pymor", "-l", "3", NULL };
@@ -131,20 +130,21 @@ static Keychord *keychords[] = {
   &((Keychord){1, {{MODKEY, XK_d}},                                       incnmaster,     {.i = -1 } }),
   &((Keychord){1, {{MODKEY, XK_h}},                                       setmfact,       {.f = -0.05} }),
   // clients
-  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_c}, {0, XK_f}},                 togglefullscr,  {0}}),
-  &((Keychord){1, {{MODKEY|ShiftMask, XK_f}},           togglefullscr,  {0}}),
+  &((Keychord){2, {{MODKEY, XK_c}, {0, XK_f}},                            togglefullscr,  {0}}),
+  &((Keychord){1, {{MODKEY|ShiftMask, XK_f}},                             togglefullscr,  {0}}),
+  &((Keychord){2, {{MODKEY, XK_c}, {0, XK_o}},                            togglefloating, {0} }),
   // layouts
-  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_1}},                 setlayout,  {.v = &layouts[0]}}),
-  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_2}},                 setlayout,  {.v = &layouts[1]}}),
-  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_t}},                 setlayout,  {.v = &layouts[2]}}),
-  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_b}},                 setlayout,  {.v = &layouts[3]}}),
-  &((Keychord){3, {{MODKEY, XK_a}, {0, XK_l}, {0, XK_5}},                 setlayout,  {.v = &layouts[4]}}),
+  &((Keychord){3, {{MODKEY, XK_l}, {0, XK_1}},                            setlayout,      {.v = &layouts[0]}}),
+  &((Keychord){3, {{MODKEY, XK_l}, {0, XK_2}},                            setlayout,      {.v = &layouts[1]}}),
+  &((Keychord){3, {{MODKEY, XK_l}, {0, XK_t}},                            setlayout,      {.v = &layouts[2]}}),
+  &((Keychord){3, {{MODKEY, XK_l}, {0, XK_b}},                            setlayout,      {.v = &layouts[3]}}),
+  &((Keychord){3, {{MODKEY, XK_l}, {0, XK_5}},                            setlayout,      {.v = &layouts[4]}}),
   // scratchs
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_u}},                            togglescratch,  {.v = scratchpadcmd } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_m}},                            togglescratch,  {.v = scratchpadbtop } }),
   //  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_t}},                            togglescratch,  {.v = scratchpadtask } }),
-//  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_s}},                            togglescratch,  {.v = scratchpadneorg } }),
-  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_e}},                            togglescratch,  {.v = scratchpadtt } }),
+  //  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_s}},                            togglescratch,  {.v = scratchpadneorg } }),
+  //  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_e}},                            togglescratch,  {.v = scratchpadtt } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_p}},                            togglescratch,  {.v = scratchpadmixer } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_t}},                            togglescratch,  {.v = scratchpadkuro } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_i}},                            togglescratch,  {.v = scratchpadia } }),
@@ -153,14 +153,14 @@ static Keychord *keychords[] = {
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_h}},                            togglescratch,  {.v = scratchpadhabit } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_r}},                            togglescratch,  {.v = scratchpadclock } }),
   // volume
-  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_j}},                            spawn,  {.v = voldw } }),
-  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_k}},                            spawn,  {.v = volup } }),
-  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_m}},                            spawn,  {.v = volm } }),
+  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_j}},                            spawn,          {.v = voldw } }),
+  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_k}},                            spawn,          {.v = volup } }),
+  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_m}},                            spawn,          {.v = volm } }),
   // exec
-  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_r}},                            spawn,  {.v = dmenucmd } }),
-  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_h}},                            spawn,  {.v = clipmenucmd } }),
-  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_n}},                            spawn,  {.v = dunst } }),
-  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_m}},                            spawn,  {.v = rotatemouse } }),
+  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_r}},                            spawn,          {.v = dmenucmd } }),
+  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_h}},                            spawn,          {.v = clipmenucmd } }),
+  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_n}},                            spawn,          {.v = dunst } }),
+  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_m}},                            spawn,          {.v = rotatemouse } }),
   &((Keychord){3, {{MODKEY, XK_e}, {0, XK_e}, {0, XK_b}},                 spawn,          {.v = bass } }),
   &((Keychord){3, {{MODKEY, XK_e}, {0, XK_e}, {0, XK_l}},                 spawn,          {.v = loudness } }),
   &((Keychord){3, {{MODKEY, XK_e}, {0, XK_p}, {0, XK_s}},                 spawn,          {.v = pymors } }),
@@ -172,7 +172,6 @@ static Keychord *keychords[] = {
   &((Keychord){1, {{MODKEY, XK_Tab}},                                     view,           {0} }),
   &((Keychord){1, {{MODKEY|ShiftMask, XK_c}},                             killclient,     {0} }),
   &((Keychord){1, {{MODKEY, XK_space}},                                   setlayout,      {0} }),
-  &((Keychord){1, {{MODKEY|ShiftMask, XK_space}},                         togglefloating, {0} }),
   &((Keychord){1, {{MODKEY, XK_0}},                                       view,           {.ui = ~0 } }),
   &((Keychord){1, {{MODKEY|ShiftMask, XK_0}},                             tag,            {.ui = ~0 } }),
   &((Keychord){1, {{MODKEY, XK_comma}},                                   focusmon,       {.i = -1 } }),
