@@ -19,7 +19,7 @@ fi
 for ((i=0; i<10; i++)); do
     # Increment the value by the argument passed
     value=$((value + $1))
-    ydotool mousemove -x $value  -y 0
+    xdotool mousemove_relative -- $value 0
     echo "Current value: $value"
     sleep 1  # Adjust the sleep duration as needed
 done

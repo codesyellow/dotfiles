@@ -12,6 +12,7 @@ urgent="^c#ff5555^"
 early_hour="^c#E4C59E^"
 afternoon_hour="^c#8DECB4^"
 night_hour="^c#FFC470^"
+day_color="^c#FFB1B1^"
 alarming="^c#f1fa8c^"
 bass="^c#F27BBD^"
 equalizer="^c#FFFBDA^"
@@ -28,7 +29,8 @@ cpu_temp_mid=
 cpu_temp_high= 
 
 volume=$(pamixer --get-volume)
-climate=$(curl 'wttr.in/Santos?format="%t"' | sed 's/[^0-9]*//g')
+#climate=$(curl 'wttr.in/Santos?format="%t"' | sed 's/[^0-9]*//g')
+day=$(date +"%a")
 easy=$(easy_preset.sh)
 cputemp=$(cat /sys/class/thermal/thermal_zone2/temp | cut -c 1-2)
 root=$(df -h | awk '{ if ($6 == "/") print $4 }')
@@ -51,11 +53,11 @@ else
   status+="$bass"
 fi
 
-if [[ $climate -le 25 ]]; then
-  status+="  $cold$climate°"
-else 
-  status+="  $hot$climate°"
-fi
+# if [[ $climate -le 25 ]]; then
+#   status+="   $cold $climate°"
+# else 
+#   status+="   $hot $climate°"
+# fi
 
 if [[ $volume -ge 55 ]]; then
   status+="  $urgent $volume %"
@@ -107,5 +109,7 @@ elif [[ $hour -ge "12" && $hour -le "18" ]]; then
 else
   status+=" $normal_date$date_icon $date $night_hour$houre"
 fi
+
+status+=" $day_color$day"
 
 xprop -root -set WM_NAME "$status"
