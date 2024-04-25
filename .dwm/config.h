@@ -54,9 +54,12 @@ static const Rule rules[] = {
   { NULL,       NULL,   "Kuro",   0,            1,           -1,   'k', 750,60,500,600,        5,   },
   { NULL,       NULL,   "pulsemixer",   0,            1,           -1,   'p', 800,50,800,600,        5,   },
   { NULL,       NULL,   "btop",   0,            1,           -1,   'b', 90,50,1200,600,        5,   },
+  { NULL,       NULL,   "notes",   0,            1,           -1,   'o', 90,50,1200,600,        5,   },
+  { "DL: language lessons",       NULL,   NULL,   0,            1,           -1,   'l', 90,50,1200,600,        5,   },
   { NULL,       NULL,   "neorg",   0,            1,           -1,   'n', 90,50,1200,600,        5,   },
   { NULL,       NULL,   "tt",   0,            1,           -1,   'e', 90,50,1200,600,        5,   },
   { NULL,       NULL,   "Exercise Timer",   0,            1,           -1,   't', 500,50,400,400,        5,   },
+
   { NULL,       NULL,   "clock",   0,            1,           -1,   'c', 500,50,400,400,        5,   },
   { "trayer",       NULL,   "panel",   0,            1,           -1,   'q', 500,50,400,400,        5,   },
 };
@@ -92,7 +95,7 @@ static const char *monocles[] = { "A", "B", "C", "D", "F", "G", "H", "I", "J", "
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-nb", "#000", "-z", "700", "-x", "230", "-y", "2", NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-nb", "#000", "-z", "700", "-x", "200", "-y", "2", NULL };
 static const char *clipmenucmd[] = { "clipmenu", "-nb", "#000", "-z", "700", "-x", "230", "-y", "4", NULL };
 static const char *bass[] = { "easy_preset.sh", "HeavyBass", NULL};
 static const char *loudness[] = { "easy_preset.sh", "LoudnessEqualizer", NULL};
@@ -109,6 +112,7 @@ static const char *volm[]  = { "volume.sh", "mute", NULL };
 static const char *scratchpadcmd[] = {"s", "st", "-A", "0.50", "-t", "scratchpad", NULL}; 
 static const char *scratchpadclock[] = {"c", "st", "-A", "0.50", "-t", "clock", "-e", "tclock_timer.sh", NULL}; 
 static const char *scratchpadhabit[] = {"h", "st", "-A", "0.70", "-t", "habits", "-e", "lvim", "/home/digo/.vimwiki/Habits.wiki", NULL}; 
+static const char *scratchpadnotes[] = {"o", "st", "-A", "0.70", "-t", "notes", "-e", "lvim", "/home/digo/.vimwiki/index.md", NULL}; 
 static const char *scratchpadbtop[] = {"b", "st", "-t", "btop", "-e", "btop", NULL}; 
 //static const char *scratchpadtask[] = {"t", "st", "-t", "task-tui", "-e", "/usr/bin/taskwarrior-tui", NULL}; 
 static const char *scratchpadkuro[] = {"k", "kuro", NULL}; 
@@ -117,6 +121,7 @@ static const char *scratchpadneorg[] = {"n", "st", "-t", "neorg", "-e", "/usr/bi
 static const char *scratchpadtt[] = {"e", "st", "-t", "tt", "-e", "tt", "-t", "60", NULL}; 
 static const char *scratchpadia[] = {"i", "noi", NULL}; 
 static const char *scratchpadstretch[] = {"t", "flatpak", "run", "xyz.safeworlds.hiit", NULL}; 
+static const char *scratchpadslingo[] = {"l", "flatpak", "run", "ro.go.hmlendea.DL-Desktop", NULL}; 
 static const char *scratchpadtrayer[] = {"q", "trayer", "--widthtype", "pixel", "--transparent", "true", "--alpha", "255", "--distance", "10", NULL}; 
 
 static Keychord *keychords[] = {
@@ -152,6 +157,8 @@ static Keychord *keychords[] = {
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_s}},                            togglescratch,  {.v = scratchpadtrayer } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_h}},                            togglescratch,  {.v = scratchpadhabit } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_r}},                            togglescratch,  {.v = scratchpadclock } }),
+  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_l}},                            togglescratch,  {.v = scratchpadslingo } }),
+  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_n}},                            togglescratch,  {.v = scratchpadnotes } }),
   // volume
   &((Keychord){2, {{MODKEY, XK_v}, {0, XK_j}},                            spawn,          {.v = voldw } }),
   &((Keychord){2, {{MODKEY, XK_v}, {0, XK_k}},                            spawn,          {.v = volup } }),
