@@ -39,12 +39,14 @@ static const Rule rules[] = {
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1,   0,     50,50,500,500,        5 },
 	{ "firefox",  NULL,       NULL,       1 << 0,       0,           -1,   0,     50,50,500,500,        5 },
 	{ "st-256color",  NULL,       NULL,       1 << 1,       0,           -1,   0,     50,50,500,500,        5 },
+	{ "Whatsapp-for-linux",  NULL,       NULL,       0,       1,           -1,   0,     50,50,1100,600,        5 },
   { "Alacritty",       "Alacritty",       NULL,       1 << 1,       0,           -1,0,        50,50,500,500,        5 },
   { "Zathura",  NULL,       NULL,       1 << 2,       0,           -1,        50,50,500,500,        5,      0},
   { "steam",    "steamwebhelper",       NULL,       1 << 3,       0,           -1, 0,        50,50,500,500,        5},
   { NULL,    NULL,       "Steam",       1 << 3,       0,           -1,     0,   50,50,500,500,        5},
   { NULL,    NULL,       "Steam setup",       1 << 3,       0,           -1,        50,50,500,500,        50},
   { "heroic",   NULL,       NULL,       1 << 3,       0,           -1,    0,    50,50,500,500,        5},
+  { "retroarch",   NULL,       NULL,       1 << 3,       0,           -1,    0,    50,50,500,500,        5},
   { "lutris",   NULL,       NULL,       1 << 3,       0,           -1,    0,    50,50,500,500,        5},
   { NULL,  "youtube music",       NULL,       1 << 4,       0,           -1, 0,       50,50,500,500,        5},
   { NULL,       NULL,   "scratchpad",   0,            1,           -1,   's', 90,50,1200,400,        5,   },
@@ -104,7 +106,7 @@ static const char *pymors[]  = { "pymor", NULL };
 static const char *pymorl[]  = { "pymor", "-l", "3", NULL };
 static const char *pymorc[]  = { "pymor", "-c", NULL };
 static const char *dunst[]  = { "dunstctl", "close-all", NULL };
-static const char *rotatemouse[]  = { "360.sh", "252", NULL };
+static const char *rotatemouse[]  = { "360.sh", "199", NULL };
 static const char *volup[]  = { "volume.sh", "up", NULL };
 static const char *voldw[]  = { "volume.sh", "down", NULL };
 static const char *volm[]  = { "volume.sh", "mute", NULL };
