@@ -18,6 +18,11 @@ bass="^c#F27BBD^"
 equalizer="^c#FFFBDA^"
 cold="^c#F5EFE6^"
 hot="^c#FA7070^"
+ds4_low="^c#FC4100^"
+ds4_mid="^c#2C4E80^"
+ds4_most="^c#8DECB4^"
+ds4_full="^c#4793AF^"
+ds4_not="^c#FFB1B1^"
 
 ram_icon=
 cpu_icon=
@@ -27,8 +32,10 @@ date_icon=
 cpu_temp_low= 
 cpu_temp_mid= 
 cpu_temp_high= 
+controller=
 
 volume=$(pamixer --get-volume)
+ds4=$(dsbattery | grep -o '[0-9]\+')
 #climate=$(curl 'wttr.in/Santos?format="%t"' | sed 's/[^0-9]*//g')
 day=$(date +"%a")
 easy=$(easy_preset.sh)
@@ -58,6 +65,18 @@ fi
 # else 
 #   status+="   $hot $climate°"
 # fi
+
+if [[ $ds4 -ge 60 && $ds4 -le 90 ]]; then
+  status+="  $ds4_most$controller "
+elif [[ -z $ds4 ]]; then
+  status+="  $ds4_not$controller "
+elif [[ $ds4 -le 59 && $ds4 -ge 30 ]]; then
+  status+="  $ds4_mid$controller "
+elif [[ $ds4 -le 29 ]]; then
+  status+="  $ds4_low$controller "
+elif [[ $ds4 -ge 91 ]]; then
+  status+="  $ds4_full$controller "
+fi
 
 if [[ $volume -ge 55 ]]; then
   status+="  $urgent $volume %"
