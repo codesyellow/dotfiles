@@ -38,6 +38,7 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor    float x,y,w,h         floatborderpx*/
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1,   0,     50,50,500,500,        5 },
 	{ "firefox",  NULL,       NULL,       1 << 0,       0,           -1,   0,     50,50,500,500,        5 },
+	{ "mpv",  NULL,       NULL,       1 << 2,       0,           -1,   0,     50,50,500,500,        5 },
 	{ "st-256color",  NULL,       NULL,       1 << 1,       0,           -1,   0,     50,50,500,500,        5 },
 	{ "Whatsapp-for-linux",  NULL,       NULL,       0,       1,           -1,   0,     50,50,1100,600,        5 },
   { "Alacritty",       "Alacritty",       NULL,       1 << 1,       0,           -1,0,        50,50,500,500,        5 },
@@ -61,7 +62,6 @@ static const Rule rules[] = {
   { NULL,       NULL,   "neorg",   0,            1,           -1,   'n', 90,50,1200,600,        5,   },
   { NULL,       NULL,   "tt",   0,            1,           -1,   'e', 90,50,1200,600,        5,   },
   { NULL,       NULL,   "Exercise Timer",   0,            1,           -1,   't', 500,50,400,400,        5,   },
-
   { NULL,       NULL,   "clock",   0,            1,           -1,   'c', 500,50,400,400,        5,   },
   { "trayer",       NULL,   "panel",   0,            1,           -1,   'q', 500,50,400,400,        5,   },
 };
@@ -76,8 +76,8 @@ static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "",      monocle },
-	{ "",      bstack },
+	{ "",        monocle },
+	{ "",        bstack },
 	{ "===",      bstackhoriz },
 };
 
@@ -98,6 +98,7 @@ static const char *monocles[] = { "A", "B", "C", "D", "F", "G", "H", "I", "J", "
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-nb", "#000", "-z", "700", "-x", "200", "-y", "2", NULL };
+static const char *dmenumpv[] = { "mpvtube.sh", NULL };
 static const char *clipmenucmd[] = { "clipmenu", "-nb", "#000", "-z", "700", "-x", "230", "-y", "4", NULL };
 static const char *bass[] = { "easy_preset.sh", "HeavyBass", NULL};
 static const char *loudness[] = { "easy_preset.sh", "LoudnessEqualizer", NULL};
@@ -128,24 +129,17 @@ static const char *scratchpadtrayer[] = {"q", "trayer", "--widthtype", "pixel", 
 
 static Keychord *keychords[] = {
   /* Keys        function        argument */
-  &((Keychord){1, {{MODKEY, XK_p}},                                       spawn,          {.v = dmenucmd } }),
-  &((Keychord){1, {{MODKEY, XK_t}},                                       spawn,          {.v = termcmd } }),
-  &((Keychord){1, {{MODKEY, XK_b}},                                       togglebar,      {0} }),
-  &((Keychord){1, {{MODKEY, XK_j}},                                       focusstack,     {.i = +1 } }),
-  &((Keychord){1, {{MODKEY, XK_k}},                                       focusstack,     {.i = -1 } }),
-  &((Keychord){1, {{MODKEY, XK_i}},                                       incnmaster,     {.i = +1 } }),
-  &((Keychord){1, {{MODKEY, XK_d}},                                       incnmaster,     {.i = -1 } }),
-  &((Keychord){1, {{MODKEY, XK_h}},                                       setmfact,       {.f = -0.05} }),
   // clients
   &((Keychord){2, {{MODKEY, XK_c}, {0, XK_f}},                            togglefullscr,  {0}}),
   &((Keychord){1, {{MODKEY|ShiftMask, XK_f}},                             togglefullscr,  {0}}),
   &((Keychord){2, {{MODKEY, XK_c}, {0, XK_o}},                            togglefloating, {0} }),
   // layouts
-  &((Keychord){3, {{MODKEY, XK_l}, {0, XK_1}},                            setlayout,      {.v = &layouts[0]}}),
-  &((Keychord){3, {{MODKEY, XK_l}, {0, XK_2}},                            setlayout,      {.v = &layouts[1]}}),
-  &((Keychord){3, {{MODKEY, XK_l}, {0, XK_t}},                            setlayout,      {.v = &layouts[2]}}),
-  &((Keychord){3, {{MODKEY, XK_l}, {0, XK_b}},                            setlayout,      {.v = &layouts[3]}}),
-  &((Keychord){3, {{MODKEY, XK_l}, {0, XK_5}},                            setlayout,      {.v = &layouts[4]}}),
+  &((Keychord){2, {{MODKEY, XK_l}, {0, XK_1}},                            setlayout,      {.v = &layouts[0]}}),
+  &((Keychord){2, {{MODKEY, XK_l}, {0, XK_2}},                            setlayout,      {.v = &layouts[1]}}),
+  &((Keychord){2, {{MODKEY, XK_l}, {0, XK_t}},                            setlayout,      {.v = &layouts[2]}}),
+  &((Keychord){2, {{MODKEY, XK_l}, {0, XK_b}},                            setlayout,      {.v = &layouts[3]}}),
+  &((Keychord){2, {{MODKEY, XK_l}, {0, XK_5}},                            setlayout,      {.v = &layouts[4]}}),
+
   // scratchs
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_u}},                            togglescratch,  {.v = scratchpadcmd } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_m}},                            togglescratch,  {.v = scratchpadbtop } }),
@@ -170,13 +164,22 @@ static Keychord *keychords[] = {
   &((Keychord){2, {{MODKEY, XK_e}, {0, XK_h}},                            spawn,          {.v = clipmenucmd } }),
   &((Keychord){2, {{MODKEY, XK_e}, {0, XK_n}},                            spawn,          {.v = dunst } }),
   &((Keychord){2, {{MODKEY, XK_e}, {0, XK_m}},                            spawn,          {.v = rotatemouse } }),
+  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_v}},                            spawn,          {.v = dmenumpv } }),
   &((Keychord){3, {{MODKEY, XK_e}, {0, XK_e}, {0, XK_b}},                 spawn,          {.v = bass } }),
   &((Keychord){3, {{MODKEY, XK_e}, {0, XK_e}, {0, XK_l}},                 spawn,          {.v = loudness } }),
   &((Keychord){3, {{MODKEY, XK_e}, {0, XK_p}, {0, XK_s}},                 spawn,          {.v = pymors } }),
   &((Keychord){3, {{MODKEY, XK_e}, {0, XK_p}, {0, XK_l}},                 spawn,          {.v = pymorl } }),
   &((Keychord){3, {{MODKEY, XK_e}, {0, XK_p}, {0, XK_c}},                 spawn,          {.v = pymorc } }),
   //rest
-  &((Keychord){1, {{MODKEY, XK_l}},                                       setmfact,       {.f = +0.05} }),
+  //  &((Keychord){1, {{MODKEY, XK_p}},                                       spawn,          {.v = dmenucmd } }),
+  &((Keychord){1, {{MODKEY, XK_t}},                                       spawn,          {.v = termcmd } }),
+  &((Keychord){1, {{MODKEY, XK_b}},                                       togglebar,      {0} }),
+  &((Keychord){1, {{MODKEY, XK_j}},                                       focusstack,     {.i = +1 } }),
+  &((Keychord){1, {{MODKEY, XK_k}},                                       focusstack,     {.i = -1 } }),
+//  &((Keychord){1, {{MODKEY, XK_i}},                                       incnmaster,     {.i = +1 } }),
+//  &((Keychord){1, {{MODKEY, XK_d}},                                       incnmaster,     {.i = -1 } }),
+  &((Keychord){1, {{MODKEY, XK_i}},                                       setmfact,       {.f = +0.05} }),
+  &((Keychord){1, {{MODKEY, XK_d}},                                       setmfact,       {.f = -0.05} }),
   &((Keychord){1, {{MODKEY, XK_Return}},                                  zoom,           {0} }),
   &((Keychord){1, {{MODKEY, XK_Tab}},                                     view,           {0} }),
   &((Keychord){1, {{MODKEY|ShiftMask, XK_c}},                             killclient,     {0} }),
