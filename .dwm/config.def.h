@@ -44,6 +44,7 @@ static const Rule rules[] = {
   { "Alacritty",       "Alacritty",       NULL,       1 << 1,       0,           -1,0,        50,50,500,500,        5 },
   { "Zathura",  NULL,       NULL,       1 << 2,       0,           -1,        50,50,500,500,        5,      0},
   { "steam",    "steamwebhelper",       NULL,       1 << 3,       0,           -1, 0,        50,50,500,500,        5},
+  { "ProtonUp-Qt",    NULL,       NULL,       1 << 3,       0,           -1, 0,        50,50,500,500,        5},
   { NULL,    NULL,       "Steam",       1 << 3,       0,           -1,     0,   50,50,500,500,        5},
   { NULL,    NULL,       "Steam setup",       1 << 3,       0,           -1,        50,50,500,500,        50},
   { "heroic",   NULL,       NULL,       1 << 3,       0,           -1,    0,    50,50,500,500,        5},
@@ -99,7 +100,7 @@ static const char *monocles[] = { "A", "B", "C", "D", "F", "G", "H", "I", "J", "
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-nb", "#000", "-z", "700", "-x", "200", "-y", "2", NULL };
 static const char *dmenumpv[] = { "mpvtube.sh", NULL };
-static const char *clipmenucmd[] = { "clipmenu", "-nb", "#000", "-z", "700", "-x", "230", "-y", "4", NULL };
+static const char *clipmenucmd[] = { "clipmenu", "-z", "700", "-x", "230", "-y", "4", NULL };
 static const char *bass[] = { "easy_preset.sh", "HeavyBass", NULL};
 static const char *loudness[] = { "easy_preset.sh", "LoudnessEqualizer", NULL};
 static const char *termcmd[]  = { "st", "-A", "0.50", NULL };
@@ -116,7 +117,7 @@ static const char *scratchpadcmd[] = {"s", "st", "-A", "0.50", "-t", "scratchpad
 static const char *scratchpadclock[] = {"c", "st", "-A", "0.50", "-t", "clock", "-e", "tclock_timer.sh", NULL}; 
 static const char *scratchpadhabit[] = {"h", "st", "-A", "0.70", "-t", "habits", "-e", "lvim", "/home/digo/.vimwiki/Habits.wiki", NULL}; 
 static const char *scratchpadnotes[] = {"o", "st", "-A", "0.70", "-t", "notes", "-e", "lvim", "/home/digo/.vimwiki/index.md", NULL}; 
-static const char *scratchpadbtop[] = {"b", "st", "-t", "btop", "-e", "btop", NULL}; 
+static const char *scratchpadbtop[] = {"b", "st", "-A", "0.50", "-t", "btop", "-e", "btop", NULL}; 
 //static const char *scratchpadtask[] = {"t", "st", "-t", "task-tui", "-e", "/usr/bin/taskwarrior-tui", NULL}; 
 static const char *scratchpadkuro[] = {"k", "kuro", NULL}; 
 static const char *scratchpadmixer[] = {"p", "st", "-t", "pulsemixer", "-e", "pulsemixer", NULL}; 
