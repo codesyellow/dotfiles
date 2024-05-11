@@ -18,7 +18,8 @@ then
         exit 1
     fi
 else
-    flatpak run com.github.wwmm.easyeffects -l $arg
+#    flatpak run com.github.wwmm.easyeffects -l $arg
+    easyeffects -l $arg
     echo $arg > $file_path
     exit 1
 fi

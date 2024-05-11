@@ -1,4 +1,4 @@
 #!/bin/bash
-dwl -s 'dwlb -font "JetBrainsMono Nerd Font:size=12"'
+slstatus -s | dwl
 
 

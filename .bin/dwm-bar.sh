@@ -23,6 +23,7 @@ ds4_mid="^c#2C4E80^"
 ds4_most="^c#8DECB4^"
 ds4_full="^c#4793AF^"
 ds4_not="^c#FFB1B1^"
+daym_color="^c#6DC5D1^"
 
 ram_icon=
 cpu_icon=
@@ -45,7 +46,8 @@ root_int=${root::-1}
 #home=$(df -h | awk '{ if ($6 == "/home") print $4 }')
 freemen_per=$(free -m | awk 'NR==2{print $3*100/$2 }')
 freemen_per_int=$(printf "%.0f\n" "$freemen_per")
-date=$(date +"%m[%d]")
+date=$(date +"%m")
+day_month=$(date +"%d")
 hour=$(date +"%H:%M" | cut -c 1-2)
 houre=$(date +"%H:%M")
 cpu=$(awk '{u=$2+$4; t=$2+$4+$5; if (NR==1){u1=u; t1=t;} else print ($2+$4-u1) * 100 / (t-t1) "%"; }' \
@@ -122,11 +124,11 @@ else
 fi
 
 if [[ $hour -ge "05" && $hour -le "12" ]]; then
-  status+=" $normal_date$date_icon $date $early_hour$houre"
+  status+=" $normal_date$date_icon $date $daym_color[ $day_month ] $early_hour$houre"
 elif [[ $hour -ge "12" && $hour -le "18" ]]; then
-  status+=" $normal_date$date_icon $date $afternoon_hour$houre"
+  status+=" $normal_date$date_icon $date $daym_color[ $day_month ] $afternoon_hour$houre"
 else
-  status+=" $normal_date$date_icon $date $night_hour$houre"
+  status+=" $normal_date$date_icon $date $daym_color[ $day_month ] $night_hour$houre"
 fi
 
 status+=" $day_color$day"
