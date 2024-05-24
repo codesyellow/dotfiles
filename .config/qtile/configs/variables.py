@@ -44,13 +44,13 @@ icons = [
         '',
         ]
 widget_icons = [
-        '󰌌 ',
-        ' ',
+        '   ',
+        '  ',
         ' ',
         ' ',
-        '  ',
-        '',
-        '',
+        '   ',
+        '',
+        '',
         ]
 home = os.path.expanduser('~/')
 #runner = "dmenu_run -nb '#272E33' -nf '#D3C6AA' -sb '#D3C6AA' -sf '#1E2326' -fn '' -dim 0.2"
@@ -61,7 +61,7 @@ group_font = 'InconsolataGo Nerd Font'
 my_font = 'JetBrainMono Nerd Font'
 runner = ''
 sterm = ''
-wsize = 16
+wsize = 18
 if qtile.core.name == "x11":
     sterm = 'st'
 if qtile.core.name == "wayland":
