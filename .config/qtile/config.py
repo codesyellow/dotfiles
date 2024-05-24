@@ -5,6 +5,6 @@ from configs.scratchpads import *
 from configs.functions import *
 from configs.layouts import *
 from configs.binds import *
-from configs.inputs import *
+#from configs.inputs import *
 from configs.screens import *
 

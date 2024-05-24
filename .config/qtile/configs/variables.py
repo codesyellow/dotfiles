@@ -3,7 +3,7 @@ from libqtile.config import Match
 from libqtile import layout, qtile
 
 alt_mod = "mod1"
-bg = '#00000000'
+bg = '#00000099'
 browser = 'floorp'
 colors = ['#1E2326', # bg_dim 0
           '#272E33', # bg0 1
@@ -34,21 +34,21 @@ colors = ['#1E2326', # bg_dim 0
           ]
 exit_icon_font = 'Font Awesome 6 Free Regular'
 icons = [
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
+        '',
+        '󰅶',
+        '',
+        '',
+        '󰍫',
+        '',
         '',
         '',
         ]
 widget_icons = [
-        ' ',
-        ' ',
-        '',
-        '',
-        '󰍛 ',
+        '󰌌 ',
+        ' ',
+        ' ',
+        ' ',
+        '  ',
         '',
         '',
         ]
@@ -57,17 +57,18 @@ home = os.path.expanduser('~/')
 # variables
 mod = "mod4"
 pad = 10
-group_font = 'Font Awesome 6 Free Regular'
+group_font = 'InconsolataGo Nerd Font'
 my_font = 'JetBrainMono Nerd Font'
 runner = ''
 sterm = ''
+wsize = 16
 if qtile.core.name == "x11":
     sterm = 'st'
 if qtile.core.name == "wayland":
     sterm = 'foot'
 
 if qtile.core.name == "x11":
-    runner = f"{home}.config/rofi/launchers/type-1/launcher.sh"
+    runner = 'dmenu_run -nb "#000" -z 350 -x 280 -y -3'
 
 elif qtile.core.name == "wayland":
     runner = f"bemenu-run -c -l 10 -i -M 300 --fn 'IBM Plex Mono 14' -p '' --hp 8 --nb {bg} --nf '#fff' --ab {bg} -- │ hf {bg} --hb {bg} --fb {bg} -B 1 --bdr {bg}"

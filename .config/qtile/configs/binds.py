@@ -23,24 +23,17 @@ keys = [
         Key([mod, 'shift'], 'e', lazy.core.change_vt(2)),
         Key([mod], "space", lazy.widget["keyboardlayout"].next_keyboard(), desc="Next keyboard layout."),
         #Key([mod], 'e', lazy.spawn(term + ' --class code -e lvim -c "cd ~/.code | NvimTreeToggle"')),
+        # keychords
         # exec
         KeyChord([mod], 'e',[
             Key([], 'r', lazy.spawn(runner)),
-            KeyChord([], 'g', [
-                Key([], 's', lazy.spawn('steam')),
-                Key([], 'h', lazy.spawn('heroic')),
-                Key([], 'w', lazy.spawn('waydroid show-full-ui')),
-                Key([], 'd', lazy.spawn('dsbattery -d')),
-                Key([], 'r', lazy.spawn('flatpak run io.github.vinegarhq.Vinegar player')),
-                ],
-                     name="󱎓"
-                     ),
+            Key([], 'v', lazy.spawn("mpvtube.sh")),
             KeyChord([], 's', [
                 Key([], 'a', lazy.spawn('anki')),
                 Key([], 'm', lazy.spawn('maps.sh')),
                 Key([], 'v', lazy.spawn('ankiv.sh')),
                 ],
-                     name="󱎓"
+                     name=""
                      ),
             KeyChord([], 'p', [
                 Key([], 'l', lazy.spawn('pymor -l 3')),
@@ -58,6 +51,7 @@ keys = [
     Key([mod, 'shift'], 'p', lazy.function(focus_main)),
     KeyChord([mod], 's', [
         Key([], 'u', lazy.group['scratchpad'].dropdown_toggle('term')),
+        Key([], 's', lazy.group['scratchpad'].dropdown_toggle('trayer')),
         Key([], 'g', lazy.group['scratchpad'].dropdown_toggle('gpterm')),
 #       Key([], 't', lazy.group['scratchpad'].dropdown_toggle('task'), lazy.spawn('task sync')),
         Key([], 'n', lazy.group['scratchpad'].dropdown_toggle('neorg')),
@@ -130,7 +124,7 @@ keys = [
                  name=''),
         KeyChord([], 'e', [
             Key([], 'l', lazy.spawn('flatpak run com.github.wwmm.easyeffects -l LoudnessEqualizer')),
-            Key([], 'b', lazy.spawn('flatpak run com.github.wwmm.easyeffects -l "my-heavy-bass"')),
+            Key([], 'b', lazy.spawn('flatpak run com.github.wwmm.easyeffects -l "Heavy Bass"')),
             ],
                  name=""
                  ),
