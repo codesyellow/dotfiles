@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -12,6 +12,7 @@ enum showtab_modes { showtab_never, showtab_auto, showtab_nmodes, showtab_always
 static const int showtab			= showtab_auto;        /* Default tab bar show mode */
 static const int toptab				= False;               /* False means bottom tab bar */
 static const char *fonts[]          = { 
+  "JetBrainMono Nerd Font",
   "Font Awesome 6 Free Solid:size=11",
    };
 static const char dmenufont[]       = "monospace:size=10";
@@ -115,17 +116,17 @@ static const char *volm[]  = { "volume.sh", "mute", NULL };
 /*First arg only serves to match against key in rules*/
 static const char *scratchpadcmd[] = {"s", "st", "-A", "0.50", "-t", "scratchpad", NULL}; 
 static const char *scratchpadclock[] = {"c", "st", "-A", "0.50", "-t", "clock", "-e", "tclock_timer.sh", NULL}; 
-static const char *scratchpadhabit[] = {"h", "st", "-A", "0.70", "-t", "habits", "-e", "lvim", "/home/digo/.vimwiki/Habits.wiki", NULL}; 
-static const char *scratchpadnotes[] = {"o", "st", "-A", "0.70", "-t", "notes", "-e", "lvim", "/home/digo/.vimwiki/index.md", NULL}; 
+static const char *scratchpadhabit[] = {"h", "st", "-A", "0.70", "-t", "habits", "-e", "nvim", "/home/digo/.vimwiki/Habits.wiki", NULL}; 
+static const char *scratchpadnotes[] = {"o", "st", "-A", "0.70", "-t", "notes", "-e", "nvim", "/home/digo/.vimwiki/index.wiki", NULL}; 
 static const char *scratchpadbtop[] = {"b", "st", "-A", "0.50", "-t", "btop", "-e", "btop", NULL}; 
 //static const char *scratchpadtask[] = {"t", "st", "-t", "task-tui", "-e", "/usr/bin/taskwarrior-tui", NULL}; 
 static const char *scratchpadkuro[] = {"k", "kuro", NULL}; 
 static const char *scratchpadmixer[] = {"p", "st", "-t", "pulsemixer", "-e", "pulsemixer", NULL}; 
 static const char *scratchpadneorg[] = {"n", "st", "-t", "neorg", "-e", "/usr/bin/nvim -c ':Neorg workspace home'", NULL}; 
 static const char *scratchpadtt[] = {"e", "st", "-t", "tt", "-e", "tt", "-t", "60", NULL}; 
-static const char *scratchpadia[] = {"i", "noi", NULL}; 
+static const char *scratchpadia[] = {"i", "noi-desktop", NULL}; 
 static const char *scratchpadstretch[] = {"t", "flatpak", "run", "xyz.safeworlds.hiit", NULL}; 
-static const char *scratchpadslingo[] = {"l", "flatpak", "run", "ro.go.hmlendea.DL-Desktop", NULL}; 
+static const char *scratchpadslingo[] = {"l", "duolingo-desktop", NULL}; 
 static const char *scratchpadtrayer[] = {"q", "trayer", "--widthtype", "pixel", "--transparent", "true", "--alpha", "255", "--distance", "10", NULL}; 
 
 static Keychord *keychords[] = {
