@@ -26,9 +26,41 @@ size = "40% 90%"
 unfocus = "hide"
 lazy = true
 
+[scratchpads.ia]
+animation = "fromRight"
+command = "alacritty -T ia --class ia -e aichat"
+class = "ia"
+size = "30% 90%"
+unfocus = "hide"
+lazy = true
+
+[scratchpads.stretch]
+animation = "fromTop"
+command = "flatpak run xyz.safeworlds.hiit"
+class = "hiit"
+size = "40% 50%"
+unfocus = "hide"
+process_tracking = false
+class_match = true
+lazy = true
+
 [scratchpads.canki]
 animation = "fromTop"
 command = "alacritty -T canki -e ~/.bin/canki.sh"
+size = "75% 60%"
+margin = 50
+
+[scratchpads.habit]
+animation = "fromLeft"
+command = "foot -T habit -a habit -e nvim ~/.vimwiki/habit.wiki"
+class = "habit"
+size = "60% 60%"
+margin = 50
+
+[scratchpads.notes]
+animation = "fromTop"
+command = "foot -T notes -a notes -e nvim ~/.vimwiki/index.md"
+class = "notes"
 size = "75% 60%"
 margin = 50
 
