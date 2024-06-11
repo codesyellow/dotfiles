@@ -33,11 +33,15 @@ window#waybar {
 
 #workspaces button:last-child {
   padding-bottom: 4px;
-  padding-right: 8px;
+  padding-right: 13px;
 }
 
 #workspaces button:nth-child(6) {
-  padding-left: 10px;
+  padding-left: 11px;
+}
+
+#workspaces button:nth-child(2) {
+  padding-right: 12px;
 }
 
 #workspaces button {
@@ -53,7 +57,7 @@ window#waybar {
 
 #workspaces button.empty:last-child {
   border-radius: 0 0 24px 18px;
-  padding-right: 11px;
+  padding-right: 13px;
   padding-bottom: 6px;
 }
 
