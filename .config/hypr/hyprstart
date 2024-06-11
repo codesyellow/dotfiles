@@ -5,7 +5,7 @@ pypr &
 paplay ~/.audios/retro-audio-logo-94648.mp3 &
 systemctl --user import-environment PATH &
 dunst &
-wl-copy &
+wl-paste -pw wl-copy &
 /usr/lib/polkit-kde-authentication-agent-1 &
 swayosd-server &
 blueman-applet &

@@ -1,13 +1,28 @@
 [pyprland]
 plugins = [
-  "scratchpads",
-  "toggle_dpms",
+  "scratchpads"
 ]
 [scratchpads.term]
 animation = "fromTop"
-command = "alacritty --config-file ~/.config/alacritty/alacritty2.toml --class alacritty-dropterm"
+command = "alacritty --class alacritty-dropterm"
 size = "75% 60%"
 margin = 50
+
+[scratchpads.volume]
+animation = "fromRight"
+command = "pavucontrol"
+class = "org.pulseaudio.pavucontrol"
+size = "40% 90%"
+unfocus = "hide"
+lazy = true
+
+[scratchpads.todo]
+animation = "fromRight"
+command = "kuro"
+class = "Kuro"
+size = "40% 90%"
+unfocus = "hide"
+lazy = true
 
 [scratchpads.canki]
 animation = "fromTop"
@@ -15,45 +30,12 @@ command = "alacritty -T canki -e ~/.bin/canki.sh"
 size = "75% 60%"
 margin = 50
 
-[scratchpads.task]
-command = "foot -a task-tui -e /usr/bin/taskwarrior-tui"
-unfocus = "hide"
-animation = "fromRight"
-
-[scratchpads.tt]
-command = "foot -a tt -e tt -t 60"
-unfocus = "hide"
-animation = "fromTop"
-size = "90% 70%"
-margin = 120
-
-[scratchpads.todo]
-command = "/opt/Kuro-9.0.0.AppImage"
-unfocus = "hide"
-animation = "fromRight"
-class = "Kuro"
-size = "40% 90%"
-margin = 60
-
 [scratchpads.btop]
 command = "foot -a btop -e btop"
 unfocus = "hide"
-margin = 120
-size = "90% 70%"
+margin = 100
+size = "90% 80%"
 animation = "fromTop"
-
-[scratchpads.noi]
-command = "/opt/Noi_linux_0.4.0.AppImage"
-unfocus = "hide"
-margin = 60
-class = "noi"
-size = "40% 90%"
-animation = "fromRight"
-
-[scratchpads.neorg]
-command = "foot -a neorg -e lvim -c ':Neorg workspace home'"
-animation = "fromBottom"
-unfocus = "false"
 
 [scratchpads.countdown]
 command = "foot -a countdown -e tclock_timer.sh"
