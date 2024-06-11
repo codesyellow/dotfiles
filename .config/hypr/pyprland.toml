@@ -8,11 +8,13 @@ command = "alacritty --class alacritty-dropterm"
 size = "75% 60%"
 margin = 50
 
-[scratchpads.volume]
-animation = "fromRight"
-command = "pavucontrol"
-class = "org.pulseaudio.pavucontrol"
-size = "40% 90%"
+[scratchpads.whats]
+animation = "fromTop"
+command = "flatpak run com.github.eneshecan.WhatsAppForLinux"
+class = "whatsapp-for-linux"
+size = "70% 80%"
+process_tracking = false
+class_match = true
 unfocus = "hide"
 lazy = true
 
