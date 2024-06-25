@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 0;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 20;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
@@ -14,7 +14,7 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 /*  monocle mode in the presence of several windows.                        */
 /*  Modes after showtab_nmodes are disabled.                                */
 enum showtab_modes { showtab_never, showtab_auto, showtab_nmodes, showtab_always};
-static const int showtab			= showtab_auto;        /* Default tab bar show mode */
+static const int showtab			= showtab_nmodes;        /* Default tab bar show mode */
 static const int toptab				= False;               /* False means bottom tab bar */
 static const char *fonts[]          = { 
   "JetBrainMono Nerd Font",
@@ -66,8 +66,9 @@ static const Rule rules[] = {
   { NULL,       NULL,   "pulsemixer",   0,            1,           -1,   'p', 930,35,400,400,        5,   },
   { NULL,       NULL,   "btop",   0,            1,           -1,   'b', 90,80,1200,600,        5,   },
   { NULL,       NULL,   "WhatsApp for Linux",   0,            1,           -1,   'w', 90,80,1200,600,        5,   },
+  { NULL,       NULL,   "Free Download Manager",   0,            1,           -1,   'd', 90,80,1200,600,        5,   },
   { NULL,       NULL,   "notes",   0,            1,           -1,   'o', 90,50,1200,600,        5,   },
-  { "DL: language lessons",       NULL,   NULL,   0,            1,           -1,   'l', 90,50,1200,600,        5,   },
+  { "DL: language lessons",       NULL,   NULL,   0,            1,           -1,   'l', 90,50,1200,700,        5,   },
   { NULL,       NULL,   "neorg",   0,            1,           -1,   'n', 90,50,1200,600,        5,   },
   { NULL,       NULL,   "tt",   0,            1,           -1,   'e', 90,50,1200,600,        5,   },
   { NULL,       NULL,   "Exercise Timer",   0,            1,           -1,   't', 500,50,400,400,        5,   },
@@ -124,7 +125,7 @@ static const char *volup[]  = { "volume.sh", "up", NULL };
 static const char *voldw[]  = { "volume.sh", "down", NULL };
 static const char *volm[]  = { "volume.sh", "mute", NULL };
 /*First arg only serves to match against key in rules*/
-static const char *scratchpadcmd[] = {"s", "st", "-A", "0.50", "-t", "scratchpad", NULL}; 
+static const char *scratchpadcmd[] = {"s", "st", "-A", "0.60", "-c", "scratchpad", "-t", "scratchpad", NULL}; 
 static const char *scratchpadclock[] = {"c", "st", "-A", "0.50", "-t", "clock", "-e", "tclock_timer.sh", NULL}; 
 static const char *scratchpadhabit[] = {"h", "st", "-A", "0.70", "-t", "habits", "-e", "nvim", "/home/digo/.vimwiki/Habits.wiki", NULL}; 
 static const char *scratchpadnotes[] = {"o", "st", "-A", "0.70", "-t", "notes", "-e", "nvim", "/home/digo/.vimwiki/index.wiki", NULL}; 
@@ -136,6 +137,7 @@ static const char *scratchpadai[] = {"a", "st", "-t", "ai", "-e", "aichat", NULL
 static const char *scratchpadneorg[] = {"n", "st", "-t", "neorg", "-e", "/usr/bin/nvim -c ':Neorg workspace home'", NULL}; 
 static const char *scratchpadtt[] = {"e", "st", "-t", "tt", "-e", "tt", "-t", "60", NULL}; 
 static const char *scratchpadia[] = {"i", "noi-desktop", NULL}; 
+static const char *scratchfdm[] = {"d", "fdm", NULL}; 
 static const char *scratchpadstretch[] = {"t", "flatpak", "run", "xyz.safeworlds.hiit", NULL}; 
 static const char *scratchpadzap[] = {"w", "flatpak", "run", "com.github.eneshecan.WhatsAppForLinux", NULL}; 
 static const char *scratchpadslingo[] = {"l", "duolingo-desktop", NULL}; 
@@ -170,6 +172,7 @@ static Keychord *keychords[] = {
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_l}},                            togglescratch,  {.v = scratchpadslingo } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_n}},                            togglescratch,  {.v = scratchpadnotes } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_w}},                            togglescratch,  {.v = scratchpadzap } }),
+  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_d}},                            togglescratch,  {.v = scratchfdm } }),
   // volume
   &((Keychord){2, {{MODKEY, XK_v}, {0, XK_j}},                            spawn,          {.v = voldw } }),
   &((Keychord){2, {{MODKEY, XK_v}, {0, XK_k}},                            spawn,          {.v = volup } }),
