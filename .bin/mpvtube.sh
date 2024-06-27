@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Prompt user for YouTube URL using dmenu
-url=$(echo "" | dmenu -nb "#000" -z "700" -x "200" -y "2")
+# Prompt user for YouTube URL using wofi
+url=$(wofi --dmenu -p "Enter YouTube URL:")
 
 # Check if the input is a valid YouTube URL
 if [[ $url == *"youtube.com"* || $url == *"youtu.be"* ]]; then
