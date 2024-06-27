@@ -34,6 +34,15 @@ size = "30% 90%"
 unfocus = "hide"
 lazy = true
 
+[scratchpads.pulse]
+animation = "fromRight"
+command = "foot -T pulsemixer -a pulsemixer -e pulsemixer"
+class = "pulsemixer"
+size = "30% 40%"
+position = "66% 5%"
+unfocus = "hide"
+lazy = true
+
 [scratchpads.stretch]
 animation = "fromTop"
 command = "flatpak run xyz.safeworlds.hiit"
