@@ -31,6 +31,7 @@ animation = "fromRight"
 command = "alacritty -T ia --class ia -e aichat"
 class = "ia"
 size = "30% 90%"
+position = "65% 5%"
 unfocus = "hide"
 lazy = true
 
@@ -39,7 +40,7 @@ animation = "fromRight"
 command = "foot -T pulsemixer -a pulsemixer -e pulsemixer"
 class = "pulsemixer"
 size = "30% 40%"
-position = "66% 5%"
+position = "65% 5%"
 unfocus = "hide"
 lazy = true
 
@@ -78,6 +79,7 @@ command = "foot -a btop -e btop"
 unfocus = "hide"
 margin = 100
 size = "90% 80%"
+position = "5% 10%"
 animation = "fromTop"
 
 [scratchpads.countdown]
