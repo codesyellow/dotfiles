@@ -11,4 +11,4 @@ swayosd-server &
 blueman-applet &
 ianny &
 flatpak run com.github.eneshecan.WhatsAppForLinux &
-sleep 5 && flatpak run com.github.wwmm.easyeffects --gapplication-service &
+sleep 5 && easyeffects --gapplication-service &
