@@ -1,0 +1,20 @@
+modmap:
+  - name: Except Chrome
+    application:
+      not: Google-chrome
+    remap:
+      Alt_R: Super_L
+      Capslock:
+        held: Super_L # Required, also accepts arrays
+        alone: Esc # Required, also accepts arrays
+keymap:
+  - name: firefox
+    application:
+      only: firefox
+    remap:
+      Super-p: C-Shift-tab
+      Super-n: C-tab
+      Super-d: C-w
+      Super-k: up
+      Super-j: down
+
