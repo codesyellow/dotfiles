@@ -5,6 +5,7 @@
 @define-color bg #7A8478;
 @define-color pulsa #A7C080;
 @define-color ram #83C092; 
+@define-color joy #E68369; 
 @define-color root #7FBBB3; 
 @define-color temp #3BCB73; 
 @define-color day-week-fg #1E2326;
@@ -98,6 +99,17 @@ window#waybar {
   color: @day-bg;
   background-color: rgba(0, 0, 0, 0.01);
 }
+
+#custom-dsbattery-icon {
+  color: @joy;
+  padding-right: 2px;
+}
+
+#custom-dsbattery {
+  color: @joy;
+  font-size: 12px;
+}
+
 #pulseaudio-icon {
   font-size: 10px;
 }
@@ -138,6 +150,7 @@ window#waybar {
 
 #clock {
   color: @normal;
+  margin-top: 4px;
 }
 
 #clock.day {
