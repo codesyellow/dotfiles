@@ -1,2 +1,2 @@
 #!/bin/sh
-DISPLAY=:12 dwm
+DISPLAY=:12 awesome
