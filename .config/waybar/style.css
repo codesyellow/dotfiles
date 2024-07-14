@@ -129,6 +129,12 @@ window#waybar {
   color: @home;
 }
 
+#custom-pacman,
+#custom-pacman-icon {
+  color: #77E4C8;
+  margin-right: 3px;
+}
+
 #temperature,
 #custom-temp-icon {
   color: @temp;

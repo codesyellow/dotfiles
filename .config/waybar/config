@@ -3,7 +3,7 @@
     "position": "right",
     "margin-right": 8,
     "modules-left": ["hyprland/workspaces"],
-    "modules-right": ["hyprland/submap", "custom/dsbattery-icon", "custom/dsbattery", "pulseaudio#icon", "pulseaudio", "custom/disk-root", "disk", "custom/disk-home", "disk#home", "custom/temp-icon", "temperature", "custom/cpu-icon", "cpu","custom/ram-icon", "memory","custom/separator", "tray", "custom/separator", "clock", "clock#day", "clock#week-day"],
+    "modules-right": ["hyprland/submap", "custom/dsbattery-icon", "custom/dsbattery", "custom/pacman-icon", "custom/pacman", "pulseaudio#icon", "pulseaudio", "custom/disk-root", "disk", "custom/disk-home", "disk#home", "custom/temp-icon", "temperature", "custom/cpu-icon", "cpu","custom/ram-icon", "memory","custom/separator", "tray", "custom/separator", "clock", "clock#day", "clock#week-day"],
     "hyprland/workspaces": {
       "all-outputs": false,
       "active-only": false,
@@ -23,6 +23,18 @@
       "persistent-workspaces": {
         "*": 7
       }
+    },
+    "custom/pacman-icon": {
+      "tooltip": false,
+      "format": ""
+    },
+    "custom/pacman": {
+                "format": "{}",
+                "interval": 3600,                     // every hour
+                "exec": "checkupdates | wc -l",       // # of updates
+                "exec-if": "exit 0",                  // always run; consider advanced run conditions
+                "on-click": "alacritty -e 'sudo pacman -Syu'; pkill -SIGRTMIN+8 waybar", // update system
+                "signal": 8
     },
     "pulseaudio#icon": {
       "format": "<span font='10'>{icon}</span>",
