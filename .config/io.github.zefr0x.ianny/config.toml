@@ -11,4 +11,4 @@ long_break_duration = 30
 [notification]
 show_progress_bar = true
 # Minimum delay of updating the progress bar (lower than 1s may return an error).
-minimum_update_delay = 5
+minimum_update_delay = 1
