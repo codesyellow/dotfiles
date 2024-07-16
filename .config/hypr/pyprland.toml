@@ -18,6 +18,16 @@ class_match = true
 unfocus = "hide"
 lazy = true
 
+[scratchpads.calc]
+animation = "fromTop"
+command = "galculator"
+class = "galculator"
+size = "70% 80%"
+process_tracking = false
+class_match = true
+unfocus = "hide"
+lazy = true
+
 [scratchpads.todo]
 animation = "fromRight"
 command = "kuro"

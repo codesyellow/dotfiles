@@ -1,4 +1,5 @@
 #!/bin/bash
+xremap ~/.config/xremap/config.yml &
 swww-daemon &
 waybar &
 pypr &
@@ -10,5 +11,4 @@ wl-paste -pw wl-copy &
 swayosd-server &
 blueman-applet &
 ianny &
-flatpak run com.github.eneshecan.WhatsAppForLinux &
 sleep 5 && easyeffects --gapplication-service &
