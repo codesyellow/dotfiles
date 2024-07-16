@@ -3,7 +3,7 @@
     "position": "right",
     "margin-right": 8,
     "modules-left": ["hyprland/workspaces"],
-    "modules-right": ["hyprland/submap", "custom/dsbattery-icon", "custom/dsbattery", "custom/pacman-icon", "custom/pacman", "pulseaudio#icon", "pulseaudio", "custom/disk-root", "disk", "custom/disk-home", "disk#home", "custom/temp-icon", "temperature", "custom/cpu-icon", "cpu","custom/ram-icon", "memory","custom/separator", "tray", "custom/separator", "clock", "clock#day", "clock#week-day"],
+    "modules-right": ["hyprland/submap", "custom/dsbattery-icon", "custom/dsbattery", "custom/pacman-icon", "custom/pacman", "pulseaudio#icon", "pulseaudio", "custom/disk-root", "disk", "custom/temp-icon", "temperature", "custom/cpu-icon", "cpu","custom/ram-icon", "memory","custom/separator", "tray", "custom/separator", "clock", "clock#day", "clock#week-day"],
     "hyprland/workspaces": {
       "all-outputs": false,
       "active-only": false,
@@ -71,9 +71,10 @@
     },
     "custom/dsbattery-icon": {
       "format": "{}",
-      "interval": 60,
+      "interval": 3,
       "escape": true,
       "exec": "ps4_status.sh icon",
+      "exec-if": "is_ds4_on.sh",
       "on-click-right": "dsbattery -d"
     },
     "custom/dsbattery": {
