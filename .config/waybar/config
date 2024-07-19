@@ -3,7 +3,7 @@
     "position": "right",
     "margin-right": 8,
     "modules-left": ["hyprland/workspaces"],
-    "modules-right": ["hyprland/submap", "custom/dsbattery-icon", "custom/dsbattery", "custom/pacman-icon", "custom/pacman", "pulseaudio#icon", "pulseaudio", "custom/disk-root", "disk", "custom/temp-icon", "temperature", "custom/cpu-icon", "cpu","custom/ram-icon", "memory","custom/separator", "tray", "custom/separator", "clock", "clock#day", "clock#week-day"],
+    "modules-right": ["hyprland/submap", "custom/dsbattery-icon", "custom/dsbattery", "custom/pacman-icon", "custom/pacman", "pulseaudio#icon", "pulseaudio", "custom/disk-root", "disk", "custom/temp-icon", "temperature", "custom/cpu-icon", "cpu","custom/ram-icon", "memory","custom/separator", "clock", "clock#day", "clock#week-day"],
     "hyprland/workspaces": {
       "all-outputs": false,
       "active-only": false,
@@ -75,16 +75,19 @@
       "escape": true,
       "exec": "ps4_status.sh icon",
       "exec-if": "is_ds4_on.sh",
-      "on-click-right": "dsbattery -d"
+      "on-click-right": "dsbattery -d && killall xboxdrv",
+      "on-click": "nohup emulate_xbox_ps4.sh > /dev/null 2>&1 &",
+      "on-scroll-down": "killall xboxdrv"
     },
     "custom/dsbattery": {
       "format": "{}",
       "interval": 3,
       "escape": true,
       "exec": "ps4_status.sh perc",
-      "on-click-right": "dsbattery -d"
+      "on-click-right": "dsbattery -d && killall xboxdrv",
+      "on-click": "nohup emulate_xbox_ps4.sh > /dev/null 2>&1 &",
+      "on-scroll-down": "killall xboxdrv"
     },
-
     "hyprland/submap": {
       "format": "",
       "max-length": 8,
@@ -118,7 +121,7 @@
       "format": "{:%a}",
     },
     "custom/separator": {
-      "format": "",
+      "format": "----",
       "tooltip": false,
     },
     "custom/ram-icon": {
