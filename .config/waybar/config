@@ -3,7 +3,7 @@
     "position": "right",
     "margin-right": 8,
     "modules-left": ["hyprland/workspaces"],
-    "modules-right": ["hyprland/submap", "custom/dsbattery-icon", "custom/dsbattery", "custom/pacman-icon", "custom/pacman", "pulseaudio#icon", "pulseaudio", "custom/disk-root", "disk", "custom/temp-icon", "temperature", "custom/cpu-icon", "cpu","custom/ram-icon", "memory","custom/separator", "clock", "clock#day", "clock#week-day"],
+    "modules-right": ["hyprland/submap", "custom/check-server-icon", "custom/check-server","custom/dsbattery-icon", "custom/dsbattery", "custom/pacman-icon", "custom/pacman", "pulseaudio#icon", "pulseaudio", "custom/disk-root", "disk", "custom/temp-icon", "temperature", "custom/cpu-icon", "cpu","custom/ram-icon", "memory","custom/separator", "clock", "clock#day", "clock#week-day"],
     "hyprland/workspaces": {
       "all-outputs": false,
       "active-only": false,
@@ -33,8 +33,9 @@
                 "interval": 3600,                     // every hour
                 "exec": "checkupdates | wc -l",       // # of updates
                 "exec-if": "exit 0",                  // always run; consider advanced run conditions
-                "on-click": "alacritty -e 'sudo pacman -Syu'; pkill -SIGRTMIN+8 waybar", // update system
-                "signal": 8
+                "on-click": "alacritty --class update-system -e sh -c 'yay'; pkill -SIGRTMIN+8 waybar",
+                "signal": 8,
+                  "tooltip": false,
     },
     "pulseaudio#icon": {
       "format": "<span font='10'>{icon}</span>",
@@ -51,14 +52,16 @@
       },
       "scroll-step": 1,
       "on-click": "pavucontrol",
-      "ignored-sinks": ["Easy Effects Sink"]
+      "ignored-sinks": ["Easy Effects Sink"],
+      "tooltip": false,
     },
     "pulseaudio": {
       "format": "{volume}%",
       "format-bluetooth": "{volume}%",
       "scroll-step": 1,
       "on-click": "pavucontrol",
-      "ignored-sinks": ["Easy Effects Sink"]
+      "ignored-sinks": ["Easy Effects Sink"],
+      "tooltip": false,
     },
     "custom/temp-icon": {
       "tooltip": false,
@@ -67,7 +70,25 @@
     "temperature": {
       "thermal-zone": 2,
       "critical-threshold": 80,
-      "format": "{temperatureC}°"
+      "format": "{temperatureC}°",
+      "tooltip": false,
+    },
+    "custom/check-server-icon": {
+      "format": "",
+      "interval": 1800,
+      "escape": true,
+      "exec": "check_server.sh icon",
+      "exec-if": "sh_check_server.sh",
+      "tooltip": false,
+    },
+    "custom/check-server": {
+      "format": "{}",
+      "interval": 1800,
+      "escape": true,
+      "exec": "check_server.sh",
+      "exec-if": "sh_check_server.sh",
+      "on-click-right": "check_server.sh",
+      "tooltip": false,
     },
     "custom/dsbattery-icon": {
       "format": "{}",
@@ -77,7 +98,8 @@
       "exec-if": "is_ds4_on.sh",
       "on-click-right": "dsbattery -d && killall xboxdrv",
       "on-click": "nohup emulate_xbox_ps4.sh > /dev/null 2>&1 &",
-      "on-scroll-down": "killall xboxdrv"
+      "on-scroll-down": "emulate_xbox_ps4.sh 'kill xboxdrv'",
+      "tooltip": false,
     },
     "custom/dsbattery": {
       "format": "{}",
@@ -86,7 +108,8 @@
       "exec": "ps4_status.sh perc",
       "on-click-right": "dsbattery -d && killall xboxdrv",
       "on-click": "nohup emulate_xbox_ps4.sh > /dev/null 2>&1 &",
-      "on-scroll-down": "killall xboxdrv"
+      "on-scroll-down": "emulate_xbox_ps4.sh 'kill xboxdrv'",
+      "tooltip": false,
     },
     "hyprland/submap": {
       "format": "",
