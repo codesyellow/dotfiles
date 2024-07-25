@@ -36,6 +36,15 @@ size = "40% 90%"
 unfocus = "hide"
 lazy = true
 
+[scratchpads.task-tui]
+animation = "fromRight"
+command = "foot -T task-tui -a task-tui -e taskwarrior-tui"
+class = "task-tui"
+size = "40% 90%"
+unfocus = "hide"
+lazy = true
+
+
 [scratchpads.ia]
 animation = "fromRight"
 command = "alacritty -T ia --class ia -e aichat"
@@ -86,6 +95,14 @@ margin = 50
 
 [scratchpads.btop]
 command = "foot -a btop -e btop"
+unfocus = "hide"
+margin = 100
+size = "90% 80%"
+position = "5% 10%"
+animation = "fromTop"
+
+[scratchpads.yazi]
+command = "foot -a btop -e yazi"
 unfocus = "hide"
 margin = 100
 size = "90% 80%"
