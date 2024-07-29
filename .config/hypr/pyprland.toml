@@ -44,13 +44,20 @@ size = "40% 90%"
 unfocus = "hide"
 lazy = true
 
+[scratchpads.clipse]
+animation = "fromRight"
+command = "foot -T clipse -a clipse -e clipse"
+class = "clipse"
+size = "30% 90%"
+unfocus = "hide"
+lazy = true
+
 [scratchpads.ia]
 animation = "fromRight"
 command = "alacritty -T ia --class ia -e aichat"
 class = "ia"
 size = "30% 90%"
 position = "65% 5%"
-unfocus = "hide"
 lazy = true
 
 [scratchpads.pulse]
@@ -98,6 +105,13 @@ unfocus = "hide"
 margin = 100
 size = "90% 80%"
 position = "5% 10%"
+animation = "fromTop"
+
+[scratchpads.tt]
+command = "foot -a tt -e tt"
+unfocus = "hide"
+margin = 100
+size = "70% 60%"
 animation = "fromTop"
 
 [scratchpads.yazi]

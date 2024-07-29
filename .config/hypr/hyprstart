@@ -12,5 +12,6 @@ swayosd-server &
 blueman-applet &
 ianny &
 #jamesdsp -t &
+clipse -listen &
 pactl load-module module-switch-on-connect &
 sleep 5 && easyeffects --gapplication-service &
