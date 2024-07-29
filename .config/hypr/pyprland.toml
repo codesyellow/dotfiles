@@ -48,7 +48,7 @@ lazy = true
 animation = "fromRight"
 command = "foot -T clipse -a clipse -e clipse"
 class = "clipse"
-size = "30% 90%"
+size = "47% 90%"
 unfocus = "hide"
 lazy = true
 
@@ -115,7 +115,7 @@ size = "70% 60%"
 animation = "fromTop"
 
 [scratchpads.yazi]
-command = "foot -a btop -e yazi"
+command = "foot -a yazi -e yazi"
 unfocus = "hide"
 margin = 100
 size = "90% 80%"
