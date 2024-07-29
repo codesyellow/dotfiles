@@ -11,4 +11,6 @@ wl-paste -pw wl-copy &
 swayosd-server &
 blueman-applet &
 ianny &
+#jamesdsp -t &
+pactl load-module module-switch-on-connect &
 sleep 5 && easyeffects --gapplication-service &

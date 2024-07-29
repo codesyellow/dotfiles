@@ -44,7 +44,6 @@ size = "40% 90%"
 unfocus = "hide"
 lazy = true
 
-
 [scratchpads.ia]
 animation = "fromRight"
 command = "alacritty -T ia --class ia -e aichat"
