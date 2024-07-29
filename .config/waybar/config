@@ -29,13 +29,13 @@
       "format": ""
     },
     "custom/pacman": {
-                "format": "{}",
-                "interval": 3600,                     // every hour
-                "exec": "checkupdates | wc -l",       // # of updates
-                "exec-if": "exit 0",                  // always run; consider advanced run conditions
-                "on-click": "alacritty --class update-system -e sh -c 'yay'; pkill -SIGRTMIN+8 waybar",
-                "signal": 8,
-                  "tooltip": false,
+      "format": "{}",
+      "interval": 3600,                     // every hour
+      "exec": "checkupdates | wc -l",       // # of updates
+      "exec-if": "exit 0",                  // always run; consider advanced run conditions
+      "on-click": "alacritty --class update-system -e sh -c 'yay'; pkill -SIGRTMIN+8 waybar",
+      "signal": 8,
+      "tooltip": false,
     },
     "pulseaudio#icon": {
       "format": "<span font='10'>{icon}</span>",
@@ -52,7 +52,6 @@
       },
       "scroll-step": 1,
       "on-click": "pavucontrol",
-      "ignored-sinks": ["Easy Effects Sink"],
       "tooltip": false,
     },
     "pulseaudio": {
@@ -60,7 +59,6 @@
       "format-bluetooth": "{volume}%",
       "scroll-step": 1,
       "on-click": "pavucontrol",
-      "ignored-sinks": ["Easy Effects Sink"],
       "tooltip": false,
     },
     "custom/temp-icon": {
@@ -79,6 +77,7 @@
       "escape": true,
       "exec": "check_server.sh icon",
       "exec-if": "sh_check_server.sh",
+      "on-click": "firefox https://tsarvar.com/en/servers/team-fortress-2/205.178.182.182:27060",
       "tooltip": false,
     },
     "custom/check-server": {
@@ -87,6 +86,7 @@
       "escape": true,
       "exec": "check_server.sh",
       "exec-if": "sh_check_server.sh",
+      "on-click": "firefox https://tsarvar.com/en/servers/team-fortress-2/205.178.182.182:27060",
       "on-click-right": "check_server.sh",
       "tooltip": false,
     },

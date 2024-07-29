@@ -49,7 +49,7 @@ window#waybar {
   border-radius: 0;
   margin-right: -4px;
   color: @button;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 #workspaces button.empty {
