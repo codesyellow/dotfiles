@@ -51,18 +51,18 @@ day_month=$(date +"%d")
 hour=$(date +"%H:%M" | cut -c 1-2)
 houre=$(date +"%H:%M")
 cpu=$(awk '{u=$2+$4; t=$2+$4+$5; if (NR==1){u1=u; t1=t;} else print ($2+$4-u1) * 100 / (t-t1) "%"; }' \
-	<(grep 'cpu ' /proc/stat) <(
-		sleep 1
-		grep 'cpu ' /proc/stat
-	))
+  <(grep 'cpu ' /proc/stat) <(
+    sleep 1
+    grep 'cpu ' /proc/stat
+  ))
 cpu_per_int=$(printf "%.0f\n" "$cpu")
 
 status=""
 
 if [[ $easy = "eq" ]]; then
-	status+="$equalizer"
+  status+="$equalizer"
 else
-	status+="$bass"
+  status+="$bass"
 fi
 
 # if [[ $climate -le 25 ]]; then
@@ -72,66 +72,66 @@ fi
 # fi
 
 if [[ $ds4 -ge 60 && $ds4 -le 90 ]]; then
-	status+="  $ds4_most$controller  "
+  status+="  $ds4_most$controller  "
 elif [[ -z $ds4 ]]; then
-	status+="  $ds4_not$controller  "
+  status+="  $ds4_not$controller  "
 elif [[ $ds4 -le 59 && $ds4 -ge 30 ]]; then
-	status+="  $ds4_mid$controller  "
+  status+="  $ds4_mid$controller  "
 elif [[ $ds4 -le 29 ]]; then
-	status+="  $ds4_low$controller  "
+  status+="  $ds4_low$controller  "
 elif [[ $ds4 -ge 91 ]]; then
-	status+="  $ds4_full$controller  "
+  status+="  $ds4_full$controller  "
 fi
 
 if [[ $volume -ge 55 ]]; then
-	status+="$urgent $volume%"
+  status+="$urgent $volume%"
 elif [[ $volume -le 20 && $volume -gt 0 ]]; then
-	status+="$urgent$volume%"
+  status+="$urgent$volume%"
 elif [[ $volume -eq 0 ]]; then
-	status+="$urgent$volume%"
+  status+="$urgent$volume%"
 elif [[ $volume -ge 50 ]]; then
-	status+="$alarming $volume%"
+  status+="$alarming $volume%"
 else
-	status+="$normal $volume%"
+  status+="$normal $volume%"
 fi
 
 if [[ $cputemp -le 40 ]]; then
-	status+=" $low_temp$cpu_temp_low $cputemp° "
+  status+=" $low_temp$cpu_temp_low $cputemp° "
 elif [[ $cputemp -ge 41 && $cputemp -le 60 ]]; then
-	status+=" $mid_temp$cpu_temp_mid $cputemp° "
+  status+=" $mid_temp$cpu_temp_mid $cputemp° "
 else
-	status+=" $high_temp$cpu_temp_high $cputemp° "
+  status+=" $high_temp$cpu_temp_high $cputemp° "
 fi
 
 if [[ $cpu_per_int -ge 80 ]]; then
-	status+="$urgent$cpu_icon $cpu_per_int%"
+  status+="$urgent$cpu_icon $cpu_per_int%"
 else
-	status+="$normal_cpu$cpu_icon $cpu_per_int%"
+  status+="$normal_cpu$cpu_icon $cpu_per_int%"
 fi
 
 if [[ $freemen_per_int -ge 70 ]]; then
-	status+=" $urgent$ram_icon $freemen_per_int%"
+  status+=" $urgent$ram_icon $freemen_per_int%"
 elif [[ $freemen_per_int -ge 60 ]]; then
-	status+=" $alarming$ram_icon $freemen_per_int%"
+  status+=" $alarming$ram_icon $freemen_per_int%"
 else
-	status+=" $normal_men$ram_icon $freemen_per_int%"
+  status+=" $normal_men$ram_icon $freemen_per_int%"
 fi
 
 if [[ $(echo "$root_int < 20" | bc) -ne 0 ]]; then
-	echo E
-	status+=" $alarming$root_icon $root_int""g"
+  echo E
+  status+=" $alarming$root_icon $root_int""g"
 elif [[ $(echo "$root_int < 5" | bc) -ne 0 ]]; then
-	status+=" $urgent$root_icon $root_int""g"
+  status+=" $urgent$root_icon $root_int""g"
 else
-	status+=" $normal_root$root_icon $root_int""g"
+  status+=" $normal_root$root_icon $root_int""g"
 fi
 
 if [[ $hour -ge "05" && $hour -le "12" ]]; then
-	status+=" $normal_date$date_icon $date $daym_color[$day_month]$early_hour$houre"
+  status+=" $normal_date$date_icon $date $daym_color[$day_month]$early_hour$houre"
 elif [[ $hour -ge "12" && $hour -le "18" ]]; then
-	status+=" $normal_date$date_icon $date$daym_color[$day_month]$afternoon_hour$houre"
+  status+=" $normal_date$date_icon $date$daym_color[$day_month]$afternoon_hour$houre"
 else
-	status+=" $normal_date$date_icon $date$daym_color[$day_month]$night_hour$houre"
+  status+=" $normal_date$date_icon $date$daym_color[$day_month]$night_hour$houre"
 fi
 
 status+=" $day_color$day"

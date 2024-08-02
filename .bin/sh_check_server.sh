@@ -10,11 +10,13 @@ server=$(check_server.sh)
 
 if [[ $server == "0" ]]; then
   #  echo yes
+  pkill -SIGRTMIN+18 waybar
   false
 else
   if [ "$current_hour" -ge 5 ] && [ "$current_hour" -le 21 ]; then
     true
   else
+    pkill -SIGRTMIN+18 waybar
     false
   fi
 #  echo no
