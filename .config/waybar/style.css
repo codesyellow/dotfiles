@@ -23,12 +23,12 @@ window#waybar {
 }
 
 #workspaces {
-  margin-top: 11px;
+  margin-top: 20px;
   font-size: 14px;  
 }
 
 #workspaces button:first-child {
-  border-radius: 15px 25px 0 0;
+  border-radius: 14px 24px 0 0;
   padding-top: 6px;
 }
 
@@ -72,14 +72,17 @@ window#waybar {
 }
 
 #pulseaudio,
+#custom-volume,
 #disk,
 #temperature,
 #cpu,
+#custom-pacman,
 #memory {
   font-size: 12px;
 }
 
 #pulseaudio.icon,
+#custom-volume-icon
 #custom-cpu-icon,
 #custom-disk-home,
 #custom-ram-icon,
@@ -132,12 +135,21 @@ window#waybar {
 #custom-pacman,
 #custom-pacman-icon {
   color: #77E4C8;
-  margin-right: 3px;
+  margin-right: 2px;
+}
+
+#custom-pacman {
+  margin-bottom: 2px;
+  margin-top: -2px;
 }
 
 #temperature,
 #custom-temp-icon {
   color: @temp;
+}
+
+#temperature {
+  margin-bottom: 4px;
 }
 
 #cpu,
@@ -150,19 +162,24 @@ window#waybar {
   color: @ram;
 }
 
-#custom-check-server {
+#custom-server {
   font-size: 12px;
   margin-bottom: 2px;
 }
 
-#custom-check-server-icon,
-#custom-check-server {
+#custom-server-icon,
+#custom-server {
   color: #FF8225;
   margin-right: 2px;
 }
 
 #tray {
   margin: 8px 3px 8px 0;
+}
+
+#custom-separator {
+  color: rgba(250, 250, 250, 0.5);
+  margin-top: -2px;
 }
 
 #clock {
@@ -179,7 +196,7 @@ window#waybar {
   color: #000;
   font-size: 12px;
   padding: 4px;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
   border-radius: 0 0 10px 10px;
 }
 

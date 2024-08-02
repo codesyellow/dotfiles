@@ -3,7 +3,7 @@
     "position": "right",
     "margin-right": 8,
     "modules-left": ["hyprland/workspaces"],
-    "modules-right": ["hyprland/submap", "custom/check-server-icon", "custom/check-server","custom/dsbattery-icon", "custom/dsbattery", "custom/pacman-icon", "custom/pacman", "pulseaudio#icon", "pulseaudio", "custom/disk-root", "disk", "custom/temp-icon", "temperature", "custom/cpu-icon", "cpu","custom/ram-icon", "memory","custom/separator", "clock", "clock#day", "clock#week-day"],
+    "modules-right": ["hyprland/submap","custom/server-icon","custom/server", "custom/dsbattery-icon", "custom/dsbattery", "custom/pacman-icon", "custom/pacman", "custom/volume-icon", "custom/volume", "custom/disk-root", "disk", "custom/temp-icon", "temperature", "custom/cpu-icon", "cpu","custom/ram-icon", "memory","custom/separator", "clock", "clock#day", "clock#week-day"],
     "hyprland/workspaces": {
       "all-outputs": false,
       "active-only": false,
@@ -16,8 +16,8 @@
         "5": " ",
         "6": "  ",
         "7": " ",
-        "urgent": " ",
-        "default": " ",
+        "urgent": "  ",
+        "default": "  ",
         "persistent": "persistent",
       },
       "persistent-workspaces": {
@@ -37,33 +37,25 @@
       "signal": 8,
       "tooltip": false,
     },
-    "pulseaudio#icon": {
-      "format": "<span font='10'>{icon}</span>",
-      "format-bluetooth": "{icon}",
-      "format-muted": "",
-      "format-icons": {
-        "headphone": "",
-        "hands-free": "",
-        "headset": "",
-        "phone": "",
-        "portable": "",
-        "car": "",
-        "default": ["", ""]
-      },
-      "scroll-step": 1,
+    "custom/volume-icon": {
+      "format": "{}",
+      "escape": true,
+      "interval": 1,
+      "exec": "cat /tmp/volume_status",
       "on-click": "pavucontrol",
       "tooltip": false,
     },
-    "pulseaudio": {
-      "format": "{volume}%",
-      "format-bluetooth": "{volume}%",
-      "scroll-step": 1,
+    "custom/volume": {
+      "format": "{}%",
+      "escape": true,
+      "interval": 1,
+      "exec": "pamixer --get-volume",
       "on-click": "pavucontrol",
       "tooltip": false,
     },
     "custom/temp-icon": {
       "tooltip": false,
-      "format": "<span font='13'></span>"
+      "format": "<span font=''></span>"
     },
     "temperature": {
       "thermal-zone": 2,
@@ -71,30 +63,28 @@
       "format": "{temperatureC}°",
       "tooltip": false,
     },
-    "custom/check-server-icon": {
-      "format": "",
-      "interval": 1800,
+    "custom/server-icon": {
+      "format": "{}",
       "escape": true,
-      "exec": "check_server.sh icon",
-      "exec-if": "sh_check_server.sh",
-      "on-click": "firefox https://tsarvar.com/en/servers/team-fortress-2/205.178.182.182:27060",
+      "interval": 1,
+      "exec": "cat '/tmp/map_display-icon'",
+      "exec-if": "check_server_status.sh",
       "tooltip": false,
     },
-    "custom/check-server": {
+    "custom/server": {
       "format": "{}",
-      "interval": 1800,
+      "interval": 1,
       "escape": true,
-      "exec": "check_server.sh",
-      "exec-if": "sh_check_server.sh",
-      "on-click": "firefox https://tsarvar.com/en/servers/team-fortress-2/205.178.182.182:27060",
-      "on-click-right": "check_server.sh",
+      "exec": "cat '/tmp/map_display'",
+      "exec-if": "check_server_status.sh",
       "tooltip": false,
+      "signal": 38,
     },
     "custom/dsbattery-icon": {
       "format": "{}",
-      "interval": 3,
       "escape": true,
-      "exec": "ps4_status.sh icon",
+      "interval": 10,
+      "exec": "echo ''",
       "exec-if": "is_ds4_on.sh",
       "on-click-right": "dsbattery -d && killall xboxdrv",
       "on-click": "nohup emulate_xbox_ps4.sh > /dev/null 2>&1 &",
@@ -102,14 +92,16 @@
       "tooltip": false,
     },
     "custom/dsbattery": {
-      "format": "{}",
-      "interval": 3,
+      "format": "{}%",
+      "interval": 10,
       "escape": true,
-      "exec": "ps4_status.sh perc",
-      "on-click-right": "dsbattery -d && killall xboxdrv",
+      "exec": "cat /tmp/ds4_battery",
+      "exec-if": "is_ds4_on.sh",
+      "on-click-right": "dsbattery -d && killall xboxdrv && rm /tmp/first_connect",
       "on-click": "nohup emulate_xbox_ps4.sh > /dev/null 2>&1 &",
       "on-scroll-down": "emulate_xbox_ps4.sh 'kill xboxdrv'",
       "tooltip": false,
+      "signal": 38,
     },
     "hyprland/submap": {
       "format": "",
@@ -144,7 +136,7 @@
       "format": "{:%a}",
     },
     "custom/separator": {
-      "format": "----",
+      "format": "-----",
       "tooltip": false,
     },
     "custom/ram-icon": {
