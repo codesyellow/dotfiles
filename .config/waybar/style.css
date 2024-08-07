@@ -71,111 +71,7 @@ window#waybar {
   color: @active;
 }
 
-#pulseaudio,
-#custom-volume,
-#disk,
-#temperature,
-#cpu,
-#custom-pacman,
-#memory {
-  font-size: 12px;
-}
 
-#pulseaudio.icon,
-#custom-volume-icon
-#custom-cpu-icon,
-#custom-disk-home,
-#custom-ram-icon,
-#tray,
-#custom-disk-root, 
-#submap,
-#custom-weather,
-#custom-temp-icon {
-  margin: 4px 2px 2px 0;
-}
-
-#custom-disk-root {
-  margin-right: 4px;
-}
-
-#submap {
-  color: @day-bg;
-  background-color: rgba(0, 0, 0, 0.01);
-}
-
-#custom-dsbattery-icon {
-  color: @joy;
-  padding-right: 2px;
-}
-
-#custom-dsbattery {
-  color: @joy;
-  font-size: 12px;
-}
-
-#pulseaudio-icon {
-  font-size: 10px;
-}
-
-#pulseaudio,
-#pulseaudio-icon {
-  color: @pulsa;
-}
-
-#custom-disk-root,
-#disk {
-  color: @root;
-}
-
-#custom-disk-home,
-#disk.home {
-  color: @home;
-}
-
-#custom-pacman,
-#custom-pacman-icon {
-  color: #77E4C8;
-  margin-right: 2px;
-}
-
-#custom-pacman {
-  margin-bottom: 2px;
-  margin-top: -2px;
-}
-
-#temperature,
-#custom-temp-icon {
-  color: @temp;
-}
-
-#temperature {
-  margin-bottom: 4px;
-}
-
-#cpu,
-#custom-cpu-icon {
-  color: @cpu;
-}
-
-#memory,
-#custom-ram-icon {
-  color: @ram;
-}
-
-#custom-server {
-  font-size: 12px;
-  margin-bottom: 2px;
-}
-
-#custom-server-icon,
-#custom-server {
-  color: #FF8225;
-  margin-right: 2px;
-}
-
-#tray {
-  margin: 8px 3px 8px 0;
-}
 
 #custom-separator {
   color: rgba(250, 250, 250, 0.5);
@@ -200,9 +96,122 @@ window#waybar {
   border-radius: 0 0 10px 10px;
 }
 
-#custom-weather {
-  color: #fff;
+#pulseaudio.icon,
+#custom-volume-icon
+#custom-cpu-icon,
+#custom-ram-icon,
+#custom-temp-icon, 
+#custom-dsbattery-icon, 
+#custom-server-icon,
+#submap,
+#custom-pacman-icon {
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+#custom-volume,
+#cpu,
+#memory,
+#temperature, 
+#custom-server, 
+#custom-dsbattery, 
+#disk,
+#custom-pacman {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+/* submap */
+#submap {
+  color: @day-bg;
+  background-color: rgba(0, 0, 0, 0.01);
+}
+
+#submap {
+  margin-bottom: -2px;
+}
+
+/* server */
+#custom-server-icon,
+#custom-server {
+  color: #FF8225;
+  margin-right: 2px;
   margin-bottom: -1px;
-  margin-left: 1px;
-  font-size: 11px;
+}
+
+#custom-server {
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+
+/* pacman */
+#custom-pacman,
+#custom-pacman-icon {
+  color: #77E4C8;
+  margin-right: 2px;
+}
+
+#custom-pacman {
+  margin: -2px 0 4px 0; 
+}
+
+#custom-pacman-icon {
+  margin-bottom: -1px;
+}
+
+/* dsbattery */
+#custom-dsbattery-icon {
+  color: @joy;
+  padding-right: 2px;
+  margin-bottom: -1px;
+}
+
+#custom-dsbattery {
+  color: @joy;
+  font-size: 12px;
+  margin-bottom: 1px;
+}
+
+/* ram */
+#memory,
+#custom-ram-icon {
+  color: @ram;
+}
+
+#memory {
+  margin-bottom: -1px;
+}
+
+#custom-ram-icon {
+  margin-bottom: -1px;
+}
+
+/* temp */
+#temperature,
+#custom-temp-icon {
+  color: @temp;
+}
+
+#custom-temp-icon {
+  margin: 0 2px 1px 0;
+}
+
+/* cpu */
+#cpu,
+#custom-cpu-icon {
+  color: @cpu;
+}
+
+#custom-cpu-icon  {
+  margin-bottom: 1px;
+}
+
+/* disk */
+#custom-disk-root,
+#disk {
+  color: @root;
+}
+
+#custom-disk-root {
+  margin-right: 2px;
 }
