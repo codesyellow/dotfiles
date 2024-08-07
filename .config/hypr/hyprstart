@@ -13,5 +13,6 @@ blueman-applet &
 ianny &
 #jamesdsp -t &
 clipse -listen &
+ds4_controller.sh &
 pactl load-module module-switch-on-connect &
 sleep 5 && easyeffects --gapplication-service &

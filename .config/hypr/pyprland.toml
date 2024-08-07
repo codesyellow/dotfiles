@@ -107,6 +107,14 @@ size = "90% 80%"
 position = "5% 10%"
 animation = "fromTop"
 
+[scratchpads.bluetui]
+command = "foot -a bluetui -e bluetui"
+unfocus = "hide"
+margin = 100
+size = "90% 80%"
+position = "5% 10%"
+animation = "fromTop"
+
 [scratchpads.tt]
 command = "foot -a tt -e tt"
 unfocus = "hide"
