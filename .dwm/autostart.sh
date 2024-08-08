@@ -1,23 +1,24 @@
 #!/bin/sh
+exec_scripts.sh dwm-bar_run.sh &
+alsactl --file ~/.config/asound.state restore &
+setxkbmap -layout "us,us" -variant ",intl" -option "grp:shift_space_toggle,caps:ctrl_modifier,caps:escape" &
+xremap ~/.config/xremap/config.yml &
 paplay ~/.audios/retro-audio-logo-94648.mp3 &
-#hsetroot -cover ~/.wallpapers/forest_stairs.jpg &
-xgifwallpaper -d 3 -s FILL ~/.wallpapers/train-station.gif &
-picom --animations -b &
+hsetroot -cover ~/.wallpapers/forest_stairs.jpg &
+#xgifwallpaper -d 12 -s FILL ~/.wallpapers/coffee-lofi.gif &
+picom &
 xrandr --output VGA-1 --gamma 1.0:0.88:0.50 --brightness 0.95 &
-#easyeffects --gapplication-service &
 dunst &
 unclutter &
 run_xidlehook &
-#easyeffects -l 'LoudnessEqualizer' &
 dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY &
 udiskie &
-xsel.sh &
+#xsel.sh &
 systemctl --user import-environment DISPLAY &
 clipmenud &
 caffeine &
 /usr/lib/polkit-kde-authentication-agent-1 &
-blueman-applet &
-flatpak run com.github.eneshecan.WhatsAppForLinux &
-sleep 5 && flatpak run com.github.wwmm.easyeffects --gapplication-service &
-flatpak run com.github.wwmm.easyeffects -l 'LoudnessEqualizer' &
-setxkbmap -layout "us,us" -variant ",intl" -option "grp:alt_space_toggle,caps:ctrl_modifier,caps:escape" &
+sleep 5 && easyeffects --gapplication-service &
+easyeffects -l 'LoudnessEqualizer' &
+exec_scripts.sh server.sh &
+exec_scripts.sh server_check.sh &

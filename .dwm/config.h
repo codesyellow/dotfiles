@@ -3,10 +3,10 @@
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const unsigned int gappih    = 20;       /* horiz inner gap between windows */
-static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
-static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 30;       /* vert outer gap between windows and screen edge */
+static const unsigned int gappih    = 0;       /* horiz inner gap between windows */
+static const unsigned int gappiv    = 0;       /* vert inner gap between windows */
+static const unsigned int gappoh    = 0;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 0;       /* vert outer gap between windows and screen edge */
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -14,13 +14,14 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 /*  monocle mode in the presence of several windows.                        */
 /*  Modes after showtab_nmodes are disabled.                                */
 enum showtab_modes { showtab_never, showtab_auto, showtab_nmodes, showtab_always};
-static const int showtab			= showtab_nmodes;        /* Default tab bar show mode */
+static const int showtab			= showtab_auto;        /* Default tab bar show mode */
 static const int toptab				= False;               /* False means bottom tab bar */
+
 static const char *fonts[]          = { 
   "JetBrainMono Nerd Font",
   "Font Awesome 6 Free Solid:size=11",
    };
-static const char dmenufont[]       = "monospace:size=10";
+static const char dmenufont[]       = "JetBrainMono Nerd Font:size=10";
 static const char bg1[]       = "#322C2B";
 static const char col_gray2[]       = "#000000";
 static const char col_gray3[]       = "#E4C59E";
@@ -47,15 +48,15 @@ static const Rule rules[] = {
 	{ "mpv",  NULL,       NULL,       1 << 2,       0,           -1,   0,     50,50,500,500,        5 },
 	{ "st-256color",  NULL,       NULL,       1 << 1,       0,           -1,   0,     50,50,500,500,        5 },
 	{ "Whatsapp-for-linux",  NULL,       NULL,       0,       1,           -1,   0,     50,50,1100,600,        5 },
-  { "Alacritty",       "Alacritty",       NULL,       1 << 1,       0,           -1,0,        50,50,500,500,        5 },
   { "Zathura",  NULL,       NULL,       1 << 2,       0,           -1,        50,50,500,500,        5,      0},
   { "steam",    "steamwebhelper",       NULL,       1 << 3,       0,           -1, 0,        50,50,500,500,        5},
+  { "alacritty",    NULL,       NULL,       1 << 2,       0,           -1, 0,        50,50,500,500,        5},
   { "ProtonUp-Qt",    NULL,       NULL,       1 << 3,       0,           -1, 0,        50,50,500,500,        5},
   { NULL,    NULL,       "Steam",       1 << 3,       0,           -1,     0,   50,50,500,500,        5},
   { NULL,    NULL,       "Steam setup",       1 << 3,       0,           -1,        50,50,500,500,        50},
   { "heroic",   NULL,       NULL,       1 << 3,       0,           -1,    0,    50,50,500,500,        5},
   { "retroarch",   NULL,       NULL,       1 << 3,       0,           -1,    0,    50,50,500,500,        5},
-  { "lutris",   NULL,       NULL,       1 << 3,       0,           -1,    0,    50,50,500,500,        5},
+  { "Lutris",   NULL,       NULL,       1 << 3,       0,           -1,    0,    50,50,500,500,        5},
   { NULL,  "youtube music",       NULL,       1 << 4,       0,           -1, 0,       50,50,500,500,        5},
   { NULL,       NULL,   "scratchpad",   0,            1,           -1,   's', 90,50,1200,400,        5,   },
   { NULL,       NULL,   "habits",   0,            1,           -1,   'h', 90,50,1200,400,        5,   },
@@ -71,7 +72,7 @@ static const Rule rules[] = {
   { "DL: language lessons",       NULL,   NULL,   0,            1,           -1,   'l', 90,50,1200,700,        5,   },
   { NULL,       NULL,   "neorg",   0,            1,           -1,   'n', 90,50,1200,600,        5,   },
   { NULL,       NULL,   "tt",   0,            1,           -1,   'e', 90,50,1200,600,        5,   },
-  { NULL,       NULL,   "Exercise Timer",   0,            1,           -1,   't', 500,50,400,400,        5,   },
+  { NULL,       NULL,   "Exercise Timer",   0,            1,           -1,   'z', 500,50,400,400,        5,   },
   { NULL,       NULL,   "clock",   0,            1,           -1,   'c', 500,50,400,400,        5,   },
   { "trayer",       NULL,   "panel",   0,            1,           -1,   'q', 500,50,400,400,        5,   },
 };
@@ -115,22 +116,23 @@ static const char *dmenumpv[] = { "mpvtube.sh", NULL };
 static const char *clipmenucmd[] = { "clipmenu", "-z", "700", "-x", "230", "-y", "4", NULL };
 static const char *bass[] = { "easy_preset.sh", "HeavyBass", NULL};
 static const char *loudness[] = { "easy_preset.sh", "LoudnessEqualizer", NULL};
-static const char *termcmd[]  = { "st", "-A", "0.50", NULL };
+static const char *termcmd[]  = { "st", NULL };
 static const char *pymors[]  = { "pymor", NULL };
 static const char *pymorl[]  = { "pymor", "-l", "3", NULL };
 static const char *pymorc[]  = { "pymor", "-c", NULL };
 static const char *dunst[]  = { "dunstctl", "close-all", NULL };
 static const char *rotatemouse[]  = { "360.sh", "199", NULL };
 static const char *volup[]  = { "volume.sh", "up", NULL };
+static const char *borderless[]  = { "borderless.sh",  NULL };
 static const char *voldw[]  = { "volume.sh", "down", NULL };
 static const char *volm[]  = { "volume.sh", "mute", NULL };
 /*First arg only serves to match against key in rules*/
 static const char *scratchpadcmd[] = {"s", "st", "-A", "0.60", "-c", "scratchpad", "-t", "scratchpad", NULL}; 
-static const char *scratchpadclock[] = {"c", "st", "-A", "0.50", "-t", "clock", "-e", "tclock_timer.sh", NULL}; 
-static const char *scratchpadhabit[] = {"h", "st", "-A", "0.70", "-t", "habits", "-e", "nvim", "/home/digo/.vimwiki/Habits.wiki", NULL}; 
-static const char *scratchpadnotes[] = {"o", "st", "-A", "0.70", "-t", "notes", "-e", "nvim", "/home/digo/.vimwiki/index.wiki", NULL}; 
-static const char *scratchpadbtop[] = {"b", "st", "-A", "0.50", "-t", "btop", "-e", "btop", NULL}; 
-//static const char *scratchpadtask[] = {"t", "st", "-t", "task-tui", "-e", "/usr/bin/taskwarrior-tui", NULL}; 
+static const char *scratchpadclock[] = {"c", "st", "clock", "-e", "tclock_timer.sh", NULL}; 
+static const char *scratchpadhabit[] = {"h", "st", "-t", "habits", "-e", "nvim", "/home/digo/.vimwiki/Habits.wiki", NULL}; 
+static const char *scratchpadnotes[] = {"o", "st", "-t", "notes", "-e", "nvim", "/home/digo/.vimwiki/index.wiki", NULL}; 
+static const char *scratchpadbtop[] = {"b", "st", "-t", "btop", "-e", "btop", NULL}; 
+static const char *scratchpadtask[] = {"t", "st", "-t", "task-tui", "-e", "/usr/bin/taskwarrior-tui", NULL}; 
 static const char *scratchpadkuro[] = {"k", "kuro", NULL}; 
 static const char *scratchpadmixer[] = {"p", "st", "-t", "pulsemixer", "-e", "pulsemixer", NULL}; 
 static const char *scratchpadai[] = {"a", "st", "-t", "ai", "-e", "aichat", NULL}; 
@@ -138,7 +140,7 @@ static const char *scratchpadneorg[] = {"n", "st", "-t", "neorg", "-e", "/usr/bi
 static const char *scratchpadtt[] = {"e", "st", "-t", "tt", "-e", "tt", "-t", "60", NULL}; 
 static const char *scratchpadia[] = {"i", "noi-desktop", NULL}; 
 static const char *scratchfdm[] = {"d", "fdm", NULL}; 
-static const char *scratchpadstretch[] = {"t", "flatpak", "run", "xyz.safeworlds.hiit", NULL}; 
+static const char *scratchpadstretch[] = {"z", "flatpak", "run", "xyz.safeworlds.hiit", NULL}; 
 static const char *scratchpadzap[] = {"w", "flatpak", "run", "com.github.eneshecan.WhatsAppForLinux", NULL}; 
 static const char *scratchpadslingo[] = {"l", "duolingo-desktop", NULL}; 
 static const char *scratchpadtrayer[] = {"q", "trayer", "--widthtype", "pixel", "--transparent", "true", "--alpha", "255", "--distance", "10", NULL}; 
@@ -163,7 +165,7 @@ static Keychord *keychords[] = {
   //  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_s}},                            togglescratch,  {.v = scratchpadneorg } }),
   //  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_e}},                            togglescratch,  {.v = scratchpadtt } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_p}},                            togglescratch,  {.v = scratchpadmixer } }),
-  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_t}},                            togglescratch,  {.v = scratchpadkuro } }),
+  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_t}},                            togglescratch,  {.v = scratchpadtask } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_i}},                            togglescratch,  {.v = scratchpadai } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_c}},                            togglescratch,  {.v = scratchpadstretch } }),
   &((Keychord){2, {{MODKEY, XK_s}, {0, XK_s}},                            togglescratch,  {.v = scratchpadtrayer } }),
@@ -181,6 +183,7 @@ static Keychord *keychords[] = {
   &((Keychord){2, {{MODKEY, XK_e}, {0, XK_r}},                            spawn,          {.v = dmenucmd } }),
   &((Keychord){2, {{MODKEY, XK_e}, {0, XK_h}},                            spawn,          {.v = clipmenucmd } }),
   &((Keychord){2, {{MODKEY, XK_e}, {0, XK_n}},                            spawn,          {.v = dunst } }),
+  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_b}},                            spawn,          {.v = borderless } }),
   &((Keychord){2, {{MODKEY, XK_e}, {0, XK_m}},                            spawn,          {.v = rotatemouse } }),
   &((Keychord){2, {{MODKEY, XK_e}, {0, XK_v}},                            spawn,          {.v = dmenumpv } }),
   &((Keychord){3, {{MODKEY, XK_e}, {0, XK_e}, {0, XK_b}},                 spawn,          {.v = bass } }),
@@ -201,7 +204,7 @@ static Keychord *keychords[] = {
   &((Keychord){1, {{MODKEY, XK_Return}},                                  zoom,           {0} }),
   &((Keychord){1, {{MODKEY, XK_Tab}},                                     view,           {0} }),
   &((Keychord){1, {{MODKEY|ShiftMask, XK_c}},                             killclient,     {0} }),
-  &((Keychord){1, {{MODKEY, XK_space}},                                   setlayout,      {0} }),
+//  &((Keychord){1, {{MODKEY, XK_space}},                                   setlayout,      {0} }),
   &((Keychord){1, {{MODKEY, XK_0}},                                       view,           {.ui = ~0 } }),
   &((Keychord){1, {{MODKEY|ShiftMask, XK_0}},                             tag,            {.ui = ~0 } }),
   &((Keychord){1, {{MODKEY, XK_comma}},                                   focusmon,       {.i = -1 } }),
@@ -235,5 +238,6 @@ static const Button buttons[] = {
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+	{ ClkTabBar,            0,              Button1,        focuswin,       {0} },
 };
 
