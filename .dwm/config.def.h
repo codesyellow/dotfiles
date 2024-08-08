@@ -20,7 +20,7 @@ static const int toptab				= False;               /* False means bottom tab bar 
 static const char *fonts[]          = { 
   "JetBrainMono Nerd Font",
   "Font Awesome 6 Free Solid:size=11",
-   };
+};
 static const char dmenufont[]       = "JetBrainMono Nerd Font:size=10";
 static const char bg1[]       = "#322C2B";
 static const char col_gray2[]       = "#000000";
@@ -28,26 +28,26 @@ static const char col_gray3[]       = "#E4C59E";
 static const char col_gray4[]       = "#ffffff";
 static const char col_cyan[]        = "#543A48";
 static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, bg1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+  /*               fg         bg         border   */
+  [SchemeNorm] = { col_gray3, bg1, col_gray2 },
+  [SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 
 /* tagging */
-static const char *tags[] = { "I", "II", "IV", "V", "VI" };
+static const char *tags[] = { " ", "", "", "", "" };
 static const int taglayouts[] = { 3, 3, 2, 2, 2, };
 
 static const Rule rules[] = {
-	/* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
-	 *	WM_NAME(STRING) = title
-	 */
-	/* class      instance    title       tags mask     isfloating   monitor    float x,y,w,h         floatborderpx*/
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1,   0,     50,50,500,500,        5 },
-	{ "firefox",  NULL,       NULL,       1 << 0,       0,           -1,   0,     50,50,500,500,        5 },
-	{ "mpv",  NULL,       NULL,       1 << 2,       0,           -1,   0,     50,50,500,500,        5 },
-	{ "st-256color",  NULL,       NULL,       1 << 1,       0,           -1,   0,     50,50,500,500,        5 },
-	{ "Whatsapp-for-linux",  NULL,       NULL,       0,       1,           -1,   0,     50,50,1100,600,        5 },
+  /* xprop(1):
+   *	WM_CLASS(STRING) = instance, class
+   *	WM_NAME(STRING) = title
+   */
+  /* class      instance    title       tags mask     isfloating   monitor    float x,y,w,h         floatborderpx*/
+  { "Gimp",     NULL,       NULL,       0,            1,           -1,   0,     50,50,500,500,        5 },
+  { "firefox",  NULL,       NULL,       1 << 0,       0,           -1,   0,     50,50,500,500,        5 },
+  { "mpv",  NULL,       NULL,       1 << 2,       0,           -1,   0,     50,50,500,500,        5 },
+  { "st-256color",  NULL,       NULL,       1 << 1,       0,           -1,   0,     50,50,500,500,        5 },
+  { "Whatsapp-for-linux",  NULL,       NULL,       0,       1,           -1,   0,     50,50,1100,600,        5 },
   { "Zathura",  NULL,       NULL,       1 << 2,       0,           -1,        50,50,500,500,        5,      0},
   { "steam",    "steamwebhelper",       NULL,       1 << 3,       0,           -1, 0,        50,50,500,500,        5},
   { "alacritty",    NULL,       NULL,       1 << 2,       0,           -1, 0,        50,50,500,500,        5},
@@ -87,24 +87,31 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 #include "vanitygaps.c"
 
 static const Layout layouts[] = {
-	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "",        monocle },
-	{ "",        bstack },
-	{ "===",      bstackhoriz },
+  /* symbol     arrange function */
+  { "[]=",      tile },    /* first entry is default */
+  { "><>",      NULL },    /* no layout function means floating behavior */
+  { "",        monocle },
+  { "",        bstack },
+  { "===",      bstackhoriz },
 };
 
 /* custom symbols for nr. of clients in monocle layout */
 /* when clients >= LENGTH(monocles), uses the last element */
-static const char *monocles[] = { "A", "B", "C", "D", "F", "G", "H", "I", "J", "K+" };
+static const char *monocles[] = { "", "2", "3", "4", "5", "6", "7", "8", "9", "10+" };
 /* key definitions */
+#define CONCAT_XK(KEY) XK_##KEY
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG)                                                                                               \
-       &((Keychord){1, {{MODKEY, KEY}},                                        view,           {.ui = 1 << TAG} }), \
-       &((Keychord){1, {{MODKEY|ControlMask, KEY}},                            toggleview,     {.ui = 1 << TAG} }), \
-       &((Keychord){1, {{MODKEY|ShiftMask, KEY}},                              tag,            {.ui = 1 << TAG} }), \
-       &((Keychord){1, {{MODKEY|ControlMask|ShiftMask, KEY}},                  toggletag,      {.ui = 1 << TAG} }),
+  &((Keychord){2, {{MODKEY, XK_w}, {0, CONCAT_XK(KEY)}},                                        view,           {.ui = 1 << TAG} }), \
+  &((Keychord){2, {{MODKEY, XK_m}, {0, CONCAT_XK(KEY)}},                              tag,            {.ui = 1 << TAG} }), 
+/*       &((Keychord){1, {{MODKEY|ControlMask, KEY}},                            toggleview,     {.ui = 1 << TAG} }), \
+         &((Keychord){1, {{MODKEY|ControlMask|ShiftMask, KEY}},                  toggletag,      {.ui = 1 << TAG} }),*/
+
+#define SCRATCHS(KEY,SCRATCH)                                                                                               \
+  &((Keychord){2, {{MODKEY, XK_s}, {0, CONCAT_XK(KEY)}},                            togglescratch,  {.v = SCRATCH } }), 
+
+#define EXECS(KEY,EXEC)                                                                                               \
+  &((Keychord){2, {{MODKEY, XK_e}, {0, CONCAT_XK(KEY)}}, spawn, {.v = EXEC }}),
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
@@ -157,87 +164,78 @@ static Keychord *keychords[] = {
   &((Keychord){2, {{MODKEY, XK_l}, {0, XK_t}},                            setlayout,      {.v = &layouts[2]}}),
   &((Keychord){2, {{MODKEY, XK_l}, {0, XK_b}},                            setlayout,      {.v = &layouts[3]}}),
   &((Keychord){2, {{MODKEY, XK_l}, {0, XK_5}},                            setlayout,      {.v = &layouts[4]}}),
-
   // scratchs
-  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_u}},                            togglescratch,  {.v = scratchpadcmd } }),
-  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_m}},                            togglescratch,  {.v = scratchpadbtop } }),
-  //  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_t}},                            togglescratch,  {.v = scratchpadtask } }),
-  //  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_s}},                            togglescratch,  {.v = scratchpadneorg } }),
-  //  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_e}},                            togglescratch,  {.v = scratchpadtt } }),
-  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_p}},                            togglescratch,  {.v = scratchpadmixer } }),
-  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_t}},                            togglescratch,  {.v = scratchpadtask } }),
-  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_i}},                            togglescratch,  {.v = scratchpadai } }),
-  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_c}},                            togglescratch,  {.v = scratchpadstretch } }),
-  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_s}},                            togglescratch,  {.v = scratchpadtrayer } }),
-  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_h}},                            togglescratch,  {.v = scratchpadhabit } }),
-  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_r}},                            togglescratch,  {.v = scratchpadclock } }),
-  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_l}},                            togglescratch,  {.v = scratchpadslingo } }),
-  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_n}},                            togglescratch,  {.v = scratchpadnotes } }),
-  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_w}},                            togglescratch,  {.v = scratchpadzap } }),
-  &((Keychord){2, {{MODKEY, XK_s}, {0, XK_d}},                            togglescratch,  {.v = scratchfdm } }),
+  SCRATCHS(p, scratchpadmixer)
+  SCRATCHS(u, scratchpadcmd)
+  SCRATCHS(t, scratchpadtask)
+  SCRATCHS(s, scratchpadtrayer)
+  SCRATCHS(l, scratchpadstretch)
+  SCRATCHS(i, scratchpadai)
+  SCRATCHS(h, scratchpadhabit)
+  SCRATCHS(n, scratchpadnotes)
+  SCRATCHS(d, scratchfdm)
+  SCRATCHS(w, scratchpadzap)
+  SCRATCHS(m, scratchpadbtop)
+  // exec
+  EXECS(r, dmenucmd)
+  EXECS(h, clipmenucmd)
+  EXECS(m, rotatemouse)
+  EXECS(v, dmenumpv)
+  EXECS(n, dunst)
   // volume
   &((Keychord){2, {{MODKEY, XK_v}, {0, XK_j}},                            spawn,          {.v = voldw } }),
   &((Keychord){2, {{MODKEY, XK_v}, {0, XK_k}},                            spawn,          {.v = volup } }),
   &((Keychord){2, {{MODKEY, XK_v}, {0, XK_m}},                            spawn,          {.v = volm } }),
-  // exec
-  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_r}},                            spawn,          {.v = dmenucmd } }),
-  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_h}},                            spawn,          {.v = clipmenucmd } }),
-  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_n}},                            spawn,          {.v = dunst } }),
-  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_b}},                            spawn,          {.v = borderless } }),
-  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_m}},                            spawn,          {.v = rotatemouse } }),
-  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_v}},                            spawn,          {.v = dmenumpv } }),
-  &((Keychord){3, {{MODKEY, XK_e}, {0, XK_e}, {0, XK_b}},                 spawn,          {.v = bass } }),
-  &((Keychord){3, {{MODKEY, XK_e}, {0, XK_e}, {0, XK_l}},                 spawn,          {.v = loudness } }),
-  &((Keychord){3, {{MODKEY, XK_e}, {0, XK_p}, {0, XK_s}},                 spawn,          {.v = pymors } }),
-  &((Keychord){3, {{MODKEY, XK_e}, {0, XK_p}, {0, XK_l}},                 spawn,          {.v = pymorl } }),
-  &((Keychord){3, {{MODKEY, XK_e}, {0, XK_p}, {0, XK_c}},                 spawn,          {.v = pymorc } }),
+  // action
+  &((Keychord){2, {{MODKEY, XK_a}, {0, XK_m}},                 spawn,          {.v = bass } }),
+  &((Keychord){2, {{MODKEY, XK_a}, {0, XK_l}},                 spawn,          {.v = loudness } }),
+  &((Keychord){2, {{MODKEY, XK_a}, {0, XK_q}},                             quit,           {0} }),
+  // pymor
+  &((Keychord){2, {{MODKEY, XK_p}, {0, XK_s}},                 spawn,          {.v = pymors } }),
+  &((Keychord){2, {{MODKEY, XK_p}, {0, XK_l}},                 spawn,          {.v = pymorl } }),
+  &((Keychord){2, {{MODKEY, XK_p}, {0, XK_c}},                 spawn,          {.v = pymorc } }),
   //rest
   //  &((Keychord){1, {{MODKEY, XK_p}},                                       spawn,          {.v = dmenucmd } }),
   &((Keychord){1, {{MODKEY, XK_t}},                                       spawn,          {.v = termcmd } }),
   &((Keychord){1, {{MODKEY, XK_b}},                                       togglebar,      {0} }),
   &((Keychord){1, {{MODKEY, XK_j}},                                       focusstack,     {.i = +1 } }),
   &((Keychord){1, {{MODKEY, XK_k}},                                       focusstack,     {.i = -1 } }),
-//  &((Keychord){1, {{MODKEY, XK_i}},                                       incnmaster,     {.i = +1 } }),
-//  &((Keychord){1, {{MODKEY, XK_d}},                                       incnmaster,     {.i = -1 } }),
+  //  &((Keychord){1, {{MODKEY, XK_i}},                                       incnmaster,     {.i = +1 } }),
+  //  &((Keychord){1, {{MODKEY, XK_d}},                                       incnmaster,     {.i = -1 } }),
   &((Keychord){1, {{MODKEY, XK_i}},                                       setmfact,       {.f = +0.05} }),
   &((Keychord){1, {{MODKEY, XK_d}},                                       setmfact,       {.f = -0.05} }),
   &((Keychord){1, {{MODKEY, XK_Return}},                                  zoom,           {0} }),
   &((Keychord){1, {{MODKEY, XK_Tab}},                                     view,           {0} }),
   &((Keychord){1, {{MODKEY|ShiftMask, XK_c}},                             killclient,     {0} }),
-//  &((Keychord){1, {{MODKEY, XK_space}},                                   setlayout,      {0} }),
+  //  &((Keychord){1, {{MODKEY, XK_space}},                                   setlayout,      {0} }),
   &((Keychord){1, {{MODKEY, XK_0}},                                       view,           {.ui = ~0 } }),
   &((Keychord){1, {{MODKEY|ShiftMask, XK_0}},                             tag,            {.ui = ~0 } }),
   &((Keychord){1, {{MODKEY, XK_comma}},                                   focusmon,       {.i = -1 } }),
   &((Keychord){1, {{MODKEY, XK_period}},                                  focusmon,       {.i = +1 } }),
   &((Keychord){1, {{MODKEY|ShiftMask, XK_comma}},                         tagmon,         {.i = -1 } }),
   &((Keychord){1, {{MODKEY|ShiftMask, XK_period}},                        tagmon,         {.i = +1 } }),
-  &((Keychord){1, {{MODKEY|ShiftMask, XK_q}},                             quit,           {0} }),
-  TAGKEYS(                        XK_1,                      0)
-  TAGKEYS(                        XK_2,                      1)
-  TAGKEYS(                        XK_3,                      2)
-  TAGKEYS(                        XK_4,                      3)
-  TAGKEYS(                        XK_5,                      4)
-  TAGKEYS(                        XK_6,                      5)
-  TAGKEYS(                        XK_7,                      6)
-  TAGKEYS(                        XK_8,                      7)
-  TAGKEYS(                        XK_9,                      8)
+  TAGKEYS(                        b,                      0)
+    TAGKEYS(                        t,                      1)
+    TAGKEYS(                        v,                      2)
+    TAGKEYS(                        g,                      3)
+    TAGKEYS(                        m,                      4)
 };
 
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
-	/* click                event mask      button          function        argument */
-	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
-	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
-	{ ClkTagBar,            0,              Button1,        view,           {0} },
-	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
-	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
-	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
-	{ ClkTabBar,            0,              Button1,        focuswin,       {0} },
+  /* click                event mask      button          function        argument */
+  { ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
+  { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
+  { ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+  { ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
+  { ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
+  { ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
+  { ClkTagBar,            0,              Button1,        view,           {0} },
+  { ClkTagBar,            0,              Button3,        toggleview,     {0} },
+  { ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
+  { ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+  { ClkTabBar,            0,              Button1,        focuswin,       {0} },
 };
 
