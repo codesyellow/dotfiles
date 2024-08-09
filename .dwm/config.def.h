@@ -16,7 +16,7 @@ static const char *fonts[]          = {
   "JetBrainMono Nerd Font",
   "Font Awesome 6 Free Solid:size=11",
 };
-static const char dmenufont[]       = "JetBrainMono Nerd Font:size=10";
+static const char dmenufont[]       = "JetBrainMono Nerd Font:size=12";
 static const char bg0[]       = "#2e3440";
 static const char bg1[]       = "#4c566a";
 static const char fg0[]       = "#d8dee9";
@@ -110,7 +110,7 @@ static const char *monocles[] = { "", "2", "3", "4", "5", "6", "7", "8", "9",
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-nb", "#000", "-z", "700", "-x", "200", "-y", "2", NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-nb", "#2e3440", "-z", "700", "-x", "200", "-y", "2", "-fn", dmenufont, NULL };
 static const char *dmenumpv[] = { "mpvtube.sh", NULL };
 static const char *clipmenucmd[] = { "clipmenu", "-z", "700", "-x", "230", "-y", "4", NULL };
 static const char *bass[] = { "easy_preset.sh", "HeavyBass", NULL};
