@@ -101,16 +101,16 @@ static const char *monocles[] = { "", "2", "3", "4", "5", "6", "7", "8", "9",
 /* key definitions */
 #define CONCAT_XK(KEY) XK_##KEY
 #define MODKEY Mod4Mask
-#define TAGKEYS(KEY,TAG)                                                                                               \
-  &((Keychord){2, {{MODKEY, XK_w}, {0, CONCAT_XK(KEY)}},                                        view,           {.ui = 1 << TAG} }), \
-  &((Keychord){2, {{MODKEY, XK_m}, {0, CONCAT_XK(KEY)}},                              tag,            {.ui = 1 << TAG} }), 
+#define TAGKEYS(KEY,TAG)                                                                                              \
+  &((Keychord){2, {{MODKEY, XK_w}, {0, CONCAT_XK(KEY)}},                           view,           {.ui = 1 << TAG} }),\
+  &((Keychord){2, {{MODKEY, XK_m}, {0, CONCAT_XK(KEY)}},                           tag,            {.ui = 1 << TAG} }), 
 /*       &((Keychord){1, {{MODKEY|ControlMask, KEY}},                            toggleview,     {.ui = 1 << TAG} }), \
          &((Keychord){1, {{MODKEY|ControlMask|ShiftMask, KEY}},                  toggletag,      {.ui = 1 << TAG} }),*/
 
-#define SCRATCHS(KEY,SCRATCH)                                                                                               \
-  &((Keychord){2, {{MODKEY, XK_s}, {0, CONCAT_XK(KEY)}},                            togglescratch,  {.v = SCRATCH } }), 
+#define SCRATCHS(KEY,SCRATCH)                                                                                        \
+  &((Keychord){2, {{MODKEY, XK_s}, {0, CONCAT_XK(KEY)}},                           togglescratch,  {.v = SCRATCH } }), 
 
-#define EXECS(KEY,EXEC)                                                                                               \
+#define EXECS(KEY,EXEC)                                                                                              \
   &((Keychord){2, {{MODKEY, XK_e}, {0, CONCAT_XK(KEY)}}, spawn, {.v = EXEC }}),
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
@@ -166,36 +166,31 @@ static Keychord *keychords[] = {
   &((Keychord){2, {{MODKEY, XK_l}, {0, XK_5}},                            setlayout,      {.v = &layouts[4]}}),
   // scratchs
   SCRATCHS(p, scratchpadmixer)
-    SCRATCHS(u, scratchpadcmd)
-    SCRATCHS(t, scratchpadtask)
-    SCRATCHS(s, scratchpadtrayer)
-    SCRATCHS(l, scratchpadstretch)
-    SCRATCHS(i, scratchpadai)
-    SCRATCHS(h, scratchpadhabit)
-    SCRATCHS(n, scratchpadnotes)
-    SCRATCHS(d, scratchfdm)
-    SCRATCHS(w, scratchpadzap)
-    SCRATCHS(m, scratchpadbtop)
-
-    EXECS(r, dmenucmd)
-    EXECS(h, clipmenucmd)
-    EXECS(m, rotatemouse)
-    EXECS(v, dmenumpv)
-
-    // volume
-    &((Keychord){2, {{MODKEY, XK_v}, {0, XK_j}},                            spawn,          {.v = voldw } }),
+  SCRATCHS(u, scratchpadcmd)
+  SCRATCHS(t, scratchpadtask)
+  SCRATCHS(s, scratchpadtrayer)
+  SCRATCHS(l, scratchpadstretch)
+  SCRATCHS(i, scratchpadai)
+  SCRATCHS(h, scratchpadhabit)
+  SCRATCHS(n, scratchpadnotes)
+  SCRATCHS(d, scratchfdm)
+  SCRATCHS(w, scratchpadzap)
+  SCRATCHS(m, scratchpadbtop)
+  // exec
+  EXECS(r, dmenucmd)
+  EXECS(h, clipmenucmd)
+  EXECS(m, rotatemouse)
+  EXECS(v, dmenumpv)
+  EXECS(n, dunst)
+  // volume
+  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_j}},                            spawn,          {.v = voldw } }),
   &((Keychord){2, {{MODKEY, XK_v}, {0, XK_k}},                            spawn,          {.v = volup } }),
   &((Keychord){2, {{MODKEY, XK_v}, {0, XK_m}},                            spawn,          {.v = volm } }),
-  // exec
-  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_h}},                            spawn,          {.v = clipmenucmd } }),
-  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_n}},                            spawn,          {.v = dunst } }),
-  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_b}},                            spawn,          {.v = borderless } }),
-  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_m}},                            spawn,          {.v = rotatemouse } }),
-  &((Keychord){2, {{MODKEY, XK_e}, {0, XK_v}},                            spawn,          {.v = dmenumpv } }),
   // action
   &((Keychord){2, {{MODKEY, XK_a}, {0, XK_m}},                 spawn,          {.v = bass } }),
   &((Keychord){2, {{MODKEY, XK_a}, {0, XK_l}},                 spawn,          {.v = loudness } }),
   &((Keychord){2, {{MODKEY, XK_a}, {0, XK_q}},                             quit,           {0} }),
+  &((Keychord){2, {{MODKEY, XK_a}, {0, XK_k}},                             killclient,     {0} }),
   // pymor
   &((Keychord){2, {{MODKEY, XK_p}, {0, XK_s}},                 spawn,          {.v = pymors } }),
   &((Keychord){2, {{MODKEY, XK_p}, {0, XK_l}},                 spawn,          {.v = pymorl } }),
@@ -212,7 +207,6 @@ static Keychord *keychords[] = {
   &((Keychord){1, {{MODKEY, XK_d}},                                       setmfact,       {.f = -0.05} }),
   &((Keychord){1, {{MODKEY, XK_Return}},                                  zoom,           {0} }),
   &((Keychord){1, {{MODKEY, XK_Tab}},                                     view,           {0} }),
-  &((Keychord){1, {{MODKEY|ShiftMask, XK_c}},                             killclient,     {0} }),
   //  &((Keychord){1, {{MODKEY, XK_space}},                                   setlayout,      {0} }),
   &((Keychord){1, {{MODKEY, XK_0}},                                       view,           {.ui = ~0 } }),
   &((Keychord){1, {{MODKEY|ShiftMask, XK_0}},                             tag,            {.ui = ~0 } }),
@@ -221,10 +215,10 @@ static Keychord *keychords[] = {
   &((Keychord){1, {{MODKEY|ShiftMask, XK_comma}},                         tagmon,         {.i = -1 } }),
   &((Keychord){1, {{MODKEY|ShiftMask, XK_period}},                        tagmon,         {.i = +1 } }),
   TAGKEYS(                        b,                      0)
-    TAGKEYS(                        t,                      1)
-    TAGKEYS(                        v,                      2)
-    TAGKEYS(                        g,                      3)
-    TAGKEYS(                        m,                      4)
+  TAGKEYS(                        t,                      1)
+  TAGKEYS(                        v,                      2)
+  TAGKEYS(                        g,                      3)
+  TAGKEYS(                        m,                      4)
 };
 
 
