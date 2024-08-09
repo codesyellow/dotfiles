@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Prompt user for YouTube URL using wofi
-url=$(wofi --dmenu -p "Enter YouTube URL:")
+# Prompt user for YouTube URL using dmenu
+url=$(echo "" | dmenu -nb "#2e3440" -z "700" -x "200" -y "2" -fn "JetBrainMono Nerd Font:size=12")
 
 # Check if the input is a valid YouTube URL
 if [[ $url == *"youtube.com"* || $url == *"youtu.be"* ]]; then
-	# Open URL in mpv
-	mpv "$url"
+  # Open URL in mpv
+  mpv "$url"
 else
-	# Display an error message if the input is not a valid YouTube URL
-	echo "Invalid YouTube URL"
+  # Display an error message if the input is not a valid YouTube URL
+  echo "Invalid YouTube URL"
 fi

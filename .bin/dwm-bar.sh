@@ -1,31 +1,10 @@
 #!/bin/bash
-normal="^c#f8f8f2^"
-normal_men="^c#e39400^"
-normal_cpu="^c#b3a1e6^"
-normal_root="^c#5ccc96^"
-normal_home="^c#00a3cc^"
-normal_date="^c#ce6f8f^"
-low_temp="^c#4793AF^"
-mid_temp="^c#FFC470^"
-high_temp="^c#DD5746^"
-urgent="^c#ff5555^"
-early_hour="^c#E4C59E^"
-afternoon_hour="^c#8DECB4^"
-night_hour="^c#FFC470^"
-day_color="^c#FFB1B1^"
-alarming="^c#f1fa8c^"
-bass="^c#F27BBD^"
-equalizer="^c#FFFBDA^"
-cold="^c#F5EFE6^"
-hot="^c#FA7070^"
-ds4_low="^c#FC4100^"
-ds4_mid="^c#2C4E80^"
-ds4_most="^c#8DECB4^"
-ds4_full="^c#4793AF^"
-ds4_not="^c#FFB1B1^"
-daym_color="^c#6DC5D1^"
+nm="^c#d8dee9^"
+wn="^c#F6E96B^"
+al="^c#FF4E88^"
 
 ram_icon=
+server_icon=$(cat /tmp/map_display-icon)
 cpu_icon=
 root_icon=
 home_icon=
@@ -36,6 +15,11 @@ cpu_temp_high=
 controller=
 
 volume=$(pamixer --get-volume)
+checkupdates=$(checkupdates | wc -l)
+is_muted=$(pamixer --get-mute)
+is_easy_active=$(pgrep 'easyeffects')
+server=$(cat /tmp/map_display)
+server_status=$(cat /tmp/server_status)
 ds4=$(dsbattery | grep -o '[0-9]\+')
 #climate=$(curl 'wttr.in/Santos?format="%t"' | sed 's/[^0-9]*//g')
 day=$(date +"%a" | tr '[:lower:]' '[:upper:]')
@@ -48,21 +32,29 @@ freemen_per=$(free -m | awk 'NR==2{print $3*100/$2 }')
 freemen_per_int=$(printf "%.0f\n" "$freemen_per")
 date=$(date +"%m")
 day_month=$(date +"%d")
-hour=$(date +"%H:%M" | cut -c 1-2)
+hour=$(echo "$hour" | sed 's/^0*//') # Remove leading zeros
 houre=$(date +"%H:%M")
 cpu=$(awk '{u=$2+$4; t=$2+$4+$5; if (NR==1){u1=u; t1=t;} else print ($2+$4-u1) * 100 / (t-t1) "%"; }' \
   <(grep 'cpu ' /proc/stat) <(
     sleep 1
     grep 'cpu ' /proc/stat
   ))
+cpu=$(echo "$cpu" | tr -d '%') # Remove the '%' sign if present
 cpu_per_int=$(printf "%.0f\n" "$cpu")
 
 status=""
 
-if [[ $easy = "eq" ]]; then
-  status+="$equalizer"
+status+="$nm$date_icon $nm $nm$houre [$day_month] [ $day ]                                                                      "
+echo $status
+
+if [[ -n $is_easy_active ]]; then
+  if [[ $easy = "eq" ]]; then
+    status+="$nm"
+  else
+    status+="$ac"
+  fi
 else
-  status+="$bass"
+  status+="$wn !"
 fi
 
 # if [[ $climate -le 25 ]]; then
@@ -70,70 +62,75 @@ fi
 # else
 #   status+="   $hot $climate°"
 # fi
+#
 
-if [[ $ds4 -ge 60 && $ds4 -le 90 ]]; then
-  status+="  $ds4_most$controller  "
-elif [[ -z $ds4 ]]; then
-  status+="  $ds4_not$controller  "
+if [[ $server_status == 'true' ]]; then
+  status+=" $nm| $server_icon $server"
+fi
+
+if [[ $checkupdates -le 20 ]]; then
+  status+=" $nm|  $checkupdates"
+elif [[ $checkupdates -ge 21 ]] && [[ $checkupdates -le 40 ]]; then
+  status+=" $wn|  $checkupdates"
+else
+  status+=" $al|  $checkupdates"
+fi
+
+if [[ -z $ds4 ]]; then
+  status+=" $nm| $nm$controller "
+elif [[ $ds4 -ge 60 && $ds4 -le 90 ]]; then
+  status+=" $nm| $nm$controller  "
 elif [[ $ds4 -le 59 && $ds4 -ge 30 ]]; then
-  status+="  $ds4_mid$controller  "
+  status+=" $nm| $al$controller  "
 elif [[ $ds4 -le 29 ]]; then
-  status+="  $ds4_low$controller  "
+  status+=" $nm| $wn$controller  "
+  notify-send.sh -i ~/.local/share/icons/joystick.png -u critical "Plug me in immediately!"
 elif [[ $ds4 -ge 91 ]]; then
-  status+="  $ds4_full$controller  "
+  status+=" $nm| $ds4_full$controller  "
 fi
 
-if [[ $volume -ge 55 ]]; then
-  status+="$urgent $volume%"
-elif [[ $volume -le 20 && $volume -gt 0 ]]; then
-  status+="$urgent$volume%"
-elif [[ $volume -eq 0 ]]; then
-  status+="$urgent$volume%"
-elif [[ $volume -ge 50 ]]; then
-  status+="$alarming $volume%"
+if [[ $is_muted == 'false' ]]; then
+  if [[ $volume -ge 50 ]]; then
+    status+=" $nm| $al $volume%"
+  elif [[ $volume -le 49 ]] && [[ $volume -ge 1 ]]; then
+    status+=" $nm| $nm $volume%"
+  elif [[ $volume -eq 0 ]]; then
+    status+=" $nm| $wm $volume%"
+  fi
 else
-  status+="$normal $volume%"
+  status+=" $nm| $al $volume%"
 fi
 
-if [[ $cputemp -le 40 ]]; then
-  status+=" $low_temp$cpu_temp_low $cputemp° "
-elif [[ $cputemp -ge 41 && $cputemp -le 60 ]]; then
-  status+=" $mid_temp$cpu_temp_mid $cputemp° "
+if [[ $cputemp -le 60 ]]; then
+  status+=" $nm| $nm $cpu_temp_low $cputemp°"
+elif [[ $cputemp -ge 61 && $cputemp -le 70 ]]; then
+  status+=" $nm| $al$cpu_temp_mid $cputemp°"
 else
-  status+=" $high_temp$cpu_temp_high $cputemp° "
+  status+=" $nm| $al$cpu_temp_high $cputemp°"
 fi
 
 if [[ $cpu_per_int -ge 80 ]]; then
-  status+="$urgent$cpu_icon $cpu_per_int%"
+  status+=" $nm| $al$cpu_icon $cpu_per_int%"
+elif [[ $cpu_per_int -ge 60 ]] && [[ $cpu_per_int -le 79 ]]; then
+  status+=" $nm| $wn$cpu_icon $cpu_per_int%"
 else
-  status+="$normal_cpu$cpu_icon $cpu_per_int%"
+  status+=" $nm| $nm$cpu_icon $cpu_per_int%"
 fi
 
 if [[ $freemen_per_int -ge 70 ]]; then
-  status+=" $urgent$ram_icon $freemen_per_int%"
-elif [[ $freemen_per_int -ge 60 ]]; then
-  status+=" $alarming$ram_icon $freemen_per_int%"
+  status+=" $nm| $wm$ram_icon $freemen_per_int%"
+elif [[ $freemen_per_int -ge 50 ]] && [[ $freemen_per_int -le 60 ]]; then
+  status+=" $nm| $al$ram_icon $freemen_per_int%"
 else
-  status+=" $normal_men$ram_icon $freemen_per_int%"
+  status+=" $nm| $nm$ram_icon $freemen_per_int%"
 fi
 
 if [[ $(echo "$root_int < 20" | bc) -ne 0 ]]; then
-  echo E
-  status+=" $alarming$root_icon $root_int""g"
+  status+=" $nm| $wm$root_icon $root_int""g"
 elif [[ $(echo "$root_int < 5" | bc) -ne 0 ]]; then
-  status+=" $urgent$root_icon $root_int""g"
+  status+=" $nm| $al$root_icon $root_int""g"
 else
-  status+=" $normal_root$root_icon $root_int""g"
+  status+=" $nm| $nm$root_icon $root_int""g"
 fi
 
-if [[ $hour -ge "05" && $hour -le "12" ]]; then
-  status+=" $normal_date$date_icon $date $daym_color[$day_month]$early_hour$houre"
-elif [[ $hour -ge "12" && $hour -le "18" ]]; then
-  status+=" $normal_date$date_icon $date$daym_color[$day_month]$afternoon_hour$houre"
-else
-  status+=" $normal_date$date_icon $date$daym_color[$day_month]$night_hour$houre"
-fi
-
-status+=" $day_color$day"
-
-xprop -root -set WM_NAME "$status"
+xprop -root -set WM_NAME "$status "
