@@ -19,6 +19,7 @@ checkupdates=$(checkupdates | wc -l)
 is_muted=$(pamixer --get-mute)
 is_easy_active=$(pgrep 'easyeffects')
 server=$(cat /tmp/map_display)
+santos=$(cat /tmp/santosmatch)
 server_status=$(cat /tmp/server_status)
 ds4=$(dsbattery | grep -o '[0-9]\+')
 #climate=$(curl 'wttr.in/Santos?format="%t"' | sed 's/[^0-9]*//g')
@@ -44,17 +45,20 @@ cpu_per_int=$(printf "%.0f\n" "$cpu")
 
 status=""
 
-status+="$nm$date_icon $nm $nm$houre [$day_month] [ $day ]                                                                      "
 echo $status
 
 if [[ -n $is_easy_active ]]; then
   if [[ $easy = "eq" ]]; then
     status+="$nm"
   else
-    status+="$ac"
+    status+="$wn"
   fi
 else
   status+="$wn !"
+fi
+
+if [[ -n $santos ]]; then
+  status+=" $nm|$nm $santos"
 fi
 
 # if [[ $climate -le 25 ]]; then
@@ -133,4 +137,5 @@ else
   status+=" $nm| $nm$root_icon $root_int""g"
 fi
 
+status+=" $nm| $nm$date_icon $nm$houre $day_month $day "
 xprop -root -set WM_NAME "$status "
