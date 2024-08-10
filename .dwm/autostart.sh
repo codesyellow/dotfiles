@@ -1,7 +1,7 @@
 #!/bin/sh
 exec_scripts.sh dwm-bar_run.sh &
 alsactl --file ~/.config/asound.state restore &
-setxkbmap -layout "us,us" -variant ",intl" -option "grp:shift_space_toggle,caps:ctrl_modifier,caps:escape" &
+setxkbmap -layout "us,us" -variant ",intl" -option "grp:alt_shift_toggle,caps:ctrl_modifier,caps:escape" &
 xremap ~/.config/xremap/config.yml &
 paplay ~/.audios/retro-audio-logo-94648.mp3 &
 hsetroot -cover ~/.wallpapers/forest_stairs.jpg &

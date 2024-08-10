@@ -105,6 +105,14 @@ static const char *monocles[] = { "", "2", "3", "4", "5", "6", "7", "8", "9",
 #define EXECS(KEY,EXEC)                                                                                              \
   &((Keychord){2, {{MODKEY, XK_e}, {0, CONCAT_XK(KEY)}}, spawn, {.v = EXEC }}),
 
+#define STACKKEYS(MOD,ACTION)                                                                                              \
+  &((Keychord){1, {{MOD, XK_j}},  ACTION##stack, {.i = INC(+1)}}), \
+  &((Keychord){1, {{MOD, XK_k}}, ACTION##stack, {.i = INC(-1)}}), \
+  &((Keychord){1, {{MOD, XK_grave}}, ACTION##stack, {.i = PREVSEL}}), \
+  &((Keychord){1, {{MOD, XK_q}},  ACTION##stack, {.i = 0}}), \
+  &((Keychord){1, {{MOD, XK_r}},  ACTION##stack, {.i = 1}}), \
+  &((Keychord){1, {{MOD, XK_z}},  ACTION##stack, {.i = 2}}), \
+  &((Keychord){1, {{MOD, XK_x}},  ACTION##stack, {.i = -1}}), \
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
@@ -126,7 +134,7 @@ static const char *borderless[]  = { "borderless.sh",  NULL };
 static const char *voldw[]  = { "volume.sh", "down", NULL };
 static const char *volm[]  = { "volume.sh", "mute", NULL };
 /*First arg only serves to match against key in rules*/
-static const char *scratchpadcmd[] = {"s", "st", "-A", "0.60", "-c", "scratchpad", "-t", "scratchpad", NULL}; 
+static const char *scratchpadcmd[] = {"s", "alacritty", "--class", "scratchpad", "-t", "scratchpad", NULL}; 
 static const char *scratchpadclock[] = {"c", "st", "clock", "-e", "tclock_timer.sh", NULL}; 
 static const char *scratchpadhabit[] = {"h", "st", "-t", "habits", "-e", "nvim", "/home/digo/.vimwiki/Habits.wiki", NULL}; 
 static const char *scratchpadnotes[] = {"o", "st", "-t", "notes", "-e", "nvim", "/home/digo/.vimwiki/index.wiki", NULL}; 
@@ -151,11 +159,11 @@ static Keychord *keychords[] = {
   &((Keychord){1, {{MODKEY|ShiftMask, XK_f}},                             togglefullscr,  {0}}),
   &((Keychord){2, {{MODKEY, XK_c}, {0, XK_o}},                            togglefloating, {0} }),
   // layouts
-  &((Keychord){2, {{MODKEY, XK_l}, {0, XK_1}},                            setlayout,      {.v = &layouts[0]}}),
-  &((Keychord){2, {{MODKEY, XK_l}, {0, XK_2}},                            setlayout,      {.v = &layouts[1]}}),
-  &((Keychord){2, {{MODKEY, XK_l}, {0, XK_t}},                            setlayout,      {.v = &layouts[2]}}),
-  &((Keychord){2, {{MODKEY, XK_l}, {0, XK_b}},                            setlayout,      {.v = &layouts[3]}}),
-  &((Keychord){2, {{MODKEY, XK_l}, {0, XK_5}},                            setlayout,      {.v = &layouts[4]}}),
+  /*&((Keychord){2, {{MODKEY, XK_l}, {0, XK_1}},                            setlayout,      {.v = &layouts[0]}}),*/
+  /*&((Keychord){2, {{MODKEY, XK_l}, {0, XK_2}},                            setlayout,      {.v = &layouts[1]}}),*/
+  /*&((Keychord){2, {{MODKEY, XK_l}, {0, XK_t}},                            setlayout,      {.v = &layouts[2]}}),*/
+  /*&((Keychord){2, {{MODKEY, XK_l}, {0, XK_b}},                            setlayout,      {.v = &layouts[3]}}),*/
+  /*&((Keychord){2, {{MODKEY, XK_l}, {0, XK_5}},                            setlayout,      {.v = &layouts[4]}}),*/
   // scratchs
   SCRATCHS(p, scratchpadmixer)
   SCRATCHS(u, scratchpadcmd)
@@ -174,6 +182,10 @@ static Keychord *keychords[] = {
   EXECS(m, rotatemouse)
   EXECS(v, dmenumpv)
   EXECS(n, dunst)
+
+	STACKKEYS(MODKEY,                          focus)
+	STACKKEYS(MODKEY|ShiftMask,                push)
+
   // volume
   &((Keychord){2, {{MODKEY, XK_v}, {0, XK_j}},                            spawn,          {.v = voldw } }),
   &((Keychord){2, {{MODKEY, XK_v}, {0, XK_k}},                            spawn,          {.v = volup } }),
@@ -191,8 +203,8 @@ static Keychord *keychords[] = {
   //  &((Keychord){1, {{MODKEY, XK_p}},                                       spawn,          {.v = dmenucmd } }),
   &((Keychord){1, {{MODKEY, XK_t}},                                       spawn,          {.v = termcmd } }),
   &((Keychord){1, {{MODKEY, XK_b}},                                       togglebar,      {0} }),
-  &((Keychord){1, {{MODKEY, XK_j}},                                       focusstack,     {.i = +1 } }),
-  &((Keychord){1, {{MODKEY, XK_k}},                                       focusstack,     {.i = -1 } }),
+//  &((Keychord){1, {{MODKEY, XK_j}},                                       focusstack,     {.i = +1 } }),
+ // &((Keychord){1, {{MODKEY, XK_k}},                                       focusstack,     {.i = -1 } }),
   //  &((Keychord){1, {{MODKEY, XK_i}},                                       incnmaster,     {.i = +1 } }),
   //  &((Keychord){1, {{MODKEY, XK_d}},                                       incnmaster,     {.i = -1 } }),
   &((Keychord){1, {{MODKEY, XK_i}},                                       setmfact,       {.f = +0.05} }),
