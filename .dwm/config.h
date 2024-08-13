@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -17,20 +17,20 @@ static const char *fonts[]          = {
   "Font Awesome 6 Free Solid:size=11",
 };
 static const char dmenufont[]       = "JetBrainMono Nerd Font:size=12";
-static const char bg0[]       = "#2e3440";
 static const char bg1[]       = "#4c566a";
+static const char bg0[]       = "#2e3440";
 static const char fg0[]       = "#d8dee9";
 static const char fg1[]       = "#eceff4";
 static const char border[]        = "#bf616a";
 static const char *colors[][3]      = {
   /*               fg         bg         border   */
-  [SchemeNorm] = { fg0, bg0, bg1 },
+  [SchemeNorm] = { fg0, bg0, bg0 },
   [SchemeSel]  = { fg1, border,  border  },
 };
 
 /* tagging */
-static const char *tags[] = { " ", "", "", "", "" };
-static const int taglayouts[] = { 3, 3, 2, 2, 2, };
+static const char *tags[] = { "", " ", "", "", "", "" };
+static const int taglayouts[] = { 2, 3, 3, 2, 2, 2, };
 
 static const Rule rules[] = {
   /* xprop(1):
@@ -39,20 +39,21 @@ static const Rule rules[] = {
    */
   /* class      instance    title       tags mask     isfloating   monitor    float x,y,w,h         floatborderpx*/
   { "Gimp",     NULL,       NULL,       0,            1,           -1,   0,     50,50,500,500,        5 },
-  { "firefox",  NULL,       NULL,       1 << 0,       0,           -1,   0,     50,50,500,500,        5 },
-  { "mpv",  NULL,       NULL,       1 << 2,       0,           -1,   0,     50,50,500,500,        5 },
-  { "st-256color",  NULL,       NULL,       1 << 1,       0,           -1,   0,     50,50,500,500,        5 },
+  { "firefox",  NULL,       NULL,       1 << 1,       0,           -1,   0,     50,50,500,500,        5 },
+  { "Emacs",    NULL,       NULL,       1 << 0,       0,           -1,   0,     50,50,500,500,        5 },
+  { "mpv",  NULL,       NULL,       1 << 3,       0,           -1,   0,     50,50,500,500,        5 },
+  { "st-256color",  NULL,       NULL,       1 << 2,       0,           -1,   0,     50,50,500,500,        5 },
   { "Whatsapp-for-linux",  NULL,       NULL,       0,       1,           -1,   0,     50,50,1100,600,        5 },
-  { "Zathura",  NULL,       NULL,       1 << 2,       0,           -1,        50,50,500,500,        5,      0},
-  { "steam",    "steamwebhelper",       NULL,       1 << 3,       0,           -1, 0,        50,50,500,500,        5},
-  { "alacritty",    NULL,       NULL,       1 << 2,       0,           -1, 0,        50,50,500,500,        5},
-  { "ProtonUp-Qt",    NULL,       NULL,       1 << 3,       0,           -1, 0,        50,50,500,500,        5},
-  { NULL,    NULL,       "Steam",       1 << 3,       0,           -1,     0,   50,50,500,500,        5},
-  { NULL,    NULL,       "Steam setup",       1 << 3,       0,           -1,        50,50,500,500,        50},
-  { "heroic",   NULL,       NULL,       1 << 3,       0,           -1,    0,    50,50,500,500,        5},
-  { "retroarch",   NULL,       NULL,       1 << 3,       0,           -1,    0,    50,50,500,500,        5},
-  { "Lutris",   NULL,       NULL,       1 << 3,       0,           -1,    0,    50,50,500,500,        5},
-  { NULL,  "youtube music",       NULL,       1 << 4,       0,           -1, 0,       50,50,500,500,        5},
+  { "Zathura",  NULL,       NULL,       1 << 3,       0,           -1,        50,50,500,500,        5,      0},
+  { "steam",    "steamwebhelper",       NULL,       1 << 4,       0,           -1, 0,        50,50,500,500,        5},
+  { "alacritty",    NULL,       NULL,       1 << 3,       0,           -1, 0,        50,50,500,500,        5},
+  { "ProtonUp-Qt",    NULL,       NULL,       1 << 4,       0,           -1, 0,        50,50,500,500,        5},
+  { NULL,    NULL,       "Steam",       1 << 4,       0,           -1,     0,   50,50,500,500,        5},
+  { NULL,    NULL,       "Steam setup",       1 << 4,       0,           -1,        50,50,500,500,        50},
+  { "heroic",   NULL,       NULL,       1 << 4,       0,           -1,    0,    50,50,500,500,        5},
+  { "retroarch",   NULL,       NULL,       1 << 4,       0,           -1,    0,    50,50,500,500,        5},
+  { "Lutris",   NULL,       NULL,       1 << 4,       0,           -1,    0,    50,50,500,500,        5},
+  { NULL,  "youtube music",       NULL,       1 << 5,       0,           -1, 0,       50,50,500,500,        5},
   { NULL,       NULL,   "scratchpad",   0,            1,           -1,   's', 90,50,1200,400,        5,   },
   { NULL,       NULL,   "habits",   0,            1,           -1,   'h', 90,50,1200,400,        5,   },
   { NULL,       NULL,   "task-tui",   0,            1,           -1,   't', 800,50,500,600,        5,   },
@@ -81,9 +82,9 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 static const Layout layouts[] = {
   /* symbol     arrange function */
   { "[]=",      tile },    /* first entry is default */
-  { "><>",      NULL },    /* no layout function means floating behavior */
-  { "",        monocle },
-  { "",        bstack },
+  { "| ",        NULL },    /* no layout function means floating behavior */
+  { "| ",        monocle },
+  { "| ",        bstack },
   { "===",      bstackhoriz },
 };
 
@@ -118,7 +119,7 @@ static const char *monocles[] = { "", "2", "3", "4", "5", "6", "7", "8", "9",
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-nb", "#2e3440", "-z", "700", "-x", "200", "-y", "2", "-fn", dmenufont, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-nb", "#2e3440", "-z", "450", "-x", "250", "-y", "2", "-sb", "#2e3440", "-shb", "#2e3440", "-fn", dmenufont, NULL };
 static const char *dmenumpv[] = { "mpvtube.sh", NULL };
 static const char *clipmenucmd[] = { "clipmenu", "-z", "700", "-x", "230", "-y", "4", NULL };
 static const char *bass[] = { "easy_preset.sh", "HeavyBass", NULL};
@@ -139,9 +140,9 @@ static const char *scratchpadclock[] = {"c", "st", "clock", "-e", "tclock_timer.
 static const char *scratchpadhabit[] = {"h", "st", "-t", "habits", "-e", "nvim", "/home/digo/.vimwiki/Habits.wiki", NULL}; 
 static const char *scratchpadnotes[] = {"o", "st", "-t", "notes", "-e", "nvim", "/home/digo/.vimwiki/index.wiki", NULL}; 
 static const char *scratchpadbtop[] = {"b", "st", "-t", "btop", "-e", "btop", NULL}; 
-static const char *scratchpadtask[] = {"t", "st", "-t", "task-tui", "-e", "/usr/bin/taskwarrior-tui", NULL}; 
+static const char *scratchpadtask[] = {"t", "xterm", "-fa", "Monospace","-fs","12", "-bg","#2e3440","-fg","#eceff4","-T", "task-tui", "-e", "/usr/bin/taskwarrior-tui", NULL}; 
 static const char *scratchpadkuro[] = {"k", "kuro", NULL}; 
-static const char *scratchpadmixer[] = {"p", "st", "-t", "pulsemixer", "-e", "pulsemixer", NULL}; 
+static const char *scratchpadmixer[] = {"p", "xterm", "-fa", "Monospace","-fs","12", "-bg","#2e3440","-fg","#eceff4","-T", "pulsemixer", "-e", "pulsemixer", NULL}; 
 static const char *scratchpadai[] = {"a", "st", "-t", "ai", "-e", "aichat", NULL}; 
 static const char *scratchpadneorg[] = {"n", "st", "-t", "neorg", "-e", "/usr/bin/nvim -c ':Neorg workspace home'", NULL}; 
 static const char *scratchpadtt[] = {"e", "st", "-t", "tt", "-e", "tt", "-t", "60", NULL}; 
@@ -182,8 +183,7 @@ static Keychord *keychords[] = {
   EXECS(m, rotatemouse)
   EXECS(v, dmenumpv)
   EXECS(n, dunst)
-
-	STACKKEYS(MODKEY,                          focus)
+STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
 
   // volume
@@ -218,11 +218,12 @@ static Keychord *keychords[] = {
   &((Keychord){1, {{MODKEY, XK_period}},                                  focusmon,       {.i = +1 } }),
   &((Keychord){1, {{MODKEY|ShiftMask, XK_comma}},                         tagmon,         {.i = -1 } }),
   &((Keychord){1, {{MODKEY|ShiftMask, XK_period}},                        tagmon,         {.i = +1 } }),
-  TAGKEYS(                        b,                      0)
-  TAGKEYS(                        t,                      1)
-  TAGKEYS(                        v,                      2)
-  TAGKEYS(                        g,                      3)
-  TAGKEYS(                        m,                      4)
+  TAGKEYS(                        c,                      0)
+  TAGKEYS(                        b,                      1)
+  TAGKEYS(                        t,                      2)
+  TAGKEYS(                        v,                      3)
+  TAGKEYS(                        g,                      4)
+  TAGKEYS(                        m,                      5)
 };
 
 
@@ -230,7 +231,7 @@ static Keychord *keychords[] = {
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
   /* click                event mask      button          function        argument */
-  { ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
+///  { ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
   { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
   { ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
   { ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
