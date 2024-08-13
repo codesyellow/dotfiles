@@ -14,6 +14,7 @@ cpu_temp_mid=
 cpu_temp_high=
 controller=
 
+to_late="21:00"
 volume=$(pamixer --get-volume)
 checkupdates=$(checkupdates | wc -l)
 is_muted=$(pamixer --get-mute)
@@ -21,7 +22,8 @@ is_easy_active=$(pgrep 'easyeffects')
 server=$(cat /tmp/map_display)
 santos=$(cat /tmp/santosmatch)
 server_status=$(cat /tmp/server_status)
-ds4=$(dsbattery | grep -o '[0-9]\+')
+ds4_bat=$(cat /tmp/ds4_battery)
+ds4_status=$(cat /tmp/ds4_status)
 #climate=$(curl 'wttr.in/Santos?format="%t"' | sed 's/[^0-9]*//g')
 day=$(date +"%a" | tr '[:lower:]' '[:upper:]')
 easy=$(easy_preset.sh)
@@ -44,8 +46,6 @@ cpu=$(echo "$cpu" | tr -d '%') # Remove the '%' sign if present
 cpu_per_int=$(printf "%.0f\n" "$cpu")
 
 status=""
-
-echo $status
 
 if [[ -n $is_easy_active ]]; then
   if [[ $easy = "eq" ]]; then
@@ -80,23 +80,22 @@ else
   status+=" $al|  $checkupdates"
 fi
 
-if [[ -z $ds4 ]]; then
+if [[ $ds4_status == 'false' ]]; then
   status+=" $nm| $nm$controller "
-elif [[ $ds4 -ge 60 && $ds4 -le 90 ]]; then
+elif [[ $ds4_bat -ge 60 && $ds4 -le 90 ]]; then
   status+=" $nm| $nm$controller  "
-elif [[ $ds4 -le 59 && $ds4 -ge 30 ]]; then
+elif [[ $ds4_bat -le 59 && $ds4 -ge 30 ]]; then
   status+=" $nm| $al$controller  "
-elif [[ $ds4 -le 29 ]]; then
+elif [[ $ds4_bat -le 29 ]]; then
   status+=" $nm| $wn$controller  "
-  notify-send.sh -i ~/.local/share/icons/joystick.png -u critical "Plug me in immediately!"
-elif [[ $ds4 -ge 91 ]]; then
+elif [[ $ds4_bat -ge 91 ]]; then
   status+=" $nm| $ds4_full$controller  "
 fi
 
 if [[ $is_muted == 'false' ]]; then
-  if [[ $volume -ge 50 ]]; then
+  if [[ $volume -ge 60 ]]; then
     status+=" $nm| $al $volume%"
-  elif [[ $volume -le 49 ]] && [[ $volume -ge 1 ]]; then
+  elif [[ $volume -le 59 ]] && [[ $volume -ge 1 ]]; then
     status+=" $nm| $nm $volume%"
   elif [[ $volume -eq 0 ]]; then
     status+=" $nm| $wm $volume%"
@@ -137,5 +136,15 @@ else
   status+=" $nm| $nm$root_icon $root_int""g"
 fi
 
-status+=" $nm| $nm$date_icon $nm$houre $day_month $day "
+echo "$houre"
+
+seconds1=$(date -d "$houre" +%s)
+seconds2=$(date -d "$to_late" +%s)
+
+if ((seconds1 >= seconds2)); then
+  status+=" $nm| $nm$date_icon $wn$houre $al$day_month $day "
+else
+  status+=" $nm| $nm$date_icon $nm$houre $day_month $day "
+fi
+
 xprop -root -set WM_NAME "$status "

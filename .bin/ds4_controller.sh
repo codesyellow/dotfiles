@@ -55,5 +55,5 @@ while true; do
   text=$(dsbattery)
   result=$(echo "$text" | grep -o '[0-9]*')
   ds4 $result
-  sleep 60
+  sleep 30
 done
