@@ -4,7 +4,7 @@
 ds4_bat_warnings_50() {
   if [[ $1 -le 50 ]]; then
     if ! [[ -f /tmp/fwarning_50 ]]; then
-      notify-send.sh -i ~/.local/share/icons/joystick.png "Battery below 50% - Plug me in!"
+      notify-send.sh -i ~/.local/share/icons/joystick.png "Joyley" "Uh-oh, battery's fading!"
       touch /tmp/fwarning_50
     fi
   else
@@ -18,7 +18,7 @@ ds4_bat_warnings_50() {
 ds4_bat_warnings_30() {
   if [[ $1 -le 30 ]]; then
     if ! [[ -f /tmp/fwarning_30 ]]; then
-      notify-send.sh -i ~/.local/share/icons/joystick.png "Battery critically low - Plug me in immediately!"
+      notify-send.sh -i ~/.local/share/icons/joystick.png "Joyley" "Help! Almost out of juice!"
       touch /tmp/fwarning_30
     fi
   else
@@ -31,7 +31,7 @@ ds4_bat_warnings_30() {
 # Notification for the first time the DS4 is connected
 ds4_first_connected() {
   if ! [[ -f /tmp/ds4_first_connect ]]; then
-    notify-send.sh -i ~/.local/share/icons/joystick.png "DS4 was connected!"
+    notify-send.sh -i ~/.local/share/icons/joystick.png "Joyley" "Power on! What’s the plan?"
     touch /tmp/ds4_first_connect
   fi
 }
@@ -45,6 +45,10 @@ ds4() {
     echo "true" >/tmp/ds4_status
     echo "$1" >/tmp/ds4_battery
     ds4_first_connected
+    if [[ -z $idle ]]; then
+      echo oi
+      nohup idle_joy.py &
+    fi
     ds4_bat_warnings_50 $1
     ds4_bat_warnings_30 $1
   fi
@@ -52,8 +56,9 @@ ds4() {
 
 # Loop to continuously check the battery level
 while true; do
+  idle=$(pgrep -fl 'idle_joy.py')
   text=$(dsbattery)
   result=$(echo "$text" | grep -o '[0-9]*')
-  ds4 $result
-  sleep 30
+  ds4 $result $idle
+  sleep 2
 done

@@ -16,7 +16,7 @@ controller=
 
 to_late="21:00"
 volume=$(pamixer --get-volume)
-checkupdates=$(checkupdates | wc -l)
+checkupdates=$(cat /tmp/updates)
 is_muted=$(pamixer --get-mute)
 is_easy_active=$(pgrep 'easyeffects')
 server=$(cat /tmp/map_display)
