@@ -46,6 +46,7 @@ static const Rule rules[] = {
   { "Whatsapp-for-linux",  NULL,       NULL,       0,       1,           -1,   0,     50,50,1100,600,        5 },
   { "Zathura",  NULL,       NULL,       1 << 3,       0,           -1,        50,50,500,500,        5,      0},
   { "steam",    "steamwebhelper",       NULL,       1 << 4,       0,           -1, 0,        50,50,500,500,        5},
+  { "sober",    NULL,       NULL,       1 << 4,       0,           -1, 0,        50,50,500,500,        5},
   { "alacritty",    NULL,       NULL,       1 << 3,       0,           -1, 0,        50,50,500,500,        5},
   { "ProtonUp-Qt",    NULL,       NULL,       1 << 4,       0,           -1, 0,        50,50,500,500,        5},
   { NULL,    NULL,       "Steam",       1 << 4,       0,           -1,     0,   50,50,500,500,        5},
@@ -74,7 +75,7 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.60; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.70; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
@@ -109,8 +110,8 @@ static const char *monocles[] = { "", "2", "3", "4", "5", "6", "7", "8", "9",
 #define STACKKEYS(MOD,ACTION)                                                                                              \
   &((Keychord){1, {{MOD, XK_j}},  ACTION##stack, {.i = INC(+1)}}), \
   &((Keychord){1, {{MOD, XK_k}}, ACTION##stack, {.i = INC(-1)}}), \
-  &((Keychord){1, {{MOD, XK_grave}}, ACTION##stack, {.i = PREVSEL}}), \
-  &((Keychord){1, {{MOD, XK_q}},  ACTION##stack, {.i = 0}}), \
+  &((Keychord){1, {{MOD, XK_p}}, ACTION##stack, {.i = PREVSEL}}), \
+  &((Keychord){1, {{MOD, XK_m}},  ACTION##stack, {.i = 0}}), \
   &((Keychord){1, {{MOD, XK_r}},  ACTION##stack, {.i = 1}}), \
   &((Keychord){1, {{MOD, XK_z}},  ACTION##stack, {.i = 2}}), \
   &((Keychord){1, {{MOD, XK_x}},  ACTION##stack, {.i = -1}}), \
@@ -161,11 +162,11 @@ static Keychord *keychords[] = {
   &((Keychord){1, {{MODKEY|ShiftMask, XK_f}},                             togglefullscr,  {0}}),
   &((Keychord){2, {{MODKEY, XK_c}, {0, XK_o}},                            togglefloating, {0} }),
   // layouts
-  /*&((Keychord){2, {{MODKEY, XK_l}, {0, XK_1}},                            setlayout,      {.v = &layouts[0]}}),*/
-  /*&((Keychord){2, {{MODKEY, XK_l}, {0, XK_2}},                            setlayout,      {.v = &layouts[1]}}),*/
-  /*&((Keychord){2, {{MODKEY, XK_l}, {0, XK_t}},                            setlayout,      {.v = &layouts[2]}}),*/
-  /*&((Keychord){2, {{MODKEY, XK_l}, {0, XK_b}},                            setlayout,      {.v = &layouts[3]}}),*/
-  /*&((Keychord){2, {{MODKEY, XK_l}, {0, XK_5}},                            setlayout,      {.v = &layouts[4]}}),*/
+  &((Keychord){2, {{MODKEY, XK_l}, {0, XK_1}},                            setlayout,      {.v = &layouts[0]}}),
+  &((Keychord){2, {{MODKEY, XK_l}, {0, XK_2}},                            setlayout,      {.v = &layouts[1]}}),
+  &((Keychord){2, {{MODKEY, XK_l}, {0, XK_t}},                            setlayout,      {.v = &layouts[2]}}),
+  &((Keychord){2, {{MODKEY, XK_l}, {0, XK_b}},                            setlayout,      {.v = &layouts[3]}}),
+  &((Keychord){2, {{MODKEY, XK_l}, {0, XK_5}},                            setlayout,      {.v = &layouts[4]}}),
   // scratchs
   SCRATCHS(p, scratchpadmixer)
   SCRATCHS(u, scratchpadcmd)
@@ -186,7 +187,7 @@ static Keychord *keychords[] = {
   EXECS(m, rotatemouse)
   EXECS(v, dmenumpv)
   EXECS(n, dunst)
-STACKKEYS(MODKEY,                          focus)
+  STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
 
   // volume
