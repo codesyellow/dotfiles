@@ -1,6 +1,6 @@
 #!/bin/sh
 exec_scripts.sh dwm-bar_run.sh &
-exec-scripts.sh /ds4_controller.sh &
+exec-scripts.sh ds4_controller.sh &
 alsactl --file ~/.config/asound.state restore &
 setxkbmap -layout "us,us" -variant ",intl" -option "grp:alt_shift_toggle,caps:ctrl_modifier,caps:escape" &
 xremap ~/.config/xremap/config.yml &

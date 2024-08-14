@@ -117,6 +117,10 @@ static const char *monocles[] = { "", "2", "3", "4", "5", "6", "7", "8", "9",
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
+
+#define TERM_CMD(cmd, title, exec, ...) \
+    {cmd, "xterm", "-fa", "Monospace", "-fs", "12", "-bg", "#2e3440", "-fg", "#eceff4", "-T", title, "-e", exec, ##__VA_ARGS__, NULL}
+
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-nb", "#2e3440", "-z", "450", "-x", "250", "-y", "2", "-sb", "#2e3440", "-shb", "#2e3440", "-fn", dmenufont, NULL };
@@ -136,17 +140,14 @@ static const char *voldw[]  = { "volume.sh", "down", NULL };
 static const char *volm[]  = { "volume.sh", "mute", NULL };
 /*First arg only serves to match against key in rules*/
 static const char *scratchpadcmd[] = {"s", "alacritty", "--class", "scratchpad", "-t", "scratchpad", NULL}; 
-static const char *scratchpadclock[] = {"c", "st", "clock", "-e", "tclock_timer.sh", NULL}; 
-static const char *scratchpadhabit[] = {"h", "st", "-t", "habits", "-e", "nvim", "/home/digo/.vimwiki/Habits.wiki", NULL}; 
-static const char *scratchpadnotes[] = {"o", "st", "-t", "notes", "-e", "nvim", "/home/digo/.vimwiki/index.wiki", NULL}; 
-static const char *scratchpadbtop[] = {"b", "st", "-t", "btop", "-e", "btop", NULL}; 
-static const char *scratchpadtask[] = {"t", "xterm", "-fa", "Monospace","-fs","12", "-bg","#2e3440","-fg","#eceff4","-T", "task-tui", "-e", "/usr/bin/taskwarrior-tui", NULL}; 
-static const char *scratchpadkuro[] = {"k", "kuro", NULL}; 
-static const char *scratchpadmixer[] = {"p", "xterm", "-fa", "Monospace","-fs","12", "-bg","#2e3440","-fg","#eceff4","-T", "pulsemixer", "-e", "pulsemixer", NULL}; 
+static const char *scratchpadclock[] = TERM_CMD("c", "clock", "tclock_timer.sh");
+static const char *scratchpadhabit[] = TERM_CMD("h", "habits", "nvim", "/home/cie/.vimwiki/habit.wiki");
+static const char *scratchpadnotes[] = TERM_CMD("o", "notes", "nvim", "/home/cie/.vimwiki/index.md");
+static const char *scratchpadbtop[] = TERM_CMD("b", "btop", "btop");
+static const char *scratchpadtask[] = TERM_CMD("t", "task-tui", "/usr/bin/taskwarrior-tui");
+static const char *scratchpadmixer[] = TERM_CMD("p", "pulsemixer", "pulsemixer");
+static const char *scratchpadtt[] = TERM_CMD("e", "tt", "tt");
 static const char *scratchpadai[] = {"a", "st", "-t", "ai", "-e", "aichat", NULL}; 
-static const char *scratchpadneorg[] = {"n", "st", "-t", "neorg", "-e", "/usr/bin/nvim -c ':Neorg workspace home'", NULL}; 
-static const char *scratchpadtt[] = {"e", "st", "-t", "tt", "-e", "tt", "-t", "60", NULL}; 
-static const char *scratchpadia[] = {"i", "noi-desktop", NULL}; 
 static const char *scratchfdm[] = {"d", "fdm", NULL}; 
 static const char *scratchpadstretch[] = {"z", "flatpak", "run", "xyz.safeworlds.hiit", NULL}; 
 static const char *scratchpadzap[] = {"w", "flatpak", "run", "com.github.eneshecan.WhatsAppForLinux", NULL}; 
@@ -169,9 +170,11 @@ static Keychord *keychords[] = {
   SCRATCHS(p, scratchpadmixer)
   SCRATCHS(u, scratchpadcmd)
   SCRATCHS(t, scratchpadtask)
+  SCRATCHS(r, scratchpadclock)
   SCRATCHS(s, scratchpadtrayer)
   SCRATCHS(l, scratchpadstretch)
   SCRATCHS(i, scratchpadai)
+  SCRATCHS(k, scratchpadtt)
   SCRATCHS(h, scratchpadhabit)
   SCRATCHS(n, scratchpadnotes)
   SCRATCHS(d, scratchfdm)
