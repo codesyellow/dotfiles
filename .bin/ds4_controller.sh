@@ -24,14 +24,10 @@ is_idle() {
   idle_warn=10
 
   if [[ -f "$log_file" ]]; then
-    # Read the last logged time from the file
     last_time=$(cat "$log_file")
 
-    # Convert last time to seconds since the epoch
     last_time_epoch=$(date -d "$last_time" +"%s")
     current_time_epoch=$(date +"%s")
-
-    # Calculate the difference in minutes
     time_diff=$(((current_time_epoch - last_time_epoch) / 60))
 
     if ((time_diff >= idle_warn)); then
@@ -40,7 +36,6 @@ is_idle() {
         touch "/tmp/ds4_idle_warn"
       fi
     else
-      # Reset the warning if the controller becomes active
       if [[ -f "/tmp/ds4_idle_warn" ]]; then
         rm "/tmp/ds4_idle_warn"
       fi
@@ -57,7 +52,6 @@ is_idle() {
         dsbattery -d &
       fi
     else
-      # Reset the critical warning if the controller becomes active
       if [[ -f "/tmp/ds4_idle_crit" ]]; then
         rm "/tmp/ds4_idle_crit"
       fi
@@ -67,7 +61,6 @@ is_idle() {
   fi
 }
 
-# Notification for battery level below 50%
 ds4_bat_warnings_50() {
   if [[ $1 -le 50 ]]; then
     if ! [[ -f "/tmp/fwarning_50" ]]; then
@@ -81,7 +74,6 @@ ds4_bat_warnings_50() {
   fi
 }
 
-# Notification for battery level below 30%
 ds4_bat_warnings_30() {
   if [[ $1 -le 30 ]]; then
     if ! [[ -f "/tmp/fwarning_30" ]]; then
@@ -95,7 +87,6 @@ ds4_bat_warnings_30() {
   fi
 }
 
-# Notification for the first time the DS4 is connected
 ds4_first_connected() {
   if ! [[ -f "/tmp/ds4_first_connect" ]]; then
     ramdon_notify "joyley_wokeup"
@@ -104,7 +95,6 @@ ds4_first_connected() {
   fi
 }
 
-# Main function to check battery level and handle notifications
 ds4() {
   if [[ -z "$1" ]]; then
     echo "false" >/tmp/ds4_status
@@ -142,7 +132,6 @@ ds4() {
   fi
 }
 
-# Loop to continuously check the battery level
 while true; do
   idle=$(pgrep -fl 'idle_joy.py')
   text=$(dsbattery)
