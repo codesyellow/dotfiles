@@ -134,9 +134,9 @@ ds4() {
 
 while true; do
   idle=$(pgrep -fl 'idle_joy.py')
-  text=$(dsbattery)
-  result=$(echo "$text" | grep -o '[0-9]*')
-  ds4 $result $idle
+  ds=$(dsbattery)
+  bat=$(echo "$ds" | grep -o '[0-9]*')
+  ds4 $bat $idle
   is_idle
   sleep 2
 done
