@@ -31,10 +31,10 @@
 
     # Position the notification in the top right corner
     # origin = top-right
-    origin = top-right
+    origin = bottom-right
 
     # Offset from the origin
-    offset = 10x50
+    offset = 50x50
 
     # Scale factor. It is auto-detected if value is 0.
     scale = 0
@@ -311,17 +311,16 @@
     per_monitor_dpi = false
 
 [urgency_low]
-background = "#EFF1F5"
-foreground = "#4C4F69"
+background = "#2e3440"
+foreground = "#d8dee9"
 
 [urgency_normal]
-background = "#EFF1F5"
-foreground = "#4C4F69"
+background = "#2e3440"
+foreground = "#d8dee9"
 
 [urgency_critical]
-background = "#EFF1F5"
-foreground = "#4C4F69"
-frame_color = "#FE640B"
+background = "#d8dee9"
+foreground = "#2e3440"
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
