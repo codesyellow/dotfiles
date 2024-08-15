@@ -82,6 +82,8 @@ fi
 
 if [[ $ds4_status == 'false' ]]; then
   status+=" $nm| $nm$controller "
+elif [[ -f /tmp/ds4_charging ]]; then
+  status+=" $nm| $wn$controller  "
 elif [[ $ds4_bat -ge 60 && $ds4 -le 90 ]]; then
   status+=" $nm| $nm$controller  "
 elif [[ $ds4_bat -le 59 && $ds4 -ge 30 ]]; then
@@ -142,7 +144,7 @@ seconds1=$(date -d "$houre" +%s)
 seconds2=$(date -d "$to_late" +%s)
 
 if ((seconds1 >= seconds2)); then
-  status+=" $nm| $nm$date_icon $wn$houre $al$day_month $day "
+  status+=" $nm| $al$date_icon $al$houre $nm$day_month $day "
 else
   status+=" $nm| $nm$date_icon $nm$houre $day_month $day "
 fi
