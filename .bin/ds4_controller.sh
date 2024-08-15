@@ -10,16 +10,73 @@ ramdon_notify() {
   notify-send.sh -i ~/.local/share/icons/joystick.png "Joyley" $random_message
 }
 
+temp() {
+  if [[ "$1" == "t" ]]; then
+    touch "/tmp/$2"
+  else
+    rm "/tmp/$1"
+  fi
+}
+
+is_idle() {
+  log_file="/tmp/ds4_logger"
+  idle_crit=15
+  idle_warn=10
+
+  if [[ -f "$log_file" ]]; then
+    # Read the last logged time from the file
+    last_time=$(cat "$log_file")
+
+    # Convert last time to seconds since the epoch
+    last_time_epoch=$(date -d "$last_time" +"%s")
+    current_time_epoch=$(date +"%s")
+
+    # Calculate the difference in minutes
+    time_diff=$(((current_time_epoch - last_time_epoch) / 60))
+
+    if ((time_diff >= idle_warn)); then
+      if ! [[ -f "/tmp/ds4_idle_warn" ]]; then
+        ramdon_notify "joyley_idle_warn"
+        touch "/tmp/ds4_idle_warn"
+      fi
+    else
+      # Reset the warning if the controller becomes active
+      if [[ -f "/tmp/ds4_idle_warn" ]]; then
+        rm "/tmp/ds4_idle_warn"
+      fi
+    fi
+
+    if ((time_diff >= idle_crit)); then
+      if ! [[ -f "/tmp/ds4_idle_crit" ]]; then
+        ramdon_notify "joyley_idle_crit"
+        touch "/tmp/ds4_idle_crit"
+        rm "/tmp/ds4_idle_warn"
+        rm "/tmp/ds4_idle_crit"
+        echo "$(cat /tmp/ds4_logger)"
+        rm "/tmp/ds4_logger"
+        dsbattery -d &
+      fi
+    else
+      # Reset the critical warning if the controller becomes active
+      if [[ -f "/tmp/ds4_idle_crit" ]]; then
+        rm "/tmp/ds4_idle_crit"
+      fi
+    fi
+  else
+    echo "Log file not found!"
+  fi
+}
+
 # Notification for battery level below 50%
 ds4_bat_warnings_50() {
   if [[ $1 -le 50 ]]; then
-    if ! [[ -f /tmp/fwarning_50 ]]; then
+    if ! [[ -f "/tmp/fwarning_50" ]]; then
       ramdon_notify "joyley_bat_warn"
-      touch /tmp/fwarning_50
+      temp "t" "fwarning_50"
     fi
   else
-    if [[ -f /tmp/fwarning_50 ]]; then
-      rm /tmp/fwarning_50
+    if [[ -f "/tmp/fwarning_50" ]]; then
+      temp "fwarning_50"
     fi
   fi
 }
@@ -27,22 +84,23 @@ ds4_bat_warnings_50() {
 # Notification for battery level below 30%
 ds4_bat_warnings_30() {
   if [[ $1 -le 30 ]]; then
-    if ! [[ -f /tmp/fwarning_30 ]]; then
+    if ! [[ -f "/tmp/fwarning_30" ]]; then
       ramdon_notify "joyley_bat_crit"
-      touch /tmp/fwarning_30
+      temp "t" "fwarning_30"
     fi
   else
-    if [[ -f /tmp/fwarning_30 ]]; then
-      rm /tmp/fwarning_30
+    if [[ -f "/tmp/fwarning_30" ]]; then
+      temp "fwarning_30"
     fi
   fi
 }
 
 # Notification for the first time the DS4 is connected
 ds4_first_connected() {
-  if ! [[ -f /tmp/ds4_first_connect ]]; then
-    notify-send.sh -i ~/.local/share/icons/joystick.png "Joyley" "Power on! What’s the plan?"
-    touch /tmp/ds4_first_connect
+  if ! [[ -f "/tmp/ds4_first_connect" ]]; then
+    ramdon_notify "joyley_wokeup"
+    temp "t" "ds4_first_connect"
+    echo "$(date +%H:%M:%S)" >>/tmp/ds4_logger
   fi
 }
 
@@ -50,29 +108,28 @@ ds4_first_connected() {
 ds4() {
   if [[ -z "$1" ]]; then
     echo "false" >/tmp/ds4_status
-    rm /tmp/ds4_first_connect
+    if [[ -f /tmp/ds4_first_connect ]]; then
+      temp "ds4_first_connect"
+    fi
   else
     battery_status=$(dsbattery)
     echo "true" >/tmp/ds4_status
     echo "$1" >/tmp/ds4_battery
-    # Check if the output contains the charging symbol "↑"
     if [[ "$battery_status" == *"↑"* ]]; then
-      echo "charging"
       if ! [[ -f /tmp/ds4_charging ]]; then
         if [[ -f /tmp/ds4_notcharging ]]; then
-          rm "/tmp/ds4_notcharging"
+          temp "ds4_notcharging"
         fi
-        touch "/tmp/ds4_charging"
+        temp "t" "ds4_charging"
         ramdon_notify "joyley_juiceon"
       fi
     else
-      echo "not charging"
       if [[ -f /tmp/ds4_charging ]]; then
         if ! [[ -f /tmp/ds4_notcharging ]]; then
           ramdon_notify "joyley_juiceoff"
-          rm "/tmp/ds4_charging"
+          temp "ds4_charging"
         fi
-        touch "/tmp/ds4_notcharging"
+        temp "t" "ds4_notcharging"
       fi
     fi
     ds4_first_connected
@@ -90,6 +147,7 @@ while true; do
   idle=$(pgrep -fl 'idle_joy.py')
   text=$(dsbattery)
   result=$(echo "$text" | grep -o '[0-9]*')
-  ds4 $result $idle $text
+  ds4 $result $idle
+  is_idle
   sleep 2
 done
