@@ -42,6 +42,7 @@ static const Rule rules[] = {
   { "firefox",  NULL,       NULL,       1 << 1,       0,           -1,   0,     50,50,500,500,        5 },
   { "Emacs",    NULL,       NULL,       1 << 0,       0,           -1,   0,     50,50,500,500,        5 },
   { "mpv",  NULL,       NULL,       1 << 3,       0,           -1,   0,     50,50,500,500,        5 },
+  { "TelegramDesktop",  NULL,       NULL,       1 << 3,       0,           -1,   0,     50,50,500,500,        5 },
   { "st-256color",  NULL,       NULL,       1 << 2,       0,           -1,   0,     50,50,500,500,        5 },
   { "Whatsapp-for-linux",  NULL,       NULL,       0,       1,           -1,   0,     50,50,1100,600,        5 },
   { "Zathura",  NULL,       NULL,       1 << 3,       0,           -1,        50,50,500,500,        5,      0},
@@ -97,7 +98,7 @@ static const char *monocles[] = { "", "2", "3", "4", "5", "6", "7", "8", "9",
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG)                                                                                              \
   &((Keychord){2, {{MODKEY, XK_w}, {0, CONCAT_XK(KEY)}},                           view,           {.ui = 1 << TAG} }),\
-  &((Keychord){2, {{MODKEY, XK_m}, {0, CONCAT_XK(KEY)}},                           tag,            {.ui = 1 << TAG} }), 
+  &((Keychord){2, {{MODKEY|ShiftMask, XK_w}, {0, CONCAT_XK(KEY)}},                           tag,            {.ui = 1 << TAG} }), 
 /*       &((Keychord){1, {{MODKEY|ControlMask, KEY}},                            toggleview,     {.ui = 1 << TAG} }), \
          &((Keychord){1, {{MODKEY|ControlMask|ShiftMask, KEY}},                  toggletag,      {.ui = 1 << TAG} }),*/
 
@@ -139,6 +140,7 @@ static const char *volup[]  = { "volume.sh", "up", NULL };
 static const char *borderless[]  = { "borderless.sh",  NULL };
 static const char *voldw[]  = { "volume.sh", "down", NULL };
 static const char *volm[]  = { "volume.sh", "mute", NULL };
+static const char *esdf[]  = { "esdf.sh", NULL };
 /*First arg only serves to match against key in rules*/
 static const char *scratchpadcmd[] = {"s", "alacritty", "--class", "scratchpad", "-t", "scratchpad", NULL}; 
 static const char *scratchpadclock[] = TERM_CMD("c", "clock", "tclock_timer.sh");
@@ -199,6 +201,7 @@ static Keychord *keychords[] = {
   &((Keychord){2, {{MODKEY, XK_a}, {0, XK_l}},                 spawn,          {.v = loudness } }),
   &((Keychord){2, {{MODKEY, XK_a}, {0, XK_q}},                             quit,           {0} }),
   &((Keychord){2, {{MODKEY, XK_a}, {0, XK_k}},                             killclient,     {0} }),
+  &((Keychord){1, {{MODKEY, XK_k}},                             spawn,     {.v = esdf } }),
   // pymor
   &((Keychord){2, {{MODKEY, XK_p}, {0, XK_s}},                 spawn,          {.v = pymors } }),
   &((Keychord){2, {{MODKEY, XK_p}, {0, XK_l}},                 spawn,          {.v = pymorl } }),
