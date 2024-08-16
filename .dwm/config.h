@@ -64,6 +64,7 @@ static const Rule rules[] = {
   { NULL,       NULL,   "ai",   0,            1,           -1,   'a', 830,35,500,700,        5,   },
   { NULL,       NULL,   "pulsemixer",   0,            1,           -1,   'p', 930,35,400,400,        5,   },
   { NULL,       NULL,   "btop",   0,            1,           -1,   'b', 90,80,1200,600,        5,   },
+  {"Galculator",       NULL,   NULL,   0,            1,           -1,   'g', 90,80,1200,600,        5,   },
   { NULL,       NULL,   "WhatsApp for Linux",   0,            1,           -1,   'w', 90,80,1200,600,        5,   },
   { NULL,       NULL,   "Free Download Manager",   0,            1,           -1,   'd', 90,80,1200,600,        5,   },
   { NULL,       NULL,   "notes",   0,            1,           -1,   'o', 90,50,1200,600,        5,   },
@@ -153,6 +154,7 @@ static const char *scratchpadtt[] = TERM_CMD("e", "tt", "tt");
 static const char *scratchpadai[] = {"a", "st", "-t", "ai", "-e", "aichat", NULL}; 
 static const char *scratchfdm[] = {"d", "fdm", NULL}; 
 static const char *scratchpadstretch[] = {"z", "flatpak", "run", "xyz.safeworlds.hiit", NULL}; 
+static const char *scratchpadcalc[] = {"g", "galculator", NULL}; 
 static const char *scratchpadzap[] = {"w", "flatpak", "run", "com.github.eneshecan.WhatsAppForLinux", NULL}; 
 static const char *scratchpadslingo[] = {"l", "duolingo-desktop", NULL}; 
 static const char *scratchpadtrayer[] = {"q", "trayer", "--widthtype", "pixel", "--transparent", "true", "--alpha", "255", "--distance", "10", NULL}; 
@@ -183,6 +185,7 @@ static Keychord *keychords[] = {
   SCRATCHS(d, scratchfdm)
   SCRATCHS(w, scratchpadzap)
   SCRATCHS(m, scratchpadbtop)
+  SCRATCHS(g, scratchpadcalc)
   // exec
   EXECS(r, dmenucmd)
   EXECS(h, clipmenucmd)
@@ -201,7 +204,6 @@ static Keychord *keychords[] = {
   &((Keychord){2, {{MODKEY, XK_a}, {0, XK_l}},                 spawn,          {.v = loudness } }),
   &((Keychord){2, {{MODKEY, XK_a}, {0, XK_q}},                             quit,           {0} }),
   &((Keychord){2, {{MODKEY, XK_a}, {0, XK_k}},                             killclient,     {0} }),
-  &((Keychord){1, {{MODKEY, XK_k}},                             spawn,     {.v = esdf } }),
   // pymor
   &((Keychord){2, {{MODKEY, XK_p}, {0, XK_s}},                 spawn,          {.v = pymors } }),
   &((Keychord){2, {{MODKEY, XK_p}, {0, XK_l}},                 spawn,          {.v = pymorl } }),

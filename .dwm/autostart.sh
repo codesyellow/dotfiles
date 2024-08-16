@@ -1,6 +1,4 @@
 #!/bin/sh
-exec_scripts.sh dwm-bar_run.sh &
-exec-scripts.sh ds4_controller.sh &
 alsactl --file ~/.config/asound.state restore &
 pamixer --set-volume 20 &
 setxkbmap -layout "us,us" -variant ",intl" -option "grp:alt_shift_toggle,caps:ctrl_modifier,caps:escape" &
@@ -12,7 +10,6 @@ picom &
 xrandr --output VGA-1 --gamma 1.0:0.88:0.50 --brightness 0.95 &
 dunst &
 unclutter &
-run_xidlehook &
 dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY &
 udiskie &
 #xsel.sh &
@@ -22,5 +19,8 @@ caffeine &
 /usr/lib/polkit-kde-authentication-agent-1 &
 sleep 5 && easyeffects --gapplication-service &
 easyeffects -l 'LoudnessEqualizer' &
+exec_scripts.sh dwm-bar_run.sh &
 exec_scripts.sh server.sh &
 exec_scripts.sh server_check.sh &
+exec-scripts.sh ds4_controller.sh &
+exec-scripts.sh run_xidlehook &
