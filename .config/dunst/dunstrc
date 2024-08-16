@@ -311,16 +311,25 @@
     per_monitor_dpi = false
 
 [urgency_low]
-background = "#2e3440"
-foreground = "#d8dee9"
-
-[urgency_normal]
-background = "#2e3440"
-foreground = "#d8dee9"
-
-[urgency_critical]
 background = "#d8dee9"
 foreground = "#2e3440"
+
+[urgency_normal]
+background = "#d8dee9"
+foreground = "#2e3440"
+
+[urgency_critical]
+background = "#bf616a"
+foreground = "#d8dee9"
+
+[play_sound]
+    summary = "*"
+    script = "/home/cie/.bin/alert.sh"
+    summary = "!Joyley"
+
+[gamejoy]
+    summary = "Joyley"
+    script = "/home/cie/.bin/game_sound.sh"
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
@@ -445,6 +454,4 @@ foreground = "#2e3440"
 #    set_stack_tag = "volume"
 #
 # vim: ft=cfg
-[play_sound]
-    summary = "*"
-    script = ~/.bin/alert.sh
+
