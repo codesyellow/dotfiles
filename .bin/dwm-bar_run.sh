@@ -1,4 +1,4 @@
 while true; do
-  dwm-bar.sh
+  /home/cie/.bin/dwm-bar.sh
   sleep 1s
 done

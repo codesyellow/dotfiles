@@ -28,10 +28,8 @@ while true; do
   current_hour=$(date +%H)
   if [[ $current_hour -ge 22 ]] || [[ $current_hour -lt 6 ]]; then
     echo 'false' >/tmp/server_status
-    sleep_duration=$((8 * 3600)) # 8 hours in seconds
-  else
-    sleep_duration=1200 # 20 minutes in seconds
+    break
   fi
 
-  sleep $sleep_duration
+  sleep 1200
 done

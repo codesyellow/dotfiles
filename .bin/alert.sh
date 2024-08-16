@@ -1,2 +1,2 @@
 #!/bin/sh
-paplay ~/.audios/notification-sound-7062.mp3
+paplay ~/.audios/system-notification-199277.mp3 &
