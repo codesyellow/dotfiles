@@ -85,9 +85,9 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 static const Layout layouts[] = {
   /* symbol     arrange function */
   { "[]=",      tile },    /* first entry is default */
-  { "| ",        NULL },    /* no layout function means floating behavior */
-  { "| ",        monocle },
-  { "| ",        bstack },
+  { "",        NULL },    /* no layout function means floating behavior */
+  { "",        monocle },
+  { "",        bstack },
   { "===",      bstackhoriz },
 };
 
@@ -136,7 +136,7 @@ static const char *pymors[]  = { "pymor", NULL };
 static const char *pymorl[]  = { "pymor", "-l", "3", NULL };
 static const char *pymorc[]  = { "pymor", "-c", NULL };
 static const char *dunst[]  = { "dunstctl", "close-all", NULL };
-static const char *rotatemouse[]  = { "360.sh", "199", NULL };
+static const char *rotatemouse[]  = { "360.sh", "99", NULL };
 static const char *volup[]  = { "volume.sh", "up", NULL };
 static const char *borderless[]  = { "borderless.sh",  NULL };
 static const char *voldw[]  = { "volume.sh", "down", NULL };

@@ -1005,59 +1005,62 @@ drawtab(Monitor *m) {
 	int x = 0;
 	int w = 0;
 
-	//view_info: indicate the tag which is displayed in the view
+	// view_info: indicate the tag which is displayed in the view
 	for(i = 0; i < LENGTH(tags); ++i){
-	  if((selmon->tagset[selmon->seltags] >> i) & 1) {
-	    if(itag >=0){ //more than one tag selected
-	      itag = -1;
-	      break;
-	    }
-	    itag = i;
-	  }
+		if((selmon->tagset[selmon->seltags] >> i) & 1) {
+			if(itag >= 0){ // more than one tag selected
+				itag = -1;
+				break;
+			}
+			itag = i;
+		}
 	}
 
-	if(0 <= itag  && itag < LENGTH(tags)){
-	  snprintf(view_info, sizeof view_info, "[%s]", tags[itag]);
+	if(0 <= itag && itag < LENGTH(tags)){
+		snprintf(view_info, sizeof view_info, "[%s]", tags[itag]);
 	} else {
-	  strncpy(view_info, "[...]", sizeof view_info);
+		strncpy(view_info, "[...]", sizeof view_info);
 	}
-	view_info[sizeof(view_info) - 1 ] = 0;
+	view_info[sizeof(view_info) - 1] = 0;
 	view_info_w = TEXTW(view_info);
 	tot_width = view_info_w;
 
 	/* Calculates number of labels and their width */
 	m->ntabs = 0;
 	for(c = m->clients; c; c = c->next){
-	  if(!ISVISIBLE(c)) continue;
-	  m->tab_widths[m->ntabs] = TEXTW(c->name);
-	  tot_width += m->tab_widths[m->ntabs];
-	  ++m->ntabs;
-	  if(m->ntabs >= MAXTABS) break;
+		// Skip floating and non-visible windows
+		if(!ISVISIBLE(c) || c->isfloating) continue;
+		m->tab_widths[m->ntabs] = TEXTW(c->name);
+		tot_width += m->tab_widths[m->ntabs];
+		++m->ntabs;
+		if(m->ntabs >= MAXTABS) break;
 	}
 
-	if(tot_width > m->ww){ //not enough space to display the labels, they need to be truncated
-	  memcpy(sorted_label_widths, m->tab_widths, sizeof(int) * m->ntabs);
-	  qsort(sorted_label_widths, m->ntabs, sizeof(int), cmpint);
-	  tot_width = view_info_w;
-	  for(i = 0; i < m->ntabs; ++i){
-	    if(tot_width + (m->ntabs - i) * sorted_label_widths[i] > m->ww)
-	      break;
-	    tot_width += sorted_label_widths[i];
-	  }
-	  maxsize = (m->ww - tot_width) / (m->ntabs - i);
-	} else{
-	  maxsize = m->ww;
+	if(tot_width > m->ww){ // not enough space to display the labels, they need to be truncated
+		memcpy(sorted_label_widths, m->tab_widths, sizeof(int) * m->ntabs);
+		qsort(sorted_label_widths, m->ntabs, sizeof(int), cmpint);
+		tot_width = view_info_w;
+		for(i = 0; i < m->ntabs; ++i){
+			if(tot_width + (m->ntabs - i) * sorted_label_widths[i] > m->ww)
+				break;
+			tot_width += sorted_label_widths[i];
+		}
+		maxsize = (m->ww - tot_width) / (m->ntabs - i);
+	} else {
+		maxsize = m->ww;
 	}
+
 	i = 0;
 	for(c = m->clients; c; c = c->next){
-	  if(!ISVISIBLE(c)) continue;
-	  if(i >= m->ntabs) break;
-	  if(m->tab_widths[i] >  maxsize) m->tab_widths[i] = maxsize;
-	  w = m->tab_widths[i];
-	  drw_setscheme(drw, scheme[(c == m->sel) ? SchemeSel : SchemeNorm]);
-	  drw_text(drw, x, 0, w, th, 0, c->name, 0);
-	  x += w;
-	  ++i;
+		// Skip floating and non-visible windows
+		if(!ISVISIBLE(c) || c->isfloating) continue;
+		if(i >= m->ntabs) break;
+		if(m->tab_widths[i] > maxsize) m->tab_widths[i] = maxsize;
+		w = m->tab_widths[i];
+		drw_setscheme(drw, scheme[(c == m->sel) ? SchemeSel : SchemeNorm]);
+		drw_text(drw, x, 0, w, th, 0, c->name, 0);
+		x += w;
+		++i;
 	}
 
 	drw_setscheme(drw, scheme[SchemeNorm]);
@@ -2426,6 +2429,7 @@ updatebars(void)
 	}
 }
 
+
 void
 updatebarpos(Monitor *m)
 {
@@ -2437,21 +2441,24 @@ updatebarpos(Monitor *m)
 	if (m->showbar) {
 		m->wh -= bh;
 		m->by = m->topbar ? m->wy : m->wy + m->wh;
-		if ( m->topbar )
+		if (m->topbar)
 			m->wy += bh;
 	} else {
 		m->by = -bh;
 	}
 
+	// Only count non-floating and visible clients
 	for(c = m->clients; c; c = c->next) {
-		if(ISVISIBLE(c)) ++nvis;
+		if(ISVISIBLE(c) && !c->isfloating)
+			++nvis;
 	}
 
+	// Show the tab bar only if there are multiple non-floating windows
 	if(m->showtab == showtab_always
 	   || ((m->showtab == showtab_auto) && (nvis > 1) && (m->lt[m->sellt]->arrange == monocle))) {
 		m->wh -= th;
 		m->ty = m->toptab ? m->wy : m->wy + m->wh;
-		if ( m->toptab )
+		if (m->toptab)
 			m->wy += th;
 	} else {
 		m->ty = -th;
