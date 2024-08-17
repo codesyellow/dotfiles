@@ -23,7 +23,8 @@ equalizer_path="/tmp/equalizer"
 do_exist() {
   if ! [[ -f "/tmp/$1" ]]; then
     touch "/tmp/$1"
-    easy_preset.sh "$2" &
+    echo "preset was selected was $2"
+    /home/cie/.bin/easy_preset.sh "$2" &
   fi
 
   if [[ "$1" == 'music' ]]; then
