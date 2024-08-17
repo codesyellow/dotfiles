@@ -1,0 +1,7 @@
+[Unit]
+Description=check the server info to display
+
+[Service]
+ExecStart=%h/.bin/server_check.sh
+WorkingDirectory=/home/cie/.bin/
+

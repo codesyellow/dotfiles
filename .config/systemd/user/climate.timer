@@ -1,0 +1,9 @@
+[Unit]
+Description=Run hourly script every hour from 5 AM to 10 PM
+
+[Timer]
+OnCalendar=*-*-* 05..22:00
+Unit=climate.service
+
+[Install]
+WantedBy=timers.target

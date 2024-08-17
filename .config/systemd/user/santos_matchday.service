@@ -1,0 +1,5 @@
+[Unit]
+Description=Santos matchday script
+
+[Service]
+ExecStart=/home/cie/.bin/santos_matchday.py

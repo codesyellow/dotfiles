@@ -1,0 +1,9 @@
+[Unit]
+Description=Run santos_schedule script daily at 5 AM
+
+[Timer]
+OnCalendar=06:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

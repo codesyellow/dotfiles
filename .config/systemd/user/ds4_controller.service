@@ -1,0 +1,7 @@
+[Unit]
+Description=run ds4 controller bash script
+
+[Service]
+ExecStart=%h/.bin/ds4_controller.sh
+WorkingDirectory=/home/cie/.bin/
+

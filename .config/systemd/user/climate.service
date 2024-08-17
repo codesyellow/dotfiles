@@ -1,0 +1,10 @@
+[Unit]
+Description=A climate script
+
+[Service]
+Type=oneshot
+ExecStart=/home/cie/.bin/clima.sh
+WorkingDirectory=/home/cie/.bin/
+
+[Install]
+WantedBy=multi-user.target
