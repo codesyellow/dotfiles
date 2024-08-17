@@ -21,9 +21,9 @@ temp() {
 is_it_charging() {
   battery_status=$(dsbattery)
   if [[ "$battery_status" == *"↑"* ]]; then
-    return 0 # Charging
+    return 0
   else
-    return 1 # Not charging
+    return 1
   fi
 }
 
@@ -31,11 +31,6 @@ is_idle() {
   log_file="/tmp/ds4_logger"
   idle_crit=15
   idle_warn=10
-
-  # Skip idle check if charging
-  if is_it_charging; then
-    return 0
-  fi
 
   if [[ -f "$log_file" ]]; then
     last_time=$(cat "$log_file")
@@ -120,19 +115,25 @@ ds4() {
 
     if is_it_charging; then
       if ! [[ -f /tmp/ds4_charging ]]; then
+        if [[ -f /tmp/ds4_notcharging ]]; then
+          temp "ds4_notcharging"
+        fi
         temp "t" "ds4_charging"
         ramdon_notify "joyley_juiceon"
       fi
     else
       if [[ -f /tmp/ds4_charging ]]; then
-        ramdon_notify "joyley_juiceoff"
-        temp "ds4_charging"
-        echo "$(date +%H:%M:%S)" >/tmp/ds4_logger # Reset idle timer
+        if ! [[ -f /tmp/ds4_notcharging ]]; then
+          ramdon_notify "joyley_juiceoff"
+          temp "ds4_charging"
+        fi
+        temp "t" "ds4_notcharging"
       fi
     fi
 
     ds4_first_connected
     if [[ -z $idle ]]; then
+      echo "idle"
       nohup /home/cie/.bin/idle_joy.py &
     fi
     ds4_bat_warnings_50 $1
@@ -149,8 +150,6 @@ while true; do
   bat=$(echo "$ds" | grep -o '[0-9]*')
   ds4 $bat $idle
 
-  if ! is_it_charging; then
-    is_idle
-  fi
+  is_idle
   sleep 2
 done

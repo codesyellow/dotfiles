@@ -18,13 +18,13 @@ to_late="21:00"
 volume=$(pamixer --get-volume)
 checkupdates=$(cat /tmp/updates)
 is_muted=$(pamixer --get-mute)
-is_easy_active=$(pgrep 'easyeffects')
+is_dsp_on=$(jamesdsp --is-connected)
 server=$(cat /tmp/map_display)
 santos=$(cat /tmp/santosmatch)
 server_status=$(cat /tmp/server_status)
 ds4_bat=$(cat /tmp/ds4_battery)
 ds4_status=$(cat /tmp/ds4_status)
-#climate=$(curl 'wttr.in/Santos?format="%t"' | sed 's/[^0-9]*//g')
+climate=$(cat /tmp/climate)
 day=$(date +"%a" | tr '[:lower:]' '[:upper:]')
 easy=$(easy_preset.sh)
 cputemp=$(cat /sys/class/thermal/thermal_zone2/temp | cut -c 1-2)
@@ -47,7 +47,7 @@ cpu_per_int=$(printf "%.0f\n" "$cpu")
 
 status=""
 
-if [[ -n $is_easy_active ]]; then
+if [[ -n $is_dsp_on ]]; then
   if [[ $easy = "eq" ]]; then
     status+="$nm"
   else
@@ -61,12 +61,13 @@ if [[ -n $santos ]]; then
   status+=" $nm|$nm $santos"
 fi
 
-# if [[ $climate -le 25 ]]; then
-#   status+="   $cold $climate°"
-# else
-#   status+="   $hot $climate°"
-# fi
-#
+if [[ "$climate" -ge 30 ]]; then
+  status+=" $nm|  $climate"
+elif [[ "$climate" -le 20 ]]; then
+  status+=" $nm|  $climate"
+else
+  status+=" $nm|  $climate"
+fi
 
 if [[ $server_status == 'true' ]]; then
   status+=" $nm| $server_icon $server"

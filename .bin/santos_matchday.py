@@ -41,16 +41,18 @@ while True:
     print(match_time, current_time, MATCH_DISPLAY_TIME)
 
     if current_time >= match_time:
-        with open("/tmp/santosmatch", "w") as f:
-            pass  # Just opening the file in 'w' mode clears its content
-        break
-
+         with open("/tmp/santosmatch", "w") as f:
+             pass  # Just opening the file in 'w' mode clears its content
+         break
+    
     with open("/tmp/santosmatch", "w") as f:
+        print("time echoed")
         f.write(match_time_str)
 
-    time.sleep(3600)  # Sleep for 20 seconds
+    time.sleep(3600)  
 
     with open("/tmp/santosmatch", "w") as f:
+        print("match echoed")
         f.write(match)
 
     time.sleep(MATCH_DISPLAY_TIME)

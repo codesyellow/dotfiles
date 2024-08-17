@@ -1,25 +1,18 @@
-#!/bin/bash
+while true; do
+  # Detect if YouTube Music is running
+  if wmctrl -l | grep -q "youtube-music"; then
+    # Apply your music preset
+    set_easyeffects_preset "$EASY_EFFECTS_PRESET"
+    echo "YouTube Music detected - Applying music preset."
 
-log_file="/tmp/ds4_logger"
-idle_crit=15
-idle_warn=10
-
-if [[ -f "$log_file" ]]; then
-  # Read the last logged time from the file
-  last_time=$(cat "$log_file")
-
-  # Convert last time to seconds since the epoch
-  last_time_epoch=$(date -d "$last_time" +"%s")
-  current_time_epoch=$(date +"%s")
-
-  # Calculate the difference in minutes
-  time_diff=$(((current_time_epoch - last_time_epoch) / 60))
-
-  if ((time_diff >= idle_warn)); then
-    notify-send.sh "inac" "has ben for warn"
-  elif ((time_diff >= idle_crit)); then
-    notify-send.sh "inac" "ggg over"
+    # Wait until YouTube Music closes
+    while wmctrl -l | grep -q "$YOUTUBE_MUSIC_WINDOW_CLASS"; do
+      sleep 1
+    done
   fi
-else
-  echo "Log file not found!"
-fi
+
+  # Apply the Loudness Equalizer preset
+  set_easyeffects_preset "$LOUDNESS_PRESET"
+  echo "YouTube Music closed - Applying Loudness Equalizer."
+  sleep 1
+done

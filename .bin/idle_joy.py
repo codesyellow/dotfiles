@@ -19,11 +19,15 @@ device_path = find_device_path(CONTROLLER_NAME)
 if device_path:
     dev = InputDevice(device_path)
     log_file = "/tmp/ds4_logger"
+    last_timestamp = None
 
     for event in dev.read_loop():
         if event.type == ecodes.EV_KEY:
             timestamp = time.strftime("%H:%M:%S", time.localtime())
-            with open(log_file, "w") as f:  # Open file in write mode to overwrite
-                f.write(timestamp)
+            if timestamp != last_timestamp:  # Only write if the timestamp is different
+                with open(log_file, "w") as f:
+                    f.write(timestamp)
+                last_timestamp = timestamp
+        time.sleep(0.05)  # Add a small delay to reduce CPU usage
 else:
     print(f"Device with name '{CONTROLLER_NAME}' not found.")
