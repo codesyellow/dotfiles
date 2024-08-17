@@ -1,5 +1,20 @@
 #!/usr/bin/env bash
 
+# Function to handle SIGTERM
+cleanup() {
+  echo "SIGTERM received, cleaning up..."
+  # Perform any cleanup tasks here, like saving state, releasing resources, etc.
+  if [[ -f /tmp/equalizer ]]; then
+    rm /tmp/equalizer
+  elif [[ -f /tmp/music ]]; then
+    rm /tmp/music
+  fi
+  exit 0
+}
+
+# Trap the SIGTERM signal and call the cleanup function
+trap cleanup SIGTERM
+
 music_preset="HeavyBass"
 equalizer="LoudnessEqualizer"
 music_path="/tmp/music"
@@ -28,14 +43,16 @@ do_exist() {
 
 while true; do
   music=$(pidof 'youtube-music')
+  effects=$(pidof 'easyeffects')
 
-  if [[ -n "$music" ]]; then
-    echo "running"
-    do_exist "music" $music_preset
+  if [[ -n "effects" ]]; then
+    if [[ -n "$music" ]]; then
+      do_exist "music" $music_preset
+    else
+      do_exist "equalizer" $equalizer
+    fi
   else
-    do_exist "equalizer" $equalizer
-    echo "not running"
+    echo "easyeffects is not running. make sure its running so the script can work"
   fi
-
   sleep 3
 done

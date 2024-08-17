@@ -18,7 +18,7 @@ to_late="21:00"
 volume=$(pamixer --get-volume)
 checkupdates=$(cat /tmp/updates)
 is_muted=$(pamixer --get-mute)
-is_dsp_on=$(jamesdsp --is-connected)
+is_easy_active=$(pgrep 'easyeffects')
 server=$(cat /tmp/map_display)
 santos=$(cat /tmp/santosmatch)
 server_status=$(cat /tmp/server_status)
@@ -47,7 +47,7 @@ cpu_per_int=$(printf "%.0f\n" "$cpu")
 
 status=""
 
-if [[ -n $is_dsp_on ]]; then
+if [[ -n $is_easy_active ]]; then
   if [[ $easy = "eq" ]]; then
     status+="$nm"
   else
