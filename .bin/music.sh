@@ -29,7 +29,6 @@ do_exist() {
 
   if [[ "$1" == 'music' ]]; then
     if [[ -f $equalizer_path ]]; then
-      echo "Yup not music"
       rm $equalizer_path
     fi
   else

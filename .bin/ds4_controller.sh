@@ -63,8 +63,6 @@ is_idle() {
         rm "/tmp/ds4_idle_crit"
       fi
     fi
-  else
-    echo "Log file not found!"
   fi
 }
 
