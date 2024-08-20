@@ -1,7 +1,7 @@
 #!/bin/bash
 nm="^c#d8dee9^"
-wn="^c#F6E96B^"
-al="^c#FF4E88^"
+wn="^c#ebcb8b^"
+al="^c#bf616a^"
 
 ram_icon=
 server_icon=$(cat /tmp/map_display-icon)
@@ -60,8 +60,12 @@ while true; do
     status+="$wn !"
   fi
 
-  if [[ -f $santos ]]; then
-    status+=" $nm|$nm $santos"
+  if [[ -f "/tmp/santosmatch" ]]; then
+    if [[ -f "/tmp/matchup" ]] && [[ $santos == *"x"* ]]; then
+      status+=" $nm|$wn $santos"
+    else
+      status+=" $nm|$nm $santos"
+    fi
   fi
 
   if [[ "$climate" -ge 30 ]]; then
@@ -117,7 +121,7 @@ while true; do
   if [[ $cputemp -le 60 ]]; then
     status+=" $nm| $nm $cpu_temp_low $cputemp°"
   elif [[ $cputemp -ge 61 && $cputemp -le 70 ]]; then
-    status+=" $nm| $al$cpu_temp_mid $cputemp°"
+    status+=" $nm| $wn$cpu_temp_mid $cputemp°"
   else
     status+=" $nm| $al$cpu_temp_high $cputemp°"
   fi
@@ -140,7 +144,7 @@ while true; do
 
   if [[ $(echo "$root_int < 20" | bc) -ne 0 ]]; then
     status+=" $nm| $wm$root_icon $root_int""g"
-  elif [[ $(echo "$root_int < 5" | bc) -ne 0 ]]; then
+  elif [[ $(echo "$root_int < 10" | bc) -ne 0 ]]; then
     status+=" $nm| $al$root_icon $root_int""g"
   else
     status+=" $nm| $nm$root_icon $root_int""g"

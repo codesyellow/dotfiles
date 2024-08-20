@@ -132,7 +132,7 @@ ds4() {
     ds4_first_connected
     if [[ -z $idle ]]; then
       echo "idle"
-      nohup /home/cie/.bin/idle_joy.py &
+    #  nohup /home/cie/.bin/idle_joy.py &
     fi
     ds4_bat_warnings_50 $1
     ds4_bat_warnings_30 $1
@@ -148,6 +148,6 @@ while true; do
   bat=$(echo "$ds" | grep -o '[0-9]*')
   ds4 $bat $idle
 
-  is_idle
+  # is_idle
   sleep 2
 done

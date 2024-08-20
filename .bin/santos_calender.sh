@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
-show_teams=10
-show_hour=20
+show_teams=600
+show_hour=3600
 current_month=$(date +"%m")
 current_day=$(date +"%d")
 santoss_match="/tmp/santosmatch"
-no_match_path="/tmp/no_match"
 notify_state_path="/tmp/santos_prior"
 
 notify_prior() {
@@ -50,11 +49,8 @@ done <<<"$todays_match"
 
 match_hour=$(echo "$hour" | sed 's/"//g')
 match_teams=$(echo "$match" | sed 's/"//g')
-
 if [[ -n $match_hour ]] && [[ -n $match_teams ]]; then
-  if [[ -f "$no_match" ]]; then
-    rm "$no_match"
-  elif [[ -f "$notify_state_path" ]]; then
+  if [[ -f "$notify_state_path" ]]; then
     rm "$notify_state_path"
   fi
 
@@ -73,17 +69,20 @@ if [[ -n $match_hour ]] && [[ -n $match_teams ]]; then
     if ! [[ -f "$notify_state_path" ]]; then
       notify_prior $match_hour
     fi
+
+    if [[ -f "/tmp/matchup" ]]; then
+      rm "/tmp/matchup"
+    fi
+
     echo "$match_hour" >"$santoss_match"
     sleep $show_hour
     echo "$match_teams" >"$santoss_match"
+    touch "/tmp/matchup"
     sleep $show_teams
   done
 else
-  if ! [[ -f "$no_match_path" ]]; then
-    touch "$no_match_path"
-    echo "No matchs for Santos for now."
-    if [[ -f "$santoss_match" ]]; then
-      rm "$santoss_match"
-    fi
+  echo "No matchs for Santos for now."
+  if [[ -f "$santoss_match" ]]; then
+    rm "$santoss_match"
   fi
 fi

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-climate=$(curl -s "wttr.in/SaoVicente?format=%t" | grep -oP '\d+')
+climate=$(curl -s "wttr.in/SaoVicente?format=%f" | grep -oP '\d+')
 
 if [[ -n $climate ]]; then
   echo $climate >"/tmp/climate"
