@@ -16,21 +16,22 @@ static const char *fonts[]          = {
   "JetBrainMono Nerd Font",
   "Font Awesome 6 Free Solid:size=11",
 };
-static const char dmenufont[]       = "JetBrainMono Nerd Font:size=12";
+static const char dmenufont[] = "JetBrainMono Nerd Font:size=12";
 static const char bg1[]       = "#4c566a";
 static const char bg0[]       = "#2e3440";
 static const char fg0[]       = "#d8dee9";
+static const char light[]     = "#ebcb8b";
 static const char fg1[]       = "#eceff4";
-static const char border[]        = "#bf616a";
-static const char *colors[][3]      = {
+static const char border[]    = "#bf616a";
+static const char *colors[][3]= {
   /*               fg         bg         border   */
   [SchemeNorm] = { fg0, bg0, bg0 },
-  [SchemeSel]  = { fg1, border,  border  },
+  [SchemeSel]  = { light, bg0,  border  },
 };
 
 /* tagging */
-static const char *tags[] = { "", " ", "", "", "", "" };
-static const int taglayouts[] = { 2, 3, 3, 2, 2, 2, };
+static const char *tags[] = { "", " ", "", "", "", "" };
+static const int taglayouts[] = { 2, 2, 3, 2, 2, 2, };
 
 static const Rule rules[] = {
   /* xprop(1):
@@ -47,28 +48,31 @@ static const Rule rules[] = {
   { "Whatsapp-for-linux",  NULL,       NULL,       0,       1,           -1,   0,     50,50,1100,600,        5 },
   { "Zathura",  NULL,       NULL,       1 << 3,       0,           -1,        50,50,500,500,        5,      0},
   { "steam",    "steamwebhelper",       NULL,       1 << 4,       0,           -1, 0,        50,50,500,500,        5},
+  { "Input-remapper-gtk",    NULL,       NULL,       1 << 4,       0,           -1, 0,        50,50,500,500,        5},
   { "sober",    NULL,       NULL,       1 << 4,       0,           -1, 0,        50,50,500,500,        5},
   { "alacritty",    NULL,       NULL,       1 << 3,       0,           -1, 0,        50,50,500,500,        5},
   { "ProtonUp-Qt",    NULL,       NULL,       1 << 4,       0,           -1, 0,        50,50,500,500,        5},
   { NULL,    NULL,       "Steam",       1 << 4,       0,           -1,     0,   50,50,500,500,        5},
   { NULL,    NULL,       "Steam setup",       1 << 4,       0,           -1,        50,50,500,500,        50},
   { "heroic",   NULL,       NULL,       1 << 4,       0,           -1,    0,    50,50,500,500,        5},
+  { "cage",   NULL,       NULL,       1 << 4,       0,           -1,    0,    50,50,500,500,        5},
   { "retroarch",   NULL,       NULL,       1 << 4,       0,           -1,    0,    50,50,500,500,        5},
   { "Lutris",   NULL,       NULL,       1 << 4,       0,           -1,    0,    50,50,500,500,        5},
   { NULL,  "youtube music",       NULL,       1 << 5,       0,           -1, 0,       50,50,500,500,        5},
   { NULL,       NULL,   "scratchpad",   0,            1,           -1,   's', 90,50,1200,400,        5,   },
   { NULL,       NULL,   "habits",   0,            1,           -1,   'h', 90,50,1200,400,        5,   },
-  { NULL,       NULL,   "task-tui",   0,            1,           -1,   't', 800,50,500,600,        5,   },
-  { "Noi",       NULL,   NULL,   0,            1,           -1,   'i', 800,50,500,700,        5,   },
-  { NULL,       NULL,   "Kuro",   0,            1,           -1,   'k', 830,35,500,700,        5,   },
-  { NULL,       NULL,   "ai",   0,            1,           -1,   'a', 830,35,500,700,        5,   },
-  { NULL,       NULL,   "pulsemixer",   0,            1,           -1,   'p', 930,35,400,400,        5,   },
+  { NULL,       NULL,   "task-tui",   0,            1,           -1,   't', 789,48,500,650,        5,   },
+  { "Noi",       NULL,   NULL,   0,            1,           -1,   'i', 788,50,500,700,        5,   },
+  { NULL,       NULL,   "Kuro",   0,            1,           -1,   'k', 830,35,500,650,        5,   },
+  { NULL,       NULL,   "ai",   0,            1,           -1,   'a', 789,48,500,650,        5,   },
+  { NULL,       NULL,   "pulsemixer",   0,            1,           -1,   'p', 788,48,400,400,        5,   },
   { NULL,       NULL,   "btop",   0,            1,           -1,   'b', 90,80,1200,600,        5,   },
+  { NULL,       NULL,   "bluetui",   0,            1,           -1,   'f', 90,80,1200,600,        5,   },
+  { NULL,       NULL,   "sysmd",   0,            1,           -1,   'q', 90,80,1200,600,        5,   },
   {"Galculator",       NULL,   NULL,   0,            1,           -1,   'g', 90,80,1200,600,        5,   },
   { NULL,       NULL,   "WhatsApp for Linux",   0,            1,           -1,   'w', 90,80,1200,600,        5,   },
   { NULL,       NULL,   "Free Download Manager",   0,            1,           -1,   'd', 90,80,1200,600,        5,   },
   { NULL,       NULL,   "notes",   0,            1,           -1,   'o', 90,50,1200,600,        5,   },
-  { "DL: language lessons",       NULL,   NULL,   0,            1,           -1,   'l', 90,50,1200,700,        5,   },
   { NULL,       NULL,   "neorg",   0,            1,           -1,   'n', 90,50,1200,600,        5,   },
   { NULL,       NULL,   "tt",   0,            1,           -1,   'e', 90,50,1200,600,        5,   },
   { NULL,       NULL,   "Exercise Timer",   0,            1,           -1,   'z', 500,50,400,400,        5,   },
@@ -112,7 +116,7 @@ static const char *monocles[] = { "", "2", "3", "4", "5", "6", "7", "8", "9",
 #define STACKKEYS(MOD,ACTION)                                                                                              \
   &((Keychord){1, {{MOD, XK_j}},  ACTION##stack, {.i = INC(+1)}}), \
   &((Keychord){1, {{MOD, XK_k}}, ACTION##stack, {.i = INC(-1)}}), \
-  &((Keychord){1, {{MOD, XK_p}}, ACTION##stack, {.i = PREVSEL}}), \
+  &((Keychord){1, {{MOD, XK_b}}, ACTION##stack, {.i = PREVSEL}}), \
   &((Keychord){1, {{MOD, XK_m}},  ACTION##stack, {.i = 0}}), \
   &((Keychord){1, {{MOD, XK_r}},  ACTION##stack, {.i = 1}}), \
   &((Keychord){1, {{MOD, XK_z}},  ACTION##stack, {.i = 2}}), \
@@ -126,7 +130,7 @@ static const char *monocles[] = { "", "2", "3", "4", "5", "6", "7", "8", "9",
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-nb", "#2e3440", "-z", "450", "-x", "250", "-y", "2", "-sb", "#2e3440", "-shb", "#2e3440", "-fn", dmenufont, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-nb", bg0, "-z", "450", "-x", "250", "-y", "2", "-sb", bg0, "-shb", bg0, "-nhb", bg0, "-shf", light,"-nhf",border,"-fn", dmenufont, NULL };
 static const char *dmenumpv[] = { "mpvtube.sh", NULL };
 static const char *clipmenucmd[] = { "clipmenu", "-z", "700", "-x", "230", "-y", "4", NULL };
 static const char *bass[] = { "easy_preset.sh", "HeavyBass", NULL};
@@ -145,6 +149,8 @@ static const char *esdf[]  = { "esdf.sh", NULL };
 /*First arg only serves to match against key in rules*/
 static const char *scratchpadcmd[] = {"s", "alacritty", "--class", "scratchpad", "-t", "scratchpad", NULL}; 
 static const char *scratchpadclock[] = TERM_CMD("c", "clock", "tclock_timer.sh");
+static const char *scratchpadblue[] = TERM_CMD("f", "bluetui", "bluetui");
+static const char *scratchpadsymd[] = TERM_CMD("q", "sysmd", "systemctl-tui");
 static const char *scratchpadhabit[] = TERM_CMD("h", "habits", "nvim", "/home/cie/.vimwiki/habit.wiki");
 static const char *scratchpadnotes[] = TERM_CMD("o", "notes", "nvim", "/home/cie/.vimwiki/index.md");
 static const char *scratchpadbtop[] = TERM_CMD("b", "btop", "btop");
@@ -156,7 +162,6 @@ static const char *scratchfdm[] = {"d", "fdm", NULL};
 static const char *scratchpadstretch[] = {"z", "flatpak", "run", "xyz.safeworlds.hiit", NULL}; 
 static const char *scratchpadcalc[] = {"g", "galculator", NULL}; 
 static const char *scratchpadzap[] = {"w", "flatpak", "run", "com.github.eneshecan.WhatsAppForLinux", NULL}; 
-static const char *scratchpadslingo[] = {"l", "duolingo-desktop", NULL}; 
 static const char *scratchpadtrayer[] = {"q", "trayer", "--widthtype", "pixel", "--transparent", "true", "--alpha", "255", "--distance", "10", NULL}; 
 
 static Keychord *keychords[] = {
@@ -186,6 +191,8 @@ static Keychord *keychords[] = {
   SCRATCHS(w, scratchpadzap)
   SCRATCHS(m, scratchpadbtop)
   SCRATCHS(g, scratchpadcalc)
+  SCRATCHS(b, scratchpadblue)
+  SCRATCHS(y, scratchpadsymd)
   // exec
   EXECS(r, dmenucmd)
   EXECS(h, clipmenucmd)
@@ -196,9 +203,9 @@ static Keychord *keychords[] = {
 	STACKKEYS(MODKEY|ShiftMask,                push)
 
   // volume
-  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_j}},                            spawn,          {.v = voldw } }),
-  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_k}},                            spawn,          {.v = volup } }),
-  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_m}},                            spawn,          {.v = volm } }),
+  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_j}},                            spawn,         SHCMD("/home/cie/.bin/volume.sh down && echo $(pamixer --get-volume) > /tmp/volume ") }),
+  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_k}},                            spawn,         SHCMD("/home/cie/.bin/volume.sh up && echo $(pamixer --get-volume) > /tmp/volume ") }),
+  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_m}},                            spawn,         SHCMD("/home/cie/.bin/volume.sh mute && echo $(pamixer --get-volume) > /tmp/volume ") }),
   // action
   &((Keychord){2, {{MODKEY, XK_a}, {0, XK_m}},                 spawn,          {.v = bass } }),
   &((Keychord){2, {{MODKEY, XK_a}, {0, XK_l}},                 spawn,          {.v = loudness } }),
@@ -211,7 +218,7 @@ static Keychord *keychords[] = {
   //rest
   //  &((Keychord){1, {{MODKEY, XK_p}},                                       spawn,          {.v = dmenucmd } }),
   &((Keychord){1, {{MODKEY, XK_t}},                                       spawn,          {.v = termcmd } }),
-  &((Keychord){1, {{MODKEY, XK_b}},                                       togglebar,      {0} }),
+  &((Keychord){1, {{MODKEY|ShiftMask, XK_b}},                                       togglebar,      {0} }),
 //  &((Keychord){1, {{MODKEY, XK_j}},                                       focusstack,     {.i = +1 } }),
  // &((Keychord){1, {{MODKEY, XK_k}},                                       focusstack,     {.i = -1 } }),
   //  &((Keychord){1, {{MODKEY, XK_i}},                                       incnmaster,     {.i = +1 } }),
