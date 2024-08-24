@@ -17,8 +17,6 @@ clipmenud &
 caffeine &
 /usr/lib/polkit-kde-authentication-agent-1 &
 sleep 5 && easyeffects --gapplication-service &
-systemctl --user start ds4_controller.service &
-systemctl --user start dwm-bar.service &
 systemctl --user start server_check.service &
 systemctl --user start server.service &
 paplay ~/.audios/retro-audio-logo-94648.mp3 &
