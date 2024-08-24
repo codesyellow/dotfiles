@@ -75,8 +75,10 @@ if [[ -n $match_hour ]] && [[ -n $match_teams ]]; then
     fi
 
     echo "$match_hour" >"$santoss_match"
+    echo "Displaying hour"
     sleep $show_hour
     echo "$match_teams" >"$santoss_match"
+    echo "Displaying matchup"
     touch "/tmp/matchup"
     sleep $show_teams
   done

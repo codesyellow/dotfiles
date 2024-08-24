@@ -4,7 +4,6 @@ wn="^c#ebcb8b^"
 al="^c#bf616a^"
 
 ram_icon=
-server_icon=$(cat /tmp/map_display-icon)
 cpu_icon=
 root_icon=
 home_icon=
@@ -14,32 +13,140 @@ cpu_temp_mid=
 cpu_temp_high=
 controller=
 sleep_time=2
+ds4_status_sleep=10
+ssd_space_sleep=60
+ram_usage_sleep=10
+check_updates_sleep=60
+get_volume_sleep=10
+get_hour=5
+get_day_month=7200
+get_week=7200
 
 to_late="21:00"
 
-while true; do
+ds4_status() {
+  while true; do
+    ds4=$(dsbattery)
+    if [[ -n "$ds4" ]]; then
+      if ! [[ -f "/tmp/ds4_active" ]]; then
+        touch "/tmp/ds4_active"
+      fi
 
+      if [[ "$ds4" == *"↑"* ]]; then
+        if ! [[ -f "/tmp/ds4_charging" ]]; then
+          touch "/tmp/ds4_charging"
+        fi
+      else
+        if [[ -f "/tmp/ds4_charging" ]]; then
+          rm "/tmp/ds4_charging"
+        fi
+        echo $(echo "$ds4" | grep -o '[0-9]*') >"/tmp/ds4_battery"
+      fi
+    else
+      if [[ -f "/tmp/ds4_active" ]]; then
+        rm "/tmp/ds4_active"
+      fi
+    fi
+    sleep $ds4_status_sleep
+  done &
+}
+
+ssd_space() {
+  while true; do
+    root=$(df -h | awk '{ if ($6 == "/") print $4 }')
+    root_int=${root::-1}
+    echo "$root_int" >"/tmp/ssd_space"
+
+    sleep $ssd_space_sleep
+  done &
+}
+
+ram_usage() {
+  while true; do
+    freemen_per=$(free -m | awk 'NR==2{print $3*100/$2 }')
+    freemen_per_int=$(printf "%.0f\n" "$freemen_per")
+    echo "$freemen_per_int" >"/tmp/ram_usage"
+
+    sleep $ram_usage_sleep
+  done &
+}
+
+check_updates() {
+  while true; do
+    echo $(checkupdates | wc -l) >"/tmp/checkupdates"
+    sleep $check_updates_sleep
+  done &
+}
+
+get_volume() {
+  while true; do
+    is_it_muted=$(pamixer --get-mute)
+    if [[ "$is_it_muted" == "true" ]]; then
+      touch "/tmp/volume_muted"
+    else
+      if [[ -f "/tmp/volume_muted" ]]; then
+        rm "/tmp/volume_muted"
+      fi
+    fi
+    echo $(pamixer --get-volume) >"/tmp/volume"
+    sleep $get_volume_sleep
+  done &
+}
+
+get_day_month() {
+  while true; do
+    echo $(date +"%d") >"/tmp/day_month"
+    sleep 7200
+  done &
+}
+
+get_hour() {
+  while true; do
+    echo $(date +"%H:%M") >"/tmp/hours"
+    sleep 5
+  done &
+}
+
+get_week() {
+  while true; do
+    echo $(date +"%a" | tr '[:lower:]' '[:upper:]') >"/tmp/week_day"
+    sleep 7200
+  done &
+}
+
+is_easyeffects_active() {
+  while true; do
+    echo $(pgrep 'easyeffects') >"/tmp/easy_active"
+    sleep 10
+  done &
+}
+
+ds4_status
+ssd_space
+ram_usage
+check_updates
+get_volume
+get_week
+get_day_month
+get_hour
+is_easyeffects_active
+
+while true; do
   volume=$(</tmp/volume)
-  checkupdates=$(</tmp/updates)
-  is_muted=$(pamixer --get-mute)
-  is_easy_active=$(pgrep 'easyeffects')
+  checkupdates=$(</tmp/checkupdates)
+  is_easy_active=$(</tmp/easy_active)
   server=$(</tmp/map_display)
-  santos=$(</tmp/santosmatch)
-  server_status=$(</tmp/server_status)
-  ds4_bat=$(</tmp/ds4_battery)
-  ds4_status=$(</tmp/ds4_status)
+  server_status="/tmp/disable_server_info"
+  server_icon=$(</tmp/map_display-icon)
+  ds4_bat=$(cat /tmp/ds4_battery)
   climate=$(</tmp/climate)
-  day=$(date +"%a" | tr '[:lower:]' '[:upper:]')
-  easy=$(/home/cie/.bin/easy_preset.sh)
+  day=$(</tmp/week_day)
+  easy=$(</home/cie/.config/.easy_preset)
   cputemp=$(</tmp/cpu_temp)
-  root=$(df -h | awk '{ if ($6 == "/") print $4 }')
-  root_int=${root::-1}
-  freemen_per=$(free -m | awk 'NR==2{print $3*100/$2 }')
-  freemen_per_int=$(printf "%.0f\n" "$freemen_per")
-  date=$(date +"%m")
-  day_month=$(date +"%d")
-  hour=$(echo "$hour" | sed 's/^0*//') # Remove leading zeros
-  houre=$(date +"%H:%M")
+  freemen_per_int=$(</tmp/ram_usage)
+  root_int=$(</tmp/ssd_space)
+  day_month=$(</tmp/day_month)
+  houre=$(</tmp/hours)
   cpu=$(awk '{u=$2+$4; t=$2+$4+$5; if (NR==1){u1=u; t1=t;} else print ($2+$4-u1) * 100 / (t-t1) "%"; }' \
     <(grep 'cpu ' /proc/stat) <(
       sleep 1
@@ -51,7 +158,7 @@ while true; do
   status=""
 
   if [[ -n $is_easy_active ]]; then
-    if [[ $easy = "eq" ]]; then
+    if [[ $easy = "LoudnessEqualizer" ]]; then
       status+="$nm"
     else
       status+="$wn"
@@ -61,6 +168,7 @@ while true; do
   fi
 
   if [[ -f "/tmp/santosmatch" ]]; then
+    santos=$(</tmp/santosmatch)
     if [[ -f "/tmp/matchup" ]] && [[ $santos == *"x"* ]]; then
       status+=" $nm|$wn $santos"
     else
@@ -76,8 +184,8 @@ while true; do
     status+=" $nm|  $climate"
   fi
 
-  if [[ $server_status == 'true' ]]; then
-    status+=" $nm| $server_icon $server"
+  if ! [[ -f $server_status ]]; then
+    status+=" $nm| $server"
   fi
 
   if [[ $checkupdates -le 20 ]]; then
@@ -88,25 +196,21 @@ while true; do
     status+=" $al|  $checkupdates"
   fi
 
-  if [[ -f /tmp/ds4_status ]]; then
-    if [[ $ds4_status == 'false' ]]; then
-      status+=" $nm| $nm$controller "
-    elif [[ -f /tmp/ds4_charging ]]; then
-      status+=" $nm| $wn$controller  "
-    elif [[ $ds4_bat -ge 51 && $ds4_bat -le 70 ]]; then
-      status+=" $nm| $nm$controller  "
-    elif [[ $ds4_bat -le 50 && $ds4_bat -ge 30 ]]; then
-      status+=" $nm| $wn$controller  "
-    elif [[ $ds4_bat -le 29 ]]; then
-      status+=" $nm| $al$controller  "
-    else
-      status+=" $nm| $nm$controller  "
-    fi
-  else
+  if ! [[ -f /tmp/ds4_active ]]; then
     status+=" $nm| $nm$controller "
+  elif [[ -f /tmp/ds4_charging ]]; then
+    status+=" $nm| $wn$controller  "
+  elif [[ $ds4_bat -ge 51 && $ds4_bat -le 70 ]]; then
+    status+=" $nm| $nm$controller  "
+  elif [[ $ds4_bat -le 50 && $ds4_bat -ge 30 ]]; then
+    status+=" $nm| $wn$controller  "
+  elif [[ $ds4_bat -le 29 ]]; then
+    status+=" $nm| $al$controller  "
+  else
+    status+=" $nm| $nm$controller  "
   fi
 
-  if [[ $is_muted == 'false' ]]; then
+  if ! [[ -f "/tmp/volume_muted" ]]; then
     if [[ $volume -ge 60 ]]; then
       status+=" $nm| $al $volume%"
     elif [[ $volume -le 59 ]] && [[ $volume -ge 1 ]]; then
@@ -154,7 +258,7 @@ while true; do
   seconds2=$(date -d "$to_late" +%s)
 
   if ((seconds1 >= seconds2)); then
-    status+=" $nm| $al$date_icon $al$houre $nm$day_month $day "
+    status+=" $nm| $wn$date_icon $wn$houre $nm$day_month $day "
   else
     status+=" $nm| $nm$date_icon $nm$houre $day_month $day "
   fi
