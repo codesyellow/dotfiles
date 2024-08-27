@@ -2,15 +2,58 @@
 
 badwater_icon=''
 dustbowl_icon=''
+turbine_icon=''
+displayed="/tmp/did_showed"
+dustbowl_path="/tmp/dustbowl_count"
+badwater_path="/tmp/badwater_count"
+turbine_path="/tmp/turbine_count"
 
-if [[ -f "/tmp/dustbowl_count" ]]; then
-  dustbowl=$(</tmp/dustbowl_count)
-  echo "$dustbowl_icon $dustbowl" >"/tmp/map_display"
-  echo "displaying dustbowl count"
+# Ensure the displayed file exists
+if [[ ! -f "$displayed" ]]; then
+  touch "$displayed"
 fi
 
-if [[ -f "/tmp/badwater_count" ]]; then
-  badwater=$(</tmp/badwater_count)
-  echo "$badwater_icon $badwater" >"/tmp/map_display"
-  echo "displaying badwater count"
+did_showed=$(cat "$displayed")
+
+to_display() {
+  map_count=$(cat "/tmp/${1}_count")
+  echo "$2 $map_count" >"/tmp/map_display"
+  echo "displaying $1 count"
+  echo "$1" >"$displayed"
+}
+
+# Determine which maps are active
+dustbowl_active=false
+badwater_active=false
+turbine_active=false
+
+if [[ -f "$dustbowl_path" ]]; then
+  dustbowl_active=true
+fi
+
+if [[ -f "$badwater_path" ]]; then
+  badwater_active=true
+fi
+
+if [[ -f "$turbine_path" ]]; then
+  turbine_active=true
+fi
+
+# Logic to alternate or display based on active maps
+if $dustbowl_active && $badwater_active && $turbine_active; then
+  if [[ "$did_showed" == "badwater" ]]; then
+    to_display "dustbowl" "$dustbowl_icon"
+  elif [[ "$did_showed" == "dustbowl" ]]; then
+    to_display "turbine" "$turbine_icon"
+  else
+    to_display "badwater" "$badwater_icon"
+  fi
+elif $dustbowl_active; then
+  to_display "dustbowl" "$dustbowl_icon"
+elif $turbine_active; then
+  to_display "turbine" "$turbine_icon"
+elif $badwater_active; then
+  to_display "badwater" "$badwater_icon"
+else
+  echo "All the servers are empty!"
 fi

@@ -1,10 +1,9 @@
 [Unit]
-Description=checks for tf2 servers
+Description=Checks for TF2 servers
 
 [Timer]
-OnCalendar=*-*-* 06:00
+OnCalendar=*-*-* 05:00/30:00
 Persistent=true
-
 
 [Install]
 WantedBy=timers.target

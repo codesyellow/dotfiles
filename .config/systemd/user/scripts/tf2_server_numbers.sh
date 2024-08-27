@@ -6,6 +6,7 @@ player_count() {
 
 dustbowl_count=$(player_count "https://tsarvar.com/en/servers/team-fortress-2/205.178.182.182:27060")
 badwater_count=$(player_count "https://tsarvar.com/en/servers/team-fortress-2/95.214.180.108:27015")
+turbine_count=$(player_count "https://tsarvar.com/en/servers/team-fortress-2/131.196.196.197:27610")
 
 if [[ $dustbowl_count -ge 5 ]]; then
   if [[ -f "/tmp/disable_server_info" ]]; then
@@ -14,10 +15,15 @@ if [[ $dustbowl_count -ge 5 ]]; then
   echo "$dustbowl_count" >"/tmp/dustbowl_count"
 else
   echo "Dustbowl server don't have enough players"
-  if [[ -f "/tmp/badwater_count" ]]; then
-    rm "/tmp/dustbowl_count"
-  fi
+fi
 
+if [[ "$turbine_count" -ge 30 ]]; then
+  if [[ -f "/tmp/disable_server_info" ]]; then
+    rm "/tmp/disable_server_info"
+  fi
+  echo "$turbine_count" >"/tmp/turbine_count"
+else
+  echo "Turbine server don't have enough players"
 fi
 
 if [[ $badwater_count -ge 5 ]]; then
@@ -27,11 +33,8 @@ if [[ $badwater_count -ge 5 ]]; then
   echo "$badwater_count" >"/tmp/badwater_count"
 else
   echo "Badwater server don't have enough players"
-  if [[ -f "/tmp/badwater_count" ]]; then
-    rm "/tmp/badwater_count"
-  fi
 fi
 
-if [[ $badwater_count -le 4 ]] && [[ $dustbowl_count -le 4 ]]; then
+if [[ $badwater_count -le 4 ]] && [[ $dustbowl_count -le 4 ]] && [[ $turbine_count -le 29 ]]; then
   touch "/tmp/disable_server_info"
 fi
