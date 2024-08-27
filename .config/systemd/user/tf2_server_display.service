@@ -1,0 +1,9 @@
+[Unit]
+Description=Update TF2 Player Display
+After=network.target
+
+[Service]
+ExecStart=/home/cie/.config/systemd/user/scripts/tf2_server_display.sh
+
+[Install]
+WantedBy=multi-user.target

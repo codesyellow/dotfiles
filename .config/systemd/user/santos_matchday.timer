@@ -1,9 +1,0 @@
-[Unit]
-Description=Run santos_matchday script daily at 5 AM
-
-[Timer]
-OnCalendar=05:10
-Persistent=true
-
-[Install]
-WantedBy=timers.target

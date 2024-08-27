@@ -1,5 +1,0 @@
-[Unit]
-Description=Santos schedule script
-
-[Service]
-ExecStart=/home/cie/.bin/santos_schedule.py

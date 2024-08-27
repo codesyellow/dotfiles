@@ -1,0 +1,5 @@
+[Unit]
+Description=Mem Usage Monitor
+
+[Service]
+ExecStart=/home/cie/.bin/mem_usage.sh

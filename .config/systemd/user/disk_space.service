@@ -1,0 +1,5 @@
+[Unit]
+Description=Disk Space Monitor
+
+[Service]
+ExecStart=/home/cie/.bin/disk_space.sh

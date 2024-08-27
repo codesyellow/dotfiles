@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Disk Space Monitor every 60 seconds
+
+[Timer]
+OnBootSec=60s
+OnUnitActiveSec=60s
+AccuracySec=1s
+
+[Install]
+WantedBy=timers.target

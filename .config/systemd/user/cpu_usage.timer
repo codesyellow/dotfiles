@@ -1,0 +1,9 @@
+[Unit]
+Description=Run CPU Usage Monitor every 5 seconds
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=5s
+
+[Install]
+WantedBy=timers.target

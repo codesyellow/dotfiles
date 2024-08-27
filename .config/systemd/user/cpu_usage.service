@@ -1,0 +1,5 @@
+[Unit]
+Description=CPU Usage Monitor
+
+[Service]
+ExecStart=/home/cie/.bin/cpu_usage.sh
