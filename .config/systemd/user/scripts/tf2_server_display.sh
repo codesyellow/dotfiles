@@ -11,6 +11,7 @@ turbine_path="/tmp/turbine_count"
 # Ensure the displayed file exists
 if [[ ! -f "$displayed" ]]; then
   touch "$displayed"
+  echo "badwater" >"$displayed"
 fi
 
 did_showed=$(cat "$displayed")
@@ -44,6 +45,24 @@ if $dustbowl_active && $badwater_active && $turbine_active; then
   if [[ "$did_showed" == "badwater" ]]; then
     to_display "dustbowl" "$dustbowl_icon"
   elif [[ "$did_showed" == "dustbowl" ]]; then
+    to_display "turbine" "$turbine_icon"
+  else
+    to_display "badwater" "$badwater_icon"
+  fi
+elif $dustbowl_active && $badwater_active; then
+  if [[ "$did_showed" == "badwater" ]]; then
+    to_display "dustbowl" "$dustbowl_icon"
+  else
+    to_display "badwater" "$badwater_icon"
+  fi
+elif $dustbowl_active && $turbine_active; then
+  if [[ "$did_showed" == "dustbowl" ]]; then
+    to_display "turbine" "$turbine_icon"
+  else
+    to_display "dustbowl" "$dustbowl_icon"
+  fi
+elif $badwater_active && $turbine_active; then
+  if [[ "$did_showed" == "badwater" ]]; then
     to_display "turbine" "$turbine_icon"
   else
     to_display "badwater" "$badwater_icon"

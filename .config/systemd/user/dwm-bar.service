@@ -3,4 +3,4 @@ Description=dwm-bar
 
 [Service]
 Environment=DISPLAY=:0
-ExecStart=/home/cie/.bin/dwm-bar.sh
+ExecStart=/home/cie/.config/systemd/user/scripts/dwm-bar.sh

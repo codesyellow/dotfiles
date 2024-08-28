@@ -168,7 +168,6 @@ while true; do
   is_easy_active=$(</tmp/easy_active)
   server=$(</tmp/map_display)
   server_status="/tmp/disable_server_info"
-  server_icon=$(</tmp/map_display-icon)
   ds4_bat=$(cat /tmp/ds4_battery)
   climate=$(</tmp/climate)
   day=$(</tmp/week_day)

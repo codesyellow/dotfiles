@@ -14,6 +14,9 @@ if [[ $dustbowl_count -ge 5 ]]; then
   fi
   echo "$dustbowl_count" >"/tmp/dustbowl_count"
 else
+  if [[ -f "/tmp/dustbowl_count" ]]; then
+    rm "/tmp/dustbowl_count"
+  fi
   echo "Dustbowl server don't have enough players"
 fi
 
@@ -23,6 +26,9 @@ if [[ "$turbine_count" -ge 30 ]]; then
   fi
   echo "$turbine_count" >"/tmp/turbine_count"
 else
+  if [[ -f "/tmp/turbine_count" ]]; then
+    rm "/tmp/turbine_count"
+  fi
   echo "Turbine server don't have enough players"
 fi
 
@@ -32,6 +38,9 @@ if [[ $badwater_count -ge 5 ]]; then
   fi
   echo "$badwater_count" >"/tmp/badwater_count"
 else
+  if [[ -f "/tmp/badwater_count" ]]; then
+    rm "/tmp/badwater_count"
+  fi
   echo "Badwater server don't have enough players"
 fi
 
