@@ -15,30 +15,18 @@ cicle_maps_to_display() {
   dustbowl_icon=''
 
   sleep_time=2
-  current_time=$(date "+%H")
-  current_hour=$((10#$current_time))
-  if [[ $current_hour -ge 22 ]]; then
-    echo "Increasing the sleep time of the maps_to_display"
-    touch "/tmp/disable_server_info"
-    main_sleep_time=25600
-  else
-    if [[ $sleep_time != 2 ]]; then
-      sleep_time=2
-    fi
-    if [[ -f "/tmp/disable_server_info" ]]; then
-      rm "/tmp/disable_server_info"
-    fi
-  fi
 
   while true; do
     if [[ -f "/tmp/dustbowl_count" ]]; then
       dustbowl=$(</tmp/dustbowl_count)
       echo "$dustbowl_icon $dustbowl" >"/tmp/map_display"
+      echo "displaying dustbowl count"
       sleep 30
     fi
     if [[ -f "/tmp/badwater_count" ]]; then
       badwater=$(</tmp/badwater_count)
       echo "$badwater_icon $badwater" >"/tmp/map_display"
+      echo "displaying dustbowl count"
       sleep 30
     fi
     sleep $sleep_time
@@ -47,27 +35,13 @@ cicle_maps_to_display() {
 
 cicle_maps_to_display
 
-main_sleep_time=600
+main_sleep_time=1800
 
 while true; do
   dustbowl_count=$(player_count "https://tsarvar.com/en/servers/team-fortress-2/205.178.182.182:27060")
   badwater_count=$(player_count "https://tsarvar.com/en/servers/team-fortress-2/95.214.180.108:27015")
   echo $dustbowl_count
   echo $badwater_count
-
-  current_time=$(date "+%H")
-  current_hour=$((10#$current_time))
-  if [[ $current_hour -ge 22 ]]; then
-    echo "Increasing the sleep time"
-    main_sleep_time=25600
-  else
-    if [[ $main_sleep_time != 600 ]]; then
-      main_sleep_time=600
-    fi
-    if [[ -f "/tmp/disable_server_info" ]]; then
-      rm "/tmp/disable_server_info"
-    fi
-  fi
 
   if [[ $dustbowl_count -ge 5 ]]; then
     if [[ -f "/tmp/disable_server_info" ]]; then

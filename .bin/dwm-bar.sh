@@ -19,8 +19,7 @@ ram_usage_sleep=10
 check_updates_sleep=60
 get_volume_sleep=10
 get_hour=5
-get_day_month=7200
-get_week=7200
+day_week_sleep=7200
 
 to_late="21:00"
 
@@ -96,7 +95,7 @@ get_volume() {
 get_day_month() {
   while true; do
     echo $(date +"%d") >"/tmp/day_month"
-    sleep 7200
+    sleep $day_week_sleep
   done &
 }
 
@@ -110,7 +109,7 @@ get_hour() {
 get_week() {
   while true; do
     echo $(date +"%a" | tr '[:lower:]' '[:upper:]') >"/tmp/week_day"
-    sleep 7200
+    sleep $day_week_sleep
   done &
 }
 
@@ -118,6 +117,37 @@ is_easyeffects_active() {
   while true; do
     echo $(pgrep 'easyeffects') >"/tmp/easy_active"
     sleep 10
+  done &
+}
+
+get_cpu_usage() {
+  while true; do
+    # Read the first line from /proc/stat
+    read cpu user nice system idle iowait irq softirq steal guest guest_nice </proc/stat
+
+    # Calculate the total and idle time
+    total=$((user + nice + system + idle + iowait + irq + softirq + steal))
+    idle_time=$((idle + iowait))
+
+    # Sleep for 1 second to calculate the difference
+    sleep 1
+
+    # Read the updated values after 1 second
+    read cpu user nice system idle iowait irq softirq steal guest guest_nice </proc/stat
+
+    # Calculate the new total and idle time
+    total_new=$((user + nice + system + idle + iowait + irq + softirq + steal))
+    idle_new=$((idle + iowait))
+
+    # Calculate the difference
+    total_diff=$((total_new - total))
+    idle_diff=$((idle_new - idle_time))
+
+    # Calculate the CPU usage percentage
+    cpu_usage=$((100 * (total_diff - idle_diff) / total_diff))
+
+    echo "$cpu_usage" >"/tmp/cpu_usage"
+    sleep 2
   done &
 }
 
@@ -130,6 +160,7 @@ get_week
 get_day_month
 get_hour
 is_easyeffects_active
+get_cpu_usage
 
 while true; do
   volume=$(</tmp/volume)
@@ -147,13 +178,7 @@ while true; do
   root_int=$(</tmp/ssd_space)
   day_month=$(</tmp/day_month)
   houre=$(</tmp/hours)
-  cpu=$(awk '{u=$2+$4; t=$2+$4+$5; if (NR==1){u1=u; t1=t;} else print ($2+$4-u1) * 100 / (t-t1) "%"; }' \
-    <(grep 'cpu ' /proc/stat) <(
-      sleep 1
-      grep 'cpu ' /proc/stat
-    ))
-  cpu=$(echo "$cpu" | tr -d '%') # Remove the '%' sign if present
-  cpu_per_int=$(printf "%.0f\n" "$cpu")
+  cpu_per_int=$(</tmp/cpu_usage)
 
   status=""
 
@@ -263,6 +288,6 @@ while true; do
     status+=" $nm| $nm$date_icon $nm$houre $day_month $day "
   fi
 
-  xprop -root -set WM_NAME "$status "
+  xsetroot -name "$status "
   sleep $sleep_time
 done

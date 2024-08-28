@@ -34,7 +34,7 @@ notify_prior() {
 todays_match=$(jq --arg cm "$current_month" --arg cd "$current_day" '
   .matchs 
   | to_entries[] 
-  | select(.value.month >= $cm and .value.day == $cd) 
+  | select(.value.month == $cm and .value.day == $cd) 
   | "\(.value.hour) \(.value.match)"
 ' /home/cie/.config/santosfc/santos.json)
 
