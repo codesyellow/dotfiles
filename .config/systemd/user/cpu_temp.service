@@ -1,5 +1,0 @@
-[Unit]
-Description=CPU Temp Monitor
-
-[Service]
-ExecStart=/home/cie/.bin/cpu_temp.sh

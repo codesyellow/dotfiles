@@ -1,5 +1,0 @@
-[Unit]
-Description=tf2 server
-
-[Service]
-ExecStart=/home/cie/.bin/server_info.sh

@@ -5,7 +5,7 @@ Description=Automatic Screen Locker
 Type=simple
 Environment=DISPLAY=:0
 Environment=XIDLEHOOK_SOCK=%t/xidlehook.socket
-ExecStart=/usr/bin/xidlehook --not-when-audio --not-when-fullscreen --socket $XIDLEHOOK_SOCK --timer 240 'xrandr --output VGA-1  --brightness 0.25;' 'xrandr --output VGA-1  --brightness 0.95;' --timer 500 'xrandr --output VGA-1 --brightness 0.95; xset -display :0.0 dpms force off;/usr/bin/slock;' 'xset -display :0.0 dpms force on'
+ExecStart=/usr/bin/xidlehook --not-when-audio --not-when-fullscreen --socket $XIDLEHOOK_SOCK --timer 240 'xrandr --output VGA-1  --brightness 0.25;' 'xrandr --output VGA-1  --brightness 0.95;' --timer 500 'xrandr --output VGA-1 --brightness 0.95; xset -display :0.0 dpms force off; /usr/local/bin/slock;' 'xset -display :0.0 dpms force on'
 
 [Install]
 WantedBy=multi-user.target
