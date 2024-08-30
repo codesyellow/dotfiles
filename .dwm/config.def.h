@@ -26,7 +26,7 @@ static const char border[]    = "#bf616a";
 static const char *colors[][3]= {
   /*               fg         bg         border   */
   [SchemeNorm] = { fg0, bg0, bg0 },
-  [SchemeSel]  = { light, bg0,  border  },
+  [SchemeSel]  = { light, bg0,  light  },
 };
 
 /* tagging */
@@ -41,6 +41,7 @@ static const Rule rules[] = {
   /* class      instance    title       tags mask     isfloating   monitor    float x,y,w,h         floatborderpx*/
   { "Gimp",     NULL,       NULL,       0,            1,           -1,   0,     50,50,500,500,        5 },
   { "firefox",  NULL,       NULL,       1 << 1,       0,           -1,   0,     50,50,500,500,        5 },
+  { NULL,  "Navigator",       NULL,       1 << 1,       0,           -1,   0,     50,50,500,500,        5 },
   { "Emacs",    NULL,       NULL,       1 << 0,       0,           -1,   0,     50,50,500,500,        5 },
   { "mpv",  NULL,       NULL,       1 << 3,       0,           -1,   0,     50,50,500,500,        5 },
   { "TelegramDesktop",  NULL,       NULL,       1 << 3,       0,           -1,   0,     50,50,500,500,        5 },
@@ -59,22 +60,22 @@ static const Rule rules[] = {
   { "retroarch",   NULL,       NULL,       1 << 4,       0,           -1,    0,    50,50,500,500,        5},
   { "Lutris",   NULL,       NULL,       1 << 4,       0,           -1,    0,    50,50,500,500,        5},
   { NULL,  "youtube music",       NULL,       1 << 5,       0,           -1, 0,       50,50,500,500,        5},
-  { NULL,       NULL,   "scratchpad",   0,            1,           -1,   's', 90,50,1200,400,        5,   },
-  { NULL,       NULL,   "habits",   0,            1,           -1,   'h', 90,50,1200,400,        5,   },
-  { NULL,       NULL,   "task-tui",   0,            1,           -1,   't', 789,48,500,650,        5,   },
+  { NULL,       NULL,   "scratchpad",   0,            1,           -1,   's', 80,50,1200,400,        5,   },
+  { NULL,       NULL,   "habits",   0,            1,           -1,   'h', 80,50,1200,400,        5,   },
+  { NULL,       NULL,   "task-tui",   0,            1,           -1,   't', 779,48,500,650,        5,   },
   { "Noi",       NULL,   NULL,   0,            1,           -1,   'i', 788,50,500,700,        5,   },
   { NULL,       NULL,   "Kuro",   0,            1,           -1,   'k', 830,35,500,650,        5,   },
-  { NULL,       NULL,   "ai",   0,            1,           -1,   'a', 789,48,500,650,        5,   },
-  { NULL,       NULL,   "pulsemixer",   0,            1,           -1,   'p', 788,48,400,400,        5,   },
-  { NULL,       NULL,   "btop",   0,            1,           -1,   'b', 90,80,1200,600,        5,   },
-  { NULL,       NULL,   "bluetui",   0,            1,           -1,   'f', 90,80,1200,600,        5,   },
-  { NULL,       NULL,   "sysmd",   0,            1,           -1,   'q', 90,80,1200,600,        5,   },
-  {"Galculator",       NULL,   NULL,   0,            1,           -1,   'g', 90,80,1200,600,        5,   },
-  { NULL,       NULL,   "WhatsApp for Linux",   0,            1,           -1,   'w', 90,80,1200,600,        5,   },
-  { NULL,       NULL,   "Free Download Manager",   0,            1,           -1,   'd', 90,80,1200,600,        5,   },
-  { NULL,       NULL,   "notes",   0,            1,           -1,   'o', 90,50,1200,600,        5,   },
-  { NULL,       NULL,   "neorg",   0,            1,           -1,   'n', 90,50,1200,600,        5,   },
-  { NULL,       NULL,   "tt",   0,            1,           -1,   'e', 90,50,1200,600,        5,   },
+  { NULL,       NULL,   "ai",   0,            1,           -1,   'a', 779,48,500,650,        5,   },
+  { NULL,       NULL,   "pulsemixer",   0,            1,           -1,   'p', 778,48,400,400,        5,   },
+  { NULL,       NULL,   "btop",   0,            1,           -1,   'b', 80,80,1200,600,        5,   },
+  { NULL,       NULL,   "bluetui",   0,            1,           -1,   'f', 80,80,1200,600,        5,   },
+  { NULL,       NULL,   "sysmd",   0,            1,           -1,   'q', 80,80,1200,600,        5,   },
+  {"Galculator",       NULL,   NULL,   0,            1,           -1,   'g', 280,80,800,600,        5,   },
+  { NULL,       NULL,   "WhatsApp for Linux",   0,            1,           -1,   'w', 80,80,1200,600,        5,   },
+  { NULL,       NULL,   "Free Download Manager",   0,            1,           -1,   'd', 80,80,1200,600,        5,   },
+  { NULL,       NULL,   "notes",   0,            1,           -1,   'o', 80,50,1200,600,        5,   },
+  { NULL,       NULL,   "neorg",   0,            1,           -1,   'n', 80,50,1200,600,        5,   },
+  { NULL,       NULL,   "tt",   0,            1,           -1,   'e', 80,50,1200,600,        5,   },
   { NULL,       NULL,   "Exercise Timer",   0,            1,           -1,   'z', 500,50,400,400,        5,   },
   { NULL,       NULL,   "clock",   0,            1,           -1,   'c', 500,50,400,400,        5,   },
   { "trayer",       NULL,   "panel",   0,            1,           -1,   'q', 500,50,400,400,        5,   },
@@ -97,7 +98,7 @@ static const Layout layouts[] = {
 
 /* custom symbols for nr. of clients in monocle layout */
 /* when clients >= LENGTH(monocles), uses the last element */
-static const char *monocles[] = { "", "2", "3", "4", "5", "6", "7", "8", "9", "10+" };
+static const char *monocles[] = { "" };
 /* key definitions */
 #define CONCAT_XK(KEY) XK_##KEY
 #define MODKEY Mod4Mask
@@ -132,7 +133,7 @@ static const char *monocles[] = { "", "2", "3", "4", "5", "6", "7", "8", "9",
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-nb", bg0, "-z", "450", "-x", "250", "-y", "2", "-sb", bg0, "-shb", bg0, "-nhb", bg0, "-shf", light,"-nhf",border,"-fn", dmenufont, NULL };
 static const char *dmenumpv[] = { "mpvtube.sh", NULL };
-static const char *clipmenucmd[] = { "clipmenu", "-z", "700", "-x", "230", "-y", "4", NULL };
+static const char *clipmenucmd[] = { "clipmenu", "-z", "700", "-x", "230", "-y", "4", "-nb", bg0, NULL };
 static const char *bass[] = { "easy_preset.sh", "HeavyBass", NULL};
 static const char *loudness[] = { "easy_preset.sh", "LoudnessEqualizer", NULL};
 static const char *termcmd[]  = { "st", NULL };
@@ -203,9 +204,9 @@ static Keychord *keychords[] = {
 	STACKKEYS(MODKEY|ShiftMask,                push)
 
   // volume
-  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_j}},                            spawn,         SHCMD("/home/cie/.bin/volume.sh down && echo $(pamixer --get-volume) > /tmp/volume ") }),
-  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_k}},                            spawn,         SHCMD("/home/cie/.bin/volume.sh up && echo $(pamixer --get-volume) > /tmp/volume ") }),
-  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_m}},                            spawn,         SHCMD("/home/cie/.bin/volume.sh mute && echo $(pamixer --get-volume) > /tmp/volume ") }),
+  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_j}},                            spawn,         SHCMD("/home/cie/.bin/volume.sh down && /usr/bin/kill -30 $(cat ~/.cache/pidofbar)") }),
+  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_k}},                            spawn,         SHCMD("/home/cie/.bin/volume.sh up && /usr/bin/kill -30 $(cat ~/.cache/pidofbar)") }),
+  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_m}},                            spawn,         SHCMD("/home/cie/.bin/volume.sh mute && /usr/bin/kill -30 $(cat ~/.cache/pidofbar)") }),
   // action
   &((Keychord){2, {{MODKEY, XK_a}, {0, XK_m}},                 spawn,          {.v = bass } }),
   &((Keychord){2, {{MODKEY, XK_a}, {0, XK_l}},                 spawn,          {.v = loudness } }),
