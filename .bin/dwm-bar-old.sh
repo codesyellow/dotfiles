@@ -51,15 +51,17 @@ update_cpu() {
 }
 
 update_disk() {
+  disk=""  # Reset the disk variable
+
   disk_usage=$(df -h | awk '{ if ($6 == "/") print $4 }')
   disk_num=${disk_usage::-1}
 
   if [[ $(echo "$disk_num < 20" | bc) -ne 0 ]]; then
-    disk=" $nm| $wm$root_icon $disk_num""g"
+    disk+=" $nm| $wm$root_icon $disk_num""g"
   elif [[ $(echo "$disk_num < 10" | bc) -ne 0 ]]; then
-    disk=" $nm| $al$root_icon $disk_num""g"
+    disk+=" $nm| $al$root_icon $disk_num""g"
   else
-    disk=" $nm| $nm$root_icon $disk_num""g"
+    disk+=" $nm| $nm$root_icon $disk_num""g"
   fi
 }
 
@@ -211,7 +213,7 @@ update_vol
 update_updates
 
 display() {
-  xsetroot -name "$easyeffects$smatch$climate$server$updates$ds4_status$vol$cpu_temp$cpu$memory$disk$time "
+  xsetroot -name "$easyeffects $smatch $climate $server $updates $ds4_status $vol $cpu $cpu_temp $memory $disk $time "
 }
 
 # signals for each module to update while updating display

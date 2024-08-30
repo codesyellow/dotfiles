@@ -1,4 +1,7 @@
-#!/bin/bash
+#!/bin/sh
+exec 2>&1
+printf "$$" >~/.cache/pidofbar
+sec=0
 nm="^c#d8dee9^"
 wn="^c#ebcb8b^"
 al="^c#bf616a^"
@@ -12,282 +15,215 @@ cpu_temp_low=
 cpu_temp_mid=
 cpu_temp_high=
 controller=
-sleep_time=2
-ds4_status_sleep=10
-ssd_space_sleep=60
-ram_usage_sleep=10
-check_updates_sleep=60
-get_volume_sleep=10
-get_hour=5
-day_week_sleep=7200
 
-to_late="21:00"
+update_cpu() {
+  cpu_usage=$(printf "%b" "import psutil\nprint(int(psutil.cpu_percent(interval=2)))" | python3)
 
-ds4_status() {
-  while true; do
-    ds4=$(dsbattery)
-    if [[ -n "$ds4" ]]; then
-      if ! [[ -f "/tmp/ds4_active" ]]; then
-        touch "/tmp/ds4_active"
-      fi
+  if [[ $cpu_usage -ge 80 ]]; then
+    cpu=" $nm| $al$cpu_icon $cpu_usage%"
+  elif [[ $cpu_usage -ge 60 ]] && [[ $cpu_usage -le 79 ]]; then
+    cpu=" $nm| $wn$cpu_icon $cpu_usage%"
+  else
+    cpu=" $nm| $nm$cpu_icon $cpu_usage%"
+  fi
+}
 
-      if [[ "$ds4" == *"↑"* ]]; then
-        if ! [[ -f "/tmp/ds4_charging" ]]; then
-          touch "/tmp/ds4_charging"
-        fi
-      else
-        if [[ -f "/tmp/ds4_charging" ]]; then
-          rm "/tmp/ds4_charging"
-        fi
-        echo $(echo "$ds4" | grep -o '[0-9]*') >"/tmp/ds4_battery"
-      fi
-    else
-      if [[ -f "/tmp/ds4_active" ]]; then
-        rm "/tmp/ds4_active"
-      fi
+update_disk() {
+  disk_usage=$(df -h | awk '{ if ($6 == "/") print $4 }')
+  disk_num=${disk_usage::-1}
+
+  if [[ $(echo "$disk_num < 20" | bc) -ne 0 ]]; then
+    disk=" $nm| $wm$root_icon $disk_num""g"
+  elif [[ $(echo "$disk_num < 10" | bc) -ne 0 ]]; then
+    disk=" $nm| $al$root_icon $disk_num""g"
+  else
+    disk=" $nm| $nm$root_icon $disk_num""g"
+  fi
+}
+
+update_ds4() {
+  ds4=$(dsbattery)
+  if [[ -n "$ds4" ]]; then
+    if ! [[ -f "/tmp/ds4_active" ]]; then
+      touch "/tmp/ds4_active"
     fi
-    sleep $ds4_status_sleep
-  done &
-}
 
-ssd_space() {
-  while true; do
-    root=$(df -h | awk '{ if ($6 == "/") print $4 }')
-    root_int=${root::-1}
-    echo "$root_int" >"/tmp/ssd_space"
-
-    sleep $ssd_space_sleep
-  done &
-}
-
-ram_usage() {
-  while true; do
-    freemen_per=$(free -m | awk 'NR==2{print $3*100/$2 }')
-    freemen_per_int=$(printf "%.0f\n" "$freemen_per")
-    echo "$freemen_per_int" >"/tmp/ram_usage"
-
-    sleep $ram_usage_sleep
-  done &
-}
-
-check_updates() {
-  while true; do
-    echo $(checkupdates | wc -l) >"/tmp/checkupdates"
-    sleep $check_updates_sleep
-  done &
-}
-
-get_volume() {
-  while true; do
-    is_it_muted=$(pamixer --get-mute)
-    if [[ "$is_it_muted" == "true" ]]; then
-      touch "/tmp/volume_muted"
-    else
-      if [[ -f "/tmp/volume_muted" ]]; then
-        rm "/tmp/volume_muted"
+    if [[ "$ds4" == *"↑"* ]]; then
+      if ! [[ -f "/tmp/ds4_charging" ]]; then
+        touch "/tmp/ds4_charging"
       fi
-    fi
-    echo $(pamixer --get-volume) >"/tmp/volume"
-    sleep $get_volume_sleep
-  done &
-}
-
-get_day_month() {
-  while true; do
-    echo $(date +"%d") >"/tmp/day_month"
-    sleep $day_week_sleep
-  done &
-}
-
-get_hour() {
-  while true; do
-    echo $(date +"%H:%M") >"/tmp/hours"
-    sleep 5
-  done &
-}
-
-get_week() {
-  while true; do
-    echo $(date +"%a" | tr '[:lower:]' '[:upper:]') >"/tmp/week_day"
-    sleep $day_week_sleep
-  done &
-}
-
-is_easyeffects_active() {
-  while true; do
-    echo $(pgrep 'easyeffects') >"/tmp/easy_active"
-    sleep 10
-  done &
-}
-
-get_cpu_usage() {
-  while true; do
-    # Read the first line from /proc/stat
-    read cpu user nice system idle iowait irq softirq steal guest guest_nice </proc/stat
-
-    # Calculate the total and idle time
-    total=$((user + nice + system + idle + iowait + irq + softirq + steal))
-    idle_time=$((idle + iowait))
-
-    # Sleep for 1 second to calculate the difference
-    sleep 1
-
-    # Read the updated values after 1 second
-    read cpu user nice system idle iowait irq softirq steal guest guest_nice </proc/stat
-
-    # Calculate the new total and idle time
-    total_new=$((user + nice + system + idle + iowait + irq + softirq + steal))
-    idle_new=$((idle + iowait))
-
-    # Calculate the difference
-    total_diff=$((total_new - total))
-    idle_diff=$((idle_new - idle_time))
-
-    # Calculate the CPU usage percentage
-    cpu_usage=$((100 * (total_diff - idle_diff) / total_diff))
-
-    echo "$cpu_usage" >"/tmp/cpu_usage"
-    sleep 2
-  done &
-}
-
-ds4_status
-ssd_space
-ram_usage
-check_updates
-get_volume
-get_week
-get_day_month
-get_hour
-is_easyeffects_active
-get_cpu_usage
-
-while true; do
-  volume=$(</tmp/volume)
-  checkupdates=$(</tmp/checkupdates)
-  is_easy_active=$(</tmp/easy_active)
-  server=$(</tmp/map_display)
-  server_status="/tmp/disable_server_info"
-  server_icon=$(</tmp/map_display-icon)
-  ds4_bat=$(cat /tmp/ds4_battery)
-  climate=$(</tmp/climate)
-  day=$(</tmp/week_day)
-  easy=$(</home/cie/.config/.easy_preset)
-  cputemp=$(</tmp/cpu_temp)
-  freemen_per_int=$(</tmp/ram_usage)
-  root_int=$(</tmp/ssd_space)
-  day_month=$(</tmp/day_month)
-  houre=$(</tmp/hours)
-  cpu_per_int=$(</tmp/cpu_usage)
-
-  status=""
-
-  if [[ -n $is_easy_active ]]; then
-    if [[ $easy = "LoudnessEqualizer" ]]; then
-      status+="$nm"
     else
-      status+="$wn"
+      if [[ -f "/tmp/ds4_charging" ]]; then
+        rm "/tmp/ds4_charging"
+      fi
+      ds4_bat=$(echo "$ds4" | grep -o '[0-9]*')
     fi
   else
-    status+="$wn !"
-  fi
-
-  if [[ -f "/tmp/santosmatch" ]]; then
-    santos=$(</tmp/santosmatch)
-    if [[ -f "/tmp/matchup" ]] && [[ $santos == *"x"* ]]; then
-      status+=" $nm|$wn $santos"
-    else
-      status+=" $nm|$nm $santos"
+    if [[ -f "/tmp/ds4_active" ]]; then
+      rm "/tmp/ds4_active"
     fi
-  fi
-
-  if [[ "$climate" -ge 30 ]]; then
-    status+=" $nm|  $climate"
-  elif [[ "$climate" -le 20 ]]; then
-    status+=" $nm|  $climate"
-  else
-    status+=" $nm|  $climate"
-  fi
-
-  if ! [[ -f $server_status ]]; then
-    status+=" $nm| $server"
-  fi
-
-  if [[ $checkupdates -le 20 ]]; then
-    status+=" $nm|  $checkupdates"
-  elif [[ $checkupdates -ge 21 ]] && [[ $checkupdates -le 40 ]]; then
-    status+=" $wn|  $checkupdates"
-  else
-    status+=" $al|  $checkupdates"
   fi
 
   if ! [[ -f /tmp/ds4_active ]]; then
-    status+=" $nm| $nm$controller "
+    ds4_status=" $nm| $nm$controller "
   elif [[ -f /tmp/ds4_charging ]]; then
-    status+=" $nm| $wn$controller  "
+    ds4_staus=" $nm| $wn$controller  "
   elif [[ $ds4_bat -ge 51 && $ds4_bat -le 70 ]]; then
-    status+=" $nm| $nm$controller  "
+    ds4_status=" $nm| $nm$controller  "
   elif [[ $ds4_bat -le 50 && $ds4_bat -ge 30 ]]; then
-    status+=" $nm| $wn$controller  "
+    ds4_status=" $nm| $wn$controller  "
   elif [[ $ds4_bat -le 29 ]]; then
-    status+=" $nm| $al$controller  "
+    ds4_status=" $nm| $al$controller  "
   else
-    status+=" $nm| $nm$controller  "
+    ds4_status=" $nm| $nm$controller  "
   fi
+}
 
-  if ! [[ -f "/tmp/volume_muted" ]]; then
-    if [[ $volume -ge 60 ]]; then
-      status+=" $nm| $al $volume%"
-    elif [[ $volume -le 59 ]] && [[ $volume -ge 1 ]]; then
-      status+=" $nm| $nm $volume%"
+update_memory() {
+  freemen_per=$(free -m | awk 'NR==2{print $3*100/$2 }')
+  memory_num=$(printf "%.0f\n" "$freemen_per")
+  if [[ $memory_num -ge 70 ]]; then
+    memory=" $nm| $wm$ram_icon $memory_num%"
+  elif [[ $memory_num -ge 50 ]] && [[ $memory_num -le 60 ]]; then
+    memory=" $nm| $al$ram_icon $memory_num%"
+  else
+    memory=" $nm| $nm$ram_icon $memory_num%"
+  fi
+}
+
+update_time() {
+  current_time="$(date "+%a %d - %H:%M")"
+  time=" $nm| $nm$date_icon $nm$current_time"
+}
+
+# modules that don't update on their own
+# they are also run at the start for getting the initial value
+update_vol() {
+  is_it_muted=$(pamixer --get-mute)
+  vol_num=$(pamixer --get-volume) >"/tmp/volume"
+
+  if ! [[ -f "$is_it_muted" ]]; then
+    if [[ $vol_num -ge 60 ]]; then
+      vol=" $nm| $al $volume%"
+    elif [[ $vol_num -le 59 ]] && [[ $vol_num -ge 1 ]]; then
+      vol=" $nm| $nm $vol_num%"
     elif [[ $volume -eq 0 ]]; then
-      status+=" $nm| $wm $volume%"
+      vol=" $nm| $wm $vol_num%"
     fi
   else
-    status+=" $nm| $al $volume%"
+    vol=" $nm| $al $vol_num%"
   fi
+}
 
-  if [[ $cputemp -le 60 ]]; then
-    status+=" $nm| $nm $cpu_temp_low $cputemp°"
-  elif [[ $cputemp -ge 61 && $cputemp -le 70 ]]; then
-    status+=" $nm| $wn$cpu_temp_mid $cputemp°"
+update_updates() {
+ updates_num=$(checkupdates | wc -l)
+ if [[ $updates_num -le 20 ]]; then
+   updates=" $nm|  $updates_num"
+ elif [[ $updates_num -ge 21 ]] && [[ $updates_num -le 40 ]]; then
+   updates=" $wn|  $updates_num"
+ else
+   updates=" $al|  $updates_num"
+ fi
+}
+
+update_easyeffects_status() {
+ is_easy_active=$(pgrep 'easyeffects')
+ easy=$(</home/cie/.config/.easy_preset)
+ if [[ -n $is_easy_active ]]; then
+    if [[ $easy = "LoudnessEqualizer" ]]; then
+      easyeffects="$nm"
+    else
+      easyeffects="$wn"
+    fi
   else
-    status+=" $nm| $al$cpu_temp_high $cputemp°"
+    easyeffects="$wn !"
   fi
+}
 
-  if [[ $cpu_per_int -ge 80 ]]; then
-    status+=" $nm| $al$cpu_icon $cpu_per_int%"
-  elif [[ $cpu_per_int -ge 60 ]] && [[ $cpu_per_int -le 79 ]]; then
-    status+=" $nm| $wn$cpu_icon $cpu_per_int%"
+update_server_info() {
+  server_info=$(</tmp/map_display)
+  server_status="/tmp/disable_server_info"
+
+  if ! [[ -f $server_status ]]; then
+    server=" $nm| $server_info"
+  fi
+}
+
+update_santosfc() {
+if [[ -f "/tmp/santosmatch" ]]; then
+    santos=$(</tmp/santosmatch)
+    if [[ -f "/tmp/matchup" ]] && [[ $santos == *"x"* ]]; then
+      smatch=" $nm|$wn  $santos"
+    else
+      smatch=" $nm|$nm  $santos"
+    fi
+  fi
+}
+
+update_climate () {
+climate_num=$(</tmp/climate)
+
+if [[ "$climate_num" -ge 30 ]]; then
+    climate=" $nm|  $climate_num"
+  elif [[ "$climate_num" -le 20 ]]; then
+    climate=" $nm|  $climate_num"
   else
-    status+=" $nm| $nm$cpu_icon $cpu_per_int%"
+    climate=" $nm|  $climate_num"
   fi
+}
 
-  if [[ $freemen_per_int -ge 70 ]]; then
-    status+=" $nm| $wm$ram_icon $freemen_per_int%"
-  elif [[ $freemen_per_int -ge 50 ]] && [[ $freemen_per_int -le 60 ]]; then
-    status+=" $nm| $al$ram_icon $freemen_per_int%"
+update_key_variant() {
+  key_variant=$(xkb-switch -p)
+  if [[ "$key_variant" == "us(intl)" ]]; then
+    variant=" |$wn  INTL" 
   else
-    status+=" $nm| $nm$ram_icon $freemen_per_int%"
+    variant=" |$nm  US"
   fi
+}
 
-  if [[ $(echo "$root_int < 20" | bc) -ne 0 ]]; then
-    status+=" $nm| $wm$root_icon $root_int""g"
-  elif [[ $(echo "$root_int < 10" | bc) -ne 0 ]]; then
-    status+=" $nm| $al$root_icon $root_int""g"
+update_cpu_temp() {
+  cpu_temp_num=$(cut -c 1-2 </sys/class/thermal/thermal_zone2/temp)
+
+  if [[ $cpu_temp_num -le 60 ]]; then
+    cpu_temp=" $nm| $nm $cpu_temp_low $cpu_temp_num°"
+  elif [[ $cpu_temp_num -ge 61 && $cpu_temp_num -le 70 ]]; then
+    cpu_temp=" $nm| $wn$cpu_temp_mid $cpu_temp_num°"
   else
-    status+=" $nm| $nm$root_icon $root_int""g"
+    cpu_temp=" $nm| $al$cpu_temp_high $cpu_temp_num°"
   fi
+}
 
-  seconds1=$(date -d "$houre" +%s)
-  seconds2=$(date -d "$to_late" +%s)
+update_vol
 
-  if ((seconds1 >= seconds2)); then
-    status+=" $nm| $wn$date_icon $wn$houre $nm$day_month $day "
-  else
-    status+=" $nm| $nm$date_icon $nm$houre $day_month $day "
-  fi
+update_updates
 
-  xsetroot -name "$status "
-  sleep $sleep_time
+display() {
+  xsetroot -name "$easyeffects$smatch$variant$climate$server$updates$ds4_status$vol$cpu_temp$cpu$memory$disk$time "
+}
+
+# signals for each module to update while updating display
+trap "update_vol;display" 30
+trap "update_updates;display" 31
+
+while true; do
+  # how many seconds each module updates
+  [ $((sec % 5)) -eq 0 ] && update_time
+  [ $((sec % 5)) -eq 0 ] && update_easyeffects_status
+  [ $((sec % 5)) -eq 0 ] && update_santosfc
+  [ $((sec % 5)) -eq 0 ] && update_key_variant
+  [ $((sec % 30)) -eq 0 ] && update_climate
+  [ $((sec % 10)) -eq 0 ] && update_ds4
+  [ $((sec % 10)) -eq 0 ] && update_server_info
+  [ $((sec % 10)) -eq 0 ] && update_disk
+  [ $((sec % 2)) -eq 0 ] && update_cpu
+  [ $((sec % 5)) -eq 0 ] && update_cpu_temp
+  [ $((sec % 3600)) -eq 0 ] && update_updates
+  [ $((sec % 10)) -eq 0 ] && update_vol
+  [ $((sec % 15)) -eq 0 ] && update_memory
+
+  # how often the display updates
+  [ $((sec % 5)) -eq 0 ] && display
+
+  sleep 1 &
+  wait && sec=$((sec + 1))
 done
