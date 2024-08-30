@@ -63,7 +63,7 @@ static const Rule rules[] = {
   { NULL,  "youtube music",       NULL,       1 << 5,       0,           -1, 0,       50,50,500,500,        5},
   { NULL,       NULL,   "scratchpad",   0,            1,           -1,   's', 80,50,1200,400,        bordersize,   },
   { NULL,       NULL,   "habits",   0,            1,           -1,   'h', 80,50,1200,400,        bordersize,   },
-  { NULL,       NULL,   "task-tui",   0,            1,           -1,   't', 779,48,500,650,        bordersize,   },
+  { NULL,       NULL,   "task-tui",   0,            1,           -1,   't', 783,48,500,650,        bordersize,   },
   { NULL,       NULL,   "ai",   0,            1,           -1,   'a', 779,48,500,650,        bordersize,   },
   { NULL,       NULL,   "pulsemixer",   0,            1,           -1,   'p', 778,48,400,400,        bordersize,   },
   { NULL,       NULL,   "btop",   0,            1,           -1,   'b', 80,80,1200,600,        bordersize,   },
