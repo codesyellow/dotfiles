@@ -5,6 +5,7 @@ static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+static const int bordersize = 1;
 /*  Display modes of the tab bar: never shown, always shown, shown only in  */
 /*  monocle mode in the presence of several windows.                        */
 /*  Modes after showtab_nmodes are disabled.                                */
@@ -60,25 +61,22 @@ static const Rule rules[] = {
   { "retroarch",   NULL,       NULL,       1 << 4,       0,           -1,    0,    50,50,500,500,        5},
   { "Lutris",   NULL,       NULL,       1 << 4,       0,           -1,    0,    50,50,500,500,        5},
   { NULL,  "youtube music",       NULL,       1 << 5,       0,           -1, 0,       50,50,500,500,        5},
-  { NULL,       NULL,   "scratchpad",   0,            1,           -1,   's', 80,50,1200,400,        5,   },
-  { NULL,       NULL,   "habits",   0,            1,           -1,   'h', 80,50,1200,400,        5,   },
-  { NULL,       NULL,   "task-tui",   0,            1,           -1,   't', 779,48,500,650,        5,   },
-  { "Noi",       NULL,   NULL,   0,            1,           -1,   'i', 788,50,500,700,        5,   },
-  { NULL,       NULL,   "Kuro",   0,            1,           -1,   'k', 830,35,500,650,        5,   },
-  { NULL,       NULL,   "ai",   0,            1,           -1,   'a', 779,48,500,650,        5,   },
-  { NULL,       NULL,   "pulsemixer",   0,            1,           -1,   'p', 778,48,400,400,        5,   },
-  { NULL,       NULL,   "btop",   0,            1,           -1,   'b', 80,80,1200,600,        5,   },
-  { NULL,       NULL,   "bluetui",   0,            1,           -1,   'f', 80,80,1200,600,        5,   },
-  { NULL,       NULL,   "sysmd",   0,            1,           -1,   'q', 80,80,1200,600,        5,   },
-  {"Galculator",       NULL,   NULL,   0,            1,           -1,   'g', 280,80,800,600,        5,   },
-  { NULL,       NULL,   "WhatsApp for Linux",   0,            1,           -1,   'w', 80,80,1200,600,        5,   },
-  { NULL,       NULL,   "Free Download Manager",   0,            1,           -1,   'd', 80,80,1200,600,        5,   },
-  { NULL,       NULL,   "notes",   0,            1,           -1,   'o', 80,50,1200,600,        5,   },
-  { NULL,       NULL,   "neorg",   0,            1,           -1,   'n', 80,50,1200,600,        5,   },
-  { NULL,       NULL,   "tt",   0,            1,           -1,   'e', 80,50,1200,600,        5,   },
-  { NULL,       NULL,   "Exercise Timer",   0,            1,           -1,   'z', 500,50,400,400,        5,   },
-  { NULL,       NULL,   "clock",   0,            1,           -1,   'c', 500,50,400,400,        5,   },
-  { "trayer",       NULL,   "panel",   0,            1,           -1,   'q', 500,50,400,400,        5,   },
+  { NULL,       NULL,   "scratchpad",   0,            1,           -1,   's', 80,50,1200,400,        bordersize,   },
+  { NULL,       NULL,   "habits",   0,            1,           -1,   'h', 80,50,1200,400,        bordersize,   },
+  { NULL,       NULL,   "task-tui",   0,            1,           -1,   't', 779,48,500,650,        bordersize,   },
+  { NULL,       NULL,   "ai",   0,            1,           -1,   'a', 779,48,500,650,        bordersize,   },
+  { NULL,       NULL,   "pulsemixer",   0,            1,           -1,   'p', 778,48,400,400,        bordersize,   },
+  { NULL,       NULL,   "btop",   0,            1,           -1,   'b', 80,80,1200,600,        bordersize,   },
+  { NULL,       NULL,   "bluetui",   0,            1,           -1,   'f', 80,80,1200,600,        bordersize,   },
+  { NULL,       NULL,   "sysmd",   0,            1,           -1,   'q', 80,80,1200,600,        bordersize,   },
+  {"Galculator",       NULL,   NULL,   0,            1,           -1,   'g', 280,80,800,600,        bordersize,   },
+  { NULL,       NULL,   "WhatsApp for Linux",   0,            1,           -1,   'w', 80,80,1200,600,        bordersize,   },
+  { NULL,       NULL,   "Free Download Manager",   0,            1,           -1,   'd', 80,80,1200,600,        bordersize,   },
+  { NULL,       NULL,   "notes",   0,            1,           -1,   'o', 80,50,1200,600,        bordersize,   },
+  { NULL,       NULL,   "tt",   0,            1,           -1,   'e', 80,50,1200,600,        bordersize,   },
+  { NULL,       NULL,   "Exercise Timer",   0,            1,           -1,   'z', 500,50,400,400,        bordersize,   },
+  { NULL,       NULL,   "clock",   0,            1,           -1,   'c', 500,50,400,400,        bordersize,   },
+  { "trayer",       NULL,   "panel",   0,            1,           -1,   'q', 500,50,400,400,        bordersize,   },
 };
 
 /* layout(s) */
@@ -144,9 +142,6 @@ static const char *dunst[]  = { "dunstctl", "close-all", NULL };
 static const char *rotatemouse[]  = { "360.sh", "99", NULL };
 static const char *volup[]  = { "volume.sh", "up", NULL };
 static const char *borderless[]  = { "borderless.sh",  NULL };
-static const char *voldw[]  = { "volume.sh", "down", NULL };
-static const char *volm[]  = { "volume.sh", "mute", NULL };
-static const char *esdf[]  = { "esdf.sh", NULL };
 /*First arg only serves to match against key in rules*/
 static const char *scratchpadcmd[] = {"s", "alacritty", "--class", "scratchpad", "-t", "scratchpad", NULL}; 
 static const char *scratchpadclock[] = TERM_CMD("c", "clock", "tclock_timer.sh");
@@ -212,6 +207,7 @@ static Keychord *keychords[] = {
   &((Keychord){2, {{MODKEY, XK_a}, {0, XK_l}},                 spawn,          {.v = loudness } }),
   &((Keychord){2, {{MODKEY, XK_a}, {0, XK_q}},                             quit,           {0} }),
   &((Keychord){2, {{MODKEY, XK_a}, {0, XK_k}},                             killclient,     {0} }),
+  &((Keychord){2, {{MODKEY, XK_a}, {0, XK_b}},                             spawn,     {.v = borderless } }),
   // pymor
   &((Keychord){2, {{MODKEY, XK_p}, {0, XK_s}},                 spawn,          {.v = pymors } }),
   &((Keychord){2, {{MODKEY, XK_p}, {0, XK_l}},                 spawn,          {.v = pymorl } }),
