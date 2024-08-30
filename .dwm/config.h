@@ -60,7 +60,7 @@ static const Rule rules[] = {
   { "cage",   NULL,       NULL,       1 << 4,       0,           -1,    0,    50,50,500,500,        5},
   { "retroarch",   NULL,       NULL,       1 << 4,       0,           -1,    0,    50,50,500,500,        5},
   { "Lutris",   NULL,       NULL,       1 << 4,       0,           -1,    0,    50,50,500,500,        5},
-  { NULL,  "youtube music",       NULL,       1 << 5,       0,           -1, 0,       50,50,500,500,        5},
+  { NULL,  "youtube music",       NULL,       1 << 5,       0,           -1, 0,    50,50,500,500,        5},
   { NULL,       NULL,   "scratchpad",   0,            1,           -1,   's', 80,50,1200,400,        bordersize,   },
   { NULL,       NULL,   "habits",   0,            1,           -1,   'h', 80,50,1200,400,        bordersize,   },
   { NULL,       NULL,   "task-tui",   0,            1,           -1,   't', 783,48,500,650,        bordersize,   },
@@ -148,7 +148,8 @@ static const char *scratchpadclock[] = TERM_CMD("c", "clock", "tclock_timer.sh")
 static const char *scratchpadblue[] = TERM_CMD("f", "bluetui", "bluetui");
 static const char *scratchpadsymd[] = TERM_CMD("q", "sysmd", "systemctl-tui");
 static const char *scratchpadhabit[] = TERM_CMD("h", "habits", "nvim", "/home/cie/.vimwiki/habit.wiki");
-static const char *scratchpadnotes[] = TERM_CMD("o", "notes", "nvim", "/home/cie/.vimwiki/index.md");
+//static const char *scratchpadnotes[] = TERM_CMD("o", "notes", "nvim", "/home/cie/.vimwiki/index.md");
+static const char *scratchpadnotes[] = {"o", "st", "-t", "notes", "-e", "nvim", "-c", "Neorg workspace notes", NULL}; 
 static const char *scratchpadbtop[] = TERM_CMD("b", "btop", "btop");
 static const char *scratchpadtask[] = TERM_CMD("t", "task-tui", "/usr/bin/taskwarrior-tui");
 static const char *scratchpadmixer[] = TERM_CMD("p", "pulsemixer", "pulsemixer");
