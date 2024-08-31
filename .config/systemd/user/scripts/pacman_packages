@@ -1,0 +1,31 @@
+#!/bin/bash
+pacman_orphans=$(pacman -Qdt | wc -l)
+flatpak_packages=$(flatpak list | wc -l)
+displayed_path="/tmp/wpackage_displayed"
+
+if [[ ! -f "$displayed_path" ]]; then
+  echo "creating file"
+  touch "$displayed_path"
+  displayed=$(cat "$displayed_path")
+else
+  displayed=$(cat "$displayed_path")
+fi
+
+to_display() {
+  echo "$1" >$displayed_path
+  echo "$2" >"/tmp/wpackage_to_display"
+}
+
+if [[ "$displayed" == "" ]] || [[ "$displayed" == "flatpak" ]]; then
+  pacman_packages=$(pacman -Q | wc -l)
+  to_display 'pacman' $pacman_packages
+  echo $pacman_packages
+elif [[ "$displayed" == "pacman" ]] && [[ ! $pacman_orphans == 0 ]]; then
+  to_display 'orphans' $pacman_orphans
+  echo $pacman_orphans
+else
+  to_display 'flatpak' $flatpak_packages
+  echo $flatpak_packages
+fi
+
+#echo "$pacman_packages $pacman_orphans $flatpak_packages"

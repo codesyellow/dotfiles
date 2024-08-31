@@ -1,0 +1,9 @@
+[Unit]
+Description=Timer to run the pacman_info script
+
+[Timer]
+OnBootSec=5s
+OnUnitActiveSec=1min
+
+[Install]
+WantedBy=timers.target

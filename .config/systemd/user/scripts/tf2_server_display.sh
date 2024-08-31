@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+current_hour=$(date +%H)
+if [[ $current_hour -lt 6 || $current_hour -ge 22 ]]; then
+  systemctl --user stop tf2_server_display.timer
+  exit 0
+fi
+
 badwater_icon=''
 dustbowl_icon=''
 turbine_icon=''

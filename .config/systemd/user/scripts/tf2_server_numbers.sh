@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+
+current_hour=$(date +%H)
+if [[ $current_hour -lt 6 || $current_hour -ge 22 ]]; then
+  systemctl --user stop tf2_server_count.timer
+  exit 0
+fi
+
 player_count() {
   count=$(curl -s -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" "$1" | pup 'span.srvPage-countCur text{}')
   echo "$count"

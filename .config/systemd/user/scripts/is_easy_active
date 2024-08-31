@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+easy=$(pidof 'easyeffects')
+
+if [[ -z "$easy" ]]; then
+  echo "volume changed to 30% because easyeffects is not currently running"
+  pamixer --set-volume 30
+fi
