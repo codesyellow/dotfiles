@@ -1,5 +1,0 @@
-[Unit]
-Description=The script to kill picom and start it again when cage is running
-
-[Service]
-ExecStart=/home/cie/.bin/cage_disable_picom.sh

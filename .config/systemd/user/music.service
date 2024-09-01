@@ -1,5 +1,0 @@
-[Unit]
-Description=The script to switch between bass and equalizer.
-
-[Service]
-ExecStart=/home/cie/.bin/music.sh

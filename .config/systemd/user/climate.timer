@@ -2,7 +2,7 @@
 Description=Run the script every hour
 
 [Timer]
-OnBootSec=1min
+OnBootSec=5s
 OnUnitActiveSec=1h
 Persistent=true
 

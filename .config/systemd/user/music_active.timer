@@ -1,0 +1,9 @@
+[Unit]
+Description=Timer unit for the music_active service
+
+[Timer]
+OnBootSec=10s
+OnUnitActiveSec=1s
+
+[Install]
+WantedBy=timers.target

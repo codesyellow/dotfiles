@@ -26,8 +26,11 @@ if [[ -n "$music_app" ]]; then
   fi
 else
   if [[ ! -f "$equalizer_preset_path" ]]; then
+    volume=$(pamixer --get-volume)
     change_preset "$equalizer_preset_path" "$equalizer_preset"
-
     if_rm_file "$music_preset_path"
+    if [[ $volume -ge 35 ]]; then
+      pamixer --set-volume 30
+    fi
   fi
 fi

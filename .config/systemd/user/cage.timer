@@ -1,9 +1,0 @@
-[Unit]
-Description=A script that kill picom when cage is running and when is not, start it again
-
-[Timer]
-OnCalendar=05:00
-Persistent=true
-
-[Install]
-WantedBy=timers.target
