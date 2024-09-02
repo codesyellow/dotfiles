@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+game=$(pidof -x "PES2017.exe")
+title="Pro Evolution Soccer 2017"
+borderless_state="/tmp/borderless_active"
+active_window_id=$(xdotool getwindowfocus)
+
+window_name=$(xprop -id "$active_window_id" _NET_WM_NAME | awk -F '"' '{print $2}')
+echo "window: $window_name"
+echo "title: $title "
+echo "game-id: $game"
+
+if [[ -n "$game" ]] && [[ "$window_name" == "$title" ]]; then
+  echo "entrou"
+  if [[ ! -f "$borderless_state" ]]; then
+    touch "$borderless_state"
+    bash /home/cie/.bin/borderless.sh
+    echo "borderless was activated"
+  fi
+else
+  if [[ -f "$borderless_state" ]]; then
+    rm "$borderless_state"
+    echo "borderless_state was removed"
+  fi
+fi

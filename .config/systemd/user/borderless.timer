@@ -1,0 +1,10 @@
+[Unit]
+Description=A systemd timer unit that control the service of the same name
+
+[Timer]
+OnBootSec=15s
+OnUnitActiveSec=1s
+AccuracySec=1us
+
+[Install]
+WantedBy=timers.target
