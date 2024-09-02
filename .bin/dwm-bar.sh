@@ -6,6 +6,7 @@ nm="^c#d8dee9^"
 wn="^c#ebcb8b^"
 al="^c#bf616a^"
 
+pacman=
 ram_icon=
 cpu_icon=
 root_icon=
@@ -66,8 +67,8 @@ update_ds4() {
 
   if ! [[ -f /tmp/ds4_active ]]; then
     ds4_status=" $nm| $nm$controller "
-  elif [[ -f /tmp/ds4_charging ]]; then
-    ds4_staus=" $nm| $wn$controller  "
+  elif [[ -f "/tmp/ds4_charging" ]]; then
+    ds4_status=" $nm| $wn$controller  "
   elif [[ $ds4_bat -ge 51 && $ds4_bat -le 70 ]]; then
     ds4_status=" $nm| $nm$controller  "
   elif [[ $ds4_bat -le 50 && $ds4_bat -ge 30 ]]; then
@@ -104,7 +105,7 @@ update_vol() {
 
   if ! [[ -f "$is_it_muted" ]]; then
     if [[ $vol_num -ge 60 ]]; then
-      vol=" $nm| $al $volume%"
+      vol=" $nm| $al $vol_num%"
     elif [[ $vol_num -le 59 ]] && [[ $vol_num -ge 1 ]]; then
       vol=" $nm| $nm $vol_num%"
     elif [[ $volume -eq 0 ]]; then
@@ -143,20 +144,24 @@ update_easyeffects_status() {
 update_server_info() {
   server_info=$(</tmp/map_display)
   server_status="/tmp/disable_server_info"
-
-  if ! [[ -f $server_status ]]; then
+  
+  if [[ ! -f $server_status ]]; then
     server=" $nm| $server_info"
+  else
+    server=""
   fi
 }
 
 update_santosfc() {
-if [[ -f "/tmp/santosmatch" ]]; then
+  if [[ -f "/tmp/santosmatch" ]]; then
     santos=$(</tmp/santosmatch)
     if [[ -f "/tmp/matchup" ]] && [[ $santos == *"x"* ]]; then
       smatch=" $nm|$wn  $santos"
     else
       smatch=" $nm|$nm  $santos"
     fi
+  else
+    smatch=""
   fi
 }
 
@@ -193,12 +198,18 @@ update_cpu_temp() {
   fi
 }
 
+update_pacman_info() {
+  packages_info=$(cat /tmp/wpackage_to_display)
+
+  packages_number=" $nm| $pacman $packages_info"
+}
+
 update_vol
 
 update_updates
 
 display() {
-  xsetroot -name "$easyeffects$smatch$variant$climate$server$updates$ds4_status$vol$cpu_temp$cpu$memory$disk$time "
+  xsetroot -name "$easyeffects$smatch$packages_number$variant$climate$server$updates$ds4_status$vol$cpu_temp$cpu$memory$disk$time "
 }
 
 # signals for each module to update while updating display
@@ -210,7 +221,8 @@ while true; do
   [ $((sec % 5)) -eq 0 ] && update_time
   [ $((sec % 5)) -eq 0 ] && update_easyeffects_status
   [ $((sec % 5)) -eq 0 ] && update_santosfc
-  [ $((sec % 5)) -eq 0 ] && update_key_variant
+  [ $((sec % 3)) -eq 0 ] && update_key_variant
+  [ $((sec % 10)) -eq 0 ] && update_pacman_info
   [ $((sec % 30)) -eq 0 ] && update_climate
   [ $((sec % 10)) -eq 0 ] && update_ds4
   [ $((sec % 10)) -eq 0 ] && update_server_info

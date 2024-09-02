@@ -44,11 +44,15 @@ do_exist() {
 while true; do
   music=$(pidof 'youtube-music')
   effects=$(pidof 'easyeffects')
+  current_preset=$(bash /home/cie/.bin/easy_preset.sh)
 
-  if [[ -n "effects" ]]; then
+  if [[ -n "$effects" ]]; then
     if [[ -n "$music" ]]; then
-      do_exist "music" $music_preset
+      if [[ ! -f "/tmp/music" ]]; then
+        do_exist "music" $music_preset
+      fi
     else
+      echo "Youtube music is not running"
       do_exist "equalizer" $equalizer
     fi
   else
