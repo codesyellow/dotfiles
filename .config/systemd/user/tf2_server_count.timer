@@ -4,6 +4,7 @@ Description=Timer to Fetch TF2 Player Counts
 [Timer]
 OnBootSec=5s
 OnUnitActiveSec=30min
+Persistent=true
 
 [Install]
 WantedBy=timers.target

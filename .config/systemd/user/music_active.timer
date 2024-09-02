@@ -3,7 +3,7 @@ Description=Timer unit for the music_active service
 
 [Timer]
 OnBootSec=10s
-OnUnitActiveSec=1s
+OnUnitActiveSec=500ms
 
 [Install]
 WantedBy=timers.target

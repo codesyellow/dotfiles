@@ -5,7 +5,7 @@ StartLimitBurst=5
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/easyeffects --gapplication-service
+ExecStart=/usr/bin/flatpak run com.github.wwmm.easyeffects --gapplication-service
 Restart=on-failure
 RestartSec=5s
 
