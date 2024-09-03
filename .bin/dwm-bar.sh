@@ -12,6 +12,9 @@ cpu_icon=
 root_icon=
 home_icon=
 date_icon=
+pymor_icon=
+pymor_icon_half=
+pymor_icon_empty=
 cpu_temp_low=
 cpu_temp_mid=
 cpu_temp_high=
@@ -26,6 +29,32 @@ update_cpu() {
     cpu=" $nm| $wn$cpu_icon $cpu_usage%"
   else
     cpu=" $nm| $nm$cpu_icon $cpu_usage%"
+  fi
+}
+
+update_pomodoro() {
+  pomodoro="/tmp/pomodoro_time"
+  if [[ -f "$pomodoro" ]]; then
+    pomodoro_number=$(cat "$pomodoro")
+    if [[ ! -f "/tmp/pomo_half" ]]; then
+      let pomo_half=pomodoro_number/2
+      touch "/tmp/pomo_half"
+    fi
+
+    if [[ "$pomodoro_number" -le "$pomo_half" ]] && [[ "$pomodoro_number" -ge 6 ]]; then
+      pymor=" $nm| $nm$pymor_icon_half $pomodoro_number"
+    else
+      pymor=" $nm| $nm$pymor_icon $pomodoro_number"
+    fi
+
+    if [[ "$pomodoro_number" -le 5 ]]; then
+      pymor=" $nm| $wn$pymor_icon_empty $pomodoro_number"
+    fi
+  else
+    pymor=""
+    if [[ -f "/tmp/pomo_half" ]]; then
+      rm "/tmp/pomo_half"
+    fi
   fi
 }
 
@@ -198,31 +227,26 @@ update_cpu_temp() {
   fi
 }
 
-update_pacman_info() {
-  packages_info=$(cat /tmp/wpackage_to_display)
-
-  packages_number=" $nm| $pacman $packages_info"
-}
-
 update_vol
 
 update_updates
 
 display() {
-  xsetroot -name "$easyeffects$smatch$packages_number$variant$climate$server$updates$ds4_status$vol$cpu_temp$cpu$memory$disk$time "
+  xsetroot -name "$easyeffects$pymor$smatch$variant$climate$server$updates$ds4_status$vol$cpu_temp$cpu$memory$disk$time "
 }
 
 # signals for each module to update while updating display
 trap "update_vol;display" 30
 trap "update_updates;display" 31
+trap "exit" SIGTERM
 
 while true; do
-  # how many seconds each module updates
+  # Update sections
   [ $((sec % 5)) -eq 0 ] && update_time
+  [ $((sec % 1)) -eq 0 ] && update_pomodoro
   [ $((sec % 5)) -eq 0 ] && update_easyeffects_status
   [ $((sec % 5)) -eq 0 ] && update_santosfc
   [ $((sec % 3)) -eq 0 ] && update_key_variant
-  [ $((sec % 10)) -eq 0 ] && update_pacman_info
   [ $((sec % 30)) -eq 0 ] && update_climate
   [ $((sec % 10)) -eq 0 ] && update_ds4
   [ $((sec % 10)) -eq 0 ] && update_server_info
@@ -233,9 +257,10 @@ while true; do
   [ $((sec % 10)) -eq 0 ] && update_vol
   [ $((sec % 15)) -eq 0 ] && update_memory
 
-  # how often the display updates
-  [ $((sec % 5)) -eq 0 ] && display
+  # Update the display
+  [ $((sec % 1)) -eq 0 ] && display
 
-  sleep 1 &
-  wait && sec=$((sec + 1))
+  # Sleep and increment sec
+  sleep 1
+  sec=$((sec + 1))
 done
