@@ -31,7 +31,7 @@
 
     # Position the notification in the top right corner
     # origin = top-right
-    origin = bottom-right
+    origin = top-left
 
     # Offset from the origin
     offset = 50x50
@@ -311,25 +311,20 @@
     per_monitor_dpi = false
 
 [urgency_low]
-background = "#d8dee9"
-foreground = "#2e3440"
+background = "#2e344040"
+foreground = "#d8dee9"
 
 [urgency_normal]
-background = "#d8dee9"
-foreground = "#2e3440"
+background = "#2e344040"
+foreground = "#d8dee9"
 
 [urgency_critical]
-background = "#bf616a"
+background = "#2e344040"
 foreground = "#d8dee9"
 
 [play_sound]
     summary = "*"
     script = "/home/cie/.bin/alert.sh"
-    summary = "!Joyley"
-
-[gamejoy]
-    summary = "Joyley"
-    script = "/home/cie/.bin/game_sound.sh"
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
