@@ -1,65 +1,31 @@
-@define-color fg #FFF3C7;
-@define-color cpu-week #D3C6AA; 
-@define-color home #D699B6; 
-@define-color normal #fff; 
-@define-color bg #7A8478;
-@define-color pulsa #A7C080;
-@define-color ram #83C092; 
-@define-color joy #D8BED8; 
-@define-color root #7FBBB3; 
-@define-color temp #3BCB73; 
-@define-color day-week-fg #1E2326;
-@define-color day-bg #E69875;
-
-@define-color button #FFEDD8;
-@define-color inactive #6196A6;
-@define-color active #F7418F;
+@define-color fg #d8dee9;
+@define-color warning #E3A5C7;
+@define-color bg #2e3440;
+@define-color critical #F5004F;
+@define-color button #FF9874;
+@define-color inactive #d8dee9;
+@define-color active #FF4C4C;
 @define-color hover #891652;
 
 window#waybar {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: @bg;
   font-family: 'Font Awesome 6 Free Solid';
   font-weight: bold;
 }
 
 #workspaces {
-  margin-top: 20px;
   font-size: 14px;  
-}
-
-#workspaces button:first-child {
-  border-radius: 14px 24px 0 0;
-  padding-top: 6px;
-}
-
-#workspaces button:last-child {
-  padding-bottom: 4px;
-  padding-right: 13px;
-}
-
-#workspaces button:nth-child(6) {
-  padding-left: 11px;
-}
-
-#workspaces button:nth-child(2) {
-  padding-right: 12px;
 }
 
 #workspaces button {
   border-radius: 0;
   margin-right: -4px;
   color: @button;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: @bg;
 }
 
 #workspaces button.empty {
   color: @inactive;
-}
-
-#workspaces button.empty:last-child {
-  border-radius: 0 0 24px 18px;
-  padding-right: 13px;
-  padding-bottom: 6px;
 }
 
 #workspaces button:hover {
@@ -71,147 +37,73 @@ window#waybar {
   color: @active;
 }
 
-
-
-#custom-separator {
-  color: rgba(250, 250, 250, 0.5);
-  margin-top: -2px;
-}
-
-#clock {
-  color: @normal;
-}
-
-#clock.day {
-  color: @day-bg;
-  margin-bottom: 4px;
-}
-
-#clock.week-day {
-  background-color: @day-bg;
-  color: #000;
-  font-size: 12px;
-  padding: 4px;
-  margin-bottom: 20px;
-  border-radius: 0 0 10px 10px;
-}
-
-#pulseaudio.icon,
-#custom-volume-icon
-#custom-cpu-icon,
-#custom-ram-icon,
-#custom-temp-icon, 
-#custom-dsbattery-icon, 
-#custom-server-icon,
 #submap,
-#custom-pacman-icon {
+#clock,
+#memory,
+#temperature,
+#custom-separator,
+#cpu,
+#disk {
   font-size: 14px;
-  margin-bottom: 2px;
 }
 
-#custom-volume,
+#custom-santos,
+#custom-climate,
+#custom-server,
 #cpu,
 #memory,
-#temperature, 
-#custom-server, 
-#custom-dsbattery, 
-#disk,
-#custom-pacman {
-  font-size: 12px;
-  margin-bottom: 5px;
+#pulseaudio,
+#temperature,
+#custom-separator,
+#custom-separator-pymor,
+#custom-separator-server,
+#custom-separator-santos,
+#custom-separator-climate,
+#clock,
+#disk {
+  color: @fg;
 }
 
 /* submap */
 #submap {
-  color: @day-bg;
-  background-color: rgba(0, 0, 0, 0.01);
+  color: @critical;
+  margin: 0 4px 0 10px;
+  font-size: 13px;
 }
 
-#submap {
-  margin-bottom: -2px;
+#custom-separator {
+  margin: 0 6px 0 6px;
 }
 
-/* server */
-#custom-server-icon,
-#custom-server {
-  color: #FF8225;
-  margin-right: 2px;
-  margin-bottom: -1px;
+/* Default state */
+#custom-easy.normal,
+#custom-updates.normal,
+#custom-pymor.normal,
+#custom-ds4.normal, 
+#cpu.normal,
+#disk.normal {
+  color: @fg;
 }
 
-#custom-server {
-  font-size: 12px;
-  margin-bottom: 3px;
+#custom-easy.warning,
+#custom-pymor.warning,
+#custom-ds4.charging,
+#custom-updates.warning,
+#custom-ds4.warning
+#memory.warning,
+#cpu.warning,
+#pulseaudio.warning,
+#disk.warning {
+  color: @warning;
 }
 
-/* pacman */
-#custom-pacman,
-#custom-pacman-icon {
-  color: #77E4C8;
-  margin-right: 2px;
+#custom-easy.critical,
+#custom-updates.alert,
+#custom-ds4.alert
+#memory.critical,
+#cpu.critical,
+#pulseaudio.critical,
+#disk.critical {
+  color: @critical;
 }
 
-#custom-pacman {
-  margin: -2px 0 4px 0; 
-}
-
-#custom-pacman-icon {
-  margin-bottom: -1px;
-}
-
-/* dsbattery */
-#custom-dsbattery-icon {
-  color: @joy;
-  padding-right: 2px;
-  margin-bottom: -1px;
-}
-
-#custom-dsbattery {
-  color: @joy;
-  font-size: 12px;
-  margin-bottom: 1px;
-}
-
-/* ram */
-#memory,
-#custom-ram-icon {
-  color: @ram;
-}
-
-#memory {
-  margin-bottom: -1px;
-}
-
-#custom-ram-icon {
-  margin-bottom: -1px;
-}
-
-/* temp */
-#temperature,
-#custom-temp-icon {
-  color: @temp;
-}
-
-#custom-temp-icon {
-  margin: 0 2px 1px 0;
-}
-
-/* cpu */
-#cpu,
-#custom-cpu-icon {
-  color: @cpu;
-}
-
-#custom-cpu-icon  {
-  margin-bottom: 1px;
-}
-
-/* disk */
-#custom-disk-root,
-#disk {
-  color: @root;
-}
-
-#custom-disk-root {
-  margin-right: 2px;
-}
