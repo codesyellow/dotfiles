@@ -1,10 +1,10 @@
 @define-color fg #d8dee9;
-@define-color warning #E3A5C7;
+@define-color warning #36C2CE;
 @define-color bg #2e3440;
-@define-color critical #F5004F;
-@define-color button #FF9874;
+@define-color critical #EF5A6F;
+@define-color button #36C2CE;
 @define-color inactive #d8dee9;
-@define-color active #FF4C4C;
+@define-color active #FF8343;
 @define-color hover #891652;
 
 window#waybar {
