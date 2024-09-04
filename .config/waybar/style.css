@@ -48,6 +48,7 @@ window#waybar {
 }
 
 #custom-santos,
+#custom-variant,
 #custom-climate,
 #custom-server,
 #cpu,
@@ -97,6 +98,7 @@ window#waybar {
   color: @warning;
 }
 
+#custom-variant.critical,
 #custom-easy.critical,
 #custom-updates.alert,
 #custom-ds4.alert

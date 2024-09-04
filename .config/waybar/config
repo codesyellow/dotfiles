@@ -2,7 +2,7 @@
   "layer": "top",
     "position": "top",
     "modules-left": [ "hyprland/workspaces", "clock","hyprland/submap" ],
-    "modules-right": [ "custom/easy", "custom/separator-pymor", "custom/pymor", "custom/separator-santos", "custom/santos", "custom/separator-climate", "custom/climate", "custom/separator-server", "custom/server", "custom/separator", "custom/updates", "custom/separator", "custom/ds4", "custom/separator", "pulseaudio", "custom/separator", "temperature", "custom/separator", "cpu", "custom/separator", "memory", "custom/separator", "disk" ],
+    "modules-right": [ "custom/easy", "custom/separator-pymor", "custom/pymor", "custom/separator-santos", "custom/santos", "custom/separator", "custom/variant", "custom/separator-climate", "custom/climate", "custom/separator-server", "custom/server", "custom/separator", "custom/updates", "custom/separator", "custom/ds4", "custom/separator", "pulseaudio", "custom/separator", "temperature", "custom/separator", "cpu", "custom/separator", "memory", "custom/separator", "disk" ],
     "hyprland/workspaces": {
       "all-outputs": false,
       "active-only": false,
@@ -58,6 +58,12 @@
     "custom/santos": {
       "exec": "/home/cie/.config/waybar/scripts/santos_match.sh",
       "interval": 5,
+      "return-type": "json",
+      "tooltip": false
+    },
+    "custom/variant": {
+      "exec": "/home/cie/.config/waybar/scripts/key_variant.sh",
+      "interval": 2,
       "return-type": "json",
       "tooltip": false
     },
