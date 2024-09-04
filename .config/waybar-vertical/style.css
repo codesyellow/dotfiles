@@ -1,0 +1,291 @@
+@define-color fg #FFF3C7;
+@define-color cpu-week #D3C6AA; 
+@define-color color-warning #FF8225; 
+@define-color color-critical #EB3678; 
+@define-color home #D699B6; 
+@define-color normal #fff; 
+@define-color bg #7A8478;
+@define-color pulsa #A7C080;
+@define-color ram #83C092; 
+@define-color joy #D8BED8; 
+@define-color root #7FBBB3; 
+@define-color temp #3BCB73; 
+@define-color day-week-fg #1E2326;
+@define-color day-bg #E69875;
+
+@define-color button #FFEDD8;
+@define-color inactive #6196A6;
+@define-color active #F7418F;
+@define-color hover #891652;
+
+window#waybar {
+  background-color: rgba(0, 0, 0, 0.1);
+  font-family: 'Font Awesome 6 Free Solid';
+  font-weight: bold;
+}
+
+#workspaces {
+  margin-top: 11px;
+  font-size: 14px;  
+}
+
+#workspaces button:first-child {
+  border-radius: 15px 25px 0 0;
+  padding-top: 6px;
+}
+
+#workspaces button:last-child {
+  padding-bottom: 4px;
+  padding-right: 13px;
+}
+
+#workspaces button:nth-child(6) {
+  padding-left: 11px;
+}
+
+#workspaces button:nth-child(2) {
+  padding-right: 12px;
+}
+
+#workspaces button {
+  border-radius: 0;
+  margin-right: -4px;
+  color: @button;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+#workspaces button.empty {
+  color: @inactive;
+}
+
+#workspaces button.empty:last-child {
+  border-radius: 0 0 24px 18px;
+  padding-right: 13px;
+  padding-bottom: 6px;
+}
+
+#workspaces button:hover {
+  color: @hover;
+  background-color: @fg;
+}
+
+#workspaces button.active {
+  color: @active;
+}
+
+#pulseaudio,
+#custom-volume,
+#disk,
+#temperature,
+#custom-cpu,
+#memory {
+  font-size: 12px;
+}
+
+#pulseaudio.icon,
+#custom-cpu-icon,
+#custom-disk-home,
+#custom-ram-icon,
+#tray,
+#custom-disk-root, 
+#submap,
+#custom-weather,
+#custom-temp-icon {
+  margin: 4px 2px 2px 0;
+}
+
+#custom-disk-root {
+  margin-right: 4px;
+}
+
+#submap {
+  color: @day-bg;
+  background-color: rgba(0, 0, 0, 0.01);
+}
+
+#custom-dsbattery-icon {
+  color: @joy;
+  padding-right: 2px;
+}
+
+#custom-dsbattery {
+  color: @joy;
+  font-size: 12px;
+}
+
+#pulseaudio-icon {
+  font-size: 10px;
+}
+
+#pulseaudio,
+#pulseaudio-icon {
+  color: @pulsa;
+}
+
+#custom-disk-root,
+#disk {
+  color: @root;
+}
+
+#custom-disk-home,
+#disk.home {
+  color: @home;
+}
+
+#custom-pacman,
+#custom-pacman-icon {
+  color: #77E4C8;
+  margin-right: 3px;
+}
+
+#temperature,
+#custom-temp-icon {
+  color: @temp;
+}
+
+#custom-cpu-icon.normal {
+  color: @cpu;
+}
+
+#custom-cpu-icon.warning {
+  color: @color-warning;
+}
+#custom-cpu-icon.critical {
+  color: @color-critical;
+}
+
+#custom-cpu.normal {
+  color: @cpu; 
+}
+
+#custom-cpu.warning { 
+  color: @color-warning;
+}
+
+#custom-cpu.critical { 
+  color: @color-critical;
+}
+
+/* ram */
+#custom-ram.normal {
+  color: @ram; 
+}
+
+#custom-ram.warning { 
+  color: @color-warning;
+}
+
+#custom-ram.critical { 
+  color: @color-critical;
+}
+
+/* ram-icon */
+
+#custom-ram-icon.normal {
+  color: @ram;
+}
+
+#custom-ram-icon.warning {
+  color: @color-warning;
+}
+
+#custom-ram-icon.critical {
+  color: @color-critical;
+}
+
+/* temp */
+#custom-temp.normal {
+  color: @temp; 
+}
+
+#custom-temp.low {
+  color: #F8EDED; 
+}
+
+#custom-temp.warning { 
+  color: @color-warning;
+}
+
+#custom-temp.critical { 
+  color: @color-critical;
+}
+/* temp-icon */
+#custom-temp-icon.normal {
+  color: @temp; 
+}
+
+#custom-temp-icon.low {
+  color: #F8EDED; 
+}
+
+#custom-temp-icon.warning { 
+  color: @color-warning;
+}
+
+#custom-temp-icon.critical { 
+  color: @color-critical;
+}
+
+/* volume */
+#custom-volume.normal {
+  color: @pulsa; 
+}
+
+#custom-volume.warning { 
+  color: @color-warning;
+}
+
+#custom-volume.critical { 
+  color: @color-critical;
+}
+/* volume-icon */
+#custom-volume-icon.normal {
+  color: @pulsa; 
+}
+
+#custom-volume-icon.warning { 
+  color: @color-warning;
+}
+
+#custom-volume-icon.critical { 
+  color: @color-critical;
+}
+#custom-check-server {
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+
+#custom-check-server-icon,
+#custom-check-server {
+  color: #FF8225;
+  margin-right: 2px;
+}
+
+#tray {
+  margin: 8px 3px 8px 0;
+}
+
+#clock {
+  color: @normal;
+}
+
+#clock.day {
+  color: @day-bg;
+  margin-bottom: 4px;
+}
+
+#clock.week-day {
+  background-color: @day-bg;
+  color: #000;
+  font-size: 12px;
+  padding: 4px;
+  margin-bottom: 12px;
+  border-radius: 0 0 10px 10px;
+}
+
+#custom-weather {
+  color: #fff;
+  margin-bottom: -1px;
+  margin-left: 1px;
+  font-size: 11px;
+}

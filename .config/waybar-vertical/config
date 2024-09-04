@@ -1,0 +1,215 @@
+{
+  "layer": "top",
+    "position": "right",
+    "margin-right": 8,
+    "modules-left": ["hyprland/workspaces"],
+    "modules-right": ["hyprland/submap", "custom/dsbattery-icon", "custom/dsbattery", "custom/pacman-icon", "custom/pacman", "custom/volume-icon", "custom/volume", "custom/disk-root", "disk", "custom/temp-icon", "custom/temp", "custom/cpu-icon", "custom/cpu","custom/ram-icon", "custom/ram","custom/separator", "clock", "clock#day", "clock#week-day"],
+    "hyprland/workspaces": {
+      "all-outputs": false,
+      "active-only": false,
+      "format": "{icon}",
+      "format-icons": {
+        "1": " ",
+        "2": " ",
+        "3": "",
+        "4": " ",
+        "5": " ",
+        "6": "  ",
+        "7": " ",
+        "urgent": " ",
+        "default": " ",
+        "persistent": "persistent",
+      },
+      "persistent-workspaces": {
+        "*": 7
+      }
+    },
+    "custom/pacman-icon": {
+      "tooltip": false,
+      "format": ""
+    },
+    "custom/pacman": {
+                "format": "{}",
+                "interval": 3600,                     // every hour
+                "exec": "checkupdates | wc -l",       // # of updates
+                "exec-if": "exit 0",                  // always run; consider advanced run conditions
+                "on-click": "alacritty --class update-system -e sh -c 'yay'; pkill -SIGRTMIN+8 waybar",
+                "signal": 8,
+                "tooltip": false,
+    },
+    "temperature": {
+      "thermal-zone": 2,
+      "critical-threshold": 80,
+      "format": "{temperatureC}°",
+      "tooltip": false,
+    },
+    "custom/check-server-icon": {
+      "format": "",
+      "interval": 1800,
+      "escape": true,
+      "exec": "check_server.sh icon",
+      "exec-if": "sh_check_server.sh",
+      "on-click": "firefox https://tsarvar.com/en/servers/team-fortress-2/205.178.182.182:27060",
+      "signal": 10,
+      "tooltip": false,
+    },
+    "custom/check-server": {
+      "format": "{}",
+      "interval": 1800,
+      "escape": true,
+      "exec": "check_server.sh",
+      "exec-if": "sh_check_server.sh",
+      "on-click": "firefox https://tsarvar.com/en/servers/team-fortress-2/205.178.182.182:27060",
+      "on-click-right": "check_server.sh",
+      "signal": 10,
+      "tooltip": false,
+    },
+    "custom/dsbattery-icon": {
+      "format": "{}",
+      "interval": 3,
+      "escape": true,
+      "exec": "ps4_status.sh icon",
+      "exec-if": "is_ds4_on.sh",
+      "on-click-right": "dsbattery -d && killall xboxdrv",
+      "on-click": "nohup emulate_xbox_ps4.sh > /dev/null 2>&1 &",
+      "on-scroll-down": "emulate_xbox_ps4.sh 'kill xboxdrv'",
+      "tooltip": false,
+    },
+    "custom/dsbattery": {
+      "format": "{}",
+      "interval": 3,
+      "escape": true,
+      "exec": "ps4_status.sh perc",
+      "on-click-right": "dsbattery -d && killall xboxdrv",
+      "on-click": "nohup emulate_xbox_ps4.sh > /dev/null 2>&1 &",
+      "on-scroll-down": "emulate_xbox_ps4.sh 'kill xboxdrv'",
+      "tooltip": false,
+    },
+    "hyprland/submap": {
+      "format": "",
+      "max-length": 8,
+      "tooltip": false
+    },
+    "tray": {
+      "icon-size": 18,
+      "spacing": 4
+    },
+    "clock#day": {
+      "format": "{:%d}",
+      "tooltip-format": "<tt><small>{calendar}</small></tt>",
+      "calendar": {
+        "mode"          : "month",
+        "mode-mon-col"  : 1,
+        "weeks-pos"     : "right",
+        "on-scroll"     : 1,
+        "format": {
+          "months":     "<span color='#ffead3'><b>{}</b></span>",
+          "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+          "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+          "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+          "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+        }
+      },
+    },
+    "clock": {
+      "format": "{:%H\n%M}",
+    },
+    "clock#week-day": {
+      "format": "{:%a}",
+    },
+    "custom/separator": {
+      "format": "----",
+      "tooltip": false,
+    },
+    "memory": {
+      "format": "{}%",
+        "states": {
+          "normal": 0,
+          "warning": 60,
+          "critical": 90
+        },
+    },
+    "custom/temp-icon": {
+      "tooltip": false,
+      "format": "<span font='12'>{}</span>",
+      "exec": "~/.config/waybar/scripts/widgets/temp.sh icon",
+      "return-type": "json",
+      "interval": 1, // execute script every n seconds; adjust as desired
+      "signal": 20,
+    },
+    "custom/temp": {
+      "format": "{}",
+      "exec": "~/.config/waybar/scripts/widgets/temp.sh",
+      "return-type": "json",
+      "interval": 1, // execute script every n seconds; adjust as desired
+    },
+    "custom/volume-icon": {
+      "tooltip": false,
+      "format": "<span font='12'>{}</span>",
+      "exec": "~/.config/waybar/scripts/widgets/volume.sh icon",
+      "return-type": "json",
+      "interval": 1,
+      "signal": 13,
+    },
+    "custom/volume": {
+      "format": "{}",
+      "exec": "~/.config/waybar/scripts/widgets/volume.sh",
+      "return-type": "json",
+      "interval": 1, // execute script every n seconds; adjust as desired
+    },
+    "custom/ram-icon": {
+      "tooltip": false,
+      "format": "<span font='12'>{}</span>",
+      "exec": "~/.config/waybar/scripts/widgets/mem.sh icon",
+      "return-type": "json",
+      "interval": 1,
+      "signal": 13,
+    },
+    "custom/ram": {
+      "format": "{}",
+      "exec": "~/.config/waybar/scripts/widgets/mem.sh",
+      "return-type": "json",
+      "interval": 1, // execute script every n seconds; adjust as desired
+    },
+    "custom/cpu-icon": {
+      "tooltip": false,
+      "format": "<span font='12'>{}</span>",
+      "exec": "~/.config/waybar/scripts/widgets/cpu.sh icon",
+      "return-type": "json",
+      "signal": 12,
+    },
+    "cpu": {
+      "format": "{usage}",
+      "interval": 1,
+      "states": {
+        "normal": 0,
+        "warning": 60,
+        "critical": 90
+      },
+    },
+    "custom/cpu": {
+      "format": "%{}",
+      "exec": "~/.config/waybar/scripts/widgets/cpu.sh",
+      "return-type": "json",
+      "signal": 12,
+      "interval": 1, // execute script every n seconds; adjust as desired
+    },
+    "custom/disk-root": {
+      "tooltip": false,
+      "format": "<span font='12'></span>"
+    },
+    "disk": {
+      "interval": 30,
+      "format": "{percentage_free}%",
+      "path": "/"
+    },
+    "custom/disk-home": {
+      "tooltip": false,
+      "format": ""
+    },
+    "disk#home": {
+      "interval": 30,
+      "format": "{percentage_free}%",
+      "path": "/home"
+    },
+}
