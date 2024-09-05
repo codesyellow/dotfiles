@@ -4,6 +4,7 @@ times=0
 seconds=0
 wait=0
 stretch_path="/tmp/stretch"
+stretch_start="/tmp/stretch_start"
 
 display_help() {
   echo "options:
@@ -47,18 +48,44 @@ if [[ "$@" == "" ]]; then
   exit 1
 fi
 
+if [[ -f "$stretch_path" ]]; then
+  echo "Its already running!"
+  notify-send "Already running!"
+  exit 1
+fi
+
+realtime=$times
+
 while [[ "$times" -ge 0 ]]; do
+  if [[ "$times" == "$realtime" ]]; then
+    paplay ~/.audios/stretch_start.wav
+    touch "$stretch_start"
+    echo "get ready!"
+    sleep 3
+  fi
+
+  if [[ -f "$stretch_start" ]]; then
+    rm "$stretch_start"
+  fi
+
+  if [[ ! -f "$stretch_path" ]]; then
+    touch "$stretch_path"
+  fi
+
   if [[ "$times" == 0 ]]; then
     paplay ~/.audios/stretch_ended.wav
-    break
+    rm "$stretch_path"
     notify-send -u critical "Stretch ended!"
+    break
   else
-    paplay ~/.audios/stretch_start.wav
+    paplay ~/Downloads/pickup-sound-46472.mp3
     sleep $seconds
     if [[ -n "$wait" ]] && [[ ! "$times" == 1 ]]; then
+      touch "/tmp/stop"
       echo "Stop!!"
       paplay ~/.audios/stretch_breaks.mp3
       sleep $wait
+      rm "/tmp/stop"
     fi
   fi
 

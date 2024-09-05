@@ -6,6 +6,21 @@ break_out=false
 pomodoro_path="/tmp/pomodoro_time"
 free_time=false
 
+notify-pymor() {
+  local arg="$1"
+  if [[ "$2" == "critical" ]]; then
+    notify-send -i ~/.local/share/icons/pomodoro_${arg}_32.png -u critical --replace-id=10 "$3"
+  else
+    notify-send -i ~/.local/share/icons/pomodoro_${arg}_32.png --replace-id=10 "$2"
+  fi
+}
+
+if [[ -f "$pomodoro_path" ]]; then
+  echo "Pymor is still running in the background. Close it or wait until is finishes before starting a new process."
+  notify-pymor "start" "Pymor is running!"
+  exit 1
+fi
+
 display_help() {
   echo "options:
   -h, --help  show this help message and exit
@@ -42,15 +57,6 @@ while getopts ":t:f:c:h" opt; do
     ;;
   esac
 done
-
-notify-pymor() {
-  local arg="$1"
-  if [[ "$2" == "critical" ]]; then
-    notify-send -i ~/.local/share/icons/pomodoro_${arg}_32.png -u critical --replace-id=10 "$3"
-  else
-    notify-send -i ~/.local/share/icons/pomodoro_${arg}_32.png --replace-id=10 "$2"
-  fi
-}
 
 if [[ "$pomodoro_time" == "0" ]]; then
   pomodoro_time=25

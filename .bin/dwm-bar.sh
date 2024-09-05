@@ -171,11 +171,15 @@ update_easyeffects_status() {
 }
 
 update_server_info() {
-  server_info=$(</tmp/map_display)
   server_status="/tmp/disable_server_info"
-  
-  if [[ ! -f $server_status ]]; then
-    server=" $nm| $server_info"
+
+  if [[ -f "/tmp/dustbowl_count" ]] || [[ -f "/tmp/turbine_count" ]] || [[ -f "/tmp/badwater_count" ]]; then
+    server_info=$(</tmp/map_display)
+    if [[ ! -f $server_status ]]; then
+      server=" $nm| $server_info"
+    else
+      server=""
+    fi
   else
     server=""
   fi
@@ -195,15 +199,18 @@ update_santosfc() {
 }
 
 update_climate () {
-climate_num=$(</tmp/climate)
-
-if [[ "$climate_num" -ge 30 ]]; then
+if [[ -f "/tmp/climate" ]]; then
+  climate_num=$(</tmp/climate)
+  if [[ "$climate_num" -ge 30 ]]; then
     climate=" $nm|  $climate_num"
   elif [[ "$climate_num" -le 20 ]]; then
     climate=" $nm|  $climate_num"
   else
     climate=" $nm|  $climate_num"
   fi
+else
+  climate=" $nm|  X"
+fi
 }
 
 update_key_variant() {
@@ -212,6 +219,21 @@ update_key_variant() {
     variant=" |$wn  INTL" 
   else
     variant=" |$nm  US"
+  fi
+}
+
+update_stretch() {
+  if [[ -f "/tmp/stretch" ]]; then
+    if [[ -f "/tmp/stretch_start" ]]; then
+      stretch=" |$wn GET READY!"
+    fi
+    if [[ -f "/tmp/stop" ]]; then
+      stretch=" |$al STOP!"
+    else
+      stretch=" |$wn DO IT!!!"
+    fi 
+  else
+    stretch=""
   fi
 }
 
@@ -232,7 +254,7 @@ update_vol
 update_updates
 
 display() {
-  xsetroot -name "$easyeffects$pymor$smatch$variant$climate$server$updates$ds4_status$vol$cpu_temp$cpu$memory$disk$time "
+  xsetroot -name "$easyeffects$stretch$pymor$smatch$variant$climate$server$updates$ds4_status$vol$cpu_temp$cpu$memory$disk$time "
 }
 
 # signals for each module to update while updating display
@@ -244,6 +266,7 @@ while true; do
   # Update sections
   [ $((sec % 5)) -eq 0 ] && update_time
   [ $((sec % 1)) -eq 0 ] && update_pomodoro
+  [ $((sec % 1)) -eq 0 ] && update_stretch
   [ $((sec % 5)) -eq 0 ] && update_easyeffects_status
   [ $((sec % 5)) -eq 0 ] && update_santosfc
   [ $((sec % 3)) -eq 0 ] && update_key_variant
