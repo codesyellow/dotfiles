@@ -17,7 +17,8 @@ static const char *fonts[]          = {
   "JetBrainMono Nerd Font",
   "Font Awesome 6 Free Solid:size=11",
 };
-static const char dmenufont[] = "JetBrainMono Nerd Font:size=12";
+static const char dmenufont[] = "JetBrainMono Nerd Font:size=14";
+static const char prompt_icon[] = "";
 static const char bg1[]       = "#4c566a";
 static const char bg0[]       = "#2e3440";
 static const char fg0[]       = "#d8dee9";
@@ -61,6 +62,9 @@ static const Rule rules[] = {
   { "retroarch",   NULL,       NULL,       1 << 4,       0,           -1,    0,    50,50,500,500,        5},
   { "Lutris",   NULL,       NULL,       1 << 4,       0,           -1,    0,    50,50,500,500,        5},
   { NULL,  "youtube music",       NULL,       1 << 5,       0,           -1, 0,    50,50,500,500,        5},
+  // floating
+  { "h-m-m",   NULL,       NULL,       0,       1,           -1,    0,    180,134,1000,500,        bordersize},
+  // scratchpads
   { NULL,       NULL,   "scratchpad",   0,            1,           -1,   's', 80,50,1200,400,        bordersize,   },
   { NULL,       NULL,   "habits",   0,            1,           -1,   'h', 80,50,1200,400,        bordersize,   },
   { NULL,       NULL,   "task-tui",   0,            1,           -1,   't', 783,48,500,650,        bordersize,   },
@@ -68,14 +72,13 @@ static const Rule rules[] = {
   { NULL,       NULL,   "pulsemixer",   0,            1,           -1,   'p', 778,48,400,400,        bordersize,   },
   { NULL,       NULL,   "btop",   0,            1,           -1,   'b', 80,80,1200,600,        bordersize,   },
   { NULL,       NULL,   "bluetui",   0,            1,           -1,   'f', 80,80,1200,600,        bordersize,   },
-  { NULL,       NULL,   "sysmd",   0,            1,           -1,   'q', 80,80,1200,600,        bordersize,   },
   {"Galculator",       NULL,   NULL,   0,            1,           -1,   'g', 280,80,800,600,        bordersize,   },
   { NULL,       NULL,   "WhatsApp for Linux",   0,            1,           -1,   'w', 80,80,1200,600,        bordersize,   },
   { NULL,       NULL,   "Free Download Manager",   0,            1,           -1,   'd', 80,80,1200,600,        bordersize,   },
   { NULL,       NULL,   "notes",   0,            1,           -1,   'o', 80,50,1200,600,        bordersize,   },
   { NULL,       NULL,   "tt",   0,            1,           -1,   'e', 80,50,1200,600,        bordersize,   },
   { NULL,       NULL,   "Exercise Timer",   0,            1,           -1,   'z', 500,50,400,400,        bordersize,   },
-  { NULL,       NULL,   "clock",   0,            1,           -1,   'c', 500,50,400,400,        bordersize,   },
+  { NULL,       NULL,   "clock",   0,            1,           -1,   'c', 555,184,400,250,        bordersize,   },
   { "trayer",       NULL,   "panel",   0,            1,           -1,   'q', 500,50,400,400,        bordersize,   },
 };
 
@@ -129,24 +132,25 @@ static const char *monocles[] = { "" };
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-nb", bg0, "-z", "450", "-x", "250", "-y", "2", "-sb", bg0, "-shb", bg0, "-nhb", bg0, "-shf", light,"-nhf",border,"-fn", dmenufont, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-nb", bg0, "-z", "450", "-x", "230", "-y", "0", "-sb", bg0, "-shb", bg0, "-nhb", bg0, "-shf", light,"-nhf",border,"-fn", dmenufont, "-p", prompt_icon, NULL };
 static const char *dmenumpv[] = { "mpvtube.sh", NULL };
 static const char *clipmenucmd[] = { "clipmenu", "-z", "700", "-x", "230", "-y", "4", "-nb", bg0, NULL };
 static const char *bass[] = { "easy_preset.sh", "HeavyBass", NULL};
 static const char *loudness[] = { "easy_preset.sh", "LoudnessEqualizer", NULL};
 static const char *termcmd[]  = { "st", NULL };
-static const char *pymors[]  = { "pymor", NULL };
-static const char *pymorl[]  = { "pymor", "-l", "3", NULL };
+static const char *pymors[]  = { "pymor", "-t", "20", NULL };
+static const char *pymorl[]  = { "pymor", "-t", "20", "-f", "3", NULL };
 static const char *pymorc[]  = { "pymor", "-c", NULL };
 static const char *dunst[]  = { "dunstctl", "close-all", NULL };
 static const char *rotatemouse[]  = { "360.sh", "99", NULL };
 static const char *volup[]  = { "volume.sh", "up", NULL };
 static const char *borderless[]  = { "borderless.sh",  NULL };
+static const char *browser[]  = { "flatpak", "run", "io.github.zen_browser.zen",  NULL };
+static const char *mindmap[] = {  "maps.sh", NULL };
 /*First arg only serves to match against key in rules*/
 static const char *scratchpadcmd[] = {"s", "alacritty", "--class", "scratchpad", "-t", "scratchpad", NULL}; 
 static const char *scratchpadclock[] = TERM_CMD("c", "clock", "tclock_timer.sh");
 static const char *scratchpadblue[] = TERM_CMD("f", "bluetui", "bluetui");
-static const char *scratchpadsymd[] = TERM_CMD("q", "sysmd", "systemctl-tui");
 static const char *scratchpadhabit[] = TERM_CMD("h", "habits", "nvim", "/home/cie/.vimwiki/habit.wiki");
 //static const char *scratchpadnotes[] = TERM_CMD("o", "notes", "nvim", "/home/cie/.vimwiki/index.md");
 static const char *scratchpadnotes[] = {"o", "st", "-t", "notes", "-e", "nvim", "-c", "Neorg workspace notes", NULL}; 
@@ -189,13 +193,14 @@ static Keychord *keychords[] = {
   SCRATCHS(m, scratchpadbtop)
   SCRATCHS(g, scratchpadcalc)
   SCRATCHS(b, scratchpadblue)
-  SCRATCHS(y, scratchpadsymd)
   // exec
   EXECS(r, dmenucmd)
+  EXECS(b, browser)
   EXECS(h, clipmenucmd)
-  EXECS(m, rotatemouse)
+  EXECS(s, rotatemouse)
   EXECS(v, dmenumpv)
   EXECS(n, dunst)
+  EXECS(m, mindmap)
   STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
 
