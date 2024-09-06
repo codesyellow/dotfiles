@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-
 current_hour=$(date +%H)
-if [[ $current_hour -lt 5 || $current_hour -ge 22 ]]; then
+
+if ((current_hour < 5 || current_hour >= 22)); then
   disable="/tmp/disable_server_info"
-  if [[ ! -f "$disable_server_info" ]]; then
+  if [[ ! -f "$disable" ]]; then
     touch "$disable"
   fi
   echo "It will not fetch data since it's past 22"

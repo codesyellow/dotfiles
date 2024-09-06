@@ -1,9 +1,9 @@
 [Unit]
-Description=A service unit to manage xremap
+Description=A service to handle the keyd application mapper
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/xremap /home/cie/.config/xremap/config.yml
+ExecStart=/usr/bin/keyd-application-mapper
 
 [Install]
 WantedBy=multi-user.target

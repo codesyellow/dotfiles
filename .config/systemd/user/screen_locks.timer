@@ -1,0 +1,11 @@
+[Unit]
+Description=A timer unit to run the service at boot
+
+[Timer]
+OnCalendar=*-*-* 5:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+
+

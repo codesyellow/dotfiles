@@ -1,0 +1,9 @@
+[Unit]
+Description=A script to check if the current window show be move to the gaming workspace
+
+[Service]
+Type=simple
+ExecStart=/home/cie/.config/systemd/user/scripts/game_to_workspace.sh
+
+[Install]
+WantedBy=timers.target
