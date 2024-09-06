@@ -1,20 +1,35 @@
 modmap:
-  - name: Except Chrome
+  - name: limbo
     application:
-      not: Google-chrome
+      only: limbo
+    remap:
+      E: UP
+      S: LEFT
+      D: DOWN
+      F: RIGHT
+      J: LEFTCTRL
+      SPACE: UP
+      BTN_LEFT: LEFTCTRL
+  
+  - name: Global
     remap:
       Alt_R: Super_L
       Capslock:
         held: Super_L # Required, also accepts arrays
         alone: Esc # Required, also accepts arrays
+  - name: Warband
+    application:
+      only: mb_warband_linux
+    remap:
+      BTN_SIDE: f10
+      BTN_EXTRA: f11
+
 keymap:
   - name: firefox
     application:
       only: firefox
     remap:
-      Super-p: C-Shift-tab
-      Super-n: C-tab
-      Super-d: C-w
-      Super-k: up
-      Super-j: down
-
+      Super_L-k: C-Shift-tab
+      Super_l-j: C-tab
+  
+  
