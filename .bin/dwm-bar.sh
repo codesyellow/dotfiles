@@ -216,21 +216,21 @@ fi
 update_key_variant() {
   key_variant=$(xkb-switch -p)
   if [[ "$key_variant" == "us(intl)" ]]; then
-    variant=" |$wn  INTL" 
+    variant=" $nn|$wn  INTL" 
   else
-    variant=" |$nm  US"
+    variant=" $nm|$nm  US"
   fi
 }
 
 update_stretch() {
   if [[ -f "/tmp/stretch" ]]; then
     if [[ -f "/tmp/stretch_start" ]]; then
-      stretch=" |$wn GET READY!"
+      stretch=" $nm|$wn GET READY!"
     fi
     if [[ -f "/tmp/stop" ]]; then
-      stretch=" |$al STOP!"
+      stretch=" $nm|$al STOP!"
     else
-      stretch=" |$wn DO IT!!!"
+      stretch=" $nm|$wn DO IT!!!"
     fi 
   else
     stretch=""
