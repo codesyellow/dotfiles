@@ -32,7 +32,7 @@ static const char *colors[][3]= {
 };
 
 /* tagging */
-static const char *tags[] = { "", " ", "", "", "", "" };
+static char *tags[] = { "", " ", "", "", "", "" };
 static const int taglayouts[] = { 2, 2, 3, 2, 2, 2, };
 
 static const Rule rules[] = {
@@ -138,12 +138,13 @@ static const char *clipmenucmd[] = { "clipmenu", "-z", "700", "-x", "230", "-y",
 static const char *bass[] = { "easy_preset.sh", "HeavyBass", NULL};
 static const char *loudness[] = { "easy_preset.sh", "LoudnessEqualizer", NULL};
 static const char *termcmd[]  = { "st", NULL };
+static const char *game_to_list[]  = { "game_to_list.sh", NULL };
 static const char *pymors[]  = { "pymor", "-t", "20", NULL };
 static const char *pymorl[]  = { "pymor", "-t", "20", "-f", "3", NULL };
 static const char *pymorc[]  = { "pymor", "-c", NULL };
+static const char *stretch[]  = { "stretch", "-t", "15", "-s", "12", "-w", "3", NULL };
 static const char *dunst[]  = { "dunstctl", "close-all", NULL };
 static const char *rotatemouse[]  = { "360.sh", "99", NULL };
-static const char *volup[]  = { "volume.sh", "up", NULL };
 static const char *borderless[]  = { "borderless.sh",  NULL };
 static const char *browser[]  = { "flatpak", "run", "io.github.zen_browser.zen",  NULL };
 static const char *mindmap[] = {  "maps.sh", NULL };
@@ -158,9 +159,8 @@ static const char *scratchpadbtop[] = TERM_CMD("b", "btop", "btop");
 static const char *scratchpadtask[] = TERM_CMD("t", "task-tui", "/usr/bin/taskwarrior-tui");
 static const char *scratchpadmixer[] = TERM_CMD("p", "pulsemixer", "pulsemixer");
 static const char *scratchpadtt[] = TERM_CMD("e", "tt", "tt");
-static const char *scratchpadai[] = {"a", "st", "-t", "ai", "-e", "aichat", NULL}; 
+static const char *scratchpadai[] = {"a", "st", "-t", "ai", "-c","aichat", "-e", "aichat", NULL}; 
 static const char *scratchfdm[] = {"d", "fdm", NULL}; 
-static const char *scratchpadstretch[] = {"z", "flatpak", "run", "xyz.safeworlds.hiit", NULL}; 
 static const char *scratchpadcalc[] = {"g", "galculator", NULL}; 
 static const char *scratchpadzap[] = {"w", "flatpak", "run", "com.github.eneshecan.WhatsAppForLinux", NULL}; 
 static const char *scratchpadtrayer[] = {"q", "trayer", "--widthtype", "pixel", "--transparent", "true", "--alpha", "255", "--distance", "10", NULL}; 
@@ -183,7 +183,6 @@ static Keychord *keychords[] = {
   SCRATCHS(t, scratchpadtask)
   SCRATCHS(r, scratchpadclock)
   SCRATCHS(s, scratchpadtrayer)
-  SCRATCHS(l, scratchpadstretch)
   SCRATCHS(i, scratchpadai)
   SCRATCHS(k, scratchpadtt)
   SCRATCHS(h, scratchpadhabit)
@@ -201,6 +200,8 @@ static Keychord *keychords[] = {
   EXECS(v, dmenumpv)
   EXECS(n, dunst)
   EXECS(m, mindmap)
+  EXECS(g, game_to_list)
+  EXECS(t, stretch)
   STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
 
