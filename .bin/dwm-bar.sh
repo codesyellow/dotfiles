@@ -122,7 +122,7 @@ update_memory() {
 }
 
 update_time() {
-  current_time="$(date "+%a %d - %H:%M")"
+  current_time="$(date "+%H:%M | %d | %a")"
   time=" $nm| $nm$date_icon $nm$current_time"
 }
 
@@ -225,12 +225,12 @@ update_key_variant() {
 update_stretch() {
   if [[ -f "/tmp/stretch" ]]; then
     if [[ -f "/tmp/stretch_start" ]]; then
-      stretch=" $nm|$wn GET READY!"
+      stretch=" $nm|$wn  GET READY!"
     fi
     if [[ -f "/tmp/stop" ]]; then
-      stretch=" $nm|$al STOP!"
+      stretch=" $nm|$al  STOP!"
     else
-      stretch=" $nm|$wn DO IT!!!"
+      stretch=" $nm|$wn  DO IT!!"
     fi 
   else
     stretch=""
