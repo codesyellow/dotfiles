@@ -1,10 +1,36 @@
---- dmenu.c	2022-10-04 10:36:58.000000000 -0700
-+++ dmenu.c	2024-03-23 19:39:53.173081139 -0700
-@@ -714,6 +717,7 @@
- usage(void)
- {
- 	die("usage: dmenu [-bfiv] [-l lines] [-p prompt] [-fn font] [-m monitor]\n"
-+	      "             [-x xoffset] [-y yoffset] [-z width]\n"
- 	    "             [-nb color] [-nf color] [-sb color] [-sf color] [-w windowid]");
- }
+--- dmenu.c
++++ dmenu.c
+@@ -53,16 +49,10 @@ static XIC xic;
+ static Drw *drw;
+ static Clr *scheme[SchemeLast];
+ 
+-static int useargb = 0;
+-static Visual *visual;
+-static int depth;
+-static Colormap cmap;
+-
+ #include "config.h"
+ 
+ static int (*fstrncmp)(const char *, const char *, size_t) = strncmp;
+ static char *(*fstrstr)(const char *, const char *) = strstr;
+-static void xinitvisual();
+ 
+ static unsigned int
+ textw_clamp(const char *str, unsigned int n)
+@@ -688,13 +678,11 @@ setup(void)
+ 
+ 	/* create menu window */
+ 	swa.override_redirect = True;
+-	swa.background_pixel = 0;
+-	swa.border_pixel = 0;
+-	swa.colormap = cmap;
++	swa.background_pixel = scheme[SchemeNorm][ColBg].pixel;
+ 	swa.event_mask = ExposureMask | KeyPressMask | VisibilityChangeMask;
+ 	win = XCreateWindow(dpy, parentwin, x, y, mw, mh, 0,
+-	                    depth, CopyFromParent, visual,
+-	                    CWOverrideRedirect | CWBackPixel | CWBorderPixel | CWColormap | CWEventMask, &swa);
++	                    CopyFromParent, CopyFromParent, CopyFromParent,
++	                    CWOverrideRedirect | CWBackPixel | CWEventMask, &swa);
+ 	XSetClassHint(dpy, win, &ch);
+ 
  
