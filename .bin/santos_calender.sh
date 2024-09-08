@@ -66,10 +66,6 @@ if [[ -n $match_hour ]] && [[ -n $match_teams ]]; then
       break
     fi
 
-    if ! [[ -f "$notify_state_path" ]]; then
-      notify_prior $match_hour
-    fi
-
     if [[ -f "/tmp/matchup" ]]; then
       rm "/tmp/matchup"
     fi
