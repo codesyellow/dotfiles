@@ -1,7 +1,5 @@
 #!/bin/bash
-xremap ~/.config/xremap/config.yml &
-swww-daemon &
-waybar &
+swaybg -i ~/.wallpapers/ign-0011.png &
 pypr &
 paplay ~/.audios/retro-audio-logo-94648.mp3 &
 systemctl --user import-environment PATH &
@@ -9,10 +7,6 @@ dunst &
 wl-paste -pw wl-copy &
 /usr/lib/polkit-kde-authentication-agent-1 &
 swayosd-server &
-blueman-applet &
 ianny &
 #jamesdsp -t &
 clipse -listen &
-ds4_controller.sh &
-pactl load-module module-switch-on-connect &
-sleep 5 && easyeffects --gapplication-service &

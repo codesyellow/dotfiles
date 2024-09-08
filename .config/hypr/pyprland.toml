@@ -4,9 +4,9 @@ plugins = [
 ]
 [scratchpads.term]
 animation = "fromTop"
-command = "alacritty --class alacritty-dropterm"
-size = "75% 60%"
-margin = 50
+command = "alacritty --class alacritty-dropterm --config-file ~/.config/alacritty/scratchpad.toml"
+size = "75% 40%"
+margin = 40
 
 [scratchpads.whats]
 animation = "fromTop"
@@ -20,19 +20,11 @@ lazy = true
 
 [scratchpads.calc]
 animation = "fromTop"
-command = "galculator"
-class = "galculator"
+command = "foot -T bc -a bc -e bc"
+class = "bc"
 size = "70% 80%"
 process_tracking = false
 class_match = true
-unfocus = "hide"
-lazy = true
-
-[scratchpads.todo]
-animation = "fromRight"
-command = "kuro"
-class = "Kuro"
-size = "40% 90%"
 unfocus = "hide"
 lazy = true
 
@@ -69,32 +61,16 @@ position = "65% 5%"
 unfocus = "hide"
 lazy = true
 
-[scratchpads.stretch]
-animation = "fromTop"
-command = "flatpak run xyz.safeworlds.hiit"
-class = "hiit"
-size = "40% 50%"
-unfocus = "hide"
-process_tracking = false
-class_match = true
-lazy = true
-
-[scratchpads.canki]
-animation = "fromTop"
-command = "alacritty -T canki -e ~/.bin/canki.sh"
-size = "75% 60%"
-margin = 50
-
 [scratchpads.habit]
 animation = "fromLeft"
-command = "foot -T habit -a habit -e nvim ~/.vimwiki/habit.wiki"
+command = "foot -T habit -a habit -e vim ~/.vimwiki/habit.wiki"
 class = "habit"
 size = "60% 60%"
 margin = 50
 
 [scratchpads.notes]
 animation = "fromTop"
-command = "foot -T notes -a notes -e nvim ~/.vimwiki/index.md"
+command = "foot -T notes -a notes -e vim ~/.vimwiki/index.wiki"
 class = "notes"
 size = "75% 60%"
 margin = 50
@@ -105,21 +81,6 @@ unfocus = "hide"
 margin = 100
 size = "90% 80%"
 position = "5% 10%"
-animation = "fromTop"
-
-[scratchpads.bluetui]
-command = "foot -a bluetui -e bluetui"
-unfocus = "hide"
-margin = 100
-size = "90% 80%"
-position = "5% 10%"
-animation = "fromTop"
-
-[scratchpads.tt]
-command = "foot -a tt -e tt"
-unfocus = "hide"
-margin = 100
-size = "70% 60%"
 animation = "fromTop"
 
 [scratchpads.yazi]
