@@ -49,11 +49,12 @@ set report      =0         " Always report changed lines.
 set synmaxcol   =200       " Only highlight the first 200 columns.
 
 let mapleader = " " 
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <leader>n :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
-nnoremap <C-f> :<CR>
-" Configuration example
+nnoremap <leader>nn :NERDTree<CR>
+nnoremap <leader>nt :NERDTreeToggle<CR>
+nnoremap <leader>nf :NERDTreeFind<CR>
+nnoremap <leader>bp :bp<CR>
+nnoremap <leader>bn :bn<CR>
+
 let g:floaterm_keymap_new    = '<leader>tc'
 let g:floaterm_keymap_prev   = '<leader>tn'
 let g:floaterm_keymap_next   = '<leader>tp'
