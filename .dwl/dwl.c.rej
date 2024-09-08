@@ -1,11 +1,13 @@
 --- dwl.c
 +++ dwl.c
-@@ -348,6 +349,8 @@ static Monitor *xytomon(double x, double y);
- static void xytonode(double x, double y, struct wlr_surface **psurface,
- 		Client **pc, LayerSurface **pl, double *nx, double *ny);
- static void zoom(const Arg *arg);
-+static void bstack(Monitor *m);
-+static void bstackhoriz(Monitor *m);
+@@ -230,6 +230,10 @@ typedef struct {
+ 	uint32_t tags;
+ 	int isfloating;
+ 	int monitor;
++	int x;
++	int y;
++	float w;
++	float h;
+ } Rule;
  
- /* variables */
- static const char broken[] = "broken";
+ typedef struct {
