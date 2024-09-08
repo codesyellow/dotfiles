@@ -40,24 +40,24 @@
     "custom/separator-pymor": {
       "exec-if": "test -f /tmp/pomodoro_time",
       "exec": "/home/cie/.config/waybar/scripts/icon_retrieve.sh",
-      "interval": 1,
+      "interval": 2,
       "format":" | "
     },
     "custom/pymor": {
       "exec": "/home/cie/.config/waybar/scripts/pymor.sh",
-      "interval": 1,
+      "interval": 2,
       "return-type": "json",
       "tooltip": false
     },
     "custom/separator-santos": {
       "exec-if": "test -f /tmp/santosmatch",
       "exec": "/home/cie/.config/waybar/scripts/icon_retrieve.sh",
-      "interval": 1,
+      "interval": 60,
       "format":" | "
     },
     "custom/santos": {
       "exec": "/home/cie/.config/waybar/scripts/santos_match.sh",
-      "interval": 5,
+      "interval": 60,
       "return-type": "json",
       "tooltip": false
     },
@@ -70,19 +70,19 @@
     "custom/separator-climate": {
       "exec-if": "test -f /tmp/climate",
       "exec": "/home/cie/.config/waybar/scripts/icon_retrieve.sh",
-      "interval": 1,
+      "interval": 1800,
       "format":" | "
     },
     "custom/climate": {
       "exec": "/home/cie/.config/waybar/scripts/climate.sh",
-      "interval": 10,
+      "interval": 1800,
       "return-type": "json",
       "tooltip": false
     },
     "custom/separator-server": {
       "exec-if": "/home/cie/.config/waybar/scripts/icon_retrieve.sh server",
       "exec": "/home/cie/.config/waybar/scripts/icon_retrieve.sh",
-      "interval": 1,
+      "interval": 60,
       "format":" | "
     },
     "custom/server": {
@@ -99,7 +99,7 @@
     },
     "custom/ds4": {
       "exec": "/home/cie/.config/waybar/scripts/ds4.sh",
-      "interval": 10,
+      "interval": 60,
       "return-type": "json",
       "tooltip": true
     },
@@ -128,9 +128,9 @@
       "on-click": "pavucontrol",
       "ignored-sinks": ["Easy Effects Sink"]
     },
-    
     "custom/separator": {
-      "format":"|"
+      "format":"|",
+      "interval": 3600
     },
     "cpu": {
       "interval": 2,
@@ -145,7 +145,8 @@
       // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
       "critical-threshold": 80,
       // "format-critical": "{temperatureC}°C ",
-      "format": " {temperatureC}°"
+      "format": " {temperatureC}°",
+      "interval": 20
     },
     "memory": {
       "interval": 30,
@@ -156,7 +157,7 @@
       }
     },
     "disk": {
-      "interval": 30,
+      "interval": 60,
       "format": " {percentage_used}% ",
       "path": "/",
       "states": {

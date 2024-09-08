@@ -1,7 +1,6 @@
 #!/bin/bash
 
-controller="" # Replace this with your desired controller icon
-
+controller=""
 ds4=$(dsbattery)
 
 if [[ -n "$ds4" ]]; then
@@ -42,5 +41,4 @@ else
   output="$controller "
 fi
 
-# Output in JSON format with class for Waybar state
 echo "{\"text\": \"$output\", \"tooltip\": \"DS4 Battery Status\", \"class\": \"$state\"}"

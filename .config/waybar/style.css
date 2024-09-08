@@ -81,8 +81,7 @@ window#waybar {
 #custom-updates.normal,
 #custom-pymor.normal,
 #custom-ds4.normal, 
-#cpu.normal,
-#disk.normal {
+#cpu.normal {
   color: @fg;
 }
 
@@ -94,8 +93,14 @@ window#waybar {
 #memory.warning,
 #cpu.warning,
 #pulseaudio.warning,
-#disk.warning {
+#disk.warning
+{
   color: @warning;
+}
+
+#cpu.warning,
+#disk.warning {
+  background-color: @bg;
 }
 
 #custom-variant.critical,

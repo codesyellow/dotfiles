@@ -1,9 +1,7 @@
 #/bin/bash
 
-server_info=$(</tmp/map_display)
-server_status="/tmp/disable_server_info"
-
-if [[ ! -f $server_status ]]; then
+if [[ ! -f "/tmp/disable_server_info" ]]; then
+  server_info=$(</tmp/map_display)
   output="$server_info"
 else
   output=""
