@@ -1,10 +1,24 @@
 sud=doas
 
 alias update-grub='$sud grub-mkconfig -o /boot/grub/grub.cfg'
-alias nvim='lvim'
 alias gtamod='~/.games/gta-sa/modloader/'
+function getInfo() {
+  xprop | awk '
+  /^WM_CLASS/{sub(/.* =/, "instance:"); sub(/,/, "\nclass:"); print}
+  /^WM_NAME/{sub(/.* =/, "title:"); print}'
+}
 
-alias change_title='xdotool selectwindow set_window --name "scratchpad"'
+
+alias change_title='xdotool selectwindow set_window --name "esdf"'
+alias change_class='xdotool selectwindow set_window --class "esdf"'
+
+alias lp='{(comm -23 <(yay -Qqe | sort) <({(pactree -u -d 1 base)&&(yay -Qqg base-devel);} | sort))&&(comm -23 <(yay -Qqtt | sort) <(yay -Qqt | sort));} | sort | uniq  | less'
+
+# systemctl
+alias syst="systemctl --user start"
+alias systt="systemctl --user status"
+alias sysp="systemctl --user stop"
+alias sysr="systemctl --user restart"
 
 # dotfiles
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
@@ -20,9 +34,9 @@ alias getWInfo='qtile cmd-obj -o cmd -f windows | less'
 alias search='pacman -Ss'
 alias lsm="exa -al --color=always --group-directories-first --icons"
 alias ls="exa --icons"
-alias up='$sud pacman -Syu && gopreload-batch-refresh.sh'
+alias up='yay && kill -31 $(cat ~/.cache/pidofbar)'
 alias i='doas pacman -S'
-alias r='$sud pacman -Rs'
+alias r='doas pacman -Rs'
 alias orphans='$sud pacman -Qtdq | $sud pacman -Rns -'
 
 # make
