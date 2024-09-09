@@ -21,16 +21,20 @@ cpu_temp_high=
 controller=
 
 update_cpu() {
-  cpu_usage=$(printf "%b" "import psutil\nprint(int(psutil.cpu_percent(interval=2)))" | python3)
+  cpu_usage=$(top -bn2 | grep "Cpu(s)" | awk 'NR==2 {print 100 - $8}')
 
-  if [[ $cpu_usage -ge 80 ]]; then
-    cpu=" $nm| $al$cpu_icon $cpu_usage%"
-  elif [[ $cpu_usage -ge 60 ]] && [[ $cpu_usage -le 79 ]]; then
-    cpu=" $nm| $wn$cpu_icon $cpu_usage%"
+  # Round to nearest integer
+  cpu_usage_int=$(printf "%.0f" "$cpu_usage")
+
+  if [[ $cpu_usage_int -ge 80 ]]; then
+    cpu=" $nm| $al$cpu_icon $cpu_usage_int%"
+  elif [[ $cpu_usage_int -ge 60 ]] && [[ $cpu_usage_int -le 79 ]]; then
+    cpu=" $nm| $wn$cpu_icon $cpu_usage_int%"
   else
-    cpu=" $nm| $nm$cpu_icon $cpu_usage%"
+    cpu=" $nm| $nm$cpu_icon $cpu_usage_int%"
   fi
 }
+
 
 update_pomodoro() {
   pomodoro="/tmp/pomodoro_time"
@@ -74,38 +78,26 @@ update_disk() {
 update_ds4() {
   ds4=$(dsbattery)
   if [[ -n "$ds4" ]]; then
-    if ! [[ -f "/tmp/ds4_active" ]]; then
-      touch "/tmp/ds4_active"
-    fi
-
+    ds4_charging="false"
+    ds4_status=""
     if [[ "$ds4" == *"↑"* ]]; then
-      if ! [[ -f "/tmp/ds4_charging" ]]; then
-        touch "/tmp/ds4_charging"
-      fi
+      ds4_charging="true"
+      ds4_status=" $nm| $wn$controller  "
     else
-      if [[ -f "/tmp/ds4_charging" ]]; then
-        rm "/tmp/ds4_charging"
-      fi
       ds4_bat=$(echo "$ds4" | grep -o '[0-9]*')
+      ds4_charging="false"
+      if [[ $ds4_bat -ge 51 && $ds4_bat -le 70 ]]; then
+        ds4_status=" $nm| $nm$controller  "
+      elif [[ $ds4_bat -le 50 && $ds4_bat -ge 30 ]]; then
+        ds4_status=" $nm| $wn$controller  "
+      elif [[ $ds4_bat -le 29 ]]; then
+        ds4_status=" $nm| $al$controller  "
+      else
+        ds4_status=" $nm| $nm$controller  "
+      fi
     fi
   else
-    if [[ -f "/tmp/ds4_active" ]]; then
-      rm "/tmp/ds4_active"
-    fi
-  fi
-
-  if ! [[ -f /tmp/ds4_active ]]; then
-    ds4_status=" $nm| $nm$controller "
-  elif [[ -f "/tmp/ds4_charging" ]]; then
-    ds4_status=" $nm| $wn$controller  "
-  elif [[ $ds4_bat -ge 51 && $ds4_bat -le 70 ]]; then
-    ds4_status=" $nm| $nm$controller  "
-  elif [[ $ds4_bat -le 50 && $ds4_bat -ge 30 ]]; then
-    ds4_status=" $nm| $wn$controller  "
-  elif [[ $ds4_bat -le 29 ]]; then
-    ds4_status=" $nm| $al$controller  "
-  else
-    ds4_status=" $nm| $nm$controller  "
+    ds4_status=""
   fi
 }
 
@@ -199,18 +191,20 @@ update_santosfc() {
 }
 
 update_climate () {
-if [[ -f "/tmp/climate" ]]; then
-  climate_num=$(</tmp/climate)
-  if [[ "$climate_num" -ge 30 ]]; then
-    climate=" $nm|  $climate_num"
-  elif [[ "$climate_num" -le 20 ]]; then
-    climate=" $nm|  $climate_num"
+  climate_num=$(curl -s "http://api.openweathermap.org/data/2.5/weather?lat=-23.963&lon=-46.3918&appid=2d6602a071d92529af1939b0152f5aba&units=metric" | jq '.main.temp | round')
+  climate=''
+
+  if [[ -n $climate_num ]]; then
+    if [[ "$climate_num" -ge 30 ]]; then
+      climate=" $nm|  $climate_num"
+    elif [[ "$climate_num" -le 20 ]]; then
+      climate=" $nm|  $climate_num"
+    else
+      climate=" $nm|  $climate_num"
+    fi
   else
-    climate=" $nm|  $climate_num"
+    climate=" $nm|  X"
   fi
-else
-  climate=" $nm|  X"
-fi
 }
 
 update_key_variant() {
@@ -270,7 +264,7 @@ while true; do
   [ $((sec % 5)) -eq 0 ] && update_easyeffects_status
   [ $((sec % 5)) -eq 0 ] && update_santosfc
   [ $((sec % 3)) -eq 0 ] && update_key_variant
-  [ $((sec % 30)) -eq 0 ] && update_climate
+  [ $((sec % 3600)) -eq 0 ] && update_climate
   [ $((sec % 10)) -eq 0 ] && update_ds4
   [ $((sec % 10)) -eq 0 ] && update_server_info
   [ $((sec % 10)) -eq 0 ] && update_disk
