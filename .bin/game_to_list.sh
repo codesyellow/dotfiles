@@ -22,7 +22,9 @@ done <"$game_list"
 
 if [[ $is_match == 'true' ]]; then
   echo "Name already exist, so it won't be added to the list."
+  notify-send "$game is already on the list, so it won't be added"
 else
   echo "Name $game wasn't in the list, so it wll be added to the list."
+  notify-send "$game was added to the list"
   echo "$game" >>"$game_list"
 fi
