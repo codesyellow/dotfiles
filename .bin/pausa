@@ -44,14 +44,10 @@ while getopts ":a:i:b:" opt; do
   esac
 done
 
-if [[ -z "$how_long" ]] || [[ -z "$inactive_counter" ]] || [[ -z "$break_counter" ]]; then
+if [[ "$how_long" == 0 ]] || [[ "$inactive_counter" == 0 ]] || [[ "$break_counter" == 0 ]]; then
   echo "All arguments are required. Use -h to see all the options"
-  echo "$how_long"
-  echo "$inactive_counter"
-  echo "$break_counter"
   exit 1
 fi
-
 
 notify() {
   notify-send -i ~/.local/share/icons/eye_${1}.png "$2"
@@ -64,7 +60,7 @@ while true; do
       inactive_counter=60
     fi
     if [[ "$active_counter" == "$how_long" ]]; then
-      notify "break" "Take a break"
+      notify "break" "Take a break!"
       sleep $break_counter
       active_counter=0
       notify "good" "Break ended!"
@@ -94,4 +90,3 @@ while true; do
  fi
   sleep 1
 done
-
