@@ -2,6 +2,7 @@
 pausa=$(ps -ef | grep 'bash' | grep 'pausa')
 dwm_bar=$(ps -ef | grep 'bash' | grep 'dwm-bar.sh')
 easy=$(ps -ef | grep 'bash' | grep 'easy_always.sh')
+server_count=$(ps -ef | grep 'bash' | grep 'tf2_server_count.sh')
 
 if [[ -z "$dwm_bar" ]]; then
   dwm-bar.sh &
@@ -13,6 +14,10 @@ fi
 
 if [[ -z "$easy" ]]; then
   easy_always.sh &
+fi
+
+if [[ -z "$server_count" ]]; then
+  tf2_server_count.sh &
 fi
 
 pamixer --set-volume 30 &
