@@ -1,3 +1,4 @@
+" Plugins
 call plug#begin()
 
 Plug 'vimwiki/vimwiki'
@@ -10,8 +11,14 @@ Plug 'mattn/emmet-vim'
 
 call plug#end()
 
-" defaults
+" Defaults
 set nocompatible
+set foldmethod=manual
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave * mkview
+  autocmd BufWinEnter * silent! loadview
+augroup END
 
 filetype plugin indent on  " Load plugins according to detected filetype.
 syntax on                  " Enable syntax highlighting.
@@ -36,25 +43,50 @@ set hlsearch               " Keep matches highlighted.
 set ttyfast                " Faster redrawing.
 set lazyredraw             " Only redraw when necessary.
 
+set scrolloff=10           " Make cursor not get close to the bottom
+
 set splitbelow             " Open new windows below the current window.
 set splitright             " Open new windows right of the current window.
 set laststatus=2
 set noshowmode
+set ignorecase             " match everything
+set nowrap
+set smartcase              " this override ignorecase and search, for example, for upper case only
+set showmatch
 
 set cursorline             " Find the current line quickly.
+set cursorcolumn
 set wrapscan               " Searches wrap around end-of-file.
 set report      =0         " Always report changed lines.
 set synmaxcol   =200       " Only highlight the first 200 columns.
 set termguicolors
+set history=1000
+colorscheme nord
+set number
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+augroup END
 
-set autochdir  " current dir will be cd by default
+
+" Enable auto completion menu after pressing TAB.
+set wildmenu
+
+" Make wildmenu behave like similar to Bash completion.
+set wildmode=list:longest
+
+" There are certain files that we would never want to edit with Vim.
+" Wildmenu will ignore files with these extensions.
+set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
 set colorcolumn=100
-hi ColorColumn ctermbg=lightcyan guibg=blue
+hi ColorColumn ctermbg=lightcyan guibg=gray
 " this will make sure .wiki files dont have the ruller
 autocmd BufRead,BufNewFile *.wiki set filetype=wiki
 autocmd FileType wiki setlocal colorcolumn=0
 
+" Netrw
 let g:netrw_keepdir = 0
 let g:netrw_winsize = 30
 let g:netrw_banner = 0
@@ -70,28 +102,15 @@ function! NetrwMapping()
   nmap <buffer> <Leader>dd :Lexplore<CR>
 endfunction
 
-colorscheme nord
+" General plugin config
 
-" this is for airline
+" Airline
 let g:airline_theme='nord_minimal'
 
 " this is for indentLine
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
-" binds
-let mapleader = " "
-nnoremap <leader>e :Lexplore<CR>
-nnoremap <leader>pi :IndentLinesToggle<CR>
-nnoremap <leader>vs :so %<CR>
-nnoremap <leader>ppu :PlugInstall<CR>
-nnoremap <leader>ppc :PlugClean<CR>
-nnoremap <leader>aq :q<CR>
-nnoremap <leader>aw :w<CR>
-nnoremap <leader>wl <C-w>l
-nnoremap <leader>wh <C-w>h
-nnoremap <leader>wj <C-w>j
-nnoremap <leader>wk <C-w>k
-
+" Emmet
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 
@@ -117,15 +136,22 @@ let g:user_emmet_settings = {
 \}
 let g:user_emmet_leader_key=','
 
-set number
+" Personal Binds
+let mapleader = " "
+nnoremap <leader>e :Lexplore<CR>
+nnoremap <leader>pi :IndentLinesToggle<CR>
+nnoremap <leader>vs :so %<CR>
+nnoremap <leader>ppu :PlugInstall<CR>
+nnoremap <leader>ppc :PlugClean<CR>
+nnoremap <leader>aq :q<CR>
+nnoremap <leader>aw :w<CR>
+nnoremap <leader>wl <C-w>l
+nnoremap <leader>wh <C-w>h
+nnoremap <leader>wj <C-w>j
+nnoremap <leader>wk <C-w>k
 
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
-  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
-augroup END
 
-" this is for coc
+" Coc stuff
 " https://raw.githubusercontent.com/neoclide/coc.nvim/master/doc/coc-example-config.vim
 
 " May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
