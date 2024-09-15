@@ -78,7 +78,7 @@ while [[ "$times" -ge 0 ]]; do
     notify-send -u critical "Stretch ended!"
     break
   else
-    paplay ~/Downloads/pickup-sound-46472.mp3
+    paplay ~/.audios/stretch_work.mp3
     sleep $seconds
     if [[ -n "$wait" ]] && [[ ! "$times" == 1 ]]; then
       touch "/tmp/stop"

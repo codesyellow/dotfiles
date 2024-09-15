@@ -263,7 +263,7 @@ while true; do
   [ $((sec % 1)) -eq 0 ] && update_stretch
   [ $((sec % 5)) -eq 0 ] && update_easyeffects_status
   [ $((sec % 5)) -eq 0 ] && update_santosfc
-  [ $((sec % 3)) -eq 0 ] && update_key_variant
+  [ $((sec % 2)) -eq 0 ] && update_key_variant
   [ $((sec % 3600)) -eq 0 ] && update_climate
   [ $((sec % 10)) -eq 0 ] && update_ds4
   [ $((sec % 10)) -eq 0 ] && update_server_info

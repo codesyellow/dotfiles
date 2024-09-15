@@ -45,12 +45,15 @@ while getopts ":a:i:b:" opt; do
 done
 
 if [[ "$how_long" == 0 ]] || [[ "$inactive_counter" == 0 ]] || [[ "$break_counter" == 0 ]]; then
-  echo "All arguments are required. Use -h to see all the options"
-  exit 1
+  echo "Default values will be used. If you want to change those values, use -h. 
+        All values are required!"
+  how_long=300
+  inactive_counter=60
+  break_counter=20
 fi
 
 notify() {
-  notify-send -i ~/.local/share/icons/eye_${1}.png "$2"
+  notify-send -t 1500 -i ~/.local/share/icons/eye_${1}.png "$2"
 }
 
 while true; do
@@ -61,6 +64,7 @@ while true; do
     fi
     if [[ "$active_counter" == "$how_long" ]]; then
       notify "break" "Take a break!"
+
       sleep $break_counter
       active_counter=0
       notify "good" "Break ended!"
