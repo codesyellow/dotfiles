@@ -52,6 +52,7 @@ if [[ "$how_long" == 0 ]] || [[ "$inactive_counter" == 0 ]] || [[ "$break_counte
   break_counter=20
 fi
 
+
 notify() {
   notify-send -t 1500 -i ~/.local/share/icons/eye_${1}.png "$2"
 }
@@ -64,7 +65,6 @@ while true; do
     fi
     if [[ "$active_counter" == "$how_long" ]]; then
       notify "break" "Take a break!"
-
       sleep $break_counter
       active_counter=0
       notify "good" "Break ended!"
