@@ -1,4 +1,18 @@
 #!/bin/sh
+
+# Check if the PID file exists and kill the process
+if [ -f ~/.cache/pidofbar ]; then
+    old_pid=$(cat ~/.cache/pidofbar)
+    if ps -p "$old_pid" > /dev/null; then
+        kill "$old_pid"
+    fi
+fi
+
+# Store the new PID
+printf "$$" >~/.cache/pidofbar
+
+# Your script content here
+
 exec 2>&1
 printf "$$" >~/.cache/pidofbar
 sec=0
