@@ -86,6 +86,7 @@ window#waybar {
 }
 
 #custom-easy.warning,
+#custom-stretch.warning,
 #custom-pymor.warning,
 #custom-ds4.charging,
 #custom-updates.warning,
@@ -99,11 +100,13 @@ window#waybar {
 }
 
 #cpu.warning,
+#custom-stretch,
 #disk.warning {
   background-color: @bg;
 }
 
 #custom-variant.critical,
+#custom-stretch.critical,
 #custom-easy.critical,
 #custom-updates.alert,
 #custom-ds4.alert
