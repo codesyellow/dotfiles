@@ -161,6 +161,8 @@ entry {
     background-color:            inherit;
     text-color:                  inherit;
     cursor:                      text;
+    cursor-width: 0;
+    blink: false;
     placeholder:                 "";
     placeholder-color:           inherit;
 }
