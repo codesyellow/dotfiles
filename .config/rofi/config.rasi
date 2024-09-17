@@ -19,19 +19,15 @@ configuration {
 	window-format:              "{w} · {c} · {t}";
 }
 
-/*****----- Global Properties -----*****/
-@import                          "shared/colors.rasi"
-@import                          "shared/fonts.rasi"
-
 * {
-    nord0:     #2e3440;
+    bg:     #2e3440;
     nord1:     #3b4252;
     nord2:     #434c5e;
     nord3:     #4c566a;
 
     nord4:     #d8dee9;
     nord5:     #e5e9f0;
-    nord6:     #eceff4;
+    fg:     #eceff4;
 
     nord7:     #8fbcbb;
     nord8:     #88c0d0;
@@ -50,23 +46,23 @@ configuration {
 
     border-colour:               #fff;
     handle-colour:               red;
-    background-colour:           @nord0;
-    foreground-colour:           #eceff4;
+    background-colour:           @bg;
+    foreground-colour:           @fg;
     alternate-background:        red;
-    normal-background:           @nord6;
-    normal-foreground:           @nord0;
-    urgent-background:           @nord6;
-    urgent-foreground:           @nord9;
-    active-background:           #fff;
-    active-foreground:           #fff;
-    selected-normal-background:  @nord0;
-    selected-normal-foreground:  @nord6;
+    normal-background:           @bg;
+    normal-foreground:           @fg;
+    urgent-background:           @fg;
+    urgent-foreground:           @bg;
+    active-background:           #444;
+    active-foreground:           #444;
+    selected-normal-background:  @bg;
+    selected-normal-foreground:  @nord13;
     selected-urgent-background:  red;
     selected-urgent-foreground:  red;
     selected-active-background:  red;
     selected-active-foreground:  red;
-    alternate-normal-background: @nord6;
-    alternate-normal-foreground: @nord0;
+    alternate-normal-background: @bg;
+    alternate-normal-foreground: @fg;
     alternate-urgent-background: red;
     alternate-urgent-foreground: red;
     alternate-active-background: red;
@@ -82,7 +78,7 @@ window {
     fullscreen:                  false;
     width:                       600px;
     height:                      23px;
-    x-offset:                    220px;
+    x-offset:                    210px;
     y-offset:                    -25px;
 
     children:                    [ horibox ];
