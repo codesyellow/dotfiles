@@ -66,12 +66,12 @@
     "custom/separator-stretch": {
       "exec-if": "test -f /tmp/stretch",
       "exec": "/home/cie/.config/waybar/scripts/icon_retrieve.sh",
-      "interval": 1,
+      "interval": 2,
       "format":" | "
     },
     "custom/stretch": {
       "exec": "/home/cie/.config/waybar/scripts/stretch.sh",
-      "interval": 1,
+      "interval": 2,
       "return-type": "json",
       "tooltip": false
     },
@@ -101,7 +101,7 @@
     },
     "custom/variant": {
       "exec": "/home/cie/.config/waybar/scripts/key_variant.sh",
-      "interval": 2,
+      "interval": 3,
       "return-type": "json",
       "tooltip": false
     },
@@ -127,7 +127,8 @@
       "exec": "/home/cie/.config/waybar/scripts/update.sh",
       "interval": 3600,
       "return-type": "json",
-      "tooltip": false
+      "tooltip": false,
+      "signal": 8
     },
     //"custom/ds4": {
     //  "exec": "/home/cie/.config/waybar/scripts/ds4.sh",

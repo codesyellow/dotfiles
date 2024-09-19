@@ -1,6 +1,7 @@
 @define-color fg #d8dee9;
 @define-color warning #36C2CE;
 @define-color bg #2e3440;
+@define-color bg1 #4c566a;
 @define-color critical #EF5A6F;
 @define-color button #36C2CE;
 @define-color inactive #d8dee9;
@@ -20,21 +21,25 @@ window#waybar {
 #workspaces button {
   border-radius: 0;
   margin-right: -4px;
-  color: @button;
+  color: @fg;
   background-color: @bg;
 }
 
 #workspaces button.empty {
-  color: @inactive;
+  color: @bg1;
 }
 
 #workspaces button:hover {
-  color: @hover;
+  color: @bg;
   background-color: @fg;
 }
 
 #workspaces button.active {
-  color: @active;
+  color: @warning;
+}
+
+#workspaces button.active:hover {
+  color: @bg;
 }
 
 #submap,
@@ -47,6 +52,14 @@ window#waybar {
   font-size: 14px;
 }
 
+/* default */
+#clock,
+#custom-easy,
+#custom-separator-stretch,
+#custom-separator-pymor,
+#custom-pymor,
+#custom-stretch,
+#custom-updates,
 #custom-santos,
 #custom-variant,
 #custom-climate,
@@ -56,18 +69,17 @@ window#waybar {
 #pulseaudio,
 #temperature,
 #custom-separator,
-#custom-separator-pymor,
 #custom-separator-server,
 #custom-separator-santos,
 #custom-separator-climate,
-#clock,
 #disk {
   color: @fg;
+  background-color: @bg;
 }
 
 /* submap */
 #submap {
-  color: @critical;
+  color: @warning;
   margin: 0 4px 0 10px;
   font-size: 13px;
 }
@@ -76,15 +88,7 @@ window#waybar {
   margin: 0 6px 0 6px;
 }
 
-/* Default state */
-#custom-easy.normal,
-#custom-updates.normal,
-#custom-pymor.normal,
-#custom-ds4.normal, 
-#cpu.normal {
-  color: @fg;
-}
-
+/* states */
 #custom-easy.warning,
 #custom-stretch.warning,
 #custom-pymor.warning,
@@ -99,17 +103,11 @@ window#waybar {
   color: @warning;
 }
 
-#cpu.warning,
-#custom-stretch,
-#disk.warning {
-  background-color: @bg;
-}
-
 #custom-variant.critical,
 #custom-stretch.critical,
 #custom-easy.critical,
 #custom-updates.alert,
-#custom-ds4.alert
+#custom-ds4.alert,
 #memory.critical,
 #cpu.critical,
 #pulseaudio.critical,
