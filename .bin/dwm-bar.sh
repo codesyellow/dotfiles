@@ -262,7 +262,7 @@ update_vol
 update_updates
 
 display() {
-  xsetroot -name "$easyeffects$stretch$pymor$smatch$variant$climate$server$updates$ds4_status$vol$cpu_temp$cpu$memory$disk$time "
+  xsetroot -name "$easyeffects$stretch$pymor$smatch$variant$climate$server$updates$vol$cpu_temp$cpu$memory$disk$time "
 }
 
 # signals for each module to update while updating display
@@ -279,7 +279,7 @@ while true; do
   [ $((sec % 5)) -eq 0 ] && update_santosfc
   [ $((sec % 2)) -eq 0 ] && update_key_variant
   [ $((sec % 3600)) -eq 0 ] && update_climate
-  [ $((sec % 10)) -eq 0 ] && update_ds4
+#  [ $((sec % 10)) -eq 0 ] && update_ds4
   [ $((sec % 10)) -eq 0 ] && update_server_info
   [ $((sec % 10)) -eq 0 ] && update_disk
   [ $((sec % 2)) -eq 0 ] && update_cpu

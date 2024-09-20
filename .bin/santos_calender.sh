@@ -31,7 +31,7 @@ if [[ -n $match_hour ]] && [[ -n $match_teams ]]; then
     actual_time=$(date +"%H:%M")
     game_hour_sec=$(date -d "$game_hour today" +"%s")
     actual_time_sec=$(date -d "$actual_time today" +"%s")
-    if [[ -f "/tmp/santos_pregame_hour" ]]; then
+    if [[ ! -f "/tmp/santos_pregame_hour" ]]; then
       echo "$match_hour" > "/tmp/santos_pregame_hour"
     fi
 
