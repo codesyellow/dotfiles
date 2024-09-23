@@ -13,12 +13,8 @@ call plug#end()
 
 " Defaults
 set nocompatible
+set clipboard=unnamedplus
 set foldmethod=manual
-augroup remember_folds
-  autocmd!
-  autocmd BufWinLeave * mkview
-  autocmd BufWinEnter * silent! loadview
-augroup END
 
 filetype plugin indent on  " Load plugins according to detected filetype.
 syntax on                  " Enable syntax highlighting.
@@ -81,7 +77,7 @@ set wildmode=list:longest
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
 set colorcolumn=100
-hi ColorColumn ctermbg=lightcyan guibg=gray
+hi ColorColumn ctermbg=lightcyan guibg=darkgray
 " this will make sure .wiki files dont have the ruller
 autocmd BufRead,BufNewFile *.wiki set filetype=wiki
 autocmd FileType wiki setlocal colorcolumn=0
@@ -91,8 +87,16 @@ let g:netrw_keepdir = 0
 let g:netrw_winsize = 30
 let g:netrw_banner = 0
 function! NetrwMapping()
+endfunction
+
+augroup netrw_mapping
+  autocmd!
+  autocmd filetype netrw call NetrwMapping()
+augroup END
+function! NetrwMapping()
   nmap <buffer> H u
   nmap <buffer> h -^
+  nmap <buffer> a %
   nmap <buffer> l <CR>
 
   nmap <buffer> . gh
@@ -138,7 +142,8 @@ let g:user_emmet_leader_key=','
 
 " Personal Binds
 let mapleader = " "
-nnoremap <leader>e :Lexplore<CR>
+nnoremap <leader>dd :Lexplore %:p:h<CR>
+nnoremap <Leader>da :Lexplore<CR>
 nnoremap <leader>pi :IndentLinesToggle<CR>
 nnoremap <leader>vs :so %<CR>
 nnoremap <leader>ppu :PlugInstall<CR>
@@ -149,6 +154,9 @@ nnoremap <leader>wl <C-w>l
 nnoremap <leader>wh <C-w>h
 nnoremap <leader>wj <C-w>j
 nnoremap <leader>wk <C-w>k
+nnoremap <leader>bp :bp<CR>
+nnoremap <leader>bn :bn<CR>
+nnoremap <leader>bd :bd<CR>
 
 
 " Coc stuff
@@ -168,6 +176,7 @@ set updatetime=300
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved
 set signcolumn=yes
+set term=xterm-256color
 
 " Use tab for trigger completion with characters ahead and navigate
 " NOTE: There's always complete item selected by default, you may want to enable
