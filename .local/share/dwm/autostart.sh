@@ -12,6 +12,7 @@ is_running 'dwm-bar.sh'
 is_running 'easy_always.sh'
 is_running 'tf2_server_count.sh'
 is_running 'santos_pregame.sh'
+is_running 'xidlehook.sh'
 
 pamixer --set-volume 30 &
 picom &

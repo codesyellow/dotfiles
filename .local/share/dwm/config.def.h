@@ -25,7 +25,7 @@ static const char bg0[]       = "#2e3440";
 static const char fg0[]       = "#eceff4";
 static const char light[]     = "#f9e2af";
 static const char fg1[]       = "#eceff4";
-static const char border[]    = "#bf616a";
+static const char border[]    = "#36C2CE";
 static const char *colors[][3]= {
   /*               fg         bg         border   */
   [SchemeNorm] = { fg0, bg0, bg0 },
@@ -34,7 +34,7 @@ static const char *colors[][3]= {
 
 /* tagging */
 static char *tags[] = { " ", "", "", "", "" };
-static const int taglayouts[] = { 2, 3, 2, 2, 2, };
+static const int taglayouts[] = { 2, 2, 2, 2, 2, };
 
 static const Rule rules[] = {
   /* xprop(1):
@@ -51,6 +51,7 @@ static const Rule rules[] = {
   { "TelegramDesktop",  NULL,       NULL,       1 << 2,       0,           -1,   0,     50,50,500,500,        5 },
   { "st-256color",  NULL,       NULL,       1 << 1,       0,           -1,   0,     50,50,500,500,        5 },
   { "Whatsapp-for-linux",  NULL,       NULL,       0,       1,           -1,   0,     50,50,1100,600,        5 },
+  { "WhatSie",  NULL,       NULL,       0,       1,           -1,   0,     50,50,1100,600,        5 },
   { "Zathura",  NULL,       NULL,       1 << 2,       0,           -1,        50,50,500,500,        5,      0},
   { "steam",    "steamwebhelper",       NULL,       1 << 3,       0,           -1, 0,        50,50,500,500,        5},
   { "Input-remapper-gtk",    NULL,       NULL,       1 << 3,       0,           -1, 0,        50,50,500,500,        5},
@@ -75,8 +76,9 @@ static const Rule rules[] = {
   { NULL,       NULL,   "pulsemixer",   0,            1,           -1,   'p', 778,48,400,400,        bordersize,   },
   { NULL,       NULL,   "btop",   0,            1,           -1,   'b', 80,80,1200,600,        bordersize,   },
   { NULL,       NULL,   "bluetui",   0,            1,           -1,   'f', 80,80,1200,600,        bordersize,   },
-  {"Galculator",       NULL,   NULL,   0,            1,           -1,   'g', 280,80,800,600,        bordersize,   },
-  { NULL,       NULL,   "WhatsApp for Linux",   0,            1,           -1,   'w', 80,80,1200,600,        bordersize,   },
+  {"calc",       NULL,   NULL,   0,            1,           -1,   'g', 280,80,200,200,        bordersize,   },
+ // { NULL,       NULL,   "WhatsApp for Linux",   0,            1,           -1,   'w', 80,80,1200,600,        bordersize,   },
+  { NULL,       NULL,   "WhatSie",   0,            1,           -1,   'w', 80,80,1200,600,        bordersize,   },
   { NULL,       NULL,   "Free Download Manager",   0,            1,           -1,   'd', 80,80,1200,600,        bordersize,   },
   { NULL,       NULL,   "notes",   0,            1,           -1,   'o', 80,50,1200,600,        bordersize,   },
   { NULL,       NULL,   "tt",   0,            1,           -1,   'e', 80,50,1200,600,        bordersize,   },
@@ -155,18 +157,18 @@ static const char *vimanywhere[] = {  "/home/cie/.vim-anywhere/bin/run", NULL };
 /*First arg only serves to match against key in rules*/
 static const char *scratchpadcmd[] = {"s", "alacritty", "--config-file", "/home/cie/.config/alacritty/scratchpad.toml", "--class", "scratchpad", "-t", "scratchpad", NULL}; 
 static const char *scratchpadclock[] = TERM_CMD("c", "clock", "tclock_timer.sh");
+static const char *scratchpadcalc[] = TERM_CMD("g", "calc", "bc");
 static const char *scratchpadblue[] = TERM_CMD("f", "bluetui", "bluetui");
-static const char *scratchpadhabit[] = TERM_CMD("h", "habits", "vim", "/home/cie/.vimwiki/habit.wiki");
+static const char *scratchpadhabit[] = TERM_CMD("h", "habits", "nvim", "/home/cie/.notes/habits.norg");
 //static const char *scratchpadnotes[] = TERM_CMD("o", "notes", "nvim", "/home/cie/.vimwiki/index.md");
-static const char *scratchpadnotes[] = {"o", "st", "-t", "notes", "-e", "vim", "/home/cie/.vimwiki/index.wiki", NULL}; 
+static const char *scratchpadnotes[] = {"o", "st", "-t", "notes", "-e", "nvim", "/home/cie/.notes/index.norg", NULL}; 
 static const char *scratchpadbtop[] = TERM_CMD("b", "btop", "btop");
 static const char *scratchpadtask[] = TERM_CMD("t", "task-tui", "/usr/bin/taskwarrior-tui");
 static const char *scratchpadmixer[] = TERM_CMD("p", "pulsemixer", "pulsemixer");
 static const char *scratchpadtt[] = TERM_CMD("e", "tt", "tt");
 static const char *scratchpadai[] = {"a", "st", "-t", "ai", "-c","aichat", "-e", "aichat", NULL}; 
 static const char *scratchfdm[] = {"d", "fdm", NULL}; 
-static const char *scratchpadcalc[] = {"g", "galculator", NULL}; 
-static const char *scratchpadzap[] = {"w", "flatpak", "run", "com.github.eneshecan.WhatsAppForLinux", NULL}; 
+static const char *scratchpadzap[] = {"w", "whatsie", NULL}; 
 static const char *scratchpadtrayer[] = {"q", "trayer", "--widthtype", "pixel", "--transparent", "true", "--alpha", "255", "--distance", "10", NULL}; 
 
 static Keychord *keychords[] = {
