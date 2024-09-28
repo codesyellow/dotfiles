@@ -1,13 +1,14 @@
-#!/bin/sh
-window_name=''
+#!/bin/bash
 
-while true; do
-  current_window_class=$(xprop -id $(xdotool getwindowfocus) | grep "WM_CLASS(STRING)" | awk -F '"' '{print $4}')
-  if [[ "$window_name" != "$current_window_class" ]]; then
-    window_name=$current_window_class
-    current_workspace=$(xprop -root _NET_CURRENT_DESKTOP | awk '/_NET_CURRENT_DESKTOP/ {print $3}')
-    echo "$current_window_class"
-  fi
+# Fetch all clients (windows) from Hyprland
+clients=$(hyprctl clients -j)
 
-  sleep 2
+# Loop through each workspace
+for workspace in $(echo "$clients" | jq -r '.[].workspace.id' | sort -u); do
+  echo "Workspace $workspace:"
+
+  # Loop through each client (window) in the current workspace
+  echo "$clients" | jq --arg workspace "$workspace" -r '.[] | select(.workspace.id == ($workspace | tonumber)) | "Window: \(.title), Class: \(.class)"'
+
+  echo "--------------------------------------"
 done

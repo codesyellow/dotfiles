@@ -14,10 +14,10 @@ dir_name=$(dirname "$file_path")
 
 # Check if the directory exists
 if [ -d "$search_dir/$dir_name" ]; then
-    # Directory exists, open it with a specific software (e.g., nautilus)
-    foot -T 'anki-vim' -e anki-vim "$search_dir/$dir_name"
+  # Directory exists, open it with a specific software (e.g., nautilus)
+  st -t 'anki-vim' -e anki-vim "$search_dir/$dir_name"
 else
-    # Directory does not exist, create it and then open with a specific software
-    mkdir -p "$search_dir/$dir_name"
-    foot -T 'anki-vim' -e anki-vim "$search_dir/$dir_name"
+  # Directory does not exist, create it and then open with a specific software
+  mkdir -p "$search_dir/$dir_name"
+  st -t 'anki-vim' -e anki-vim "$search_dir/$dir_name"
 fi
