@@ -5,13 +5,18 @@ SAVEHIST=1000
 
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_CONFIG_HOME=$HOME/.config
+export GTK_THEME=Nordic
 export XDG_STATE_HOME=$HOME/.local/state
 export XDG_CACHE_HOME=$HOME/.cache
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
-export EDITOR=/usr/bin/nvim
-export VISUAL=/usr/bin/nvim
+export TERM="screen-256color"
+export EDITOR=/usr/bin/vim
+export CM_LAUNCHER=dmenu
+export VISUAL=/usr/bin/vim
 setopt autocd beep extendedglob nomatch
+export NNN_USE_EDITOR=1
+export NNN_OPENER=zathura
 
 bindkey -v
 # End of lines configured by zsh-newuser-install
