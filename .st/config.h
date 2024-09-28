@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "CaskaydiaCove Nerd Font Mono:pixelsize=14:antialias=true:autohint=true";
+static char *font = "CaskaydiaCove Nerd Font Mono:pixelsize=16:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*
@@ -96,10 +96,10 @@ unsigned int tabspaces = 8;
 /* bg opacity */
 float alpha = 1.0;
 
+/* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-
-/* 8 normal colors */
-	"#3b4252", /* black   */
+	/* 8 normal colors */
+	"#3b4252", /* black   */  
 	"#bf616a", /* red     */
 	"#a3be8c", /* green   */
 	"#ebcb8b", /* yellow  */
@@ -108,32 +108,31 @@ static const char *colorname[] = {
 	"#88c0d0", /* cyan    */
 	"#e5e9f0", /* white   */
 
+	/* 8 bright colors */
+	"#585B70",
+	"#F38BA8",
+	"#A6E3A1",
+	"#F9E2AF",
+	"#89B4FA",
+	"#F5C2E7",
+	"#94E2D5",
+	"#A6ADC8",
 
-/* 8 bright colors */
-	"#4c566a", /* black   */
-	"#bf616a", /* red     */
-	"#a3be8c", /* green   */
-	"#ebcb8b", /* yellow  */
-	"#81a1c1", /* blue    */
-	"#b48ead", /* magenta */
-	"#8fbcbb", /* cyan    */
-	"#eceff4", /* white   */
+[256] = "#d8dee9", /* default foreground colour */
+[257] = "#2e3440", /* default background colour */
+[258] = "#F5E0DC", /*575268*/
 
-   [255] = 0,
+};
 
-   "#d8dee9", /* default foreground colour */
-   "#2e3440", /* default background colour */
- };
- /*
- * Default colors (colorname index)
+/*
  * foreground, background, cursor, reverse cursor
  */
 unsigned int defaultfg = 256;
 unsigned int defaultbg = 257;
-unsigned int defaultcs = 257;
-static unsigned int defaultrcs = 256;
+unsigned int defaultcs = 258;
+static unsigned int defaultrcs = 258;
 
-unsigned int const currentBg = 6, buffSize = 2048;
+unsigned int const currentBg = 8, buffSize = 2048;
 /// Enable double / triple click yanking / selection of word / line.
 int const mouseYank = 1, mouseSelect = 0;
 /// [Vim Browse] Colors for search results currently on screen.
@@ -170,7 +169,7 @@ unsigned int defaultunderline = 7;
  * 7: blinking st cursor
  * 8: steady st cursor
  */
-static unsigned int cursorstyle = 0;
+static unsigned int cursorstyle = 2;
 static Rune stcursor = 0x2603; /* snowman ("☃") */
 
 /*
