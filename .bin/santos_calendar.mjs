@@ -9,7 +9,7 @@ let sleepTime;
 const printMatchInfo = (match,hour) => {
   match.split('x').forEach(team => {
     if (!team.trim().toLowerCase().includes('san')) {
-      fs.writeFileSync('/home/cie/santosfc', `${hour}[ ${team.trim()} ]`)
+      fs.writeFileSync('/tmp/santosmatch', `${hour}[ ${team.trim()} ]`)
     }
   });
 }
@@ -24,10 +24,11 @@ const santosMatch = async (hour, match) => {
   while (true) {
     const { stdout: current_hour } = await $`date +%H`
     const { stdout: current_minute } = await $`date +%M`
-    const timeLeft = gameHour % current_hour;
+    const timeLeft = gameHour - current_hour;
 
     if (timeLeft <= 0) {
       console.log('Leaving because condition was met');
+      await $`rm /tmp/santosmatch`;
       break;
     }
 
@@ -35,7 +36,6 @@ const santosMatch = async (hour, match) => {
       printMatchInfo(match, hour);
       didMatchDisplayed = true;
     }
-    console.log(timeLeft)
 
     if (timeLeft <= 2 && gameMinutes <= current_minute && !notifyDone) {
       await $`notify-send -u critical -i $HOME/.local/share/icons/football.png "Pregame is about to start!!!"`
@@ -47,7 +47,7 @@ const santosMatch = async (hour, match) => {
       sleepTime=3600000;
     }
     else {
-      sleepTime=6000;
+      sleepTime=60000;
     }
 
     console.log(sleepTime)

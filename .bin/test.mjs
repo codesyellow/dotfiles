@@ -1,31 +1,30 @@
 #!/usr/bin/env zx
-const { stdout: current_day } = await $`date +%d`
-const { stdout: current_month } = await $`date +%m`
+let sleepTime;
+while (true) {
+  try {
+    const { stdout: reaperRunning } = await $`pstree -p | grep reaper || echo "0"`;
+    
+    if (reaperRunning.trim() !== '0' ) {
+      const numbers = reaperRunning.match(/\((\d+)\)/g).map(num => num.replace(/[()]/g, ''));
 
-const parsedJson = async (jsonPath) => {
-  const data = await fs.readFile('/home/cie/.config/santosfc/santos.json', 'utf-8');
-  return data
-}
-
-class Santos {
-  matchup;
-  hour;
-
-  constructor(matchup, hour) {
-    this.matchup = matchup,
-    this.hour = hour
-  }
-}
-
-const santos = new Santos('Ponte', '12');
-
-console.log(santos);
-parsedJson('/home/cie/.config/santosfc/santos.json').then(jsonData => {
-  const matchs = JSON.parse(jsonData).matchs
-  //console.log(matchs)
-  Object.keys(matchs).forEach(key => {
-    if (matchs[key].month.trim() === current_month.trim() && matchs[key].day.trim() === current_day.trim()) {
-      console.log(matchs[key].hour, matchs[key].match)
+      // Loop through the array and print the numbers
+      numbers.forEach(number => {
+        console.log(number);
+      });
+      const { stdout: current_workspace } = await $`xprop -root _NET_CURRENT_DESKTOP | awk '/_NET_CURRENT_DESKTOP/ {print $3}'`;
+      if(current_workspace.trim() != '3') {
+        const { stdout: window_class } = await $`xprop -id $(xdotool getwindowfocus) | grep "WM_CLASS(STRING)" | awk -F '"' '{print $4}' || xprop -id $(xdotool getwindowfocus) | grep "_NET_WM_NAME" | awk -F'"' '{print $2}'
+`;
+        console.log(window_class, current_workspace);
+        sleepTime = 3000;
+      }
     }
-  });
-});
+    else {
+      console.log('no game running or is running in the proper workspace')
+      sleepTime = 10000;
+    }
+  } catch (error) {
+    console.error('Error executing command:', error);
+  }
+  await sleep(sleepTime);
+}
