@@ -1,12 +1,27 @@
-#!/bin/bash
-swaybg -i ~/.wallpapers/ign-0011.png &
+#!/usr/bin/env bash
+waybar &
+is_running() {
+  script=$(ps -ef | grep 'bash' | grep $1)
+  echo "$script"
+  if [[ -z "$script" ]]; then
+    $1 &
+  fi
+}
+
+is_running 'easy_always.sh'
+is_running 'tf2_server_count.sh'
+is_running 'santos_pregame.sh'
+
+hyprpaper &
 pypr &
 paplay ~/.audios/retro-audio-logo-94648.mp3 &
 systemctl --user import-environment PATH &
 dunst &
-wl-paste -pw wl-copy &
+#wl-paste -pw wl-copy &
 /usr/lib/polkit-kde-authentication-agent-1 &
 swayosd-server &
 ianny &
 #jamesdsp -t &
-clipse -listen &
+wl-paste --watch cliphist store &
+xremap ~/.config/xremap/config.yml --mouse &
+eamcs --daemon &

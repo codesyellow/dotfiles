@@ -3,10 +3,10 @@ plugins = [
   "scratchpads"
 ]
 [scratchpads.term]
-animation = "fromTop"
+animation = "fromBottom"
 command = "alacritty --class alacritty-dropterm --config-file ~/.config/alacritty/scratchpad.toml"
 size = "75% 40%"
-margin = 40
+margin = 27
 
 [scratchpads.whats]
 animation = "fromTop"
@@ -22,7 +22,7 @@ lazy = true
 animation = "fromTop"
 command = "foot -T bc -a bc -e bc"
 class = "bc"
-size = "70% 80%"
+size = "75% 40%"
 process_tracking = false
 class_match = true
 unfocus = "hide"
@@ -35,6 +35,7 @@ class = "task-tui"
 size = "40% 90%"
 unfocus = "hide"
 lazy = true
+margin = 27
 
 [scratchpads.clipse]
 animation = "fromRight"
@@ -51,6 +52,7 @@ class = "ia"
 size = "30% 90%"
 position = "65% 5%"
 lazy = true
+margin = 27
 
 [scratchpads.pulse]
 animation = "fromRight"
@@ -60,17 +62,20 @@ size = "30% 40%"
 position = "65% 5%"
 unfocus = "hide"
 lazy = true
+margin = 27
 
 [scratchpads.habit]
 animation = "fromLeft"
-command = "foot -T habit -a habit -e vim ~/.vimwiki/habit.wiki"
+#command = "foot -T habit -a habit -e vim ~/.vimwiki/habit.wiki"
+command = "foot -T habit -a habit -e nvim ~/.notes/habits.norg"
 class = "habit"
 size = "60% 60%"
 margin = 50
 
 [scratchpads.notes]
 animation = "fromTop"
-command = "foot -T notes -a notes -e vim ~/.vimwiki/index.wiki"
+#command = "foot -T notes -a notes -e vim ~/.vimwiki/index.wiki"
+command = "foot -T notes -a notes -e nvim ~/.notes/index.norg"
 class = "notes"
 size = "75% 60%"
 margin = 50
@@ -97,4 +102,15 @@ unfocus = "hide"
 animation = "fromTop"
 margin = 200
 size = "50% 50%"
+
+[scratchpads.vimiv]
+command = "vimiv /home/cie/.projects"
+unfocus = "hide"
+class = "vimiv"
+animation = "fromTop"
+margin = 100
+size = "90% 80%"
+position = "5% 10%"
+
+
 
