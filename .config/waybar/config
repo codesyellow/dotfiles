@@ -52,6 +52,7 @@
     "clock": {
       "interval": 60,
       "format": "                                                       {:%H:%M | %d | %a}",
+      "tooltip": false
     },
     "hyprland/submap": {
       "format": "" ,
