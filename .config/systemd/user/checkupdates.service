@@ -1,6 +1,0 @@
-[Unit]
-Description=Check for updates every hour
-
-[Service]
-ExecStart=%h/.dwm/bar-scripts/updates.sh
-

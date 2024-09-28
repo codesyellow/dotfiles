@@ -1,9 +1,0 @@
-[Unit]
-Description=Timer to run the pacman_info script
-
-[Timer]
-OnCalendar=*-*-* 6:00:00
-Persistent=true
-
-[Install]
-WantedBy=timers.target

@@ -1,9 +1,0 @@
-[Unit]
-Description=Get pacman packags info and also flatpak
-After=network.target
-
-[Service]
-ExecStart=/home/cie/.config/systemd/user/scripts/pacman_packages
-
-[Install]
-WantedBy=multi-user.target

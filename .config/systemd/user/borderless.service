@@ -1,5 +1,0 @@
-[Unit]
-Description=A script to check if a game that is running requires to be borderless fullscreen
-
-[Service]
-ExecStart=/home/cie/.config/systemd/user/scripts/borderless

@@ -1,30 +1,40 @@
 #!/bin/bash
 
-game_list="/home/cie/.config/game_list"
-if [[ ! -f "$game_list" ]]; then
-  touch $game_list
-fi
+no_launchers="/tmp/gtw_no_launcher"
+did_move=false
 
-game=$1
-is_match=false
-game_to_move=''
+while true; do
+  steam=$(pidof 'steam')
+  lutris=$(pidof 'lutris')
+  heroic=$(pidof 'heroic')
 
-while IFS= read -r line; do
-  current_window_class=$(xprop -id $(xdotool getwindowfocus) | grep "WM_CLASS(STRING)" | awk -F '"' '{print $4}')
-  current_workspace=$(xprop -root _NET_CURRENT_DESKTOP | awk '/_NET_CURRENT_DESKTOP/ {print $3}')
+  if [[ -n "$steam" ]] || [[ -n "$lutris" ]] || [[ -n "$heroic" ]]; then
+    if [[ -f "$no_launchers" ]]; then
+      echo "remove no launcher file"
+      rm "$no_launchers"
+    fi
+    game_list=$(cat /home/cie/.config/game_list)
 
-  if [ "$line" == "$current_window_class" ] && [[ ! "$current_workspace" == "4" ]]; then
-    is_match=true
-    game_to_move=$line
+    current_window_class=$(xprop -id $(xdotool getwindowfocus) | grep "WM_CLASS(STRING)" | awk -F '"' '{print $4}')
+    current_workspace=$(xprop -root _NET_CURRENT_DESKTOP | awk '/_NET_CURRENT_DESKTOP/ {print $3}')
+
+    if [[ "$game_list" == *"$current_window_class"* ]] && [[ ! "$current_workspace" == "4" ]]; then
+      if [[ "$did_move" == false ]]; then  # Only move if not already moved
+        echo "$(date)"
+        echo "$current_window_class"
+        xdotool key --clearmodifiers Super+Shift+w g
+        did_move=true
+      fi
+    else
+      did_move=false
+    fi
+  else
+    if [[ ! -f "$no_launchers" ]]; then
+      echo "No gaming launcher is running."
+      touch "$no_launchers"
+    fi
+    did_move=false
   fi
 
-done <"$game_list"
-
-if [[ $is_match == 'true' ]]; then
-  echo "Moved window with class '$game_to_move' to the desired workspace."
-  xdotool key --clearmodifiers Super+Shift+w g
-  exit 0
-else
-  echo "Game is already on the right workspace or the game_list is empty"
-  exit 0
-fi
+  sleep 3
+done

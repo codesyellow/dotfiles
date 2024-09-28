@@ -3,7 +3,7 @@ Description=Run the script every 3 seconds
 
 [Timer]
 OnBootSec=10s
-OnUnitActiveSec=3s
+OnUnitActiveSec=5s
 AccuracySec=1us
 Persistent=true
 
