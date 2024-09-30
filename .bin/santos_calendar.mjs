@@ -9,7 +9,7 @@ let sleepTime;
 const printMatchInfo = (match,hour) => {
   match.split('x').forEach(team => {
     if (!team.trim().toLowerCase().includes('san')) {
-      fs.writeFileSync('/tmp/santosmatch', `${hour}[ ${team.trim()} ]`)
+      fs.writeFileSync('/tmp/santosmatch', `${hour}[${team.trim()}]`)
     }
   });
 }
@@ -43,14 +43,12 @@ const santosMatch = async (hour, match) => {
     }
 
     if (timeLeft > 4) {
-      console.log('Sleep time will be set to an hour until it reachs the desire hour.');
       sleepTime=3600000;
     }
     else {
       sleepTime=60000;
     }
 
-    console.log(sleepTime)
     await sleep(sleepTime);
   }
 }
