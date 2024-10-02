@@ -35,8 +35,12 @@ const moveIt = async (theGame) => {
 
 const isGameRunning = async () => {
     try {
-        const { stdout: gameRunning } = await $`pstree | grep reaper || pstree | grep lutris-wrapper || echo "0"`;
-
+        const { stdout: gameRunning } = await $`
+            pstree | grep reaper || 
+            pstree | grep lutris-wrapper ||
+            ps -ef | grep '.Games' | grep -v 'grep' ||
+            echo "0"`;
+        console.log(gameRunning)
         if (gameRunning.trim() !== '0') {
             const { stdout: picomRunning } = await $`pidof picom || echo 0`;
             if (picomRunning != 0) {
