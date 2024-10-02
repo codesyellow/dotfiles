@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-const windowManager = require("@johnlindquist/node-window-manager")
+const windowManager = require("@johnlindquist/node-window-manager");
 
-console.log(windowManager.windowManager.getActiveWindow())
-
+console.log(windowManager.windowManager.getActiveWindow());

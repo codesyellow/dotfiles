@@ -17,8 +17,8 @@ exec 2>&1
 printf "$$" >~/.cache/pidofbar
 sec=0
 nm="^c#d8dee9^"
-wn="^c#ebcb8b^"
-al="^c#bf616a^"
+wn="^c#36C2CE^"
+al="^c#EF5A6F^"
 
 pacman=
 ram_icon=
@@ -33,6 +33,15 @@ cpu_temp_low=
 cpu_temp_mid=
 cpu_temp_high=
 controller=
+
+game_running() {
+    gameon='';
+    if [[ -f "/tmp/gameon" ]]; then
+        gameon=" $nm| $al"
+    else 
+        gameon=""
+    fi
+}
 
 update_cpu() {
   cpu_usage=$(top -bn2 | grep "Cpu(s)" | awk 'NR==2 {print 100 - $8}')
@@ -262,7 +271,7 @@ update_vol
 update_updates
 
 display() {
-  xsetroot -name "$easyeffects$stretch$pymor$smatch$variant$climate$server$updates$vol$cpu_temp$cpu$memory$disk$time "
+  xsetroot -name "$easyeffects$gameon$stretch$pymor$smatch$variant$climate$server$updates$vol$cpu_temp$cpu$memory$disk$time "
 }
 
 # signals for each module to update while updating display
@@ -277,6 +286,7 @@ while true; do
   [ $((sec % 1)) -eq 0 ] && update_stretch
   [ $((sec % 5)) -eq 0 ] && update_easyeffects_status
   [ $((sec % 5)) -eq 0 ] && update_santosfc
+  [ $((sec % 5)) -eq 0 ] && game_running
   [ $((sec % 2)) -eq 0 ] && update_key_variant
   [ $((sec % 3600)) -eq 0 ] && update_climate
 #  [ $((sec % 10)) -eq 0 ] && update_ds4

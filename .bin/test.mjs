@@ -1,81 +1,112 @@
 #!/usr/bin/env zx
-let sleepTime = 4000; 
-let wasItMoved = false;
-let notRunning = false;
+const https = require("https");
+const cheerio = require("cheerio");
+let startup = false;
+let empty = false;
+let counter = 0;
+let mapShown = 0;
+let dustbowl = 0;
+let badwater = 0;
+let turbine = 0;
 
-const moveIt = async (theGame) => {
-  try {
-    const { stdout: window_class } = await $`xprop -id $(xdotool getwindowfocus) | grep "WM_CLASS(STRING)" | awk -F '"' '{print $4}' || xprop -id $(xdotool getwindowfocus) | grep "WM_NAME" | awk -F'"' '{print $2}'`;
-    
-    const window_classes = window_class.trim().split(' ');
+const badwater_icon = "";
+const dustbowl_icon = "";
+const turbine_icon = "";
 
-    const normalized_window_class = window_class
-    .trim()
-    .toLowerCase()
-    .replace(/[0-9]/g, '')
-    .replace(/[^a-zA-Z\s]/g, '')
-    .replace(/bin.*/, '');
+const server_count = async (ip) => {
+    return new Promise((resolve, reject) => {
+        https
+            .get(
+                `https://tsarvar.com/en/servers/team-fortress-2/${ip}`,
+                function (res) {
+                    let html = "";
 
-    const cleanTheGame = theGame.toLowerCase().replace(/[0-9]/g, '').replace(/[^a-zA-Z\s]/g, '');
-    const regex = new RegExp(normalized_window_class);  
+                    res.on("data", function (data) {
+                        html += data;
+                    });
 
-    for (const element of window_classes) {
-      if (cleanTheGame.includes(normalized_window_class) && !wasItMoved) {
-        wasItMoved = true;
-        console.log('Window class matched, moving it.');
-        await $`xdotool windowfocus $(xdotool getwindowfocus)`;
-        await $`xdotool key --clearmodifiers Super+Shift+w g`;
-        break; 
-      }
+                    res.on("end", function () {
+                        const $ = cheerio.load(html);
+
+                        const playerCount = $(".srvPage-countCur").text();
+                        resolve(playerCount);
+                    });
+                }
+            )
+            .on("error", function (err) {
+                reject(err);
+            });
+    });
+};
+const ruleToDisplay = (maps) => {
+    if (maps.length === 1) {
+        return `${maps[0].icon} ${maps[0].count}`;
     }
+    const mapToDisplay = maps.find((name) => {
+        if (maps.length < mapShown) {
+            mapShown = 0;
+        }
+        return name.id > mapShown;
+    });
 
-    if (cleanTheGame.includes(normalized_window_class) && !wasItMoved) {
-      wasItMoved = true;
-      console.log('Window class matched in fallback, moving it.');
-      await $`xdotool windowfocus $(xdotool getwindowfocus)`;
-      await $`xdotool key --clearmodifiers Super+Shift+w g`;
-    }
-
-  } catch (error) {
-    console.error('Error in moveIt function:', error);
-  }
+    mapShown = mapToDisplay.id;
+    return `${mapToDisplay.icon} ${mapToDisplay.count}`;
 };
 
-const isGameRunning = async () => {
-  try {
-    const { stdout: gameRunning } = await $`pstree | grep reaper || pstree | grep lutris-wrapper || echo "0"`;
+const display_count = async (server) => {
+    const toDisplay = server.filter(
+        (map) => map.count >= 10 || (map.map == "turbine" && map.count >= 30)
+    );
 
-    if (gameRunning.trim() !== '0') {
-      const { stdout: current_workspace } = await $`xprop -root _NET_CURRENT_DESKTOP | awk '/_NET_CURRENT_DESKTOP/ {print $3}'`;
-        if(current_workspace.trim() != '3' && !wasItMoved) {
-          await moveIt(gameRunning);
-      }
-      else {
-        if (wasItMoved) {
-          wasItMoved = false;
-          console.log('No game running')
+    if (toDisplay.length == 0) {
+        if (!empty) {
+            console.log(
+                "The servers are empty or not enough people are playing!"
+            );
+            empty = true;
         }
-      }
+        return;
     }
-    else {
-      return false;
-    }
-  } catch (error) {
-    console.error('Error for isGameRunning function:', error);
-  }
-}
+    const display = ruleToDisplay(toDisplay);
+    fs.writeFileSync("/home/cie/tf2display", `${display}`);
+    empty = false;
+};
 
 while (true) {
-  try {
-    const state = await isGameRunning(value => value);
-    if (!state && !notRunning) {
-      wasItMoved = false;
-      notRunning = true;
-      console.log('No game running')
-    }
+    try {
+        if (counter >= 30 || !startup) {
+            dustbowl = await server_count("205.178.182.182:27060");
+            await sleep(1000);
+            badwater = 2;
+            await sleep(1000);
+            turbine = 4;
+            counter = 0;
+            startup = true;
+        }
 
-  } catch (error) {
-    console.error('Error executing command:', error);
-  }
-  await sleep(sleepTime);
+        display_count([
+            {
+                map: "dustbowl",
+                count: dustbowl,
+                icon: dustbowl_icon,
+                id: 1,
+            },
+            {
+                map: "badwater",
+                count: badwater,
+                icon: badwater_icon,
+                id: 2,
+            },
+            {
+                map: "turbine",
+                count: turbine,
+                icon: turbine_icon,
+                id: 3,
+            },
+        ]);
+    } catch (err) {
+        console.log("Error:", err);
+    }
+    counter++;
+    await sleep(60000);
 }
