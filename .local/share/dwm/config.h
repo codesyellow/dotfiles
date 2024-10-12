@@ -69,7 +69,7 @@ static const Rule rules[] = {
   // floating
   { "h-m-m",   NULL,       NULL,       0,       1,           -1,    0,    180,134,1000,500,        bordersize},
   // scratchpads
-  { NULL,       NULL,   "scratchpad",   0,            1,           -1,   's', 80,50,1200,400,        bordersize,   },
+  { NULL,       NULL,   "scratchpad",   0,            1,           -1,   's', 80,550,1200,200,        bordersize,   },
   { NULL,       NULL,   "habits",   0,            1,           -1,   'h', 80,50,1200,400,        bordersize,   },
   { NULL,       NULL,   "task-tui",   0,            1,           -1,   't', 783,48,500,650,        bordersize,   },
   { NULL,       NULL,   "ai",   0,            1,           -1,   'a', 779,48,500,650,        bordersize,   },
@@ -77,8 +77,8 @@ static const Rule rules[] = {
   { NULL,       NULL,   "btop",   0,            1,           -1,   'b', 80,80,1200,600,        bordersize,   },
   { NULL,       NULL,   "bluetui",   0,            1,           -1,   'f', 80,80,1200,600,        bordersize,   },
   {"calc",       NULL,   NULL,   0,            1,           -1,   'g', 280,80,200,200,        bordersize,   },
- // { NULL,       NULL,   "WhatsApp for Linux",   0,            1,           -1,   'w', 80,80,1200,600,        bordersize,   },
-  { NULL,       NULL,   "WhatSie",   0,            1,           -1,   'w', 80,80,1200,600,        bordersize,   },
+  { NULL,       NULL,   "WhatsApp for Linux",   0,            1,           -1,   'w', 80,80,1200,600,        bordersize,   },
+ // { NULL,       NULL,   "WhatSie",   0,            1,           -1,   'w', 80,80,1200,600,        bordersize,   },
   { NULL,       NULL,   "Free Download Manager",   0,            1,           -1,   'd', 80,80,1200,600,        bordersize,   },
   { NULL,       NULL,   "notes",   0,            1,           -1,   'o', 80,50,1200,600,        bordersize,   },
   { NULL,       NULL,   "tt",   0,            1,           -1,   'e', 80,50,1200,600,        bordersize,   },
@@ -131,10 +131,6 @@ static const char *monocles[] = { "" };
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
-
-#define TERM_CMD(cmd, title, exec, ...) \
-    {cmd, "xterm", "-fa", "Monospace", "-fs", "12", "-bg", "#2e3440", "-fg", "#eceff4", "-T", title, "-e", exec, ##__VA_ARGS__, NULL}
-
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-nb", bg0, "-z", "497", "-x", "200", "-y", "1", "-sb", bg0, "-shb", bg0, "-nhb", bg0, "-shf", light,"-nhf",border,"-fn", dmenufont, "-p", prompt_icon, NULL };
@@ -155,20 +151,18 @@ static const char *browser[]  = { "flatpak", "run", "io.github.zen_browser.zen",
 static const char *mindmap[] = {  "maps.sh", NULL };
 static const char *vimanywhere[] = {  "/home/cie/.vim-anywhere/bin/run", NULL };
 /*First arg only serves to match against key in rules*/
-static const char *scratchpadcmd[] = {"s", "alacritty", "--config-file", "/home/cie/.config/alacritty/scratchpad.toml", "--class", "scratchpad", "-t", "scratchpad", NULL}; 
-static const char *scratchpadclock[] = TERM_CMD("c", "clock", "tclock_timer.sh");
-static const char *scratchpadcalc[] = TERM_CMD("g", "calc", "bc");
-static const char *scratchpadblue[] = TERM_CMD("f", "bluetui", "bluetui");
-static const char *scratchpadhabit[] = TERM_CMD("h", "habits", "nvim", "/home/cie/.notes/habits.norg");
-//static const char *scratchpadnotes[] = TERM_CMD("o", "notes", "nvim", "/home/cie/.vimwiki/index.md");
-static const char *scratchpadnotes[] = {"o", "st", "-t", "notes", "-e", "nvim", "/home/cie/.notes/index.norg", NULL}; 
-static const char *scratchpadbtop[] = TERM_CMD("b", "btop", "btop");
-static const char *scratchpadtask[] = TERM_CMD("t", "task-tui", "/usr/bin/taskwarrior-tui");
-static const char *scratchpadmixer[] = TERM_CMD("p", "pulsemixer", "pulsemixer");
-static const char *scratchpadtt[] = TERM_CMD("e", "tt", "tt");
+static const char *scratchpadcmd[] = {"s", "alacritty", "--config-file", "/home/digo/.config/alacritty/scratchpad.toml", "--class", "scratchpad", "-t", "scratchpad", NULL}; 
+static const char *scratchpadclock[] = {"c", "st", "-t", "clock", "-c","clock", "-e", "tclock_timer.sh", NULL}; 
+static const char *scratchpadcalc[] = {"g", "st", "-t", "calc", "-c","calc", "-e", "bc", NULL}; 
+static const char *scratchpadnotes[] = {"o", "st", "-t", "notes", "-c","notes", "-e", "nvim", "/home/digo/.notes/index.norg", NULL}; 
+static const char *scratchpadbtop[] = {"b", "st", "-t", "btop", "-c","btop", "-e", "btop", NULL}; 
+static const char *scratchpadtask[] = {"t", "st", "-t", "task-tui", "-c","task-tui", "-e", "taskwarrior-tui", NULL}; 
+static const char *scratchpadmixer[] = {"p", "st", "-t", "pulsemixer", "-c","pulsemixer", "-e", "pulsemixer", NULL}; 
+static const char *scratchpadtt[] = {"e", "st", "-t", "tt", "-c","tt", "-e", "tt", NULL}; 
 static const char *scratchpadai[] = {"a", "st", "-t", "ai", "-c","aichat", "-e", "aichat", NULL}; 
+static const char *scratchpadhabit[] = {"h", "st", "-t", "habits", "-c","habits", "-e", "nvim", "/home/digo/.notes/habits.norg", NULL}; 
 static const char *scratchfdm[] = {"d", "fdm", NULL}; 
-static const char *scratchpadzap[] = {"w", "whatsie", NULL}; 
+static const char *scratchpadzap[] = {"w", "flatpak", "run", "com.github.eneshecan.WhatsAppForLinux", NULL}; 
 static const char *scratchpadtrayer[] = {"q", "trayer", "--widthtype", "pixel", "--transparent", "true", "--alpha", "255", "--distance", "10", NULL}; 
 
 static Keychord *keychords[] = {
@@ -197,7 +191,7 @@ static Keychord *keychords[] = {
   SCRATCHS(w, scratchpadzap)
   SCRATCHS(m, scratchpadbtop)
   SCRATCHS(g, scratchpadcalc)
-  SCRATCHS(b, scratchpadblue)
+//  SCRATCHS(b, scratchpadblue)
   // exec
   EXECS(r, dmenucmd)
   EXECS(b, browser)
@@ -213,9 +207,9 @@ static Keychord *keychords[] = {
 	STACKKEYS(MODKEY|ShiftMask,                push)
 
   // volume
-  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_j}},                            spawn,         SHCMD("/home/cie/.bin/volume.sh down && /usr/bin/kill -30 $(cat ~/.cache/pidofbar)") }),
-  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_k}},                            spawn,         SHCMD("/home/cie/.bin/volume.sh up && /usr/bin/kill -30 $(cat ~/.cache/pidofbar)") }),
-  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_m}},                            spawn,         SHCMD("/home/cie/.bin/volume.sh mute && /usr/bin/kill -30 $(cat ~/.cache/pidofbar)") }),
+  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_j}},                            spawn,         SHCMD("/home/digo/.bin/volume.sh down && /usr/bin/kill -30 $(cat ~/.cache/pidofbar)") }),
+  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_k}},                            spawn,         SHCMD("/home/digo/.bin/volume.sh up && /usr/bin/kill -30 $(cat ~/.cache/pidofbar)") }),
+  &((Keychord){2, {{MODKEY, XK_v}, {0, XK_m}},                            spawn,         SHCMD("/home/digo/.bin/volume.sh mute && /usr/bin/kill -30 $(cat ~/.cache/pidofbar)") }),
   // action
   &((Keychord){2, {{MODKEY, XK_a}, {0, XK_m}},                 spawn,          {.v = bass } }),
   &((Keychord){2, {{MODKEY, XK_a}, {0, XK_l}},                 spawn,          {.v = loudness } }),
