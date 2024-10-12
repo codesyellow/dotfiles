@@ -18,7 +18,6 @@ const moveIt = async (theGame) => {
 
         const cleanTheGame = theGame.toLowerCase().replace(/[0-9]/g, '').replace(/[^a-zA-Z\s]/g, '');
         const regex = new RegExp(normalized_window_class);  
-        console.log(window_classes, normalized_window_class, cleanTheGame);
 
         for (const element of window_classes) {
             if (cleanTheGame.includes(normalized_window_class.split(' ')[0]) && !wasItMoved) {
@@ -40,7 +39,6 @@ const isGameRunning = async () => {
             pstree | grep lutris-wrapper ||
             ps -ef | grep '.Games' | grep -v 'grep' ||
             echo "0"`;
-        console.log(gameRunning)
         if (gameRunning.trim() !== '0') {
             const { stdout: picomRunning } = await $`pidof picom || echo 0`;
             if (picomRunning != 0) {

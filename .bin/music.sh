@@ -24,7 +24,7 @@ do_exist() {
   if ! [[ -f "/tmp/$1" ]]; then
     touch "/tmp/$1"
     echo "preset was selected was $2"
-    /home/cie/.bin/easy_preset.sh "$2" &
+    /home/digo/.bin/easy_preset.sh "$2" &
   fi
 
   if [[ "$1" == 'music' ]]; then
@@ -44,7 +44,7 @@ do_exist() {
 while true; do
   music=$(pidof 'youtube-music')
   effects=$(pidof 'easyeffects')
-  current_preset=$(bash /home/cie/.bin/easy_preset.sh)
+  current_preset=$(bash /home/digo/.bin/easy_preset.sh)
 
   if [[ -n "$effects" ]]; then
     if [[ -n "$music" ]]; then
