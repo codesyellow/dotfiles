@@ -18,6 +18,7 @@ is_running 'santos_pregame.sh'
 is_running 'xidlehook.sh'
 is_running 'gametowks.mjs' 'node'
 is_running 'santos_calendar.mjs' 'node'
+is_running 'gameon.mjs' 'node'
 
 pipewire &
 pamixer --set-volume 30 &
@@ -28,10 +29,9 @@ paplay ~/.audios/retro-audio-logo-94648.mp3 &
 xrandr --output VGA-1 --gamma 1.2:1.2:1.2 &
 dunst &
 unclutter &
-#dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY &
 udiskie &
-#systemctl --user import-environment DISPLAY &
 clipmenud &
+systemctl --user import-environment DISPLAY &
 /usr/lib/polkit-kde-authentication-agent-1 &
 redshift -O 6000 &
-setxkbmap -layout "c" -variant ",intl" -option "grp:alt_shift_toggle,caps:ctrl_modifier,caps:escape" &
+setxkbmap -layout "us,us" -variant ",intl" -option "grp:alt_shift_toggle,caps:ctrl_modifier,caps:escape" &

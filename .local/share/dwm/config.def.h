@@ -69,21 +69,21 @@ static const Rule rules[] = {
   // floating
   { "h-m-m",   NULL,       NULL,       0,       1,           -1,    0,    180,134,1000,500,        bordersize},
   // scratchpads
-  { NULL,       NULL,   "scratchpad",   0,            1,           -1,   's', 80,550,1200,200,        bordersize,   },
+  { NULL,       NULL,   "scratchpad",   0,            1,           -1,   's', 80,448,1200,300,        bordersize,   },
   { NULL,       NULL,   "habits",   0,            1,           -1,   'h', 80,50,1200,400,        bordersize,   },
-  { NULL,       NULL,   "task-tui",   0,            1,           -1,   't', 783,48,500,650,        bordersize,   },
-  { NULL,       NULL,   "ai",   0,            1,           -1,   'a', 779,48,500,650,        bordersize,   },
+  { NULL,       NULL,   "task-tui",   0,            1,           -1,   't', 840,59,500,650,        bordersize,   },
+  { NULL,       NULL,   "ai",   0,            1,           -1,   'a', 840,59,500,650,        bordersize,   },
   { NULL,       NULL,   "pulsemixer",   0,            1,           -1,   'p', 778,48,400,400,        bordersize,   },
-  { NULL,       NULL,   "btop",   0,            1,           -1,   'b', 80,80,1200,600,        bordersize,   },
+  { NULL,       NULL,   "btop",   0,            1,           -1,   'b', 80,84,1200,600,        bordersize,   },
   { NULL,       NULL,   "bluetui",   0,            1,           -1,   'f', 80,80,1200,600,        bordersize,   },
-  {"calc",       NULL,   NULL,   0,            1,           -1,   'g', 280,80,200,200,        bordersize,   },
+  {"calc",       NULL,   NULL,   0,            1,           -1,   'g', 530,234,300,300,        bordersize,   },
   { NULL,       NULL,   "WhatsApp for Linux",   0,            1,           -1,   'w', 80,80,1200,600,        bordersize,   },
  // { NULL,       NULL,   "WhatSie",   0,            1,           -1,   'w', 80,80,1200,600,        bordersize,   },
   { NULL,       NULL,   "Free Download Manager",   0,            1,           -1,   'd', 80,80,1200,600,        bordersize,   },
   { NULL,       NULL,   "notes",   0,            1,           -1,   'o', 80,50,1200,600,        bordersize,   },
   { NULL,       NULL,   "tt",   0,            1,           -1,   'e', 80,50,1200,600,        bordersize,   },
   { NULL,       NULL,   "Exercise Timer",   0,            1,           -1,   'z', 500,50,400,400,        bordersize,   },
-  { NULL,       NULL,   "clock",   0,            1,           -1,   'c', 555,184,400,250,        bordersize,   },
+  { NULL,       NULL,   "clock",   0,            1,           -1,   'c', 555,184,450,280,        bordersize,   },
   { "trayer",       NULL,   "panel",   0,            1,           -1,   'q', 500,50,400,400,        bordersize,   },
 };
 
@@ -162,7 +162,7 @@ static const char *scratchpadtt[] = {"e", "st", "-t", "tt", "-c","tt", "-e", "tt
 static const char *scratchpadai[] = {"a", "st", "-t", "ai", "-c","aichat", "-e", "aichat", NULL}; 
 static const char *scratchpadhabit[] = {"h", "st", "-t", "habits", "-c","habits", "-e", "nvim", "/home/digo/.notes/habits.norg", NULL}; 
 static const char *scratchfdm[] = {"d", "fdm", NULL}; 
-static const char *scratchpadzap[] = {"w", "flatpak", "run", "com.github.eneshecan.WhatsAppForLinux", NULL}; 
+static const char *scratchpadzap[] = {"w", "whatsapp-for-linux", NULL}; 
 static const char *scratchpadtrayer[] = {"q", "trayer", "--widthtype", "pixel", "--transparent", "true", "--alpha", "255", "--distance", "10", NULL}; 
 
 static Keychord *keychords[] = {
