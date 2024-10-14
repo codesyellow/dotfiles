@@ -25,8 +25,9 @@ santosFunctionSleep=60
 pacman=
 ram_icon=
 cpu_icon=
-root_icon=
+root_icon=
 home_icon=
+hdd_icon=
 date_icon=
 pymor_icon=
 pymor_icon_half=
@@ -118,6 +119,17 @@ update_disk_home() {
     else
         #disk=" $nm| $nm$root_icon $disk_num""g"
         disk_home=""
+    fi
+}
+
+update_disk_hdd() {
+    disk_usage=$(df -h | awk '{ if ($6 == "/home/digo/.HDD") print $4 }')
+    disk_num=${disk_usage::-1}
+
+    if [[ $(echo "$disk_num < 10" | bc) -ne 0 ]]; then
+        disk_hdd=" $nm| $al$hdd_icon $disk_num""g"
+    else
+        disk_hdd=""
     fi
 }
 
@@ -287,7 +299,7 @@ update_vol
 update_updates
 
 display() {
-    xsetroot -name "$easyeffects$gameon$stretch$pymor$smatch$variant$updates$vol$cpu_temp$cpu$memory$disk$disk_home$time "
+    xsetroot -name "$easyeffects$gameon$stretch$pymor$smatch$variant$updates$vol$cpu_temp$cpu$memory$disk$disk_home$disk_hdd$time "
 }
 
 # signals for each module to update while updating display
@@ -306,8 +318,9 @@ while true; do
     [ $((sec % 2)) -eq 0 ] && update_key_variant
     #  [ $((sec % 10)) -eq 0 ] && update_ds4
     [ $((sec % 10)) -eq 0 ] && update_server_info
-    [ $((sec % 600)) -eq 0 ] && update_disk_root
-    [ $((sec % 600)) -eq 0 ] && update_disk_home
+    [ $((sec % 100)) -eq 0 ] && update_disk_root
+    [ $((sec % 100)) -eq 0 ] && update_disk_home
+    [ $((sec % 100)) -eq 0 ] && update_disk_hdd
     [ $((sec % 2)) -eq 0 ] && update_cpu
     [ $((sec % 5)) -eq 0 ] && update_cpu_temp
     [ $((sec % 3600)) -eq 0 ] && update_updates
