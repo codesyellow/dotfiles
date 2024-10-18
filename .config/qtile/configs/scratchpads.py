@@ -1,9 +1,9 @@
-from libqtile.config import DropDown
+from libqtile.config import DropDown, Match
 from .variables import home, sterm
 scratchpads = [
         DropDown(
             'term', 
-            'alacritty -t scratchpad',
+            f'alacritty -t scratchpad --config-file {home}.config/alacritty/scratchpad.toml',
             y=0,
             ),
         DropDown(
@@ -51,7 +51,15 @@ scratchpads = [
             x=0.8,
             y=0.4,
             on_focus_lost_hide=False
-            ),
+    ),
+    DropDown(
+        'zap',
+        'flatpak run com.github.eneshecan.WhatsAppForLinux',
+        match=Match(wm_class=['Whatsapp-for-linux'][0]),
+        height=0.9,
+        width=0.8,
+        on_focus_lost_hide=False
+    ),        
         DropDown(
             'btop',
             f'{sterm} -T scratchpad -e btop',

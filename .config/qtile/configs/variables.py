@@ -3,7 +3,9 @@ from libqtile.config import Match
 from libqtile import layout, qtile
 
 alt_mod = "mod1"
-bg = '#00000099'
+bg = '#2e3440'
+fg = '#d8dee9'
+al = '#ebcb8b'
 browser = 'floorp'
 colors = ['#1E2326', # bg_dim 0
           '#272E33', # bg0 1
