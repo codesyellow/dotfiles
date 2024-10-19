@@ -1,7 +1,7 @@
 from libqtile import qtile
 from libqtile.config import Match
 
-def desconnect_ds4():  
+def desconnect_ds4():
     qtile.cmd_spawn('dsbattery -d')
 
 def run_easy():
@@ -22,4 +22,13 @@ def has_class(c):
 
 def has_name(c):
     return Match(title=c)
+
+def tabbed():
+    if qtile.current_group and qtile.current_group.tiled_windows:
+        num_windows = len(qtile.current_group.tiled_windows)
+        if num_windows <= 1:
+            return ""
+        else:
+            return "  " + str(num_windows)
+    return ""
 
