@@ -6,6 +6,11 @@ if qtile.core.name == "wayland":
     def autostart():
         home = os.path.expanduser('~/.config/qtile/wl_autostart.sh')
         subprocess.Popen([home])
+else:
+    @hook.subscribe.startup_once
+    def autostart():
+        home = os.path.expanduser('~/.config/qtile/autostart.sh')
+        subprocess.Popen([home])
 
 @hook.subscribe.client_focus
 def opacity(c):

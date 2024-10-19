@@ -1,7 +1,6 @@
 import os, subprocess
 from libqtile import widget, qtile
-from .variables import colors, bg, fg, al, my_font, exit_icon_font, group_font, widget_icons, wsize
-#from .functions import desconnect_ds4, run_easy, stop_easy
+from .variables import bg, fg, al, my_font, exit_icon_font, group_font, widget_icons, wsize
 
 def tabbed():
     if qtile.current_group and qtile.current_group.tiled_windows:
@@ -16,26 +15,19 @@ my_widgets = [
     widget.GroupBox(
         active=fg,
         background=bg,
-        block_highlight_text_color=colors[1],
+        block_highlight_text_color=al,
         disable_drag=True,
         highlight_method='text',
+        markup=True,
         highlight_color=al,
         foreground=fg,
         font=group_font,
         fontsize=20,
-        inactive=colors[14],
+        inactive=fg,
         use_mouse_wheel=False,
     ),
-#     widget.TaskList(
-#         title_width_method='uniform',
-#         icon_size=0,
-#         parse_text=tabbed,
-# #        text_minimized="",
-# #        text_maximized="",
-# #        text_floating="",
-#     ),
     widget.CurrentLayoutIcon(
-        background=bg
+        background=bg,
     ),
     widget.Spacer(
         background=bg
@@ -45,32 +37,17 @@ my_widgets = [
         fontsize=wsize,
         background=bg,
         foreground=fg,
-        format='%d %H:%M',
-    ),
-    widget.Clock(
-        font='Font Awesome 6 Free Regular',
-        fontsize=15,
-        foreground=fg,
-        format='%a',
+        format='%d | %H:%M | %a',
     ),
     widget.Spacer(
         background=bg
     ),
     widget.Chord(
         background=bg,
-        foreground=fg,
+        foreground=al,
         fontsize=wsize,
         font='JetBrainMono Nerd Font',
     ),
-    # widget.GenPollText(
-    #     background=bg,
-    #     func=lambda: subprocess.check_output(os.path.expanduser("~/.bin/psbat.sh")).decode("utf-8"),
-    #     foreground=colors[21],
-    #     font='JetBrainMono Nerd Font',
-    #     mouse_callbacks={'Button1': desconnect_ds4 },
-    #     fontsize=wsize,
-    #     update_interval=30, 
-    # ),
     widget.GenPollText(
         background=bg,
         func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/configs/widgets/easy.sh")).decode("utf-8"),
@@ -167,17 +144,9 @@ my_widgets = [
         update_interval=15, 
     ),
     
-        # widget.Memory(
-    #     background=bg,
-    #     font='JetBrainMono Nerd Font',
-    #     fontsize=wsize,
-    #     foreground=fg,
-    #     format=f'{widget_icons[4]}' + '{MemUsed:.0f}{mm}',
-    #     update_interval=60
-    # ),
     widget.QuickExit(
         background=bg,
-        default_text=f'{widget_icons[5]}', countdown_format=f'{widget_icons[6]}',
+        default_text=f'{widget_icons[2]}', countdown_format=f'{widget_icons[3]}',
         font='JetBrainMono Nerd Font',
     ),
     widget.Spacer(length=6),

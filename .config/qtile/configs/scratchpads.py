@@ -25,11 +25,21 @@ scratchpads = [
         DropDown(
             'task',
             f'{sterm} -T scratchpad -e taskwarrior-tui',
-            height=0.995,
+            height=0.940,
             width=0.3,
             opacity=0.5,
-            x=0.698,
-            y=0,
+            x=0.690,
+            y=0.01,
+            on_focus_lost_hide=False
+            ),
+    DropDown(
+            'ai',
+            f'{sterm} -T scratchpad -e aichat',
+            height=0.940,
+            width=0.3,
+            opacity=0.5,
+            x=0.690,
+            y=0.01,
             on_focus_lost_hide=False
             ),
         DropDown(
@@ -54,7 +64,7 @@ scratchpads = [
     ),
     DropDown(
         'zap',
-        'flatpak run com.github.eneshecan.WhatsAppForLinux',
+        'whatsapp-for-linux',
         match=Match(wm_class=['Whatsapp-for-linux'][0]),
         height=0.9,
         width=0.8,
@@ -63,6 +73,16 @@ scratchpads = [
         DropDown(
             'btop',
             f'{sterm} -T scratchpad -e btop',
+            height=0.9,
+            width=0.9,
+            opacity=0.5,
+            x=0.05,
+            y=0.03,
+            on_focus_lost_hide=True
+            ),
+    DropDown(
+            'cmus',
+            f'{sterm} -T scratchpad -e cmus',
             height=0.9,
             width=0.9,
             opacity=0.5,
