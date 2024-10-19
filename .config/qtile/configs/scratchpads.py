@@ -121,14 +121,23 @@ scratchpads = [
         on_focus_lost_hide=False
     ),
     DropDown(
-        'neorg',
-        f'{sterm} -T scratchpad -e {home}.local/bin/lvim -c ":Neorg workspace home"',
+        'notes',
+        f'{sterm} -T scratchpad -e vim {home}./vimwiki/index.wiki',
         height=0.9,
+        width=0.9,
+        opacity=0.5,
+        x=0.05,
+        y=0.03,
+        on_focus_lost_hide=False
+    ),
+    DropDown(
+        'habits',
+        f'{sterm} -T scratchpad -e vim {home}./vimwiki/habit.wiki',
+        height=0.5,
         width=0.5,
         opacity=0.5,
-        x=0.8,
-        y=0.0,
-        relative=True,
+        x=0.25,
+        y=0.2,
         on_focus_lost_hide=False
     )]
 

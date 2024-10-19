@@ -39,9 +39,20 @@ my_widgets = [
         fontsize=wsize,
         update_interval=2,
     ),
+    widget.TextBox(
+        fmt='| ',
+        fontsize=16,
+    ),
     widget.GenPollText(
         func=tabbed,
         foreground=al,
+        padding=5,
+        fontsize=wsize,
+        update_interval=2,
+    ),
+    widget.GenPollText(
+        background=bg,
+        func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/configs/widgets/variant.sh")).decode("utf-8"),
         padding=5,
         fontsize=wsize,
         update_interval=2,
@@ -51,15 +62,15 @@ my_widgets = [
         fmt='  {}',
         update_interval=5
     ),
-    widget.KeyboardLayout(
-        configured_keyboards=['us', 'us intl'],
-        display_map={
-            'us':f'{widget_icons[0]}US',
-            'us intl':f'{widget_icons[0]}USI',
-        },
-        fontsize=wsize,
-        option='compose:menu,grp_led:scroll',
-    ),
+    #widget.KeyboardLayout(
+    #    configured_keyboards=['us', 'us intl'],
+    #    display_map={
+    #        'us':f'{widget_icons[0]}US',
+    #        'us intl':f'{widget_icons[0]}USI',
+    #    },
+    #    fontsize=wsize,
+    #    option='compose:menu,grp_led:scroll',
+    #),
    widget.GenPollText(
         background=bg,
         func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/configs/widgets/disk-home.sh")).decode("utf-8"),
