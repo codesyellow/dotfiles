@@ -12,7 +12,7 @@ my_widgets = [
         markup=True,
         highlight_color=al,
         font=group_font,
-        fontsize=20,
+        fontsize=wsize,
         inactive=fg,
         use_mouse_wheel=False,
     ),
@@ -27,6 +27,7 @@ my_widgets = [
         foreground=al,
         fontsize=wsize,
     ),
+    widget.QuickExit(default_text=f'{widget_icons[2]}', countdown_format=f'{widget_icons[3]}'),
     widget.GenPollText(
         func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/configs/widgets/easy.sh")).decode("utf-8"),
         padding=5,
@@ -40,8 +41,8 @@ my_widgets = [
         update_interval=2,
     ),
     widget.TextBox(
-        fmt='| ',
-        fontsize=16,
+        fmt='|',
+        fontsize=19,
     ),
     widget.GenPollText(
         func=tabbed,
@@ -57,41 +58,27 @@ my_widgets = [
         fontsize=wsize,
         update_interval=2,
     ),
-    widget.Volume(
-        fontsize=wsize,
-        fmt='  {}',
-        update_interval=5
-    ),
-    #widget.KeyboardLayout(
-    #    configured_keyboards=['us', 'us intl'],
-    #    display_map={
-    #        'us':f'{widget_icons[0]}US',
-    #        'us intl':f'{widget_icons[0]}USI',
-    #    },
-    #    fontsize=wsize,
-    #    option='compose:menu,grp_led:scroll',
-    #),
-   widget.GenPollText(
+    widget.GenPollText(
         background=bg,
-        func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/configs/widgets/disk-home.sh")).decode("utf-8"),
+        func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/configs/widgets/updates.sh")).decode("utf-8"),
         padding=5,
         fontsize=wsize,
-        update_interval=30,
-    ),
-    widget.GenPollText(
-        func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/configs/widgets/disk-hdd.sh")).decode("utf-8"),
-        fontsize=wsize,
         update_interval=60,
-    ),
-    widget.GenPollText(
-        func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/configs/widgets/disk-root.sh")).decode("utf-8"),
-        fontsize=wsize,
-        update_interval=15,
     ),
     widget.GenPollText(
         func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/configs/widgets/pymor.sh")).decode("utf-8"),
         fontsize=wsize,
         update_interval=5,
+    ),
+    widget.GenPollText(
+        func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/configs/widgets/santos.sh")).decode("utf-8"),
+        fontsize=wsize,
+        update_interval=30,
+    ),
+    widget.Volume(
+        fontsize=wsize,
+        fmt='  {}',
+        update_interval=5
     ),
     widget.GenPollText(
         func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/configs/widgets/temp.sh")).decode("utf-8"),
@@ -108,7 +95,23 @@ my_widgets = [
         fontsize=wsize,
         update_interval=15,
     ),
-    widget.QuickExit(default_text=f'{widget_icons[2]}', countdown_format=f'{widget_icons[3]}'),
+    widget.GenPollText(
+        func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/configs/widgets/disk-root.sh")).decode("utf-8"),
+        fontsize=wsize,
+        update_interval=15,
+    ),
+   widget.GenPollText(
+        background=bg,
+        func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/configs/widgets/disk-home.sh")).decode("utf-8"),
+        padding=5,
+        fontsize=wsize,
+        update_interval=30,
+    ),
+    widget.GenPollText(
+        func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/configs/widgets/disk-hdd.sh")).decode("utf-8"),
+        fontsize=wsize,
+        update_interval=60,
+    ),
     widget.Spacer(length=6),
 ]
 

@@ -5,7 +5,7 @@ from libqtile import layout, qtile
 alt_mod = "mod1"
 bg = '#2e3440'
 fg = '#d8dee9'
-al = '#ebcb8b'
+al = '#EF5A6F'
 browser = 'firefox'
 exit_icon_font = 'Font Awesome 6 Free Regular'
 icons = [

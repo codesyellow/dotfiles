@@ -6,5 +6,5 @@ cpu_usage=$(top -bn2 | grep "Cpu(s)" | awk 'NR==2 {print 100 - $8}')
 cpu_usage_int=$(printf "%.0f" "$cpu_usage")
 if [[ $cpu_usage_int -ge 80 ]]; then
   output="$cpu_icon  $cpu_usage_int%"
-  printf '<span foreground="#EF5A6F">%s</span>' "$output"
+  printf '<span foreground="#fff">|</span> <span foreground="#EF5A6F">%s</span>' "$output"
 fi

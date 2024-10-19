@@ -11,18 +11,8 @@ if [[ -f "$pomodoro" ]]; then
     touch "/tmp/pomo_half"
   fi
 
-  if [[ "$pomodoro_number" -le "$pomo_half" ]] && [[ "$pomodoro_number" -ge 6 ]]; then
-    output="$pymor_icon_half $pomodoro_number"
-    printf '<span foreground="#36C2CE">%s</span>' "$output"
-  else
-    output="$pymor_icon $pomodoro_number"
-    printf '<span foreground="#36C2CE">%s</span>' "$output"
-  fi
-
-  if [[ "$pomodoro_number" -le 5 ]]; then
-    output="$pymor_icon_empty $pomodoro_number"
-    printf '<span foreground="#EF5A6F">%s</span>' "$output"
-  fi
+  output="$pymor_icon_empty $pomodoro_number"
+  printf '<span foreground="#EF5A6F">%s</span> <span foreground="#fff">|</span>' "$output"
 else
   if [[ -f "/tmp/pomo_half" ]]; then
     rm "/tmp/pomo_half"

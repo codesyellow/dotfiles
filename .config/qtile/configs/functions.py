@@ -29,6 +29,6 @@ def tabbed():
         if num_windows <= 1:
             return ""
         else:
-            return "  " + str(num_windows)
+            return f'<span foreground="#EF5A6F">  </span>{str(num_windows)} <span foreground="#fff"> |</span>'
     return ""
 
