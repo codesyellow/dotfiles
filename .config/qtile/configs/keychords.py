@@ -39,7 +39,7 @@ keys.append(
         Key([], 'v', lazy.group['scratchpad'].dropdown_toggle('vimiv')),
         Key([], 'f', lazy.group['scratchpad'].dropdown_toggle('nnn')),
         Key([], 'e', lazy.group['scratchpad'].dropdown_toggle('tt')),
-    ], name='<span size="17000" rise="2000">󰊠</span> <span size="x-large" foreground="#d8dee9"> |</span>'))
+    ], name='<span size="16000" rise="2000">󰊠</span> <span size="x-large" foreground="#d8dee9"> |</span>'))
 
 # toworkspace
 keys.append(
@@ -50,7 +50,7 @@ KeyChord([mod], 'w', [
     Key([], 'g', lazy.group[groups[3].name].toscreen()),
     Key([], 'm', lazy.group[groups[4].name].toscreen()),
     Key([], 'e', lazy.group[groups[5].name].toscreen()),
-    ], name='<span rise="3000" size="13000"></span> <span size="x-large" foreground="#d8dee9"> |</span>'))
+    ], name='<span rise="3000" size="13000"></span> <span size="x-large" foreground="#d8dee9">|</span>'))
 
 keys.append(
     KeyChord([mod, 'shift'], 'w', [
@@ -60,7 +60,7 @@ keys.append(
         Key([], 'g',  lazy.window.togroup(groups[3].name)),
         Key([], 'm',  lazy.window.togroup(groups[4].name)),
         Key([], 'e',  lazy.window.togroup(groups[5].name)),
-    ], name='<span rise="4000" size="14000"></span> <span size="x-large" foreground="#d8dee9">|</span>'))
+    ], name='<span rise="2000" size="14000"></span> <span size="x-large" foreground="#d8dee9">|</span>'))
 
 # action
 keys.append(
