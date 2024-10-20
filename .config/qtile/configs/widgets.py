@@ -2,7 +2,7 @@ import os, subprocess
 from libqtile import widget, qtile
 from .variables import bg, fg, al, my_font, exit_icon_font, group_font, widget_icons, wsize
 from .functions import tabbed
-
+size="16000"
 my_widgets = [
     widget.GroupBox(
         active=fg,
@@ -25,7 +25,7 @@ my_widgets = [
     widget.Spacer(),
     widget.Clock(
         fontsize=wsize,
-        format='<span size="16000" rise="3000">%d</span> <span size="x-large" foreground="#d8dee9">|</span> <span size="16000" rise="3000">%H:%M</span> <span size="x-large" foreground="#d8dee9">|</span> <span size="16000" rise="3000">%a</span>',
+        format=f'<span size="14000" rise="3000">%d</span> <span size="x-large" foreground="#d8dee9">|</span> <span size="14000" rise="3500">%H:%M</span> <span size="x-large" foreground="#d8dee9">|</span> <span size="12800" text_transform="uppercase" rise="3000">%a</span>',
     ),
     widget.Spacer(),
     widget.Chord(
