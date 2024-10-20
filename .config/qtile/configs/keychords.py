@@ -20,7 +20,7 @@ keys.append(KeyChord([mod], 'e',[
         Key([], 'l', lazy.spawn('pymor -t 20 -f 3')),
         Key([], 's', lazy.spawn('pymor -t 20')),
         Key([], 'c', lazy.spawn('pymor -c')),
-    ], name="󰁫  |"
+    ], name='<span size="18000">󰁫</span> <span foreground="#d8dee9"> |</span>'
              ),
 ], name='<span size="14000"></span> <span foreground="#d8dee9">|</span>'))
 
