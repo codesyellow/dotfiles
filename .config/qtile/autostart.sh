@@ -23,7 +23,7 @@ is_running 'gameon.mjs' 'node'
 pipewire &
 pamixer --set-volume 30 &
 picom &
-hsetroot -cover ~/.wallpapers/ign_cityRainOther.png &
+hsetroot -cover ~/.wallpapers/ign-0011.png &
 alsactl --file ~/.config/asound.state restore &
 paplay ~/.audios/retro-audio-logo-94648.mp3 &
 xrandr --output VGA-1 --gamma 1.2:1.2:1.2 &

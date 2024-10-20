@@ -25,7 +25,7 @@ my_widgets = [
     widget.Spacer(),
     widget.Clock(
         fontsize=wsize,
-        format='%d | %H:%M | %a',
+        format='<span size="16000" rise="3000">%d</span> <span size="x-large" foreground="#d8dee9">|</span> <span size="16000" rise="3000">%H:%M</span> <span size="x-large" foreground="#d8dee9">|</span> <span size="16000" rise="3000">%a</span>',
     ),
     widget.Spacer(),
     widget.Chord(
@@ -46,7 +46,7 @@ my_widgets = [
         update_interval=2,
     ),
     widget.TextBox(
-        fmt='|',
+        fmt='<span size="x-large" foreground="#d8dee9">|</span>',
         fontsize=19,
     ),
     widget.GenPollText(
