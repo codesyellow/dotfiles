@@ -15,14 +15,14 @@ keys.append(KeyChord([mod], 'e',[
         Key([], 'a', lazy.spawn('anki')),
         Key([], 'm', lazy.spawn('maps.sh')),
         Key([], 'v', lazy.spawn('ankiv.sh')),
-    ], name="  |"),
+    ], name='<span size="14000"></span> |'),
     KeyChord([], 'p', [
         Key([], 'l', lazy.spawn('pymor -t 20 -f 3')),
         Key([], 's', lazy.spawn('pymor -t 20')),
         Key([], 'c', lazy.spawn('pymor -c')),
     ], name="󰁫  |"
              ),
-], name="  |"))
+], name='<span size="14000"></span> <span foreground="#d8dee9">|</span>'))
 
 # scratchpds 
 keys.append(
@@ -40,7 +40,7 @@ keys.append(
         Key([], 'v', lazy.group['scratchpad'].dropdown_toggle('vimiv')),
         Key([], 'f', lazy.group['scratchpad'].dropdown_toggle('nnn')),
         Key([], 'e', lazy.group['scratchpad'].dropdown_toggle('tt')),
-    ], name="󰊠  |"))
+    ], name='<span size="17000">󰊠</span> <span foreground="#d8dee9"> |</span>'))
 
 # toworkspace
 keys.append(
@@ -51,7 +51,7 @@ KeyChord([mod], 'w', [
     Key([], 'g', lazy.group[groups[3].name].toscreen()),
     Key([], 'm', lazy.group[groups[4].name].toscreen()),
     Key([], 'e', lazy.group[groups[5].name].toscreen()),
-    ], name="  |"))
+    ], name='<span size="15000"></span> <span foreground="#d8dee9"> |</span>'))
 
 keys.append(
     KeyChord([mod, 'shift'], 'w', [
@@ -61,7 +61,7 @@ keys.append(
         Key([], 'g',  lazy.window.togroup(groups[3].name)),
         Key([], 'm',  lazy.window.togroup(groups[4].name)),
         Key([], 'e',  lazy.window.togroup(groups[5].name)),
-    ], name="  |"))
+    ], name='<span size="15000"></span> <span foreground="#d8dee9">|</span>'))
 
 # action
 keys.append(
@@ -75,7 +75,7 @@ keys.append(
                 Key([], 'n', lazy.layout.normalize()),
                 Key([], 'm', lazy.layout.maximize()),
                 Key([], 'r', lazy.layout.reset()),
-            ], mode=True, name="  |"),
+            ], mode=True, name='<span size="15000"></span> <span foreground="#d8dee9">  |</span>'),
         KeyChord([], 'l', [
             Key([], 'k', lazy.layout.shuffle_down()),
             Key([], 'j', lazy.layout.shuffle_up()),
@@ -83,17 +83,17 @@ keys.append(
             Key([], 'm', lazy.function(focus_main)),
             Key([], 'b', lazy.group.focus_back()),
             Key([], 'space', lazy.layout.flip()),
-        ], name='  |'),
+        ], name='<span size="15000"></span> <span foreground="#d8dee9">  |</span>'),
         KeyChord([], 'q', [
             Key([], 'r', lazy.reload_config()),
             Key([], 'e', lazy.shutdown()),
             Key([], 'i', lazy.spawn('getwindow.sh')),
-        ], name='  |'),
+        ], name='<span size="15000"></span> <span foreground="#d8dee9"> |</span>'),
         KeyChord([], 'e', [
             Key([], 'l', lazy.spawn('easyeffects -l LoudnessEqualizer')),
             Key([], 'b', lazy.spawn('easyeffects -l "HeavyBass"')),
         ], name=""),
-    ], name="  |"))
+    ], name='<span size="15000"></span> <span foreground="#d8dee9">|</span>'))
 
 # audio
 if qtile.core.name == "x11":
@@ -101,12 +101,12 @@ if qtile.core.name == "x11":
         Key([], 'j', lazy.spawn('volume.sh down')),
         Key([], 'k', lazy.spawn('volume.sh up')),
         Key([], 'm', lazy.spawn('volume.sh mute')),
-        ], mode=True, name="󰕾  |"))
+        ], mode=True, name='<span size="18000">󰕾</span> <span foreground="#d8dee9"> |</span>'))
 
 elif qtile.core.name == "wayland":
     keys.append(KeyChord([mod], "v", [
         Key([], 'j', lazy.spawn('swayosd-client --output-volume lower')),
         Key([], 'k', lazy.spawn('swayosd-client --output-volume raise')),
         Key([], 'm', lazy.spawn('swayosd-client --output-volume mute-toggle')),
-        ], mode=True, name="󰕾  |"))
+        ], mode=True, name='<span size="18000">󰕾</span> <span foreground="#d8dee9"> |</span>'))
 
