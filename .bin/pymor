@@ -76,7 +76,7 @@ while [[ "$pomodoro_time" -ge 0 ]]; do
     ((pomodoro_time--))
     echo "$pomodoro_time" >"$pomodoro_path"
     if [[ $pomodoro_time == 0 ]]; then
-        notify-pymor "end" "critical" "Pomodoro ended!"
+        notify-pymor "critical" "Pomodoro ended!"
         rm $pomodoro_path
         break
     fi
