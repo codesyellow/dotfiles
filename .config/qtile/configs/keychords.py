@@ -51,7 +51,7 @@ KeyChord([mod], 'w', [
     Key([], 'g', lazy.group[groups[3].name].toscreen()),
     Key([], 'm', lazy.group[groups[4].name].toscreen()),
     Key([], 'e', lazy.group[groups[5].name].toscreen()),
-    ], name='<span size="15000"></span> <span foreground="#d8dee9"> |</span>'))
+    ], name='<span size="15000"></span> <span foreground="#d8dee9"> |</span>'))
 
 keys.append(
     KeyChord([mod, 'shift'], 'w', [
