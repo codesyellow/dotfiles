@@ -4,23 +4,13 @@ scratchpads = [
     DropDown(
         'term',
         f'alacritty -t scratchpad --config-file {home}.config/alacritty/scratchpad.toml',
-        y=0,
+        y=0.6,
     ),
     DropDown(
         'trayer',
         'trayer --widthtype pixel --transparent true --alpha 255 --distance 10',
         y=0,
         on_focus_lost_hide=True
-    ),
-    DropDown(
-        'gpterm',
-        f'alacritty -t scratchpad -e {home}.local/share/cargo/bin/bard-rs -e {home}.env-bard',
-        height=0.995,
-        width=0.3,
-        opacity=0.5,
-        x=0.698,
-        y=0,
-        on_focus_lost_hide=False
     ),
     DropDown(
         'task',
@@ -40,26 +30,6 @@ scratchpads = [
         opacity=0.5,
         x=0.690,
         y=0.01,
-        on_focus_lost_hide=False
-    ),
-    DropDown(
-        'Kuro',
-        'kuro',
-        height=0.9,
-        width=0.3,
-        opacity=0.1,
-        x=0.68,
-        y=0.05,
-        on_focus_lost_hide=False
-    ),
-    DropDown(
-        'noi',
-        'Noi_linux_0.4.0.AppImage',
-        match='noi',
-        height=0.9,
-        width=0.5,
-        x=0.8,
-        y=0.4,
         on_focus_lost_hide=False
     ),
     DropDown(
