@@ -36,6 +36,7 @@ keys.append(
         Key([], 'n', lazy.group['scratchpad'].dropdown_toggle('notes')),
         Key([], 'h', lazy.group['scratchpad'].dropdown_toggle('habits')),
         Key([], 'm', lazy.group['scratchpad'].dropdown_toggle('btop')),
+        Key([], 'p', lazy.group['scratchpad'].dropdown_toggle('pulsemixer')),
         Key([], 'v', lazy.group['scratchpad'].dropdown_toggle('vimiv')),
         Key([], 'f', lazy.group['scratchpad'].dropdown_toggle('nnn')),
         Key([], 'e', lazy.group['scratchpad'].dropdown_toggle('tt')),
@@ -97,10 +98,10 @@ keys.append(
 # audio
 if qtile.core.name == "x11":
     keys.append(KeyChord([mod], "v", [
-        Key([], 'j', lazy.spawn('volume.sh down')),
-        Key([], 'k', lazy.spawn('volume.sh up')),
-        Key([], 'm', lazy.spawn('volume.sh mute')),
-        ], mode=True, name='<span size="17000" rise="2000">󰕾</span> <span size="x-large" foreground="#d8dee9"> |</span>'))
+        Key([], 'j', lazy.spawn('changevolume.sh "-" 5')),
+        Key([], 'k', lazy.spawn('changevolume.sh 5')),
+        Key([], 'm', lazy.spawn('changevolume.sh "m"')),
+        ], name='<span size="17000" rise="2000">󰕾</span> <span size="x-large" foreground="#d8dee9"> |</span>'))
 
 elif qtile.core.name == "wayland":
     keys.append(KeyChord([mod], "v", [

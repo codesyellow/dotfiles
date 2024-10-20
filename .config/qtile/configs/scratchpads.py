@@ -1,5 +1,6 @@
 from libqtile.config import DropDown, Match
 from .variables import home, sterm
+from libqtile.log_utils import logger
 scratchpads = [
     DropDown(
         'term',
@@ -14,7 +15,7 @@ scratchpads = [
     ),
     DropDown(
         'task',
-        f'{sterm} -T scratchpad -e taskwarrior-tui',
+        f'{sterm} -T scratchpad -c right_side -e taskwarrior-tui',
         height=0.940,
         width=0.3,
         opacity=0.5,
@@ -24,8 +25,18 @@ scratchpads = [
     ),
     DropDown(
         'ai',
-        f'{sterm} -T scratchpad -e aichat',
+        f'{sterm} -T scratchpad -c right_side -e aichat',
         height=0.940,
+        width=0.3,
+        opacity=0.5,
+        x=0.690,
+        y=0.01,
+        on_focus_lost_hide=False
+    ),
+    DropDown(
+        'pulsemixer',
+        f'{sterm} -T scratchpad -c right_side -e pulsemixer',
+        height=0.5,
         width=0.3,
         opacity=0.5,
         x=0.690,
@@ -92,7 +103,7 @@ scratchpads = [
     ),
     DropDown(
         'notes',
-        f'{sterm} -T scratchpad -e vim {home}./vimwiki/index.wiki',
+        f'{sterm} -T scratchpad -e vim {home}.vimwiki/notes/index.wiki',
         height=0.9,
         width=0.9,
         opacity=0.5,
@@ -102,7 +113,7 @@ scratchpads = [
     ),
     DropDown(
         'habits',
-        f'{sterm} -T scratchpad -e vim {home}./vimwiki/habit.wiki',
+        f'{sterm} -T scratchpad -e vim {home}.vimwiki/habits/index.wiki',
         height=0.5,
         width=0.5,
         opacity=0.5,

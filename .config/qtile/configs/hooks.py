@@ -1,5 +1,6 @@
 import os, subprocess
 from libqtile import hook, qtile
+from libqtile.log_utils import logger
 
 if qtile.core.name == "wayland":
     @hook.subscribe.startup_once
@@ -16,7 +17,7 @@ else:
 def opacity(c):
     for x in c.qtile.current_group.windows:
         wm_class = x.get_wm_class()[0]
-        if (wm_class == 'firefox' 
+        if (wm_class == 'firefox'
             or wm_class == 'org.qutebrowser.qutebrowser'
             or wm_class == 'qutebrowser'
             or wm_class == 'Brave-browser'):
@@ -27,7 +28,7 @@ def opacity(c):
         elif not x.has_focus:
             x.set_opacity(0.5)
         else:
-            x.opacity = 1 
+            x.opacity = 1
 
 @hook.subscribe.client_focus
 def is_floating(c):
@@ -36,5 +37,4 @@ def is_floating(c):
             if x.get_wm_class()[0] == 'firefox' or x.get_wm_class()[0] == 'Navigator':
                 x.set_size_floating(500,680)
             x.center()
-
 

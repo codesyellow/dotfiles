@@ -1,6 +1,6 @@
 from libqtile.lazy import lazy
 from libqtile.config import Click, Drag, Key
-from .variables import mod, alt_mod, term
+from .variables import mod, alt_mod, term, sterm
 from .functions import latest_group, focus_main
 
 keys = [
@@ -17,7 +17,8 @@ keys = [
     Key([mod], "space", lazy.widget["keyboardlayout"].next_keyboard()),
     Key([mod], 'Tab', lazy.function(latest_group)),
     Key([mod, 'shift'], 'p', lazy.function(focus_main)),
-    Key([mod], 't', lazy.spawn(term)),
+    Key([mod], 'Return', lazy.spawn(sterm)),
+    Key([mod], 't', lazy.spawn(f'{sterm} -T tmux -c tmux -e tmux')),
     Key([alt_mod], 't', lazy.spawn(term)),
 ]
 

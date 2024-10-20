@@ -34,4 +34,3 @@ clipmenud &
 systemctl --user import-environment DISPLAY &
 /usr/lib/polkit-kde-authentication-agent-1 &
 redshift -O 6000 &
-setxkbmap -layout "us,us" -variant ",intl" -option "grp:alt_shift_toggle,caps:ctrl_modifier,caps:escape" &
