@@ -1,10 +1,11 @@
 " this is for indentLine
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+" NERDTree
+let NERDTreeQuitOnOpen=1
 
 " Emmet
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
-let NERDTreeMapOpenInTab='<ENTER>'
 let g:user_emmet_settings = {
 \  'variables': {'lang': 'ja'},
 \  'html': {
