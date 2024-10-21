@@ -5,7 +5,8 @@ scratchpads = [
     DropDown(
         'term',
         f'alacritty -t scratchpad --config-file {home}.config/alacritty/scratchpad.toml',
-        y=0.6,
+        y=0.48,
+        height=0.5,
     ),
     DropDown(
         'trayer',

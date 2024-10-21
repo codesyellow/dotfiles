@@ -1,7 +1,7 @@
 from libqtile.lazy import lazy
 from libqtile.config import KeyChord, Key
 from .binds import keys
-from .variables import mod, runner
+from .variables import mod, runner, browser
 from .functions import focus_main
 from .groups import groups
 from libqtile import  qtile
@@ -10,6 +10,7 @@ from libqtile import  qtile
 keys.append(KeyChord([mod], 'e',[
     Key([], 'r', lazy.spawn(runner)),
     Key([], 'v', lazy.spawn("mpvtube.sh")),
+    Key([], 'b', lazy.spawn(browser)),
     Key([], 'n', lazy.spawn('dunstctl close-all')),
     KeyChord([], 's', [
         Key([], 'a', lazy.spawn('anki')),

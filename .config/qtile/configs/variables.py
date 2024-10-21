@@ -5,7 +5,7 @@ alt_mod = "mod1"
 bg = '#2e3440'
 fg = '#d8dee9'
 al = '#EF5A6F'
-browser = 'firefox'
+browser = 'com.brave.Browser'
 exit_icon_font = 'Font Awesome 6 Free Regular'
 icons = [
         '',
@@ -18,8 +18,8 @@ icons = [
 widget_icons = [
         '   ',
         '  ',
-        '<span size="13000"> </span>',
-        '<span size="13000"> </span>',
+        '<span size="12000"> </span>',
+        '<span size="12000"> </span>',
         ]
 home = os.path.expanduser('~/')
 mod = "mod4"
