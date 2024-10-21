@@ -14,7 +14,10 @@ alias lp='{(comm -23 <(yay -Qqe | sort) <({(pactree -u -d 1 base)&&(yay -Qqg bas
 
 # defaults
 alias :c='clear'
+
+# files
 alias :m='mkdir -p'
+alias :fp='chmod +x'
 
 # systemctl
 alias :st="systemctl --user start"
@@ -81,6 +84,7 @@ alias powersave="sudo cpupower frequency-set -g powersave"
 
 # terminal apps
 alias :v='$EDITOR'
+alias :V='sudoedit'
 # Anki
 alias ae='canki.sh English'
 alias ap='canki.sh Portuguese'
