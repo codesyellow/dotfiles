@@ -7,7 +7,7 @@ path=("$HOME/.bin"
     "$HOME/.config/emacs.d/bin" 
     "$HOME/.var/lib/flatpak/exports/share"
     "$HOME/.local/share/gem/ruby/3.2.0/bin"
-    "$HOME/.local/share/flatpak/exports/share" "$path[@]"
+    "$HOME/.local/share/flatpak/exports/share"
     "$HOME/.nix-profile/bin" "$path[@]")
 export PATH
 
