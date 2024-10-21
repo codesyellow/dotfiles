@@ -8,6 +8,8 @@ msgTag="myvolume"
 #amixer -c 0 set Master "$@" > /dev/null
 if [[ $1 == "-" ]]; then
     pamixer -d "$2"
+elif [[ $1 == "m" ]]; then
+    pamixer -t
 else
     pamixer -i "$1"
 fi
