@@ -20,11 +20,25 @@ alias :sr="systemctl --user restart"
 alias :sd="systemctl --user daemon-reload"
 
 # dotfiles
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-alias dots='dotfiles push -u origin main'
-alias dott='dotfiles status'
-alias dotc='dotfiles commit -m'
-alias dota='dotfiles add'
+:dotfiles() {
+    /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME "$@"
+}
+
+:ds() {
+    :dotfiles push -u origin main
+}
+
+:dt() {
+    :dotfiles status
+}
+
+:dc() {
+    :dotfiles commit -m "$@"
+}
+
+:da() {
+    :dotfiles add "$@"
+}
 
 # qtile
 alias getWInfo='qtile cmd-obj -o cmd -f windows | less'
@@ -51,6 +65,8 @@ alias :sz='source ~/.zshrc'
 # configs
 alias :cp='$EDITOR ~/.config/picom/picom.conf'
 alias :cz='$EDITOR ~/.zshrc'
+alias :cza='$EDITOR ~/.aliases.zsh'
+alias :czp='$EDITOR ~/.zshenv'
 alias :cq='$EDITOR ~/.config/qtile/config.py'
 alias :cv='$EDITOR ~/.vimrc'
 alias :cvd='$EDITOR ~/.vim/defaults.vim'
