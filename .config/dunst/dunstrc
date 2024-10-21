@@ -218,7 +218,7 @@
     max_icon_size = 128
 
     # Paths to default icons (only neccesary when not using recursive icon lookup)
-    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+    icon_path = /usr/share/icons/Adwaita/16x16/status/:/usr/share/icons/Adwaita/16x16/devices/:/usr/share/icons/Adwaita/16x16/legacy/
 
     ### History ###
 
@@ -311,20 +311,16 @@
     per_monitor_dpi = false
 
 [urgency_low]
-background = "#2e3440"
-foreground = "#d8dee9"
+background = "#d8dee9"
+foreground = "#2e3440"
 
 [urgency_normal]
-background = "#2e3440"
-foreground = "#d8dee9"
+background = "#d8dee9"
+foreground = "#2e3440"
 
 [urgency_critical]
-background = "#2e3440"
-foreground = "#d8dee9"
-
-[play_sound]
-    summary = "*"
-    script = "/home/cie/.bin/alert.sh"
+background = "#EF5A6F"
+foreground = "#2e3440"
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
