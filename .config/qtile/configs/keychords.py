@@ -38,7 +38,7 @@ keys.append(
         Key([], 'm', lazy.group['scratchpad'].dropdown_toggle('btop')),
         Key([], 'p', lazy.group['scratchpad'].dropdown_toggle('pulsemixer')),
         Key([], 'v', lazy.group['scratchpad'].dropdown_toggle('vimiv')),
-        Key([], 'f', lazy.group['scratchpad'].dropdown_toggle('nnn')),
+        Key([], 'f', lazy.group['scratchpad'].dropdown_toggle('yazi')),
         Key([], 'e', lazy.group['scratchpad'].dropdown_toggle('tt')),
     ], name='<span size="16000" rise="2000">󰊠</span> <span size="x-large" foreground="#d8dee9"> |</span>'))
 

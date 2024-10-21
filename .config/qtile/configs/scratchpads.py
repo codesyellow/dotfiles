@@ -45,7 +45,7 @@ scratchpads = [
     ),
     DropDown(
         'zap',
-        'whatsapp-for-linux',
+        'flatpak run com.github.eneshecan.WhatsAppForLinux',
         match=Match(wm_class=['Whatsapp-for-linux'][0]),
         height=0.9,
         width=0.8,
@@ -54,6 +54,16 @@ scratchpads = [
     DropDown(
         'btop',
         f'{sterm} -T scratchpad -e btop',
+        height=0.9,
+        width=0.9,
+        opacity=0.5,
+        x=0.05,
+        y=0.03,
+        on_focus_lost_hide=True
+    ),
+    DropDown(
+        'yazi',
+        f'{sterm} -T scratchpad -e yazi',
         height=0.9,
         width=0.9,
         opacity=0.5,

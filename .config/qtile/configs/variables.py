@@ -35,7 +35,7 @@ if qtile.core.name == "wayland":
     sterm = 'alacritty'
 
 if qtile.core.name == "x11":
-    runner = f"dmenu_run -nb {bg} -z 530 -x 215 -y -1 -sb {bg} -shb {bg} -nhb {bg} -shf {al} -nhf {al} -fn dmenufont -p  "
+    runner = f"dmenu_run -nb {bg} -z 540 -x 215 -y -1 -sb {bg} -shb {bg} -nhb {bg} -shf {al} -nhf {al} -fn dmenufont -p "
 elif qtile.core.name == "wayland":
     runner = f"bemenu-run -c -l 10 -i -M 300 --fn 'IBM Plex Mono 14' -p '' --hp 8 --nb {bg} --nf '#fff' --ab {bg} -- │ hf {bg} --hb {bg} --fb {bg} -B 1 --bdr {bg}"
 term = "alacritty"
