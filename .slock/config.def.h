@@ -1,6 +1,6 @@
 /* user and group to drop privileges to */
-static const char *user  = "cie";
-static const char *group = "cie";
+static const char *user  = "digo";
+static const char *group = "digo";
 
 static const char *colorname[NUMCOLS] = {
 	[INIT] =   "black",     /* after initialization */
@@ -12,4 +12,4 @@ static const char *colorname[NUMCOLS] = {
 static const int failonclear = 1;
 
 /* Background image path, should be available to the user above */
-static const char* background_image = "/home/cie/.wallpapers/ign-0011.png";
+static const char* background_image = "/home/digo/.wallpapers/ign-0011.png";

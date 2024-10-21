@@ -198,8 +198,8 @@ readpw(Display *dpy, struct xrandr *rr, struct lock **locks, int nscreens,
                                                 XSetWindowBackgroundPixmap(dpy, locks[screen]->win, locks[screen]->bgmap);
                                         else
                                                 XSetWindowBackground(dpy, locks[screen]->win, locks[screen]->colors[0]);
-          XClearWindow(dpy, locks[screen]->win);
-        }
+					XClearWindow(dpy, locks[screen]->win);
+				}
 				oldc = color;
 			}
 		} else if (rr->active && ev.type == rr->evbase + RRScreenChangeNotify) {
