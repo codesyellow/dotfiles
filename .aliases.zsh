@@ -12,6 +12,10 @@ alias change_class='xdotool selectwindow set_window --class "esdf"'
 
 alias lp='{(comm -23 <(yay -Qqe | sort) <({(pactree -u -d 1 base)&&(yay -Qqg base-devel);} | sort))&&(comm -23 <(yay -Qqtt | sort) <(yay -Qqt | sort));} | sort | uniq  | less'
 
+# defaults
+alias :c='clear'
+alias :m='mkdir -p'
+
 # systemctl
 alias :st="systemctl --user start"
 alias :ss="systemctl --user status"
