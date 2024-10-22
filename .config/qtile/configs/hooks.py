@@ -30,6 +30,13 @@ def opacity(c):
         else:
             x.opacity = 1
 
+@hook.subscribe.client_new
+def new_client(client):
+    #logger.warning(dir(client))
+    logger.warning(client.name)
+    if client.get_wm_class()[0] == "xdg-desktop-portal-lxqt":
+        client.set_size_floating(800,500)
+
 @hook.subscribe.client_focus
 def is_floating(c):
     for x in c.qtile.current_group.windows:
@@ -38,3 +45,8 @@ def is_floating(c):
                 x.set_size_floating(500,680)
             x.center()
 
+
+@hook.subscribe.client_focus
+def move_pulsemixer(c):
+    if c.name == "pulsemixer":
+        c.move_floating(460, -170)
