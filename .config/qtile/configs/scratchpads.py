@@ -57,9 +57,17 @@ scratchpads = [
         f'{sterm} -T scratchpad -e btop',
         height=0.9,
         width=0.9,
-        opacity=0.5,
         x=0.05,
         y=0.03,
+        on_focus_lost_hide=True
+    ),
+    DropDown(
+        'calc',
+        f'{sterm} -T scratchpad -e bc',
+        height=0.5,
+        width=0.5,
+        x=0.25,
+        y=0.25,
         on_focus_lost_hide=True
     ),
     DropDown(

@@ -41,6 +41,7 @@ keys.append(
         Key([], 'v', lazy.group['scratchpad'].dropdown_toggle('vimiv')),
         Key([], 'f', lazy.group['scratchpad'].dropdown_toggle('yazi')),
         Key([], 'e', lazy.group['scratchpad'].dropdown_toggle('tt')),
+        Key([], 'g', lazy.group['scratchpad'].dropdown_toggle('calc')),
     ], name='<span size="16000" rise="2000">󰊠</span> <span size="x-large" foreground="#d8dee9"> |</span>'))
 
 # toworkspace
