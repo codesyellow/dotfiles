@@ -12,6 +12,7 @@ keys.append(KeyChord([mod], 'e',[
     Key([], 'v', lazy.spawn("mpvtube.sh")),
     Key([], 'b', lazy.spawn(browser)),
     Key([], 'n', lazy.spawn('dunstctl close-all')),
+    Key([], 't', lazy.spawn('stretch.sh -t 15 -s 12 -w 3')),
     KeyChord([], 's', [
         Key([], 'a', lazy.spawn('anki')),
         Key([], 'm', lazy.spawn('maps.sh')),

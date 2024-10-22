@@ -71,6 +71,11 @@ my_widgets = [
         update_interval=60,
     ),
     widget.GenPollText(
+        func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/configs/widgets/stretch.sh")).decode("utf-8"),
+        fontsize=wsize,
+        update_interval=1,
+    ),
+    widget.GenPollText(
         func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/configs/widgets/pymor.sh")).decode("utf-8"),
         fontsize=wsize,
         update_interval=5,

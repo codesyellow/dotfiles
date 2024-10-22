@@ -17,8 +17,8 @@ keys = [
     Key([mod], "space", lazy.widget["keyboardlayout"].next_keyboard()),
     Key([mod], 'Tab', lazy.function(latest_group)),
     Key([mod, 'shift'], 'p', lazy.function(focus_main)),
-    Key([mod], 'Return', lazy.spawn(sterm)),
-    Key([mod], 't', lazy.spawn(f'{sterm} -T tmux -c tmux -e tmux')),
+    Key([mod], 't', lazy.spawn(f'{term} -T tmux -e tmux')),
+    Key([mod], 'return', lazy.spawn(term)),
     Key([alt_mod], 't', lazy.spawn(term)),
 ]
 

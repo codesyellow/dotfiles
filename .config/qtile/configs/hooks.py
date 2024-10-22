@@ -22,7 +22,7 @@ def opacity(c):
             or wm_class == 'qutebrowser'
             or wm_class == 'Brave-browser'):
             x.set_opacity(1)
-        if x.has_focus and x.name == 'scratchpad' or x.name == 'chatgpt':
+        if x.has_focus and x.name == 'scratchpad' or x.name == 'pulsemixer':
             for w in x.group.windows:
                 w.opacity = 1
         elif not x.has_focus:
@@ -35,3 +35,21 @@ def new_client(client):
     logger.warning(client.name)
     if client.get_wm_class()[0] == "xdg-desktop-portal-lxqt":
         client.set_size_floating(800,500)
+
+@hook.subscribe.client_killed
+def client_killed(client):
+  try:
+    subprocess.run(["canberra-gtk-play", "-f", "/usr/share/sounds/Smooth/stereo/window-close.oga"])
+  except FileNotFoundError:
+    logger.warning(f"Error: Sound file not found")
+  except subprocess.CalledProcessError as e:
+    logger.warning(f"Error playing sound: {e}")
+
+@hook.subscribe.client_managed
+def client_managed(client):
+  try:
+    subprocess.run(["canberra-gtk-play", "-f", "/usr/share/sounds/Smooth/stereo/window-new.oga"])
+  except FileNotFoundError:
+    logger.warning(f"Error: Sound file not found")
+  except subprocess.CalledProcessError as e:
+    logger.warning(f"Error playing sound: {e}")

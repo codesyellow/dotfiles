@@ -1,4 +1,5 @@
 from libqtile import qtile
+from libqtile.log_utils import logger
 
 def desconnect_ds4():
     qtile.cmd_spawn('dsbattery -d')
