@@ -3,4 +3,4 @@ Description=A script to display Santos fc matchs
 
 [Service]
 Type=simple
-ExecStart=/home/cie/.bin/santos_calender.sh
+ExecStart=/home/digo/.bin/santos_calendar.mjs
