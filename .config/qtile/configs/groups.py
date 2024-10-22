@@ -10,7 +10,7 @@ groups = [
         Group(icons[3], layout='max', matches=[Match(wm_class=re.compile(r"^(heroic|Steam|amazon\ games\ ui\.exe|bottles|ProtonUp\-Qt|lutris|amazongamessetup\.exe|net\.davidotek\.pupgui2)$")),
                                                Match(title=re.compile(r"^(Steam\ \-\ Self\ Updater|Special\ Offers|Steam\ setup|Steam|Sign\ in\ to\ Steam)$"))]),
         Group(icons[4], layout='max', matches=[Match(wm_class=re.compile(r"^(Youtube\ Music|youtube\ music)$"))]),
-        Group(icons[5], layout='max', matches=[Match(wm_class=re.compile(r"^(Zathura|mpv|Microsoft\-edge|anki)$"))]),
+        Group(icons[5], layout='max', matches=[Match(wm_class=re.compile(r"^(Zathura|mpv|Microsoft\-edge|anki|TelegramDesktop)$"))]),
                                                    ScratchPad('scratchpad', scratchpads),
                                                    ]
 

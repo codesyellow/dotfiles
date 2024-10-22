@@ -36,11 +36,11 @@ scratchpads = [
     ),
     DropDown(
         'pulsemixer',
-        f'{sterm} -T scratchpad -c right_side -e pulsemixer',
+        f'{sterm}, -T scratchpad -c right_side -e pulsemixer',
         height=0.5,
         width=0.3,
         opacity=0.5,
-        x=0.690,
+        x=0.990,
         y=0.01,
         on_focus_lost_hide=False
     ),
