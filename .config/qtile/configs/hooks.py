@@ -32,7 +32,6 @@ def opacity(c):
 
 @hook.subscribe.client_new
 def new_client(client):
-    logger.warning(client.name)
     if client.get_wm_class()[0] == "xdg-desktop-portal-lxqt":
         client.set_size_floating(800,500)
 
