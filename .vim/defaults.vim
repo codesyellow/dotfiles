@@ -71,3 +71,32 @@ hi ColorColumn ctermbg=darkgray
 autocmd BufRead,BufNewFile *.wiki set filetype=wiki
 autocmd FileType wiki setlocal colorcolumn=0
 
+" Custom function to show only the filename in the tab
+function! TabLabel(n)
+    " Get the full file path of the buffer
+    let l:bufname = bufname(tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1])
+    
+    " If there's no file, return the tab number
+    if l:bufname == ''
+        return '[No Name]'
+    endif
+    
+    " Return only the filename, not the full path
+    return fnamemodify(l:bufname, ':t')
+endfunction
+
+" Set tabline to use the custom function for each tab
+set tabline=%!MyTabLine()
+
+function! MyTabLine()
+    let s = ''
+    " Loop through all the tabs
+    for i in range(tabpagenr('$'))
+        " Get the label for the tab (only the file name)
+        let s .= '%' . (i + 1) . 'T'
+        let s .= (i + 1 == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
+        let s .= ' ' . TabLabel(i + 1) . ' '
+        let s .= '%#TabLineFill#'
+    endfor
+    return s
+endfunction
