@@ -9,9 +9,10 @@ free_time=false
 notify-pymor() {
     local arg="$1"
     if [[ "$2" == "critical" ]]; then
-        notify-send.sh -i ~/.local/share/icons/pomodoro_${arg}_32.png -u critical --replace-id=10 "$3"
+        notify-send -i ~/.local/share/icons/pomodoro_${arg}_32.png -u critical --replace-id=10 "$3"
+        canberra-gtk-play -f /usr/share/sounds/Smooth/stereo/dialog-warning.oga
     else
-        notify-send.sh -i ~/.local/share/icons/pomodoro_${arg}_32.png --replace=10 "$2"
+        notify-send -i ~/.local/share/icons/pomodoro_${arg}_32.png --replace-id=10 "$2"
     fi
 }
 
@@ -76,7 +77,7 @@ while [[ "$pomodoro_time" -ge 0 ]]; do
     ((pomodoro_time--))
     echo "$pomodoro_time" >"$pomodoro_path"
     if [[ $pomodoro_time == 0 ]]; then
-        notify-pymor "critical" "Pomodoro ended!"
+        notify-pymor "end" "critical" "Pomodoro ended!"
         rm $pomodoro_path
         break
     fi

@@ -50,7 +50,7 @@ fi
 
 if [[ -f "$stretch_path" ]]; then
     echo "Its already running!"
-    notify-send.sh "Already running!"
+    notify-send "Already running!"
     exit 1
 fi
 
@@ -73,17 +73,17 @@ while [[ "$times" -ge 0 ]]; do
     fi
 
     if [[ "$times" == 0 ]]; then
-        paplay ~/.audios/stretch_ended.wav
+        canberra-gtk-play -f ~/.audios/stretch_ended.wav
         rm "$stretch_path"
         notify-send -u critical "Stretch ended!"
         break
     else
-        paplay ~/.audios/stretch_work.mp3
+       canberra-gtk-play -f ~/.audios/stretch_work.mp3
         sleep $seconds
         if [[ -n "$wait" ]] && [[ ! "$times" == 1 ]]; then
             touch "/tmp/stop"
             echo "Stop!!"
-            paplay ~/.audios/stretch_breaks.mp3
+            canberra-gtk-play -f ~/.audios/stretch_breaks.mp3
             sleep $wait
             rm "/tmp/stop"
         fi
