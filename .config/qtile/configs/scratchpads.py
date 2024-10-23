@@ -4,8 +4,8 @@ from libqtile.log_utils import logger
 scratchpads = [
     DropDown(
         'term',
-        f'alacritty -t scratchpad --config-file {home}.config/alacritty/scratchpad.toml -e tmux new-session -s scratchpad',
-        y=0.48,
+        f"alacritty -t scratchpad --config-file {home}/.config/alacritty/scratchpad.toml -e bash -c 'tmux attach-session -t scratchpad || tmux new-session -s scratchpad'",
+        y=0.01,
         height=0.5,
     ),
     DropDown(
