@@ -13,6 +13,7 @@ alias lp='{(comm -23 <(yay -Qqe | sort) <({(pactree -u -d 1 base)&&(yay -Qqg bas
 
 # defaults
 alias :c='clear'
+alias cd='z'
 alias :m='mkdir -p'
 alias :fp='chmod +x'
 alias :tx='tar xvf'
@@ -25,6 +26,9 @@ alias :ss="systemctl --user status"
 alias :sp="systemctl --user stop"
 alias :sr="systemctl --user restart"
 alias :sd="systemctl --user daemon-reload"
+
+# tmux
+alias :tl="tmux ls"
 
 # dotfiles
 :dotfiles() {
@@ -63,6 +67,10 @@ alias :ps='pacman -Ss'
 alias :pi='sudo pacman -S'
 alias :pr='sudo pacman -Rs'
 alias :po='$sud pacman -Qtdq | $sud pacman -Rns -'
+
+alias :fi='flatpak install'
+alias :fu='flatpak update'
+alias :fr='flatpak uninstall'
 
 # make
 alias smi='$sud rm config.h; make; $sud make install'
