@@ -1,7 +1,4 @@
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
 
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_CONFIG_HOME=$HOME/.config
@@ -13,51 +10,62 @@ export TERM="screen-256color"
 export EDITOR=/usr/bin/vim
 export CM_LAUNCHER=dmenu
 export VISUAL=/usr/bin/vim
-setopt autocd beep extendedglob nomatch
 export NNN_USE_EDITOR=1
 export NNN_OPENER=zathura
 
 bindkey -v
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/aedigo/.zshrc'
-zstyle :compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
-
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.aliases.zsh
 
-bindkey -M viins 'jk' vi-cmd-mode
+#bindkey -M viins 'jk' vi-cmd-mode
 
 zstyle ':completion:*'  matcher-list 'm:{a-z}={A-Z}'
 
 bindkey '^ ' autosuggest-accept
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
 
-# Find and set branch name var if in git repository.
-function git_branch_name()
-{
-  branch=$(git symbolic-ref HEAD 2> /dev/null | awk 'BEGIN{FS="/"} {print $NF}')
-  if [[ $branch == "" ]];
-  then
-    :
-  else
-    echo '('$branch')'
-  fi
-}
+### Added by Zinit's installer
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
+fi
 
-# pipe it to less
-function l { $@ | less }
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-# Enable substitution in the prompt.
-setopt prompt_subst
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-completions
+zinit light zdharma-continuum/fast-syntax-highlighting
 
-# Config for prompt. PS1 synonym.
-autoload -Uz compinit colors && colors
-#PS1="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg[yellow]%}%~ %{$reset_color%}%% "
+autoload -U compinit && compinit
 
-PROMPT='%{$fg[red]%}%~ %{$fg[white]%}$(git_branch_name) 
-'
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
-compinit
+# History 
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+
+# Options
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+setopt autocd beep extendedglob nomatch
+
 eval "$(zoxide init zsh)"
-# End of lines added by compinstall
+eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/posh.toml)"
+
