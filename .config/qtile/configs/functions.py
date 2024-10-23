@@ -1,6 +1,8 @@
 from libqtile import qtile
 from libqtile.log_utils import logger
 
+win_number=0
+
 def desconnect_ds4():
     qtile.cmd_spawn('dsbattery -d')
 
@@ -23,6 +25,10 @@ def tabbed():
         if num_windows <= 1:
             return ""
         else:
-            return f'<span foreground="#EF5A6F">  </span>{str(num_windows)} <span foreground="#fff"> |</span>'
+            for w in qtile.current_group.tiled_windows:
+                global win_number
+                if w.wid == qtile.current_window.wid and qtile.current_window.floating == False:
+                    win_number = qtile.current_group.windows.index(w) + 1
+            return f'<span foreground="#EF5A6F">  </span>{str(win_number)} / {str(num_windows)} <span foreground="#fff"> |</span>'
     return ""
 

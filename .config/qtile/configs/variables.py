@@ -1,7 +1,7 @@
 import os
 from libqtile import layout, qtile
 
-alt_mod = "mod1"
+alt_mod = "mod3"
 bg = '#2e3440'
 fg = '#d8dee9'
 al = '#EF5A6F'
