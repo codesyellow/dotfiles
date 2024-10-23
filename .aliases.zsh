@@ -6,7 +6,6 @@ function :wi() {
   /^WM_NAME/{sub(/.* =/, "title:"); print}'
 }
 
-
 alias change_title='xdotool selectwindow set_window --name "scratchpad"'
 alias change_class='xdotool selectwindow set_window --class "esdf"'
 
@@ -14,10 +13,11 @@ alias lp='{(comm -23 <(yay -Qqe | sort) <({(pactree -u -d 1 base)&&(yay -Qqg bas
 
 # defaults
 alias :c='clear'
-
-# files
 alias :m='mkdir -p'
 alias :fp='chmod +x'
+alias :tx='tar xvf'
+alias :r='rm'
+alias :rr='rm -rf'
 
 # systemctl
 alias :st="systemctl --user start"
@@ -28,23 +28,27 @@ alias :sd="systemctl --user daemon-reload"
 
 # dotfiles
 :dotfiles() {
-    /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME "$@"
+  /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME "$@"
+}
+
+:dd() {
+  :dotfiles diff
 }
 
 :ds() {
-    :dotfiles push -u origin main
+  :dotfiles push -u origin main
 }
 
 :dt() {
-    :dotfiles status
+  :dotfiles status
 }
 
 :dc() {
-    :dotfiles commit -m "$@"
+  :dotfiles commit -m "$@"
 }
 
 :da() {
-    :dotfiles add "$@"
+  :dotfiles add "$@"
 }
 
 # qtile
@@ -55,6 +59,7 @@ alias search='pacman -Ss'
 alias lsm="exa -al --color=always --group-directories-first --icons"
 alias ls="exa --icons"
 alias :pu='yay'
+alias :ps='pacman -Ss'
 alias :pi='sudo pacman -S'
 alias :pr='sudo pacman -Rs'
 alias :po='$sud pacman -Qtdq | $sud pacman -Rns -'
@@ -85,10 +90,6 @@ alias powersave="sudo cpupower frequency-set -g powersave"
 # terminal apps
 alias :v='$EDITOR'
 alias :V='sudoedit'
-# Anki
-alias ae='canki.sh English'
-alias ap='canki.sh Portuguese'
-alias am='canki.sh Math'
 
 # translate shell
 alias :t="trans -sp -brief en:pt-br"
@@ -99,6 +100,6 @@ translate() {
   trans -brief $1:$2 $3
 }
 
-re_iso() {
+:chd() {
     chdman createcd -i $1 -o $2
 }
