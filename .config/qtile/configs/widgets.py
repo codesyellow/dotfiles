@@ -2,7 +2,8 @@ import os, subprocess
 from libqtile import widget, qtile
 from .variables import bg, fg, al, my_font, exit_icon_font, group_font, widget_icons, wsize
 from .functions import tabbed
-size="16000"
+from libqtile.log_utils import logger
+
 my_widgets = [
     widget.GroupBox(
         active=fg,
