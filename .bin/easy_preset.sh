@@ -19,5 +19,5 @@ else
     #flatpak run com.github.wwmm.easyeffects -l $arg
     easyeffects -l $arg
     echo $arg >$file_path
-    exit 1
+    exit 0
 fi
