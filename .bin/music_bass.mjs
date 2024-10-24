@@ -4,7 +4,7 @@ let inactive = false;
 while (true) {
   try {
     const { stdout: cmusStatus } =
-      await $`cmus-remote -Q 2>/dev/null | grep status | awk '{print $2}' || echo "cmus is not running"`;
+      await $`cmus-remote -Q 2>/dev/null | grep status | awk '{print $2}' || echo "0"`;
     if (cmusStatus.trim() === "playing" && !active) {
       active = true;
       if (inactive) {
@@ -22,6 +22,12 @@ while (true) {
       await $`easy_preset.sh 'LoudnessEqualizer'`;
       if (active) {
         active = false;
+      }
+    } else if (cmusStatus.trim() === "0") {
+      if (!inactive) {
+        await $`pamixer --set-volume 30`;
+        await $`easy_preset.sh 'LoudnessEqualizer'`;
+        inactive = true;
       }
     }
   } catch (e) {
