@@ -4,7 +4,7 @@ let inactive = false;
 while (true) {
   try {
     const { stdout: cmusStatus } =
-      await $`cmus-remote -Q | grep status | awk '{print $2}'`;
+      await $`cmus-remote -Q 2>/dev/null | grep status | awk '{print $2}' || echo "cmus is not running"`;
     if (cmusStatus.trim() === "playing" && !active) {
       active = true;
       if (inactive) {
