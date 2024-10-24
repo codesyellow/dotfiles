@@ -21,11 +21,17 @@ alias :r='rm'
 alias :rr='rm -rf'
 
 # systemctl
-alias :st="systemctl --user start"
-alias :ss="systemctl --user status"
-alias :sp="systemctl --user stop"
-alias :sr="systemctl --user restart"
-alias :sd="systemctl --user daemon-reload"
+alias :st="systemctl start"
+alias :ss="systemctl status"
+alias :sp="systemctl stop"
+alias :sr="systemctl restart"
+alias :sd="systemctl daemon-reload"
+# user
+alias :set="systemctl --user start"
+alias :ses="systemctl --user status"
+alias :sep="systemctl --user stop"
+alias :ser="systemctl --user restart"
+alias :sed="systemctl --user daemon-reload"
 
 # tmux
 alias :tl="tmux ls"
