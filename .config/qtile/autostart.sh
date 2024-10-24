@@ -19,6 +19,7 @@ is_running 'xidlehook.sh'
 is_running 'gametowks.mjs' 'node'
 is_running 'santos_calendar.mjs' 'node'
 is_running 'gameon.mjs' 'node'
+is_running 'music_bass.mjs' 'node'
 
 pipewire &
 pamixer --set-volume 30 &
