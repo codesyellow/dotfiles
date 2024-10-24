@@ -1,0 +1,1 @@
+{ "coc.preferences.formatOnSaveFiletypes": [ "markdown", "javascript", "javascriptreact", "typescript", "typescriptreact", "json", "graphql", "elixir", "eelixir""] }
