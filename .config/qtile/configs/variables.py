@@ -19,7 +19,7 @@ widget_icons = [
         '   ',
         '  ',
         '<span size="12000"> </span>',
-        '<span size="12000"> </span>',
+        '<span foreground="#EF5A6F" size="12000"> </span>',
         ]
 home = os.path.expanduser('~/')
 mod = "mod4"

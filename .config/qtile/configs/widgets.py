@@ -33,7 +33,10 @@ my_widgets = [
         foreground=al,
         fontsize=wsize,
     ),
-    widget.QuickExit(default_text=f'{widget_icons[2]}', countdown_format=f'{widget_icons[3]}'),
+    widget.QuickExit(
+        default_text=f'{widget_icons[2]}', countdown_format=f'{widget_icons[3]}',
+        countdown_start=10,
+    ),
     widget.GenPollText(
         func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/configs/widgets/easy.sh")).decode("utf-8"),
         padding=5,

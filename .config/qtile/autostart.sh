@@ -11,12 +11,10 @@ is_running() {
 }
 
 is_running 'pausa'
-is_running 'dwm-bar.sh'
 is_running 'easy_always.sh'
 is_running 'tf2_server_count.sh'
 is_running 'santos_pregame.sh'
 is_running 'xidlehook.sh'
-is_running 'gametowks.mjs' 'node'
 is_running 'santos_calendar.mjs' 'node'
 is_running 'gameon.mjs' 'node'
 is_running 'music_bass.mjs' 'node'
