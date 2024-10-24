@@ -1,4 +1,4 @@
-import = ["~/.config/alacritty/nord.toml"]
+general.import = ["~/.config/alacritty/nord.toml"]
 [env]
 TERM="alacritty"
 
