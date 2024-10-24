@@ -63,6 +63,7 @@ alias search='pacman -Ss'
 alias lsm="exa -al --color=always --group-directories-first --icons"
 alias ls="exa --icons"
 alias :pu='yay'
+alias :pc='checkupdates | wc -l'
 alias :ps='pacman -Ss'
 alias :pi='sudo pacman -S'
 alias :pr='sudo pacman -Rs'
