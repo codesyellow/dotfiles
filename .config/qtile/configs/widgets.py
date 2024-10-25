@@ -90,8 +90,8 @@ my_widgets = [
         update_interval=30,
     ),
     widget.Volume(
-        fontsize=wsize,
-        fmt='  {}',
+        fontsize=18,
+        fmt='<span size="15000" rise="4500" foreground="#d8dee9"></span> <span rise="5000" size="14000" foreground="#d8dee9"> {}</span>',
         update_interval=5
     ),
     widget.GenPollText(
