@@ -39,7 +39,6 @@ my_widgets = [
     ),
     widget.GenPollText(
         func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/configs/widgets/easy.sh")).decode("utf-8"),
-        padding=5,
         fontsize=wsize,
         update_interval=2,
     ),
@@ -63,7 +62,6 @@ my_widgets = [
     widget.GenPollText(
         background=bg,
         func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/configs/widgets/variant.sh")).decode("utf-8"),
-        padding=5,
         fontsize=wsize,
         update_interval=2,
     ),
