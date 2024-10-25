@@ -14,4 +14,3 @@ groups = [
                                                    ScratchPad('scratchpad', scratchpads),
                                                    ]
 
-

@@ -11,7 +11,7 @@ icons = [
         '<span size="14000"></span> ',
         '',
         '<span size="15000"></span>',
-        '<span size="16000"></span>',
+        '<span size="15000"></span>',
         '<span size="15000" rise="3000"></span> ',
         '<span size="14000"></span>',
         ]
