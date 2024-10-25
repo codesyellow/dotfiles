@@ -25,7 +25,6 @@ home = os.path.expanduser('~/')
 mod = "mod4"
 pad = 10
 group_font = 'Font Awesome 6 Free Regular'
-my_font = 'JetBrainMono Nerd Font'
 runner = ''
 sterm = ''
 wsize = 18

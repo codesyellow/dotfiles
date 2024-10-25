@@ -1,6 +1,6 @@
 import os, subprocess
 from libqtile import widget, qtile
-from .variables import bg, fg, al, my_font, exit_icon_font, group_font, widget_icons, wsize
+from .variables import bg, fg, al, exit_icon_font, group_font, widget_icons, wsize
 from .functions import tabbed
 from libqtile.log_utils import logger
 
