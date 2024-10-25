@@ -1,6 +1,12 @@
 #!/usr/bin/env zx
 let active = false;
 let inactive = false;
+
+const setEqualizer = async () => {
+  await $`pamixer --set-volume 30`;
+  await $`easy_preset.sh 'LoudnessEqualizer'`;
+};
+
 while (true) {
   try {
     const { stdout: cmusStatus } =
@@ -18,22 +24,19 @@ while (true) {
     ) {
       inactive = true;
       console.log("Paused or stopped");
-      await $`pamixer --set-volume 30`;
-      await $`easy_preset.sh 'LoudnessEqualizer'`;
+      setEqualizer();
       if (active) {
         active = false;
       }
     } else if (cmusStatus.trim() === "0") {
       if (!inactive) {
-        await $`pamixer --set-volume 30`;
-        await $`easy_preset.sh 'LoudnessEqualizer'`;
+        setEqualizer();
         inactive = true;
       }
     }
   } catch (e) {
     if (!inactive) {
-      await $`pamixer --set-volume 30`;
-      await $`easy_preset.sh 'LoudnessEqualizer'`;
+      setEqualizer();
       inactive = true;
     }
   }
