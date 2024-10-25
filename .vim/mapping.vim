@@ -1,6 +1,8 @@
 let mapleader = " "
 let g:user_emmet_leader_key=','
 
+nnoremap <silent><esc><esc> :nohlsearch<CR>
+
 nnoremap <leader>pi :IndentLinesToggle<CR>
 nnoremap <leader>vs :so %<CR>
 nnoremap <leader>aq :q<CR>

@@ -4,7 +4,6 @@ set foldmethod=manual
 filetype plugin indent on  " Load plugins according to detected filetype.
 syntax on                  " Enable syntax highlighting.
 set autoindent             " Indent according to previous line.
-set wrap
 set expandtab              " Use spaces instead of tabs.
 set softtabstop =2         " Tab key indents by 4 spaces.
 set shiftwidth  =2         " >> indents by 4 spaces.
@@ -25,7 +24,7 @@ set splitright             " Open new windows right of the current window.
 set laststatus=2
 set noshowmode
 set ignorecase             " match everything
-set nowrap
+set wrap
 set smartcase              " this override ignorecase and search, for example, for upper case only
 set showmatch
 set cursorline             " Find the current line quickly.
