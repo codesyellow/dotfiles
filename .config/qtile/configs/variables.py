@@ -8,12 +8,12 @@ al = '#EF5A6F'
 browser = 'com.brave.Browser'
 exit_icon_font = 'Font Awesome 6 Free Regular'
 icons = [
-        '',
-        '',
-        '',
-        '',
-        '',
-        '<span size="14000"> </span>',
+        '<span size="14000"></span> ',
+        '',
+        '<span size="15000"></span>',
+        '<span size="16000"></span>',
+        '<span size="15000" rise="3000"></span> ',
+        '<span size="14000"></span>',
         ]
 widget_icons = [
         '   ',

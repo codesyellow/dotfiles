@@ -48,9 +48,9 @@ keys.append(
 # toworkspace
 keys.append(
 KeyChord([mod], 'w', [
-    Key([], 'b', lazy.group[groups[0].name].toscreen()),
+    Key([], 't', lazy.group[groups[0].name].toscreen()),
     Key([], 'v', lazy.group[groups[1].name].toscreen()),
-    Key([], 't', lazy.group[groups[2].name].toscreen()),
+    Key([], 'b', lazy.group[groups[2].name].toscreen()),
     Key([], 'g', lazy.group[groups[3].name].toscreen()),
     Key([], 'm', lazy.group[groups[4].name].toscreen()),
     Key([], 'e', lazy.group[groups[5].name].toscreen()),
@@ -58,9 +58,9 @@ KeyChord([mod], 'w', [
 
 keys.append(
     KeyChord([mod, 'shift'], 'w', [
-        Key([], 'b',  lazy.window.togroup(groups[0].name)),
+        Key([], 't',  lazy.window.togroup(groups[0].name)),
         Key([], 'v',  lazy.window.togroup(groups[1].name)),
-        Key([], 't',  lazy.window.togroup(groups[2].name)),
+        Key([], 'b',  lazy.window.togroup(groups[2].name)),
         Key([], 'g',  lazy.window.togroup(groups[3].name)),
         Key([], 'm',  lazy.window.togroup(groups[4].name)),
         Key([], 'e',  lazy.window.togroup(groups[5].name)),

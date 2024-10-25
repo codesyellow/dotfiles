@@ -52,6 +52,7 @@ scratchpads = [
         match=Match(wm_class=['Whatsapp-for-linux'][0]),
         height=0.9,
         width=0.8,
+        y=0.03,
         on_focus_lost_hide=False
     ),
     DropDown(

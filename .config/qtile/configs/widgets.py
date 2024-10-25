@@ -5,12 +5,15 @@ from .functions import tabbed
 from libqtile.log_utils import logger
 
 my_widgets = [
+    widget.Spacer(
+        length=-10,
+    ),
     widget.GroupBox(
         active=fg,
         block_highlight_text_color=al,
         disable_drag=True,
         markup=True,
-        spacing=4,
+        spacing=2,
         highlight_method='text',
         this_current_screen_border=al,
         urgent_text=al,
@@ -20,7 +23,6 @@ my_widgets = [
         inactive='#4c566a',
         foreground='#444',
         use_mouse_wheel=False,
-        padding_x=4,
     ),
     widget.CurrentLayoutIcon(),
     widget.Spacer(),
@@ -124,7 +126,6 @@ my_widgets = [
         fontsize=wsize,
         update_interval=60,
     ),
-    widget.Spacer(length=6),
 ]
 
 widget_defaults = dict(
