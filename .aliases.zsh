@@ -25,12 +25,16 @@ alias :st="systemctl start"
 alias :ss="systemctl status"
 alias :sp="systemctl stop"
 alias :sr="systemctl restart"
+alias :se="systemctl enable"
+alias :sen="systemctl enable --now"
 alias :sd="systemctl daemon-reload"
 # user
 alias :set="systemctl --user start"
 alias :ses="systemctl --user status"
 alias :sep="systemctl --user stop"
 alias :ser="systemctl --user restart"
+alias :see="systemctl --user enable"
+alias :seen="systemctl --user enable --now"
 alias :sed="systemctl --user daemon-reload"
 
 # tmux
