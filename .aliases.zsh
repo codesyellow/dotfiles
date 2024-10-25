@@ -37,6 +37,9 @@ alias :see="systemctl --user enable"
 alias :seen="systemctl --user enable --now"
 alias :sed="systemctl --user daemon-reload"
 
+# move
+alias :m3="mv ~/Downloads/*.mp3 ~/.music"
+
 # tmux
 alias :tl="tmux ls"
 
