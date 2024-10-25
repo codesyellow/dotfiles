@@ -5,5 +5,5 @@ disk_num=${disk_usage::-1}
 
 if [[ $disk_num -le 20 ]]; then
   output="$hdd_icon  $disk_num""G"
-  printf '<span foreground="#fff">|</span> <span size="12000" foreground="#EF5A6F" rise="3000">%s</span> <span foreground="#EF5A6F" rise="2000"> %sG</span>' "$hdd_icon" "$disk_num"
+  printf '<span size="x-large" foreground="#fff">|</span> <span size="12000" foreground="#EF5A6F" rise="3800">%s</span> <span foreground="#EF5A6F" rise="3500"> %sG</span>' "$hdd_icon" "$disk_num"
 fi

@@ -4,5 +4,5 @@ disk_usage=$(df -h | awk '{ if ($6 == "/home") print $4 }')
 disk_num=${disk_usage::-1}
 
 if [[ $disk_num -le 10 ]]; then
-  printf ' <span foreground="#fff">|</span> <span size="12000" foreground="#EF5A6F" rise="3000">%s</span> <span foreground="#EF5A6F" rise="2000">%sG</span>' "$hdd_icon" "$disk_num"
+  printf '<span size="x-large" foreground="#fff">|</span> <span size="12000" foreground="#EF5A6F" rise="4000">%s</span> <span foreground="#EF5A6F" rise="3000">%sG</span>' "$hdd_icon" "$disk_num"
 fi
