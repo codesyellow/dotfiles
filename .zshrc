@@ -39,14 +39,17 @@ autoload -Uz _zinit
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
-zinit light-mode for \
-    zdharma-continuum/zinit-annex-as-monitor \
-    zdharma-continuum/zinit-annex-bin-gem-node \
-    zdharma-continuum/zinit-annex-patch-dl \
-    zdharma-continuum/zinit-annex-rust
+#zinit light-mode for \
+#    zdharma-continuum/zinit-annex-as-monitor \
+#    zdharma-continuum/zinit-annex-bin-gem-node \
+#    zdharma-continuum/zinit-annex-patch-dl \
+#    zdharma-continuum/zinit-annex-rust
 zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-completions
-zinit light zdharma-continuum/fast-syntax-highlighting
+zinit wait lucid for \
+   zdharma-continuum/fast-syntax-highlighting \
+   zsh-users/zsh-completions
+#zinit light zsh-users/zsh-completions
+#zinit light zdharma-continuum/fast-syntax-highlighting
 
 autoload -U compinit && compinit
 
@@ -66,6 +69,6 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 setopt autocd beep extendedglob nomatch
 
-eval "$(zoxide init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/posh.toml)"
 
