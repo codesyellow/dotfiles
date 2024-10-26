@@ -14,6 +14,7 @@ if [[ -f "$pomodoro" ]]; then
   output="$pymor_icon_empty $pomodoro_number"
   printf '<span rise="4500" size="12500" foreground="#EF5A6F">%s</span> <span size="x-large" foreground="#fff">|</span>' "$output"
 else
+  printf ''
   if [[ -f "/tmp/pomo_half" ]]; then
     rm "/tmp/pomo_half"
   fi

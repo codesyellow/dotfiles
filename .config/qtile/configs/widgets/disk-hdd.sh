@@ -1,7 +1,7 @@
 #!/bin/bash
 hdd_icon=
-disk_usage=$(df -h | awk '{ if ($6 == "/home/digo/.HDD") print $4 }')
-disk_num=${disk_usage::-1}
+disk_usage=$(df -h | awk '{ if ($6 == "/home") print $4 }')
+disk_num=$(printf "%.0f" "$(echo "${disk_usage::-1}" | bc)")
 
 if [[ $disk_num -le 10 ]]; then
   output="$hdd_icon  $disk_num""G"
