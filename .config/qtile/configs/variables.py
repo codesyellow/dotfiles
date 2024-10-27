@@ -34,7 +34,8 @@ if qtile.core.name == "wayland":
     sterm = 'alacritty'
 
 if qtile.core.name == "x11":
-    runner = f"dmenu_run -nb {bg} -z 700 -x 225 -y -1 -sb {bg} -shb {bg} -nhb {bg} -shf {al} -nhf {al} -fn dmenufont -p "
+#    runner = f"dmenu_run -nb {bg} -z 700 -x 225 -y -1 -sb {bg} -shb {bg} -nhb {bg} -shf {al} -nhf {al} -fn dmenufont -p "
+    runner = "rofi -show run"
 elif qtile.core.name == "wayland":
     runner = f"bemenu-run -c -l 10 -i -M 300 --fn 'IBM Plex Mono 14' -p '' --hp 8 --nb {bg} --nf '#fff' --ab {bg} -- │ hf {bg} --hb {bg} --fb {bg} -B 1 --bdr {bg}"
 term = "alacritty"
