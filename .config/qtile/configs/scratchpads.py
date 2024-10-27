@@ -85,7 +85,7 @@ scratchpads = [
     ),
     DropDown(
         'cmus',
-        f'{sterm} -T scratchpad -e cmus',
+        f'{sterm} -T scratchpad -c cmus -e cmus',
         height=0.9,
         width=0.9,
         opacity=0.5,
