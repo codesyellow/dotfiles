@@ -1,9 +1,0 @@
-[Unit]
-Description=A service unit to manage xremap
-
-[Service]
-Type=simple
-ExecStart=/usr/bin/xremap /home/cie/.config/xremap/config.yml
-
-[Install]
-WantedBy=multi-user.target

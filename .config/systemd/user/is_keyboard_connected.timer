@@ -1,9 +1,0 @@
-[Unit]
-Description=A timer unit that should start the is_keyboard_connected service every 10 seconds
-
-[Timer]
-OnBootSec=10s
-OnUnitActiveSec=5s
-
-[Install]
-WantedBy=timers.target

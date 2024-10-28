@@ -1,9 +1,0 @@
-[Unit]
-Description=Timer unit for the easy_active service
-
-[Timer]
-OnBootSec=5s
-OnUnitActiveSec=30s
-
-[Install]
-WantedBy=timers.target

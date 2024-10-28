@@ -1,5 +1,0 @@
-[Unit]
-Description=A script to check if easyeffects is running and if it's not, set volume to 30%
-
-[Service]
-ExecStart=/home/cie/.config/systemd/user/scripts/is_easy_active
