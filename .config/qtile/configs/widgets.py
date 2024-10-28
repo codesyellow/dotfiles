@@ -89,6 +89,12 @@ my_widgets = [
         fontsize=wsize,
         update_interval=30,
     ),
+    widget.GenPollText(
+        func=lambda: subprocess.check_output(os.path.expanduser("~/.bin/tmux_kill.mjs")).decode("utf-8"),
+        fontsize=wsize,
+        mouse_callbacks = {'Button1': lambda: qtile.spawn("tmux_kill.mjs 'kill'")},
+        update_interval=60,
+    ),
     widget.Volume(
         fontsize=18,
         fmt='<span size="14000" rise="4000" foreground="#d8dee9"></span> <span rise="4500" size="13500" foreground="#d8dee9"> {}</span>',
