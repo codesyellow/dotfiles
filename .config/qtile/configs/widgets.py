@@ -87,6 +87,7 @@ my_widgets = [
     widget.GenPollText(
         func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/configs/widgets/santos.sh")).decode("utf-8"),
         fontsize=wsize,
+        mouse_callbacks = {'Button1': lambda: qtile.spawn("touch /tmp/stop_santos_widget")},
         update_interval=30,
     ),
     widget.GenPollText(
