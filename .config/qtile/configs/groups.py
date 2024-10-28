@@ -5,7 +5,7 @@ from .scratchpads import scratchpads
 
 groups = [
         Group(icons[0], layout='max', matches=[Match(wm_class=re.compile(r"^(Alacritty|st)$"))]),
-        Group(icons[1], layout='max', matches=[Match(wm_class=re.compile(r"^(audacious)$"))]),
+        Group(icons[1], layout='max', matches=[Match(wm_class=re.compile(r"^(audacious|gimp|kdenlive)$"))]),
         Group(icons[2], layout='max', matches=[Match(wm_class=re.compile(r"^(navigator|firefox|Brave\-browser|qutebrowser|org\.qutebrowser\.qutebrowser|floorp)$"))]),
         Group(icons[3], layout='max', matches=[Match(wm_class=re.compile(r"^(heroic|Steam|amazon\ games\ ui\.exe|bottles|ProtonUp\-Qt|lutris|amazongamessetup\.exe|net\.davidotek\.pupgui2)$")),
                                                Match(title=re.compile(r"^(Steam\ \-\ Self\ Updater|Special\ Offers|Steam\ setup|Steam|Sign\ in\ to\ Steam)$"))]),

@@ -35,20 +35,3 @@ def new_client(client):
     if client.get_wm_class()[0] == "xdg-desktop-portal-lxqt":
         client.set_size_floating(800,500)
 
-@hook.subscribe.client_killed
-def client_killed(client):
-  try:
-    subprocess.run(["canberra-gtk-play", "-f", "/usr/share/sounds/Smooth/stereo/window-close.oga"])
-  except FileNotFoundError:
-    logger.warning(f"Error: Sound file not found")
-  except subprocess.CalledProcessError as e:
-    logger.warning(f"Error playing sound: {e}")
-
-@hook.subscribe.client_managed
-def client_managed(client):
-  try:
-    subprocess.run(["canberra-gtk-play", "-f", "/usr/share/sounds/Smooth/stereo/window-new.oga"])
-  except FileNotFoundError:
-    logger.warning(f"Error: Sound file not found")
-  except subprocess.CalledProcessError as e:
-    logger.warning(f"Error playing sound: {e}")
