@@ -90,10 +90,10 @@ my_widgets = [
         update_interval=30,
     ),
     widget.GenPollText(
-        func=lambda: subprocess.check_output(os.path.expanduser("~/.bin/tmux_kill.mjs")).decode("utf-8"),
+        func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/configs/widgets/tmux_kill.mjs")).decode("utf-8"),
         fontsize=wsize,
         mouse_callbacks = {'Button1': lambda: qtile.spawn("tmux_kill.mjs 'kill'")},
-        update_interval=60,
+        update_interval=30,
     ),
     widget.Volume(
         fontsize=18,
