@@ -27,7 +27,7 @@ opacity = 1.0
 [keyboard]
 bindings = [
   { key = "N", mods = "Control|Shift", action = "CreateNewWindow" },
-  { key = "C", mods = "ALT", action = "ToggleViMode" },
+  { key = "C", mods = "Control|Alt", action = "ToggleViMode" },
 ]
 
 [cursor]
