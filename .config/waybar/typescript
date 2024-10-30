@@ -1,419 +1,0 @@
-Script started on 2024-10-19 09:01:21-03:00 [TERM="screen-256color" TTY="/dev/pts/9" COLUMNS="77" LINES="5"]
-[1m[3m%[23m[1m[0m                                                                             [0m[23m[24m[J[31m~/.config/waybar [37m 
-[K[?2004h[Kc[1m[31mc[0m[39m[1m[31mc[0m[39m[35mlear[39m[1m[31mc[1m[31md[0m[39m[39m [39m [39m [0m[32mc[0m[32md[39m[32mc[32md[32m [39m[32mc[32md[39m[39m [35m~/.d[39m[35mwm-new[39m[10D[39ms[39m [39m [39m [39m [39m [39m [39m [39m [39m [9D[4ms[24m[35mcrip[39m[35mts[39m[4ms[39m[4mc[24m[2C[35mp[35mt[39m[4mc[39m[4mr[39m[4mi[39m[4mp[39m[4mt[39m[4ms[1m[4m/[0m[24m[4ms[24m[0m[24m [?2004l
-[1m[3m%[23m[1m[0m                                                                             [0m[23m[24m[J[31m~/.config/waybar/scripts [37m 
-[K[?2004h[Kl[32ml[39m[32ml[39m[35ms[39m[32ml[32ms[39m[?2004l
-[32m [1mclimate.sh[0m    [32m [1mds4.sh[0m            [32m [1mmem.sh[0m           [32m [1mtablayout.sh[0m
-[32m [1mcpu.sh[0m        [32m [1measyeffects.sh[0m    [32m [1mpymor.sh[0m         [32m [1mtemp.sh[0m
-[32m [1mdisk_hdd.sh[0m   [32m [1mgameon.sh[0m         [32m [1msantos_match.sh[0m  [32m [1mupdate.sh[0m
-[32m [1mdisk_home.sh[0m  [32m [1micon_retrieve.sh[0m  [32m [1mserver.sh[0m        
-[32m [1mdisk_root.sh[0m  [32m [1mkey_variant.sh[0m    [32m [1mstretch.sh[0m       
-[1m[3m%[23m[1m[0m                                                                             [0m[23m[24m[J[31m~/.config/waybar/scripts [37m 
-[K[?2004h[K.[32m.[39m[32m.[39m[35m/gameon.sh[39m[10D[32m.[32m/[39m[4m[32m.[4m[32m/[24m[39m[4m[32m.[4m[32m/[4m[32mv[24m[39m[39m [39m [39m [39m [39m [39m [39m [39m [8D[24m[1m[31m.[24m[1m[31m/[24m[1m[31mv[0m[39m[1m[31mv[1m[31ma[0m[39m[0m[39m.[0m[39m/[0m[39mv[0m[39ma[1m[31m.[1m[31m/[1m[31mv[1m[31ma[0m[39m[1m[31mv[0m[39m[0m[39m [1m[31m.[1m[31m/[0m[39m[0m[39m [0m[4m[32m.[0m[4m[32m/[24m[39m[35mgameon.sh[39m[9D[24m[39m.[24m[39m/
-[Jclimate.sh*        ds4.sh*            mem.sh*            tablayout.sh*
-cpu.sh*            easyeffects.sh*    pymor.sh*          temp.sh*
-disk_hdd.sh*       gameon.sh*         santos_match.sh*   update.sh*
-disk_home.sh*      icon_retrieve.sh*  server.sh*         
-disk_root.sh*      key_variant.sh*    stretch.sh*        
-[0m[23m[24m[J[31m~/.config/waybar/scripts [37m 
-./[35mgameon.sh[39m[K[9D[4m[32m.[4m[32m/[24m[39m[4m[32m.[4m[32m/[4m[32mk[24m[39m[39m [39m [39m [39m [39m [39m [39m [39m [8D[39m[4m.[39m[4m/[39m[4mk[24m[4mk[4me[24m[24m[32m.[24m[32m/[24m[32mk[24m[32me[32my_variant.sh[39m[1m [0m[0m [?2004l
-{"text": " US", "tooltip": "Keyboar Variant", "class": "normal"}
-[1m[3m%[23m[1m[0m                                                                             [0m[23m[24m[J[31m~/.config/waybar/scripts [37m 
-[K[?2004h[K'[1m[31m'[0m[39m[1m[31m'[1m[31m'[0m[39m[1m[31m'[1m[31m'[1m[31m'[0m[39m[1m[31m'[1m[31m´[0m[39m[0m[39m.[0m[39m/[0m[39mk[0m[39mey_variant.sh[32m.[32m/[32mk[32me[32my[32m_[32mv[32ma[32mr[32mi[32ma[32mn[32mt[32m.[32ms[32mh[39m[?2004l
-{"text": " INTL", "tooltip": "Keyboar Variant", "class": "critical"}
-[1m[3m%[23m[1m[0m                                                                             [0m[23m[24m[J[31m~/.config/waybar/scripts [37m 
-[K[?2004h[K[K./key_variant.sh[32m.[32m/[32mk[32me[32my[32m_[32mv[32ma[32mr[32mi[32ma[32mn[32mt[32m.[32ms[32mh[39m[32ml[32ms[39m[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [15D[32mc[32md[39m scripts[32ms[32mt[39martx    [32ms[32mt[32ma[32mr[32mt[32mx[39m[32mr[32mi[32mv[32me[32mr[39m[39m [K[K[K[K[K[Kw[32mw[39m[32mw[39m[35maybar[39m[32mw[32mw[39m[39m [39m [39m [39m [1m[31mw[1m[31mw[0m[39m[1m[31mw[0m[39m[0m[39m [0m[32mw[39m[32mw[39m[35maybar[39m[32mw[32ma[39m[1m[31mw[1m[31ma[0m[39m[1m[31mw[1m[31ma[1m[31my[0m[39m[1m[31my[1m[31mb[0m[39m[1m[31mb[1m[31ma[0m[39m[1m[31ma[1m[31mr[0m[39m[0m[32mw[0m[32ma[0m[32my[0m[32mb[0m[32ma[0m[32mr[39m[?2004l
-[2024-10-19 09:01:54.069] [[32minfo[m] Using configuration file /home/digo/.config/waybar/config
-[2024-10-19 09:01:54.072] [[32minfo[m] Using CSS file /home/digo/.config/waybar/style.css
-[2024-10-19 09:01:54.082] [[32minfo[m] Hyprland IPC starting
-[2024-10-19 09:01:54.083] [[32minfo[m] Loading persistent workspaces from Waybar config
-[2024-10-19 09:01:54.084] [[32minfo[m] Loading persistent workspaces from Hyprland workspace rules
-[2024-10-19 09:01:54.206] [[32minfo[m] Bar configured (width: 1360, height: 26) for output: VGA-1
-'''^C[2024-10-19 09:02:54.649] [[32minfo[m] Quitting.
-^Czsh: segmentation fault (core dumped)  waybar
-[1m[3m%[23m[1m[0m                                                                             [0m[23m[24m[J[31m~/.config/waybar/scripts [37m 
-[K[?2004h[K[Kwaybar[32mw[32ma[32my[32mb[32ma[32mr[39m[?2004l
-[2024-10-19 09:02:55.458] [[32minfo[m] Using configuration file /home/digo/.config/waybar/config
-[2024-10-19 09:02:55.461] [[32minfo[m] Using CSS file /home/digo/.config/waybar/style.css
-[2024-10-19 09:02:55.471] [[32minfo[m] Hyprland IPC starting
-[2024-10-19 09:02:55.472] [[32minfo[m] Loading persistent workspaces from Waybar config
-[2024-10-19 09:02:55.473] [[32minfo[m] Loading persistent workspaces from Hyprland workspace rules
-[2024-10-19 09:02:55.604] [[32minfo[m] Bar configured (width: 1360, height: 26) for output: VGA-1
-^C[2024-10-19 09:03:10.733] [[32minfo[m] Quitting.
-^Czsh: segmentation fault (core dumped)  waybar
-[1m[3m%[23m[1m[0m                                                                             [0m[23m[24m[J[31m~/.config/waybar/scripts [37m 
-[K[?2004h[K[Kwaybar[32mw[32ma[32my[32mb[32ma[32mr[39m[?2004l
-[2024-10-19 09:03:11.551] [[32minfo[m] Using configuration file /home/digo/.config/waybar/config
-[2024-10-19 09:03:11.554] [[32minfo[m] Using CSS file /home/digo/.config/waybar/style.css
-[2024-10-19 09:03:11.564] [[32minfo[m] Hyprland IPC starting
-[2024-10-19 09:03:11.565] [[32minfo[m] Loading persistent workspaces from Waybar config
-[2024-10-19 09:03:11.565] [[32minfo[m] Loading persistent workspaces from Hyprland workspace rules
-[2024-10-19 09:03:11.697] [[32minfo[m] Bar configured (width: 1360, height: 26) for output: VGA-1
-^C[2024-10-19 09:03:20.685] [[32minfo[m] Quitting.
-^Czsh: segmentation fault (core dumped)  waybar
-[1m[3m%[23m[1m[0m                                                                             [0m[23m[24m[J[31m~/.config/waybar/scripts [37m 
-[K[?2004h[K[Kwaybar[32mw[32ma[32my[32mb[32ma[32mr[39m[?2004l
-[2024-10-19 09:03:21.535] [[32minfo[m] Using configuration file /home/digo/.config/waybar/config
-[2024-10-19 09:03:21.540] [[32minfo[m] Using CSS file /home/digo/.config/waybar/style.css
-[2024-10-19 09:03:21.549] [[32minfo[m] Hyprland IPC starting
-[2024-10-19 09:03:21.550] [[32minfo[m] Loading persistent workspaces from Waybar config
-[2024-10-19 09:03:21.551] [[32minfo[m] Loading persistent workspaces from Hyprland workspace rules
-[2024-10-19 09:03:21.686] [[32minfo[m] Bar configured (width: 1360, height: 26) for output: VGA-1
-^C[2024-10-19 09:03:32.821] [[32minfo[m] Quitting.
-^Czsh: segmentation fault (core dumped)  waybar
-[1m[3m%[23m[1m[0m                                                                             [0m[23m[24m[J[31m~/.config/waybar/scripts [37m 
-[K[?2004h[K[Kwaybar[32mw[32ma[32my[32mb[32ma[32mr[39m[?2004l
-[2024-10-19 09:03:33.663] [[32minfo[m] Using configuration file /home/digo/.config/waybar/config
-[2024-10-19 09:03:33.667] [[32minfo[m] Using CSS file /home/digo/.config/waybar/style.css
-[2024-10-19 09:03:33.676] [[32minfo[m] Hyprland IPC starting
-[2024-10-19 09:03:33.677] [[32minfo[m] Loading persistent workspaces from Waybar config
-[2024-10-19 09:03:33.678] [[32minfo[m] Loading persistent workspaces from Hyprland workspace rules
-[2024-10-19 09:03:33.815] [[32minfo[m] Bar configured (width: 1360, height: 26) for output: VGA-1
-^C[2024-10-19 09:16:50.827] [[32minfo[m] Quitting.
-^Czsh: segmentation fault (core dumped)  waybar
-[1m[3m%[23m[1m[0m                                                                             [0m[23m[24m[J[31m~/.config/waybar/scripts [37m 
-[K[?2004h[K[Kwaybar[32mw[32ma[32my[32mb[32ma[32mr[39m[?2004l
-[2024-10-19 09:16:51.747] [[32minfo[m] Using configuration file /home/digo/.config/waybar/config
-[2024-10-19 09:16:51.756] [[32minfo[m] Using CSS file /home/digo/.config/waybar/style.css
-[2024-10-19 09:16:51.775] [[32minfo[m] Hyprland IPC starting
-[2024-10-19 09:16:51.780] [[32minfo[m] Loading persistent workspaces from Waybar config
-[2024-10-19 09:16:51.780] [[32minfo[m] Loading persistent workspaces from Hyprland workspace rules
-[2024-10-19 09:16:52.084] [[32minfo[m] Bar configured (width: 1360, height: 26) for output: VGA-1
-^C[2024-10-19 09:17:44.952] [[32minfo[m] Quitting.
-^Czsh: segmentation fault (core dumped)  waybar
-[1m[3m%[23m[1m[0m                                                                             [0m[23m[24m[J[31m~/.config/waybar/scripts [37m 
-[K[?2004h[K[Kwaybar[32mw[32ma[32my[32mb[32ma[32mr[39m[?2004l
-[2024-10-19 09:17:45.805] [[32minfo[m] Using configuration file /home/digo/.config/waybar/config
-[2024-10-19 09:17:45.808] [[32minfo[m] Using CSS file /home/digo/.config/waybar/style.css
-[2024-10-19 09:17:45.818] [[32minfo[m] Hyprland IPC starting
-[2024-10-19 09:17:45.820] [[32minfo[m] Loading persistent workspaces from Waybar config
-[2024-10-19 09:17:45.820] [[32minfo[m] Loading persistent workspaces from Hyprland workspace rules
-[2024-10-19 09:17:45.944] [[32minfo[m] Bar configured (width: 1360, height: 26) for output: VGA-1
-[2024-10-19 09:52:44.586] [[32minfo[m] Hyprland config reloaded, reinitializing hyprland/workspaces module...
-[2024-10-19 09:52:44.673] [[32minfo[m] Loading persistent workspaces from Waybar config
-[2024-10-19 09:52:44.674] [[32minfo[m] Loading persistent workspaces from Hyprland workspace rules
-[2024-10-19 09:53:30.678] [[32minfo[m] Hyprland config reloaded, reinitializing hyprland/workspaces module...
-[2024-10-19 09:53:30.706] [[32minfo[m] Loading persistent workspaces from Waybar config
-[2024-10-19 09:53:30.712] [[32minfo[m] Loading persistent workspaces from Hyprland workspace rules
-^C[2024-10-19 09:58:35.764] [[32minfo[m] Quitting.
-^Czsh: segmentation fault (core dumped)  waybar
-[1m[3m%[23m[1m[0m                                                                        [0m[23m[24m[J[31m~/.config/waybar/scripts [37m 
-[K[?2004h[K[Kwaybar[32mw[32ma[32my[32mb[32ma[32mr[39m[?2004l
-[2024-10-19 09:58:36.709] [[32minfo[m] Using configuration file /home/digo/.config/waybar/config
-[2024-10-19 09:58:36.712] [[32minfo[m] Using CSS file /home/digo/.config/waybar/style.css
-[2024-10-19 09:58:36.721] [[32minfo[m] Hyprland IPC starting
-[2024-10-19 09:58:36.722] [[32minfo[m] Loading persistent workspaces from Waybar config
-[2024-10-19 09:58:36.723] [[32minfo[m] Loading persistent workspaces from Hyprland workspace rules
-[2024-10-19 09:58:36.858] [[32minfo[m] Bar configured (width: 1360, height: 26) for output: VGA-1
-^C[2024-10-19 09:58:44.177] [[32minfo[m] Quitting.
-^Czsh: segmentation fault (core dumped)  waybar
-[1m[3m%[23m[1m[0m                                                                        [0m[23m[24m[J[31m~/.config/waybar/scripts [37m 
-[K[?2004h[K[Kwaybar[32mw[32ma[32my[32mb[32ma[32mr[39m[?2004l
-[2024-10-19 09:58:46.096] [[32minfo[m] Using configuration file /home/digo/.config/waybar/config
-[2024-10-19 09:58:46.099] [[32minfo[m] Using CSS file /home/digo/.config/waybar/style.css
-[2024-10-19 09:58:46.107] [[32minfo[m] Hyprland IPC starting
-[2024-10-19 09:58:46.109] [[32minfo[m] Loading persistent workspaces from Waybar config
-[2024-10-19 09:58:46.110] [[32minfo[m] Loading persistent workspaces from Hyprland workspace rules
-[2024-10-19 09:58:46.246] [[32minfo[m] Bar configured (width: 1360, height: 26) for output: VGA-1
-^C[2024-10-19 09:58:53.827] [[32minfo[m] Quitting.
-[1m[3m%[23m[1m[0m                                                                        [0m[23m[24m[J[31m~/.config/waybar/scripts [37m 
-[K[?2004h[K[Kwaybar[32mw[32ma[32my[32mb[32ma[32mr[39m[?2004l
-[2024-10-19 09:59:02.963] [[32minfo[m] Using configuration file /home/digo/.config/waybar/config
-[2024-10-19 09:59:02.966] [[32minfo[m] Using CSS file /home/digo/.config/waybar/style.css
-[2024-10-19 09:59:02.975] [[32minfo[m] Hyprland IPC starting
-[2024-10-19 09:59:02.977] [[32minfo[m] Loading persistent workspaces from Waybar config
-[2024-10-19 09:59:02.977] [[32minfo[m] Loading persistent workspaces from Hyprland workspace rules
-[2024-10-19 09:59:03.120] [[32minfo[m] Bar configured (width: 1360, height: 26) for output: VGA-1
-^C[2024-10-19 09:59:36.795] [[32minfo[m] Quitting.
-^Czsh: segmentation fault (core dumped)  waybar
-[1m[3m%[23m[1m[0m                                                                        [0m[23m[24m[J[31m~/.config/waybar/scripts [37m 
-[K[?2004h[K[Kwaybar[32mw[32ma[32my[32mb[32ma[32mr[39m[?2004l
-[2024-10-19 09:59:38.396] [[32minfo[m] Using configuration file /home/digo/.config/waybar/config
-[2024-10-19 09:59:38.399] [[32minfo[m] Using CSS file /home/digo/.config/waybar/style.css
-[2024-10-19 09:59:38.408] [[32minfo[m] Hyprland IPC starting
-[2024-10-19 09:59:38.410] [[32minfo[m] Loading persistent workspaces from Waybar config
-[2024-10-19 09:59:38.410] [[32minfo[m] Loading persistent workspaces from Hyprland workspace rules
-[2024-10-19 09:59:38.544] [[32minfo[m] Bar configured (width: 1360, height: 26) for output: VGA-1
-^C[2024-10-19 10:00:14.764] [[32minfo[m] Quitting.
-^Czsh: segmentation fault (core dumped)  waybar
-[1m[3m%[23m[1m[0m                                                                        [0m[23m[24m[J[31m~/.config/waybar/scripts [37m 
-[K[?2004h[K[Kwaybar[32mw[32ma[32my[32mb[32ma[32mr[39m[?2004l
-[2024-10-19 10:00:15.767] [[32minfo[m] Using configuration file /home/digo/.config/waybar/config
-[2024-10-19 10:00:15.770] [[32minfo[m] Using CSS file /home/digo/.config/waybar/style.css
-[2024-10-19 10:00:15.779] [[32minfo[m] Hyprland IPC starting
-[2024-10-19 10:00:15.781] [[32minfo[m] Loading persistent workspaces from Waybar config
-[2024-10-19 10:00:15.782] [[32minfo[m] Loading persistent workspaces from Hyprland workspace rules
-[2024-10-19 10:00:15.917] [[32minfo[m] Bar configured (width: 1360, height: 26) for output: VGA-1
-jk^C[2024-10-19 10:00:34.973] [[32minfo[m] Quitting.
-[1m[3m%[23m[1m[0m                                                                        ^C[0m[23m[24m[J[31m~/.config/waybar/scripts [37m 
-[K[?2004h[K[Kwaybar[32mw[32ma[32my[32mb[32ma[32mr[39m[?2004l
-[2024-10-19 10:00:35.899] [[32minfo[m] Using configuration file /home/digo/.config/waybar/config
-[2024-10-19 10:00:35.902] [[32minfo[m] Using CSS file /home/digo/.config/waybar/style.css
-[2024-10-19 10:00:35.911] [[32minfo[m] Hyprland IPC starting
-[2024-10-19 10:00:35.913] [[32minfo[m] Loading persistent workspaces from Waybar config
-[2024-10-19 10:00:35.913] [[32minfo[m] Loading persistent workspaces from Hyprland workspace rules
-[2024-10-19 10:00:36.044] [[32minfo[m] Bar configured (width: 1360, height: 26) for output: VGA-1
-^C[2024-10-19 10:00:46.358] [[32minfo[m] Quitting.
-^Czsh: segmentation fault (core dumped)  waybar
-[1m[3m%[23m[1m[0m                                                                        [0m[23m[24m[J[31m~/.config/waybar/scripts [37m 
-[K[?2004h[K[Kwaybar[32mw[32ma[32my[32mb[32ma[32mr[39m[?2004l
-[2024-10-19 10:00:47.130] [[32minfo[m] Using configuration file /home/digo/.config/waybar/config
-[2024-10-19 10:00:47.134] [[32minfo[m] Using CSS file /home/digo/.config/waybar/style.css
-[2024-10-19 10:00:47.142] [[32minfo[m] Hyprland IPC starting
-[2024-10-19 10:00:47.144] [[32minfo[m] Loading persistent workspaces from Waybar config
-[2024-10-19 10:00:47.144] [[32minfo[m] Loading persistent workspaces from Hyprland workspace rules
-[2024-10-19 10:00:47.332] [[32minfo[m] Bar configured (width: 1360, height: 26) for output: VGA-1
-^C[2024-10-19 10:01:14.792] [[32minfo[m] Quitting.
-^Czsh: segmentation fault (core dumped)  waybar
-[1m[3m%[23m[1m[0m                                                                        [0m[23m[24m[J[31m~/.config/waybar/scripts [37m 
-[K[?2004h[K[Kwaybar[32mw[32ma[32my[32mb[32ma[32mr[39m[?2004l
-[2024-10-19 10:01:15.669] [[32minfo[m] Using configuration file /home/digo/.config/waybar/config
-[2024-10-19 10:01:15.672] [[32minfo[m] Using CSS file /home/digo/.config/waybar/style.css
-[2024-10-19 10:01:15.682] [[32minfo[m] Hyprland IPC starting
-[2024-10-19 10:01:15.684] [[32minfo[m] Loading persistent workspaces from Waybar config
-[2024-10-19 10:01:15.685] [[32minfo[m] Loading persistent workspaces from Hyprland workspace rules
-[2024-10-19 10:01:15.850] [[32minfo[m] Bar configured (width: 1360, height: 26) for output: VGA-1
-k^C[2024-10-19 10:03:07.361] [[32minfo[m] Quitting.
-^Czsh: segmentation fault (core dumped)  waybar
-[1m[3m%[23m[1m[0m                                                                        [0m[23m[24m[J[K[?2004hwaybar[32mw[32ma[32my[32mb[32ma[32mr[39m[?2004l
-[2024-10-19 10:03:08.721] [[32minfo[m] Using configuration file /home/digo/.config/waybar/config
-[2024-10-19 10:03:08.724] [[32minfo[m] Using CSS file /home/digo/.config/waybar/style.css
-[2024-10-19 10:03:08.734] [[32minfo[m] Hyprland IPC starting
-[2024-10-19 10:03:08.736] [[32minfo[m] Loading persistent workspaces from Waybar config
-[2024-10-19 10:03:08.736] [[32minfo[m] Loading persistent workspaces from Hyprland workspace rules
-[2024-10-19 10:03:08.867] [[32minfo[m] Bar configured (width: 1360, height: 26) for output: VGA-1
-^C[2024-10-19 10:03:39.225] [[32minfo[m] Quitting.
-^Czsh: segmentation fault (core dumped)  waybar
-[1m[3m%[23m[1m[0m                                                                        [0m[23m[24m[J[K[?2004hwaybar[32mw[32ma[32my[32mb[32ma[32mr[39m[?2004l
-[2024-10-19 10:03:41.227] [[32minfo[m] Using configuration file /home/digo/.config/waybar/config
-[2024-10-19 10:03:41.230] [[32minfo[m] Using CSS file /home/digo/.config/waybar/style.css
-[2024-10-19 10:03:41.239] [[32minfo[m] Hyprland IPC starting
-[2024-10-19 10:03:41.240] [[32minfo[m] Loading persistent workspaces from Waybar config
-[2024-10-19 10:03:41.241] [[32minfo[m] Loading persistent workspaces from Hyprland workspace rules
-[2024-10-19 10:03:41.372] [[32minfo[m] Bar configured (width: 1360, height: 26) for output: VGA-1
-^C[2024-10-19 10:04:22.975] [[32minfo[m] Quitting.
-^Czsh: segmentation fault (core dumped)  waybar
-[1m[3m%[23m[1m[0m                                                                        [0m[23m[24m[J[K[?2004hwaybar[32mw[32ma[32my[32mb[32ma[32mr[39m[?2004l
-[2024-10-19 10:04:23.828] [[32minfo[m] Using configuration file /home/digo/.config/waybar/config
-[2024-10-19 10:04:23.832] [[32minfo[m] Using CSS file /home/digo/.config/waybar/style.css
-[2024-10-19 10:04:23.841] [[32minfo[m] Hyprland IPC starting
-[2024-10-19 10:04:23.843] [[32minfo[m] Loading persistent workspaces from Waybar config
-[2024-10-19 10:04:23.843] [[32minfo[m] Loading persistent workspaces from Hyprland workspace rules
-[2024-10-19 10:04:23.979] [[32minfo[m] Bar configured (width: 1360, height: 26) for output: VGA-1
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:33.779] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:34.808] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:35.835] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:36.860] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:37.888] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:38.922] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:39.949] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:40.976] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:42.003] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:43.029] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:44.062] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:45.087] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:46.113] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:47.140] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:48.171] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:49.200] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:50.229] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:51.260] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:52.287] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:53.320] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:54.349] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:55.378] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:56.407] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:57.434] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:58.464] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:50:59.493] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:51:00.521] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:51:01.552] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:51:02.580] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:51:03.605] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:51:04.632] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:51:05.662] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:51:06.692] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:51:07.719] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:51:08.745] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:51:09.773] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:51:10.801] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:51:11.828] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:51:12.858] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:51:13.885] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:51:14.910] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:51:15.941] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (error token is "Abrir")
-[2024-10-19 10:51:16.970] [[31m[1merror[m] custom/tablayout: Error parsing JSON: * Line 1, Column 10
-  Syntax error: value, object or array expected.
-
-/home/digo/.config/waybar/scripts/tablayout.sh: line 12: [[: 1
-Abrir: syntax error in expression (e

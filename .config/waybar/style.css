@@ -80,13 +80,21 @@ window#waybar {
   font-size: 16px;
 }
 
-#custom-easy.warning,
 #custom-easy {
   font-size: 16px;
+  margin-bottom: 2px;
+}
+
+#custom-easy.warning {
+  font-size: 18px;
 }
 
 #custom-separator {
   font-size: 20px;
   padding-bottom: 4px;
   color: #4c566a;
+}
+
+#pulseaudio {
+  margin-bottom: 2px;
 }
