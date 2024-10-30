@@ -10,8 +10,8 @@ margin = 27
 
 [scratchpads.whats]
 animation = "fromTop"
-command = "flatpak run com.github.eneshecan.WhatsAppForLinux"
-class = "whatsapp-for-linux"
+command = "whatsie"
+class = "WhatSie"
 size = "70% 80%"
 process_tracking = false
 class_match = true
@@ -111,6 +111,4 @@ animation = "fromTop"
 margin = 100
 size = "90% 80%"
 position = "5% 10%"
-
-
 
