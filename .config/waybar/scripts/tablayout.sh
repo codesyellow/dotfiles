@@ -9,11 +9,9 @@ if [[ "$floating" -ge "1" ]]; then
   ((clients--))
 fi
 
-if [[ "$clients" -le "1" ]]; then
-  output=""
-else
+if [[ "$clients" -ge "2" ]]; then
   state="warning"
-  output=" $clients_icon $clients [ $client_name ] "
+  output="$clients_icon $clients [ $client_name ]<span size='15000' foreground='#4c566a'> | </span>"
 fi
 
 echo "{\"text\": \"$output\", \"tooltip\": \"tablayout\", \"class\": \"$state\"}"

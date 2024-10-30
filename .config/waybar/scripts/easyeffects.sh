@@ -9,7 +9,7 @@ if [[ -n $is_easy_active ]]; then
     output=""
   fi
 else
-  state="critical"
+  state="warning"
   output="!"
 fi
 

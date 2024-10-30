@@ -42,40 +42,13 @@ window#waybar {
   color: @bg;
 }
 
-#submap,
-#clock,
-#memory,
-#temperature,
-#custom-separator,
-#cpu,
-#disk {
-  font-size: 14px;
-}
-
 /* default */
 #clock,
 #custom-easy,
-#custom-separator-stretch,
-#custom-separator-pymor,
-#custom-pymor,
-#custom-stretch,
-#custom-updates,
-#custom-santos,
-#custom-variant,
-#custom-climate,
-#custom-server,
-#cpu,
-#custom-cpu,
-#memory,
-#pulseaudio,
-#temperature,
-#custom-separator,
-#custom-separator-server,
-#custom-separator-santos,
-#custom-separator-climate,
-#disk {
+#pulseaudio {
   color: @fg;
   background-color: @bg;
+  font-size: 16px;
 }
 
 /* submap */
@@ -89,36 +62,9 @@ window#waybar {
   margin: 0 6px 0 6px;
 }
 
-/* states */
-#custom-easy.warning,
-#custom-cpu.warning,
-#custom-stretch.warning,
-#custom-pymor.warning,
-#custom-ds4.charging,
-#custom-updates.warning,
-#custom-ds4.warning
-#memory.warning,
-#cpu.warning,
-#pulseaudio.warning,
-#disk.warning
-{
-  color: @warning;
-}
-
-#custom-variant.critical,
-#custom-stretch.critical,
-#custom-easy.critical,
-#custom-updates.alert,
-#custom-ds4.alert,
-#memory.critical,
-#cpu.critical,
-#pulseaudio.critical,
-#disk.critical {
-  color: @critical;
-}
-
 #custom-gameon.warning,
 #custom-easy.warning,
+#custom-tabbed.warning,
 #custom-variant.warning,
 #custom-updates.warning,
 #custom-pymor.warning,
@@ -135,8 +81,9 @@ window#waybar {
   font-size: 16px;
 }
 
+#custom-easy.warning,
 #custom-easy {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 #custom-separator {
