@@ -69,13 +69,14 @@
     },
     "custom/updates": {
       "exec": "/home/digo/.config/waybar/scripts/update.sh",
-      "interval": 3,
+      "interval": 60,
       "return-type": "json",
-      "tooltip": false
+      "tooltip": false,
+      "signal": 30,
     },
     "custom/pymor": {
       "exec": "/home/digo/.config/waybar/scripts/pymor.sh",
-      "interval": 1,
+      "interval": 2,
       "return-type": "json",
       "tooltip": false
     },
