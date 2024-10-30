@@ -1,7 +1,8 @@
 {
-    "modules-left": [ "hyprland/workspaces",  ],
-    "modules-center": ["clock","hyprland/submap"],
+    "modules-left": [ "hyprland/workspaces" ],
+    "modules-center": ["clock"],
     "modules-right": [ 
+      "hyprland/submap",
       "custom/gameon",
       "custom/easy", 
       "custom/separator", 
@@ -40,11 +41,11 @@
     },
     "clock": {
       "interval": 60,
-      "format": " {:%H:%M | %d | %a}",
+      "format": " {:%H:%M <span size='15000' foreground='#4c566a'>|</span> %d <span size='15000' foreground='#4c566a'>|</span> %a}",
       "tooltip": false
     },
     "hyprland/submap": {
-      "format": "" ,
+      "format": "<span size='15000' foreground='#4c566a'>  | </span>",
       "tooltip": false
     },
     "custom/gameon": {
