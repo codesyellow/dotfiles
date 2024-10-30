@@ -23,8 +23,9 @@ opacity = 0.7
 [keyboard]
 bindings = [
   { key = "N", mods = "Control|Shift", action = "CreateNewWindow" },
-  { key = "C", mods = "ALT", action = "ToggleViMode" },
+  { key = "C", mods = "Control|Alt", action = "ToggleViMode" },
 ]
+
 
 # Colors (Nord)
 
