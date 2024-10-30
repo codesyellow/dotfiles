@@ -1,18 +1,15 @@
 #!/bin/bash
 
 if [[ -f "/tmp/santosmatch" ]]; then
-  santos=$(</tmp/santosmatch)
-  if [[ -f "/tmp/matchup" ]] && [[ $santos == *"x"* ]]; then
-    output=" $santos"
-  else
-    output=" $santos"
+  if [[ ! -f "/tmp/stop_santos_widget" ]]; then
+    santos=$(</tmp/santosmatch)
+    output=" $santos<span size='15000' foreground='#4c566a'> | </span>"
+    state="warning"
   fi
 else
-  output=""
+  if [[ -f "/tmp/stop_santos_widget" ]]; then
+    rm "/tmp/stop_santos_widget"
+  fi
 fi
 
-# Properly escape any double quotes in the output
-output=$(echo "$output" | sed 's/"/\\"/g')
-
-# Print the JSON output
-echo "{\"text\": \"$output\", \"tooltip\": \"Santos Game\" }"
+echo "{\"text\": \"$output\", \"tooltip\": \"Pomodoro Timer\", \"class\": \"$state\"}"

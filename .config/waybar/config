@@ -1,33 +1,20 @@
 {
-  "layer": "top",
-    "position": "top",
     "modules-left": [ "hyprland/workspaces", "clock","hyprland/submap" ],
     "modules-right": [ 
+      "custom/gameon",
       "custom/easy", 
-      "custom/separator-stretch", 
-      "custom/stretch", 
-      "custom/separator-pymor", 
-      "custom/pymor", 
-      "custom/separator-santos", 
-      "custom/santos", 
       "custom/separator", 
-      "custom/variant", 
-      "custom/climate", 
-      "custom/separator-server", 
-      "custom/server", 
-      "custom/separator", 
+      "custom/variant",
       "custom/updates", 
-//      "custom/ds4", 
-      "custom/separator", 
-      "pulseaudio", 
-      "custom/separator", 
-      "temperature", 
-      "custom/separator", 
-      "cpu", 
-      "custom/separator", 
-      "memory", 
-      "custom/separator", 
-      "disk" 
+      "custom/pymor",
+      "custom/santos", 
+      "pulseaudio",
+      "custom/cpu-temp",
+      "custom/cpu",
+      "custom/mem", 
+      "custom/disk-root", 
+      "custom/disk-home", 
+      "custom/disk-hdd" 
       ],
     "hyprland/workspaces": {
       "all-outputs": false,
@@ -58,88 +45,50 @@
       "format": "" ,
       "tooltip": false
     },
-    "custom/easy": {
-      "exec": "/home/cie/.config/waybar/scripts/easyeffects.sh",
+    "custom/gameon": {
+      "exec": "/home/digo/.config/waybar/scripts/gameon.sh",
       "interval": 3,
       "return-type": "json",
       "tooltip": false
     },
-    "custom/separator-stretch": {
-      "exec-if": "test -f /tmp/stretch",
-      "exec": "/home/cie/.config/waybar/scripts/icon_retrieve.sh",
-      "interval": 2,
-      "format":" | "
-    },
-    "custom/stretch": {
-      "exec": "/home/cie/.config/waybar/scripts/stretch.sh",
-      "interval": 2,
+    "custom/easy": {
+      "exec": "/home/digo/.config/waybar/scripts/easyeffects.sh",
+      "interval": 3,
       "return-type": "json",
       "tooltip": false
     },
-    "custom/separator-pymor": {
-      "exec-if": "test -f /tmp/pomodoro_time",
-      "exec": "/home/cie/.config/waybar/scripts/icon_retrieve.sh",
-      "interval": 2,
-      "format":" | "
-    },
-    "custom/pymor": {
-      "exec": "/home/cie/.config/waybar/scripts/pymor.sh",
-      "interval": 2,
-      "return-type": "json",
-      "tooltip": false
-    },
-    "custom/separator-santos": {
-      "exec-if": "test -f /tmp/santosmatch",
-      "exec": "/home/cie/.config/waybar/scripts/icon_retrieve.sh",
-      "interval": 60,
-      "format":" | "
-    },
-    "custom/santos": {
-      "exec": "/home/cie/.config/waybar/scripts/santos_match.sh",
-      "interval": 60,
-      "return-type": "json",
-      "tooltip": false
+    "custom/separator": {
+      "format":"|",
+      "interval": 3600
     },
     "custom/variant": {
-      "exec": "/home/cie/.config/waybar/scripts/key_variant.sh",
-      "interval": 3,
-      "return-type": "json",
-      "tooltip": false
-    },
-    "custom/climate": {
-      "exec": "/home/cie/.config/waybar/scripts/climate.sh",
-      "interval": 1800,
-      "return-type": "json",
-      "tooltip": false
-    },
-    "custom/separator-server": {
-      "exec-if": "/home/cie/.config/waybar/scripts/icon_retrieve.sh server",
-      "exec": "/home/cie/.config/waybar/scripts/icon_retrieve.sh",
-      "interval": 60,
-      "format":" | "
-    },
-    "custom/server": {
-      "exec": "/home/cie/.config/waybar/scripts/server.sh",
-      "interval": 60,
+      "exec": "/home/digo/.config/waybar/scripts/key_variant.sh",
+      "interval": 2,
       "return-type": "json",
       "tooltip": false
     },
     "custom/updates": {
-      "exec": "/home/cie/.config/waybar/scripts/update.sh",
-      "interval": 3600,
+      "exec": "/home/digo/.config/waybar/scripts/update.sh",
+      "interval": 3,
       "return-type": "json",
-      "tooltip": false,
-      "signal": 8
+      "tooltip": false
     },
-    //"custom/ds4": {
-    //  "exec": "/home/cie/.config/waybar/scripts/ds4.sh",
-    //  "interval": 60,
-    //  "return-type": "json",
-    //  "tooltip": true
-    //},
+    "custom/pymor": {
+      "exec": "/home/digo/.config/waybar/scripts/pymor.sh",
+      "interval": 1,
+      "return-type": "json",
+      "tooltip": false
+    },
+    "custom/santos": {
+      "exec": "/home/digo/.config/waybar/scripts/santos_match.sh",
+      "interval": 60,
+      "return-type": "json",
+      "on-click": "touch '/tmp/stop_santos_widget'",
+      "tooltip": false,
+    },
     "pulseaudio": {
-      "format": "{icon} {volume}%",
-      "format-bluetooth": "{icon} {volume}%",
+      "format": "{icon} {volume}% ",
+      "format-bluetooth": "{icon} {volume}% ",
       "format-muted": "",
       "format-icons": {
         "alsa_output.pci-0000_00_1f.3.analog-stereo": "",
@@ -162,41 +111,40 @@
       "on-click": "pavucontrol",
       "ignored-sinks": ["Easy Effects Sink"]
     },
-    "custom/separator": {
-      "format":"|",
-      "interval": 3600
+    "custom/cpu-temp": {
+      "exec": "/home/digo/.config/waybar/scripts/temp.sh",
+      "interval": 10,
+      "return-type": "json",
+      "tooltip": false
     },
-    "cpu": {
+    "custom/cpu": {
+      "exec": "/home/digo/.config/waybar/scripts/cpu.sh",
       "interval": 2,
-      "format": " {usage}%",
-      "states": {
-        "warning": 50,
-        "critical": 90
-      }
+      "return-type": "json",
+      "tooltip": false
     },
-    "temperature": {
-      "thermal-zone": 2,
-      // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-      "critical-threshold": 80,
-      // "format-critical": "{temperatureC}°C ",
-      "format": " {temperatureC}°",
-      "interval": 20
+    "custom/mem": {
+      "exec": "/home/digo/.config/waybar/scripts/mem.sh",
+      "interval": 15,
+      "return-type": "json",
+      "tooltip": false
     },
-    "memory": {
+    "custom/disk-root": {
+      "exec": "/home/digo/.config/waybar/scripts/disk_root.sh",
+      "interval": 15,
+      "return-type": "json",
+      "tooltip": false
+    },
+    "custom/disk-home": {
+      "exec": "/home/digo/.config/waybar/scripts/disk_home.sh",
       "interval": 30,
-      "format": " {}%",
-      "states": {
-        "warning": 50,
-        "critical": 80
-      }
+      "return-type": "json",
+      "tooltip": false
     },
-    "disk": {
-      "interval": 60,
-      "format": " {percentage_used}% ",
-      "path": "/",
-      "states": {
-          "warning": 80,
-          "critical": 90
-        }
+    "custom/disk-hdd": {
+      "exec": "/home/digo/.config/waybar/scripts/disk_hdd.sh",
+      "interval": 30,
+      "return-type": "json",
+      "tooltip": false
     },
 }

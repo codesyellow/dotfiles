@@ -65,6 +65,7 @@ window#waybar {
 #custom-climate,
 #custom-server,
 #cpu,
+#custom-cpu,
 #memory,
 #pulseaudio,
 #temperature,
@@ -90,6 +91,7 @@ window#waybar {
 
 /* states */
 #custom-easy.warning,
+#custom-cpu.warning,
 #custom-stretch.warning,
 #custom-pymor.warning,
 #custom-ds4.charging,
@@ -115,3 +117,30 @@ window#waybar {
   color: @critical;
 }
 
+#custom-gameon.warning,
+#custom-easy.warning,
+#custom-variant.warning,
+#custom-updates.warning,
+#custom-pymor.warning,
+#custom-santos.warning,
+#custom-cpu-temp.warning,
+#custom-cpu.warning,
+#custom-mem.warning,
+#custom-disk-root,
+#custom-disk-home.warning,
+#custom-disk-hdd.warning {
+  background-color: @bg;
+  color: @warning;
+  padding-bottom: 3px;
+  font-size: 16px;
+}
+
+#custom-easy {
+  font-size: 18px;
+}
+
+#custom-separator {
+  font-size: 20px;
+  padding-bottom: 4px;
+  color: #4c566a;
+}

@@ -1,6 +1,6 @@
 is_easy_active=$(pgrep 'easyeffects')
 if [[ -n $is_easy_active ]]; then
-  easy=$(</home/cie/.config/.easy_preset)
+  easy=$(</home/digo/.config/.easy_preset)
   if [[ $easy = "LoudnessEqualizer" ]]; then
     state="normal"
     output=""
