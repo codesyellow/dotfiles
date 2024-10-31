@@ -14,7 +14,7 @@ window#waybar {
 }
 
 .modules-right {
-  padding-right: 8px;
+  padding-right: 4px;
 }
 
 #workspaces {
@@ -30,7 +30,7 @@ window#waybar {
 }
 
 #workspaces button:first-child {
-  margin-bottom: 1px;
+  margin-bottom: 2px;
 }
 
 #workspaces button:nth-child(2) {
@@ -75,11 +75,19 @@ window#waybar {
   margin: 0 6px 0 6px;
 }
 
+#custom-stretch {
+  background-color: @bg;
+  color: @fg;
+  padding-bottom: 3px;
+  font-size: 16px;
+}
+
 #custom-gameon.warning,
 #custom-easy.warning,
 #custom-tabbed.warning,
 #custom-variant.warning,
 #custom-updates.warning,
+#custom-stretch.warning,
 #custom-pymor.warning,
 #custom-santos.warning,
 #custom-cpu-temp.warning,

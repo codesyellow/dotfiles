@@ -1,15 +1,14 @@
 #!/bin/bash
 if [[ -f "/tmp/stretch" ]]; then
   if [[ -f "/tmp/stretch_start" ]]; then
-    output=" $nm|$wn  GET READY!"
+    output=" GET READY!<span size='15000' foreground='#4c566a'> | </span>"
   fi
   if [[ -f "/tmp/stop" ]]; then
-    state="critical"
-    output=" STOP!"
+    output=" STOP!<span size='15000' foreground='#4c566a'> | </span>"
   else
     state="warning"
-    output=" DO IT!!"
-  fi 
+    output=" DO IT!!<span size='15000' foreground='#4c566a'> | </span>"
+  fi
 else
   output=""
 fi
