@@ -38,11 +38,6 @@ window#waybar {
   margin-left: 3px;
 }
 
-#workspaces button:last-child {
-  margin-bottom: 2px;
-  margin-left: -5px;
-} 
-
 #workspaces button.empty {
   color: @bg1;
 }
@@ -106,6 +101,7 @@ window#waybar {
 
 #custom-easy.warning {
   font-size: 18px;
+  margin-bottom: -1px;
 }
 
 #custom-separator {
