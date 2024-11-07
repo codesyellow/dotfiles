@@ -28,4 +28,5 @@ nnoremap <leader>ppc :PlugClean<CR>
 
 " NERDTree
 nnoremap <silent> <expr> <leader>e g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
+let NERDTreeCustomOpenArgs={'file':{'where': 't'}}
 
