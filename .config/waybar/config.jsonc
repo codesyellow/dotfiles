@@ -25,7 +25,7 @@
     "active-only": false,
     "format": "{icon}",
     "format-icons": {
-      "1": "<span size='20000'></span> ",
+      "1": "<span size='21000'></span>",
       "2": " ",
       "3": " ",
       "4": "<span size='20000'></span> ",
