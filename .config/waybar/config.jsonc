@@ -1,6 +1,14 @@
 {
   "modules-center": ["hyprland/workspaces"],
-  "modules-left": ["clock"],
+  "modules-left": [
+    "pulseaudio",
+    "custom/pymor",
+    "custom/stretch",
+    "custom/cpu",
+    "custom/mem",
+    "custom/disk-root",
+    "custom/network"
+  ],
   "modules-right": [
     "hyprland/submap",
     "custom/gameon",
@@ -9,14 +17,9 @@
     "custom/tabbed",
     "custom/variant",
     "custom/updates",
-    "custom/stretch",
-    "custom/pymor",
     "custom/santos",
-    "pulseaudio",
+    "clock",
     "custom/cpu-temp",
-    "custom/cpu",
-    "custom/mem",
-    "custom/disk-root",
     "custom/disk-home",
     "custom/disk-hdd"
   ],
@@ -34,11 +37,11 @@
       "7": "",
       "urgent": " ",
       "default": " ",
-      "persistent": "persistent",
+      "persistent": "persistent"
     },
     "persistent-workspaces": {
       "*": 7
-    },
+    }
   },
   "clock": {
     "interval": 60,
@@ -46,7 +49,7 @@
     "tooltip": false
   },
   "hyprland/submap": {
-    "format": "<span rise='4000' size='15000' foreground='#4c566a'> | </span>",
+    "format": "<span rise='3000' size='15000' foreground='#4c566a'> | </span>",
     "tooltip": false
   },
   "custom/gameon": {
@@ -82,7 +85,7 @@
     "interval": 60,
     "return-type": "json",
     "tooltip": false,
-    "signal": 30,
+    "signal": 30
   },
   "custom/stretch": {
     "exec": "/home/digo/.config/waybar/scripts/stretch.sh",
@@ -96,16 +99,22 @@
     "return-type": "json",
     "tooltip": false
   },
+  "custom/network": {
+    "exec": "/home/digo/.config/waybar/scripts/isNetON.sh",
+    "interval": 2,
+    "return-type": "json",
+    "tooltip": false
+  },
   "custom/santos": {
     "exec": "/home/digo/.config/waybar/scripts/santos_match.sh",
     "interval": 60,
     "return-type": "json",
     "on-click": "touch '/tmp/stop_santos_widget'",
-    "tooltip": false,
+    "tooltip": false
   },
   "pulseaudio": {
-    "format": "{icon} {volume}% ",
-    "format-bluetooth": "{icon} {volume}% ",
+    "format": "{icon} {volume}%",
+    "format-bluetooth": "{icon} {volume}%",
     "format-muted": "",
     "format-icons": {
       "alsa_output.pci-0000_00_1f.3.analog-stereo": "",
@@ -163,5 +172,5 @@
     "interval": 30,
     "return-type": "json",
     "tooltip": false
-  },
+  }
 }

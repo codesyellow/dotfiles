@@ -11,7 +11,11 @@ if [[ $steamMenu -ge 2 ]] && [[ $IsSteamMenu == 1 ]]; then
   let clients-=1
 fi
 
-if [[ steamNotification > 0 ]]; then
+if [[ -z "$client_name" ]]; then
+  let clients-=1
+fi
+
+if [[ "$steamNotification" > 0 ]]; then
   let clients-=steamNotification
 fi
 

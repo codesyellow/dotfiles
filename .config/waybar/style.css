@@ -88,6 +88,7 @@ window#waybar {
 /* default */
 #clock,
 #custom-easy,
+#custom-network,
 #pulseaudio {
   color: @fg;
   background-color: @bg;
@@ -96,7 +97,7 @@ window#waybar {
 
 /* submap */
 #submap {
-  margin: -6px 2px -6px 0px;
+  margin: -6px 2px -5px 0px;
   color: @warning;
   font-size: 26px;
 }
@@ -112,6 +113,7 @@ window#waybar {
   font-size: 16px;
 }
 
+#custom-network.warning,
 #custom-gameon.warning,
 #custom-easy.warning,
 #custom-tabbed.warning,
