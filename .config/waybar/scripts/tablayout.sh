@@ -21,7 +21,7 @@ fi
 
 if [[ "$clients" -ge "2" ]]; then
   state="warning"
-  output="$clients_icon $clients [ $client_name ]<span size='15000' foreground='#4c566a'> | </span>"
+  output="$clients_icon $clients<span size='15000' foreground='#4c566a'> | </span>"
 fi
 
 echo "{\"text\": \"$output\", \"tooltip\": \"tablayout\", \"class\": \"$state\"}"

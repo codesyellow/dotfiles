@@ -69,7 +69,7 @@
     "interval": 3600
   },
   "custom/tabbed": {
-    "exec": "/home/digo/.config/waybar/scripts/tablayout.sh",
+    "exec": "/home/digo/.config/waybar/scripts/tablayout.mjs",
     "interval": 1,
     "return-type": "json",
     "tooltip": false
