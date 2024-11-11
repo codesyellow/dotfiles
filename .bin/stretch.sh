@@ -50,7 +50,7 @@ fi
 
 if [[ -f "$stretch_path" ]]; then
     echo "Its already running!"
-    notify-send "Already running!"
+    notify-send.sh "Already running!"
     exit 1
 fi
 
@@ -75,7 +75,7 @@ while [[ "$times" -ge 0 ]]; do
     if [[ "$times" == 0 ]]; then
         canberra-gtk-play -f ~/.audios/stretch_ended.wav
         rm "$stretch_path"
-        notify-send -u critical "Stretch ended!"
+        notify-send.sh -u critical "Stretch ended!"
         break
     else
        canberra-gtk-play -f ~/.audios/stretch_work.mp3

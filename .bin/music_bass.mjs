@@ -2,17 +2,17 @@
 let active = false;
 let inactive = false;
 let off = false;
+const defaultVolume = 25;
 
 const setEqualizer = async () => {
-  await $`pamixer --set-volume 30`;
+  await $`pamixer --set-volume ${defaultVolume}`;
   await $`easy_preset.sh 'LoudnessEqualizer'`;
 };
 
-while (true) {
+const cmusRunning = async () => {
   try {
     const { stdout: cmusStatus } =
       await $`cmus-remote -Q 2>/dev/null | grep status | awk '{print $2}' || echo "0"`;
-    //    console.log(cmusStatus);
     if (cmusStatus.trim() === "playing" && !active) {
       active = true;
       off = false;
@@ -27,7 +27,7 @@ while (true) {
     ) {
       off = false;
       inactive = true;
-      console.log("Paused or stopped", inactive);
+      console.log("Paused or stopped");
       setEqualizer();
       if (active) {
         active = false;
@@ -45,5 +45,9 @@ while (true) {
       off = true;
     }
   }
+};
+
+while (true) {
+  cmusRunning();
   await sleep(2000);
 }

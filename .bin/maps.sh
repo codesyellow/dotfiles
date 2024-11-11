@@ -4,7 +4,7 @@
 search_dir="$HOME/.mindmaps"
 
 # Prompt user to enter a file name using dmenu
-file_name=$(find "$search_dir" -maxdepth 1 -type f | sed "s|$search_dir/||" | dmenu -nb "#2e3440" -z "450" -x "230" -y "0" -sb "#2e3440" -shb "#2e3440" -fn "JetBrainMono Nerd Font:size=14" -p "")
+file_name=$(find "$search_dir" -maxdepth 1 -type f | sed "s|$search_dir/||" | dmenu -nb "#2e3440" -z "800" -x "230" -y "0" -sb "#2e3440" -shb "#2e3440" -fn "JetBrainMono Nerd Font:size=14" -p "")
 #file_name=$(find "$search_dir" -maxdepth 1 -type f | sed "s|$search_dir/||" | rofi -dmenu -p "" )
 
 # If user pressed escape or canceled, exit
