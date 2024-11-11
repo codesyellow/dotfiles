@@ -41,7 +41,7 @@ window {
     anchor:                      northwest;
     fullscreen:                  false;
     width:                       700px;
-    height:                      23px;
+    height:                      21px;
     /* x-offset:                    230px; when using entry*/
     x-offset:                    230px;
     y-offset:                    -1px;
@@ -50,7 +50,7 @@ window {
 
     enabled:                     true;
     margin:                      0px;
-    padding:                     2px;
+    padding:                     0px;
     border:                      0px solid;
     border-radius:               0px;
     border-color:                @border-colour;
