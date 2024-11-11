@@ -5,15 +5,16 @@ alt_mod = "mod3"
 bg = '#2e3440'
 fg = '#d8dee9'
 al = '#EF5A6F'
+bg1 = '#4c566a'
 browser = 'com.brave.Browser'
 exit_icon_font = 'Font Awesome 6 Free Regular'
 icons = [
-        '<span size="14000"></span> ',
+        '',
         '',
-        '<span size="15000"></span>',
-        '<span size="15000"></span>',
-        '<span size="15000" rise="3000"></span> ',
-        '<span size="14000"></span>',
+        '',
+        '',
+        '',
+        '',
         ]
 widget_icons = [
         '   ',
@@ -24,7 +25,7 @@ widget_icons = [
 home = os.path.expanduser('~/')
 mod = "mod4"
 pad = 10
-group_font = 'Font Awesome 6 Free Regular'
+group_font = ' Symbols Nerd Font'
 runner = ''
 sterm = ''
 wsize = 18

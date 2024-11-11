@@ -8,4 +8,3 @@ from configs.binds import *
 from configs.keychords import *
 #from configs.inputs import *
 from configs.screens import *
-

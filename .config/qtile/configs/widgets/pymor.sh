@@ -11,8 +11,7 @@ if [[ -f "$pomodoro" ]]; then
     touch "/tmp/pomo_half"
   fi
 
-#  output="$pymor_icon_empty $pomodoro_number"
-  printf '<span rise="4650" size="12000" foreground="#EF5A6F">%s</span> <span size="14000" rise="4000" foreground="#EF5A6F">%s</span> <span size="x-large" foreground="#fff">|</span>' "$pymor_icon" "$pomodoro_number"
+  printf '<span size="x-large" foreground="#4c566a">|</span> <span rise="4650" size="12000" foreground="#EF5A6F">%s</span> <span size="14000" rise="3600" foreground="#EF5A6F">%s</span>' "$pymor_icon" "$pomodoro_number"
 else
   printf ''
   if [[ -f "/tmp/pomo_half" ]]; then

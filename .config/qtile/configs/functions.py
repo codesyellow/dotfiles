@@ -1,5 +1,6 @@
 from libqtile import qtile
 from libqtile.log_utils import logger
+from .variables import bg1
 
 def desconnect_ds4():
     qtile.cmd_spawn('dsbattery -d')
@@ -23,6 +24,6 @@ def tabbed():
         if num_windows <= 1:
             return ""
         else:
-            return f'<span rise="4000" foreground="#EF5A6F"> </span><span rise="4000">{str(num_windows)}</span><span size="x-large" foreground="#fff"> |</span>'
+            return f'<span rise="5000" foreground="#EF5A6F"> </span><span rise="4000">{str(num_windows)}</span><span size="x-large" foreground="{bg1}"> |</span>'
     return ""
 

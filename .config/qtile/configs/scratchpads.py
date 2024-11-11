@@ -48,8 +48,8 @@ scratchpads = [
     ),
     DropDown(
         'zap',
-        'flatpak run com.github.eneshecan.WhatsAppForLinux',
-        match=Match(wm_class=['Whatsapp-for-linux'][0]),
+        'whatsie',
+        match=Match(wm_class=['WhatSie'][0]),
         height=0.9,
         width=0.8,
         y=0.03,
@@ -125,7 +125,7 @@ scratchpads = [
     ),
     DropDown(
         'notes',
-        f'{sterm} -T scratchpad -e vim {home}.vimwiki/notes/index.wiki',
+        f'kitty -T scratchpad -e vim {home}.vimwiki/notes/index.wiki',
         height=0.9,
         width=0.9,
         opacity=0.5,
@@ -135,7 +135,7 @@ scratchpads = [
     ),
     DropDown(
         'habits',
-        f'{sterm} -T scratchpad -e vim {home}.vimwiki/habits/index.wiki',
+        f'kitty -T scratchpad -e vim {home}.vimwiki/habits/index.wiki',
         height=0.5,
         width=0.5,
         opacity=0.5,

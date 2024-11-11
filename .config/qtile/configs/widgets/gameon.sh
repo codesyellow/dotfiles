@@ -1,4 +1,4 @@
 #!/bin/bash
 if [[ -f "/tmp/gameon" ]]; then
-  printf '<span size="14000" foreground="#EF5A6F" rise="1000"></span>  '
+  printf '<span size="x-large" foreground="#4c566a">|</span><span foreground="#EF5A6F" rise="8000" > </span>'
 fi

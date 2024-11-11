@@ -33,3 +33,4 @@ clipmenud &
 systemctl --user import-environment DISPLAY &
 /usr/lib/polkit-kde-authentication-agent-1 &
 redshift -O 6000 &
+xremap ~/.config/xremap/xremap &
