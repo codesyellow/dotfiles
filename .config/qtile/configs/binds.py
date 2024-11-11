@@ -4,8 +4,10 @@ from .variables import mod, alt_mod, term, sterm
 from .functions import latest_group, focus_main
 
 keys = [
-    Key([mod], 'j', lazy.layout.down()),
-    Key([mod], 'k', lazy.layout.up()),
+    #Key([mod], 'j', lazy.layout.down()),
+    #Key([mod], 'k', lazy.layout.up()),
+    Key([mod], 'j', lazy.group.next_window()),
+    Key([mod], 'k', lazy.group.prev_window()),
     Key([mod, 'shift'], 'k', lazy.layout.shuffle_down()),
     Key([mod, 'shift'], 'j', lazy.layout.shuffle_up()),
     Key([mod, 'control'], 'r', lazy.reload_config()),
