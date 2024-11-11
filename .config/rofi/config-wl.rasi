@@ -41,10 +41,10 @@ window {
     anchor:                      northwest;
     fullscreen:                  false;
     width:                       700px;
-    height:                      23px;
+    height:                      24px;
     /* x-offset:                    230px; when using entry*/
-    x-offset:                    230px;
-    y-offset:                    -1px;
+    x-offset:                    220px;
+    y-offset:                    -24px;
 
     children:                    [ horibox ];
 
