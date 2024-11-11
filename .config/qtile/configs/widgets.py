@@ -103,7 +103,6 @@ my_widgets = [
         fontsize=wsize,
         update_interval=1,
     ),
-    
     widget.GenPollText(
         func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/configs/widgets/santos.sh")).decode("utf-8"),
         fontsize=wsize,
@@ -125,9 +124,6 @@ my_widgets = [
         fontsize=wsize,
         update_interval=5,
     ),
-    
-    
-    
    widget.GenPollText(
         background=bg,
         func=lambda: subprocess.check_output(os.path.expanduser("~/.config/qtile/configs/widgets/disk-home.sh")).decode("utf-8"),

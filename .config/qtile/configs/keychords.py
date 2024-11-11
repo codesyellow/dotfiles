@@ -17,21 +17,21 @@ keys.append(KeyChord([mod], 'e',[
         Key([], 'a', lazy.spawn('anki')),
         Key([], 'm', lazy.spawn('maps.sh')),
         Key([], 'v', lazy.spawn('ankiv.sh')),
-    ], name='<span size="13000"></span> <span size="x-large" foreground="#d8dee9">|</span>'),
+    ], name=f'<span size="16000" rise="4000">󰑴</span> <span size="x-large" foreground="{bg1}">|</span>'),
     KeyChord([], 'p', [
         Key([], 'l', lazy.spawn('pymor -t 20 -f 3')),
         Key([], 's', lazy.spawn('pymor -t 20')),
         Key([], 'c', lazy.spawn('pymor -c')),
-    ], name='<span size="17000" rise="2000">󰁫</span> <span size="x-large" foreground="#d8dee9"> |</span>'
+    ], name=f'<span rise="2500" size="17000">󰁫</span> <span size="x-large" foreground="{bg1}">|</span>'
              ),
-], name='<span size="13000" rise="3000"></span> <span size="x-large" foreground="#d8dee9">|</span>'))
+], name=f'<span size="13000" rise="3000"></span> <span size="x-large" foreground="{bg1}">|</span>'))
 
 # scratchpds 
 keys.append(
     KeyChord([mod], 's', [
         Key([], 'u', lazy.group['scratchpad'].dropdown_toggle('term')),
         Key([], 'i', lazy.group['scratchpad'].dropdown_toggle('ai')),
-        Key([], 's', lazy.group['scratchpad'].dropdown_toggle('trayer')),
+#        Key([], 's', lazy.group['scratchpad'].dropdown_toggle('trayer')),
         Key([], 'w', lazy.group['scratchpad'].dropdown_toggle('zap')),
         Key([], 'c', lazy.group['scratchpad'].dropdown_toggle('cmus')),
         Key([], 't', lazy.group['scratchpad'].dropdown_toggle('task')),
@@ -42,6 +42,10 @@ keys.append(
         Key([], 'v', lazy.group['scratchpad'].dropdown_toggle('vimiv')),
         Key([], 'f', lazy.group['scratchpad'].dropdown_toggle('yazi')),
         Key([], 'e', lazy.group['scratchpad'].dropdown_toggle('tt')),
+        KeyChord([], 's', [
+            Key([], 'p', lazy.group['scratchpad'].dropdown_toggle('ankivPT')),
+            Key([], 'e', lazy.group['scratchpad'].dropdown_toggle('ankivEN')),
+        ], name=f'<span size="16000" rise="4000">󰑴</span> <span size="x-large" foreground="{bg1}">|</span>'),
         Key([], 'g', lazy.group['scratchpad'].dropdown_toggle('calc')),
     ], name=f'<span size="16000" rise="4000">󰊠</span> <span size="x-large" foreground="{bg1}">|</span>'))
 
@@ -86,16 +90,16 @@ keys.append(
             Key([], 'm', lazy.function(focus_main)),
             Key([], 'b', lazy.group.focus_back()),
             Key([], 'space', lazy.layout.flip()),
-        ], name=f'<span size="13000"rise="4000"></span> <span size="x-large" foreground="{bg1}">  |</span>'),
+        ], name=f'<span size="13000"rise="4000"></span> <span size="x-large" foreground="{bg1}">|</span>'),
         KeyChord([], 'q', [
             Key([], 'r', lazy.reload_config()),
             Key([], 'e', lazy.shutdown()),
             Key([], 'i', lazy.spawn('getwindow.sh')),
-        ], name=f'<span size="13000" rise="4000"></span> <span size="x-large" foreground="{bg1}"> |</span>'),
+        ], name=f'<span size="13000" rise="4000"></span> <span size="x-large" foreground="{bg1}">|</span>'),
         KeyChord([], 'e', [
             Key([], 'l', lazy.spawn('easyeffects -l LoudnessEqualizer')),
             Key([], 'b', lazy.spawn('easyeffects -l "HeavyBass"')),
-        ], name=""),
+        ], name=f'<span size="13000"rise="4000"></span> <span size="x-large" foreground="{bg1}">|</span>'),
     ], name=f'<span size="13000"rise="4000"></span> <span size="x-large" foreground="{bg1}">|</span>'))
 
 # audio

@@ -48,8 +48,8 @@ scratchpads = [
     ),
     DropDown(
         'zap',
-        'whatsie',
-        match=Match(wm_class=['WhatSie'][0]),
+        'wasistlos',
+        match=Match(wm_class=['Wasistlos'][0]),
         height=0.9,
         width=0.8,
         y=0.03,
@@ -86,6 +86,26 @@ scratchpads = [
     DropDown(
         'cmus',
         f'{sterm} -T scratchpad -c cmus -e cmus',
+        height=0.9,
+        width=0.9,
+        opacity=0.5,
+        x=0.05,
+        y=0.03,
+        on_focus_lost_hide=True
+    ),
+    DropDown(
+        'ankivPT',
+        f'{sterm} -t "anki-vim" -e anki-vim "/home/digo/.ankivim/decks/portuguese/raw_cards.txt"',
+        height=0.9,
+        width=0.9,
+        opacity=0.5,
+        x=0.05,
+        y=0.03,
+        on_focus_lost_hide=True
+    ),
+    DropDown(
+        'ankivEN',
+        f'{sterm} -t "anki-vim" -e anki-vim "/home/digo/.ankivim/decks/english/raw_cards.txt"',
         height=0.9,
         width=0.9,
         opacity=0.5,
