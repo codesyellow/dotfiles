@@ -4,11 +4,19 @@ from libqtile.log_utils import logger
 scratchpads = [
     DropDown(
         'term',
-        f"alacritty -t scratchpad --config-file {home}/.config/alacritty/scratchpad.toml -e bash -c 'tmux attach-session -t scratch || tmux new-session -s scratch'",
+        f"alacritty -t dropdown --config-file {home}/.config/alacritty/scratchpad.toml -e bash -c 'tmux attach-session -t scratch || tmux new-session -s scratch'",
         y=0.01,
         x=0.050,
         height=0.6,
         width=0.9
+    ),
+    DropDown(
+        'calc',
+        'st -f "CaskaydiaCove Nerd Font Mono:pixelsize=25" -e python -ic ""',
+        height=0.2,
+        width=0.5,
+        x=0.25,
+        y=0.02,
     ),
     DropDown(
         'trayer',
@@ -18,11 +26,11 @@ scratchpads = [
     ),
     DropDown(
         'task',
-        f'{sterm} -T scratchpad -c right_side -e taskwarrior-tui',
+        f'{sterm} -T scratchpad -c left_side -e taskwarrior-tui',
         height=0.940,
         width=0.3,
         opacity=0.5,
-        x=0.690,
+        x=0.02,
         y=0.01,
         on_focus_lost_hide=False
     ),
@@ -46,6 +54,7 @@ scratchpads = [
         y=0.01,
         on_focus_lost_hide=False
     ),
+
     DropDown(
         'zap',
         'wasistlos',
@@ -62,15 +71,6 @@ scratchpads = [
         width=0.9,
         x=0.05,
         y=0.03,
-        on_focus_lost_hide=True
-    ),
-    DropDown(
-        'calc',
-        f'{sterm} -T scratchpad -e bc',
-        height=0.5,
-        width=0.5,
-        x=0.25,
-        y=0.25,
         on_focus_lost_hide=True
     ),
     DropDown(
@@ -95,22 +95,22 @@ scratchpads = [
     ),
     DropDown(
         'ankivPT',
-        f'{sterm} -t "anki-vim" -e anki-vim "/home/digo/.ankivim/decks/portuguese/raw_cards.txt"',
-        height=0.9,
+        f'{sterm} -t "anki-vim" -e anki-vim portuguese',
+        height=0.5,
         width=0.9,
         opacity=0.5,
         x=0.05,
-        y=0.03,
+        y=0.45,
         on_focus_lost_hide=True
     ),
     DropDown(
         'ankivEN',
-        f'{sterm} -t "anki-vim" -e anki-vim "/home/digo/.ankivim/decks/english/raw_cards.txt"',
-        height=0.9,
+        f'{sterm} -t "anki-vim" -e anki-vim english',
+        height=0.5,
         width=0.9,
         opacity=0.5,
         x=0.05,
-        y=0.03,
+        y=0.45,
         on_focus_lost_hide=True
     ),
     DropDown(
