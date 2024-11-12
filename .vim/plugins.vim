@@ -9,6 +9,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mattn/emmet-vim'
 Plug 'arcticicestudio/nord-vim'
+Plug 'davidhalter/jedi-vim'
 
 call plug#end()
 
