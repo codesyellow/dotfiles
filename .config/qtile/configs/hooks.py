@@ -22,7 +22,7 @@ def opacity(c):
             or wm_class == 'qutebrowser'
             or wm_class == 'Brave-browser'):
             x.set_opacity(1)
-        if x.has_focus and x.name == 'scratchpad' or x.name == 'pulsemixer':
+        if x.has_focus and x.name == 'to_top' or x.name == 'pulsemixer':
             for w in x.group.windows:
                 w.opacity = 1
         elif not x.has_focus:

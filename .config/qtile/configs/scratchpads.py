@@ -4,7 +4,7 @@ from libqtile.log_utils import logger
 scratchpads = [
     DropDown(
         'term',
-        f"alacritty -t dropdown --config-file {home}/.config/alacritty/scratchpad.toml -e bash -c 'tmux attach-session -t scratch || tmux new-session -s scratch'",
+        f"alacritty -t to_top --config-file {home}/.config/alacritty/scratchpad.toml -e bash -c 'tmux attach-session -t scratch || tmux new-session -s scratch'",
         y=0.01,
         x=0.050,
         height=0.6,
@@ -12,7 +12,7 @@ scratchpads = [
     ),
     DropDown(
         'calc',
-        'st -f "CaskaydiaCove Nerd Font Mono:pixelsize=25" -e python -ic ""',
+        'st -t to_top -f "CaskaydiaCove Nerd Font Mono:pixelsize=25" -e python -ic ""',
         height=0.2,
         width=0.5,
         x=0.25,
