@@ -40,6 +40,7 @@ keys.append(
         Key([], 'm', lazy.group['scratchpad'].dropdown_toggle('btop')),
         Key([], 'p', lazy.group['scratchpad'].dropdown_toggle('pulsemixer')),
         Key([], 'v', lazy.group['scratchpad'].dropdown_toggle('vimiv')),
+        Key([], 'r', lazy.group['scratchpad'].dropdown_toggle('countdown')),
         Key([], 'f', lazy.group['scratchpad'].dropdown_toggle('yazi')),
         Key([], 'e', lazy.group['scratchpad'].dropdown_toggle('tt')),
         KeyChord([], 's', [
@@ -115,5 +116,5 @@ elif qtile.core.name == "wayland":
         Key([], 'j', lazy.spawn('swayosd-client --output-volume lower')),
         Key([], 'k', lazy.spawn('swayosd-client --output-volume raise')),
         Key([], 'm', lazy.spawn('swayosd-client --output-volume mute-toggle')),
-        ], mode=True, name=f'<span size="17000" rise="2000">󰕾</span> <span size="x-large" foreground="#d8dee9"> |</span>'))
+        ], mode=True, name=f'<span size="17000" rise="2000">󰕾</span> <span size="x-large" foreground="#d8dee9"> |</span>')),
 

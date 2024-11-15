@@ -19,6 +19,14 @@ scratchpads = [
         y=0.02,
     ),
     DropDown(
+        'countdown',
+        'st -t to_top -f "CaskaydiaCove Nerd Font Mono:pixelsize=25" -e /home/digo/.bin/tclock_timer.sh',
+        height=0.4,
+        width=0.5,
+        x=0.25,
+        y=0.02,
+    ),
+    DropDown(
         'trayer',
         'trayer --widthtype pixel --transparent true --alpha 255 --distance 10',
         y=0,
@@ -75,7 +83,7 @@ scratchpads = [
     ),
     DropDown(
         'yazi',
-        f'{sterm} -T scratchpad -e yazi',
+        f'{sterm} -A 1 -t to_top -e yazi',
         height=0.9,
         width=0.9,
         opacity=0.5,
@@ -146,7 +154,7 @@ scratchpads = [
     DropDown(
         'notes',
         f'kitty -T scratchpad -e vim {home}.vimwiki/notes/index.wiki',
-        height=0.9,
+        height=0.5,
         width=0.9,
         opacity=0.5,
         x=0.05,

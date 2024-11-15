@@ -10,7 +10,7 @@ const listSize = tmuxList
 
 if (listSize.length > 1) {
   console.log(
-    `<span rise="-22000" foreground="#EF5A6F">${icon}</span>  <span rise="-20000" foreground="#EF5A6F">${listSize.length}</span><span rise="-18000"size="x-large" foreground="#fff"> |</span>`
+    `<span rise="-22000" foreground="#EF5A6F">${icon}</span>  <span rise="-20000" foreground="#EF5A6F">${listSize.length}</span><span rise="-18000"size="x-large" foreground="#4c566a"> |</span>`
   );
 }
 
