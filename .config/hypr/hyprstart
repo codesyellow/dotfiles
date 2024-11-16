@@ -19,8 +19,7 @@ is_running 'music_bass.mjs' 'node'
 
 hyprpaper &
 hypridle &
-pypr &
-paplay ~/.audios/retro-audio-logo-94648.mp3 &
+hyprsunset -t 3500 &
 systemctl --user import-environment PATH &
 dunst &
 #wl-paste -pw wl-copy &
@@ -29,5 +28,6 @@ swayosd-server &
 ianny &
 #jamesdsp -t &
 wl-paste --type text --watch cliphist store &
-xremap ~/.config/xremap/config.yml --mouse &
-eamcs --daemon &
+#xremap ~/.config/xremap/config.yml --mouse &
+
+
