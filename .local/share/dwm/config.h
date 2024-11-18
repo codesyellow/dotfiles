@@ -16,7 +16,7 @@ static const int attachbelow = 1;    /* 1 means attach after the currently activ
 
 static const char *fonts[]          = { 
   "JetBrainMono Nerd Font",
-  "Font Awesome 6 Free Solid:size=11",
+  "Symbols Nerd Font:size=11",
 };
 static const char dmenufont[] = "JetBrainMono Nerd Font:size=12";
 static const char prompt_icon[] = "";
@@ -154,13 +154,13 @@ static const char *vimanywhere[] = {  "/home/cie/.vim-anywhere/bin/run", NULL };
 static const char *scratchpadcmd[] = {"s", "alacritty", "--config-file", "/home/digo/.config/alacritty/scratchpad.toml", "--class", "scratchpad", "-t", "scratchpad", NULL}; 
 static const char *scratchpadclock[] = {"c", "st", "-t", "clock", "-c","clock", "-e", "tclock_timer.sh", NULL}; 
 static const char *scratchpadcalc[] = {"g", "st", "-t", "calc", "-c","calc", "-e", "bc", NULL}; 
-static const char *scratchpadnotes[] = {"o", "st", "-t", "notes", "-c","notes", "-e", "nvim", "/home/digo/.notes/index.norg", NULL}; 
+static const char *scratchpadnotes[] = {"o", "st", "-t", "notes", "-c","notes", "-e", "vim", "/home/digo/.vimwiki/notes/index.wiki", NULL}; 
 static const char *scratchpadbtop[] = {"b", "st", "-t", "btop", "-c","btop", "-e", "btop", NULL}; 
 static const char *scratchpadtask[] = {"t", "st", "-t", "task-tui", "-c","task-tui", "-e", "taskwarrior-tui", NULL}; 
 static const char *scratchpadmixer[] = {"p", "st", "-t", "pulsemixer", "-c","pulsemixer", "-e", "pulsemixer", NULL}; 
 static const char *scratchpadtt[] = {"e", "st", "-t", "tt", "-c","tt", "-e", "tt", NULL}; 
 static const char *scratchpadai[] = {"a", "st", "-t", "ai", "-c","aichat", "-e", "aichat", NULL}; 
-static const char *scratchpadhabit[] = {"h", "st", "-t", "habits", "-c","habits", "-e", "nvim", "/home/digo/.notes/habits.norg", NULL}; 
+static const char *scratchpadhabit[] = {"h", "st", "-t", "habits", "-c","habits", "-e", "vim", "/home/digo/.vimwiki/habits/index.wiki", NULL}; 
 static const char *scratchfdm[] = {"d", "fdm", NULL}; 
 static const char *scratchpadzap[] = {"w", "whatsapp-for-linux", NULL}; 
 static const char *scratchpadtrayer[] = {"q", "trayer", "--widthtype", "pixel", "--transparent", "true", "--alpha", "255", "--distance", "10", NULL}; 
