@@ -11,6 +11,7 @@ configuration {
     nord4:     #d8dee9;
     nord5:     #e5e9f0;
     fg:        #eceff4;
+    warning:   #EF5A6F;
     nord7:     #8fbcbb;
     nord8:     #88c0d0;
     nord9:     #81a1c1;
@@ -21,7 +22,7 @@ configuration {
     nord14:    #a3be8c;
     nord15:    #b48ead;
     background-color:            transparent;
-    text-color:                  @nord4;
+    text-color:                  @bg;
     accent-color:                @nord8;
     background-colour:           @bg;
     foreground-colour:           @fg;
@@ -30,7 +31,7 @@ configuration {
     urgent-background:           @fg;
     urgent-foreground:           @bg;
     selected-normal-background:  @bg;
-    selected-normal-foreground:  @nord13;
+    selected-normal-foreground:  @warning;
     alternate-normal-background: @bg;
     alternate-normal-foreground: @fg;
 }
