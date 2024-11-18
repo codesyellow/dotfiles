@@ -1,1 +1,5 @@
-{ "coc.preferences.formatOnSaveFiletypes": [ "markdown", "javascript", "javascriptreact", "typescript", "typescriptreact", "json", "graphql", "elixir", "eelixir""] }
+{ 
+  "python.formatting.provider": "autopep8",
+  "coc.preferences.formatOnSave": true
+}
+
