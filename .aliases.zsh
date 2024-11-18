@@ -13,7 +13,6 @@ alias lp='{(comm -23 <(yay -Qqe | sort) <({(pactree -u -d 1 base)&&(yay -Qqg bas
 
 # defaults
 alias :c='clear'
-alias cd='z'
 alias :m='mkdir -p'
 alias :fp='chmod +x'
 alias :tx='tar xvf'
@@ -43,6 +42,7 @@ alias :m3="mv ~/Downloads/*.mp3 ~/.music"
 # tmux
 alias :tl="tmux ls"
 
+alias :!s="sudo !!"
 # dotfiles
 :dotfiles() {
   /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME "$@"
@@ -85,6 +85,7 @@ alias :po='$sud pacman -Qtdq | $sud pacman -Rns -'
 alias :fi='flatpak install'
 alias :fu='flatpak update'
 alias :fr='flatpak uninstall'
+alias :fo='flatpak uninstall --unused'
 
 # make
 alias smi='$sud rm config.h; make; $sud make install'
