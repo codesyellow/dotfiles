@@ -42,7 +42,6 @@ window {
     fullscreen:                  false;
     width:                       700px;
     height:                      24px;
-    /* x-offset:                    230px; when using entry*/
     x-offset:                    300px;
     y-offset:                    -24px;
 
