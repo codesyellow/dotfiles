@@ -28,6 +28,7 @@ swayosd-server &
 ianny &
 #jamesdsp -t &
 wl-paste --type text --watch cliphist store &
+syncthing server &
 #xremap ~/.config/xremap/config.yml --mouse &
 
 
