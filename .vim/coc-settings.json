@@ -1,5 +1,4 @@
-{ 
+{
   "python.formatting.provider": "autopep8",
   "coc.preferences.formatOnSave": true
 }
-
