@@ -1,17 +1,17 @@
 from libqtile.config import DropDown, Match
 from .variables import home, sterm
-from libqtile.log_utils import logger
+
 scratchpads = [
     DropDown(
-        'term',
+        "term",
         f"alacritty -t to_top --config-file {home}/.config/alacritty/scratchpad.toml -e bash -c 'tmux attach-session -t scratch || tmux new-session -s scratch'",
         y=0.01,
         x=0.050,
         height=0.6,
-        width=0.9
+        width=0.9,
     ),
     DropDown(
-        'calc',
+        "calc",
         'st -t to_top -f "CaskaydiaCove Nerd Font Mono:pixelsize=25" -e python -ic ""',
         height=0.2,
         width=0.5,
@@ -19,7 +19,7 @@ scratchpads = [
         y=0.02,
     ),
     DropDown(
-        'countdown',
+        "countdown",
         'st -t to_top -f "CaskaydiaCove Nerd Font Mono:pixelsize=25" -e /home/digo/.bin/tclock_timer.sh',
         height=0.4,
         width=0.5,
@@ -27,113 +27,112 @@ scratchpads = [
         y=0.02,
     ),
     DropDown(
-        'trayer',
-        'trayer --widthtype pixel --transparent true --alpha 255 --distance 10',
+        "trayer",
+        "trayer --widthtype pixel --transparent true --alpha 255 --distance 10",
         y=0,
-        on_focus_lost_hide=True
+        on_focus_lost_hide=True,
     ),
     DropDown(
-        'task',
-        f'{sterm} -T scratchpad -c left_side -e taskwarrior-tui',
+        "task",
+        f"{sterm} -T scratchpad -c left_side -e taskwarrior-tui",
         height=0.940,
         width=0.3,
         opacity=0.5,
         x=0.02,
         y=0.01,
-        on_focus_lost_hide=False
+        on_focus_lost_hide=False,
     ),
     DropDown(
-        'ai',
-        f'{sterm} -T scratchpad -c right_side -e aichat',
+        "ai",
+        f"{sterm} -T scratchpad -c right_side -e aichat",
         height=0.940,
         width=0.3,
         opacity=0.5,
         x=0.690,
         y=0.01,
-        on_focus_lost_hide=False
+        on_focus_lost_hide=False,
     ),
     DropDown(
-        'pulsemixer',
-        f'{sterm} -T scratchpad -c right_side -e pulsemixer',
+        "pulsemixer",
+        f"{sterm} -T scratchpad -c right_side -e pulsemixer",
         height=0.5,
         width=0.3,
         opacity=0.5,
         x=0.690,
         y=0.01,
-        on_focus_lost_hide=False
+        on_focus_lost_hide=False,
     ),
-
     DropDown(
-        'zap',
-        'wasistlos',
-        match=Match(wm_class=['Wasistlos'][0]),
+        "zap",
+        "wasistlos",
+        match=Match(wm_class=["Wasistlos"][0]),
         height=0.9,
         width=0.8,
         y=0.03,
-        on_focus_lost_hide=False
+        on_focus_lost_hide=False,
     ),
     DropDown(
-        'btop',
-        f'{sterm} -T scratchpad -e btop',
+        "btop",
+        f"{sterm} -T scratchpad -e btop",
         height=0.9,
         width=0.9,
         x=0.05,
         y=0.03,
-        on_focus_lost_hide=True
+        on_focus_lost_hide=True,
     ),
     DropDown(
-        'yazi',
-        f'{sterm} -A 1 -t to_top -e yazi',
-        height=0.9,
-        width=0.9,
-        opacity=0.5,
-        x=0.05,
-        y=0.03,
-        on_focus_lost_hide=True
-    ),
-    DropDown(
-        'cmus',
-        f'{sterm} -T scratchpad -c cmus -e cmus',
+        "yazi",
+        f"{sterm} -A 1 -t to_top -e yazi",
         height=0.9,
         width=0.9,
         opacity=0.5,
         x=0.05,
         y=0.03,
-        on_focus_lost_hide=True
+        on_focus_lost_hide=True,
     ),
     DropDown(
-        'ankivPT',
+        "cmus",
+        f"{sterm} -T scratchpad -c cmus -e cmus",
+        height=0.9,
+        width=0.9,
+        opacity=0.5,
+        x=0.05,
+        y=0.03,
+        on_focus_lost_hide=True,
+    ),
+    DropDown(
+        "ankivPT",
         f'{sterm} -t "anki-vim" -e anki-vim portuguese',
         height=0.5,
         width=0.9,
         opacity=0.5,
         x=0.05,
         y=0.45,
-        on_focus_lost_hide=True
+        on_focus_lost_hide=True,
     ),
     DropDown(
-        'ankivEN',
+        "ankivEN",
         f'{sterm} -t "anki-vim" -e anki-vim english',
         height=0.5,
         width=0.9,
         opacity=0.5,
         x=0.05,
         y=0.45,
-        on_focus_lost_hide=True
+        on_focus_lost_hide=True,
     ),
     DropDown(
-        'nnn',
-        f'{sterm} -T scratchpad -e nnn',
+        "nnn",
+        f"{sterm} -T scratchpad -e nnn",
         height=0.9,
         width=0.9,
         opacity=0.5,
         x=0.05,
         y=0.03,
-        on_focus_lost_hide=False
+        on_focus_lost_hide=False,
     ),
     DropDown(
-        'vimiv',
-        f'vimiv {home}.code/',
+        "vimiv",
+        f"vimiv {home}.code/",
         height=0.9,
         width=0.7,
         opacity=0.5,
@@ -142,33 +141,33 @@ scratchpads = [
         y=0.02,
     ),
     DropDown(
-        'tt',
-        f'{sterm} -T scratchpad -e tt -t 60',
+        "tt",
+        f"{sterm} -T scratchpad -e tt -t 60",
         height=0.9,
         width=0.9,
         opacity=0.5,
         x=0.05,
         y=0.03,
-        on_focus_lost_hide=False
+        on_focus_lost_hide=False,
     ),
     DropDown(
-        'notes',
-        f'kitty -T scratchpad -e vim {home}.vimwiki/notes/index.wiki',
+        "notes",
+        f"kitty -T scratchpad -e vim {home}.vimwiki/notes/index.wiki",
         height=0.5,
         width=0.9,
         opacity=0.5,
         x=0.05,
         y=0.03,
-        on_focus_lost_hide=False
+        on_focus_lost_hide=False,
     ),
     DropDown(
-        'habits',
-        f'kitty -T scratchpad -e vim {home}.vimwiki/habits/index.wiki',
+        "habits",
+        f"kitty -T scratchpad -e vim {home}.vimwiki/habits/index.wiki",
         height=0.5,
         width=0.5,
         opacity=0.5,
         x=0.25,
         y=0.2,
-        on_focus_lost_hide=False
-    )]
-
+        on_focus_lost_hide=False,
+    ),
+]

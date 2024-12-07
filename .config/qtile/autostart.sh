@@ -12,8 +12,6 @@ is_running() {
 
 is_running 'pausa'
 is_running 'easy_always.sh'
-is_running 'tf2_server_count.sh'
-is_running 'santos_pregame.sh'
 is_running 'xidlehook.sh'
 is_running 'santos_calendar.mjs' 'node'
 is_running 'gameon.mjs' 'node'
@@ -32,5 +30,5 @@ udiskie &
 clipmenud &
 systemctl --user import-environment DISPLAY &
 /usr/lib/polkit-kde-authentication-agent-1 &
-redshift -O 6000 &
+redshift -O 4000 &
 xremap ~/.config/xremap/xremap &

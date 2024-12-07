@@ -1,4 +1,5 @@
-from libqtile.lazy import lazy
+# type: ignore
+from libqtile.lazy import lazy 
 from libqtile.config import KeyChord, Key
 from .binds import keys
 from .variables import mod, runner, browser, bg1
@@ -56,9 +57,10 @@ KeyChord([mod], 'w', [
     Key([], 't', lazy.group[groups[0].name].toscreen()),
     Key([], 'v', lazy.group[groups[1].name].toscreen()),
     Key([], 'b', lazy.group[groups[2].name].toscreen()),
-    Key([], 'g', lazy.group[groups[3].name].toscreen()),
+    Key([], 'l', lazy.group[groups[3].name].toscreen()),
     Key([], 'm', lazy.group[groups[4].name].toscreen()),
-    Key([], 'e', lazy.group[groups[5].name].toscreen()),
+    Key([], 's', lazy.group[groups[5].name].toscreen()),
+    Key([], 'g', lazy.group[groups[6].name].toscreen()),
     ], name=f'<span rise="3000" size="13000"></span> <span size="x-large" foreground="{bg1}">|</span>'))
 
 keys.append(
@@ -66,9 +68,10 @@ keys.append(
         Key([], 't',  lazy.window.togroup(groups[0].name)),
         Key([], 'v',  lazy.window.togroup(groups[1].name)),
         Key([], 'b',  lazy.window.togroup(groups[2].name)),
-        Key([], 'g',  lazy.window.togroup(groups[3].name)),
+        Key([], 'l',  lazy.window.togroup(groups[3].name)),
         Key([], 'm',  lazy.window.togroup(groups[4].name)),
-        Key([], 'e',  lazy.window.togroup(groups[5].name)),
+        Key([], 's',  lazy.window.togroup(groups[5].name)),
+        Key([], 'g',  lazy.window.togroup(groups[6].name)),
     ], name=f'<span rise="2000" size="14000"></span> <span size="x-large" foreground="{bg1}">|</span>'))
 
 # action
