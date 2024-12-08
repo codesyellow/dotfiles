@@ -1,24 +1,24 @@
 from libqtile import layout
 from libqtile.config import Match
-from .variables import bg, fg, al
+from .variables import colors
 
 layouts = [
-    layout.MonadWide(
-        align=1,
-        border_focus=al,
-        border_normal=bg,
-        border_width=2,
-        new_client_position="before_current",
-        ratio=0.7,
-        single_border_width=0,
-        single_margin=0,
-    ),
+    #    layout.MonadWide(
+    #        align=1,
+    #        border_focus=al,
+    #        border_normal=bg,
+    #        border_width=2,
+    #        new_client_position="before_current",
+    #        ratio=0.7,
+    #        single_border_width=0,
+    #        single_margin=0,
+    #    ),
     layout.Max(),
 ]
 
 floating_layout = layout.Floating(
-    border_focus=al,
-    border_normal=bg,
+    border_focus=colors["alt_color"],
+    border_normal=colors["bg_color"],
     border_width=2,
     margin=2,
     float_rules=[

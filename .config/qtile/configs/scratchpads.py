@@ -1,10 +1,11 @@
 from libqtile.config import DropDown, Match
-from .variables import home, sterm
+from .variables import home, sterm, scratch_zellij, calc
 
 scratchpads = [
     DropDown(
         "term",
-        f"alacritty -t to_top --config-file {home}/.config/alacritty/scratchpad.toml -e bash -c 'tmux attach-session -t scratch || tmux new-session -s scratch'",
+        f"alacritty -t to_top --config-file {
+            home}/.config/alacritty/scratchpad.toml -e {scratch_zellij}",
         y=0.01,
         x=0.050,
         height=0.6,
@@ -12,7 +13,8 @@ scratchpads = [
     ),
     DropDown(
         "calc",
-        'st -t to_top -f "CaskaydiaCove Nerd Font Mono:pixelsize=25" -e python -ic ""',
+        f'st -t to_top -f "CaskaydiaCove Nerd Font Mono:pixelsize=25" -e {
+            calc}',
         height=0.2,
         width=0.5,
         x=0.25,
@@ -20,7 +22,7 @@ scratchpads = [
     ),
     DropDown(
         "countdown",
-        'st -t to_top -f "CaskaydiaCove Nerd Font Mono:pixelsize=25" -e /home/digo/.bin/tclock_timer.sh',
+        'st -t to_top -f "CaskaydiaCove Nerd Font Mono:pixelsize=25" -e tclock_timer.sh',
         height=0.4,
         width=0.5,
         x=0.25,

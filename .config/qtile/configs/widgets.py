@@ -84,10 +84,6 @@ my_widgets = [
         fontsize=wsize,
         update_interval=2,
     ),
-    widget.TextBox(
-        fmt=f'<span size="x-large" foreground="{colors["bg1_color"]}">|</span>',
-        fontsize=19,
-    ),
     widget.GenPollText(
         func=lambda: subprocess.check_output(
             os.path.expanduser("~/.config/qtile/configs/widgets/gameon.sh")
@@ -139,6 +135,10 @@ my_widgets = [
         fontsize=wsize,
         mouse_callbacks={"Button1": lambda: qtile.spawn("tmux_kill.mjs 'kill'")},
         update_interval=30,
+    ),
+    widget.TextBox(
+        fmt=f'<span size="x-large" foreground="{colors["bg1_color"]}">|</span>',
+        fontsize=19,
     ),
     widget.Clock(
         fontsize=wsize,
