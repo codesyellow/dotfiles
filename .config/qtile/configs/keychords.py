@@ -80,6 +80,7 @@ keys.append(
         # Key([], 'h', lazy.core.hide_cursor()),
         # Key([], 's', lazy.core.unhide_cursor()),
         Key([], 'k', lazy.window.kill()),
+        Key([], 'b', lazy.hide_show_bar()),
         KeyChord([], "r", [
             Key([], 'i', lazy.layout.grow()),
             Key([], 'd', lazy.layout.shrink()),
