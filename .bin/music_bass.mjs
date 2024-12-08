@@ -20,6 +20,7 @@ const cmusRunning = async () => {
         inactive = false;
       }
       console.log("Playing");
+      await $`pamixer --set-volume ${defaultVolume}`;
       await $`easy_preset.sh 'HeavyBass'`;
     } else if (
       (cmusStatus.trim() === "paused" && !inactive) ||

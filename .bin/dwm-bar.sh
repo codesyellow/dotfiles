@@ -283,7 +283,7 @@ update_stretch() {
 update_cpu_temp() {
     cpu_temp_num=$(cut -c 1-2 </sys/class/thermal/thermal_zone2/temp)
 
-    if [[ $cpu_temp_num -ge 60 ]]; then
+    if [[ $cpu_temp_num -ge 80 ]]; then
         cpu_temp=" $nm| $wn $cpu_temp_low $cpu_temp_num°"
         #     cpu_temp=" $nm| $nm $cpu_temp_low $cpu_temp_num°"
         # elif [[ $cpu_temp_num -ge 61 && $cpu_temp_num -le 70 ]]; then

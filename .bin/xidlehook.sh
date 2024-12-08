@@ -11,7 +11,7 @@ xidlehook \
     'xrandr --output "$PRIMARY_DISPLAY" --brightness .3' \
     'xrandr --output "$PRIMARY_DISPLAY" --brightness 1' \
     `# screen off some minutes later, on & undim if user becomes active` \
-    --timer 150 \
+    --timer 200 \
     'xset dpms force off' \
     'xset dpms force on && xrandr --output "$PRIMARY_DISPLAY" --brightness 1' \
     `# Undim & lock after some minutes` \
