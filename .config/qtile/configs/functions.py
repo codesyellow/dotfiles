@@ -1,5 +1,4 @@
 from libqtile import qtile
-from libqtile.log_utils import logger
 from .variables import colors
 
 
@@ -8,7 +7,8 @@ def desconnect_ds4():
 
 
 def run_easy():
-    qtile.cmd_spawn("flatpak run com.github.wwmm.easyeffects --gapplication-service")
+    qtile.cmd_spawn(
+        "flatpak run com.github.wwmm.easyeffects --gapplication-service")
 
 
 def stop_easy():

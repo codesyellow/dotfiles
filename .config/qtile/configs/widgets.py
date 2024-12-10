@@ -1,8 +1,8 @@
-import os, subprocess
+import os
+import subprocess
 from libqtile import widget, qtile
 from .variables import group_font, widget_icons, wsize, colors
-from .functions import tabbed
-from libqtile.log_utils import logger
+from .custom_widgets import cpu_temp, cpu_usage, mem_usage, root_space, home_space, hdd_space
 
 my_widgets = [
     widget.Volume(
@@ -11,25 +11,19 @@ my_widgets = [
         update_interval=5,
     ),
     widget.GenPollText(
-        func=lambda: subprocess.check_output(
-            os.path.expanduser("~/.config/qtile/configs/widgets/mem.sh")
-        ).decode("utf-8"),
+        func=mem_usage,
         fontsize=wsize,
         font=group_font,
         update_interval=15,
     ),
     widget.GenPollText(
-        func=lambda: subprocess.check_output(
-            os.path.expanduser("~/.config/qtile/configs/widgets/cpu.sh")
-        ).decode("utf-8"),
+        func=cpu_usage,
         fontsize=wsize,
         font=group_font,
         update_interval=2,
     ),
     widget.GenPollText(
-        func=lambda: subprocess.check_output(
-            os.path.expanduser("~/.config/qtile/configs/widgets/disk-root.sh")
-        ).decode("utf-8"),
+        func=root_space,
         fontsize=wsize,
         font=group_font,
         update_interval=15,
@@ -85,22 +79,20 @@ my_widgets = [
         update_interval=2,
     ),
     widget.GenPollText(
-        func=lambda: subprocess.check_output(
-            os.path.expanduser("~/.config/qtile/configs/widgets/gameon.sh")
-        ).decode("utf-8"),
+        func=cpu_temp,
         font=group_font,
         padding=5,
         fontsize=wsize,
         update_interval=2,
     ),
-    widget.GenPollText(
-        func=tabbed,
-        foreground=colors["alt_color"],
-        padding=5,
-        fontsize=wsize,
-        font=group_font,
-        update_interval=2,
-    ),
+    # widget.GenPollText(
+    #    func=tabbed,
+    #    foreground=colors["alt_color"],
+    #    padding=5,
+    #    fontsize=wsize,
+    #    font=group_font,
+    #    update_interval=2,
+    # ),
     widget.GenPollText(
         background=colors["bg_color"],
         func=lambda: subprocess.check_output(
@@ -129,43 +121,26 @@ my_widgets = [
         update_interval=30,
     ),
     widget.GenPollText(
-        func=lambda: subprocess.check_output(
-            os.path.expanduser("~/.config/qtile/configs/widgets/tmux_kill.mjs")
-        ).decode("utf-8"),
-        fontsize=wsize,
-        mouse_callbacks={"Button1": lambda: qtile.spawn("tmux_kill.mjs 'kill'")},
-        update_interval=30,
-    ),
-    widget.TextBox(
-        fmt=f'<span size="x-large" foreground="{colors["bg1_color"]}">|</span>',
-        fontsize=19,
-    ),
-    widget.Clock(
-        fontsize=wsize,
-        format=f'<span size="14000" rise="3000">%d</span><span size="x-large" foreground="{colors["bg1_color"]}">|</span><span size="14000" rise="3500">%H:%M</span><span size="x-large" foreground="{colors["bg1_color"]}">|</span><span size="12800" text_transform="uppercase" rise="3000">%a</span>',
-    ),
-    widget.GenPollText(
-        func=lambda: subprocess.check_output(
-            os.path.expanduser("~/.config/qtile/configs/widgets/temp.sh")
-        ).decode("utf-8"),
-        fontsize=wsize,
-        update_interval=5,
-    ),
-    widget.GenPollText(
         background=colors["bg_color"],
-        func=lambda: subprocess.check_output(
-            os.path.expanduser("~/.config/qtile/configs/widgets/disk-home.sh")
-        ).decode("utf-8"),
+        func=home_space,
         padding=5,
         fontsize=wsize,
         update_interval=30,
     ),
     widget.GenPollText(
-        func=lambda: subprocess.check_output(
-            os.path.expanduser("~/.config/qtile/configs/widgets/disk-hdd.sh")
-        ).decode("utf-8"),
+        func=hdd_space,
         fontsize=wsize,
         update_interval=60,
+    ),
+    widget.TextBox(
+        fmt=f'<span size="x-large" foreground="{
+            colors["bg1_color"]}">|</span>',
+        fontsize=19,
+    ),
+    widget.Clock(
+        fontsize=wsize,
+        format=f'<span size="14000" rise="3000">%d</span><span size="x-large" foreground="{colors["bg1_color"]}">-</span><span size="14000" rise="3500">%H:%M</span><span size="x-large" foreground="{
+            colors["bg1_color"]}">-</span><span size="12800" text_transform="uppercase" rise="3000">%a</span>',
     ),
 ]
 
