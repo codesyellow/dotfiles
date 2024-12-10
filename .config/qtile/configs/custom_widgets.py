@@ -17,6 +17,8 @@ GAMEON_ICON = ""
 EASYEFFECTS_EQUALIZER_ICON = ""
 EASYEFFECTS_BASS_ICON = ""
 UPDATES_ICON = "󰇚"
+KEYBOARD_ICONS = ""
+STRETCH_ICON = ""
 
 MIN_CPU_USAGE = 80
 MIN_MEM_USAGE = 90
@@ -32,6 +34,8 @@ WARNING_COLOR = "#EF5A6F"
 
 POMODORO_TIME_PATH = "/tmp/pomodoro_time"
 EASYEFFECTS_PRESET_PATH = "/home/digo/.config/.easy_preset"
+STRETCH_TIME_PATH = "/tmp/stretch"
+STRETCH_STOP_PATH = "/tmp/stop"
 
 
 def is_process_running(process_name):
@@ -40,6 +44,11 @@ def is_process_running(process_name):
 
 def file_exist(file):
     return os.path.isfile(file)
+
+
+def get_command_output(command):
+    return subprocess.check_output(
+        command, shell=True).decode('utf-8')
 
 
 def cpu_temp():
@@ -157,7 +166,7 @@ def game_is_on():
         return set_pango(
             colors=[BAR_COLOR, WARNING_COLOR],
             size=[20000, 14000],
-            position=[4000, 6000],
+            position=[4000, 8000],
             icon_image=GAMEON_ICON,
             text=""
         )
@@ -179,10 +188,29 @@ def pomodoro():
         return ""
 
 
+def do_stretch():
+    current_colors = []
+    current_text = ""
+    if file_exist(STRETCH_TIME_PATH):
+        if file_exist(STRETCH_STOP_PATH):
+            current_text = "STOP!"
+            current_colors = [BAR_COLOR, NORMAL_COLOR]
+        else:
+            current_text = "DOIT!"
+            current_colors = [BAR_COLOR, WARNING_COLOR]
+        return set_pango(
+            colors=current_colors,
+            size=[30000, 13000, 3000],
+            position=[0, 9700, 8500],
+            icon_image=STRETCH_ICON,
+            text=current_text)
+    else:
+        return ""
+
+
 def check_updates():
     """Return the number of updates available for the system"""
-    updates_available = subprocess.check_output(
-        "checkupdates | wc -l", shell=True).decode('utf-8')
+    updates_available = get_command_output("checkupdates | wc -l")
 
     if int(updates_available) >= MIN_UPDATES:
         return set_pango(
@@ -192,3 +220,18 @@ def check_updates():
             icon_image=UPDATES_ICON,
             text=updates_available
         )
+
+
+def check_keyboard_variant():
+    """Return keyboard current variant if it's: US(INTL) or returns nothing"""
+    keyboard_variant = get_command_output("xkb-switch -p").strip()
+    if keyboard_variant == "us(intl)":
+        return set_pango(
+            colors=[BAR_COLOR, WARNING_COLOR],
+            size=[25000, 26000, 3000],
+            position=[0, 4500, 10000],
+            icon_image=KEYBOARD_ICONS,
+            text="INTL"
+        )
+    else:
+        return ""

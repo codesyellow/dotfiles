@@ -2,7 +2,7 @@ import os
 import subprocess
 from libqtile import widget, qtile
 from .variables import group_font, widget_icons, wsize, colors
-from .custom_widgets import cpu_temp, cpu_usage, game_is_on, mem_usage, root_space, home_space, hdd_space, pomodoro, easyeffects_is_on, check_updates
+from .custom_widgets import cpu_temp, cpu_usage, game_is_on, mem_usage, root_space, home_space, hdd_space, pomodoro, easyeffects_is_on, check_updates, check_keyboard_variant, do_stretch
 
 my_widgets = [
     widget.Volume(
@@ -48,9 +48,7 @@ my_widgets = [
         update_interval=2,
     ),
     widget.GenPollText(
-        func=lambda: subprocess.check_output(
-            os.path.expanduser("~/.config/qtile/configs/widgets/stretch.sh")
-        ).decode("utf-8"),
+        func=do_stretch,
         fontsize=wsize,
         update_interval=1,
     ),
@@ -89,9 +87,7 @@ my_widgets = [
     ),
     widget.GenPollText(
         background=colors["bg_color"],
-        func=lambda: subprocess.check_output(
-            os.path.expanduser("~/.config/qtile/configs/widgets/variant.sh")
-        ).decode("utf-8"),
+        func=check_keyboard_variant,
         fontsize=wsize,
         update_interval=2,
     ),
@@ -102,16 +98,16 @@ my_widgets = [
         fontsize=wsize,
         update_interval=60,
     ),
-    widget.GenPollText(
-        func=lambda: subprocess.check_output(
-            os.path.expanduser("~/.config/qtile/configs/widgets/santos.sh")
-        ).decode("utf-8"),
-        fontsize=wsize,
-        mouse_callbacks={
-            "Button1": lambda: qtile.spawn("touch /tmp/stop_santos_widget")
-        },
-        update_interval=30,
-    ),
+    # widget.GenPollText(
+    #    func=lambda: subprocess.check_output(
+    #        os.path.expanduser("~/.config/qtile/configs/widgets/santos.sh")
+    #    ).decode("utf-8"),
+    #    fontsize=wsize,
+    #    mouse_callbacks={
+    #        "Button1": lambda: qtile.spawn("touch /tmp/stop_santos_widget")
+    #    },
+    #    update_interval=30,
+    # ),
     widget.GenPollText(
         background=colors["bg_color"],
         func=home_space,
