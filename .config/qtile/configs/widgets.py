@@ -2,7 +2,7 @@ import os
 import subprocess
 from libqtile import widget, qtile
 from .variables import group_font, widget_icons, wsize, colors
-from .custom_widgets import cpu_temp, cpu_usage, mem_usage, root_space, home_space, hdd_space
+from .custom_widgets import cpu_temp, cpu_usage, game_is_on, mem_usage, root_space, home_space, hdd_space, pomodoro
 
 my_widgets = [
     widget.Volume(
@@ -20,7 +20,7 @@ my_widgets = [
         func=cpu_usage,
         fontsize=wsize,
         font=group_font,
-        update_interval=2,
+        update_interval=1,
     ),
     widget.GenPollText(
         func=root_space,
@@ -29,12 +29,16 @@ my_widgets = [
         update_interval=15,
     ),
     widget.GenPollText(
-        func=lambda: subprocess.check_output(
-            os.path.expanduser("~/.config/qtile/configs/widgets/pymor.sh")
-        ).decode("utf-8"),
+        func=pomodoro,
         fontsize=wsize,
         font=group_font,
         update_interval=5,
+    ),
+    widget.GenPollText(
+        func=game_is_on,
+        fontsize=wsize,
+        font=group_font,
+        update_interval=2,
     ),
     widget.GenPollText(
         func=lambda: subprocess.check_output(
