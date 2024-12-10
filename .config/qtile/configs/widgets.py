@@ -2,7 +2,7 @@ import os
 import subprocess
 from libqtile import widget, qtile
 from .variables import group_font, widget_icons, wsize, colors
-from .custom_widgets import cpu_temp, cpu_usage, game_is_on, mem_usage, root_space, home_space, hdd_space, pomodoro
+from .custom_widgets import cpu_temp, cpu_usage, game_is_on, mem_usage, root_space, home_space, hdd_space, pomodoro, easyeffects_is_on, check_updates
 
 my_widgets = [
     widget.Volume(
@@ -21,6 +21,13 @@ my_widgets = [
         fontsize=wsize,
         font=group_font,
         update_interval=1,
+    ),
+    widget.GenPollText(
+        func=cpu_temp,
+        font=group_font,
+        padding=5,
+        fontsize=wsize,
+        update_interval=5,
     ),
     widget.GenPollText(
         func=root_space,
@@ -76,27 +83,10 @@ my_widgets = [
         countdown_start=10,
     ),
     widget.GenPollText(
-        func=lambda: subprocess.check_output(
-            os.path.expanduser("~/.config/qtile/configs/widgets/easy.sh")
-        ).decode("utf-8"),
+        func=easyeffects_is_on,
         fontsize=wsize,
         update_interval=2,
     ),
-    widget.GenPollText(
-        func=cpu_temp,
-        font=group_font,
-        padding=5,
-        fontsize=wsize,
-        update_interval=2,
-    ),
-    # widget.GenPollText(
-    #    func=tabbed,
-    #    foreground=colors["alt_color"],
-    #    padding=5,
-    #    fontsize=wsize,
-    #    font=group_font,
-    #    update_interval=2,
-    # ),
     widget.GenPollText(
         background=colors["bg_color"],
         func=lambda: subprocess.check_output(
@@ -107,9 +97,7 @@ my_widgets = [
     ),
     widget.GenPollText(
         background=colors["bg_color"],
-        func=lambda: subprocess.check_output(
-            os.path.expanduser("~/.config/qtile/configs/widgets/updates.sh")
-        ).decode("utf-8"),
+        func=check_updates,
         padding=5,
         fontsize=wsize,
         update_interval=60,
