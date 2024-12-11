@@ -1,5 +1,5 @@
 # type: ignore
-from .variables import home
+from .variables import HOME
 
 wks1class_rules = "Alacritty|st"
 wks2class_rules = "audacious|gimp|kdenlive"
@@ -21,7 +21,7 @@ wks4title_rules = (
 game_rules = ""
 
 games_classes_file = (
-    open(f"{home}/.config/qtile/configs/game_classes", "r").read().splitlines()
+    open(f"{HOME}/.config/qtile/configs/game_classes", "r").read().splitlines()
 )
 counter = 0
 

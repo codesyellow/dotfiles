@@ -1,4 +1,5 @@
-import os, subprocess
+import os
+import subprocess
 from libqtile import hook, qtile
 
 if qtile.core.name == "wayland":

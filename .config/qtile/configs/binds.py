@@ -1,38 +1,34 @@
 from libqtile.lazy import lazy
 from libqtile.config import Click, Drag, Key
-from .variables import mod, alt_mod, term, zellij_term
-from .functions import latest_group, focus_main
+from .variables import MOD, ALT_MOD, TERM, zellij_term
 
 keys = [
-    # Key([mod], 'j', lazy.layout.down()),
-    # Key([mod], 'k', lazy.layout.up()),
-    Key([mod], "j", lazy.group.next_window()),
-    Key([mod], "k", lazy.group.prev_window()),
-    Key([mod, "shift"], "k", lazy.layout.shuffle_down()),
-    Key([mod, "shift"], "j", lazy.layout.shuffle_up()),
-    Key([mod, "control"], "r", lazy.reload_config()),
-    Key([mod, "control"], "q", lazy.shutdown()),
-    Key([mod], "f", lazy.window.toggle_fullscreen()),
-    Key([mod, "shift"], "f", lazy.window.toggle_floating()),
-    Key([mod], "c", lazy.window.center()),
-    Key([mod, "shift"], "e", lazy.core.change_vt(2)),
-    Key([mod], "space", lazy.widget["keyboardlayout"].next_keyboard()),
-    Key([mod], "Tab", lazy.function(latest_group)),
-    Key([mod, "shift"], "p", lazy.function(focus_main)),
-    Key([mod], "t", lazy.spawn(zellij_term)),
-    Key([mod], "return", lazy.spawn(term)),
-    Key([alt_mod], "t", lazy.spawn(term)),
+    Key([MOD], "j", lazy.group.next_window()),
+    Key([MOD], "k", lazy.group.prev_window()),
+    Key([MOD, "shift"], "k", lazy.layout.shuffle_down()),
+    Key([MOD, "shift"], "j", lazy.layout.shuffle_up()),
+    Key([MOD, "control"], "r", lazy.reload_config()),
+    Key([MOD, "control"], "q", lazy.shutdown()),
+    Key([MOD], "f", lazy.window.toggle_fullscreen()),
+    Key([MOD, "shift"], "f", lazy.window.toggle_floating()),
+    Key([MOD], "c", lazy.window.center()),
+    Key([MOD, "shift"], "e", lazy.core.change_vt(2)),
+    Key([MOD], "Tab", lazy.screen.toggle_group()),
+    Key([MOD], "t", lazy.spawn(zellij_term)),
+    Key([MOD], "return", lazy.spawn(TERM)),
+    Key([ALT_MOD], "t", lazy.spawn(TERM)),
 ]
 
 mouse = [
     Drag(
-        [mod],
+        [MOD],
         "Button1",
         lazy.window.set_position_floating(),
         start=lazy.window.get_position(),
     ),
     Drag(
-        [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
+        [MOD], "Button3", lazy.window.set_size_floating(),
+        start=lazy.window.get_size()
     ),
-    Click([mod], "Button2", lazy.window.bring_to_front()),
+    Click([MOD], "Button2", lazy.window.bring_to_front()),
 ]

@@ -1,27 +1,12 @@
 from libqtile import qtile
-from .variables import colors
+from .variables import COLORS, log
+import psutil
+import os.path
+import subprocess
 
 
 def desconnect_ds4():
     qtile.cmd_spawn("dsbattery -d")
-
-
-def run_easy():
-    qtile.cmd_spawn(
-        "flatpak run com.github.wwmm.easyeffects --gapplication-service")
-
-
-def stop_easy():
-    qtile.cmd_spawn("killall easyeffects")
-
-
-def latest_group(qtile):
-    qtile.current_screen.set_group(qtile.current_screen.previous_group)
-
-
-def focus_main(qtile):
-    window = qtile.current_group.layout.focus_first()
-    qtile.current_group.focus(window)
 
 
 def tabbed():
@@ -30,13 +15,13 @@ def tabbed():
         if num_windows <= 1:
             return ""
         else:
-            return f'<span size="x-large" foreground="{colors["bg1_color"]}">| </span><span rise="5000" foreground="#EF5A6F"> </span><span rise="4000">{str(num_windows)}</span>'
+            return f'<span size="x-large" foreground="{COLORS["bg1_color"]}">| </span><span rise="5000" foreground="#EF5A6F"> </span><span rise="4000">{str(num_windows)}</span>'
     return ""
 
 
 def set_pango(colors, size, position, icon_image, text):
     """Set the pango by passing three list, icon_image and the text:
-        one for colors for bar,icon and text,
+        one for COLORS for bar,icon and text,
         size for bar, icon and text,
         position bar, icon and text,
         icon image and text"""
@@ -51,3 +36,16 @@ def set_pango(colors, size, position, icon_image, text):
         output = f"{bar} {icon} <span rise='{
             position[2]}' foreground='{colors[1]}'>{text}</span>"
         return output
+
+
+def is_process_running(process_name):
+    return process_name in (p.name() for p in psutil.process_iter())
+
+
+def file_exist(file):
+    return os.path.isfile(file)
+
+
+def get_command_output(command):
+    return subprocess.check_output(
+        command, shell=True).decode('utf-8')

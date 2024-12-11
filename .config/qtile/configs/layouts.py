@@ -1,7 +1,7 @@
 from libqtile import layout
 from libqtile.config import Match
 from tabbed import Tabbed
-from .variables import colors
+from .variables import COLORS
 
 layouts = [
     #    layout.MonadWide(
@@ -16,18 +16,18 @@ layouts = [
     #    ),
     Tabbed(
         show_single_tab=False,
-        bg_color=colors["bg_color"],
-        active_bg=colors["bg_color"],
-        active_fg=colors["fg_color"],
-        inactive_bg=colors["bg1_color"],
-        inactive_fg=colors["fg_color"],
+        bg_color=COLORS["bg_color"],
+        active_bg=COLORS["bg_color"],
+        active_fg=COLORS["alt_color"],
+        inactive_bg=COLORS["bg_color"],
+        inactive_fg=COLORS["fg_color"],
     ),
     layout.Max(),
 ]
 
 floating_layout = layout.Floating(
-    border_focus=colors["alt_color"],
-    border_normal=colors["bg_color"],
+    border_focus=COLORS["alt_color"],
+    border_normal=COLORS["bg_color"],
     border_width=2,
     margin=2,
     float_rules=[
