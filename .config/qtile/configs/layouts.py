@@ -16,18 +16,19 @@ layouts = [
     #    ),
     Tabbed(
         show_single_tab=False,
-        bg_color=COLORS["bg_color"],
-        active_bg=COLORS["bg_color"],
-        active_fg=COLORS["alt_color"],
-        inactive_bg=COLORS["bg_color"],
-        inactive_fg=COLORS["fg_color"],
+        bg_color=COLORS["bg"],
+        active_bg=COLORS["bg"],
+        active_fg=COLORS["alt"],
+        inactive_bg=COLORS["bg"],
+        inactive_fg=COLORS["fg"],
     ),
     layout.Max(),
+    layout.Floating(),
 ]
 
 floating_layout = layout.Floating(
-    border_focus=COLORS["alt_color"],
-    border_normal=COLORS["bg_color"],
+    border_focus=COLORS["alt"],
+    border_normal=COLORS["bg"],
     border_width=2,
     margin=2,
     float_rules=[

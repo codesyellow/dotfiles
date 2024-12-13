@@ -1,8 +1,7 @@
 import psutil
 import shutil
-from libqtile.log_utils import logger
 from .functions import set_pango, file_exist, get_command_output
-# from .variables import home
+from .variables import HOME
 
 CPU_ICON = ""
 CPU_TEMP_ICON = ""
@@ -31,7 +30,7 @@ NORMAL_COLOR = "#d8dee9"
 WARNING_COLOR = "#EF5A6F"
 
 POMODORO_TIME_PATH = "/tmp/pomodoro_time"
-EASYEFFECTS_PRESET_PATH = "/home/digo/.config/.easy_preset"
+EASYEFFECTS_PRESET_PATH = f"{HOME}/.config/.easy_preset"
 STRETCH_TIME_PATH = "/tmp/stretch"
 STRETCH_STOP_PATH = "/tmp/stop"
 
@@ -64,6 +63,8 @@ class Custom_Widgets:
                 icon_image=UPDATES_ICON,
                 text=updates_available
             )
+        else:
+            return ""
 
     def game_is_on(self):
         if file_exist("/tmp/gameon"):
@@ -145,7 +146,7 @@ class Custom_Widgets:
             return ""
 
     def hdd_space(self):
-        total, used, free = shutil.disk_usage("/home/digo/.HDD")
+        total, used, free = shutil.disk_usage(f"{HOME}/.HDD")
         total_free = free // (2**30)
         if total_free <= MIN_HDD_SPACE:
             return set_pango(

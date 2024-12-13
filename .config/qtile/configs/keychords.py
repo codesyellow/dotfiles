@@ -7,7 +7,7 @@ from .binds import keys
 
 def keychord_name(icon, size, rise):
     icon = f"<span size='{size}' rise='{rise}'>{icon}</span>"
-    bar = f"<span size='x-large' foreground='{COLORS['bg1_color']}'>|</span>"
+    bar = f"<span size='x-large' foreground='{COLORS['bg1']}'>|</span>"
     return f"{icon} {bar}"
 
 
@@ -102,12 +102,11 @@ keychords = [
     ], name=keychord_name(icon="", size="13000", rise="3500")),
 
     KeyChord([MOD], "v", [
-        Key([], 'j', lazy.spawn('changevolume.sh "-" 5')),
+        Key([], 'j', lazy.spawn('changevolume.sh - 5')),
         Key([], 'k', lazy.spawn('changevolume.sh 5')),
-        Key([], 'm', lazy.spawn('changevolume.sh "m"')),
+        Key([], 'm', lazy.spawn('changevolume.sh m')),
     ], name=keychord_name(icon="󰕾", size="15000", rise="4000")),
 ]
 
 for keychord in keychords:
     keys.append(keychord)
-

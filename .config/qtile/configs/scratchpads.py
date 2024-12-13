@@ -1,9 +1,9 @@
 from libqtile.config import DropDown, Match
-from .variables import HOME, sterm, scratch_zellij, calc, neorg_habits, neorg
+from .variables import HOME, sterm, ZELLIJ_SCRATCHPAD
 
 calculator = DropDown(
     "calc",
-    f'st -t to_top -f "CaskaydiaCove Nerd Font Mono:pixelsize=25" -e {calc}',
+    f'st -t to_top -f "CaskaydiaCove Nerd Font Mono:pixelsize=25" -e python -ic ""',
     height=0.2,
     width=0.5,
     x=0.25,
@@ -13,7 +13,7 @@ calculator = DropDown(
 dropdown_terminal = DropDown(
     "term",
     f"alacritty -t to_top --config-file {
-        HOME}/.config/alacritty/scratchpad.toml -e {scratch_zellij}",
+        HOME}/.config/alacritty/scratchpad.toml -e {ZELLIJ_SCRATCHPAD}",
     y=0.01,
     x=0.050,
     height=0.6,
@@ -157,7 +157,7 @@ typing_test = DropDown(
 
 note_taking = DropDown(
     "notes",
-    neorg,
+    f"{sterm} -T to_top -e nvim {HOME}.notes/index.norg",
     height=0.5,
     width=0.9,
     opacity=0.5,
@@ -168,7 +168,7 @@ note_taking = DropDown(
 
 habit_tracking = DropDown(
     "habits",
-    neorg_habits,
+    f"{sterm} -T scratchpad -e nvim {HOME}.notes/habits.norg",
     height=0.5,
     width=0.5,
     opacity=0.5,

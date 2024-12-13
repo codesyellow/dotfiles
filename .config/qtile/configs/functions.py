@@ -1,5 +1,5 @@
 from libqtile import qtile
-from .variables import COLORS, log
+from .variables import COLORS
 import psutil
 import os.path
 import subprocess
@@ -15,7 +15,7 @@ def tabbed():
         if num_windows <= 1:
             return ""
         else:
-            return f'<span size="x-large" foreground="{COLORS["bg1_color"]}">| </span><span rise="5000" foreground="#EF5A6F"> </span><span rise="4000">{str(num_windows)}</span>'
+            return f'<span size="x-large" foreground="{COLORS["bg1"]}">| </span><span rise="5000" foreground="#EF5A6F"> </span><span rise="4000">{str(num_windows)}</span>'
     return ""
 
 

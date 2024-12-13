@@ -47,7 +47,8 @@ groups = [
     ),
     Group(
         icons[6],
+        layout="max",
         matches=[Match(wm_class=re.compile(rf"^({wks7class_rules})$"))],
     ),
-    ScratchPad("scratchpad", scratchpads),
+    ScratchPad("scratchpad", scratchpads, single=False),
 ]

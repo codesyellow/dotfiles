@@ -54,24 +54,24 @@ my_widgets = [
     ),
     widget.Spacer(),
     widget.GroupBox(
-        active=COLORS["fg_color"],
-        block_highlight_text_color=COLORS["alt_color"],
+        active=COLORS["fg"],
+        block_highlight_text_color=COLORS["alt"],
         disable_drag=True,
         markup=True,
         spacing=2,
         highlight_method="text",
-        this_current_screen_border=COLORS["alt_color"],
-        urgent_text=COLORS["alt_color"],
-        highlight_color=[COLORS["bg_color"], COLORS["alt_color"]],
+        this_current_screen_border=COLORS["alt"],
+        urgent_text=COLORS["alt"],
+        highlight_color=[COLORS["bg"], COLORS["alt"]],
         font=FONT,
         fontsize=WSIZE,
-        inactive=COLORS["bg1_color"],
+        inactive=COLORS["bg1"],
         foreground="#444",
         use_mouse_wheel=False,
     ),
     widget.Spacer(),
     widget.Chord(
-        foreground=COLORS["alt_color"],
+        foreground=COLORS["alt"],
         fontsize=WSIZE,
         font=FONT,
     ),
@@ -86,20 +86,20 @@ my_widgets = [
         update_interval=2,
     ),
     widget.GenPollText(
-        background=COLORS["bg_color"],
+        background=COLORS["bg"],
         func=custom_widgets.check_keyboard_variant,
         fontsize=WSIZE,
         update_interval=2,
     ),
     widget.GenPollText(
-        background=COLORS["bg_color"],
+        background=COLORS["bg"],
         func=custom_widgets.check_updates,
         padding=5,
         fontsize=WSIZE,
         update_interval=60,
     ),
     widget.GenPollText(
-        background=COLORS["bg_color"],
+        background=COLORS["bg"],
         func=custom_widgets.home_space,
         padding=5,
         fontsize=WSIZE,
@@ -112,20 +112,20 @@ my_widgets = [
     ),
     widget.TextBox(
         fmt=f'<span size="x-large" foreground="{
-            COLORS["bg1_color"]}">|</span>',
+            COLORS["bg1"]}">|</span>',
         fontsize=19,
     ),
     widget.Clock(
         fontsize=WSIZE,
-        format=f'<span size="14000" rise="3000">%d</span><span size="x-large" foreground="{COLORS["bg1_color"]}">-</span><span size="14000" rise="3500">%H:%M</span><span size="x-large" foreground="{
-            COLORS["bg1_color"]}">-</span><span size="12800" text_transform="uppercase" rise="3000">%a</span>',
+        format=f'<span size="14000" rise="3000">%d</span><span size="x-large" foreground="{COLORS["bg1"]}">-</span><span size="14000" rise="3500">%H:%M</span><span size="x-large" foreground="{
+            COLORS["bg1"]}">-</span><span size="12800" text_transform="uppercase" rise="3000">%a</span>',
     ),
 ]
 
 widget_defaults = dict(
-    background=COLORS["bg_color"],
+    background=COLORS["bg"],
     font=FONT,
-    foreground=COLORS["fg_color"],
+    foreground=COLORS["fg"],
     padding=4,
 )
 
