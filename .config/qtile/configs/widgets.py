@@ -1,5 +1,5 @@
 from libqtile import widget
-from .variables import FONT, widget_icons, WSIZE, COLORS
+from .variables import FONT, WSIZE, COLORS
 from .custom_widgets import Custom_Widgets
 
 custom_widgets = Custom_Widgets()
@@ -76,8 +76,8 @@ my_widgets = [
         font=FONT,
     ),
     widget.QuickExit(
-        default_text=f"{widget_icons[0]}",
-        countdown_format=f"{widget_icons[1]}",
+        default_text='<span size="12000"> </span>',
+        countdown_format='<span foreground="#EF5A6F" size="12000"> </span>',
         countdown_start=10,
     ),
     widget.GenPollText(
@@ -121,12 +121,3 @@ my_widgets = [
             COLORS["bg1"]}">-</span><span size="12800" text_transform="uppercase" rise="3000">%a</span>',
     ),
 ]
-
-widget_defaults = dict(
-    background=COLORS["bg"],
-    font=FONT,
-    foreground=COLORS["fg"],
-    padding=4,
-)
-
-extension_defaults = widget_defaults.copy()

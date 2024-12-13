@@ -5,6 +5,10 @@ import os.path
 import subprocess
 
 
+def get_terminal(terminal, name, font_size):
+    return f'{terminal} -T {name} -c {name} -f "CaskaydiaCove Nerd Font Mono:pixelsize={font_size}"'
+
+
 def desconnect_ds4():
     qtile.cmd_spawn("dsbattery -d")
 

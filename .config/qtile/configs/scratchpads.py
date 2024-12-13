@@ -1,9 +1,12 @@
+from os import name
 from libqtile.config import DropDown, Match
-from .variables import HOME, sterm, ZELLIJ_SCRATCHPAD
+from .variables import HOME, ALT_TERM, ZELLIJ_SCRATCHPAD
+from .functions import get_terminal
 
 calculator = DropDown(
     "calc",
-    f'st -t to_top -f "CaskaydiaCove Nerd Font Mono:pixelsize=25" -e python -ic ""',
+    f'{get_terminal(terminal=ALT_TERM, name="from_top",
+                    font_size=25)} -e python -ic ""',
     height=0.2,
     width=0.5,
     x=0.25,
@@ -12,7 +15,7 @@ calculator = DropDown(
 
 dropdown_terminal = DropDown(
     "term",
-    f"alacritty -t to_top --config-file {
+    f"alacritty -t from_top --config-file {
         HOME}/.config/alacritty/scratchpad.toml -e {ZELLIJ_SCRATCHPAD}",
     y=0.01,
     x=0.050,
@@ -22,7 +25,8 @@ dropdown_terminal = DropDown(
 
 countdown = DropDown(
     "countdown",
-    'st -t to_top -f "CaskaydiaCove Nerd Font Mono:pixelsize=25" -e tclock_timer.sh',
+    f'{get_terminal(terminal=ALT_TERM, name="from_top",
+                    font_size=25)} -e tclock_timer.sh',
     height=0.4,
     width=0.5,
     x=0.25,
@@ -38,7 +42,8 @@ trayer = DropDown(
 
 todo = DropDown(
     "task",
-    f"{sterm} -T scratchpad -c left_side -e taskwarrior-tui",
+    f"{get_terminal(terminal=ALT_TERM, name="from_left",
+                    font_size=16)} -e taskwarrior-tui",
     height=0.940,
     width=0.3,
     opacity=0.5,
@@ -49,7 +54,8 @@ todo = DropDown(
 
 aichat = DropDown(
     "ai",
-    f"{sterm} -T scratchpad -c right_side -e aichat",
+    f"{get_terminal(terminal=ALT_TERM, name="from_right",
+                    font_size=16)} -e aichat",
     height=0.940,
     width=0.3,
     opacity=0.5,
@@ -60,7 +66,8 @@ aichat = DropDown(
 
 pulsemixer = DropDown(
     "pulsemixer",
-    f"{sterm} -T scratchpad -c right_side -e pulsemixer",
+    f"{get_terminal(terminal=ALT_TERM, name="from_right",
+                    font_size=18)} -e pulsemixer",
     height=0.5,
     width=0.3,
     opacity=0.5,
@@ -81,7 +88,8 @@ whatsapp = DropDown(
 
 btop = DropDown(
     "btop",
-    f"{sterm} -T scratchpad -e btop",
+    f"{get_terminal(terminal=ALT_TERM, name="from_bottom",
+                    font_size=16)} -e btop",
     height=0.9,
     width=0.9,
     x=0.05,
@@ -91,7 +99,8 @@ btop = DropDown(
 
 yazy = DropDown(
     "yazi",
-    f"{sterm} -A 1 -t to_top -e yazi",
+    f"{get_terminal(terminal=ALT_TERM, name="from_top",
+                    font_size=16)} -e yazi",
     height=0.9,
     width=0.9,
     opacity=0.5,
@@ -102,7 +111,8 @@ yazy = DropDown(
 
 cmus = DropDown(
     "cmus",
-    f"{sterm} -T scratchpad -c cmus -e cmus",
+    f"{get_terminal(terminal=ALT_TERM, name="from_top",
+                    font_size=18)} -T scratchpad -c cmus -e cmus",
     height=0.9,
     width=0.9,
     opacity=0.5,
@@ -113,7 +123,8 @@ cmus = DropDown(
 
 anki_portuguese = DropDown(
     "ankivPT",
-    f'{sterm} -t "anki-vim" -e anki-vim portuguese',
+    f'{get_terminal(terminal=ALT_TERM, name="from_bottom",
+                    font_size=16)} -e anki-vim portuguese',
     height=0.5,
     width=0.9,
     opacity=0.5,
@@ -124,7 +135,8 @@ anki_portuguese = DropDown(
 
 anki_english = DropDown(
     "ankivEN",
-    f'{sterm} -t "anki-vim" -e anki-vim english',
+    f'{get_terminal(terminal=ALT_TERM, name="from_bottom",
+                    font_size=16)} -e anki-vim english',
     height=0.5,
     width=0.9,
     opacity=0.5,
@@ -146,7 +158,7 @@ vimiv = DropDown(
 
 typing_test = DropDown(
     "tt",
-    f"{sterm} -T scratchpad -e tt -t 60",
+    f"{ALT_TERM} -T scratchpad -e tt -t 60",
     height=0.9,
     width=0.9,
     opacity=0.5,
@@ -157,7 +169,8 @@ typing_test = DropDown(
 
 note_taking = DropDown(
     "notes",
-    f"{sterm} -T to_top -e nvim {HOME}.notes/index.norg",
+    f"{get_terminal(ALT_TERM, name="from_top", font_size=16)
+       } -e nvim {HOME}.notes/index.norg",
     height=0.5,
     width=0.9,
     opacity=0.5,
@@ -168,7 +181,8 @@ note_taking = DropDown(
 
 habit_tracking = DropDown(
     "habits",
-    f"{sterm} -T scratchpad -e nvim {HOME}.notes/habits.norg",
+    f"{get_terminal(terminal=ALT_TERM, name="from_top",
+                    font_size=18)}  -e nvim {HOME}.notes/habits.norg",
     height=0.5,
     width=0.5,
     opacity=0.5,

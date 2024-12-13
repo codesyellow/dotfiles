@@ -23,7 +23,6 @@ layouts = [
         inactive_fg=COLORS["fg"],
     ),
     layout.Max(),
-    layout.Floating(),
 ]
 
 floating_layout = layout.Floating(

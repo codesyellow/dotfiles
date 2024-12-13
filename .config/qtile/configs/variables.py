@@ -3,7 +3,7 @@ import os
 FONT = "Symbols Nerd Font"
 RUNNER = "rofi -show run"
 TERM = "kitty"
-ALT_MOD = "mod3"
+ALT_MOD = "mod1"
 COLORS = {
     "bg": "#2e3440",
     "fg": "#d8dee9",
@@ -16,7 +16,7 @@ BROWSER = "brave"
 HOME = os.path.expanduser("~/")
 TMUX_SCRATCHPAD = "bash -c 'tmux attach-session -t scratch || tmux new-session -s scratch'"
 ZELLIJ_SCRATCHPAD = "zellij -s scratch"
-icons = [
+GROUP_ICONS = [
     "",
     "",
     "",
@@ -25,12 +25,7 @@ icons = [
     "",
     "",
 ]
-widget_icons = [
-    '<span size="12000"> </span>',
-    '<span foreground="#EF5A6F" size="12000"> </span>',
-]
-pad = 10
-sterm = "st"
+ALT_TERM = "st"
 
 # qtile default variables
 dgroups_key_binder = None
