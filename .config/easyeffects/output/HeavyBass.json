@@ -3,7 +3,7 @@
         "bass_enhancer#0": {
             "amount": 4.5,
             "blend": 0.0,
-            "bypass": false,
+            "bypass": true,
             "floor": 20.0,
             "floor-active": false,
             "harmonics": 8.5,
@@ -15,7 +15,7 @@
             "bypass": false,
             "input-gain": 0.0,
             "link": -9.1,
-            "loudness": -1.799999999999999,
+            "loudness": -1.5999999999999988,
             "output": -5.0000000000000036,
             "output-gain": 0.0
         },
@@ -88,7 +88,7 @@
                 "intensity": -13.0,
                 "mute": false
             },
-            "bypass": false,
+            "bypass": true,
             "input-gain": 0.0,
             "output-gain": 0.0
         },
