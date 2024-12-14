@@ -1,12 +1,10 @@
-from os import altsep, name
 from libqtile.config import DropDown, Match
 from .variables import HOME, ALT_TERM, ZELLIJ_SCRATCHPAD
 from .functions import get_terminal
 
 calculator = DropDown(
     "calc",
-    f'{get_terminal(terminal=ALT_TERM, name="from_top",
-                    font_size=25)} -e python -ic ""',
+    f'{get_terminal(name="from_top", font_size=25)} -e python -ic ""',
     height=0.2,
     width=0.5,
     x=0.25,
@@ -15,8 +13,7 @@ calculator = DropDown(
 
 dropdown_terminal = DropDown(
     "term",
-    f"{get_terminal(terminal=ALT_TERM, name="from_top",
-                    font_size=16)} -A 0.7 -e {ZELLIJ_SCRATCHPAD}",
+    f"{get_terminal(name="from_top")} -A 0.7 -e {ZELLIJ_SCRATCHPAD}",
     y=0.01,
     x=0.050,
     height=0.6,
@@ -25,7 +22,7 @@ dropdown_terminal = DropDown(
 
 countdown = DropDown(
     "countdown",
-    f'{get_terminal(terminal=ALT_TERM, name="from_top",
+    f'{get_terminal(name="from_top",
                     font_size=25)} -e tclock_timer.sh',
     height=0.4,
     width=0.5,
@@ -42,8 +39,7 @@ trayer = DropDown(
 
 todo = DropDown(
     "task",
-    f"{get_terminal(terminal=ALT_TERM, name="from_left",
-                    font_size=16)} -e taskwarrior-tui",
+    f"{get_terminal(name="from_left")} -e taskwarrior-tui",
     height=0.940,
     width=0.3,
     opacity=0.5,
@@ -54,8 +50,7 @@ todo = DropDown(
 
 aichat = DropDown(
     "ai",
-    f"{get_terminal(terminal=ALT_TERM, name="from_right",
-                    font_size=16)} -e aichat",
+    f"{get_terminal(name="from_right")} -e aichat",
     height=0.940,
     width=0.3,
     opacity=0.5,
@@ -66,8 +61,7 @@ aichat = DropDown(
 
 pulsemixer = DropDown(
     "pulsemixer",
-    f"{get_terminal(terminal=ALT_TERM, name="from_right",
-                    font_size=18)} -e pulsemixer",
+    f"{get_terminal(name="from_right")} -e pulsemixer",
     height=0.5,
     width=0.3,
     opacity=0.5,
@@ -88,8 +82,7 @@ whatsapp = DropDown(
 
 btop = DropDown(
     "btop",
-    f"{get_terminal(terminal=ALT_TERM, name="from_bottom",
-                    font_size=16)} -e btop",
+    f"{get_terminal(name="from_bottom")} -e btop",
     height=0.9,
     width=0.9,
     x=0.05,
@@ -99,8 +92,7 @@ btop = DropDown(
 
 yazy = DropDown(
     "yazi",
-    f"{get_terminal(terminal=ALT_TERM, name="from_top",
-                    font_size=16)} -e yazi",
+    f"{get_terminal(name="from_top")} -e yazi",
     height=0.9,
     width=0.9,
     opacity=0.5,
@@ -111,8 +103,7 @@ yazy = DropDown(
 
 cmus = DropDown(
     "cmus",
-    f"{get_terminal(terminal=ALT_TERM, name="from_top",
-                    font_size=18)} -T scratchpad -c cmus -e cmus",
+    f"{get_terminal(name="from_top")} -T scratchpad -c cmus -e cmus",
     height=0.9,
     width=0.9,
     opacity=0.5,
@@ -123,8 +114,7 @@ cmus = DropDown(
 
 anki_portuguese = DropDown(
     "ankivPT",
-    f'{get_terminal(terminal=ALT_TERM, name="from_bottom",
-                    font_size=16)} -e anki-vim portuguese',
+    f'{get_terminal(name="from_bottom")} -e anki-vim portuguese',
     height=0.5,
     width=0.9,
     opacity=0.5,
@@ -135,8 +125,7 @@ anki_portuguese = DropDown(
 
 anki_english = DropDown(
     "ankivEN",
-    f'{get_terminal(terminal=ALT_TERM, name="from_bottom",
-                    font_size=16)} -e anki-vim english',
+    f'{get_terminal(name="from_bottom")} -e anki-vim english',
     height=0.5,
     width=0.9,
     opacity=0.5,
@@ -169,7 +158,7 @@ typing_test = DropDown(
 
 note_taking = DropDown(
     "notes",
-    f"{get_terminal(ALT_TERM, name="from_top", font_size=16)
+    f"{get_terminal(name="from_top")
        } -e nvim {HOME}.notes/index.norg",
     height=0.5,
     width=0.9,
@@ -181,8 +170,8 @@ note_taking = DropDown(
 
 habit_tracking = DropDown(
     "habits",
-    f"{get_terminal(terminal=ALT_TERM, name="from_top",
-                    font_size=18)}  -e nvim {HOME}.notes/habits.norg",
+    f"{get_terminal(name="from_top", font_size=18)
+       }  -e nvim {HOME}.notes/habits.norg",
     height=0.5,
     width=0.5,
     opacity=0.5,

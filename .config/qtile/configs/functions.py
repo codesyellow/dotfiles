@@ -5,15 +5,16 @@ import os.path
 import subprocess
 
 
-def get_terminal(terminal, name, font_size):
-    matching = {
-        "class": "-c",
-        "name": "-T",
-    }
-    if terminal.lower() == "kitty":
-        return f'{terminal} -T {name} --class {name} -f "CaskaydiaCove Nerd Font Mono:pixelsize={font_size}"'
-    else:
-        return f'{terminal} {matching["name"]} {name} {matching["class"]} {name} -f "CaskaydiaCove Nerd Font Mono:pixelsize={font_size}"'
+def get_terminal(name, terminal="st", font_size=16):
+    font_name = 'CaskaydiaCove Nerd Font Mono'
+    class_letter = "-c"
+    name_letter = "-T"
+    if terminal.lower() == "alacritty":
+        class_letter = "--class"
+
+    terminal_with_names = f"{terminal} {name_letter} {
+        name} {class_letter} {name}"
+    return f'{terminal_with_names} -f "{font_name}:pixelsize={font_size}"'
 
 
 def desconnect_ds4():
