@@ -1,4 +1,4 @@
-from os import name
+from os import altsep, name
 from libqtile.config import DropDown, Match
 from .variables import HOME, ALT_TERM, ZELLIJ_SCRATCHPAD
 from .functions import get_terminal
@@ -15,8 +15,8 @@ calculator = DropDown(
 
 dropdown_terminal = DropDown(
     "term",
-    f"alacritty -t from_top --config-file {
-        HOME}/.config/alacritty/scratchpad.toml -e {ZELLIJ_SCRATCHPAD}",
+    f"{get_terminal(terminal=ALT_TERM, name="from_top",
+                    font_size=16)} -A 0.7 -e {ZELLIJ_SCRATCHPAD}",
     y=0.01,
     x=0.050,
     height=0.6,

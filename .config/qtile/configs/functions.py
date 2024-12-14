@@ -6,7 +6,14 @@ import subprocess
 
 
 def get_terminal(terminal, name, font_size):
-    return f'{terminal} -T {name} -c {name} -f "CaskaydiaCove Nerd Font Mono:pixelsize={font_size}"'
+    matching = {
+        "class": "-c",
+        "name": "-T",
+    }
+    if terminal.lower() == "kitty":
+        return f'{terminal} -T {name} --class {name} -f "CaskaydiaCove Nerd Font Mono:pixelsize={font_size}"'
+    else:
+        return f'{terminal} {matching["name"]} {name} {matching["class"]} {name} -f "CaskaydiaCove Nerd Font Mono:pixelsize={font_size}"'
 
 
 def desconnect_ds4():
