@@ -29,7 +29,7 @@ BAR_COLOR = "#4c566a"
 NORMAL_COLOR = "#d8dee9"
 WARNING_COLOR = "#EF5A6F"
 
-POMODORO_TIME_PATH = "/tmp/pomodoro_time"
+POMODORO_TIME_PATH = "/tmp/pomo_timer"
 EASYEFFECTS_PRESET_PATH = f"{HOME}/.config/.easy_preset"
 STRETCH_TIME_PATH = "/tmp/stretch"
 STRETCH_STOP_PATH = "/tmp/stop"
@@ -184,12 +184,18 @@ class Custom_Widgets:
     def pomodoro(self):
         if file_exist(POMODORO_TIME_PATH):
             with open(POMODORO_TIME_PATH, "r") as pomodoro_time:
+                colors = [BAR_COLOR, WARNING_COLOR]
+                if file_exist("/tmp/pomo_pause"):
+                    colors = [BAR_COLOR, NORMAL_COLOR]
+                elif file_exist("/tmp/pomo_long_pause"):
+                    colors = [BAR_COLOR, NORMAL_COLOR]
+
                 return set_pango(
-                    colors=[BAR_COLOR, WARNING_COLOR],
+                    colors=colors,
                     size=[30000, 13000, 3000],
-                    position=[0, -700, -2200],
+                    position=[0, 8000, 7500],
                     icon_image=POMODORO_ICON,
-                    text=pomodoro_time.read()
+                    text=pomodoro_time.read().strip()
                 )
         else:
             return ""

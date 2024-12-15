@@ -39,7 +39,7 @@ my_widgets = [
         func=custom_widgets.pomodoro,
         fontsize=WSIZE,
         font=FONT,
-        update_interval=5,
+        update_interval=1,
     ),
     widget.GenPollText(
         func=custom_widgets.game_is_on,
