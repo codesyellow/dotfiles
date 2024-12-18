@@ -7,31 +7,28 @@
     "custom/cpu",
     "custom/mem",
     "custom/disk-root",
-    "custom/network"
+    "custom/gameon",
   ],
   "modules-right": [
     "hyprland/submap",
-    "custom/gameon",
     "custom/easy",
-    "custom/separator",
     "custom/tabbed",
     "custom/variant",
     "custom/updates",
-    "custom/santos",
-    "clock",
     "custom/cpu-temp",
     "custom/disk-home",
-    "custom/disk-hdd"
-  ],
+    "custom/disk-hdd",
+    "clock",
+      ],
   "hyprland/workspaces": {
     "all-outputs": false,
     "active-only": false,
     "format": "{icon}",
     "format-icons": {
-      "1": "<span size='21000'></span>",
+      "1": "",
       "2": " ",
       "3": " ",
-      "4": "<span size='20000'></span> ",
+      "4": "",
       "5": " ",
       "6": " ",
       "7": "",
@@ -45,22 +42,22 @@
   },
   "clock": {
     "interval": 60,
-    "format": " {:%H:%M <span size='15000' foreground='#4c566a'>|</span> %d <span size='15000' foreground='#4c566a'>|</span> %a}",
+    "format": "<span rise='5000' size='11000'></span> <span rise='3500'>{:%H:%M <span size='15000' foreground='#4c566a'>|</span> %d <span size='15000' foreground='#4c566a'>|</span> %a}</span>",
     "tooltip": false
   },
   "hyprland/submap": {
-    "format": "<span rise='3000' size='15000' foreground='#4c566a'> | </span>",
+    "format": " <span size='14000' foreground='#4c566a'>|</span> ",
     "tooltip": false
   },
   "custom/gameon": {
-    "exec": "/home/digo/.config/waybar/scripts/gameon.sh",
-    "interval": 3,
+    "exec": "/home/digo/.config/waybar/scripts/custom_widgets.py gameon",
+    "interval": 1,
     "return-type": "json",
     "tooltip": false
   },
   "custom/easy": {
-    "exec": "/home/digo/.config/waybar/scripts/easyeffects.sh",
-    "interval": 3,
+    "exec": "/home/digo/.config/waybar/scripts/custom_widgets.py easy",
+    "interval": 2,
     "return-type": "json",
     "tooltip": false
   },
@@ -69,51 +66,38 @@
     "interval": 3600
   },
   "custom/tabbed": {
-    "exec": "/home/digo/.config/waybar/scripts/tablayout.mjs",
+    "exec": "/home/digo/.projects/python/own/tabbed-hyprland/tabbed.py",
     "interval": 1,
     "return-type": "json",
     "tooltip": false
   },
   "custom/variant": {
-    "exec": "/home/digo/.config/waybar/scripts/key_variant.sh",
-    "interval": 2,
+    "exec": "/home/digo/.config/waybar/scripts/custom_widgets.py variant",
+    "interval": 1,
     "return-type": "json",
     "tooltip": false
   },
   "custom/updates": {
-    "exec": "/home/digo/.config/waybar/scripts/update.sh",
+    "exec": "/home/digo/.config/waybar/scripts/custom_widgets.py updates",
     "interval": 60,
     "return-type": "json",
     "tooltip": false,
     "signal": 30
   },
   "custom/stretch": {
-    "exec": "/home/digo/.config/waybar/scripts/stretch.sh",
+    "exec": "/home/digo/.config/waybar/scripts/custom_widgets.py stretch",
     "interval": 2,
     "return-type": "json",
     "tooltip": false
   },
   "custom/pymor": {
-    "exec": "/home/digo/.config/waybar/scripts/pymor.sh",
-    "interval": 2,
+    "exec": "/home/digo/.config/waybar/scripts/custom_widgets.py pomodoro",
+    "interval": 1,
     "return-type": "json",
-    "tooltip": false
-  },
-  "custom/network": {
-    "exec": "/home/digo/.config/waybar/scripts/isNetON.sh",
-    "interval": 2,
-    "return-type": "json",
-    "tooltip": false
-  },
-  "custom/santos": {
-    "exec": "/home/digo/.config/waybar/scripts/santos_match.sh",
-    "interval": 60,
-    "return-type": "json",
-    "on-click": "touch '/tmp/stop_santos_widget'",
     "tooltip": false
   },
   "pulseaudio": {
-    "format": "{icon} {volume}%",
+    "format": "<span rise='1000'>{icon}</span> {volume}%",
     "format-bluetooth": "{icon} {volume}%",
     "format-muted": "",
     "format-icons": {
@@ -138,38 +122,38 @@
     "ignored-sinks": ["Easy Effects Sink"]
   },
   "custom/cpu-temp": {
-    "exec": "/home/digo/.config/waybar/scripts/temp.sh",
+    "exec": "/home/digo/.config/waybar/scripts/custom_widgets.py temp",
     "interval": 10,
     "return-type": "json",
     "tooltip": false
   },
   "custom/cpu": {
-    "exec": "/home/digo/.config/waybar/scripts/cpu.sh",
+    "exec": "/home/digo/.config/waybar/scripts/custom_widgets.py cpu",
     "interval": 2,
     "return-type": "json",
     "tooltip": false
   },
   "custom/mem": {
-    "exec": "/home/digo/.config/waybar/scripts/mem.sh",
-    "interval": 15,
+    "exec": "/home/digo/.config/waybar/scripts/custom_widgets.py mem",
+    "interval": 4,
     "return-type": "json",
     "tooltip": false
   },
   "custom/disk-root": {
-    "exec": "/home/digo/.config/waybar/scripts/disk_root.sh",
-    "interval": 15,
+    "exec": "/home/digo/.config/waybar/scripts/custom_widgets.py root",
+    "interval": 1,
     "return-type": "json",
     "tooltip": false
   },
   "custom/disk-home": {
-    "exec": "/home/digo/.config/waybar/scripts/disk_home.sh",
-    "interval": 30,
+    "exec": "/home/digo/.config/waybar/scripts/custom_widgets.py home",
+    "interval": 1,
     "return-type": "json",
     "tooltip": false
   },
   "custom/disk-hdd": {
-    "exec": "/home/digo/.config/waybar/scripts/disk_hdd.sh",
-    "interval": 30,
+    "exec": "/home/digo/.config/waybar/scripts/custom_widgets.py hdd",
+    "interval": 1,
     "return-type": "json",
     "tooltip": false
   }

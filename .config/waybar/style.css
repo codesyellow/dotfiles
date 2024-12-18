@@ -7,19 +7,20 @@
 @define-color active #FF8343;
 @define-color hover #891652;
 
-* { 
-    padding: 0;
-    margin: 0;
+* {
+  padding: 0;
+  margin: 0;
 }
 
 window#waybar {
   background-color: @bg;
-  font-family: 'Font Awesome 6 Free Solid';
+  font-family: 'Symbols Nerd Font';
 }
 
 .modules-right {
   padding-right: 10px;
 }
+
 .modules-left {
   padding-left: 10px;
 }
@@ -85,6 +86,8 @@ window#waybar {
   color: @bg;
 }
 
+
+
 /* default */
 #clock,
 #custom-easy,
@@ -97,9 +100,9 @@ window#waybar {
 
 /* submap */
 #submap {
-  margin: -6px 2px -5px 0px;
+  margin: -4px 2px 0px 0px;
   color: @warning;
-  font-size: 26px;
+  font-size: 18px;
 }
 
 #custom-separator {
@@ -156,4 +159,9 @@ window#waybar {
 
 #clock {
   padding-bottom: 2px;
+}
+
+#custom-pymor.normal {
+  background-color: @bg;
+  color: @fg;
 }
