@@ -102,7 +102,7 @@ window#waybar {
 #submap {
   margin: -4px 2px 0px 0px;
   color: @warning;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 #custom-separator {
@@ -164,4 +164,10 @@ window#waybar {
 #custom-pymor.normal {
   background-color: @bg;
   color: @fg;
+}
+
+#custom-tabbed.normal {
+  background-color: @bg;
+  color: @fg;
+  font-size: 16px;
 }

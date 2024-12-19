@@ -274,7 +274,13 @@ class Custom_Widgets:
                     text=pomodoro_time.read().strip()
                 )
         else:
-            return ""
+            return set_pango(
+                colors=[BAR_COLOR, NORMAL_COLOR],
+                size=[14000, 12000, 3000],
+                position=[0, 1800, 0],
+                icon_image=POMODORO_ICON,
+                text="00:00"
+            )
 
     def do_stretch(self):
         current_colors = []
