@@ -138,7 +138,7 @@ window#waybar {
 }
 
 #custom-easy {
-  font-size: 16px;
+  font-size: 10px;
   margin-bottom: 2px;
 }
 
@@ -170,4 +170,9 @@ window#waybar {
   background-color: @bg;
   color: @fg;
   font-size: 16px;
+}
+
+
+#pulseaudio {
+  margin-bottom: 3px;
 }

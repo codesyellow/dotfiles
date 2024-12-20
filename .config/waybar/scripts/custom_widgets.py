@@ -14,7 +14,7 @@ ROOT_ICON = ""
 HOME_ICON = ""
 HDD_ICON = ""
 POMODORO_ICON = ""
-GAMEON_ICON = ""
+GAMEON_ICON = "󱤙"
 EASYEFFECTS_EQUALIZER_ICON = ""
 EASYEFFECTS_BASS_ICON = ""
 UPDATES_ICON = "󰇚"
@@ -134,12 +134,18 @@ class Custom_Widgets:
             return set_pango(
                 colors=[BAR_COLOR, WARNING_COLOR],
                 size=[14000, 14000],
-                position=[0, 0],
+                position=[0, 700],
                 icon_image=GAMEON_ICON,
                 text=""
             )
         else:
-            return ""
+            return set_pango(
+                colors=[BAR_COLOR, NORMAL_COLOR],
+                size=[14000, 13500],
+                position=[0, 700],
+                icon_image=GAMEON_ICON,
+                text=""
+            )
 
     def cpu_temp(self):
         temperature = int(psutil.sensors_temperatures()["coretemp"][0][1])
@@ -228,32 +234,24 @@ class Custom_Widgets:
     def easyeffects_is_on(self):
         if file_exist(EASYEFFECTS_PRESET_PATH):
             with open(EASYEFFECTS_PRESET_PATH, "r") as easy_preset:
-                if easy_preset.read().strip() != "LoudnessEqualizer":
-                    #                    return set_pango(
-                    #                        colors=[BAR_COLOR, NORMAL_COLOR],
-                    #                        size=[14000, 13000],
-                    #                        position=[4000, 2000],
-                    #                        icon_image=EASYEFFECTS_EQUALIZER_ICON,
-                    #                        text="",
-                    #                        bar_pos="right",
-                    #                    )
+                if easy_preset.read().strip() == "LoudnessEqualizer":
+                    return set_pango(
+                        colors=[BAR_COLOR, NORMAL_COLOR],
+                        size=[14000, 11000],
+                        position=[0, 800],
+                        icon_image=EASYEFFECTS_EQUALIZER_ICON,
+                        text="",
+                        bar_pos="right",
+                    )
+                else:
                     return set_pango(
                         colors=[BAR_COLOR, WARNING_COLOR],
                         size=[14000, 14000],
-                        position=[1000, 0],
+                        position=[1100, 0],
                         icon_image=EASYEFFECTS_BASS_ICON,
                         text="",
-                        bar_pos="right"
+                        bar_pos="right",
                     )
-                else:
-                    # return set_pango(
-                    #    colors=[BAR_COLOR, WARNING_COLOR],
-                    #    size=[20000, 14000],
-                    #    position=[4000, 6000],
-                    #    icon_image=EASYEFFECTS_BASS_ICON,
-                    #    text=""
-                    # )
-                    return ""
         else:
             return ""
 
@@ -268,7 +266,7 @@ class Custom_Widgets:
 
                 return set_pango(
                     colors=colors,
-                    size=[14000, 12000, 3000],
+                    size=[12000, 12000, 3000],
                     position=[0, 1800, 0],
                     icon_image=POMODORO_ICON,
                     text=pomodoro_time.read().strip()
@@ -276,8 +274,8 @@ class Custom_Widgets:
         else:
             return set_pango(
                 colors=[BAR_COLOR, NORMAL_COLOR],
-                size=[14000, 12000, 3000],
-                position=[0, 1800, 0],
+                size=[10000, 12000, 3000],
+                position=[0, 1600, 0],
                 icon_image=POMODORO_ICON,
                 text="00:00"
             )
