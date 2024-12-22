@@ -4,11 +4,11 @@ from .functions import get_terminal
 
 calculator = DropDown(
     "calc",
-    f'{get_terminal(name="from_top", font_size=25)} -e python -ic ""',
+    f'{get_terminal(name="from_bottom", font_size=25)} -e python -ic ""',
     height=0.2,
     width=0.5,
     x=0.25,
-    y=0.02,
+    y=0.70,
 )
 
 dropdown_terminal = DropDown(

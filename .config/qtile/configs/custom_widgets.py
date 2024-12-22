@@ -71,20 +71,26 @@ class Custom_Widgets:
             return set_pango(
                 colors=[BAR_COLOR, WARNING_COLOR],
                 size=[20000, 14000],
-                position=[4000, 8000],
+                position=[4000, 7500],
                 icon_image=GAMEON_ICON,
                 text=""
             )
         else:
-            return ""
+            return set_pango(
+                colors=[BAR_COLOR, NORMAL_COLOR],
+                size=[20000, 14000],
+                position=[4000, 7500],
+                icon_image=GAMEON_ICON,
+                text=""
+            )
 
     def cpu_temp(self):
         temperature = int(psutil.sensors_temperatures()["coretemp"][0][1])
         if temperature >= MIN_TEMP:
             return set_pango(
                 colors=[BAR_COLOR, WARNING_COLOR],
-                size=[20000, 13000, 3000],
-                position=[0, 4000, 2700],
+                size=[2000, 13000, 3000],
+                position=[1000, 0, 2700],
                 icon_image=CPU_TEMP_ICON,
                 text=f"{temperature}°"
             )
@@ -182,23 +188,29 @@ class Custom_Widgets:
             return ""
 
     def pomodoro(self):
+        colors = [BAR_COLOR, NORMAL_COLOR]
         if file_exist(POMODORO_TIME_PATH):
             with open(POMODORO_TIME_PATH, "r") as pomodoro_time:
-                colors = [BAR_COLOR, WARNING_COLOR]
                 if file_exist("/tmp/pomo_pause"):
-                    colors = [BAR_COLOR, NORMAL_COLOR]
+                    colors = [BAR_COLOR, WARNING_COLOR]
                 elif file_exist("/tmp/pomo_long_pause"):
-                    colors = [BAR_COLOR, NORMAL_COLOR]
+                    colors = [BAR_COLOR, WARNING_COLOR]
 
                 return set_pango(
                     colors=colors,
-                    size=[30000, 13000, 3000],
-                    position=[0, 8000, 7500],
+                    size=[20000, 12000, 3000],
+                    position=[0, 5000, 3000],
                     icon_image=POMODORO_ICON,
                     text=pomodoro_time.read().strip()
                 )
         else:
-            return ""
+            return set_pango(
+                colors=colors,
+                size=[20000, 12000, 3000],
+                position=[0, 5000, 3000],
+                icon_image=POMODORO_ICON,
+                text="00:00"
+            )
 
     def do_stretch(self):
         current_colors = []

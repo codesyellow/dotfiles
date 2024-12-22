@@ -7,7 +7,7 @@ ALT_MOD = "mod1"
 COLORS = {
     "bg": "#2e3440",
     "fg": "#d8dee9",
-    "alt": "#EF5A6F",
+    "alt": "#FF748B",
     "bg1": "#4c566a",
 }
 MOD = "mod4"
@@ -20,7 +20,7 @@ GROUP_ICONS = [
     "",
     "",
     "",
-    "",
+    "<span size='13000' rise='-16000'></span>",
     "",
     "",
     "",
