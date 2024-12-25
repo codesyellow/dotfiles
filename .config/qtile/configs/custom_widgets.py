@@ -9,7 +9,9 @@ MEM_ICON = ""
 ROOT_ICON = ""
 HOME_ICON = ""
 HDD_ICON = ""
-POMODORO_ICON = ""
+POMODORO_ICON = ""
+PAUSA_ICON = "󰈈"
+COUNTDOWN_ICON = ""
 GAMEON_ICON = ""
 EASYEFFECTS_EQUALIZER_ICON = ""
 EASYEFFECTS_BASS_ICON = ""
@@ -17,9 +19,9 @@ UPDATES_ICON = "󰇚"
 KEYBOARD_ICONS = ""
 STRETCH_ICON = ""
 
-MIN_CPU_USAGE = 80
-MIN_MEM_USAGE = 90
-MIN_TEMP = 80
+MIN_CPU_USAGE = 0
+MIN_MEM_USAGE = 0
+MIN_TEMP = 0
 MIN_ROOT_SPACE = 10
 MIN_HOME_SPACE = 10
 MIN_HDD_SPACE = 30
@@ -30,6 +32,7 @@ NORMAL_COLOR = "#d8dee9"
 WARNING_COLOR = "#EF5A6F"
 
 POMODORO_TIME_PATH = "/tmp/pomo_timer"
+COUNTDOWN_PATH = "/tmp/countdown_timer"
 EASYEFFECTS_PRESET_PATH = f"{HOME}/.config/.easy_preset"
 STRETCH_TIME_PATH = "/tmp/stretch"
 STRETCH_STOP_PATH = "/tmp/stop"
@@ -44,7 +47,7 @@ class Custom_Widgets:
             return set_pango(
                 colors=[BAR_COLOR, WARNING_COLOR],
                 size=[25000, 26000, 3000],
-                position=[0, 4500, 10000],
+                position=[0, 2400, 8000],
                 icon_image=KEYBOARD_ICONS,
                 text="INTL"
             )
@@ -71,26 +74,34 @@ class Custom_Widgets:
             return set_pango(
                 colors=[BAR_COLOR, WARNING_COLOR],
                 size=[20000, 14000],
-                position=[4000, 7500],
+                position=[4000, 7200],
                 icon_image=GAMEON_ICON,
                 text=""
             )
         else:
-            return set_pango(
-                colors=[BAR_COLOR, NORMAL_COLOR],
-                size=[20000, 14000],
-                position=[4000, 7500],
-                icon_image=GAMEON_ICON,
-                text=""
-            )
+            return ""
+
+    def pausa(self):
+        colors = []
+        if file_exist("/tmp/pausa"):
+            colors = [BAR_COLOR, WARNING_COLOR]
+        else:
+            colors = [BAR_COLOR, NORMAL_COLOR]
+        return set_pango(
+            colors=colors,
+            size=[20000, 16000],
+            position=[4000, 7500],
+            icon_image=PAUSA_ICON,
+            text=""
+        )
 
     def cpu_temp(self):
         temperature = int(psutil.sensors_temperatures()["coretemp"][0][1])
         if temperature >= MIN_TEMP:
             return set_pango(
                 colors=[BAR_COLOR, WARNING_COLOR],
-                size=[2000, 13000, 3000],
-                position=[1000, 0, 2700],
+                size=[20000, 13000, 3000],
+                position=[1000, 5500, 4500],
                 icon_image=CPU_TEMP_ICON,
                 text=f"{temperature}°"
             )
@@ -103,7 +114,7 @@ class Custom_Widgets:
             return set_pango(
                 colors=[BAR_COLOR, WARNING_COLOR],
                 size=[20000, 13000, 3000],
-                position=[0, 4000, 2700],
+                position=[0, 4000, 2600],
                 icon_image=CPU_ICON,
                 text=f"{cpu_usage}%"
             )
@@ -184,6 +195,19 @@ class Custom_Widgets:
                         icon_image=EASYEFFECTS_BASS_ICON,
                         text=""
                     )
+        else:
+            return ""
+
+    def countdown(self):
+        if file_exist(COUNTDOWN_PATH):
+            with open(COUNTDOWN_PATH, "r") as timer:
+                return set_pango(
+                    colors=[BAR_COLOR, WARNING_COLOR],
+                    size=[20000, 12000, 3000],
+                    position=[0, 5000, 3000],
+                    icon_image=COUNTDOWN_ICON,
+                    text=timer.read().strip()
+                )
         else:
             return ""
 

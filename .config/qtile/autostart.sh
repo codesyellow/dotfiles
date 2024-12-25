@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 is_running() {
-  if [[ "$2" == "node" ]]; then
-    script=$(ps -ef | grep 'node' | grep $1)
-  else
-    script=$(ps -ef | grep 'bash' | grep $1)
-  fi
-  if [[ -z "$script" ]]; then
-    $1 &
-  fi
+    if [[ "$2" == "node" ]]; then
+        script=$(ps -ef | grep 'node' | grep $1)
+    else
+        script=$(ps -ef | grep 'bash' | grep $1)
+    fi
+    if [[ -z "$script" ]]; then
+        $1 &
+    fi
 }
 
-is_running 'pausa'
+#is_running 'pausa'
 is_running 'easy_always.sh'
 is_running 'xidlehook.sh'
 is_running 'santos_calendar.mjs' 'node'
@@ -32,3 +32,4 @@ systemctl --user import-environment DISPLAY &
 /usr/lib/polkit-kde-authentication-agent-1 &
 redshift -O 4000 &
 xremap ~/.config/xremap/xremap &
+pausa.py &

@@ -15,7 +15,7 @@ dropdown_terminal = DropDown(
     "term",
     f"{get_terminal(name="from_top")} -A 0.7 -e {ZELLIJ_SCRATCHPAD}",
     y=0.01,
-    x=0.050,
+    x=0.05,
     height=0.6,
     width=0.9,
 )
@@ -23,7 +23,7 @@ dropdown_terminal = DropDown(
 countdown = DropDown(
     "countdown",
     f'{get_terminal(name="from_top",
-                    font_size=25)} -e tclock_timer.sh',
+                    font_size=25)} -e countdown.py',
     height=0.4,
     width=0.5,
     x=0.25,

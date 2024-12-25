@@ -1,6 +1,7 @@
 from libqtile import widget
 from .variables import FONT, WSIZE, COLORS
 from .custom_widgets import Custom_Widgets
+from .functions import stop_timers, start_pomodoro
 
 custom_widgets = Custom_Widgets()
 
@@ -39,7 +40,26 @@ my_widgets = [
         func=custom_widgets.pomodoro,
         fontsize=WSIZE,
         font=FONT,
+        mouse_callbacks={
+            "Button1": start_pomodoro,
+            "Button3": lambda: stop_timers(file="pomo_cancel"),
+        },
         update_interval=1,
+    ),
+    widget.GenPollText(
+        func=custom_widgets.countdown,
+        fontsize=WSIZE,
+        font=FONT,
+        mouse_callbacks={
+            "Button3": lambda: stop_timers(file="countdown_cancel"),
+        },
+        update_interval=1,
+    ),
+    widget.GenPollText(
+        func=custom_widgets.pausa,
+        fontsize=WSIZE,
+        font=FONT,
+        update_interval=2,
     ),
     widget.GenPollText(
         func=custom_widgets.game_is_on,

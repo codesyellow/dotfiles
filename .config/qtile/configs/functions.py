@@ -3,6 +3,17 @@ from .variables import COLORS
 import psutil
 import os.path
 import subprocess
+import os
+
+
+def start_pomodoro():
+    script_path = os.path.expanduser("~/.bin/pomodoro.py")
+    subprocess.Popen(["python3", script_path])
+
+
+def stop_timers(file):
+    f = open(f"/tmp/{file}", "w")
+    f.close()
 
 
 def get_terminal(name, terminal="st", font_size=16):
@@ -10,7 +21,7 @@ def get_terminal(name, terminal="st", font_size=16):
     class_letter = "-c"
     name_letter = "-T"
     if terminal.lower() == "alacritty":
-        class_letter = "--class"
+        return f'alacritty -T {name} --class {name}"'
 
     terminal_with_names = f"{terminal} {name_letter} {
         name} {class_letter} {name}"
