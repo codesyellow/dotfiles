@@ -73,7 +73,7 @@ class Pausa():
             pause_time -= 1
             time.sleep(1)
         self.notify(title="PAUSA", body="DONE")
-        self.play_audio("pomo_start.wav")
+        self.play_audio("pausa_end.wav")
         self.reset_idle_time()
 
     def reset_long_break(self):
