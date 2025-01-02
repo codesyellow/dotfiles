@@ -24,7 +24,7 @@ current_workspace_id = current_workspace_info["id"]
 window_to_display = []
 
 for window in windows_info:
-    if window["workspace"]["id"] == current_workspace_id and window["pid"] != focused_window["pid"]:
+    if window["workspace"]["id"] == current_workspace_id and window["pid"] != focused_window["pid"] and len(window["title"]) > 0:
         if len(window["class"].split(".")) == 3:
             window_to_display.append(window["class"].split(".")[2].title())
         else:

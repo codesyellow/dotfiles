@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 import sys
 import json
 import psutil
@@ -260,8 +260,10 @@ class Custom_Widgets:
             with open(POMODORO_TIME_PATH, "r") as pomodoro_time:
                 colors = [BAR_COLOR, WARNING_COLOR]
                 if file_exist("/tmp/pomo_pause"):
-                    colors = [BAR_COLOR, NORMAL_COLOR]
+                    colors = [BAR_COLOR, WARNING_COLOR]
                 elif file_exist("/tmp/pomo_long_pause"):
+                    colors = [BAR_COLOR, WARNING_COLOR]
+                else:
                     colors = [BAR_COLOR, NORMAL_COLOR]
 
                 return set_pango(

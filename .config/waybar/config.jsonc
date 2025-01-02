@@ -67,6 +67,8 @@
   },
   "custom/tabbed": {
     "exec": "/home/digo/.config/waybar/scripts/tabbed.py",
+    "on-click": "hyprctl dispatch changegroupactive f",
+    "on-click-right": "hyprctl dispatch changegroupactive b",
     "interval": 1,
     "return-type": "json",
     "tooltip": false
