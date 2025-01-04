@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import time
 import os
-from playsound import playsound
 from datetime import timedelta
 
 
@@ -26,7 +25,11 @@ should_take_break = False
 should_take_long_break = False
 
 
-playsound(f"{HOME}/.audios/pomo_start.wav", block=False)
+def play_audio(audio_name):
+    os.system(f'paplay --volume=65536 {HOME}/.audios/{audio_name}')
+
+
+play_audio("pomo_start.wav")
 
 
 def reset_time(time):
@@ -57,7 +60,7 @@ while pomodoro_running:
             should_take_long_break = True
             should_take_break = False
         elif pomodoro_pause_countdown <= 0:
-            playsound(f"{HOME}/.audios/pomo_pause.wav", block=False)
+            play_audio("pomo_pause.wav")
             if os.path.exists(POMODORO_PAUSE_PATH):
                 os.remove(POMODORO_PAUSE_PATH)
             should_take_break = False
@@ -70,7 +73,7 @@ while pomodoro_running:
         save_time(pomodoro_long_pause_countdown)
         open(POMODORO_LONG_PAUSE_PATH, "w")
         if pomodoro_long_pause_countdown <= 0:
-            playsound(f"{HOME}/.audios/pomo_pause.wav", block=False)
+            play_audio("pomo_pause.wav")
             pomodoro_running = False
             break
     else:
@@ -78,7 +81,7 @@ while pomodoro_running:
         save_time(pomodoro_countdown)
 
         if pomodoro_countdown <= 0:
-            playsound(f"{HOME}/.audios/pomo_pause.wav", block=False)
+            play_audio("pomo_pause.wav")
             should_take_break = True
             pomodoro_countdown = reset_time(POMODORO_TIME)
 

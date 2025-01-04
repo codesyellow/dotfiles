@@ -89,7 +89,7 @@ class Pausa():
 
     def run(self):
         while True:
-            if self.is_active():
+            if self.is_active() and not os.path.exists("/tmp/pausa_stop"):
                 for _ in range(0, 9):
                     self.idle_seconds -= 1
                     self.long_break_time -= 1
