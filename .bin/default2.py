@@ -2,7 +2,6 @@
 import subprocess
 import json
 import os
-from types import new_class
 
 HOME = os.path.expanduser("~/")
 CURRENT_WINDOW = json.loads(subprocess.check_output([
@@ -20,7 +19,6 @@ CURRENT_WORKSPACE = json.loads(subprocess.check_output([
 HYPR_RULES_PATH = f"{HOME}.config/hypr/configs/rules.conf"
 
 window_class = CURRENT_WINDOW["class"]
-window_title = CURRENT_WINDOW["title"]
 workspace_id = CURRENT_WORKSPACE["id"]
 
 
@@ -39,7 +37,7 @@ def write_rule(rule):
 
 
 new_rule = f"windowrulev2 = workspace {workspace_id} silent,class:^({
-    window_class})$,title:^({window_title})$"
+    window_class})$"
 
 if exists(new_rule):
     pass
