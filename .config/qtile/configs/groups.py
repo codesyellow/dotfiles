@@ -18,6 +18,7 @@ groups = [
     Group(
         GROUP_ICONS[0],
         matches=[Match(wm_class=re.compile(rf"^({wks1class_rules})$"))],
+        layout="max"
     ),
     Group(
         GROUP_ICONS[1],

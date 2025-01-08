@@ -21,6 +21,7 @@ def count_windows(group, include_floating=True):
 
 class Tab:
     """A tab representing a window."""
+
     def __init__(self, window):
         self.window = window
         self._left = 0

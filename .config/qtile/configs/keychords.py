@@ -49,6 +49,7 @@ keychords = [
         KeyChord([], 's', [
             Key([], 'p', lazy.group['scratchpad'].dropdown_toggle('ankivPT')),
             Key([], 'e', lazy.group['scratchpad'].dropdown_toggle('ankivEN')),
+            Key([], 'm', lazy.group['scratchpad'].dropdown_toggle('ankivMATH')),
         ], name=keychord_name(icon="󰑴", size="16000", rise="4000")),
         Key([], 'g', lazy.group['scratchpad'].dropdown_toggle('calc')),
     ], name=keychord_name(icon="󰊠", size="15000", rise="3600")),

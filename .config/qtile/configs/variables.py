@@ -20,7 +20,7 @@ GROUP_ICONS = [
     "",
     "",
     "",
-    "<span size='13000' rise='-16000'></span>",
+    "<span size='12000' rise='-15900'></span>",
     "",
     "",
     "",

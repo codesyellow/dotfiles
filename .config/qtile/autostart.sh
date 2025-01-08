@@ -17,19 +17,18 @@ is_running 'santos_calendar.mjs' 'node'
 is_running 'gameon.mjs' 'node'
 is_running 'music_bass.mjs' 'node'
 
-pipewire &
 pamixer --set-volume 30 &
 picom &
 hsetroot -cover ~/.wallpapers/ign-0011.png &
 alsactl --file ~/.config/asound.state restore &
 paplay ~/.audios/retro-audio-logo-94648.mp3 &
-xrandr --output VGA-1 --gamma 1.2:1.2:1.2 &
+#xrandr --output VGA-1 --gamma 1.2:1.2:1.2 &
 dunst &
 unclutter &
 udiskie &
 clipmenud &
 systemctl --user import-environment DISPLAY &
 /usr/lib/polkit-kde-authentication-agent-1 &
-redshift -O 4000 &
+redshift -O 3000 &
 xremap ~/.config/xremap/xremap &
 pausa.py &

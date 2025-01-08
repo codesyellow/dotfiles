@@ -57,6 +57,9 @@ my_widgets = [
     ),
     widget.GenPollText(
         func=custom_widgets.pausa,
+        mouse_callbacks={
+            "Button3": lambda: stop_timers(file="pausa_stop"),
+        },
         fontsize=WSIZE,
         font=FONT,
         update_interval=2,
@@ -129,6 +132,15 @@ my_widgets = [
         func=custom_widgets.hdd_space,
         fontsize=WSIZE,
         update_interval=60,
+    ),
+    widget.GenPollText(
+        background=COLORS["bg"],
+        func=custom_widgets.santos_widget,
+        fontsize=WSIZE,
+        update_interval=2,
+        width=200,
+        scroll_step=2,
+        scroll=True,
     ),
     widget.TextBox(
         fmt=f'<span size="x-large" foreground="{

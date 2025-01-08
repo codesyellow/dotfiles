@@ -123,6 +123,17 @@ anki_portuguese = DropDown(
     on_focus_lost_hide=True,
 )
 
+anki_math = DropDown(
+    "ankivMATH",
+    f'{get_terminal(name="from_bottom")} -e anki-vim math',
+    height=0.5,
+    width=0.9,
+    opacity=0.5,
+    x=0.05,
+    y=0.45,
+    on_focus_lost_hide=True,
+)
+
 anki_english = DropDown(
     "ankivEN",
     f'{get_terminal(name="from_bottom")} -e anki-vim english',
@@ -194,6 +205,7 @@ scratchpads = [
     cmus,
     anki_portuguese,
     anki_english,
+    anki_math,
     vimiv,
     typing_test,
     note_taking,

@@ -52,7 +52,12 @@ def set_pango(colors, size, position, icon_image, text):
         size[0]}' foreground='{colors[0]}'>|</span>"
     icon = f"<span size='{size[1]}' foreground='{colors[1]}' rise='{
         position[1]}'>{icon_image}</span>"
-    if text == "":
+    if size[0] == 0:
+        output = f"{icon} <span rise='{
+            position[2]}' foreground='{colors[1]}'>{text}</span>"
+        return output
+
+    elif text == "":
         output = f"{bar} {icon}"
         return output
     else:

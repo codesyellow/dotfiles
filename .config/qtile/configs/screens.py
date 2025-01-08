@@ -7,7 +7,7 @@ screens = [
     Screen(
         top=bar.Bar(
             my_widgets,
-            20,
+            26,
             background=COLORS["bg"],
         ),
     ),

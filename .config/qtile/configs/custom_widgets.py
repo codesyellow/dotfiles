@@ -4,13 +4,14 @@ from .functions import set_pango, file_exist, get_command_output
 from .variables import HOME
 
 CPU_ICON = ""
+SANTOS_FC = "󰒸"
 CPU_TEMP_ICON = ""
 MEM_ICON = ""
 ROOT_ICON = ""
 HOME_ICON = ""
 HDD_ICON = ""
 POMODORO_ICON = ""
-PAUSA_ICON = "󰈈"
+PAUSA_ICON = ""
 COUNTDOWN_ICON = ""
 GAMEON_ICON = ""
 EASYEFFECTS_EQUALIZER_ICON = ""
@@ -19,13 +20,13 @@ UPDATES_ICON = "󰇚"
 KEYBOARD_ICONS = ""
 STRETCH_ICON = ""
 
-MIN_CPU_USAGE = 0
-MIN_MEM_USAGE = 0
-MIN_TEMP = 0
+MIN_CPU_USAGE = 90
+MIN_MEM_USAGE = 90
+MIN_TEMP = 90
 MIN_ROOT_SPACE = 10
 MIN_HOME_SPACE = 10
-MIN_HDD_SPACE = 30
-MIN_UPDATES = 20
+MIN_HDD_SPACE = 10
+MIN_UPDATES = 90
 
 BAR_COLOR = "#4c566a"
 NORMAL_COLOR = "#d8dee9"
@@ -61,13 +62,32 @@ class Custom_Widgets:
         if int(updates_available) >= MIN_UPDATES:
             return set_pango(
                 colors=[BAR_COLOR, WARNING_COLOR],
-                size=[30000, 16000, 3000],
-                position=[0, -2700, -2000],
+                size=[14000, 16000, 3000],
+                position=[0, 1000, 2000],
                 icon_image=UPDATES_ICON,
-                text=updates_available
+                text=updates_available.strip(),
             )
         else:
             return ""
+
+    def santos_widget(self):
+        """Return Santos FC info"""
+        try:
+            with open("/tmp/santos_widget") as data:
+                santos_info = data.read().strip()
+        except FileNotFoundError:
+            return ""
+        else:
+            if file_exist("/tmp/santos_widget"):
+                return set_pango(
+                    colors=[BAR_COLOR, NORMAL_COLOR],
+                    size=[0, 16000, 3000],
+                    position=[0, 1000, 2000],
+                    icon_image=SANTOS_FC,
+                    text=santos_info,
+                )
+            else:
+                return ""
 
     def game_is_on(self):
         if file_exist("/tmp/gameon"):
@@ -90,7 +110,7 @@ class Custom_Widgets:
         return set_pango(
             colors=colors,
             size=[20000, 16000],
-            position=[4000, 7500],
+            position=[4000, 6700],
             icon_image=PAUSA_ICON,
             text=""
         )
@@ -114,7 +134,7 @@ class Custom_Widgets:
             return set_pango(
                 colors=[BAR_COLOR, WARNING_COLOR],
                 size=[20000, 13000, 3000],
-                position=[0, 4000, 2600],
+                position=[0, 4500, 2600],
                 icon_image=CPU_ICON,
                 text=f"{cpu_usage}%"
             )
@@ -154,8 +174,8 @@ class Custom_Widgets:
         if total_free <= MIN_HOME_SPACE:
             return set_pango(
                 colors=[BAR_COLOR, WARNING_COLOR],
-                size=[20000, 11000, 3000],
-                position=[0, 4700, 2700],
+                size=[20000, 10500, 3000],
+                position=[0, 4600, 2700],
                 icon_image=HOME_ICON,
                 text=f"{total_free}G"
             )
@@ -169,7 +189,7 @@ class Custom_Widgets:
             return set_pango(
                 colors=[BAR_COLOR, WARNING_COLOR],
                 size=[20000, 23000, 3000],
-                position=[0, 2200, 6500],
+                position=[0, 1200, 5000],
                 icon_image=HDD_ICON,
                 text=f"{total_free}G"
             )
@@ -223,7 +243,7 @@ class Custom_Widgets:
                 return set_pango(
                     colors=colors,
                     size=[20000, 12000, 3000],
-                    position=[0, 5000, 3000],
+                    position=[0, 6000, 3000],
                     icon_image=POMODORO_ICON,
                     text=pomodoro_time.read().strip()
                 )
