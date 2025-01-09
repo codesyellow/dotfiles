@@ -15,7 +15,7 @@ modmap:
     remap:
       Alt_R: Super_L
       Capslock:
-        held: Super_L # Required, also accepts arrays
+        held: Control_L # Required, also accepts arrays
         alone: Esc # Required, also accepts arrays
   - name: Warband
     application:
@@ -25,11 +25,18 @@ modmap:
       BTN_EXTRA: f11
 
 keymap:
-  - name: firefox
+  - name: xournal
     application:
-      only: firefox
+      only: com.github.xournalpp.xournalpp.Com.github.xournalpp.xournalpp
     remap:
-      Super_L-k: C-Shift-tab
-      Super_l-j: C-tab
-  
-  
+      M-r: C-7
+
+  - name: Zen Browser
+    application:
+      only: Navigator
+    remap:
+      Alt_L-l: f6
+  - name: tty move
+    remap:
+      C-i: M-C-f1
+      C-o: M-C-f2
