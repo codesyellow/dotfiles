@@ -3,3 +3,4 @@
 -- Add any additional options here
 vim.g.lazyvim_python_lsp = "pyright"
 vim.g.maplocalleader = ";"
+vim.o.shiftwidth = 4 -- Number of spaces inserted when indenting
