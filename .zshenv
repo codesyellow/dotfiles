@@ -1,6 +1,7 @@
 set -U PATH path
 path=("$HOME/.bin" 
     "$HOME/.cargo/bin" 
+    "$HOME/.projects/python/own" 
     "$HOME/.local/share/cargo/bin"
     "$HOME/.local/bin" 
     "$HOME/.dwm/bar-scripts/" 
