@@ -20,4 +20,5 @@ if [ -f "$usermodmap" ]; then
 	xmodmap "$usermodmap"
 fi
 
+#exec startdwm
 exec qtile start
