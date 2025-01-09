@@ -12,7 +12,7 @@ class Pomodoro():
         self.pomodoro = 25 * 60
         self.pomodoro_pause = 5 * 60
         self.pomodoro_long_pause = 20 * 60
-        self.breaks_before_long_pause = 4
+        self.breaks_before_long_pause = 5
         self.pomodoro_time_path = "/tmp/pomo_timer"
         self.pomodoro_pause_path = "/tmp/pomo_pause"
         self.created_pomo_pause = False
@@ -20,7 +20,7 @@ class Pomodoro():
 
     def run(self):
         for times in range(self.breaks_before_long_pause):
-            if times <= 2:
+            if times <= 3:
                 self.play_audio("pomo_start.wav")
                 self.countdown(time=self.pomodoro, name="pomo")
                 self.play_audio("pomo_pause.wav")
@@ -32,7 +32,7 @@ class Pomodoro():
                 self.play_audio("pomo_pause.wav")
                 self.number_of_breaks += 1
                 self.countdown(time=self.pomodoro_long_pause, name="pausa")
-                self.play_audio("pomo_end.wav")
+                self.play_audio("stretch_ended.wav")
                 self.cleanup()
 
     def cleanup(self):
@@ -74,8 +74,8 @@ class Pomodoro():
         if os.path.exists(path):
             os.remove(path)
 
-    def file_exist(self, file_name):
-        os.path.exists(f"/tmp/{file_name}")
+    def file_exist(self, file_path):
+        return os.path.exists(file_path)
 
 
 if __name__ == "__main__":
