@@ -1,6 +1,5 @@
 {
-  "layer": "bottom",
-  "modules-center": ["sway/workspaces"],
+  "modules-center": ["hyprland/workspaces"],
   "modules-left": [
     "pulseaudio",
     "custom/pymor",
@@ -11,18 +10,18 @@
     "custom/gameon",
   ],
   "modules-right": [
-    "sway/mode",
+    "hyprland/submap",
     "custom/easy",
-    //"custom/tabbed",
-    //"custom/variant",
+    "custom/tabbed",
+    "custom/variant",
     "custom/updates",
     "custom/cpu-temp",
     "custom/disk-home",
     "custom/disk-hdd",
     "clock",
       ],
-  "sway/workspaces": {
-    "all-outputs": true,
+  "hyprland/workspaces": {
+    "all-outputs": false,
     "active-only": false,
     "format": "{icon}",
     "format-icons": {
@@ -35,15 +34,10 @@
       "7": "",
       "urgent": " ",
       "default": " ",
+      "persistent": "persistent"
     },
     "persistent-workspaces": {
-        "1": [], // Always show a workspace with name '3', on all outputs if it does not exists
-        "2": [], // Always show a workspace with name '3', on all outputs if it does not exists
-        "3": [], // Always show a workspace with name '3', on all outputs if it does not exists
-        "4": [], // Always show a workspace with name '3', on all outputs if it does not exists
-        "5": [], // Always show a workspace with name '3', on all outputs if it does not exists
-        "6": [], // Always show a workspace with name '3', on all outputs if it does not exists
-        "7": [], // Always show a workspace with name '3', on all outputs if it does not exists
+      "*": 7
     }
   },
   "clock": {

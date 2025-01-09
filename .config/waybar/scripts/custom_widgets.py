@@ -89,29 +89,29 @@ def get_command_output(command):
 
 
 class Custom_Widgets:
-    def check_keyboard_variant(self):
-        """Return keyboard current
-            variant if it's: US(INTL) or returns nothing"""
+    # def check_keyboard_variant(self):
+    #    """Return keyboard current
+    #        variant if it's: US(INTL) or returns nothing"""
 
-        devices_output = subprocess.check_output(
-            ["hyprctl", "devices", "-j"]).decode("utf-8")
+    #    devices_output = subprocess.check_output(
+    #        ["hyprctl", "devices", "-j"]).decode("utf-8")
 
-        devices = json.loads(devices_output)
+    #    devices = json.loads(devices_output)
 
-        keyboards = devices.get("keyboards", [])
-        is_intl_active = any(kb.get("active_keymap", "").find(
-            "intl") != -1 for kb in keyboards)
-        if is_intl_active:
-            return set_pango(
-                colors=[BAR_COLOR, WARNING_COLOR],
-                size=[14000, 14000, 3000],
-                position=[0, 500, 0],
-                icon_image=KEYBOARD_ICONS,
-                text="INTL",
-                bar_pos="right",
-            )
-        else:
-            return ""
+    #    keyboards = devices.get("keyboards", [])
+    #    is_intl_active = any(kb.get("active_keymap", "").find(
+    #        "intl") != -1 for kb in keyboards)
+    #    if is_intl_active:
+    #        return set_pango(
+    #            colors=[BAR_COLOR, WARNING_COLOR],
+    #            size=[14000, 14000, 3000],
+    #            position=[0, 500, 0],
+    #            icon_image=KEYBOARD_ICONS,
+    #            text="INTL",
+    #            bar_pos="right",
+    #        )
+    #    else:
+    #        return ""
 
     def check_updates(self):
         """Return the number of updates available for the system"""
@@ -134,7 +134,7 @@ class Custom_Widgets:
             return set_pango(
                 colors=[BAR_COLOR, WARNING_COLOR],
                 size=[14000, 14000],
-                position=[0, 700],
+                position=[0, 800],
                 icon_image=GAMEON_ICON,
                 text=""
             )
@@ -142,7 +142,7 @@ class Custom_Widgets:
             return set_pango(
                 colors=[BAR_COLOR, NORMAL_COLOR],
                 size=[14000, 13500],
-                position=[0, 700],
+                position=[0, 800],
                 icon_image=GAMEON_ICON,
                 text=""
             )
@@ -269,7 +269,7 @@ class Custom_Widgets:
                 return set_pango(
                     colors=colors,
                     size=[12000, 12000, 3000],
-                    position=[0, 1800, 0],
+                    position=[0, 500, -1000],
                     icon_image=POMODORO_ICON,
                     text=pomodoro_time.read().strip()
                 )
@@ -277,7 +277,7 @@ class Custom_Widgets:
             return set_pango(
                 colors=[BAR_COLOR, NORMAL_COLOR],
                 size=[10000, 12000, 3000],
-                position=[0, 1600, 0],
+                position=[0, 500, -1000],
                 icon_image=POMODORO_ICON,
                 text="00:00"
             )
@@ -336,8 +336,8 @@ def main():
         display_json("warning", cw.easyeffects_is_on)
     elif module == "updates":
         display_json("warning", cw.check_updates)
-    elif module == "variant":
-        display_json("warning", cw.check_keyboard_variant)
+    # elif module == "variant":
+    #    display_json("warning", cw.check_keyboard_variant)
     elif module == "pomodoro":
         display_json("warning", cw.pomodoro)
     elif module == "stretch":
