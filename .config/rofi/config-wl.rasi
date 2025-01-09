@@ -44,7 +44,7 @@ window {
     width:                       700px;
     height:                      24px;
     x-offset:                    300px;
-    y-offset:                    -27px;
+    y-offset:                    -7px;
 
     children:                    [ horibox ];
 
