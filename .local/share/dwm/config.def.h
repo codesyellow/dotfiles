@@ -33,7 +33,7 @@ static const char *colors[][3]= {
 };
 
 /* tagging */
-static char *tags[] = { " ", "", "", "", "" };
+static char *tags[] = { " ", "", "", "" };
 static const int taglayouts[] = { 2, 2, 2, 2, 2, };
 
 static const Rule rules[] = {
@@ -44,6 +44,7 @@ static const Rule rules[] = {
   /* class      instance    title       tags mask     isfloating   monitor    float x,y,w,h         floatborderpx*/
   { "Gimp",     NULL,       NULL,       0,            1,           -1,   0,     50,50,500,500,        5 },
   { "firefox",  NULL,       NULL,       1 << 0,       0,           -1,   0,     50,50,500,500,        5 },
+  { "kitty",  NULL,       NULL,       2 << 0,       0,           -1,   0,     50,50,500,500,        5 },
   { "Brave-browser",  NULL,       NULL,       1 << 0,       0,           -1,   0,     50,50,500,500,        5 },
   { NULL,  "Navigator",       NULL,       1 << 0,       0,           -1,   0,     50,50,500,500,        5 },
   { "Emacs",    NULL,       NULL,       1 << 0,       0,           -1,   0,     50,50,500,500,        5 },
@@ -75,6 +76,7 @@ static const Rule rules[] = {
   { NULL,       NULL,   "ai",   0,            1,           -1,   'a', 840,59,500,650,        bordersize,   },
   { NULL,       NULL,   "pulsemixer",   0,            1,           -1,   'p', 778,48,400,400,        bordersize,   },
   { NULL,       NULL,   "btop",   0,            1,           -1,   'b', 80,84,1200,600,        bordersize,   },
+  { NULL,       NULL,   "cmus",   0,            1,           -1,   'u', 80,84,1200,600,        bordersize,   },
   { NULL,       NULL,   "bluetui",   0,            1,           -1,   'f', 80,80,1200,600,        bordersize,   },
   {"calc",       NULL,   NULL,   0,            1,           -1,   'g', 530,234,300,300,        bordersize,   },
   { NULL,       NULL,   "WhatsApp for Linux",   0,            1,           -1,   'w', 80,80,1200,600,        bordersize,   },
@@ -138,7 +140,7 @@ static const char *dmenumpv[] = { "mpvtube.sh", NULL };
 static const char *clipmenucmd[] = { "clipmenu", "-z", "700", "-x", "230", "-y", "4", "-nb", bg0, NULL };
 static const char *bass[] = { "easy_preset.sh", "HeavyBass", NULL};
 static const char *loudness[] = { "easy_preset.sh", "LoudnessEqualizer", NULL};
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "st", "-T", "tmux", "-e", "tmux", NULL };
 static const char *game_to_list[]  = { "game_to_list.sh", NULL };
 static const char *pymors[]  = { "pymor", "-t", "20", NULL };
 static const char *pymorl[]  = { "pymor", "-t", "20", "-f", "3", NULL };
@@ -151,7 +153,7 @@ static const char *browser[]  = { "flatpak", "run", "io.github.zen_browser.zen",
 static const char *mindmap[] = {  "maps.sh", NULL };
 static const char *vimanywhere[] = {  "/home/cie/.vim-anywhere/bin/run", NULL };
 /*First arg only serves to match against key in rules*/
-static const char *scratchpadcmd[] = {"s", "alacritty", "--config-file", "/home/digo/.config/alacritty/scratchpad.toml", "--class", "scratchpad", "-t", "scratchpad", NULL}; 
+static const char *scratchpadcmd[] = {"s", "alacritty", "--config-file", "/home/digo/.config/alacritty/scratchpad.toml", "--class", "scratchpad", "-t", "scratchpad", "-e", "bash", "-c", "tmux attach-session -t scratch || tmux new-session -s scratch", NULL}; 
 static const char *scratchpadclock[] = {"c", "st", "-t", "clock", "-c","clock", "-e", "tclock_timer.sh", NULL}; 
 static const char *scratchpadcalc[] = {"g", "st", "-t", "calc", "-c","calc", "-e", "bc", NULL}; 
 static const char *scratchpadnotes[] = {"o", "st", "-t", "notes", "-c","notes", "-e", "vim", "/home/digo/.vimwiki/notes/index.wiki", NULL}; 
@@ -160,6 +162,7 @@ static const char *scratchpadtask[] = {"t", "st", "-t", "task-tui", "-c","task-t
 static const char *scratchpadmixer[] = {"p", "st", "-t", "pulsemixer", "-c","pulsemixer", "-e", "pulsemixer", NULL}; 
 static const char *scratchpadtt[] = {"e", "st", "-t", "tt", "-c","tt", "-e", "tt", NULL}; 
 static const char *scratchpadai[] = {"a", "st", "-t", "ai", "-c","aichat", "-e", "aichat", NULL}; 
+static const char *scratchpadcmus[] = {"u", "st", "-t", "cmus", "-c","cmus", "-e", "cmus", NULL}; 
 static const char *scratchpadhabit[] = {"h", "st", "-t", "habits", "-c","habits", "-e", "vim", "/home/digo/.vimwiki/habits/index.wiki", NULL}; 
 static const char *scratchfdm[] = {"d", "fdm", NULL}; 
 static const char *scratchpadzap[] = {"w", "whatsapp-for-linux", NULL}; 
@@ -191,6 +194,7 @@ static Keychord *keychords[] = {
   SCRATCHS(w, scratchpadzap)
   SCRATCHS(m, scratchpadbtop)
   SCRATCHS(g, scratchpadcalc)
+  SCRATCHS(c, scratchpadcmus)
 //  SCRATCHS(b, scratchpadblue)
   // exec
   EXECS(r, dmenucmd)
@@ -223,7 +227,7 @@ static Keychord *keychords[] = {
   //rest
   //  &((Keychord){1, {{MODKEY, XK_p}},                                       spawn,          {.v = dmenucmd } }),
   &((Keychord){1, {{MODKEY, XK_t}},                                       spawn,          {.v = termcmd } }),
-  &((Keychord){1, {{MODKEY|ShiftMask, XK_b}},                                       togglebar,      {0} }),
+  &((Keychord){1, {{MODKEY|ShiftMask, XK_b}},                                       togglebar,      {1} }),
 //  &((Keychord){1, {{MODKEY, XK_j}},                                       focusstack,     {.i = +1 } }),
  // &((Keychord){1, {{MODKEY, XK_k}},                                       focusstack,     {.i = -1 } }),
   //  &((Keychord){1, {{MODKEY, XK_i}},                                       incnmaster,     {.i = +1 } }),
@@ -242,8 +246,7 @@ static Keychord *keychords[] = {
   TAGKEYS(                        b,                      0)
   TAGKEYS(                        t,                      1)
   TAGKEYS(                        v,                      2)
-  TAGKEYS(                        g,                      3)
-  TAGKEYS(                        m,                      4)
+  TAGKEYS(                        r,                      3)
 };
 
 
