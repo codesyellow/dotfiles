@@ -4,3 +4,12 @@
 vim.g.lazyvim_python_lsp = "pyright"
 vim.g.maplocalleader = ";"
 vim.o.shiftwidth = 4 -- Number of spaces inserted when indenting
+vim.opt.foldmethod = "manual"
+
+vim.cmd([[
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave * mkview
+  autocmd BufWinEnter * silent! loadview
+augroup END
+]])
