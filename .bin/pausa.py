@@ -4,6 +4,7 @@ import time
 import json
 import os
 import random
+import subprocess
 
 config_file = None
 
@@ -81,11 +82,11 @@ class Pausa():
 
     def is_active(self):
         """return the idle state as true or false"""
-        milliseconds = IdleMonitor()
-        if not milliseconds.is_idle():
-            return True
-        else:
+        idle = int(subprocess.check_output("xprintidle")) // 1000
+        if idle > 0:
             return False
+        else:
+            return True
 
     def run(self):
         while True:
