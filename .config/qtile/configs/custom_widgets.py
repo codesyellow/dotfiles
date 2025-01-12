@@ -34,7 +34,7 @@ WARNING_COLOR = "#EF5A6F"
 
 POMODORO_TIME_PATH = "/tmp/pomo_timer"
 COUNTDOWN_PATH = "/tmp/countdown_timer"
-EASYEFFECTS_PRESET_PATH = f"{HOME}/.config/.easy_preset"
+EASYEFFECTS_PRESET_PATH = f"{HOME}/.config/easyeffects_preset"
 STRETCH_TIME_PATH = "/tmp/stretch"
 STRETCH_STOP_PATH = "/tmp/stop"
 

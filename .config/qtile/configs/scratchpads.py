@@ -112,6 +112,18 @@ cmus = DropDown(
     on_focus_lost_hide=True,
 )
 
+lowfi = DropDown(
+    "lowfi",
+    f"{get_terminal(name="from_top")} -T lowfi -c lowfi -e lowfi",
+    height=0.3,
+    width=0.3,
+    opacity=1,
+    x=0.05,
+    y=0.03,
+    on_focus_lost_hide=True,
+)
+
+
 anki_portuguese = DropDown(
     "ankivPT",
     f'{get_terminal(name="from_bottom")} -e anki-vim portuguese',
@@ -207,6 +219,7 @@ scratchpads = [
     anki_english,
     anki_math,
     vimiv,
+    lowfi,
     typing_test,
     note_taking,
     habit_tracking,

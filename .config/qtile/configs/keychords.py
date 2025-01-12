@@ -37,6 +37,7 @@ keychords = [
         # Key([], 's', lazy.group['scratchpad'].dropdown_toggle('trayer')),
         Key([], 'w', lazy.group['scratchpad'].dropdown_toggle('zap')),
         Key([], 'c', lazy.group['scratchpad'].dropdown_toggle('cmus')),
+        Key([], 'l', lazy.group['scratchpad'].dropdown_toggle('lowfi')),
         Key([], 't', lazy.group['scratchpad'].dropdown_toggle('task')),
         Key([], 'n', lazy.group['scratchpad'].dropdown_toggle('notes')),
         Key([], 'h', lazy.group['scratchpad'].dropdown_toggle('habits')),

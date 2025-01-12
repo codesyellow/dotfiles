@@ -13,9 +13,7 @@ is_running() {
 #is_running 'pausa'
 is_running 'easy_always.sh'
 is_running 'xidlehook.sh'
-is_running 'santos_calendar.mjs' 'node'
 is_running 'gameon.mjs' 'node'
-is_running 'music_bass.mjs' 'node'
 
 pamixer --set-volume 30 &
 picom &
@@ -32,3 +30,4 @@ systemctl --user import-environment DISPLAY &
 redshift -O 3000 &
 xremap ~/.config/xremap/xremap &
 pausa.py &
+is_music.py &
