@@ -1,0 +1,62 @@
+# Default config for sway
+#
+# Copy this to ~/.config/sway/config and edit it to your liking.
+#
+# Read `man 5 sway` for a complete reference.
+
+
+include ./configs/variables
+### Output configuration
+#
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+output * bg /home/digo/.wallpapers/ign-0011.png fill
+output "VGA-1" allow_tearing yes
+#
+# Example configuration:
+#
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#
+# You can get the names of your  allow_tearing yesoutputs by running: swaymsg -t get_outputs
+exec wl-paste -t text --watch clipman store --no-persist
+### Idle configuration
+#
+# Example configuration:
+#
+exec swayidle -w \
+          timeout 300 'swaylock -f -c 000000' \
+          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+          before-sleep 'swaylock -f -c 000000'
+
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+input "type:keyboard" {
+    xkb_options caps:escape
+}
+input "type:mouse" {
+    accel_profile "flat"
+}
+
+# Dont show tab when there's only one window
+default_border pixel
+hide_edge_borders --i3 smart
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+    position top
+
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+#    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+    swaybar_command waybar
+}
+
+workspace_layout tabbed
+include ./configs/scratchpads
+include ./configs/keychords
+include ./configs/binds
+include ./configs/rules
+include /etc/sway/config.d/*
+

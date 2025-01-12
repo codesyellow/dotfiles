@@ -1,0 +1,12 @@
+for_window [app_id="dropdown_math"] move scratchpad, move position 100 400, scratchpad show
+
+for_window [app_id="dropdown_term"] move scratchpad, resize set width 1200, scratchpad show
+
+for_window [app_id="btop"]  move scratchpad, resize set width 1200, scratchpad show
+
+for_window [app_id="notes"]  move scratchpad, resize set width 1200, scratchpad show
+for_window [app_id="habits"]  move scratchpad, resize set width 1200, scratchpad show
+for_window [app_id="wasistlos"]  move scratchpad, resize set width 1200, scratchpad show
+
+
+
