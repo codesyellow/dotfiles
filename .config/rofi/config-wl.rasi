@@ -43,8 +43,8 @@ window {
     fullscreen:                  false;
     width:                       700px;
     height:                      24px;
-    x-offset:                    300px;
-    y-offset:                    -7px;
+    x-offset:                    400px;
+    y-offset:                    -27px;
 
     children:                    [ horibox ];
 
