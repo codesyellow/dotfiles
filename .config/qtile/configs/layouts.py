@@ -1,6 +1,5 @@
 from libqtile import layout
 from libqtile.config import Match
-from tabbed import Tabbed
 from .variables import COLORS
 
 layouts = [
@@ -14,14 +13,6 @@ layouts = [
     #        single_border_width=0,
     #        single_margin=0,
     #    ),
-    Tabbed(
-        show_single_tab=False,
-        bg_color=COLORS["bg"],
-        active_bg=COLORS["bg"],
-        active_fg=COLORS["fg"],
-        inactive_bg=COLORS["bg1"],
-        inactive_fg=COLORS["fg"],
-    ),
     layout.Max(),
 ]
 

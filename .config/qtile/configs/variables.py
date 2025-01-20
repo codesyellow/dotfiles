@@ -16,12 +16,15 @@ BROWSER = "brave"
 HOME = os.path.expanduser("~/")
 TMUX_SCRATCHPAD = "bash -c 'tmux attach-session -t scratch || tmux new-session -s scratch'"
 ZELLIJ_SCRATCHPAD = "zellij -s scratch"
-GROUP_ICONS = [
+VERTICAL_MONITOR_GROUPS = [
     "",
-    "",
     "",
+    "",
+]
+GROUP_ICONS = [
+    "",
+    "",
     "<span size='12000' rise='-15900'></span>",
-    "",
     "",
     "",
 ]
@@ -32,7 +35,7 @@ dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
 follow_mouse_focus = True
 bring_front_click = False
-cursor_warp = False
+cursor_warp = True
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True

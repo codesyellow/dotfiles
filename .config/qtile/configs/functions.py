@@ -1,5 +1,7 @@
+from re import VERBOSE
 from libqtile import qtile
-from .variables import COLORS
+from .variables import COLORS, GROUP_ICONS, VERTICAL_MONITOR_GROUPS
+from libqtile.log_utils import logger
 import psutil
 import os.path
 import subprocess
@@ -33,13 +35,17 @@ def desconnect_ds4():
 
 
 def tabbed():
-    if qtile.current_group and qtile.current_group.tiled_windows:
-        num_windows = len(qtile.current_group.tiled_windows)
-        if num_windows <= 1:
-            return ""
-        else:
-            return f'<span size="x-large" foreground="{COLORS["bg1"]}">| </span><span rise="5000" foreground="#EF5A6F"> </span><span rise="4000">{str(num_windows)}</span>'
-    return ""
+    current_focused_clients = qtile.current_group.last_focused
+    all_clients = qtile.current_group.tiled_windows
+    filtered_clients = [
+        client.name.split(" ")[0] for client in all_clients if client != current_focused_clients]
+    if len(filtered_clients) >= 3:
+        filtered_clients = filtered_clients[:2]
+
+    if len(filtered_clients) > 0:
+        return f'<span size="x-large" foreground="{COLORS["bg1"]}">| </span><span rise="5000" foreground="#EF5A6F"> </span><span rise="4000">{", ".join(filtered_clients)}</span>'
+    else:
+        return ""
 
 
 def set_pango(colors, size, position, icon_image, text):
@@ -77,3 +83,37 @@ def file_exist(file):
 def get_command_output(command):
     return subprocess.check_output(
         command, shell=True).decode('utf-8')
+
+
+def go_to_group(name: str):
+    def _inner(qtile):
+        if len(qtile.screens) == 1:
+            qtile.groups_map[name].toscreen()
+            return
+
+        if name in VERTICAL_MONITOR_GROUPS:
+            qtile.focus_screen(1)
+            qtile.groups_map[name].toscreen()
+        else:
+            qtile.focus_screen(0)
+            qtile.groups_map[name].toscreen()
+
+    return _inner
+
+
+def go_to_group_and_move_window(name: str):
+    def _inner(qtile):
+        if len(qtile.screens) == 1:
+            qtile.current_window.togroup(name, switch_group=True)
+            return
+
+        if name in GROUP_ICONS:
+            qtile.current_window.togroup(name, switch_group=False)
+            qtile.focus_screen(0)
+            qtile.groups_map[name].toscreen()
+        else:
+            qtile.current_window.togroup(name, switch_group=False)
+            qtile.focus_screen(1)
+            qtile.groups_map[name].toscreen()
+
+    return _inner

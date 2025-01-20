@@ -3,6 +3,7 @@ from libqtile.config import KeyChord, Key
 from .variables import MOD, RUNNER, BROWSER, COLORS
 from .groups import groups
 from .binds import keys
+from .functions import go_to_group, go_to_group_and_move_window
 
 
 def keychord_name(icon, size, rise):
@@ -54,25 +55,30 @@ keychords = [
         ], name=keychord_name(icon="󰑴", size="16000", rise="4000")),
         Key([], 'g', lazy.group['scratchpad'].dropdown_toggle('calc')),
     ], name=keychord_name(icon="󰊠", size="15000", rise="3600")),
-
+    KeyChord([MOD], 'c', [
+        Key([], 'j', lazy.next_screen(), desc='Next monitor'),
+        Key([], 'k', lazy.prev_screen(), desc='Next monitor'),
+    ], name=keychord_name(icon="󰊠", size="15000", rise="3600")),
     KeyChord([MOD], 'w', [
-        Key([], 't', lazy.group[groups[0].name].toscreen()),
-        Key([], 'v', lazy.group[groups[1].name].toscreen()),
-        Key([], 'b', lazy.group[groups[2].name].toscreen()),
-        Key([], 'l', lazy.group[groups[3].name].toscreen()),
-        Key([], 'm', lazy.group[groups[4].name].toscreen()),
-        Key([], 's', lazy.group[groups[5].name].toscreen()),
-        Key([], 'g', lazy.group[groups[6].name].toscreen()),
-    ], name=keychord_name(icon="", size="13000", rise="3000")),
+        Key([], 't', lazy.function(go_to_group(groups[0].name))),
+        Key([], 'i', lazy.function(go_to_group(groups[1].name))),
+        Key([], 'r', lazy.function(go_to_group(groups[2].name))),
+        Key([], 'v', lazy.function(go_to_group(groups[3].name))),
+        Key([], 'b', lazy.function(go_to_group(groups[4].name))),
+        Key([], 'l', lazy.function(go_to_group(groups[5].name))),
+        Key([], 's', lazy.function(go_to_group(groups[6].name))),
+        Key([], 'g', lazy.function(go_to_group(groups[7].name))), ],
+        name=keychord_name(icon="", size="13000", rise="3000")),
 
     KeyChord([MOD, 'shift'], 'w', [
-        Key([], 't',  lazy.window.togroup(groups[0].name)),
-        Key([], 'v',  lazy.window.togroup(groups[1].name)),
-        Key([], 'b',  lazy.window.togroup(groups[2].name)),
-        Key([], 'l',  lazy.window.togroup(groups[3].name)),
-        Key([], 'm',  lazy.window.togroup(groups[4].name)),
-        Key([], 's',  lazy.window.togroup(groups[5].name)),
-        Key([], 'g',  lazy.window.togroup(groups[6].name)),
+        Key([], 't',  lazy.function(go_to_group_and_move_window(groups[0].name))),
+        Key([], 'i',  lazy.function(go_to_group_and_move_window(groups[1].name))),
+        Key([], 'r',  lazy.function(go_to_group_and_move_window(groups[2].name))),
+        Key([], 'v',  lazy.function(go_to_group_and_move_window(groups[3].name))),
+        Key([], 'b',  lazy.function(go_to_group_and_move_window(groups[4].name))),
+        Key([], 'l',  lazy.function(go_to_group_and_move_window(groups[5].name))),
+        Key([], 's',  lazy.function(go_to_group_and_move_window(groups[6].name))),
+        Key([], 'g',  lazy.function(go_to_group_and_move_window(groups[7].name))),
     ], name=keychord_name(icon="", size="14000", rise="2000")),
 
     KeyChord([MOD], 'a', [

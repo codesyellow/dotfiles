@@ -1,7 +1,7 @@
 from libqtile import widget
-from .variables import FONT, WSIZE, COLORS
+from .variables import FONT, WSIZE, COLORS, GROUP_ICONS
 from .custom_widgets import Custom_Widgets
-from .functions import stop_timers, start_pomodoro
+from .functions import stop_timers, start_pomodoro, tabbed
 
 custom_widgets = Custom_Widgets()
 
@@ -75,8 +75,14 @@ my_widgets = [
         fontsize=WSIZE,
         update_interval=1,
     ),
+    widget.GenPollText(
+        func=tabbed,
+        fontsize=WSIZE,
+        update_interval=2,
+    ),
     widget.Spacer(),
     widget.GroupBox(
+        visible_groups=GROUP_ICONS,
         active=COLORS["fg"],
         block_highlight_text_color=COLORS["alt"],
         disable_drag=True,

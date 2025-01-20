@@ -1,15 +1,19 @@
 # type: ignore
 from .variables import HOME
 
+vertical_browser_rules = "navigator|firefox"
+vertical_terminal_rules = "Alacritty|st|kitty"
+vertical_reading_rules = "Zathura"
+
 wks1class_rules = "Alacritty|st|kitty"
 wks2class_rules = "audacious|gimp|kdenlive|mpv"
 wks3class_rules = (
-    "navigator|firefox|Brave\-browser|qutebrowser|org\.qutebrowser\.qutebrowser|floorp"
+    "qutebrowser|org\.qutebrowser\.qutebrowser|floorp"
 )
 wks4class_rules = "heroic|Steam|amazon\ games\ ui\.exe|bottles|ProtonUp\-Qt|lutris|amazongamessetup\.exe|net\.davidotek\.pupgui2"
 wks5class_rules = "Youtube\ Music|youtube\ music"
 wks6class_rules = (
-    "DL: language lessons|Zathura|anki|TelegramDesktop"
+    "DL: language lessons|anki|TelegramDesktop"
 )
 
 # title
