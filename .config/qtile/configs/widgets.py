@@ -1,15 +1,39 @@
 from libqtile import widget
-from .variables import FONT, WSIZE, COLORS, GROUP_ICONS
+from .variables import FONT, WSIZE, COLORS, GROUP_ICONS, VERTICAL_MONITOR_GROUPS
 from .custom_widgets import Custom_Widgets
 from .functions import stop_timers, start_pomodoro, tabbed
 
 custom_widgets = Custom_Widgets()
 
-my_widgets = [
-    widget.Volume(
-        fontsize=18,
-        fmt='<span size="24000" rise="4500" foreground="#d8dee9"></span> <span rise="9000" size="13500" foreground="#d8dee9">{}</span>',
-        update_interval=5,
+vertical_widgets = [
+    widget.GroupBox(
+        visible_groups=VERTICAL_MONITOR_GROUPS,
+        active=COLORS["fg"],
+        block_highlight_text_color=COLORS["alt"],
+        disable_drag=True,
+        markup=True,
+        spacing=2,
+        highlight_method="text",
+        this_current_screen_border=COLORS["alt"],
+        urgent_text=COLORS["alt"],
+        highlight_color=[COLORS["bg"], COLORS["alt"]],
+        font=FONT,
+        fontsize=WSIZE,
+        inactive=COLORS["bg1"],
+        foreground="#444",
+        use_mouse_wheel=False,
+    ),
+    widget.Spacer(),
+
+    widget.GenPollText(
+        func=custom_widgets.pomodoro,
+        fontsize=WSIZE,
+        font=FONT,
+        mouse_callbacks={
+            "Button1": start_pomodoro,
+            "Button3": lambda: stop_timers(file="pomo_cancel"),
+        },
+        update_interval=1,
     ),
     widget.GenPollText(
         func=custom_widgets.mem_usage,
@@ -36,16 +60,7 @@ my_widgets = [
         font=FONT,
         update_interval=15,
     ),
-    widget.GenPollText(
-        func=custom_widgets.pomodoro,
-        fontsize=WSIZE,
-        font=FONT,
-        mouse_callbacks={
-            "Button1": start_pomodoro,
-            "Button3": lambda: stop_timers(file="pomo_cancel"),
-        },
-        update_interval=1,
-    ),
+
     widget.GenPollText(
         func=custom_widgets.countdown,
         fontsize=WSIZE,
@@ -75,12 +90,19 @@ my_widgets = [
         fontsize=WSIZE,
         update_interval=1,
     ),
-    widget.GenPollText(
-        func=tabbed,
-        fontsize=WSIZE,
-        update_interval=2,
+    widget.TextBox(
+        fmt=f'<span size="x-large" foreground="{
+            COLORS["bg1"]}">|</span>',
+        fontsize=19,
     ),
-    widget.Spacer(),
+    widget.Volume(
+        fontsize=18,
+        fmt='<span size="24000" rise="4500" foreground="#d8dee9"></span> <span rise="9000" size="13500" foreground="#d8dee9">{}</span>',
+        update_interval=5,
+    ),
+]
+
+my_widgets = [
     widget.GroupBox(
         visible_groups=GROUP_ICONS,
         active=COLORS["fg"],
@@ -99,6 +121,7 @@ my_widgets = [
         use_mouse_wheel=False,
     ),
     widget.Spacer(),
+
     widget.Chord(
         foreground=COLORS["alt"],
         fontsize=WSIZE,
@@ -147,6 +170,11 @@ my_widgets = [
         width=200,
         scroll_step=2,
         scroll=True,
+    ),
+    widget.GenPollText(
+        func=tabbed,
+        fontsize=WSIZE,
+        update_interval=2,
     ),
     widget.TextBox(
         fmt=f'<span size="x-large" foreground="{

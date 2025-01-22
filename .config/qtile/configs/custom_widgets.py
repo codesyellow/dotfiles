@@ -110,7 +110,7 @@ class Custom_Widgets:
         return set_pango(
             colors=colors,
             size=[20000, 16000],
-            position=[4000, 6700],
+            position=[3000, 6200],
             icon_image=PAUSA_ICON,
             text=""
         )
@@ -242,16 +242,16 @@ class Custom_Widgets:
 
                 return set_pango(
                     colors=colors,
-                    size=[20000, 12000, 3000],
-                    position=[0, 6000, 3000],
+                    size=[0, 12000, 3000],
+                    position=[0, 6000, 1000],
                     icon_image=POMODORO_ICON,
                     text=pomodoro_time.read().strip()
                 )
         else:
             return set_pango(
                 colors=colors,
-                size=[20000, 12000, 3000],
-                position=[0, 5000, 3000],
+                size=[0, 12000, 3000],
+                position=[0, 2000, 0],
                 icon_image=POMODORO_ICON,
                 text="00:00"
             )

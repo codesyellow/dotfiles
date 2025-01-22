@@ -56,8 +56,8 @@ keychords = [
         Key([], 'g', lazy.group['scratchpad'].dropdown_toggle('calc')),
     ], name=keychord_name(icon="󰊠", size="15000", rise="3600")),
     KeyChord([MOD], 'c', [
-        Key([], 'j', lazy.next_screen(), desc='Next monitor'),
-        Key([], 'k', lazy.prev_screen(), desc='Next monitor'),
+        Key([], 'l', lazy.next_screen()),
+        Key([], 'h', lazy.prev_screen()),
     ], name=keychord_name(icon="󰊠", size="15000", rise="3600")),
     KeyChord([MOD], 'w', [
         Key([], 't', lazy.function(go_to_group(groups[0].name))),
