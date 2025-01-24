@@ -37,13 +37,30 @@ def desconnect_ds4():
 def tabbed():
     current_focused_clients = qtile.current_group.last_focused
     all_clients = qtile.current_group.tiled_windows
-    filtered_clients = [
-        client.name.split(" ")[0] for client in all_clients if client != current_focused_clients]
+
+    # logger.warning(qtile.current_group.current_window.get_wm_class())
+    rename_clients = [
+        {
+            "current_name": "Com.Github.Xournalpp.Xournalpp",
+            "change_to": "xournal"
+        }
+    ]
+    filtered_clients = []
+
+    for client in all_clients:
+        client_class = client.get_wm_class()[1].title()
+        if client != current_focused_clients:
+            for name in rename_clients:
+                if client_class == name["current_name"]:
+                    filtered_clients.append(name["change_to"].title())
+                else:
+                    filtered_clients.append(client_class.split(".")[0][:10])
+
     if len(filtered_clients) >= 3:
         filtered_clients = filtered_clients[:2]
 
     if len(filtered_clients) > 0:
-        return f'<span size="x-large" foreground="{COLORS["bg1"]}">| </span><span rise="5000" foreground="#EF5A6F"> </span><span rise="4000">{", ".join(filtered_clients)}</span>'
+        return f'<span size="x-large" foreground="{COLORS["bg1"]}">| </span><span size="18000" rise="3000" foreground="{COLORS["fg"]}"></span> <span rise="4000">{", ".join(filtered_clients)}</span>'
     else:
         return ""
 

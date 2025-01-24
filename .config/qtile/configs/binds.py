@@ -10,6 +10,8 @@ keys = [
     Key([MOD, "control"], "r", lazy.reload_config()),
     Key([MOD, "control"], "q", lazy.shutdown()),
     Key([MOD], "f", lazy.window.toggle_fullscreen()),
+    Key([MOD], 'l', lazy.next_screen()),
+    Key([MOD], 'h', lazy.prev_screen()),
     Key([MOD, "shift"], "f", lazy.window.toggle_floating()),
     Key([MOD], "c", lazy.window.center()),
     Key([MOD, "shift"], "e", lazy.core.change_vt(2)),

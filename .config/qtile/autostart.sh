@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-arandr ~/.screenlayout/restore_layout.sh &
 is_running() {
     if [[ "$2" == "node" ]]; then
         script=$(ps -ef | grep 'node' | grep $1)
@@ -16,6 +15,7 @@ is_running 'easy_always.sh'
 is_running 'xidlehook.sh'
 is_running 'gameon.mjs' 'node'
 
+restore_layout.sh &
 pamixer --set-volume 30 &
 picom &
 #hsetroot -cover ~/.wallpapers/ign-0011.png &

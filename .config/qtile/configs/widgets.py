@@ -24,7 +24,6 @@ vertical_widgets = [
         use_mouse_wheel=False,
     ),
     widget.Spacer(),
-
     widget.GenPollText(
         func=custom_widgets.pomodoro,
         fontsize=WSIZE,
@@ -100,6 +99,15 @@ vertical_widgets = [
         fmt='<span size="24000" rise="4500" foreground="#d8dee9"></span> <span rise="9000" size="13500" foreground="#d8dee9">{}</span>',
         update_interval=5,
     ),
+    widget.TextBox(
+        fmt=f'<span size="x-large" foreground="{
+            COLORS["bg1"]}">|</span>',
+        fontsize=19,
+    ),
+    widget.Clock(
+        fontsize=WSIZE,
+        format=f'<span size="20000" rise="2000">󱑸</span> <span size="14000" rise="4500">%H:%M</span>',
+    ),
 ]
 
 my_widgets = [
@@ -121,7 +129,6 @@ my_widgets = [
         use_mouse_wheel=False,
     ),
     widget.Spacer(),
-
     widget.Chord(
         foreground=COLORS["alt"],
         fontsize=WSIZE,
@@ -183,7 +190,7 @@ my_widgets = [
     ),
     widget.Clock(
         fontsize=WSIZE,
-        format=f'<span size="14000" rise="3000">%d</span><span size="x-large" foreground="{COLORS["bg1"]}">-</span><span size="14000" rise="3500">%H:%M</span><span size="x-large" foreground="{
-            COLORS["bg1"]}">-</span><span size="12800" text_transform="uppercase" rise="3000">%a</span>',
+        format=f'<span size="20000" rise="2000">󱑸</span> <span size="14000" rise="4300">%d</span><span size="x-large" foreground="{COLORS["bg1"]}">-</span><span size="14000" rise="4300">%H:%M</span><span size="x-large" foreground="{
+            COLORS["bg1"]}">-</span><span size="12800" text_transform="uppercase" rise="4500">%a</span>',
     ),
 ]

@@ -3,11 +3,9 @@ from libqtile.config import Group, ScratchPad, Match
 from .variables import GROUP_ICONS, VERTICAL_MONITOR_GROUPS
 from .scratchpads import scratchpads
 from .rules import (
-    wks1class_rules,
     wks2class_rules,
     wks3class_rules,
     wks4class_rules,
-    wks5class_rules,
     wks6class_rules,
     wks7class_rules,
     wks2title_rules,

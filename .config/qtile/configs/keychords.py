@@ -12,7 +12,6 @@ def keychord_name(icon, size, rise):
     return f"{icon} {bar}"
 
 
-# exec
 keychords = [
     KeyChord([MOD], 'e', [
         Key([], 'r', lazy.spawn(RUNNER)),
@@ -55,7 +54,7 @@ keychords = [
         ], name=keychord_name(icon="󰑴", size="16000", rise="4000")),
         Key([], 'g', lazy.group['scratchpad'].dropdown_toggle('calc')),
     ], name=keychord_name(icon="󰊠", size="15000", rise="3600")),
-    KeyChord([MOD], 'c', [
+    KeyChord([MOD], 'm', [
         Key([], 'l', lazy.next_screen()),
         Key([], 'h', lazy.prev_screen()),
     ], name=keychord_name(icon="󰊠", size="15000", rise="3600")),
