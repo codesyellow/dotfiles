@@ -10,7 +10,7 @@ xidlehook \
     --timer 240 \
     'xset dpms force off' \
     'xset dpms force on && redshift -oP -O 4500 -b 1' \
-    --timer 600 'redshift -oP -O 4500 -b 1; slock' \
+    --timer 600 'redshift -oP -O 4500 -b 1; betterlockscreen -l' \
     ''#$( #\
         # Finally, suspend after it locks
     )
