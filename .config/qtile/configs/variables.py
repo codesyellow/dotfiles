@@ -15,7 +15,7 @@ WSIZE = 18
 BROWSER = "brave"
 HOME = os.path.expanduser("~/")
 TMUX_SCRATCHPAD = "bash -c 'tmux attach-session -t scratch || tmux new-session -s scratch'"
-ZELLIJ_SCRATCHPAD = "zellij -s scratch"
+ZELLIJ_SCRATCHPAD = "bash -c 'zellij a scratch || zellij -s scratch'"
 VERTICAL_MONITOR_GROUPS = [
     "",
     "",

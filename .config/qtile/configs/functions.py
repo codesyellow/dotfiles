@@ -61,7 +61,7 @@ def tabbed():
         filtered_clients.append("+")
 
     if len(filtered_clients) > 0:
-        return f'<span size="x-large" foreground="{COLORS["bg1"]}">| </span><span size="18000" rise="3000" foreground="{COLORS["fg"]}"></span> <span rise="4000">{", ".join(filtered_clients)}</span>'
+        return f'<span size="18000" rise="3000" foreground="{COLORS["fg"]}"></span> <span rise="4000">{", ".join(filtered_clients)}</span><span size="x-large" foreground="{COLORS["bg1"]}"> |</span>'
     else:
         return ""
 
