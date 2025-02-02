@@ -58,6 +58,7 @@ def tabbed():
 
     if len(filtered_clients) >= 3:
         filtered_clients = filtered_clients[:2]
+        filtered_clients.append("+")
 
     if len(filtered_clients) > 0:
         return f'<span size="x-large" foreground="{COLORS["bg1"]}">| </span><span size="18000" rise="3000" foreground="{COLORS["fg"]}"></span> <span rise="4000">{", ".join(filtered_clients)}</span>'
@@ -65,7 +66,27 @@ def tabbed():
         return ""
 
 
-def set_pango(colors, size, position, icon_image, text):
+def get_pango(text: str, icon_image: str, icon_size: int, icony: int, texty: int,  bar_pos: str,  bary: int = 0, colors: list = ["#4c566a", "#d8dee9"], style: str = "full", bar_size: int = 25000):
+    """It should contain a text, text y position, icon, icon_size, icon y position, bar size, bar_size, bar y position. colors and style are optional"""
+    bar = f"<span size='{bar_size}' rise='{
+        bary}' foreground='{colors[0]}'>|</span>"
+    icon = f"<span size='{icon_size}' foreground='{colors[1]}' rise='{
+        icony}'>{icon_image}</span>"
+    content = f"<span rise='{texty}' foreground='{colors[1]}'>{text}</span>"
+
+    if style.lower() == "full":
+        if bar_pos.lower() == "left":
+            return f"{bar} {icon} {content}"
+        elif bar_pos.lower() == "right":
+            return f"{icon} {content} {bar}"
+    elif style.lower() == "icon":
+        if bar_pos.lower() == "left":
+            return f"{bar} {icon}"
+        elif bar_pos.lower() == "right":
+            return f"{icon} {bar}"
+
+
+def set_pango(colors, size, position, icon_image, text, **args):
     """Set the pango by passing three list, icon_image and the text:
         one for COLORS for bar,icon and text,
         size for bar, icon and text,
@@ -75,18 +96,27 @@ def set_pango(colors, size, position, icon_image, text):
         size[0]}' foreground='{colors[0]}'>|</span>"
     icon = f"<span size='{size[1]}' foreground='{colors[1]}' rise='{
         position[1]}'>{icon_image}</span>"
-    if size[0] == 0:
-        output = f"{icon} <span rise='{
-            position[2]}' foreground='{colors[1]}'>{text}</span>"
-        return output
+    if len(args) == 0:
+        if size[0] == 0:
+            output = f"{icon} <span rise='{
+                position[2]}' foreground='{colors[1]}'>{text}</span>"
+            return output
 
-    elif text == "":
-        output = f"{bar} {icon}"
-        return output
+        elif text == "":
+            output = f"{bar} {icon}"
+            return output
+        else:
+            output = f"{bar} {icon} <span rise='{
+                position[2]}' foreground='{colors[1]}'>{text}</span>"
+            return output
     else:
-        output = f"{bar} {icon} <span rise='{
-            position[2]}' foreground='{colors[1]}'>{text}</span>"
-        return output
+        if text == "":
+            output = f"{icon} {bar}"
+            return output
+        else:
+            output = f"{icon} <span rise='{
+                position[2]}' foreground='{colors[1]}'>{text}</span> {bar}"
+            return output
 
 
 def is_process_running(process_name):

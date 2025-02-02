@@ -1,11 +1,14 @@
+from libqtile import bar
 import psutil
 import shutil
-from .functions import set_pango, file_exist, get_command_output
+import subprocess
+from .functions import set_pango, file_exist, get_command_output, get_pango
 from .variables import HOME
 
 CPU_ICON = ""
 SANTOS_FC = "󰒸"
 CPU_TEMP_ICON = ""
+DS4_ICON = "󰊴"
 MEM_ICON = ""
 ROOT_ICON = ""
 HOME_ICON = ""
@@ -26,7 +29,7 @@ MIN_TEMP = 90
 MIN_ROOT_SPACE = 10
 MIN_HOME_SPACE = 10
 MIN_HDD_SPACE = 10
-MIN_UPDATES = 90
+MIN_UPDATES = 20
 
 BAR_COLOR = "#4c566a"
 NORMAL_COLOR = "#d8dee9"
@@ -40,35 +43,62 @@ STRETCH_STOP_PATH = "/tmp/stop"
 
 
 class Custom_Widgets:
-    def check_keyboard_variant(self):
+    def check_keyboard_variant(self, texty: int = 0, icony: int = 0, icon_size=15000, bar_pos="left", bary: int = 0):
         """Return keyboard current
             variant if it's: US(INTL) or returns nothing"""
         keyboard_variant = get_command_output("xkb-switch -p").strip()
         if keyboard_variant == "us(intl)":
-            return set_pango(
-                colors=[BAR_COLOR, WARNING_COLOR],
-                size=[25000, 26000, 3000],
-                position=[0, 2400, 8000],
+            return get_pango(
+                text="INTL",
+                texty=texty,
                 icon_image=KEYBOARD_ICONS,
-                text="INTL"
+                colors=[BAR_COLOR, WARNING_COLOR],
+                icony=icony,
+                icon_size=icon_size,
+                bar_pos=bar_pos,
             )
         else:
             return ""
 
-    def check_updates(self):
+    def check_updates(self, texty: int, icony: int, icon_size: int, bar_pos: str = "left"):
         """Return the number of updates available for the system"""
-        updates_available = get_command_output("checkupdates | wc -l")
+        updates_available = get_command_output("checkupdates | wc -l").strip()
 
         if int(updates_available) >= MIN_UPDATES:
-            return set_pango(
-                colors=[BAR_COLOR, WARNING_COLOR],
-                size=[14000, 16000, 3000],
-                position=[0, 1000, 2000],
-                icon_image=UPDATES_ICON,
+            return get_pango(
                 text=updates_available.strip(),
+                texty=texty,
+                icon_image=UPDATES_ICON,
+                colors=[BAR_COLOR, WARNING_COLOR],
+                icony=icony,
+                icon_size=icon_size,
+                bar_pos=bar_pos,
             )
         else:
             return ""
+
+    def ds4_bat(self, texty: int, icony: int, icon_size: int, bar_pos: str = "left"):
+        """Return ds4 bat"""
+        ds4 = subprocess.check_output([
+            "dsbattery"
+        ]).decode("utf-8").strip()
+        text = ""
+        style = "full"
+        if len(ds4) > 0:
+            text = ds4.split()[1]
+        else:
+            text = ""
+            style = "icon"
+
+        return get_pango(
+            text=text,
+            texty=texty,
+            icon_image=DS4_ICON,
+            icony=icony,
+            icon_size=icon_size,
+            bar_pos=bar_pos,
+            style=style,
+        )
 
     def santos_widget(self):
         """Return Santos FC info"""
@@ -89,150 +119,156 @@ class Custom_Widgets:
             else:
                 return ""
 
-    def game_is_on(self):
+    def game_is_on(self, texty: int = 0, icony: int = 0, icon_size=15000, bar_pos="right", bary: int = 0):
         if file_exist("/tmp/gameon"):
-            return set_pango(
+            return get_pango(
                 colors=[BAR_COLOR, WARNING_COLOR],
-                size=[20000, 14000],
-                position=[4000, 7200],
+                texty=texty,
+                style="icon",
+                icony=icony,
+                icon_size=icon_size,
                 icon_image=GAMEON_ICON,
-                text=""
+                text="",
+                bar_pos=bar_pos
             )
         else:
             return ""
 
-    def pausa(self):
-        colors = []
-        if file_exist("/tmp/pausa"):
-            colors = [BAR_COLOR, WARNING_COLOR]
-        else:
-            colors = [BAR_COLOR, NORMAL_COLOR]
-        return set_pango(
-            colors=colors,
-            size=[20000, 16000],
-            position=[3000, 6200],
-            icon_image=PAUSA_ICON,
-            text=""
-        )
-
-    def cpu_temp(self):
+    def cpu_temp(self, texty: int = 0, icony: int = 0, icon_size=15000, bar_pos="right", bary: int = 0):
         temperature = int(psutil.sensors_temperatures()["coretemp"][0][1])
         if temperature >= MIN_TEMP:
-            return set_pango(
+            return get_pango(
                 colors=[BAR_COLOR, WARNING_COLOR],
-                size=[20000, 13000, 3000],
-                position=[1000, 5500, 4500],
+                text=f"{temperature}°",
                 icon_image=CPU_TEMP_ICON,
-                text=f"{temperature}°"
+                icony=icony,
+                icon_size=icon_size,
+                texty=texty,
+                bar_pos=bar_pos
             )
         else:
             return ""
 
-    def cpu_usage(self):
+    def cpu_usage(self, texty: int = 0, icony: int = 0, icon_size=15000, bar_pos="right", bary: int = 0):
         cpu_usage = int(psutil.cpu_percent(2))
         if cpu_usage > MIN_CPU_USAGE:
-            return set_pango(
+            return get_pango(
                 colors=[BAR_COLOR, WARNING_COLOR],
-                size=[20000, 13000, 3000],
-                position=[0, 4500, 2600],
+                text=f"{cpu_usage}%",
                 icon_image=CPU_ICON,
-                text=f"{cpu_usage}%"
+                icony=icony,
+                icon_size=icon_size,
+                texty=texty,
+                bar_pos=bar_pos
             )
         else:
             return ""
 
-    def mem_usage(self):
+    def mem_usage(self, texty: int = 0, icony: int = 0, icon_size=15000, bar_pos="right", bary: int = 0):
         mem_usage = int(psutil.virtual_memory()[2])
         if mem_usage > MIN_MEM_USAGE:
-            return set_pango(
+            return get_pango(
                 colors=[BAR_COLOR, WARNING_COLOR],
-                size=[20000, 13000, 3000],
-                position=[0, 3000, 2700],
+                text=f"{mem_usage}%",
                 icon_image=MEM_ICON,
-                text=f"{mem_usage}%"
+                icony=icony,
+                icon_size=icon_size,
+                texty=texty,
+                bar_pos=bar_pos
             )
         else:
             return ""
 
-    def root_space(self):
+    def root_space(self, texty: int = 0, icony: int = 0, icon_size=15000, bar_pos="right", bary: int = 0):
         total, used, free = shutil.disk_usage("/")
         total_free = free // (2**30)
         if total_free <= MIN_ROOT_SPACE:
-            return set_pango(
+            return get_pango(
                 colors=[BAR_COLOR, WARNING_COLOR],
-                size=[20000, 13000, 3000],
-                position=[0, 4400, 2700],
+                text=f"{total_free}G",
                 icon_image=ROOT_ICON,
-                text=f"{total_free}G"
+                icony=icony,
+                icon_size=icon_size,
+                texty=texty,
+                bar_pos=bar_pos
             )
         else:
             return ""
 
-    def home_space(self):
+    def home_space(self, texty: int = 0, icony: int = 0, icon_size=15000, bar_pos="right", bary: int = 0):
         total, used, free = shutil.disk_usage("/home")
         total_free = free // (2**30)
         if total_free <= MIN_HOME_SPACE:
-            return set_pango(
+            return get_pango(
                 colors=[BAR_COLOR, WARNING_COLOR],
-                size=[20000, 10500, 3000],
-                position=[0, 4600, 2700],
+                text=f"{total_free}G",
                 icon_image=HOME_ICON,
-                text=f"{total_free}G"
+                icony=icony,
+                icon_size=icon_size,
+                texty=texty,
+                bar_pos=bar_pos
             )
         else:
             return ""
 
-    def hdd_space(self):
+    def hdd_space(self, texty: int = 0, icony: int = 0, icon_size=15000, bar_pos="right", bary: int = 0):
         total, used, free = shutil.disk_usage(f"{HOME}/.HDD")
         total_free = free // (2**30)
         if total_free <= MIN_HDD_SPACE:
-            return set_pango(
+            return get_pango(
                 colors=[BAR_COLOR, WARNING_COLOR],
-                size=[20000, 23000, 3000],
-                position=[0, 1200, 5000],
+                text=f"{total_free}G",
                 icon_image=HDD_ICON,
-                text=f"{total_free}G"
+                icony=icony,
+                icon_size=icon_size,
+                texty=texty,
+                bar_pos=bar_pos
             )
         else:
             return ""
 
-    def easyeffects_is_on(self):
+    def easyeffects_is_on(self, texty: int = 0, icony: int = 0, icon_size=15000, bar_pos="right", bary: int = 0):
+        icon_image = EASYEFFECTS_EQUALIZER_ICON
+        colors = []
+
         if file_exist(EASYEFFECTS_PRESET_PATH):
             with open(EASYEFFECTS_PRESET_PATH, "r") as easy_preset:
                 if easy_preset.read().strip() == "LoudnessEqualizer":
-                    return set_pango(
-                        colors=[BAR_COLOR, NORMAL_COLOR],
-                        size=[20000, 13000],
-                        position=[4000, 6000],
-                        icon_image=EASYEFFECTS_EQUALIZER_ICON,
-                        text=""
-                    )
+                    colors = [BAR_COLOR, NORMAL_COLOR]
                 else:
-                    return set_pango(
-                        colors=[BAR_COLOR, WARNING_COLOR],
-                        size=[20000, 14000],
-                        position=[4000, 6000],
-                        icon_image=EASYEFFECTS_BASS_ICON,
-                        text=""
-                    )
-        else:
-            return ""
-
-    def countdown(self):
-        if file_exist(COUNTDOWN_PATH):
-            with open(COUNTDOWN_PATH, "r") as timer:
-                return set_pango(
-                    colors=[BAR_COLOR, WARNING_COLOR],
-                    size=[20000, 12000, 3000],
-                    position=[0, 5000, 3000],
-                    icon_image=COUNTDOWN_ICON,
-                    text=timer.read().strip()
+                    colors = [BAR_COLOR, WARNING_COLOR]
+                    icon_image = EASYEFFECTS_BASS_ICON
+                return get_pango(
+                    colors=colors,
+                    texty=texty,
+                    style="icon",
+                    icony=icony,
+                    icon_size=icon_size,
+                    icon_image=icon_image,
+                    text="",
+                    bar_pos=bar_pos
                 )
         else:
             return ""
 
-    def pomodoro(self):
+    def countdown(self, texty: int = 0, icony: int = 0, icon_size=15000, bar_pos="right", bary: int = 0):
+        if file_exist(COUNTDOWN_PATH):
+            with open(COUNTDOWN_PATH, "r") as timer:
+                return get_pango(
+                    text=timer.read().strip(),
+                    icon_image=COUNTDOWN_ICON,
+                    colors=[BAR_COLOR, WARNING_COLOR],
+                    icon_size=icon_size,
+                    texty=texty,
+                    icony=icony,
+                    bar_pos=bar_pos
+                )
+        else:
+            return ""
+
+    def pomodoro(self, texty: int = 0, icony: int = 0, icon_size=15000, bar_pos="right", bary: int = 0):
         colors = [BAR_COLOR, NORMAL_COLOR]
+        text = "0:00:00"
         if file_exist(POMODORO_TIME_PATH):
             with open(POMODORO_TIME_PATH, "r") as pomodoro_time:
                 if file_exist("/tmp/pomo_pause"):
@@ -240,21 +276,16 @@ class Custom_Widgets:
                 elif file_exist("/tmp/pomo_long_pause"):
                     colors = [BAR_COLOR, WARNING_COLOR]
 
-                return set_pango(
-                    colors=colors,
-                    size=[0, 12000, 3000],
-                    position=[0, 6000, 1000],
-                    icon_image=POMODORO_ICON,
-                    text=pomodoro_time.read().strip()
-                )
-        else:
-            return set_pango(
-                colors=colors,
-                size=[0, 12000, 3000],
-                position=[0, 2000, 0],
-                icon_image=POMODORO_ICON,
-                text="00:00"
-            )
+                text = pomodoro_time.read().strip()
+        return get_pango(
+            text=text,
+            icon_image=POMODORO_ICON,
+            colors=colors,
+            icon_size=icon_size,
+            texty=texty,
+            icony=icony,
+            bar_pos=bar_pos
+        )
 
     def do_stretch(self):
         current_colors = []
