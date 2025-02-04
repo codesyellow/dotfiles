@@ -33,4 +33,5 @@ systemctl --user import-environment DISPLAY &
 xremap ~/.config/xremap/xremap &
 pausa.py &
 is_music.py &
-sleep 5 && redshift -oP -O 3000 -b 1 &
+redshift -oP -O 3000 -b 1 &
+earphone.sh &

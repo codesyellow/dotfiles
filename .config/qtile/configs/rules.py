@@ -3,7 +3,7 @@ from .variables import HOME
 
 vertical_browser_rules = "navigator|firefox"
 vertical_terminal_rules = "Alacritty|st|kitty"
-vertical_reading_rules = "Zathura"
+vertical_reading_rules = "Zathura|scrcpy"
 
 wks1class_rules = "Alacritty|st|kitty"
 wks2class_rules = "audacious|gimp|kdenlive|mpv"
