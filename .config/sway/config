@@ -4,42 +4,277 @@
 #
 # Read `man 5 sway` for a complete reference.
 
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+# Your preferred terminal emulator
+set $term kitty -e zellij
+set $scratchpad_term alacritty
+# Your preferred application launcher
+set $menu rofi --config ~/.config/rofi/config-wl.rasi -show run
+default_border pixel
+hide_edge_borders --i3 smart
+workspace_layout tabbed
 
-include ./configs/variables
+exec autostart
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/digo/.wallpapers/ign-0011.png fill
-output "VGA-1" allow_tearing yes
+output * bg ~/.wallpapers/ign-0011.png fill
 #
 # Example configuration:
 #
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+output VGA-1 transform 270 res 1360x768 pos 0 -500
+output HDMI-A-1 res 1920x1024 pos 768 0
 #
-# You can get the names of your  allow_tearing yesoutputs by running: swaymsg -t get_outputs
-exec wl-paste -t text --watch clipman store --no-persist
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
 ### Idle configuration
 #
 # Example configuration:
 #
-exec swayidle -w \
-          timeout 300 'swaylock -f -c 000000' \
-          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-          before-sleep 'swaylock -f -c 000000'
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+#          before-sleep 'swaylock -f -c 000000'
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
 
+### Input configuration
+#
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
-input "type:keyboard" {
-    xkb_options caps:escape
-}
-input "type:mouse" {
-    accel_profile "flat"
+
+### Key bindings
+#
+# Basics:
+#
+    # Start a terminal
+    bindsym $mod+Return exec $term
+
+    # Kill focused window
+    bindsym $mod+Shift+q kill
+
+    # Start your launcher
+    bindsym $mod+d exec $menu
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+Shift+c reload
+
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+#
+# Moving around:
+#
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    # Or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    # Ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+#
+# Workspaces:
+#
+    workspace 1 output VGA-1
+    workspace 2 output VGA-1
+    workspace 3 output VGA-1
+    workspace 4 output HDMI-A-1
+    workspace 5 output HDMI-A-1
+    workspace 6 output HDMI-A-1
+    workspace 7 output HDMI-A-1
+    workspace 8 output HDMI-A-1
+
+mode "workspaces" {
+    # vertical monitor
+    bindsym t workspace 1, mode "default"
+    bindsym i workspace 2, mode "default"
+    bindsym r workspace 3, mode "default"
+    # horizontal monitor
+    bindsym b workspace 4, mode "default"
+    bindsym l workspace 5, mode "default"
+    bindsym g workspace 6, mode "default"
+    bindsym s workspace 7, mode "default"
+    bindsym v workspace 8, mode "default"
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
-# Dont show tab when there's only one window
-default_border pixel
-hide_edge_borders --i3 smart
+mode "move_workspaces" {
+    # vertical monitor
+    bindsym t move container to workspace number 1, mode "default"
+    bindsym i move container to workspace number 2, mode "default"
+    bindsym r move container to workspace number 3, mode "default"
+    # horizontal monitor
+    
+    bindsym b move container to workspace number 4, mode "default"
+    bindsym l move container to workspace number 5, mode "default"
+    bindsym g move container to workspace number 6, mode "default"
+    bindsym s move container to workspace number 7, mode "default"
+    bindsym v move container to workspace number 8, mode "default"
 
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+w mode "workspaces"
+bindsym $mod+Shift+w mode "move_workspaces"
+
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    #bindsym $mod+b splith
+#    bindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    #bindsym $mod+s layout stacking
+    bindsym $mod+o layout tabbed
+#    bindsym $mod+e layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+    # Move focus to the parent container
+    bindsym $mod+a focus parent
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+
+mode "volume" {
+    bindsym k exec volume.sh up, mode "default"
+    bindsym j exec volume.sh down, mode "default"
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+
+}
+
+
+bindsym $mod+v mode "volume"
+#
+# Utilities:
+#
+    # Special keys to adjust volume via PulseAudio
+    bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+    bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+    # Special keys to adjust brightness via brightnessctl
+    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+    # Special key to take a screenshot with grim
+    bindsym Print exec grim
+
+for_window [app_id="dropdown_math"] move scratchpad, move position 100 400, scratchpad show
+
+for_window [app_id="dropdown_term"] move scratchpad, resize set width 1200, scratchpad show
+for_window [app_id="test"] move scratchpad,  move position 100 400, resize set width 1200, scratchpad show
+
+for_window [app_id="btop"]  move scratchpad, resize set width 50%, scratchpad show
+
+for_window [app_id="notes"]  move scratchpad, resize set width 1200, scratchpad show
+for_window [app_id="habits"]  move scratchpad, resize set width 1200, scratchpad show
+for_window [app_id="wasistlos"]  move scratchpad, resize set width 1200, scratchpad show
+mode "scratchpad" {
+    #bindsym c exec sh -c 'swaymsg [app_id="dropdown_math"] scratchpad show || exec $scratchpad_term --class dropdown_math -e python -q', mode "default"
+    bindsym c exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x30% -- foot -T dropdown_math -e python -q", mode "default"
+    bindsym n exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x70% -- foot -T notes -e nvim ~/.notes/index.norg", mode "default"
+    bindsym h exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x70% -- foot -T notes -e nvim ~/.notes/habits.norg", mode "default"
+    bindsym m exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T monitor -e btop", mode "default"
+    bindsym t exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x90% -p -180,0 -m left -- foot -T todo -e taskwarrior-tui", mode "default"
+    bindsym w exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- wasistlos", mode "default"
+    bindsym u exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x60% -p 0,20 -- alacritty --config-file ~/.config/alacritty/scratchpad.toml --class dropdown_term -e bash -c 'zellij attach --create scratch'", mode "default"
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+tab workspace back_and_forth
+
+bindsym $mod+s mode "scratchpad"
 #
 # Status Bar:
 #
@@ -47,16 +282,37 @@ hide_edge_borders --i3 smart
 bar {
     position top
 
+
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-#    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-    swaybar_command waybar
+    swaybar_command "waybar --config ~/.config/waybar/sway-waybar.jsonc"
+
+    colors {
+        statusline #ffffff
+        background #323232
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
 }
 
-workspace_layout tabbed
-include ./configs/scratchpads
-include ./configs/keychords
-include ./configs/binds
-include ./configs/rules
-include /etc/sway/config.d/*
 
+for_window [class="^tf_linux64$"] move to workspace 6
+for_window [class="^hl_linux$"] move to workspace 6
+for_window [class="^steam_app_48700$"] move to workspace 6
+for_window [class="^mb_warband_linux$"] move to workspace 6
+for_window [class="^steam_app_425580$"] move to workspace 6
+for_window [class="^steam_app_475150$"] move to workspace 6
+for_window [class="^steam_app_35130$"] move to workspace 6
+for_window [class="^steam_app_257510$"] move to workspace 6
+for_window [class="^steam_app_8980$"] move to workspace 6
+for_window [class="^steam_app_0$"] move to workspace 6
+for_window [class="^steam_app_20900$"] move to workspace 6
+for_window [class="^Rising$"] move to workspace 6
+for_window [class="^pes2017.exe$"] move to workspace 6
+for_window [class="^org.vinegarhq.Sober$"] move to workspace 6
+for_window [class="^steam_app_8000$"] move to workspace 6
+for_window [class="^gamescope$"] move to workspace 6
+for_window [class="^hl2_linux$"] move to workspace 6
+for_window [class="^steam_app_218640$"] move to workspace 6
+# Toggle dropdown terminal
+bindsym $mod+Ctrl+Return exec --no-startup-id "sway-scratchpad -tmt -atc kitty -o background_opacity=0.7"
+include /etc/sway/config.d/*
