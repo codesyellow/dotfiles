@@ -1,4 +1,3 @@
-from re import VERBOSE
 from libqtile import qtile
 from .variables import COLORS, GROUP_ICONS, VERTICAL_MONITOR_GROUPS
 from libqtile.log_utils import logger
@@ -47,23 +46,27 @@ def tabbed():
     ]
     filtered_clients = []
 
-    for client in all_clients:
-        client_class = client.get_wm_class()[1].title()
-        if client != current_focused_clients:
-            for name in rename_clients:
-                if client_class == name["current_name"]:
-                    filtered_clients.append(name["change_to"].title())
-                else:
-                    filtered_clients.append(client_class.split(".")[0][:10])
+    try:
+        for client in all_clients:
+            client_class = client.get_wm_class()[1].title()
+            if client != current_focused_clients:
+                for name in rename_clients:
+                    if client_class == name["current_name"]:
+                        filtered_clients.append(name["change_to"].title())
+                    else:
+                        filtered_clients.append(
+                            client_class.split(".")[0][:10])
 
-    if len(filtered_clients) >= 3:
-        filtered_clients = filtered_clients[:2]
-        filtered_clients.append("+")
+        if len(filtered_clients) >= 3:
+            filtered_clients = filtered_clients[:2]
+            filtered_clients.append("+")
 
-    if len(filtered_clients) > 0:
-        return f'<span size="18000" rise="3000" foreground="{COLORS["fg"]}"></span> <span rise="4000">{", ".join(filtered_clients)}</span><span size="x-large" foreground="{COLORS["bg1"]}"> |</span>'
-    else:
-        return ""
+        if len(filtered_clients) > 0:
+            return f'<span size="18000" rise="3000" foreground="{COLORS["fg"]}"></span> <span rise="4000">{", ".join(filtered_clients)}</span><span size="x-large" foreground="{COLORS["bg1"]}"> |</span>'
+        else:
+            return ""
+    except IndexError:
+        pass
 
 
 def get_pango(text: str, icon_image: str, icon_size: int, icony: int, texty: int,  bar_pos: str,  bary: int = 0, colors: list = ["#4c566a", "#d8dee9"], style: str = "full", bar_size: int = 25000):
