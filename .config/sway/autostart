@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-waybar &
 is_running() {
     if [[ "$2" == "node" ]]; then
         script=$(ps -ef | grep 'node' | grep $1)
