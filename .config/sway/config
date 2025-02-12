@@ -39,7 +39,11 @@
     input type:pointer {
         accel_profile "flat" # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
     }
-
+    input type:keyboard {
+        xkb_layout us,us
+        xkb_variant ,intl
+        xkb_options caps:ctrl_modifier,caps:escape,grp:alt_shift_toggle
+    } 
 
 # Scratchpads
 ## Rules
