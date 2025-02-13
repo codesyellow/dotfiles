@@ -1,9 +1,10 @@
 # Read `man 5 sway` for a complete reference.
     exec ~/.config/sway/autostart
     exec swayidle -w \
-            timeout 300 'swaylock -f -c 000000' \
+            timeout 300 'swaylock --image VGA-1:/home/digo/.wallpapers/vert.png --image HDMI-A-1:/home/digo/.wallpapers/hor.png' \
             timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-            before-sleep 'swaylock -f -c 000000'
+            before-sleep 'swaylock --image VGA-1:/home/digo/.wallpapers/vert.png --image HDMI-A-1:/home/digo/.wallpapers/hor.png'
+            
 
 # Own variables
     set $mod Mod4
@@ -31,7 +32,8 @@
     workspace_layout tabbed
 
 # Monitor
-    output * bg ~/.wallpapers/ign-0011.png fill
+    output VGA-1 bg ~/.wallpapers/vert.png fill
+    output HDMI-A-1 bg ~/.wallpapers/hor.png fill
     output VGA-1 transform 270 res 1360x768 pos 0 -500
     output HDMI-A-1 res 1280x1024 pos 768 0
 
@@ -182,7 +184,7 @@
     bindsym $mod+v mode "volume"
 
 # normal-binds
-    bindsym $mod+Return exec $term
+    bindsym $mod+t exec $term
     bindsym $mod+Shift+c kill
     bindsym $mod+Shift+r reload
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
