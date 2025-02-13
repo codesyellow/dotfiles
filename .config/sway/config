@@ -4,7 +4,6 @@
             timeout 300 'swaylock --image VGA-1:/home/digo/.wallpapers/vert.png --image HDMI-A-1:/home/digo/.wallpapers/hor.png' \
             timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
             before-sleep 'swaylock --image VGA-1:/home/digo/.wallpapers/vert.png --image HDMI-A-1:/home/digo/.wallpapers/hor.png'
-            
 
 # Own variables
     set $mod Mod4
@@ -29,7 +28,6 @@
 # Sway variables
     default_border pixel
     hide_edge_borders --i3 smart
-    workspace_layout tabbed
 
 # Monitor
     output VGA-1 bg ~/.wallpapers/vert.png fill
@@ -56,6 +54,7 @@
     for_window [app_id="notes"]  move scratchpad, resize set width 1200, scratchpad show
     for_window [app_id="habits"]  move scratchpad, resize set width 1200, scratchpad show
     for_window [app_id="wasistlos"]  move scratchpad, resize set width 1200, scratchpad show
+    for_window [app_id="Kuro"]  move scratchpad, resize set width 1200, scratchpad show
 
 ## Binds
     mode "scratchpad" {
@@ -71,7 +70,6 @@
         bindsym u exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x60% -p 0,20 -- alacritty --config-file ~/.config/alacritty/scratchpad.toml --class dropdown_term -e bash -c 'zellij attach --create scratch'", mode "default"
         bindsym l exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x40% -p 0,20 -- foot -T lowfi -e lowfi", mode "default"
 
-        # Return to default mode
         bindsym Return mode "default"
         bindsym Escape mode "default"
     }
@@ -87,14 +85,12 @@
         bindsym $down resize grow height 10px
         bindsym $up resize shrink height 10px
         bindsym $right resize grow width 10px
-
         # Ditto, with arrow keys
         bindsym Left resize shrink width 10px
         bindsym Down resize grow height 10px
         bindsym Up resize shrink height 10px
         bindsym Right resize grow width 10px
 
-        # Return to default mode
         bindsym Return mode "default"
         bindsym Escape mode "default"
     }
@@ -110,7 +106,6 @@
         bindsym s workspace 7, mode "default"
         bindsym v workspace 8, mode "default"
 
-        # Return to default mode
         bindsym Return mode "default"
         bindsym Escape mode "default"
     }
@@ -121,14 +116,12 @@
         bindsym i move container to workspace number 2, mode "default"
         bindsym r move container to workspace number 3, mode "default"
         # horizontal monitor
-        
         bindsym b move container to workspace number 4, mode "default"
         bindsym l move container to workspace number 5, mode "default"
         bindsym g move container to workspace number 6, mode "default"
         bindsym s move container to workspace number 7, mode "default"
         bindsym v move container to workspace number 8, mode "default"
 
-        # Return to default mode
         bindsym Return mode "default"
         bindsym Escape mode "default"
     }
@@ -240,5 +233,11 @@
     for_window [class="^Firefox$"] inhibit_idle fullscreen
     for_window [app_id="^firefox$"] inhibit_idle fullscreen
 
-# Toggle dropdown terminal
-    include /etc/sway/config.d/*
+
+# tab related
+    workspace_layout tabbed
+    client.focused          "#2e3440" "#d8dee9" "#2e3440" "#2e3440" "#ff8800"
+    client.focused_inactive "#2e3440" "#2e3440" "#ffffff" "#ff4400" "#ff8800"
+    client.unfocused        "#2e3440" "#2e3440" "#ffffff" "#2e3440" "#2e3440"
+
+include /etc/sway/config.d/*
