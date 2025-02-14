@@ -17,10 +17,11 @@ wlsunset -t 4000 &
 pamixer --set-volume 30 &
 systemctl --user import-environment PATH &
 dunst &
-#wl-paste -pw wl-copy &
 /usr/lib/polkit-kde-authentication-agent-1 &
 swayosd-server &
 ianny &
 wl-paste --type text --watch cliphist store &
 is_music.py &
+sway-audio-idle-inhibit &
+wdisplays --gapplication-service &
 #xremap ~/.config/xremap/config.yml --mouse &

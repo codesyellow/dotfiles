@@ -30,10 +30,8 @@
     hide_edge_borders --i3 smart
 
 # Monitor
-    output VGA-1 bg ~/.wallpapers/vert.png fill
-    output HDMI-A-1 bg ~/.wallpapers/hor.png fill
-    output VGA-1 transform 270 res 1360x768 pos 0 -500
-    output HDMI-A-1 res 1280x1024 pos 768 0
+    output HDMI-A-1 res 1280x1024 pos 768 0 bg ~/.wallpapers/hor.png fill
+    output VGA-1 res 1360x768 transform 270 pos 0 0 bg ~/.wallpapers/vert.png fill
 
 # Read `man 5 sway-input` for more information about this section.
     input type:pointer {
@@ -227,11 +225,15 @@
     for_window [class="^pes2017.exe$"] move to workspace 6
     for_window [class="^org.vinegarhq.Sober$"] move to workspace 6
     for_window [class="^steam_app_8000$"] move to workspace 6
-    for_window [class="^gamescope$"] move to workspace 6
+    for_window [app_id="^gamescope$"] move to workspace 6
     for_window [class="^hl2_linux$"] move to workspace 6
     for_window [class="^steam_app_218640$"] move to workspace 6
     for_window [class="^Firefox$"] inhibit_idle fullscreen
     for_window [app_id="^firefox$"] inhibit_idle fullscreen
+## launcher workspace rules
+    for_window [app_id="^net.lutris.Lutris$"] move to workspace 5
+    for_window [class="^steam$"] move to workspace 5
+    for_window [class="^heroic$"] move to workspace 5
 
 
 # tab related
