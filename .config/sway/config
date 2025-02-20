@@ -3,7 +3,7 @@ exec ~/.config/sway/autostart
 exec swayidle -w \
     timeout 300 'swaylock --image VGA-1:/home/digo/.wallpapers/vert.png --image HDMI-A-1:/home/digo/.wallpapers/hor.png' \
     timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-    before-sleep 'swaylock --image VGA-1:/home/digo/.wallpapers/vert.png --image HDMI-A-1:/home/digo/.wallpapers/hor.png'
+    before-sleep 'pgrep swaylock || swaylock --image VGA-1:/home/digo/.wallpapers/vert.png --image HDMI-A-1:/home/digo/.wallpapers/hor.png'
 
 # Own variables
 set $mod Mod4
@@ -13,26 +13,25 @@ set $up k
 set $right l
 set $term kitty -e zellij
 set $scratchpad_term alacritty
-set $menu rofi -show run -theme-str 'window { width: 30%; x-offset: 20%; y-offset: -25px; }'
+set $menu rofi -show run -theme-str 'window { width: 60%; x-offset: 20%; y-offset: -25px; }'
 
 # Workspace info
-workspace 1 output VGA-1
-workspace 2 output VGA-1
-workspace 3 output VGA-1
-workspace 4 output HDMI-A-1
-workspace 5 output HDMI-A-1
-workspace 6 output HDMI-A-1
-workspace 7 output HDMI-A-1
-workspace 8 output HDMI-A-1
+workspace 1 output HDMI-A-1
+workspace 2 output HDMI-A-1
+workspace 3 output HDMI-A-1
+workspace 4 output VGA-1
+workspace 5 output VGA-1
+workspace 6 output VGA-1
+workspace 7 output VGA-1
+workspace 8 output VGA-1
 
 # Sway variables
 default_border pixel
 hide_edge_borders --i3 smart
 
 # Monitor
-output HDMI-A-1 res 1280x1024 pos 768 500 bg ~/.wallpapers/hor.png fill
-output VGA-1 res 1360x768 transform 270 pos 0 0 bg ~/.wallpapers/vert.png fill
-
+output HDMI-A-1 res 1280x1024@75HZ pos 0 0 transform 270 bg ~/.wallpapers/vert.png fill allow_tearing yes max_render_time off
+output VGA-1 res 1360x768@60HZ pos 1024 0 bg ~/.wallpapers/hor.png fill allow_tearing yes max_render_time off
 # Read `man 5 sway-input` for more information about this section.
 input type:pointer {
     accel_profile "flat" # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
@@ -53,6 +52,7 @@ for_window [app_id="notes"]  move scratchpad, resize set width 1200, scratchpad 
 for_window [app_id="habits"]  move scratchpad, resize set width 1200, scratchpad show
 for_window [app_id="wasistlos"]  move scratchpad, resize set width 1200, scratchpad show
 for_window [app_id="Kuro"]  move scratchpad, resize set width 1200, scratchpad show
+for_window [app_id="todo"]  move scratchpad, resize set width 1200, scratchpad show
 
 ## Binds
 mode "scratchpad" {
@@ -62,9 +62,9 @@ mode "scratchpad" {
         bindsym h exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x70% -- foot -T notes -e nvim ~/.notes/habits.norg", mode "default"
         bindsym m exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T monitor -e btop", mode "default"
         bindsym c exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T monitor -e cmus", mode "default"
-#bindsym t exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x90% -p -180,0 -m left -- foot -T todo -e taskwarrior-tui", mode "default"
         bindsym w exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- wasistlos", mode "default"
-        bindsym t exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x90% -p -170,0 -- kuro", mode "default"
+        #bindsym t exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x90% -p -170,0 -- kuro", mode "default"
+        bindsym t exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x90% -p -180,0 -m left -- foot -T todo -e taskwarrior-tui", mode "default"
         bindsym u exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x60% -p 0,20 -- alacritty --config-file ~/.config/alacritty/scratchpad.toml --class dropdown_term -e bash -c 'zellij attach --create scratch'", mode "default"
         bindsym l exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x40% -p 0,20 -- foot -T lowfi -e lowfi", mode "default"
 
@@ -170,7 +170,7 @@ bindsym $mod+w mode "workspaces"
 bindsym $mod+Shift+w mode "move_workspaces"
 bindsym $mod+e mode "exec"
 bindsym $mod+a mode "action"
-bindsym $mod+i mode "layout"
+bindsym $mod+y mode "layout"
 bindsym $mod+r mode "resize"
 bindsym $mod+v mode "volume"
 
@@ -187,6 +187,8 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
+bindsym $mod+n focus output right
+bindsym $mod+p focus output left
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
@@ -243,3 +245,4 @@ client.focused_inactive "#2e3440" "#2e3440" "#ffffff" "#ff4400" "#ff8800"
 client.unfocused        "#2e3440" "#2e3440" "#ffffff" "#2e3440" "#2e3440"
 
 include /etc/sway/config.d/*
+

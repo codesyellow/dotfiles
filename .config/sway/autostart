@@ -24,4 +24,6 @@ wl-paste --type text --watch cliphist store &
 is_music.py &
 sway-audio-idle-inhibit &
 wdisplays --gapplication-service &
+# This is for sway to fix a game resolution issue because of a VGA as primary monitor
+xrandr --output VGA-1 --primary &
 #xremap ~/.config/xremap/config.yml --mouse &
