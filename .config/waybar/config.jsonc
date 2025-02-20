@@ -172,9 +172,9 @@
             "8": ["VGA-1"], // Always show a workspace with name '3', on all outputs if it does not exists
         }
     },
-  "sway/mode": {
-        "format": " | ",
-  },
+"sway/mode": {
+    "format": "<span size='12000' rise='5000'></span> <span size='14000' foreground='#4c566a' rise='6000'>| </span>",
+},
   "clock": {
     "interval": 60,
     "format": "<span rise='5000' size='11000'></span> <span rise='3500'>{:%H:%M <span size='15000' foreground='#4c566a'>|</span> %d <span size='15000' foreground='#4c566a'>|</span> %a}</span>",
