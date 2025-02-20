@@ -144,6 +144,7 @@
         "sway/mode",
         "custom/easy",
     //    "custom/variant",
+        "custom/santos",
         "custom/updates",
         "custom/disk-home",
         "custom/disk-hdd",
@@ -190,6 +191,12 @@
   "custom/variant": {
     "exec": "/home/digo/.config/waybar/scripts/custom_widgets.py variant",
     "interval": 1,
+    "return-type": "json",
+    "tooltip": false
+  },
+  "custom/santos": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/santos.sh",
+    "interval": 60,
     "return-type": "json",
     "tooltip": false
   },
