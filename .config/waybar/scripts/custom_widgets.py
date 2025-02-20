@@ -26,7 +26,7 @@ MIN_MEM_USAGE = 90
 MIN_TEMP = 80
 MIN_ROOT_SPACE = 10
 MIN_HOME_SPACE = 10
-MIN_HDD_SPACE = 30
+MIN_HDD_SPACE = 10
 MIN_UPDATES = 20
 
 BAR_COLOR = "#4c566a"
@@ -34,7 +34,7 @@ NORMAL_COLOR = "#d8dee9"
 WARNING_COLOR = "#EF5A6F"
 
 POMODORO_TIME_PATH = "/tmp/pomo_timer"
-EASYEFFECTS_PRESET_PATH = f"{HOME}/.config/.easy_preset"
+EASYEFFECTS_PRESET_PATH = f"{HOME}/.config/easyeffects_preset"
 STRETCH_TIME_PATH = "/tmp/stretch"
 STRETCH_STOP_PATH = "/tmp/stop"
 

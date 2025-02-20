@@ -25,10 +25,11 @@ window_to_display = []
 
 for window in windows_info:
     if window["workspace"]["id"] == current_workspace_id and window["pid"] != focused_window["pid"] and len(window["title"]) > 0:
-        if len(window["class"].split(".")) == 3:
-            window_to_display.append(window["class"].split(".")[2].title())
-        else:
-            window_to_display.append(window["class"].split(".")[0].title())
+        if window["title"] != 0 or window["class"] != 0:
+            if len(window["class"].split(".")) == 3:
+                window_to_display.append(window["class"].split(".")[2].title())
+            else:
+                window_to_display.append(window["class"].split(".")[0].title())
 
 for window in window_to_display:
     if len(window.split(".")) == 3:
