@@ -42,14 +42,6 @@ window#waybar {
     font-size: 15.5px;
 }
 
-#workspaces button:nth-child(3) {}
-
-#workspaces button:nth-child(4) {}
-
-#workspaces button:nth-child(5) {}
-
-#workspaces button:nth-child(6) {}
-
 #workspaces button:last-child {
     margin-right: 1px;
     font-size: 17px;
