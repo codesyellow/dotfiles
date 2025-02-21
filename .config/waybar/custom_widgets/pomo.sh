@@ -2,7 +2,7 @@
 BAR_COLOR="#4c566a"
 NORMAL_COLOR="#d8dee9"
 WARNING_COLOR="#EF5A6F"
-icon_symbol=""
+icon_symbol=""
 bary=$((8 * 1000))
 icony=$((8 * 1000))
 texty=$((7 * 1000))

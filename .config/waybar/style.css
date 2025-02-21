@@ -37,8 +37,9 @@ window#waybar {
 }
 
 #workspaces button:nth-child(2) {
-    margin-left: 3px;
-    font-size: 17px;
+    margin-left: -6px;
+    margin-right: -10px;
+    font-size: 15.5px;
 }
 
 #workspaces button:nth-child(3) {}
@@ -51,7 +52,7 @@ window#waybar {
 
 #workspaces button:last-child {
     margin-right: 1px;
-    font-size: 19px;
+    font-size: 17px;
 }
 
 #workspaces button.empty {
@@ -59,8 +60,8 @@ window#waybar {
 }
 
 #workspaces button:hover {
-    color: @bg;
-    background-color: @fg;
+    color: @warning;
+    background-color: @bg;
 }
 
 #workspaces button.focused {
