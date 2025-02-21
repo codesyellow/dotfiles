@@ -12,6 +12,7 @@ is_running() {
 
 is_running 'easy_always.sh'
 is_running 'gameon.mjs' 'node'
+santos_calendar.py &
 
 wlsunset -t 4000 &
 pamixer --set-volume 30 &
@@ -26,4 +27,5 @@ sway-audio-idle-inhibit &
 wdisplays --gapplication-service &
 # This is for sway to fix a game resolution issue because of a VGA as primary monitor
 xrandr --output VGA-1 --primary &
+swayidle -w &
 #xremap ~/.config/xremap/config.yml --mouse &
