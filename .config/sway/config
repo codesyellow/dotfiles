@@ -52,19 +52,19 @@ for_window [app_id="wasistlos"]  move scratchpad, resize set width 1200, scratch
 mode "scratchpad" {
 #bindsym c exec sh -c 'swaymsg [app_id="dropdown_math"] scratchpad show || exec $scratchpad_term --class dropdown_math -e python -q', mode "default"
     bindsym g exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x30% -- foot -T dropdown_math -e python -q", mode "default"
-        bindsym n exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x70% -- foot -T notes -e nvim ~/.notes/index.norg", mode "default"
-        bindsym h exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x70% -- foot -T notes -e nvim ~/.notes/habits.norg", mode "default"
-        bindsym m exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T monitor -e btop", mode "default"
-        bindsym c exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T monitor -e cmus", mode "default"
-        bindsym w exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- wasistlos", mode "default"
-        #bindsym t exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x90% -p -170,0 -- kuro", mode "default"
-        bindsym t exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x90% -p -180,0 -m left -- foot -T todo -e taskwarrior-tui", mode "default"
-        bindsym u exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x60% -p 0,20 -- alacritty --config-file ~/.config/alacritty/scratchpad.toml --class dropdown_term -e bash -c 'zellij attach --create scratch'", mode "default"
-        bindsym l exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x40% -p 0,20 -- foot -T lowfi -e lowfi", mode "default"
-        bindsym r exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x40% -p 0,20 -- foot -T countdown -e countdown.py", mode "default"
+    bindsym n exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x70% -- foot -T notes -e nvim ~/.notes/index.norg", mode "default"
+    bindsym h exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x70% -- foot -T notes -e nvim ~/.notes/habits.norg", mode "default"
+    bindsym m exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T monitor -e btop", mode "default"
+    bindsym c exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T monitor -e cmus", mode "default"
+    bindsym w exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- wasistlos", mode "default"
+    #bindsym t exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x90% -p -170,0 -- kuro", mode "default"
+    bindsym t exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x90% -p -180,0 -m left -- foot -T todo -e taskwarrior-tui", mode "default"
+    bindsym u exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x60% -p 0,20 -- alacritty --config-file ~/.config/alacritty/scratchpad.toml --class dropdown_term -e bash -c 'zellij attach --create scratch'", mode "default"
+    bindsym l exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x40% -p 0,20 -- foot -T lowfi -e lowfi", mode "default"
+    bindsym r exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x40% -p 0,20 -- foot -T countdown -e countdown.py", mode "default"
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 # Binds
@@ -75,48 +75,48 @@ mode "resize" {
 # up will shrink the containers height
 # down will grow the containers height
     bindsym $left resize shrink width 10px
-        bindsym $down resize grow height 10px
-        bindsym $up resize shrink height 10px
-        bindsym $right resize grow width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
 # Ditto, with arrow keys
-        bindsym Left resize shrink width 10px
-        bindsym Down resize grow height 10px
-        bindsym Up resize shrink height 10px
-        bindsym Right resize grow width 10px
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 mode "workspaces" {
 # vertical monitor
     bindsym t workspace 1, mode "default"
-        bindsym i workspace 2, mode "default"
-        bindsym r workspace 3, mode "default"
+    bindsym i workspace 2, mode "default"
+    bindsym r workspace 3, mode "default"
 # horizontal monitor
-        bindsym b workspace 4, mode "default"
-        bindsym l workspace 5, mode "default"
-        bindsym g workspace 6, mode "default"
-        bindsym s workspace 7, mode "default"
-        bindsym v workspace 8, mode "default"
+    bindsym b workspace 4, mode "default"
+    bindsym l workspace 5, mode "default"
+    bindsym g workspace 6, mode "default"
+    bindsym s workspace 7, mode "default"
+    bindsym v workspace 8, mode "default"
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 ## Move workspace binds
 mode "move_workspaces" {
 # vertical monitor
     bindsym t move container to workspace number 1, mode "default"
-        bindsym i move container to workspace number 2, mode "default"
-        bindsym r move container to workspace number 3, mode "default"
+    bindsym i move container to workspace number 2, mode "default"
+    bindsym r move container to workspace number 3, mode "default"
 # horizontal monitor
-        bindsym b move container to workspace number 4, mode "default"
-        bindsym l move container to workspace number 5, mode "default"
-        bindsym g move container to workspace number 6, mode "default"
-        bindsym s move container to workspace number 7, mode "default"
-        bindsym v move container to workspace number 8, mode "default"
+    bindsym b move container to workspace number 4, mode "default"
+    bindsym l move container to workspace number 5, mode "default"
+    bindsym g move container to workspace number 6, mode "default"
+    bindsym s move container to workspace number 7, mode "default"
+    bindsym v move container to workspace number 8, mode "default"
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 ## action
@@ -134,15 +134,15 @@ mode "action" {
 mode "exec" {
     bindsym r exec $menu, mode "default"
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 ## layout
 mode "layout" {
     bindsym t layout tabbed, mode "default"
     bindsym s layout stacking, mode "default"
-    bindsym o layout toggle split, mode "default"
+    bindsym o exec swaymsg layout toggle splitv tabbed, mode "default"
     bindsym v splitv, mode "default"
     bindsym b splith, mode "default"
 
@@ -153,11 +153,10 @@ mode "layout" {
 ## volume
 mode "volume" {
     bindsym k exec volume.sh up, mode "default"
-        bindsym j exec volume.sh down, mode "default"
-# Return to default mode
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    bindsym j exec volume.sh down, mode "default"
 
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 ## modes-bind
