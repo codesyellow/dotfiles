@@ -9,7 +9,7 @@ set $up k
 set $right l
 set $term kitty -e zellij
 set $scratchpad_term alacritty
-set $menu rofi -show run -theme-str 'window { width: 60%; x-offset: 20%; y-offset: -25px; }'
+set $menu rofi -show run -theme-str 'window { width: 60%; x-offset: 20%; y-offset: -28px; }'
 
 # Workspace info
 workspace 1 output HDMI-A-1
@@ -238,6 +238,9 @@ workspace_layout tabbed
 client.focused          "#2e3440" "#d8dee9" "#2e3440" "#2e3440" "#ff8800"
 client.focused_inactive "#2e3440" "#2e3440" "#ffffff" "#ff4400" "#ff8800"
 client.unfocused        "#2e3440" "#2e3440" "#ffffff" "#2e3440" "#2e3440"
+
+# hide mouse
+seat seat0 hide_cursor 3000
 
 include /etc/sway/config.d/*
 
