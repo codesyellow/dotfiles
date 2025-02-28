@@ -232,6 +232,8 @@ for_window [app_id="^firefox$"] inhibit_idle fullscreen
 for_window [app_id="^net.lutris.Lutris$"] move to workspace 5
 for_window [class="^steam$"] move to workspace 5
 for_window [class="^heroic$"] move to workspace 5
+## sizes
+for_window [title="Open file"] resize set width 900, resize set height 500
 
 
 # tab related
