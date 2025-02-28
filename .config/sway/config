@@ -125,6 +125,7 @@ mode "action" {
     bindsym r reload, mode "default"
     bindsym f fullscreen, mode "default"
     bindsym b exec "killall -SIGUSR2 waybar", mode "default"
+    bindsym n exec "dunstctl close-all", mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
