@@ -19,7 +19,6 @@ pamixer --set-volume 30 &
 systemctl --user import-environment PATH &
 dunst &
 /usr/lib/polkit-kde-authentication-agent-1 &
-swayosd-server &
 ianny &
 wl-paste --type text --watch cliphist store &
 is_music.py &
@@ -28,4 +27,5 @@ wdisplays --gapplication-service &
 # This is for sway to fix a game resolution issue because of a VGA as primary monitor
 xrandr --output VGA-1 --primary &
 swayidle -w &
+syncthing &
 #xremap ~/.config/xremap/config.yml --mouse &

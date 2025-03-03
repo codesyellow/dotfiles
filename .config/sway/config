@@ -55,6 +55,7 @@ mode "scratchpad" {
     bindsym n exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x70% -- foot -T notes -e nvim ~/.notes/index.norg", mode "default"
     bindsym h exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x70% -- foot -T notes -e nvim ~/.notes/habits.norg", mode "default"
     bindsym m exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T monitor -e btop", mode "default"
+    bindsym f exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T file -e yazi", mode "default"
     bindsym c exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T monitor -e cmus", mode "default"
     bindsym w exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- wasistlos", mode "default"
     #bindsym t exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x90% -p -170,0 -- kuro", mode "default"
@@ -126,6 +127,7 @@ mode "action" {
     bindsym f fullscreen, mode "default"
     bindsym b exec "killall -SIGUSR2 waybar", mode "default"
     bindsym n exec "dunstctl close-all", mode "default"
+    bindsym l exec "killall -USR1 swayidle", mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -153,8 +155,10 @@ mode "layout" {
 
 ## volume
 mode "volume" {
-    bindsym k exec volume.sh up, mode "default"
-    bindsym j exec volume.sh down, mode "default"
+    bindsym l exec volume.sh up, mode "default"
+    bindsym h exec volume.sh down, mode "default"
+    bindsym k exec volume.sh up_slow, mode "default"
+    bindsym j exec volume.sh down_slow, mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
