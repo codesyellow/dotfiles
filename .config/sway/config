@@ -125,12 +125,17 @@ mode "action" {
     bindsym k kill, mode "default"
     bindsym r reload, mode "default"
     bindsym f fullscreen, mode "default"
-    bindsym b exec "killall -SIGUSR2 waybar", mode "default"
     bindsym n exec "dunstctl close-all", mode "default"
     bindsym l exec "killall -USR1 swayidle", mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
+}
+
+## bar
+mode "bar" {
+        bindsym r exec "killall -SIGUSR2 waybar", mode "default"
+        bindsym h exec "killall -SIGUSR1 waybar", mode "default"
 }
 
 ## exec
@@ -173,6 +178,7 @@ bindsym $mod+a mode "action"
 bindsym $mod+y mode "layout"
 bindsym $mod+r mode "resize"
 bindsym $mod+v mode "volume"
+bindsym $mod+b mode "bar"
 
 # normal-binds
 bindsym $mod+t exec $term
@@ -236,6 +242,7 @@ for_window [app_id="^firefox$"] inhibit_idle fullscreen
 for_window [app_id="^net.lutris.Lutris$"] move to workspace 5
 for_window [class="^steam$"] move to workspace 5
 for_window [class="^heroic$"] move to workspace 5
+for_window [class="^mpv$"] move to workspace 8
 ## sizes
 for_window [title="Open file"] resize set width 900, resize set height 500
 
