@@ -8,7 +8,7 @@ bary=$((8 * 1000))
 icony=$((7 * 1000))
 texty=$((7 * 1000))
 bsize=$((15 * 1000))
-tsize=$((14 * 1000))
+tsize=$((12 * 1000))
 isize=$((16 * 1000))
 ds4_bat=$(dsbattery | awk '{print $2}')
 

@@ -86,7 +86,7 @@
   "custom/pymor": {
     "exec": "/home/digo/.config/waybar/custom_widgets/pomo.sh",
     "interval": 1,
-    "on-click": "pomodoro.py",
+    "on-click": "setsid pomodoro.py &",
     "on-click-middle": "touch /tmp/pomo_cancel; rm /tmp/pomo_timer",
     "return-type": "json",
     "tooltip": false
