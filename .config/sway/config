@@ -49,20 +49,42 @@ for_window [app_id="habits"]  move scratchpad, resize set width 1200, scratchpad
 for_window [app_id="wasistlos"]  move scratchpad, resize set width 1200, scratchpad show
 
 ## Binds
+## file manager
+mode "file" {
+    bindsym c exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T file -e yazi ~/.HDD/courses/", mode "default"
+    bindsym h exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T file -e yazi ~/.HDD/", mode "default"
+    bindsym d exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T file -e yazi ~/Downloads/", mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+mode "study" {
+    bindsym p exec --no-startup-id "sway-scratchpad -tmt -atc -d 80%x70% -- foot -T anki-pt -e anki-vim portuguese", mode "default"
+    bindsym e exec --no-startup-id "sway-scratchpad -tmt -atc -d 80%x70% -- foot -T anki-en -e anki-vim english", mode "default"
+    bindsym m exec --no-startup-id "sway-scratchpad -tmt -atc -d 80%x70% -- foot -T anki-mt -e anki-vim math", mode "default"
+    bindsym c exec --no-startup-id "sway-scratchpad -tmt -atc -d 80%x70% -- foot -T anki-code -e anki-vim code", mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
 mode "scratchpad" {
 #bindsym c exec sh -c 'swaymsg [app_id="dropdown_math"] scratchpad show || exec $scratchpad_term --class dropdown_math -e python -q', mode "default"
-    bindsym g exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x30% -- foot -T dropdown_math -e python -q", mode "default"
+    bindsym c exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x30% -- foot -T dropdown_math -e python -q", mode "default"
     bindsym n exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x70% -- foot -T notes -e nvim ~/.notes/index.norg", mode "default"
     bindsym h exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x70% -- foot -T notes -e nvim ~/.notes/habits.norg", mode "default"
-    bindsym m exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T monitor -e btop", mode "default"
+    bindsym b exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T monitor -e btop", mode "default"
     bindsym f exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T file -e yazi", mode "default"
-    bindsym c exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T monitor -e cmus", mode "default"
+    bindsym m exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T monitor -e cmus", mode "default"
     bindsym w exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- wasistlos", mode "default"
     #bindsym t exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x90% -p -170,0 -- kuro", mode "default"
     bindsym t exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x90% -p -180,0 -m left -- foot -T todo -e taskwarrior-tui", mode "default"
     bindsym u exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x60% -p 0,20 -- alacritty --config-file ~/.config/alacritty/scratchpad.toml --class dropdown_term -e bash -c 'zellij attach --create scratch'", mode "default"
     bindsym l exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x40% -p 0,20 -- foot -T lowfi -e lowfi", mode "default"
     bindsym r exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x40% -p 0,20 -- foot -T countdown -e countdown.py", mode "default"
+    bindsym g mode "file"
+    bindsym s mode "study"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -71,15 +93,15 @@ mode "scratchpad" {
 # Binds
 ## Modes/Keychords
 mode "resize" {
-# left will shrink the containers width
-# right will grow the containers width
-# up will shrink the containers height
-# down will grow the containers height
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
     bindsym $left resize shrink width 10px
     bindsym $down resize grow height 10px
     bindsym $up resize shrink height 10px
     bindsym $right resize grow width 10px
-# Ditto, with arrow keys
+    # Ditto, with arrow keys
     bindsym Left resize shrink width 10px
     bindsym Down resize grow height 10px
     bindsym Up resize shrink height 10px
@@ -89,11 +111,11 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 mode "workspaces" {
-# vertical monitor
+    # vertical monitor
     bindsym t workspace 1, mode "default"
     bindsym i workspace 2, mode "default"
     bindsym r workspace 3, mode "default"
-# horizontal monitor
+    # horizontal monitor
     bindsym b workspace 4, mode "default"
     bindsym l workspace 5, mode "default"
     bindsym g workspace 6, mode "default"
@@ -105,11 +127,11 @@ mode "workspaces" {
 }
 ## Move workspace binds
 mode "move_workspaces" {
-# vertical monitor
+    # vertical monitor
     bindsym t move container to workspace number 1, mode "default"
     bindsym i move container to workspace number 2, mode "default"
     bindsym r move container to workspace number 3, mode "default"
-# horizontal monitor
+    # horizontal monitor
     bindsym b move container to workspace number 4, mode "default"
     bindsym l move container to workspace number 5, mode "default"
     bindsym g move container to workspace number 6, mode "default"
@@ -134,13 +156,17 @@ mode "action" {
 
 ## bar
 mode "bar" {
-        bindsym r exec "killall -SIGUSR2 waybar", mode "default"
-        bindsym h exec "killall -SIGUSR1 waybar", mode "default"
+    bindsym r exec "killall -SIGUSR2 waybar", mode "default"
+    bindsym h exec "killall -SIGUSR1 waybar", mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 ## exec
 mode "exec" {
     bindsym r exec $menu, mode "default"
+    bindsym t exec "kitty -T alt_term -e zellij", mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
