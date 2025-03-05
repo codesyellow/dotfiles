@@ -1,15 +1,16 @@
 # Read `man 5 sway` for a complete reference.
 exec ~/.config/sway/autostart
-
 # Own variables
 set $mod Mod4
 set $left h
 set $down j
 set $up k
 set $right l
-set $term kitty -e zellij
+#set $term kitty -e zellij
+set $term foot -e zellij
 set $scratchpad_term alacritty
-set $menu rofi -show run -theme-str 'window { width: 60%; x-offset: 20%; y-offset: -28px; }'
+#set $menu rofi -show run -theme-str 'window { width: 60%; x-offset: 20%; y-offset: -28px; }'
+set $menu bemenu-run
 
 # Workspace info
 workspace 1 output HDMI-A-1
@@ -69,6 +70,12 @@ mode "study" {
     bindsym Escape mode "default"
 }
 
+mode "ia" {
+    bindsym i exec --no-startup-id "sway-scratchpad -tmt -atc -d 500x90% -p -180,0 -m left -- foot -T ai -e aichat", mode "default"
+    bindsym g exec --no-startup-id "sway-scratchpad -tmt -atc -d 500x90% -p -180,0 -m left -- foot -T ai -e aichat -r correct_text", mode "default"
+    bindsym c exec --no-startup-id "sway-scratchpad -tmt -atc -d 500x90% -p -180,0 -m left -- foot -T ai -e aichat -r %code%", mode "default"
+}
+
 mode "scratchpad" {
 #bindsym c exec sh -c 'swaymsg [app_id="dropdown_math"] scratchpad show || exec $scratchpad_term --class dropdown_math -e python -q', mode "default"
     bindsym c exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x30% -- foot -T dropdown_math -e python -q", mode "default"
@@ -85,6 +92,7 @@ mode "scratchpad" {
     bindsym r exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x40% -p 0,20 -- foot -T countdown -e countdown.py", mode "default"
     bindsym g mode "file"
     bindsym s mode "study"
+    bindsym i mode "ia"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -167,6 +175,7 @@ mode "bar" {
 mode "exec" {
     bindsym r exec $menu, mode "default"
     bindsym t exec "kitty -T alt_term -e zellij", mode "default"
+    bindsym h exec "cliphist list | wofi --dmenu | cliphist decode | wl-copy", mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -268,7 +277,7 @@ for_window [app_id="^firefox$"] inhibit_idle fullscreen
 for_window [app_id="^net.lutris.Lutris$"] move to workspace 5
 for_window [class="^steam$"] move to workspace 5
 for_window [class="^heroic$"] move to workspace 5
-for_window [class="^mpv$"] move to workspace 8
+for_window [app_id="^mpv$"] move to workspace 8
 ## sizes
 for_window [title="Open file"] resize set width 900, resize set height 500
 
