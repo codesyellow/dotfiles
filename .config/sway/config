@@ -228,8 +228,8 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
-bindsym $mod+n focus output right
-bindsym $mod+p focus output left
+bindsym $mod+n focus output right; exec which_monitor.sh
+bindsym $mod+p focus output left; exec which_monitor.sh
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
@@ -280,7 +280,7 @@ for_window [class="^heroic$"] move to workspace 5
 for_window [app_id="^mpv$"] move to workspace 8
 ## sizes
 for_window [title="Open file"] resize set width 900, resize set height 500
-
+for_window [app_id="yad"] floating enable, resize set 100, move position 30 30
 
 # tab related
 workspace_layout tabbed
