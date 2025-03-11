@@ -3,9 +3,11 @@ import sys
 
 actual_structure = ""
 EXPAND = "	"
+child_jump = 0
 
 path = sys.argv[1]
 name = sys.argv[2]
+level = 0
 
 actual_structure += f"{name} \n"
 
@@ -18,16 +20,17 @@ def add_expand(jumps, content):
     return string + content + "\n"
 
 
+# remove prefix corretly
 with open(path) as file:
     for line in file.readlines():
-        if line.count("*") == 1:
-            actual_structure += add_expand(1, line.removeprefix("*").strip())
-        elif line.count("**") == 1:
-            actual_structure += add_expand(2, line.removeprefix("**").strip())
+        if line.count("*") >= 1:
+            actual_structure += add_expand(line.count("*"),
+                                           line.removeprefix("*" * line.count("*")).strip())
+            child_jump = line.count("*")
         elif line.count("-") == 1:
-            actual_structure += add_expand(3, line.removeprefix("-").strip())
+            actual_structure += add_expand(child_jump,
+                                           line.removeprefix("-").strip())
 
 
 with open(f"/home/digo/.mindmaps/{name}", "w") as file:
-    yes = f"vai \n{EXPAND} oi \n{EXPAND}{EXPAND} yes"
     file.write(actual_structure)
