@@ -9,10 +9,6 @@ window#waybar {
   font-family: "VictorMono Nerd Font Mono";
 }
 
-#workspaces {
-  padding: 0 12px;
-}
-
 #workspaces button {
   border-radius: 0;
   font-size: 17px;
@@ -33,6 +29,7 @@ window#waybar {
 
 #workspaces button.focused {
   color: #EABF61;
+  opacity: 1;
 }
 
 #workspaces button.focused:hover {

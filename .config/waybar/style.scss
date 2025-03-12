@@ -21,10 +21,6 @@ window#waybar {
   font-family: $font;
 }
 
-#workspaces {
-  padding: 0 12px;
-}
-
 #workspaces button {
   border-radius: 0;
   font-size: 17px;
@@ -45,6 +41,7 @@ window#waybar {
 
 #workspaces button.focused {
   color: $warning;
+  opacity: 1;
 }
 
 #workspaces button.focused:hover {
