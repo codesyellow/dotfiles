@@ -9,16 +9,13 @@ bary=$((8 * 1000))
 isizea=$((12 * 1000))
 easy=$(cat ~/.config/easyeffects_preset)
 
-bar="<span size='15000' rise='$bary' foreground='$BAR_COLOR'>| </span>"
 if [[ "$easy" == "HeavyBass" ]]; then
-    icony=$((7 * 1000))
-    isize=$((10 * 1000))
-    icon="<span size='${isizea}' rise='$icony' foreground='$WARNING_COLOR'>$EASYEFFECTS_BASS_ICON</span>"
+    classes='["warning", "easy"]' # Use JSON array syntax
+    icon="<span font_family='VictorMono Nerd Font Mono' font_weight='ultralight'>FX:</span>MUS"
 else
-    icony=$((8 * 1000))
-    isize=$((11 * 1000))
-    icon="<span size='${isize}' rise='$icony' foreground='$NORMAL_COLOR'>$EASYEFFECTS_EQUALIZER_ICON</span>"
+    classes='["normal", "easy"]' # Use JSON array syntax
+    icon="<span font_family='VictorMono Nerd Font Mono' font_weight='ultralight'>FX:</span>EQ"
 fi
-output="{\"text\": \"$icon $bar\", \"tooltip\": \"Updates: $easy\"}"
+output="{\"text\": \"$icon\", \"tooltip\": \"Updates: $easy\", \"class\": $classes}"
 
 echo $output

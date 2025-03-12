@@ -5,21 +5,18 @@
     "modules-left": [
         "sway/workspaces", 
         "custom/gameon",
-        "custom/cpu",
-        "custom/cpu-temp",
-        "custom/mem",
-        "custom/disk-root",
     ],
     "modules-right": [
         "sway/mode",
         "custom/easy",
+        "custom/cpu",
+        "custom/mem",
         "custom/ds4_bat",
         "custom/countdown",
-        "pulseaudio",
+        "custom/volume",
         "custom/pymor",
-        "custom/separator",
     //    "custom/variant",
-        "clock",
+        "custom/clock",
         ],
 
     "sway/workspaces": {
@@ -27,9 +24,9 @@
         "all-outputs": false,
         "format": "{icon}",
         "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
+            "1": "TRM",
+            "2": "WEB",
+            "3": "RD",
 
             "urgent": "",
             "default": "",
@@ -53,8 +50,14 @@
     "tooltip": false
     }, 
 "sway/mode": {
-    "format": "<span size='12000' rise='5000'></span> <span size='14000' foreground='#4c566a' rise='6000'>| </span>",
+    "format": "",
 },
+"custom/clock": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/clock.sh",
+    "interval": 2,
+    "return-type": "json",
+    "tooltip": false
+    },
 "clock": {
     "interval": 60,
     "format": "<span rise='5000' size='11000'></span> <span rise='3500'>{:%H:%M <span size='15000' foreground='#4c566a'>|</span> %a}</span>",
@@ -91,8 +94,15 @@
     "return-type": "json",
     "tooltip": false
   },
+  "custom/volume": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/volume.sh",
+    "interval": 1,
+    "on-click": "pavucontrol",
+    "return-type": "json",
+    "tooltip": false
+  },
   "pulseaudio": {
-    "format": "<span rise='1000'>{icon}</span> {volume}%",
+    "format": "<span font_family='HeavyData Nerd Font' font_weight='ultralight'>VOL:</span>{volume}%",
     "format-bluetooth": "{icon} {volume}%",
     "format-muted": "",
     "format-icons": {
@@ -150,23 +160,24 @@
     "modules-right": [
         "sway/mode",
         "custom/easy",
-    //    "custom/variant",
-        "custom/santos",
-        "custom/updates",
+        "custom/cpu-temp",
+        "custom/disk-root",
         "custom/disk-home",
         "custom/disk-hdd",
-        "clock",
+        "custom/updates",
+    //    "custom/variant",
+        "custom/clock",
         ],
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": false,
         "format": "{icon}",
         "format-icons": {
-            "4": "",
-            "5": "",
-            "6": "",
-            "7": "<span size='12000'></span>",
-            "8": "",
+            "4": "WEB",
+            "5": "LNCH",
+            "6": "GM",
+            "7": "ST",
+            "8": "VID",
 
             "urgent": "",
             "default": "",
@@ -180,8 +191,39 @@
         }
     },
 "sway/mode": {
-    "format": "<span size='12000' rise='5000'></span> <span size='14000' foreground='#4c566a' rise='6000'>| </span>",
+    "format": "",
 },
+  "custom/cpu-temp": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/temp.sh",
+    "interval": 2,
+    "return-type": "json",
+    "tooltip": false
+  },
+  "custom/cpu": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/cpu.sh",
+    "interval": 2,
+    "return-type": "json",
+    "tooltip": false
+  },
+  "custom/mem": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/mem.sh",
+    "interval": 4,
+    "return-type": "json",
+    "tooltip": false
+  },
+  "custom/disk-root": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/root.sh",
+    "interval": 1,
+    "return-type": "json",
+    "tooltip": false
+  },
+"custom/clock": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/clock.sh",
+    "interval": 2,
+    "return-type": "json",
+    "tooltip": false
+    },
+
   "clock": {
     "interval": 60,
     "format": "<span rise='5000' size='11000'></span> <span rise='3500'>{:%H:%M <span size='15000' foreground='#4c566a'>|</span> %d <span size='15000' foreground='#4c566a'>|</span> %a}</span>",

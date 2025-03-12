@@ -1,15 +1,5 @@
 #!/usr/bin/env bash
 
-BAR_COLOR="#4c566a"
-NORMAL_COLOR="#d8dee9"
-WARNING_COLOR="#EF5A6F"
-icon_symbol=""
-bary=$((8 * 1000))
-icony=$((6 * 1000))
-texty=$((5 * 1000))
-bsize=$((14 * 1000))
-tsize=$((13 * 1000))
-isize=$((13 * 1000))
 cpu_usage() {
     # Read first CPU stats
     read -r cpu user nice system idle iowait irq softirq steal guest guest_nice </proc/stat
@@ -32,9 +22,11 @@ cpu_usage() {
 cpu_load=$(cpu_usage)
 
 if [[ "$cpu_load" -ge 80 ]]; then
-    bar="<span size='$bsize' rise='$bary' foreground='$BAR_COLOR'> |</span>"
-    icon="<span size='$isize' rise='$icony' foreground='$WARNING_COLOR'>$icon_symbol</span>"
-    text="<span size='$tsize' rise='$texty' foreground='$WARNING_COLOR'>$cpu_load%</span>"
-    output="{\"text\": \"$bar $icon $text\", \"tooltip\": \"Updates: $cpu_load\"}"
-    echo $output
+    classes='["warning", "cpu"]' # Use JSON array syntax
+else
+    classes='["normal", "cpu"]' # Use JSON array syntax
 fi
+
+text="<span font_family='VictorMono Nerd Font Mono' font_weight='ultralight'>CPU:</span>$cpu_load%"
+output="{\"text\": \"$text\", \"tooltip\": \"Updates: $cpu_load\", \"class\": $classes}"
+echo $output

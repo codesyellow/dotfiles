@@ -1,3 +1,15 @@
+$fg: #d8dee9;
+$warning: #EABF61;
+$bg: #2e3440;
+$bg1: #4c566a;
+$button: #36C2CE;
+$inactive: #d8dee9;
+$active: #FF8343;
+$hover: #891652;
+$font: "VictorMono Nerd Font Mono";
+$padx: 6px;
+$pady: 2px;
+
 * {
   padding: 0;
   margin: 0;
@@ -5,8 +17,8 @@
 }
 
 window#waybar {
-  background-color: #2e3440;
-  font-family: "VictorMono Nerd Font Mono";
+  background-color: $bg;
+  font-family: $font;
 }
 
 #workspaces {
@@ -16,8 +28,8 @@ window#waybar {
 #workspaces button {
   border-radius: 0;
   font-size: 17px;
-  color: #d8dee9;
-  background-color: #2e3440;
+  color: $fg;
+  background-color: $bg;
   padding: 0 6px;
 }
 
@@ -27,20 +39,20 @@ window#waybar {
 }
 
 #workspaces button:hover {
-  color: #EABF61;
-  background-color: #d8dee9;
+  color: $warning;
+  background-color: $fg;
 }
 
 #workspaces button.focused {
-  color: #EABF61;
+  color: $warning;
 }
 
 #workspaces button.focused:hover {
-  color: #2e3440;
+  color: $bg;
 }
 
 .modules-right {
-  font-family: "VictorMono Nerd Font Mono";
+  font-family: $font;
 }
 
 .modules-left {
@@ -50,16 +62,14 @@ window#waybar {
 
 .warning {
   padding: 0 4px;
-  color: #EABF61;
-  background-color: #2e3440;
-  font-family: "VictorMono Nerd Font Mono";
+  color: $warning;
+  background-color: $bg;
+  font-family: $font;
   font-weight: 900;
 }
 
 .normal {
   padding: 0 4px;
-  font-family: "VictorMono Nerd Font Mono";
+  font-family: $font;
   font-weight: 900;
 }
-
-/*# sourceMappingURL=style.css.map */
