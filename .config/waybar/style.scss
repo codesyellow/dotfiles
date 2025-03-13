@@ -6,14 +6,14 @@ $button: #36C2CE;
 $inactive: #d8dee9;
 $active: #FF8343;
 $hover: #891652;
-$font: "VictorMono Nerd Font Mono";
+$font: "Lexend Deca";
+$weight: 600;
 $padx: 6px;
 $pady: 2px;
 
 * {
   padding: 0;
   margin: 0;
-  font-size: 16px;
 }
 
 window#waybar {
@@ -21,21 +21,26 @@ window#waybar {
   font-family: $font;
 }
 
+#workspaces {
+  padding-right: 8px;
+}
+
 #workspaces button {
   border-radius: 0;
   font-size: 17px;
+  font-family: "Shrikhand";
   color: $fg;
   background-color: $bg;
-  padding: 0 6px;
+  padding: 0 $padx;
 }
 
 #workspaces button.empty {
-  font-family: "HeavyData Nerd Font";
+  font-family: "Shrikhand";
   opacity: 0.5;
 }
 
 #workspaces button:hover {
-  color: $warning;
+  color: $bg;
   background-color: $fg;
 }
 
@@ -52,21 +57,40 @@ window#waybar {
   font-family: $font;
 }
 
-.modules-left {
-  font-family: "HeavyData Nerd Font";
-  font-weight: 100;
-}
+.modules-left {}
 
 .warning {
   padding: 0 4px;
   color: $warning;
   background-color: $bg;
   font-family: $font;
-  font-weight: 900;
+  font-weight: $weight;
+  font-size: 17px;
 }
 
 .normal {
   padding: 0 4px;
   font-family: $font;
-  font-weight: 900;
+  font-weight: $weight;
+  font-size: 17px;
+}
+
+.easy {
+  margin-top: 1px;
+}
+
+.pomo {
+  margin-top: 1px;
+}
+
+.time {
+  margin-top: 2px;
+}
+
+.updates {
+  margin-top: 2px;
+}
+
+.gameon {
+  margin-top: 1px;
 }

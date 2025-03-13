@@ -11,8 +11,8 @@
         "custom/easy",
         "custom/cpu",
         "custom/mem",
-        "custom/ds4_bat",
-        "custom/countdown",
+//        "custom/ds4_bat",
+ //       "custom/countdown",
         "custom/volume",
         "custom/pymor",
     //    "custom/variant",
@@ -38,7 +38,7 @@
         }
     },
 "custom/gameon": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/gameon.sh",
+    "exec": "/home/digo/.config/waybar/custom_widgets/gameon.py",
     "interval": 2,
     "return-type": "json",
     "tooltip": false
@@ -53,7 +53,7 @@
     "format": "",
 },
 "custom/clock": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/clock.sh",
+    "exec": "/home/digo/.config/waybar/custom_widgets/day.py",
     "interval": 2,
     "return-type": "json",
     "tooltip": false
@@ -71,7 +71,7 @@
     "tooltip": false
   },
   "custom/easy": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/easyeffects.sh",
+    "exec": "/home/digo/.config/waybar/custom_widgets/preset.py",
     "interval": 2,
     "return-type": "json",
     "tooltip": false
@@ -87,7 +87,7 @@
     "tooltip": false
   },
   "custom/pymor": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/pomo.sh",
+    "exec": "/home/digo/.config/waybar/custom_widgets/pomodoro.py",
     "interval": 1,
     "on-click": "setsid pomodoro.py &",
     "on-click-middle": "touch /tmp/pomo_cancel; rm /tmp/pomo_timer",
@@ -95,7 +95,7 @@
     "tooltip": false
   },
   "custom/volume": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/volume.sh",
+    "exec": "/home/digo/.config/waybar/custom_widgets/volume.py",
     "interval": 1,
     "on-click": "pavucontrol",
     "return-type": "json",
@@ -127,25 +127,25 @@
     "ignored-sinks": ["Easy Effects Sink"]
   },
   "custom/cpu-temp": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/temp.sh",
+    "exec": "/home/digo/.config/waybar/custom_widgets/temp.py",
     "interval": 2,
     "return-type": "json",
     "tooltip": false
   },
   "custom/cpu": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/cpu.sh",
+    "exec": "/home/digo/.config/waybar/custom_widgets/cpu.py",
     "interval": 2,
     "return-type": "json",
     "tooltip": false
   },
   "custom/mem": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/mem.sh",
+    "exec": "/home/digo/.config/waybar/custom_widgets/ram.py",
     "interval": 4,
     "return-type": "json",
     "tooltip": false
   },
   "custom/disk-root": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/root.sh",
+    "exec": "/home/digo/.config/waybar/custom_widgets/root.py",
     "interval": 1,
     "return-type": "json",
     "tooltip": false
@@ -194,7 +194,7 @@
     "format": "",
 },
   "custom/cpu-temp": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/temp.sh",
+    "exec": "/home/digo/.config/waybar/custom_widgets/temp.py",
     "interval": 2,
     "return-type": "json",
     "tooltip": false
@@ -206,19 +206,19 @@
     "tooltip": false
   },
   "custom/mem": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/mem.sh",
+    "exec": "/home/digo/.config/waybar/custom_widgets/ram.py",
     "interval": 4,
     "return-type": "json",
     "tooltip": false
   },
   "custom/disk-root": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/root.sh",
+    "exec": "/home/digo/.config/waybar/custom_widgets/root.py",
     "interval": 1,
     "return-type": "json",
     "tooltip": false
   },
 "custom/clock": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/clock.sh",
+    "exec": "/home/digo/.config/waybar/custom_widgets/day.py",
     "interval": 2,
     "return-type": "json",
     "tooltip": false
@@ -250,7 +250,7 @@
     "tooltip": false
   },
   "custom/updates": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/check_update.sh",
+    "exec": "/home/digo/.config/waybar/custom_widgets/updates.py",
     "interval": 60,
     "return-type": "json",
     "tooltip": false,
@@ -282,13 +282,13 @@
     "ignored-sinks": ["Easy Effects Sink"]
   },
   "custom/disk-home": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/home.sh",
+    "exec": "/home/digo/.config/waybar/custom_widgets/home.py",
     "interval": 1,
     "return-type": "json",
     "tooltip": false
   },
   "custom/disk-hdd": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/hdd.sh",
+    "exec": "/home/digo/.config/waybar/custom_widgets/hdd.py",
     "interval": 1,
     "return-type": "json",
     "tooltip": false
