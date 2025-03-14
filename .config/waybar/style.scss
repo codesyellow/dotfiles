@@ -75,11 +75,11 @@ window#waybar {
   font-size: 17px;
 }
 
-.easy {
-  margin-top: 1px;
-}
-
-.pomo {
+.easy,
+.pomo,
+.updates,
+.variant,
+.gameon {
   margin-top: 1px;
 }
 
@@ -87,10 +87,8 @@ window#waybar {
   margin-top: 2px;
 }
 
-.updates {
-  margin-top: 1px;
-}
-
-.gameon {
-  margin-top: 1px;
+#mode {
+  color: $warning;
+  margin-bottom: 1px;
+  font-weight: 200;
 }
