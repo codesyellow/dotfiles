@@ -27,6 +27,7 @@
             "1": "TRM",
             "2": "WEB",
             "3": "RD",
+            "4": "NOTES",
 
             "urgent": "",
             "default": "",
@@ -35,6 +36,7 @@
             "1": ["HDMI-A-1"], // Always show a workspace with name '3', on all outputs if it does not exists
             "2": ["HDMI-A-1"], // Always show a workspace with name '3', on all outputs if it does not exists
             "3": ["HDMI-A-1"], // Always show a workspace with name '3', on all outputs if it does not exists
+            "4": ["HDMI-A-1"], // Always show a workspace with name '3', on all outputs if it does not exists
         }
     },
 "custom/gameon": {
@@ -159,13 +161,13 @@
     ],
     "modules-right": [
         "sway/mode",
-        "custom/easy",
+        //"custom/easy",
+        "custom/variant",
         "custom/cpu-temp",
         "custom/disk-root",
         "custom/disk-home",
         "custom/disk-hdd",
         "custom/updates",
-    //    "custom/variant",
         "custom/clock",
         ],
     "sway/workspaces": {
@@ -173,21 +175,21 @@
         "all-outputs": false,
         "format": "{icon}",
         "format-icons": {
-            "4": "WEB",
-            "5": "LNCH",
-            "6": "GM",
-            "7": "ST",
-            "8": "VID",
+            "5": "WEB",
+            "6": "GL",
+            "7": "GMS",
+            "8": "ST",
+            "9": "VID",
 
             "urgent": "",
             "default": "",
         },
         "persistent-workspaces": {
-            "4": ["VGA-1"], // Always show a workspace with name '3', on all outputs if it does not exists
             "5": ["VGA-1"], // Always show a workspace with name '3', on all outputs if it does not exists
             "6": ["VGA-1"], // Always show a workspace with name '3', on all outputs if it does not exists
             "7": ["VGA-1"], // Always show a workspace with name '3', on all outputs if it does not exists
             "8": ["VGA-1"], // Always show a workspace with name '3', on all outputs if it does not exists
+            "9": ["VGA-1"], // Always show a workspace with name '3', on all outputs if it does not exists
         }
     },
 "sway/mode": {
@@ -238,7 +240,7 @@
     "interval": 3600
   },
   "custom/variant": {
-    "exec": "/home/digo/.config/waybar/scripts/custom_widgets.py variant",
+    "exec": "/home/digo/.config/waybar/custom_widgets/variant.py",
     "interval": 1,
     "return-type": "json",
     "tooltip": false
