@@ -26,6 +26,11 @@ window#waybar {
   opacity: 0.5;
 }
 
+#workspaces button.urgent {
+  font-family: "Shrikhand";
+  color: #EABF61;
+}
+
 #workspaces button:hover {
   color: #2e3440;
   background-color: #d8dee9;
