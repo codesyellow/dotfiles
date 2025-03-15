@@ -1,19 +1,8 @@
 #!/bin/bash
+root_free=$(df -BG / | awk 'NR==2 {print $4}' | tr -d 'G')
+home_free=$(df -BG /home | awk 'NR==2 {print $4}' | tr -d 'G')
+hdd_free=$(df -BG ~/.HDD | awk 'NR==2 {print $4}' | tr -d 'G') # Change if needed
 
-# Function to check if a game is running via Heroic
-is_game_running() {
-    # Get all processes launched by Heroic
-    heroic_processes=$(pstree -p | grep -E "heroic-run|bwrap")
-
-    # Check for any `.exe` processes under bwrap
-    if echo "$heroic_processes" | grep -qE "\.exe"; then
-        echo "A game is running via Heroic."
-        return 0
-    else
-        echo "No game is running via Heroic."
-        return 1
-    fi
-}
-
-# Run the function
-is_game_running
+echo "Root Free: ${root_free}G"
+echo "Home Free: ${home_free}G"
+echo "HDD Free: ${hdd_free}G"

@@ -126,3 +126,4 @@ class Pomodoro():
 
 if __name__ == "__main__":
     Pomodoro().run()
+    Pomodoro().cleanup()

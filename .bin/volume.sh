@@ -33,8 +33,10 @@ if [ "$MUTE" == "[off]" ]; then
     ICON=audio-volume-muted
 fi
 
-notify-send.sh $VOLUME% \
-    --replace=22 \
-    -u low \
-    -a volume \
-    -i /usr/share/icons/AdwaitaLegacy/32x32/legacy/$ICON.png
+echo $VOLUME >/tmp/volumepipe
+pkill -RTMIN+13 waybar
+#notify-send.sh $VOLUME% \
+#    --replace=22 \
+#    -u low \
+#    -a volume \
+#    -i /usr/share/icons/AdwaitaLegacy/32x32/legacy/$ICON.png

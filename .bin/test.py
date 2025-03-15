@@ -1,7 +1,17 @@
-#!/usr/bin/env python
-from libqtile.command.client import InteractiveCommandClient
+#!/home/digo/.bin/.venv/bin/python
 
-# Connect to the running Qtile instance
-c = InteractiveCommandClient()
 
-print(dir(c))
+from gi.repository import Gtk
+import gi
+
+
+gi.require_version("Gtk", "3.0")
+
+
+win = Gtk.Window()
+
+win.connect("destroy", Gtk.main_quit)
+
+win.show_all()
+
+Gtk.main()

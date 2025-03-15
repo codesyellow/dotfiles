@@ -13,19 +13,29 @@ class Music():
         self.music_preset = "HeavyBass"
         self.equalizer_preset = "LoudnessEqualizer"
 
-    def is_lowfi_running(self):
-        """Check if lowfi is running and if it is return True else, False."""
+    def get_process(self, process):
+        """Check if x process is running"""
         try:
-            lowfi = subprocess.check_output(
+            actual_process = subprocess.check_output(
                 ["pgrep",
-                 "lowfi"]).strip()
+                 f"{process}"]).strip()
         except subprocess.CalledProcessError:
             pass
         else:
-            if len(lowfi) > 0:
+            if len(actual_process) > 0:
                 return True
             else:
                 return False
+
+    def music_playing(self):
+        """Return true or false if music is playing"""
+        if (self.get_process("lowfi")
+                or self.get_process("youtube-music")
+                or self.is_cmus_playing()
+                ):
+            return True
+        else:
+            return False
 
     def is_cmus_playing(self):
         """Check if cmus is playing and if it it's,
@@ -63,8 +73,8 @@ class Music():
 
     def run(self):
         while True:
-            playing_music = self.is_cmus_playing()
-            if playing_music and not self.music_state or self.is_lowfi_running() and not self.music_state:
+            if self.music_playing() and not self.music_state:
+                print(self.music_state)
                 if self.easyeffects.read()[0] != self.music_preset:
                     self.volume_perc = self.get_volume()
                     self.easyeffects.seto("music")
@@ -73,7 +83,8 @@ class Music():
                     self.easyeffects.write(self.music_preset)
                     print("Preset was set to Heavy Bass",
                           self.easyeffects.read()[0])
-            elif not playing_music and not self.equalizer_state and not self.is_lowfi_running() and not self.equalizer_state:
+            elif not self.music_playing() and not self.equalizer_state:
+                print("no")
                 if self.easyeffects.read()[0] == self.music_preset:
                     self.easyeffects.seto("equalizer")
                     self.restore_volume()

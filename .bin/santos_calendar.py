@@ -26,22 +26,26 @@ class Santos():
         site = r.html.find(".Table__TR.Table__TR--sm.Table__even")
         schedule = []
         for game in site:
-            day = int(game.find(".matchTeams")[
-                      0].text.split(".")[1].split(" ")[1])
-            month = game.find(".matchTeams")[0].text.split(".")[
-                1].split(" ")[2]
-            hour = int(game.find(".Table__TD .AnchorLink")
-                       [5].text.split(":")[0]) + 2
-            minutes = game.find(".Table__TD .AnchorLink")[5].text.split(":")[1]
-            home_team = game.find(".AnchorLink.Table__Team")[0].text
-            away_team = game.find(".AnchorLink.Table__Team")[1].text
-            schedule.append({
-                "day": day,
-                "month": month,
-                "hour": f"{hour}:{minutes}",
-                "home_team": home_team,
-                "away_team": away_team,
-            })
+            try:
+                day = int(game.find(".matchTeams")[
+                    0].text.split(".")[1].split(" ")[1])
+                month = game.find(".matchTeams")[0].text.split(".")[
+                    1].split(" ")[2]
+                hour = game.find(".Table__TD .AnchorLink")[
+                    5].text.split(":")[0]
+                minutes = game.find(".Table__TD .AnchorLink")[
+                    5].text.split(":")[1]
+                home_team = game.find(".AnchorLink.Table__Team")[0].text
+                away_team = game.find(".AnchorLink.Table__Team")[1].text
+                schedule.append({
+                    "day": day,
+                    "month": month,
+                    "hour": f"{int(hour) + 2}:{minutes}",
+                    "home_team": home_team,
+                    "away_team": away_team,
+                })
+            except IndexError:
+                pass
         return schedule
 
     def get_schedule(self) -> list:
@@ -105,10 +109,11 @@ class Santos():
         current_hour = f"{hour}:{minutes}"
 
         start = datetime.strptime(current_hour, "%H:%M")
-        end = datetime.strptime(self.pre_game_hour, "%H:%M")
+        end = datetime.strptime(self.game_hour, "%H:%M")
 
         difference = end - start
         seconds = difference.total_seconds()
+        print(seconds / 60)
         return seconds // 60 <= 120
 
     def send_notification(self, message):
@@ -148,6 +153,7 @@ class Santos():
         self.write()
         if self.is_game_today():
             while True:
+                print(self.pre_game())
                 if self.pre_game() and not self.pre_game_state:
                     self.send_notification("Pre game!")
                     self.pre_game_state = True
