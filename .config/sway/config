@@ -17,11 +17,12 @@ workspace 1 output HDMI-A-1
 workspace 2 output HDMI-A-1
 workspace 3 output HDMI-A-1
 workspace 4 output HDMI-A-1
-workspace 5 output VGA-1
+workspace 5 output HDMI-A-1
 workspace 6 output VGA-1
 workspace 7 output VGA-1
 workspace 8 output VGA-1
 workspace 9 output VGA-1
+workspace 10 output VGA-1
 
 # Sway variables
 default_border pixel
@@ -128,12 +129,13 @@ mode "workspaces" {
     bindsym i workspace 2, mode "default"
     bindsym r workspace 3, mode "default"
     bindsym n workspace 4, mode "default"
+    bindsym m workspace 5, mode "default"
     # horizontal monitor
-    bindsym b workspace 5, mode "default"
-    bindsym l workspace 6, mode "default"
-    bindsym g workspace 7, mode "default"
-    bindsym s workspace 8, mode "default"
-    bindsym v workspace 9, mode "default"
+    bindsym b workspace 6, mode "default"
+    bindsym l workspace 7, mode "default"
+    bindsym g workspace 8, mode "default"
+    bindsym s workspace 9, mode "default"
+    bindsym v workspace 10, mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -145,12 +147,13 @@ mode "move_workspaces" {
     bindsym i move container to workspace number 2, mode "default"
     bindsym r move container to workspace number 3, mode "default"
     bindsym n move container to workspace number 4, mode "default"
+    bindsym m move container to workspace number 5, mode "default"
     # horizontal monitor
-    bindsym b move container to workspace number 5, mode "default"
-    bindsym l move container to workspace number 6, mode "default"
-    bindsym g move container to workspace number 7, mode "default"
-    bindsym s move container to workspace number 8, mode "default"
-    bindsym v move container to workspace number 9, mode "default"
+    bindsym b move container to workspace number 6, mode "default"
+    bindsym l move container to workspace number 7, mode "default"
+    bindsym g move container to workspace number 8, mode "default"
+    bindsym s move container to workspace number 9, mode "default"
+    bindsym v move container to workspace number 10, mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -163,6 +166,8 @@ mode "action" {
     bindsym f fullscreen, mode "default"
     bindsym n exec "dunstctl close-all", mode "default"
     bindsym l exec "killall -USR1 swayidle", mode "default"
+    bindsym s exec "bash -c 'grim -g \"$(slurp)\"'", mode "default"
+    bindsym p exec "grim && notify-send 'Screenshot'", mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -262,36 +267,38 @@ bar {
 }
 
 # Rules
-for_window [class="^tf_linux64$"] move to workspace 7
-for_window [class="^hl_linux$"] move to workspace 7
-for_window [class="^steam_app_48700$"] move to workspace 7
-for_window [class="^mb_warband_linux$"] move to workspace 7
-for_window [class="^steam_app_425580$"] move to workspace 7
-for_window [class="^steam_app_475150$"] move to workspace 7
-for_window [class="^steam_app_35130$"] move to workspace 7
-for_window [class="^steam_app_257510$"] move to workspace 7
-for_window [class="^steam_app_8980$"] move to workspace 7
-for_window [class="^steam_app_0$"] move to workspace 7
-for_window [class="^steam_app_20900$"] move to workspace 7
-for_window [class="^Rising$"] move to workspace 7
-for_window [class="^pes2017.exe$"] move to workspace 7
-for_window [class="^org.vinegarhq.Sober$"] move to workspace 7
-for_window [class="^steam_app_8000$"] move to workspace 7
-for_window [app_id="^gamescope$"] move to workspace 7
-for_window [class="^hl2_linux$"] move to workspace 7
-for_window [class="^steam_app_218640$"] move to workspace 7
+for_window [class="^tf_linux64$"] move to workspace 8
+for_window [class="^hl_linux$"] move to workspace 8
+for_window [class="^steam_app_48700$"] move to workspace 8
+for_window [class="^mb_warband_linux$"] move to workspace 8
+for_window [class="^steam_app_425580$"] move to workspace 8
+for_window [class="^steam_app_475150$"] move to workspace 8
+for_window [class="^steam_app_35130$"] move to workspace 8
+for_window [class="^steam_app_257510$"] move to workspace 8
+for_window [class="^steam_app_8980$"] move to workspace 8
+for_window [class="^steam_app_0$"] move to workspace 8
+for_window [class="^steam_app_20900$"] move to workspace 8
+for_window [class="^Rising$"] move to workspace 8
+for_window [class="^pes2017.exe$"] move to workspace 8
+for_window [class="^org.vinegarhq.Sober$"] move to workspace 8
+for_window [class="^steam_app_8000$"] move to workspace 8
+for_window [app_id="^gamescope$"] move to workspace 8
+for_window [class="^hl2_linux$"] move to workspace 8
+for_window [class="^steam_app_218640$"] move to workspace 8
 for_window [class="^Firefox$"] inhibit_idle fullscreen
 for_window [app_id="^firefox$"] inhibit_idle fullscreen
 ## launcher workspace rules
-for_window [app_id="^net.lutris.Lutris$"] move to workspace 6
-for_window [class="^steam$"] move to workspace 6
-for_window [class="^heroic$"] move to workspace 6
-for_window [app_id="^mpv$"] move to workspace 9
+for_window [app_id="^net.lutris.Lutris$"] move to workspace 7
+for_window [class="^steam$"] move to workspace 7
+for_window [class="^heroic$"] move to workspace 7
+for_window [app_id="^mpv$"] move to workspace 10
 for_window [app_id="^ankivim$"] move to workspace 4
 for_window [app_id="^h-m-m$"] move to workspace 4
+for_window [class="^com.github.th_ch.youtube_music$"] move to workspace 5
 ## sizes
 for_window [title="Open file"] resize set width 900, resize set height 500
 for_window [app_id="yad"] floating enable, resize set 100, move position 30 30
+
 
 # tab related
 workspace_layout tabbed

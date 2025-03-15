@@ -1,21 +1,18 @@
 #!/usr/bin/env bash
 waybar &
 is_running() {
-  if [[ "$2" == "node" ]]; then
-    script=$(ps -ef | grep 'node' | grep $1)
-  else
-    script=$(ps -ef | grep 'bash' | grep $1)
-  fi
-  if [[ -z "$script" ]]; then
-    $1 &
-  fi
+    if [[ "$2" == "node" ]]; then
+        script=$(ps -ef | grep 'node' | grep $1)
+    else
+        script=$(ps -ef | grep 'bash' | grep $1)
+    fi
+    if [[ -z "$script" ]]; then
+        $1 &
+    fi
 }
 
 is_running 'easy_always.sh'
-is_running 'tf2_server_count.sh'
-is_running 'santos_calendar.mjs' 'node'
 is_running 'gameon.mjs' 'node'
-is_running 'music_bass.mjs' 'node'
 
 hyprpaper &
 hypridle &
@@ -29,6 +26,5 @@ ianny &
 #jamesdsp -t &
 wl-paste --type text --watch cliphist store &
 syncthing server &
+is_music.py &
 #xremap ~/.config/xremap/config.yml --mouse &
-
-
