@@ -13,7 +13,7 @@ text = "US"
 if "intl" in keyboard_layout:
     classes[0] = "warning"
     text = "INTL"
-output = f"{get_pango('EN', text)}"
+output = f"{get_pango('KBD', text)}"
 
 print(json.dumps({
     "text": output,

@@ -8,7 +8,7 @@ text = "OFF"
 if os.path.exists("/tmp/gameon"):
     classes[0] = "warning"
     text = "ON"
-output = f"{get_pango('GSTAT', text)}"
+output = f"{get_pango('PLY', text)}"
 
 print(json.dumps({
     "text": output,

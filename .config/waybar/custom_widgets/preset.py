@@ -16,7 +16,7 @@ if os.path.exists(EASYEFFECTS_PRESET_PATH):
         else:
             text = "EQ"
 
-output = f"{get_pango('FX', text)}"
+output = f"{get_pango('DSP', text)}"
 
 print(json.dumps({
     "text": output,

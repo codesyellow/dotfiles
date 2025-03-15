@@ -15,7 +15,7 @@ if os.path.exists(POMODORO):
         if os.path.exists(POMOPAUSE):
             classes[0] = "warning"
 
-output = f"{get_pango('POMO', text)}"
+output = f"{get_pango('POM', text)}"
 
 print(json.dumps({
     "text": output,

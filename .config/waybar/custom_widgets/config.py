@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-TITLE_FONT = "Roboto"
+TITLE_FONT = "IBM Plex Sans"
 TITLE_BOLD = "100"
-CONTENT_FONT = "Roboto"
+CONTENT_FONT = "IBM Plex Sans"
 CONTENT_BOLD = "600"
 
 
