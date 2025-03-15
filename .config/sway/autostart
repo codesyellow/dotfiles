@@ -14,7 +14,10 @@ is_running 'easy_always.sh'
 is_running 'gameon.mjs' 'node'
 santos_calendar.py &
 
+mkfifo /tmp/volumepipe 2>/dev/null &
+wob &
 wlsunset -t 4000 &
+earphone.sh &
 pamixer --set-volume 30 &
 systemctl --user import-environment PATH &
 dunst &
@@ -28,4 +31,5 @@ wdisplays --gapplication-service &
 xrandr --output VGA-1 --primary &
 swayidle -w &
 syncthing &
+tail -f /tmp/volumepipe | wob -c ~/.config/wob/volwob.ini &
 #xremap ~/.config/xremap/config.yml --mouse &

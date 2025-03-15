@@ -10,17 +10,18 @@ set $right l
 set $term foot -e zellij
 set $scratchpad_term alacritty
 #set $menu rofi -show run -theme-str 'window { width: 60%; x-offset: 20%; y-offset: -28px; }'
-set $menu bemenu-run
+set $menu bemenu-run -i -H 26
 
 # Workspace info
 workspace 1 output HDMI-A-1
 workspace 2 output HDMI-A-1
 workspace 3 output HDMI-A-1
-workspace 4 output VGA-1
+workspace 4 output HDMI-A-1
 workspace 5 output VGA-1
 workspace 6 output VGA-1
 workspace 7 output VGA-1
 workspace 8 output VGA-1
+workspace 9 output VGA-1
 
 # Sway variables
 default_border pixel
@@ -28,7 +29,7 @@ hide_edge_borders --i3 smart
 
 # Monitor
 output HDMI-A-1 res 1280x1024@75HZ pos 0 0 transform 270 bg ~/.wallpapers/ign_unsplash21.png fill allow_tearing yes max_render_time off
-output VGA-1 res 1360x768@60HZ pos 1024 0 bg ~/.wallpapers/ign_unsplash21.png fill allow_tearing yes max_render_time off
+output VGA-1 res 1360x768@60HZ pos 1024 500 bg ~/.wallpapers/ign_unsplash21.png fill allow_tearing yes max_render_time off
 # Read `man 5 sway-input` for more information about this section.
 input type:pointer {
     accel_profile "flat" # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
@@ -74,6 +75,9 @@ mode "ia" {
     bindsym i exec --no-startup-id "sway-scratchpad -tmt -atc -d 500x90% -p -180,0 -m left -- foot -T ai -e aichat", mode "default"
     bindsym g exec --no-startup-id "sway-scratchpad -tmt -atc -d 500x90% -p -180,0 -m left -- foot -T ai -e aichat -r correct_text", mode "default"
     bindsym c exec --no-startup-id "sway-scratchpad -tmt -atc -d 500x90% -p -180,0 -m left -- foot -T ai -e aichat -r %code%", mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 mode "scratchpad" {
@@ -123,12 +127,13 @@ mode "workspaces" {
     bindsym t workspace 1, mode "default"
     bindsym i workspace 2, mode "default"
     bindsym r workspace 3, mode "default"
+    bindsym n workspace 4, mode "default"
     # horizontal monitor
-    bindsym b workspace 4, mode "default"
-    bindsym l workspace 5, mode "default"
-    bindsym g workspace 6, mode "default"
-    bindsym s workspace 7, mode "default"
-    bindsym v workspace 8, mode "default"
+    bindsym b workspace 5, mode "default"
+    bindsym l workspace 6, mode "default"
+    bindsym g workspace 7, mode "default"
+    bindsym s workspace 8, mode "default"
+    bindsym v workspace 9, mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -139,12 +144,13 @@ mode "move_workspaces" {
     bindsym t move container to workspace number 1, mode "default"
     bindsym i move container to workspace number 2, mode "default"
     bindsym r move container to workspace number 3, mode "default"
+    bindsym n move container to workspace number 4, mode "default"
     # horizontal monitor
-    bindsym b move container to workspace number 4, mode "default"
-    bindsym l move container to workspace number 5, mode "default"
-    bindsym g move container to workspace number 6, mode "default"
-    bindsym s move container to workspace number 7, mode "default"
-    bindsym v move container to workspace number 8, mode "default"
+    bindsym b move container to workspace number 5, mode "default"
+    bindsym l move container to workspace number 6, mode "default"
+    bindsym g move container to workspace number 7, mode "default"
+    bindsym s move container to workspace number 8, mode "default"
+    bindsym v move container to workspace number 9, mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -176,6 +182,9 @@ mode "exec" {
     bindsym r exec $menu, mode "default"
     bindsym t exec "kitty -T alt_term -e zellij", mode "default"
     bindsym h exec "cliphist list | wofi --dmenu | cliphist decode | wl-copy", mode "default"
+    bindsym m exec "maps.sh", mode "default"
+    bindsym n exec "ankivim.sh", mode "default"
+    bindsym c exec "hyprpicker | wl-copy", mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -253,31 +262,33 @@ bar {
 }
 
 # Rules
-for_window [class="^tf_linux64$"] move to workspace 6
-for_window [class="^hl_linux$"] move to workspace 6
-for_window [class="^steam_app_48700$"] move to workspace 6
-for_window [class="^mb_warband_linux$"] move to workspace 6
-for_window [class="^steam_app_425580$"] move to workspace 6
-for_window [class="^steam_app_475150$"] move to workspace 6
-for_window [class="^steam_app_35130$"] move to workspace 6
-for_window [class="^steam_app_257510$"] move to workspace 6
-for_window [class="^steam_app_8980$"] move to workspace 6
-for_window [class="^steam_app_0$"] move to workspace 6
-for_window [class="^steam_app_20900$"] move to workspace 6
-for_window [class="^Rising$"] move to workspace 6
-for_window [class="^pes2017.exe$"] move to workspace 6
-for_window [class="^org.vinegarhq.Sober$"] move to workspace 6
-for_window [class="^steam_app_8000$"] move to workspace 6
-for_window [app_id="^gamescope$"] move to workspace 6
-for_window [class="^hl2_linux$"] move to workspace 6
-for_window [class="^steam_app_218640$"] move to workspace 6
+for_window [class="^tf_linux64$"] move to workspace 7
+for_window [class="^hl_linux$"] move to workspace 7
+for_window [class="^steam_app_48700$"] move to workspace 7
+for_window [class="^mb_warband_linux$"] move to workspace 7
+for_window [class="^steam_app_425580$"] move to workspace 7
+for_window [class="^steam_app_475150$"] move to workspace 7
+for_window [class="^steam_app_35130$"] move to workspace 7
+for_window [class="^steam_app_257510$"] move to workspace 7
+for_window [class="^steam_app_8980$"] move to workspace 7
+for_window [class="^steam_app_0$"] move to workspace 7
+for_window [class="^steam_app_20900$"] move to workspace 7
+for_window [class="^Rising$"] move to workspace 7
+for_window [class="^pes2017.exe$"] move to workspace 7
+for_window [class="^org.vinegarhq.Sober$"] move to workspace 7
+for_window [class="^steam_app_8000$"] move to workspace 7
+for_window [app_id="^gamescope$"] move to workspace 7
+for_window [class="^hl2_linux$"] move to workspace 7
+for_window [class="^steam_app_218640$"] move to workspace 7
 for_window [class="^Firefox$"] inhibit_idle fullscreen
 for_window [app_id="^firefox$"] inhibit_idle fullscreen
 ## launcher workspace rules
-for_window [app_id="^net.lutris.Lutris$"] move to workspace 5
-for_window [class="^steam$"] move to workspace 5
-for_window [class="^heroic$"] move to workspace 5
-for_window [app_id="^mpv$"] move to workspace 8
+for_window [app_id="^net.lutris.Lutris$"] move to workspace 6
+for_window [class="^steam$"] move to workspace 6
+for_window [class="^heroic$"] move to workspace 6
+for_window [app_id="^mpv$"] move to workspace 9
+for_window [app_id="^ankivim$"] move to workspace 4
+for_window [app_id="^h-m-m$"] move to workspace 4
 ## sizes
 for_window [title="Open file"] resize set width 900, resize set height 500
 for_window [app_id="yad"] floating enable, resize set 100, move position 30 30
