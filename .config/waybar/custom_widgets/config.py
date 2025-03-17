@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-TITLE_FONT = "IBM Plex Sans"
+TITLE_FONT = "Roboto"
 TITLE_BOLD = "100"
-CONTENT_FONT = "IBM Plex Sans"
-CONTENT_BOLD = "600"
+CONTENT_FONT = "Roboto"
+CONTENT_BOLD = "900"
 
 
 def get_pango(title, content):

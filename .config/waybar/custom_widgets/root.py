@@ -7,7 +7,7 @@ total, used, free = shutil.disk_usage(f"/")
 total_free = free // (2**30)
 
 classes = ["normal", "root"]
-if total_free < 20:
+if total_free < 10:
     classes[0] = "warning"
 output = f"{get_pango('RFS', total_free)}G"
 

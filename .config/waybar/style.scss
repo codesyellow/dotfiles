@@ -7,8 +7,9 @@ $inactive: #d8dee9;
 $active: #FF8343;
 $hover: #891652;
 $font: "Lexend Deca";
+$workspace_font: "Shrikhand";
 $weight: 600;
-$padx: 6px;
+$padx: 4px;
 $pady: 2px;
 
 * {
@@ -27,20 +28,18 @@ window#waybar {
 
 #workspaces button {
   border-radius: 0;
-  font-size: 17px;
-  font-family: "Shrikhand";
+  font-size: 18px;
+  font-family: $workspace_font;
   color: $fg;
   background-color: $bg;
   padding: 0 $padx;
 }
 
 #workspaces button.empty {
-  font-family: "Shrikhand";
   opacity: 0.5;
 }
 
 #workspaces button.urgent {
-  font-family: "Shrikhand";
   color: $warning;
 }
 
@@ -62,22 +61,20 @@ window#waybar {
   font-family: $font;
 }
 
-.modules-left {}
-
 .warning {
   padding: 0 4px;
   color: $warning;
   background-color: $bg;
   font-family: $font;
   font-weight: $weight;
-  font-size: 17px;
+  font-size: 16px;
 }
 
 .normal {
   padding: 0 4px;
   font-family: $font;
   font-weight: $weight;
-  font-size: 17px;
+  font-size: 16px;
 }
 
 #mode {
