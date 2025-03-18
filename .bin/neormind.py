@@ -23,13 +23,16 @@ def add_expand(jumps, content):
 # remove prefix corretly
 with open(path) as file:
     for line in file.readlines():
-        if line.count("*") >= 1:
-            actual_structure += add_expand(line.count("*"),
-                                           line.removeprefix("*" * line.count("*")).strip())
+        if line.startswith("*") >= 1:
+            count = line.count("*")
+            actual_structure += add_expand(count,
+                                           line.removeprefix("*" * count).strip())
             child_jump = line.count("*")
-        elif line.count("-") == 1:
+
+        elif line.count("-") >= 1:
             actual_structure += add_expand(child_jump,
                                            line.removeprefix("-").strip())
+            print(line)
 
 
 with open(f"/home/digo/.mindmaps/{name}", "w") as file:
