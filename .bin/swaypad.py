@@ -37,15 +37,15 @@ class Swaypad():
             case "top":
                 return (monitor_width//2 - self.size[0] // 2, PADDING[1])
             case "bottom":
-                return (monitor_width//2 - self.size[0] // 2, monitor_height - self.size[0] - 50)
+                return (monitor_width//2 - self.size[0] // 2, monitor_height - self.size[1] - 50)
             case "top-left":
                 return PADDING
             case "top-right":
                 return (monitor_width - self.size[0] - PADDING[0], PADDING[1])
             case "bottom-left":
-                return (PADDING[0], monitor_height - self.size[0] - 50)
+                return (PADDING[0], monitor_height - self.size[1] - 50)
             case "bottom-right":
-                return (monitor_width - self.size[0] - PADDING[0], monitor_height - self.size[0] - 50)
+                return (monitor_width - self.size[0] - PADDING[0], monitor_height - self.size[1] - 50)
             case _:
                 return ("center", "")
 
