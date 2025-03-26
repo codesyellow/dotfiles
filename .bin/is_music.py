@@ -10,7 +10,7 @@ class Music():
         self.music_state = False
         self.equalizer_state = False
         self.volume_perc = self.get_volume()
-        self.music_preset = "HeavyBass"
+        self.music_preset = "Bass Boosted"
         self.equalizer_preset = "LoudnessEqualizer"
 
     def get_process(self, process):
