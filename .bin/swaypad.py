@@ -104,13 +104,12 @@ class Swaypad():
             app_name = f"[class='{class_name}']"
         position = f"move position {self.position[0]} {self.position[1]}"
         resize = f"resize set {self.size[0]} {self.size[1]}"
-
         app = subprocess.run(f'swaymsg {app_name} scratchpad show', shell=True)
         window_id = subprocess.check_output(
             "swaymsg -t get_tree | jq -r '.. | select(.focused?) | .id'", shell=True).strip().decode()
         time.sleep(0.1)
-        subprocess.run(f'swaymsg {position}', shell=True)
-        subprocess.run(f'swaymsg {resize}', shell=True)
+        subprocess.run(f'swaymsg {app_name} {position}', shell=True)
+        subprocess.run(f'swaymsg {app_name} {resize}', shell=True)
         time.sleep(0.1)
         if window_id:
             subprocess.run(f'swaymsg [con_id={window_id}] focus', shell=True)
