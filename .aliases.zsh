@@ -80,7 +80,7 @@ alias :pc='checkupdates | wc -l'
 alias :ps='pacman -Ss'
 alias :pi='sudo pacman -S'
 alias :pr='sudo pacman -Rs'
-alias :po='$sud pacman -Qtdq | $sud pacman -Rns -'
+alias :po='$sud pacman -Qtdq | $sud pacman -Rns - && flatpak uninstall --unused'
 
 alias :fi='flatpak install'
 alias :fu='flatpak update'
