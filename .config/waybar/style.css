@@ -15,7 +15,8 @@ window#waybar {
 #workspaces button {
   border-radius: 0;
   font-size: 18px;
-  font-family: "Shrikhand";
+  font-family: "Leckerli One";
+  font-weight: 900;
   color: #d8dee9;
   background-color: #2e3440;
   padding: 0 4px;
@@ -52,15 +53,15 @@ window#waybar {
   color: #EABF61;
   background-color: #2e3440;
   font-family: "Lexend Deca";
-  font-weight: 600;
-  font-size: 16px;
+  font-weight: 900;
+  font-size: 20px;
 }
 
 .normal {
   padding: 0 4px;
   font-family: "Lexend Deca";
-  font-weight: 600;
-  font-size: 16px;
+  font-weight: 900;
+  font-size: 20px;
 }
 
 #mode {

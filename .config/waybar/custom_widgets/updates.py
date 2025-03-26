@@ -13,7 +13,7 @@ else:
     classes = ["normal", "updates"]
     if updates_available > 20:
         classes[0] = "warning"
-    output = f"{get_pango('UP', updates_available)}"
+    output = f"{get_pango('UPD', updates_available)}"
 
     print(json.dumps({
         "text": output,

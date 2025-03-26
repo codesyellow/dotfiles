@@ -22,8 +22,7 @@
             "1": "TER",
             "2": "WEB",
             "3": "RED",
-            "4": "NOT",
-            "5": "MUS",
+            "4": "ALT",
 
             "urgent": "CIT",
             "default": "ATT",
@@ -33,7 +32,6 @@
             "2": ["HDMI-A-1"], // Always show a workspace with name '3', on all outputs if it does not exists
             "3": ["HDMI-A-1"], // Always show a workspace with name '3', on all outputs if it does not exists
             "4": ["HDMI-A-1"], // Always show a workspace with name '3', on all outputs if it does not exists
-            "5": ["HDMI-A-1"], // Always show a workspace with name '3', on all outputs if it does not exists
         }
     },
   "sway/mode": {
@@ -101,21 +99,19 @@
         "all-outputs": false,
         "format": "{icon}",
         "format-icons": {
-            "6": "WEB",
-            "7": "GLH",
-            "8": "GAM",
-            "9": "STD",
-            "10": "VID",
+            "5": "WEB",
+            "6": "GAM",
+            "7": "STD",
+            "8": "ALT",
 
             "urgent": "CIT",
             "default": "ATT",
         },
         "persistent-workspaces": {
+            "5": ["VGA-1"], // Always show a workspace with name '3', on all outputs if it does not exists
             "6": ["VGA-1"], // Always show a workspace with name '3', on all outputs if it does not exists
             "7": ["VGA-1"], // Always show a workspace with name '3', on all outputs if it does not exists
             "8": ["VGA-1"], // Always show a workspace with name '3', on all outputs if it does not exists
-            "9": ["VGA-1"], // Always show a workspace with name '3', on all outputs if it does not exists
-            "10": ["VGA-1"], // Always show a workspace with name '3', on all outputs if it does not exists
         }
     },
   "sway/mode": {
