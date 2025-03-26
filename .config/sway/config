@@ -307,7 +307,7 @@ for_window [app_id="imv"] floating enable, resize set 700
 workspace_layout tabbed
 # border background text indicator
 client.focused          $warning $bg $fg $warning
-client.focused_inactive  $bg1 $bg $fg $warning
+client.focused_inactive  $bg $bg $fg $warning
 client.unfocused       $bg $bg $fg $warning 
 
 # hide mouse
