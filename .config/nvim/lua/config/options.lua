@@ -14,10 +14,3 @@ augroup remember_folds
   autocmd BufWinEnter * silent! loadview
 augroup END
 ]])
-
-vim.cmd([[
-augroup SetSwayConfigFiletype
-  autocmd!
-  autocmd BufRead,BufNewFile ~/.config/sway/configs/* setlocal filetype=swayconfig
-augroup END
-]])
