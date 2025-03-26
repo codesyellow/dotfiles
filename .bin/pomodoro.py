@@ -1,9 +1,18 @@
 #!/usr/bin/env python
 from time import sleep
 import os
+import socket
 from datetime import timedelta
 
 HOME = os.path.expanduser("~/")
+try:
+    s = socket.socket()
+    host = socket.gethostname()
+    port = 12345
+    s.bind((host, port))
+except OSError:
+    print("pomodoro already running!")
+    exit(0)
 
 
 class Pomodoro():
