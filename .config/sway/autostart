@@ -15,10 +15,10 @@ is_running 'gameon.mjs' 'node'
 santos_calendar.py &
 
 mkfifo /tmp/volumepipe 2>/dev/null &
-wob &
-wlsunset -t 4000 &
+#wlsunset -t 4000 &
+gammastep -P -O 2500 &
 earphone.sh &
-pamixer --set-volume 30 &
+whatsap_on.sh &
 systemctl --user import-environment PATH &
 dunst &
 /usr/lib/polkit-kde-authentication-agent-1 &
@@ -26,10 +26,9 @@ ianny &
 wl-paste --type text --watch cliphist store &
 is_music.py &
 sway-audio-idle-inhibit &
-wdisplays --gapplication-service &
-# This is for sway to fix a game resolution issue because of a VGA as primary monitor
-xrandr --output VGA-1 --primary &
 swayidle -w &
 syncthing &
 tail -f /tmp/volumepipe | wob -c ~/.config/wob/volwob.ini &
+pamixer --set-volume 30 &
+xrandr --output VGA-1 --primary & # to fix game spawning on the wrong monitor
 #xremap ~/.config/xremap/config.yml --mouse &

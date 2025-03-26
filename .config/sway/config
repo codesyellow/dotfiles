@@ -7,7 +7,7 @@ set $down j
 set $up k
 set $right l
 #set $term kitty -e zellij
-set $term foot -e zellij
+set $term alacritty -e zellij
 set $scratchpad_term alacritty
 #set $menu rofi -show run -theme-str 'window { width: 60%; x-offset: 20%; y-offset: -28px; }'
 set $menu bemenu-run -i -H 26
@@ -17,12 +17,10 @@ workspace 1 output HDMI-A-1
 workspace 2 output HDMI-A-1
 workspace 3 output HDMI-A-1
 workspace 4 output HDMI-A-1
-workspace 5 output HDMI-A-1
+workspace 5 output VGA-1
 workspace 6 output VGA-1
 workspace 7 output VGA-1
 workspace 8 output VGA-1
-workspace 9 output VGA-1
-workspace 10 output VGA-1
 
 # Sway variables
 default_border pixel
@@ -43,13 +41,17 @@ input type:keyboard {
 
 # Scratchpads
 ## Rules
-for_window [app_id="dropdown_math"] move scratchpad, move position 100 400, scratchpad show
-for_window [app_id="dropdown_term"] move scratchpad, resize set width 1200, scratchpad show
-for_window [app_id="test"] move scratchpad,  move position 100 400, resize set width 1200, scratchpad show
-for_window [app_id="btop"]  move scratchpad, resize set width 50%, scratchpad show
-for_window [app_id="notes"]  move scratchpad, resize set width 1200, scratchpad show
-for_window [app_id="habits"]  move scratchpad, resize set width 1200, scratchpad show
-for_window [app_id="wasistlos"]  move scratchpad, resize set width 1200, scratchpad show
+for_window [app_id="dropdown_math"] move scratchpad
+for_window [app_id="dropdown_term"] move scratchpad
+for_window [app_id="todo"] move scratchpad
+for_window [app_id="notes"] move scratchpad
+for_window [app_id="music"] move scratchpad
+for_window [app_id="monitor"] move scratchpad
+for_window [app_id="calculator"] move scratchpad
+for_window [app_id="habits"] move scratchpad
+for_window [app_id="file-manager"] move scratchpad
+for_window [app_id="test"] move scratchpad
+for_window [app_id="wasistlos"]  move scratchpad
 
 ## Binds
 ## file manager
@@ -83,16 +85,16 @@ mode "ia" {
 
 mode "scratchpad" {
 #bindsym c exec sh -c 'swaymsg [app_id="dropdown_math"] scratchpad show || exec $scratchpad_term --class dropdown_math -e python -q', mode "default"
-    bindsym c exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x30% -- foot -T dropdown_math -e python -q", mode "default"
-    bindsym n exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x70% -- foot -T notes -e nvim ~/.notes/index.norg", mode "default"
-    bindsym h exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x70% -- foot -T notes -e nvim ~/.notes/habits.norg", mode "default"
-    bindsym b exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T monitor -e btop", mode "default"
-    bindsym f exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T file -e yazi", mode "default"
-    bindsym m exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T monitor -e cmus", mode "default"
-    bindsym w exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- wasistlos", mode "default"
-    #bindsym t exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x90% -p -170,0 -- kuro", mode "default"
-    bindsym t exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x90% -p -180,0 -m left -- foot -T todo -e taskwarrior-tui", mode "default"
-    bindsym u exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x60% -p 0,20 -- alacritty --config-file ~/.config/alacritty/scratchpad.toml --class dropdown_term -e bash -c 'zellij attach --create scratch'", mode "default"
+    bindsym c exec "swaypad.py -s sm -p 'top-left' -c 'foot -a calculator -e python -q' -n 'calculator'", mode "default"
+    bindsym h exec "swaypad.py -s big -p 'top' -c 'foot -a test -e nvim /home/digo/.notes/habits.norg' -n 'test'", mode "default"
+    bindsym n exec "swaypad.py -s big -p 'bottom' -c 'foot -a notes -e nvim /home/digo/.notes/index.norg' -n 'notes'", mode "default"
+    bindsym b exec "swaypad.py -s big -c 'foot -a monitor -e btop' -n 'monitor'", mode "default"
+    bindsym f exec "swaypad.py -s big -c 'foot -a file-manager -e yazi' -n 'file-manager'", mode "default"
+    bindsym m exec "swaypad.py -s big -c 'foot -a music -e cmus' -n 'music'", mode "default"
+    bindsym w exec "swaypad.py -s big -c 'wasistlos' -n 'wasistlos'", mode "default"
+
+    bindsym t exec "swaypad.py -s sma -p 'top-left' -c 'foot -a todo -e taskwarrior-tui' -n 'todo'", mode "default"
+    bindsym u exec "swaypad.py -s smf -p 'top' -c 'alacritty --config-file /home/digo/.config/alacritty/scratchpad.toml --class dropdown_term -e zellij attach --create scratch' -n 'dropdown_term'", mode "default"
     bindsym l exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x40% -p 0,20 -- foot -T lowfi -e lowfi", mode "default"
     bindsym r exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x40% -p 0,20 -- foot -T countdown -e countdown.py", mode "default"
     bindsym g mode "file"
@@ -126,16 +128,14 @@ mode "resize" {
 mode "workspaces" {
     # vertical monitor
     bindsym t workspace 1, mode "default"
-    bindsym i workspace 2, mode "default"
+    bindsym w workspace 2, mode "default"
     bindsym r workspace 3, mode "default"
-    bindsym n workspace 4, mode "default"
-    bindsym m workspace 5, mode "default"
+    bindsym a workspace 4, mode "default"
     # horizontal monitor
-    bindsym b workspace 6, mode "default"
-    bindsym l workspace 7, mode "default"
-    bindsym g workspace 8, mode "default"
-    bindsym s workspace 9, mode "default"
-    bindsym v workspace 10, mode "default"
+    bindsym b workspace 5, mode "default"
+    bindsym g workspace 6, mode "default"
+    bindsym s workspace 7, mode "default"
+    bindsym d workspace 8, mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -144,16 +144,14 @@ mode "workspaces" {
 mode "move_workspaces" {
     # vertical monitor
     bindsym t move container to workspace number 1, mode "default"
-    bindsym i move container to workspace number 2, mode "default"
+    bindsym w move container to workspace number 2, mode "default"
     bindsym r move container to workspace number 3, mode "default"
-    bindsym n move container to workspace number 4, mode "default"
-    bindsym m move container to workspace number 5, mode "default"
+    bindsym a move container to workspace number 4, mode "default"
     # horizontal monitor
-    bindsym b move container to workspace number 6, mode "default"
-    bindsym l move container to workspace number 7, mode "default"
-    bindsym g move container to workspace number 8, mode "default"
-    bindsym s move container to workspace number 9, mode "default"
-    bindsym v move container to workspace number 10, mode "default"
+    bindsym b move container to workspace number 5, mode "default"
+    bindsym g move container to workspace number 6, mode "default"
+    bindsym s move container to workspace number 7, mode "default"
+    bindsym d move container to workspace number 8, mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -166,8 +164,11 @@ mode "action" {
     bindsym f fullscreen, mode "default"
     bindsym n exec "dunstctl close-all", mode "default"
     bindsym l exec "killall -USR1 swayidle", mode "default"
-    bindsym s exec "bash -c 'grim -g \"$(slurp)\"'", mode "default"
+    bindsym s exec grim -g "$(slurp)" "/home/digo/ps_$(date +'%Y%m%d%H%M%S').png", mode "default"
     bindsym p exec "grim && notify-send 'Screenshot'", mode "default"
+    bindsym m exec "360.sh 80", mode "default"
+    bindsym z exec 'TMP=$(mktemp); grim -g "$(slurp)" - > $TMP; imv -u nearest_neighbour $TMP; rm $TMP', mode "default"
+
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -288,17 +289,15 @@ for_window [class="^steam_app_218640$"] move to workspace 8
 for_window [class="^Firefox$"] inhibit_idle fullscreen
 for_window [app_id="^firefox$"] inhibit_idle fullscreen
 ## launcher workspace rules
-for_window [app_id="^net.lutris.Lutris$"] move to workspace 7
-for_window [class="^steam$"] move to workspace 7
-for_window [class="^heroic$"] move to workspace 7
-for_window [app_id="^mpv$"] move to workspace 10
-for_window [app_id="^ankivim$"] move to workspace 4
-for_window [app_id="^h-m-m$"] move to workspace 4
-for_window [class="^com.github.th_ch.youtube_music$"] move to workspace 5
+for_window [app_id="^net.lutris.Lutris$"] move to workspace 6
+for_window [class="^steam$"] move to workspace 6
+for_window [class="^heroic$"] move to workspace 6
+for_window [app_id="^mpv$"] move to workspace 8
+#for_window [class="^com.github.th_ch.youtube_music$"] move to workspace 5
 ## sizes
 for_window [title="Open file"] resize set width 900, resize set height 500
 for_window [app_id="yad"] floating enable, resize set 100, move position 30 30
-
+for_window [app_id="imv"] floating enable, resize set 700
 
 # tab related
 workspace_layout tabbed
