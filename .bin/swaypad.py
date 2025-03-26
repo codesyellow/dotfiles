@@ -2,11 +2,12 @@
 import subprocess
 import json
 import argparse
+import time
 
 PADDING = (20, 20)
 SMALL = (400, 400)
 SMALLA = (400, 700)
-SMALLF = (800, 400)
+SMALLF = (1000, 400)
 MEDIUM = (600, 600)
 MEDIUMA = (600, 700)
 BIG = (1000, 700)
@@ -84,12 +85,11 @@ class Swaypad():
         print(width, height)
 
     def open_app(self):
+        """Open the app"""
         args = parser.parse_args()
         config = vars(args)
         command = config["command"]
-        print(command.split())
-        subprocess.Popen(command.split(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                         stdin=subprocess.DEVNULL, start_new_session=True)
+        subprocess.Popen(command.split(), start_new_session=True)
 
     def open_scratch(self) -> None:
         """Open the scratchpad"""
@@ -104,9 +104,18 @@ class Swaypad():
             app_name = f"[class='{class_name}']"
         position = f"move position {self.position[0]} {self.position[1]}"
         resize = f"resize set {self.size[0]} {self.size[1]}"
-        var = subprocess.check_output(
-            f'swaymsg {app_name} scratchpad show, {position}, {resize} || echo 1', shell=True).decode("utf-8")
-        if "false" in var:
+
+        app = subprocess.run(f'swaymsg {app_name} scratchpad show', shell=True)
+        window_id = subprocess.check_output(
+            "swaymsg -t get_tree | jq -r '.. | select(.focused?) | .id'", shell=True).strip().decode()
+        time.sleep(0.1)
+        subprocess.run(f'swaymsg {position}', shell=True)
+        subprocess.run(f'swaymsg {resize}', shell=True)
+        time.sleep(0.1)
+        if window_id:
+            subprocess.run(f'swaymsg [con_id={window_id}] focus', shell=True)
+
+        if app.returncode == 2:
             self.open_app()
 
     def run(self) -> None:
@@ -115,5 +124,4 @@ class Swaypad():
 
 
 swaypad = Swaypad()
-print(swaypad.position)
-print(swaypad.run())
+swaypad.run()
