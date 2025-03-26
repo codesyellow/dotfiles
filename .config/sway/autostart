@@ -14,8 +14,6 @@ is_running 'easy_always.sh'
 is_running 'gameon.mjs' 'node'
 santos_calendar.py &
 
-mkfifo /tmp/volumepipe 2>/dev/null &
-#wlsunset -t 4000 &
 gammastep -P -O 2500 &
 earphone.sh &
 whatsap_on.sh &
@@ -28,7 +26,5 @@ is_music.py &
 sway-audio-idle-inhibit &
 swayidle -w &
 syncthing &
-tail -f /tmp/volumepipe | wob -c ~/.config/wob/volwob.ini &
 pamixer --set-volume 30 &
 xrandr --output VGA-1 --primary & # to fix game spawning on the wrong monitor
-#xremap ~/.config/xremap/config.yml --mouse &

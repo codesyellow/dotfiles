@@ -1,6 +1,10 @@
 # Read `man 5 sway` for a complete reference.
 exec ~/.config/sway/autostart
 # Own variables
+set $fg #d8dee9
+set $warning #EABF61
+set $bg #2e3440
+set $bg1 #4c566a
 set $mod Mod4
 set $left h
 set $down j
@@ -27,8 +31,8 @@ default_border pixel
 hide_edge_borders --i3 smart
 
 # Monitor
-output HDMI-A-1 res 1280x1024@75HZ pos 0 0 transform 270 bg ~/.wallpapers/ign_unsplash21.png fill allow_tearing yes max_render_time off
-output VGA-1 res 1360x768@60HZ pos 1024 500 bg ~/.wallpapers/ign_unsplash21.png fill allow_tearing yes max_render_time off
+output HDMI-A-1 res 1280x1024@75HZ pos 0 0 transform 270 bg ~/.wallpapers/ign_unsplash32_vertical.png fill allow_tearing yes max_render_time off
+output VGA-1 res 1360x768@60HZ pos 1024 500 bg ~/.wallpapers/ign_unsplash32_horizontal.png fill allow_tearing yes max_render_time off
 # Read `man 5 sway-input` for more information about this section.
 input type:pointer {
     accel_profile "flat" # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
@@ -301,9 +305,10 @@ for_window [app_id="imv"] floating enable, resize set 700
 
 # tab related
 workspace_layout tabbed
-client.focused          "#2e3440" "#d8dee9" "#2e3440" "#2e3440" "#ff8800"
-client.focused_inactive "#2e3440" "#2e3440" "#ffffff" "#ff4400" "#ff8800"
-client.unfocused        "#2e3440" "#2e3440" "#ffffff" "#2e3440" "#2e3440"
+# border background text indicator
+client.focused          $warning $bg $fg $warning
+client.focused_inactive  $bg1 $bg $fg $warning
+client.unfocused       $bg $bg $fg $warning 
 
 # hide mouse
 seat seat0 hide_cursor 3000
