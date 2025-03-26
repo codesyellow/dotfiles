@@ -33,6 +33,7 @@ if [ "$MUTE" == "[off]" ]; then
     ICON=audio-volume-muted
 fi
 
+echo $VOLUME
 echo $VOLUME >/tmp/volumepipe
 pkill -RTMIN+13 waybar
 #notify-send.sh $VOLUME% \
