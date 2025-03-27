@@ -6,10 +6,12 @@
 window#waybar {
   background-color: #2e3440;
   font-family: "Lexend Deca";
+  border-bottom: 1px solid #4c566a;
 }
 
 #workspaces {
   padding-right: 8px;
+  border-bottom: 1px solid #4c566a;
 }
 
 #workspaces button {
@@ -17,13 +19,13 @@ window#waybar {
   font-size: 18px;
   font-family: "Leckerli One";
   font-weight: 900;
-  color: #d8dee9;
+  color: #eceff4;
   background-color: #2e3440;
   padding: 0 4px;
 }
 
 #workspaces button.empty {
-  opacity: 0.5;
+  color: #4c566a;
 }
 
 #workspaces button.urgent {
@@ -31,12 +33,12 @@ window#waybar {
 }
 
 #workspaces button:hover {
-  color: #2e3440;
-  background-color: #d8dee9;
+  border-bottom: 1px solid #EABF61;
+  background-color: #eceff4;
 }
 
 #workspaces button.focused {
-  color: #EABF61;
+  border-bottom: 1px solid #EABF61;
   opacity: 1;
 }
 
@@ -55,6 +57,7 @@ window#waybar {
   font-family: "Lexend Deca";
   font-weight: 900;
   font-size: 20px;
+  border-bottom: 1px solid #EABF61;
 }
 
 .normal {
@@ -62,6 +65,7 @@ window#waybar {
   font-family: "Lexend Deca";
   font-weight: 900;
   font-size: 20px;
+  border-bottom: 1px solid #4c566a;
 }
 
 #mode {
