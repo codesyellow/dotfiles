@@ -1,5 +1,5 @@
 $fg: #eceff4;
-$warning: #EABF61;
+$warning: #bf616a;
 $bg: #2e3440;
 $bg1: #4c566a;
 $button: #36C2CE;
@@ -47,14 +47,12 @@ window#waybar {
 }
 
 #workspaces button:hover {
-  border-bottom: 1px solid $warning;
-  //color: $bg;
+  color: $bg;
   background-color: $fg;
 }
 
 #workspaces button.focused {
-  border-bottom: 1px solid $warning;
-  //color: $warning;
+  color: $warning;
   opacity: 1;
 }
 
