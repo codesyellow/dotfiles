@@ -1,7 +1,7 @@
 # Read `man 5 sway` for a complete reference.
 exec ~/.config/sway/autostart
 # Own variables
-set $fg #d8dee9
+set $fg #eceff4
 set $warning #EABF61
 set $bg #2e3440
 set $bg1 #4c566a
@@ -56,6 +56,10 @@ for_window [app_id="habits"] move scratchpad
 for_window [app_id="file-manager"] move scratchpad
 for_window [app_id="test"] move scratchpad
 for_window [app_id="wasistlos"]  move scratchpad
+for_window [app_id="anki-pt"]  move scratchpad
+for_window [app_id="anki-en"]  move scratchpad
+for_window [app_id="anki-ori"]  move scratchpad
+for_window [app_id="anki-mh"]  move scratchpad
 
 ## Binds
 ## file manager
@@ -64,15 +68,16 @@ mode "file" {
     bindsym h exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T file -e yazi ~/.HDD/", mode "default"
     bindsym d exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T file -e yazi ~/Downloads/", mode "default"
 
+
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 
 mode "study" {
-    bindsym p exec --no-startup-id "sway-scratchpad -tmt -atc -d 80%x70% -- foot -T anki-pt -e anki-vim portuguese", mode "default"
-    bindsym e exec --no-startup-id "sway-scratchpad -tmt -atc -d 80%x70% -- foot -T anki-en -e anki-vim english", mode "default"
-    bindsym m exec --no-startup-id "sway-scratchpad -tmt -atc -d 80%x70% -- foot -T anki-mt -e anki-vim math", mode "default"
-    bindsym c exec --no-startup-id "sway-scratchpad -tmt -atc -d 80%x70% -- foot -T anki-code -e anki-vim code", mode "default"
+    bindsym p exec "swaypad.py -s big -p 'top' -c 'foot -a anki-pt -e anki-vim portuguese' -n 'anki-pt'", mode "default"
+    bindsym e exec "swaypad.py -s big -p 'top' -c 'foot -a anki-en -e anki-vim english' -n 'anki-en'", mode "default"
+    bindsym o exec "swaypad.py -s big -p 'top' -c 'foot -a anki-ori -e anki-vim origamid' -n 'anki-ori'", mode "default"
+    bindsym m exec "swaypad.py -s big -p 'top' -c 'foot -a anki-mh -e anki-vim math' -n 'anki-mh'", mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -88,7 +93,6 @@ mode "ia" {
 }
 
 mode "scratchpad" {
-#bindsym c exec sh -c 'swaymsg [app_id="dropdown_math"] scratchpad show || exec $scratchpad_term --class dropdown_math -e python -q', mode "default"
     bindsym c exec "swaypad.py -s sm -p 'top-left' -c 'foot -a calculator -e python -q' -n 'calculator'", mode "default"
     bindsym h exec "swaypad.py -s big -p 'top' -c 'foot -a test -e nvim /home/digo/.notes/habits.norg' -n 'test'", mode "default"
     bindsym n exec "swaypad.py -s big -p 'bottom' -c 'foot -a notes -e nvim /home/digo/.notes/index.norg' -n 'notes'", mode "default"
@@ -99,8 +103,8 @@ mode "scratchpad" {
 
     bindsym t exec "swaypad.py -s sma -p 'top-left' -c 'foot -a todo -e taskwarrior-tui' -n 'todo'", mode "default"
     bindsym u exec "swaypad.py -s smf -p 'top' -c 'alacritty --config-file /home/digo/.config/alacritty/scratchpad.toml --class dropdown_term -e zellij attach --create scratch' -n 'dropdown_term'", mode "default"
-    bindsym l exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x40% -p 0,20 -- foot -T lowfi -e lowfi", mode "default"
-    bindsym r exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x40% -p 0,20 -- foot -T countdown -e countdown.py", mode "default"
+    bindsym l exec "swaypad.py -s sm -c 'foot -a lowfi -e lowfi' -n 'lowfi'", mode "default"
+#    bindsym r exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x40% -p 0,20 -- foot -T countdown -e countdown.py", mode "default"
     bindsym g mode "file"
     bindsym s mode "study"
     bindsym i mode "ia"
@@ -305,10 +309,10 @@ for_window [app_id="imv"] floating enable, resize set 700
 
 # tab related
 workspace_layout tabbed
-# border background text indicator
-client.focused          $warning $bg $fg $warning
-client.focused_inactive  $bg $bg $fg $warning
-client.unfocused       $bg $bg $fg $warning 
+#                       border background text indicator floating border
+client.focused          $warning $bg      $fg  $warning  $warning
+client.focused_inactive $bg      $bg      $bg1 $warning  $bg1
+client.unfocused        $bg      $bg      $bg1 $warning  $bg1
 
 # hide mouse
 seat seat0 hide_cursor 3000
