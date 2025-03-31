@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
 
 PIC_PATH="$HOME/.pictures"
-if [[ -d "$PIC_PATH" ]]; then
-    echo "yes"
-else
+if ! [[ -d "$PIC_PATH" ]]; then
     mkdir "$PIC_PATH"
-    echo "no"
+    echo "Pictures folder was created"
 fi
 if [[ "$1" == "region" ]]; then
-    grim -g "$(slurp)" "$PIC_PATH/ps_$(date +'%Y%m%d%H%M%S').png" && notify-send.sh "Region screenshot was taken!"
+    grim -g "$(slurp)" "$PIC_PATH/ps_$(date +'%Y%m%d%H%M%S').jpg" && notify-send.sh "Region screenshot was taken!"
+elif [[ "$1" == "zoom" ]]; then
+    TMP=$(mktemp)
+    grim -g "$(slurp)" - >$TMP
+    imv -u nearest_neighbour $TMP
+    rm $TMP
 else
     grim "$PIC_PATH/ps_$(date +'%Y%m%d%H%M%S').png" && notify-send.sh "Full screenshot was taken!"
 fi
