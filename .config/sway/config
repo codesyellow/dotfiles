@@ -280,9 +280,9 @@ for_window [app_id="com.example.App"] floating enable, resize set 700
 # tab related
 workspace_layout tabbed
 #                       border background text indicator floating border
-client.focused          $bg      $bg      $warning  $bg  $warning
-client.focused_inactive $bg      $bg      $warning $warning  $bg1
-client.unfocused        $bg      $bg      $fg $warning  $bg1
+client.focused          $bg      $bg      $fg  $bg  $warning
+client.focused_inactive $bg      $bg      $bg1 $warning  $bg1
+client.unfocused        $bg      $bg      $bg1 $warning  $bg1
 
 # hide mouse
 seat seat0 hide_cursor 3000
