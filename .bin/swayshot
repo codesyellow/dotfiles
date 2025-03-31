@@ -8,10 +8,11 @@ fi
 if [[ "$1" == "region" ]]; then
     grim -g "$(slurp)" "$PIC_PATH/ps_$(date +'%Y%m%d%H%M%S').jpg" && notify-send.sh "Region screenshot was taken!"
 elif [[ "$1" == "zoom" ]]; then
-    TMP=$(mktemp)
-    grim -g "$(slurp)" - >$TMP
-    imv -u nearest_neighbour $TMP
-    rm $TMP
+    TMP=$(mktemp).png
+    grim -g "$(slurp)" - >"$TMP"
+    convert "$TMP" -resize 500% -filter Mitchell "$TMP"
+    imv -u nearest_neighbour "$TMP"
+    rm "$TMP"
 else
     grim "$PIC_PATH/ps_$(date +'%Y%m%d%H%M%S').png" && notify-send.sh "Full screenshot was taken!"
 fi
