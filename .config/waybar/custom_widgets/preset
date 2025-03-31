@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+source ./config
+
+state="normal"
+preset=$(cat ~/.config/easyeffects_preset)
+text="EQ"
+
+if [[ "$preset" != "LoudnessEqualizer" ]]; then
+    text="MUS"
+    state="warning"
+fi
+
+output=$(get_pango "DSP" "$text")
+printf '{"text": "%s", "tooltip": "Updates: %s", "class": "%s"}\n' "$output" "$preset" "$state"

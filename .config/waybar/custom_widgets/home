@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+source ./config
+
+state="normal"
+
+home=$(df -h /home/ | awk 'NR==2 {print $4}' | tr -d 'G')
+
+if [[ "$home" -le 15 ]]; then
+    state="warning"
+fi
+
+homefs=$home"G"
+output=$(get_pango "HOM" "$homefs")
+printf '{"text": "%s", "tooltip": "Updates: %s", "class": "%s"}\n' "$output" "$home" "$state"

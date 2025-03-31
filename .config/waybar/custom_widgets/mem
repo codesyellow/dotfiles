@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+source ./config
+
+state="normal"
+
+get_mem_usage() {
+    # Read memory info from /proc/meminfo
+    read -r _ total_mem < <(grep MemTotal /proc/meminfo)
+    read -r _ free_mem < <(grep MemAvailable /proc/meminfo)
+
+    # Convert to percentage
+    total_mem=${total_mem//[^0-9]/} # Remove non-numeric characters
+    free_mem=${free_mem//[^0-9]/}
+
+    used_mem=$((total_mem - free_mem))
+    mem_usage=$((100 * used_mem / total_mem))
+
+    echo "$mem_usage"
+}
+
+mem=$(get_mem_usage)
+
+if [[ "$mem" -ge 80 ]]; then
+    state="warning"
+fi
+
+output=$(get_pango "RAM" "$mem%")
+printf '{"text": "%s", "tooltip": "Updates: %s", "class": "%s"}\n' "$output" "$mem" "$state"

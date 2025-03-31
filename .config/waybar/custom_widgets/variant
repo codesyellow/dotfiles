@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+source ./config
+
+state="normal"
+text="US"
+
+variant=$(swaymsg -t get_inputs | jq -r 'map(select(has("xkb_active_layout_name")))[0].xkb_active_layout_name')
+
+if echo "$variant" | grep -q "intl"; then
+    text="INTL"
+    state="warning"
+fi
+
+output=$(get_pango "KBD" "$text")
+printf '{"text": "%s", "tooltip": "Updates: %s", "class": "%s"}\n' "$output" "$variant" "$state"

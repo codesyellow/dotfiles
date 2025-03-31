@@ -6,11 +6,12 @@ $button: #36C2CE;
 $inactive: #d8dee9;
 $active: #FF8343;
 $hover: #891652;
-$font: "Lexend Deca";
-$workspace_font: "Leckerli One";
+$main_font: "Leckerli One";
+$widget_font: "Roboto";
 $weight: 900;
 $padx: 4px;
 $pady: 2px;
+$widget_font_size: 18px;
 
 * {
   padding: 0;
@@ -19,7 +20,7 @@ $pady: 2px;
 
 window#waybar {
   background-color: $bg;
-  font-family: $font;
+  font-family: $main_font;
   border-bottom: 1px solid $bg1;
 }
 
@@ -31,7 +32,7 @@ window#waybar {
 #workspaces button {
   border-radius: 0;
   font-size: 18px;
-  font-family: $workspace_font;
+  font-family: $main_font;
   font-weight: 900;
   color: $fg;
   background-color: $bg;
@@ -60,25 +61,21 @@ window#waybar {
   color: $bg;
 }
 
-.modules-right {
-  font-family: $font;
-}
-
 .warning {
   padding: 0 4px;
   color: $warning;
   background-color: $bg;
-  font-family: $font;
   font-weight: $weight;
-  font-size: 20px;
+  font-size: $widget_font_size;
+  font-family: $widget_font;
   border-bottom: 1px solid $warning;
 }
 
 .normal {
   padding: 0 4px;
-  font-family: $font;
   font-weight: $weight;
-  font-size: 20px;
+  font-size: $widget_font_size;
+  font-family: $widget_font;
   border-bottom: 1px solid $bg1;
 }
 

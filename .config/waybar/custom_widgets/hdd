@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+source ./config
+
+state="normal"
+
+hdd=$(df -h ~/.HDD/ | awk 'NR==2 {print $4}' | tr -d 'G')
+
+if [[ "$hdd" -le 20 ]]; then
+    state="warning"
+fi
+
+hddfs=$hdd"G"
+output=$(get_pango "HDD" "$hddfs")
+printf '{"text": "%s", "tooltip": "Updates: %s", "class": "%s"}\n' "$output" "$hdd" "$state"

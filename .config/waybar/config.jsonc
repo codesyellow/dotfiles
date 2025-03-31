@@ -19,38 +19,36 @@
         "all-outputs": false,
         "format": "{icon}",
         "format-icons": {
-            "1": "TER",
-            "2": "WEB",
-            "3": "RED",
-            "4": "ALT",
+            "1": "WEB",
+            "2": "TER",
+            "3": "ALT",
 
             "urgent": "CIT",
             "default": "ATT",
         },
         "persistent-workspaces": {
-            "1": ["HDMI-A-1"], // Always show a workspace with name '3', on all outputs if it does not exists
-            "2": ["HDMI-A-1"], // Always show a workspace with name '3', on all outputs if it does not exists
-            "3": ["HDMI-A-1"], // Always show a workspace with name '3', on all outputs if it does not exists
-            "4": ["HDMI-A-1"], // Always show a workspace with name '3', on all outputs if it does not exists
+            "1": ["HDMI-A-1"], 
+            "2": ["HDMI-A-1"], 
+            "3": ["HDMI-A-1"],
         }
     },
   "sway/mode": {
     "format": "MODE",
   },
 "custom/gameon": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/gameon.py",
-    "interval": 2,
+    "exec": "/home/digo/.config/waybar/custom_widgets/gameon",
+    "interval": 3,
     "return-type": "json",
     "tooltip": false
   },
 "custom/clock": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/day.py",
+    "exec": "/home/digo/.config/waybar/custom_widgets/day",
     "interval": 60,
     "return-type": "json",
     "tooltip": false
     },
   "custom/pymor": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/pomodoro.py",
+    "exec": "/home/digo/.config/waybar/custom_widgets/pomodoro",
     "interval": 1,
     "on-click": "setsid pomodoro.py &",
     "on-click-middle": "touch /tmp/pomo_cancel; rm /tmp/pomo_timer",
@@ -58,20 +56,20 @@
     "tooltip": false
   },
   "custom/volume": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/volume.py",
+    "exec": "/home/digo/.config/waybar/custom_widgets/volume",
     "on-click": "pavucontrol",
     "return-type": "json",
     "tooltip": false,
     "signal": 13
   },
   "custom/cpu": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/cpu.py",
+    "exec": "/home/digo/.config/waybar/custom_widgets/cpu",
     "interval": 2,
     "return-type": "json",
     "tooltip": false
   },
   "custom/mem": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/ram.py",
+    "exec": "/home/digo/.config/waybar/custom_widgets/mem",
     "interval": 4,
     "return-type": "json",
     "tooltip": false
@@ -99,71 +97,70 @@
         "all-outputs": false,
         "format": "{icon}",
         "format-icons": {
-            "5": "WEB",
-            "6": "GAM",
-            "7": "STD",
-            "8": "ALT",
+            "4": "WEB",
+            "5": "GAM",
+            "6": "ALT",
 
             "urgent": "CIT",
             "default": "ATT",
         },
         "persistent-workspaces": {
-            "5": ["VGA-1"], // Always show a workspace with name '3', on all outputs if it does not exists
-            "6": ["VGA-1"], // Always show a workspace with name '3', on all outputs if it does not exists
-            "7": ["VGA-1"], // Always show a workspace with name '3', on all outputs if it does not exists
-            "8": ["VGA-1"], // Always show a workspace with name '3', on all outputs if it does not exists
+            "4": ["VGA-1"], 
+            "5": ["VGA-1"], 
+            "6": ["VGA-1"],
         }
     },
   "sway/mode": {
     "format": "MODE",
   },
   "custom/easy": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/preset.py",
-    "interval": 2,
+    "exec": "/home/digo/.config/waybar/custom_widgets/preset",
+    "interval": 3,
     "return-type": "json",
     "tooltip": false
   },
   "custom/cpu-temp": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/temp.py",
+    "exec": "/home/digo/.config/waybar/custom_widgets/temp",
     "interval": 10,
     "return-type": "json",
     "tooltip": false
   },
   "custom/disk-root": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/root.py",
+    "exec": "/home/digo/.config/waybar/custom_widgets/root",
     "interval": 60,
     "return-type": "json",
     "tooltip": false
   },
- "custom/clock": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/day.py",
-    "interval": 60,
-    "return-type": "json",
-    "tooltip": false
-    },
   "custom/variant": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/variant.py",
+    "exec": "/home/digo/.config/waybar/custom_widgets/variant",
     "interval": 2,
     "return-type": "json",
     "tooltip": false
   },
   "custom/updates": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/updates.py",
+    "exec": "/home/digo/.config/waybar/custom_widgets/updates",
     "interval": 60,
     "return-type": "json",
     "tooltip": false,
     "signal": 30
   },
 "custom/disk-home": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/home.py",
+    "exec": "/home/digo/.config/waybar/custom_widgets/home",
     "interval": 60,
     "return-type": "json",
     "tooltip": false
   },
   "custom/disk-hdd": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/hdd.py",
+    "exec": "/home/digo/.config/waybar/custom_widgets/hdd",
     "interval": 120,
     "return-type": "json",
     "tooltip": false
-  }
+  },
+"custom/clock": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/day hour",
+    "interval": 60,
+    "return-type": "json",
+    "tooltip": false
+    },
+
 }]

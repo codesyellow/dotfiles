@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+source ./config
+
+state="normal"
+
+temp=$(awk '{print $1/1000}' /sys/class/thermal/thermal_zone2/temp)
+
+if [[ "$temp" -ge 80 ]]; then
+    state="warning"
+fi
+
+output=$(get_pango "TMP" "$temp°C")
+printf '{"text": "%s", "tooltip": "Updates: %s", "class": "%s"}\n' "$output" "$temp" "$state"

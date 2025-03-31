@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+source ./config
+
+state="normal"
+
+root=$(df -h / | awk 'NR==2 {print $4}' | tr -d 'G')
+
+if [[ "$root" -le 10 ]]; then
+    state="warning"
+fi
+
+rootfs=$root"G"
+output=$(get_pango "RFS" "$rootfs")
+printf '{"text": "%s", "tooltip": "Updates: %s", "class": "%s"}\n' "$output" "$root" "$state"

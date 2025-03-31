@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+source ./config
+
+state="normal"
+
+volume=$(pamixer --get-volume)
+
+if [[ "$volume" -ge 50 ]]; then
+    state="warning"
+fi
+
+output=$(get_pango "VOL" "$volume%")
+printf '{"text": "%s", "tooltip": "Updates: %s", "class": "%s"}\n' "$output" "$volume" "$state"

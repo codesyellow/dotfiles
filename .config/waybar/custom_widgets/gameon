@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+source ./config
+
+state="normal"
+
+text="OFF"
+
+if [[ -e /tmp/gameon ]]; then
+    state="warning"
+    text="ON"
+fi
+
+output=$(get_pango "PLY" "$text")
+printf '{"text": "%s", "tooltip": "Updates: %s", "class": "%s"}\n' "$output" "$text" "$state"

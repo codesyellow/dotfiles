@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+source ./config
+
+state="normal"
+
+updates=$(checkupdates | wc -l)
+
+if [[ "$updates" -ge 30 ]]; then
+    state="warning"
+fi
+
+output=$(get_pango "UPD" "$updates")
+printf '{"text": "%s", "tooltip": "Updates: %s", "class": "%s"}\n' "$output" "$updates" "$state"

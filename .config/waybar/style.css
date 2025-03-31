@@ -5,7 +5,7 @@
 
 window#waybar {
   background-color: #2e3440;
-  font-family: "Lexend Deca";
+  font-family: "Leckerli One";
   border-bottom: 1px solid #4c566a;
 }
 
@@ -46,25 +46,21 @@ window#waybar {
   color: #2e3440;
 }
 
-.modules-right {
-  font-family: "Lexend Deca";
-}
-
 .warning {
   padding: 0 4px;
   color: #bf616a;
   background-color: #2e3440;
-  font-family: "Lexend Deca";
   font-weight: 900;
-  font-size: 20px;
+  font-size: 18px;
+  font-family: "Roboto";
   border-bottom: 1px solid #bf616a;
 }
 
 .normal {
   padding: 0 4px;
-  font-family: "Lexend Deca";
   font-weight: 900;
-  font-size: 20px;
+  font-size: 18px;
+  font-family: "Roboto";
   border-bottom: 1px solid #4c566a;
 }
 
