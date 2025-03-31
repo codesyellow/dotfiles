@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source ./config
+source $HOME/.config/waybar/custom_widgets/config
 
 state="normal"
 
