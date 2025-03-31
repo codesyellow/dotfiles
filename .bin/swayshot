@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+PIC_PATH="$HOME/.pictures"
+if [[ -d "$PIC_PATH" ]]; then
+    echo "yes"
+else
+    mkdir "$PIC_PATH"
+    echo "no"
+fi
+if [[ "$1" == "region" ]]; then
+    grim -g "$(slurp)" "$PIC_PATH/ps_$(date +'%Y%m%d%H%M%S').png" && notify-send.sh "Region screenshot was taken!"
+else
+    grim "$PIC_PATH/ps_$(date +'%Y%m%d%H%M%S').png" && notify-send.sh "Full screenshot was taken!"
+fi
