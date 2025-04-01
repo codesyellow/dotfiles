@@ -11,7 +11,7 @@ export EDITOR=/usr/bin/nvim
 export CM_LAUNCHER=dmenu
 export VISUAL=/usr/bin/nvim
 export NNN_USE_EDITOR=1
-export NNN_OPENER=zathura
+export NNN_OPENER="xdg-open"
 
 bindkey -v
 source ~/.aliases.zsh
@@ -72,3 +72,5 @@ setopt autocd beep extendedglob nomatch
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/posh.toml)"
 
+
+export PATH=$PATH:/home/digo/.spicetify
