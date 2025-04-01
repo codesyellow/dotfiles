@@ -10,7 +10,7 @@ if [[ "$1" == "region" ]]; then
 elif [[ "$1" == "zoom" ]]; then
     TMP=$(mktemp).png
     grim -g "$(slurp)" - >"$TMP"
-    convert "$TMP" -resize 500% -filter Mitchell "$TMP"
+    ffmpeg -i "$TMP" -vf "scale=iw*2:ih*2:flags=lanczos" "$TMP" -y
     imv -u nearest_neighbour "$TMP"
     rm "$TMP"
 else
