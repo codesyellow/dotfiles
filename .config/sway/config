@@ -58,6 +58,7 @@ for_window [app_id="anki-pt"]  move scratchpad
 for_window [app_id="anki-en"]  move scratchpad
 for_window [app_id="anki-ori"]  move scratchpad
 for_window [app_id="anki-mh"]  move scratchpad
+for_window [app_id="countdown"]  move scratchpad
 
 ## Binds
 ## file manager
@@ -92,7 +93,8 @@ mode "ia" {
 
 mode "scratchpad" {
     bindsym c exec "swaypad.py -s sm -p 'top-left' -c 'foot -a calculator -e python -q' -n 'calculator'", mode "default"
-    bindsym h exec "swaypad.py -s big -p 'top' -c 'foot -a test -e nvim /home/digo/.notes/habits.norg' -n 'test'", mode "default"
+    bindsym r exec "swaypad.py -s sm -p 'top' -c 'foot -a countdown -e countdown.py' -n 'countdown'", mode "default"
+    bindsym h exec "swaypad.jy -s big -p 'top' -c 'foot -a test -e nvim /home/digo/.notes/habits.norg' -n 'test'", mode "default"
     bindsym n exec "swaypad.py -s big -p 'bottom' -c 'foot -a notes -e nvim /home/digo/.notes/index.norg' -n 'notes'", mode "default"
     bindsym b exec "swaypad.py -s big -c 'foot -a monitor -e btop' -n 'monitor'", mode "default"
     bindsym f exec "swaypad.py -s big -c 'foot -a file-manager -e nnn' -n 'file-manager'", mode "default"

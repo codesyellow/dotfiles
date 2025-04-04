@@ -1,20 +1,8 @@
 #!/usr/bin/env bash
-is_running() {
-    if [[ "$2" == "node" ]]; then
-        script=$(ps -ef | grep 'node' | grep $1)
-    else
-        script=$(ps -ef | grep 'bash' | grep $1)
-    fi
-    if [[ -z "$script" ]]; then
-        $1 &
-    fi
-}
+easy_always.sh &
+gameon.mjs &
+#santos_calendar.py &
 
-is_running 'easy_always.sh'
-is_running 'gameon.mjs' 'node'
-santos_calendar.py &
-
-pavucontrol --gapplication-service &
 gammastep -P -O 2500 &
 earphone.sh &
 whatsap_on.sh &
