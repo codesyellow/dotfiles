@@ -11,10 +11,10 @@ set $down j
 set $up k
 set $right l
 #set $term kitty -e zellij
-set $term alacritty -e zellij
+set $term uwsm app -- $(alacritty -e zellij)
 set $scratchpad_term alacritty
 #set $menu rofi -show run -theme-str 'window { width: 60%; x-offset: 20%; y-offset: -28px; }'
-set $menu bemenu-run -i -H 26
+set $menu uwsm app -- $(bemenu-run -i -H 26)
 
 # Workspace info
 workspace 1 output HDMI-A-1
@@ -95,7 +95,7 @@ mode "scratchpad" {
     bindsym h exec "swaypad.py -s big -p 'top' -c 'foot -a test -e nvim /home/digo/.notes/habits.norg' -n 'test'", mode "default"
     bindsym n exec "swaypad.py -s big -p 'bottom' -c 'foot -a notes -e nvim /home/digo/.notes/index.norg' -n 'notes'", mode "default"
     bindsym b exec "swaypad.py -s big -c 'foot -a monitor -e btop' -n 'monitor'", mode "default"
-    bindsym f exec "swaypad.py -s big -c 'foot -a file-manager -e yazi' -n 'file-manager'", mode "default"
+    bindsym f exec "swaypad.py -s big -c 'foot -a file-manager -e nnn' -n 'file-manager'", mode "default"
     bindsym m exec "swaypad.py -s big -c 'foot -a music -e cmus' -n 'music'", mode "default"
     bindsym w exec "swaypad.py -s big -c 'wasistlos' -n 'wasistlos'", mode "default"
 
@@ -159,6 +159,13 @@ mode "move_workspaces" {
     bindsym Escape mode "default"
 }
 
+mode "screenshot" {
+        bindsym r exec "swayshot region", mode "default"
+        bindsym s exec "swayshot", mode "default"
+        bindsym h exec "swayshot mon HDMI-A-1", mode "default"
+        bindsym l exec "swayshot mon VGA-1", mode "default"
+        }
+
 ## action
 mode "action" {
     bindsym k kill, mode "default"
@@ -166,11 +173,9 @@ mode "action" {
     bindsym f fullscreen, mode "default"
     bindsym n exec "dunstctl close-all", mode "default"
     bindsym l exec "killall -USR1 swayidle", mode "default"
-    bindsym s exec grim -g "$(slurp)" "/home/digo/ps_$(date +'%Y%m%d%H%M%S').png", mode "default"
-    bindsym p exec "grim && notify-send 'Screenshot'", mode "default"
     bindsym m exec "360.sh 80", mode "default"
-    bindsym z exec 'TMP=$(mktemp); grim -g "$(slurp)" - > $TMP; imv -u nearest_neighbour $TMP; rm $TMP', mode "default"
-
+    bindsym s mode "screenshot"
+    bindsym z exec "swayshot zoom", mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -280,9 +285,9 @@ for_window [app_id="com.example.App"] floating enable, resize set 700
 # tab related
 workspace_layout tabbed
 #                       border background text indicator floating border
-client.focused          $bg      $bg      $fg  $bg  $warning
-client.focused_inactive $bg      $bg      $bg1 $warning  $bg1
-client.unfocused        $bg      $bg      $bg1 $warning  $bg1
+client.focused          $warning      $bg      $fg  $bg  $warning
+client.focused_inactive $fg      $bg      $fg $warning  $bg1
+client.unfocused        $bg      $bg      $fg $warning  $bg1
 
 # hide mouse
 seat seat0 hide_cursor 3000

@@ -14,6 +14,7 @@ is_running 'easy_always.sh'
 is_running 'gameon.mjs' 'node'
 santos_calendar.py &
 
+pavucontrol --gapplication-service &
 gammastep -P -O 2500 &
 earphone.sh &
 whatsap_on.sh &
