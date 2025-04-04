@@ -6,12 +6,12 @@
 window#waybar {
   background-color: #2e3440;
   font-family: "Leckerli One";
-  border-bottom: 1px solid #4c566a;
+  border-bottom: 0.5px solid #4c566a;
 }
 
 #workspaces {
   padding-right: 8px;
-  border-bottom: 1px solid #4c566a;
+  border-bottom: 0.5px solid #4c566a;
 }
 
 #workspaces button {
@@ -53,7 +53,7 @@ window#waybar {
   font-weight: 900;
   font-size: 18px;
   font-family: "Roboto";
-  border-bottom: 1px solid #bf616a;
+  border-bottom: 0.5px solid #bf616a;
 }
 
 .normal {
@@ -61,7 +61,7 @@ window#waybar {
   font-weight: 900;
   font-size: 18px;
   font-family: "Roboto";
-  border-bottom: 1px solid #4c566a;
+  border-bottom: 0.5px solid #4c566a;
 }
 
 #mode {

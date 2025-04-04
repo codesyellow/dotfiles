@@ -12,6 +12,7 @@ $weight: 900;
 $padx: 4px;
 $pady: 2px;
 $widget_font_size: 18px;
+$border_size: .5px solid;
 
 * {
   padding: 0;
@@ -21,12 +22,12 @@ $widget_font_size: 18px;
 window#waybar {
   background-color: $bg;
   font-family: $main_font;
-  border-bottom: 1px solid $bg1;
+  border-bottom: $border_size $bg1;
 }
 
 #workspaces {
   padding-right: 8px;
-  border-bottom: 1px solid $bg1;
+  border-bottom: $border_size $bg1;
 }
 
 #workspaces button {
@@ -68,7 +69,7 @@ window#waybar {
   font-weight: $weight;
   font-size: $widget_font_size;
   font-family: $widget_font;
-  border-bottom: 1px solid $warning;
+  border-bottom: $border_size $warning;
 }
 
 .normal {
@@ -76,7 +77,7 @@ window#waybar {
   font-weight: $weight;
   font-size: $widget_font_size;
   font-family: $widget_font;
-  border-bottom: 1px solid $bg1;
+  border-bottom: $border_size $bg1;
 }
 
 #mode {

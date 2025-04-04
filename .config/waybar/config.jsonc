@@ -83,6 +83,7 @@
         "sway/mode",
     ],
     "modules-right": [
+        "custom/countdown",
         "custom/variant",
         "custom/easy",
         "custom/cpu-temp",
@@ -153,6 +154,14 @@
   "custom/disk-hdd": {
     "exec": "/home/digo/.config/waybar/custom_widgets/hdd",
     "interval": 120,
+    "return-type": "json",
+    "tooltip": false
+  },
+"custom/countdown": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/countdown",
+//    "exec-if": "[ -f /tmp/countdown_timer ]",
+    "on-click-middle": "touch /tmp/countdown_cancel",
+    "interval": 1,
     "return-type": "json",
     "tooltip": false
   },
