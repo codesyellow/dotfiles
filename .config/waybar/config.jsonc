@@ -11,6 +11,7 @@
         "custom/cpu",
         "custom/mem",
         "custom/volume",
+        "custom/countdown",
         "custom/pymor",
         "custom/clock",
         ],
@@ -35,6 +36,14 @@
   "sway/mode": {
     "format": "MODE",
   },
+"custom/countdown": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/countdown",
+//    "exec-if": "[ -f /tmp/countdown_timer ]",
+    "on-click-middle": "touch /tmp/countdown_cancel",
+    "interval": 1,
+    "return-type": "json",
+    "tooltip": false
+  },
 "custom/gameon": {
     "exec": "/home/digo/.config/waybar/custom_widgets/gameon",
     "interval": 3,
@@ -42,7 +51,7 @@
     "tooltip": false
   },
 "custom/clock": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/day",
+    "exec": "/home/digo/.config/waybar/custom_widgets/day hour",
     "interval": 60,
     "return-type": "json",
     "tooltip": false
@@ -83,7 +92,6 @@
         "sway/mode",
     ],
     "modules-right": [
-        "custom/countdown",
         "custom/variant",
         "custom/easy",
         "custom/cpu-temp",
@@ -166,7 +174,7 @@
     "tooltip": false
   },
 "custom/clock": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/day hour",
+    "exec": "/home/digo/.config/waybar/custom_widgets/day",
     "interval": 60,
     "return-type": "json",
     "tooltip": false
