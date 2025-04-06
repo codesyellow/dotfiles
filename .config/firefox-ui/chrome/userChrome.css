@@ -1,0 +1,22 @@
+#navigator-toolbox {
+  height: 0 !important;
+  overflow: hidden !important;
+  transition: height 0.3s ease !important;
+  position: relative !important;
+  z-index: 1;
+}
+
+#navigator-toolbox:hover {
+  height: var(--toolbox-height) !important;
+  overflow: visible !important;
+}
+
+:root {
+  --toolbox-height: 85px;
+}
+
+#urlbar-container {
+  max-width: 200px !important;
+  margin: auto !important;
+  display: hidden;
+}
