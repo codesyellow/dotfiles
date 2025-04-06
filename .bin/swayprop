@@ -1,26 +1,54 @@
 #!/usr/bin/env bash
 
-# bindsym  $mod+question exec sway-prop
-# bindsym $a+$c+question exec sway-prop
+function prop () {
+    # Needs to be declared before it’s assigned or I cannot grab the exit code
+    # later. Fun race condition <.<
+    local selection
+    local window
+    # Find all visible windows and get their geometry, then
+    # format slurp-friendly, then
+    # run slurp!
+    selection=$(swaymsg -t get_tree | jq  '.. | select(.visible?==true) | .rect | [ .x,.y,.width,.height ]' \
+        | jq -r '"\(.[0]),\(.[1]) \(.[2])x\(.[3])"' \
+        | slurp -r)
 
-# but if running from a terminal rather than a sway key binding:
-# sleep 2; sway-prop
+    local ret=$?
+    [ $ret -ne 0 ] && exit $ret
 
-TMP=/tmp/sway-prop-$$.tmp
+    local x=$(echo "$selection" | awk -F'[, x]' '{print $1}')
+    local y=$(echo "$selection" | awk -F'[, x]' '{print $2}')
+    local w=$(echo "$selection" | awk -F'[, x]' '{print $3}')
+    local h=$(echo "$selection" | awk -F'[, x]' '{print $4}')
 
-trap "rm $TMP" EXIT
+    # Find the window matching the selection.
+    window=$(swaymsg -t get_tree | \
+        jq ".. | select((.rect?.x==$x) and (.rect?.y==$y) and (.rect?.width==$w) and (.rect?.height=$h) and (.visible?==true))")
 
-swaymsg -t get_tree | jq '.. | select(.type?) | select(.focused==true)' > "$TMP"
+    [ -z "$window" ] && exit 1
 
-if [[ -t 1 ]]; then
-    cat "$TMP"
-else
-    # I prefer to popup a terminal eg:
-    if type kitty &> /dev/null; then
-        kitty --class floating -e bash -c "less $TMP"
+    # Check if id was passed an if so only echo class, id and name
+    # Also copy it to clipboard instead of just printing it.
+    if [[ "$1" == "id" ]]; then
+        app_id="APP_ID=$(echo $window | jq -r '.app_id')"
+        class="CLASS=$(echo $window | jq -r '.class')"
+        name="NAME=$(echo $window | jq -r '.name')"
+        echo $app_id && wl-copy $app_id
+        echo $class && wl-copy $class
+        echo $name && wl-copy $name
     else
-        # ... but sway doesn't have anything like i3-sensible-terminal.
-        # swaynag is always installed with sway, so:
-        swaynag -l -m "sway-prop" < "$TMP"
+        # Pretty print, since capturing the output of `swaymsg` makes it uglify.
+        echo $window | jq
     fi
-fi
+}
+
+function check_dependencies () {
+    local ret=0
+    for cmd in "$@"; do
+        ! [ $(command -v $cmd) ] && echo "Missing dependency: $cmd." && ret=1
+    done
+    return $ret
+}
+
+( check_dependencies "jq" "slurp" "swaymsg" ) || exit 1
+
+prop "$1"
