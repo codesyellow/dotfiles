@@ -1,5 +1,26 @@
 #!/usr/bin/env bash
 
+function process_app_info () {
+    id=$(echo "$1" | jq -r '.app_id')
+    name=$(echo "$1" | jq -r '.name')
+    if [[ "$name" == "null" ]]; then
+        echo "name was empty"
+    else
+        echo "NAME=$name"
+        echo "NAME=$name" | wl-copy
+    fi
+    if [[ "$id" == "null" ]]; then
+        class=$(echo "$1" | jq -r '.window_properties.class' )
+        echo "CLASS=$class"
+        echo "CLASS=$class" | wl-copy
+
+    else
+        echo "ID=$id"
+        echo "ID=$id" | wl-copy
+    fi
+    notify-send.sh "App info was copied to clipboard!"
+}
+
 function prop () {
     # Needs to be declared before it’s assigned or I cannot grab the exit code
     # later. Fun race condition <.<
@@ -19,7 +40,6 @@ function prop () {
     local y=$(echo "$selection" | awk -F'[, x]' '{print $2}')
     local w=$(echo "$selection" | awk -F'[, x]' '{print $3}')
     local h=$(echo "$selection" | awk -F'[, x]' '{print $4}')
-
     # Find the window matching the selection.
     window=$(swaymsg -t get_tree | \
         jq ".. | select((.rect?.x==$x) and (.rect?.y==$y) and (.rect?.width==$w) and (.rect?.height=$h) and (.visible?==true))")
@@ -29,12 +49,7 @@ function prop () {
     # Check if id was passed an if so only echo class, id and name
     # Also copy it to clipboard instead of just printing it.
     if [[ "$1" == "id" ]]; then
-        app_id="APP_ID=$(echo $window | jq -r '.app_id')"
-        class="CLASS=$(echo $window | jq -r '.class')"
-        name="NAME=$(echo $window | jq -r '.name')"
-        echo $app_id && wl-copy $app_id
-        echo $class && wl-copy $class
-        echo $name && wl-copy $name
+        process_app_info "$window"
     else
         # Pretty print, since capturing the output of `swaymsg` makes it uglify.
         echo $window | jq
@@ -49,6 +64,6 @@ function check_dependencies () {
     return $ret
 }
 
-( check_dependencies "jq" "slurp" "swaymsg" ) || exit 1
+( check_dependencies "jq" "slurp" "swaymsg" "wl-copy" ) || exit 1
 
 prop "$1"
