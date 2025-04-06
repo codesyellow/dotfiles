@@ -11,7 +11,7 @@ set $down j
 set $up k
 set $right l
 #set $term kitty -e zellij
-set $term uwsm app -- $(alacritty -e zellij)
+set $term alacritty -e zellij
 set $scratchpad_term alacritty
 #set $menu rofi -show run -theme-str 'window { width: 60%; x-offset: 20%; y-offset: -28px; }'
 set $menu uwsm app -- $(bemenu-run -i -H 26)
@@ -47,6 +47,7 @@ for_window [app_id="dropdown_math"] move scratchpad
 for_window [app_id="dropdown_term"] move scratchpad
 for_window [app_id="todo"] move scratchpad
 for_window [app_id="notes"] move scratchpad
+for_window [app_id="habits"] move scratchpad
 for_window [app_id="music"] move scratchpad
 for_window [app_id="monitor"] move scratchpad
 for_window [app_id="calculator"] move scratchpad
@@ -94,8 +95,8 @@ mode "ia" {
 mode "scratchpad" {
     bindsym c exec "swaypad.py -s sm -p 'top-left' -c 'foot -a calculator -e python -q' -n 'calculator'", mode "default"
     bindsym r exec "swaypad.py -s sm -p 'top' -c 'foot -a countdown -e countdown.py' -n 'countdown'", mode "default"
-    bindsym h exec "swaypad.jy -s big -p 'top' -c 'foot -a test -e nvim /home/digo/.notes/habits.norg' -n 'test'", mode "default"
-    bindsym n exec "swaypad.py -s big -p 'bottom' -c 'foot -a notes -e nvim /home/digo/.notes/index.norg' -n 'notes'", mode "default"
+    bindsym h exec "swaypad.py -s big -p 'top' -c 'foot -a habits -e vim /home/digo/.vimwiki/habits/index.md' -n 'habits'", mode "default"
+    bindsym n exec "swaypad.py -s big -p 'bottom' -c 'foot -a notes -e vim /home/digo/.vimwiki/notes/index.md' -n 'notes'", mode "default"
     bindsym b exec "swaypad.py -s big -c 'foot -a monitor -e btop' -n 'monitor'", mode "default"
     bindsym f exec "swaypad.py -s big -c 'foot -a file-manager -e nnn' -n 'file-manager'", mode "default"
     bindsym m exec "swaypad.py -s big -c 'foot -a music -e cmus' -n 'music'", mode "default"
@@ -176,6 +177,7 @@ mode "action" {
     bindsym n exec "dunstctl close-all", mode "default"
     bindsym l exec "killall -USR1 swayidle", mode "default"
     bindsym m exec "360.sh 80", mode "default"
+    bindsym w exec "swayprop id", mode "default"
     bindsym s mode "screenshot"
     bindsym z exec "swayshot zoom", mode "default"
 
@@ -282,7 +284,11 @@ for_window [title="Open file"] resize set width 900, resize set height 500
 for_window [app_id="yad"] floating enable, resize set 100, move position 30 30
 for_window [app_id="imv"] floating enable, resize set 700
 for_window [app_id="com.example.App"] floating enable, resize set 700
-
+for_window [class="^Firefox$"] inhibit_idle fullscreen
+for_window [app_id="^firefox$"] inhibit_idle fullscreen
+for_window [class="^Firefox$"] move to workspace 1
+for_window [app_id="^firefox$"] move to workspace 1
+for_window [app_id="^brave-browser$"] move to workspace 4
 
 # tab related
 workspace_layout tabbed
