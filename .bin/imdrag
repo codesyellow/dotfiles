@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+TEMP_DIR="~/.drag_dir"
+IMAGE_LIMIT=10
+declare -A FILTERED_IMAGES
+if [ ! -d "$TEMP_DIR" ]; then
+    mkdir -p "$TEMP_DIR"
+    echo "directory was created!"
+fi
+
+# filter the latest x limit images from x path and store it on an Array
+function filtered_list() {
+    shopt -s nullglob
+    for dir in "$@"; do
+        files=($(ls -t "$dir"/*.{jpg,png,gif,webp,svg} 2>/dev/null | head -n $IMAGE_LIMIT))
+
+        for f in "${files[@]}"; do
+            FILTERED_IMAGES[$(date -r "$f" +%s)]="$f"
+        done
+    done
+}
+
+# sort the images and send them to temp dir
+function move_images() {
+    # sort and create new array based on the FILTERED_IMAGES
+    sorted_keys=($(printf "%s\n" "${!FILTERED_IMAGES[@]}" | sort -nr))
+
+    # this add a number before the image name to make sure its sorted correctly
+    i=1
+    for key in "${sorted_keys[@]}"; do
+        original="${FILTERED_IMAGES[$key]}"
+        filename="$(basename "$original")"
+        new_name=$(printf "%03d_%s" "$i" "$filename")
+        cp -p "$original" "$TEMP_DIR/$new_name"
+        ((i++))
+    done
+}
+
+function check_dependencies() {
+    local ret=0
+    for cmd in "$@"; do
+        ! [ $(command -v $cmd) ] && echo "Missing dependency: $cmd." && ret=1
+    done
+    return $ret
+}
+
+(check_dependencies "ripdrag") || exit 1
+
+filtered_list $@
+move_images
+
+ripdrag -n -s 300 -W 500 "$TEMP_DIR"/*
+
+if [ -d "$TEMP_DIR" ]; then
+    rm -rf "$TEMP_DIR"
+    echo "directory was deleted!"
+fi
