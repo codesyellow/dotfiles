@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-TEMP_DIR="~/.drag_dir"
+TEMP_DIR="$HOME/.drag_dir"
 IMAGE_LIMIT=10
 declare -A FILTERED_IMAGES
 if [ ! -d "$TEMP_DIR" ]; then
@@ -49,7 +49,7 @@ function check_dependencies() {
 filtered_list $@
 move_images
 
-ripdrag -n -s 300 -W 500 "$TEMP_DIR"/*
+ripdrag -n -i -s 400 -H 500 "$TEMP_DIR"/*
 
 if [ -d "$TEMP_DIR" ]; then
     rm -rf "$TEMP_DIR"
