@@ -1,6 +1,11 @@
 # Read `man 5 sway` for a complete reference.
+# Quick search: 
+## SAB(System Action Binds) - Anything related to the system: Clipboard, Runner, Drag and Drop App, Clipboard history, fullscreen, exit...
+## ESCA(Exec Script/Commands/Apps) - Anything that needs to be executed but has nothing to do with anything related to the system: Firefox, Scripts...
+## TFPR(Toggle Floating App Rules)
+## TFPB(Toggle Floating App Binds)
 exec ~/.config/sway/autostart
-# Own variables
+# variables
 set $fg #eceff4
 set $warning #bf616a
 set $bg #2e3440
@@ -10,25 +15,31 @@ set $left h
 set $down j
 set $up k
 set $right l
+set $update_mode "pkill -RTMIN+7 waybar"
 #set $term kitty -e zellij
 set $term alacritty -e zellij
 set $scratchpad_term alacritty
 #set $menu rofi -show run -theme-str 'window { width: 60%; x-offset: 20%; y-offset: -28px; }'
-set $menu uwsm app -- $(bemenu-run -i -H 26)
+set $menu uwsm app -- $(rofi -show run -theme-str 'window { width: 60%; x-offset: 20%; y-offset: -25px; }')
 
-# Workspace info
+# General
 workspace 1 output HDMI-A-1
 workspace 2 output HDMI-A-1
 workspace 3 output HDMI-A-1
 workspace 4 output VGA-1
 workspace 5 output VGA-1
 workspace 6 output VGA-1
-
-# Sway variables
+# tab related
+workspace_layout tabbed
+# colors                border background text indicator floating border
+client.focused          $warning      $bg      $fg  $bg  $warning
+client.focused_inactive $fg      $bg      $fg $warning  $bg1
+client.unfocused        $bg      $bg      $fg $warning  $bg1
 default_border pixel
 hide_edge_borders --i3 smart
-
-# Monitor
+# hide mouse
+seat seat0 hide_cursor 3000
+# monitors
 output HDMI-A-1 res 1280x1024@75HZ pos 0 0 transform 270 bg ~/.wallpapers/vert.png fill allow_tearing yes max_render_time off
 output VGA-1 res 1360x768@60HZ pos 1024 500 bg ~/.wallpapers/hori.png fill allow_tearing yes max_render_time off
 # Read `man 5 sway-input` for more information about this section.
@@ -41,7 +52,7 @@ input type:keyboard {
     xkb_options caps:ctrl_modifier,caps:escape,grp:alt_shift_toggle
 } 
 
-# Scratchpads
+# TFPR
 ## Rules
 for_window [app_id="dropdown_math"] move scratchpad
 for_window [app_id="dropdown_term"] move scratchpad
@@ -61,8 +72,7 @@ for_window [app_id="anki-ori"]  move scratchpad
 for_window [app_id="anki-mh"]  move scratchpad
 for_window [app_id="countdown"]  move scratchpad
 
-## Binds
-## file manager
+# TFPR
 mode "file" {
     bindsym c exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T file -e yazi ~/.HDD/courses/", mode "default"
     bindsym h exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T file -e yazi ~/.HDD/", mode "default"
@@ -106,12 +116,12 @@ mode "scratchpad" {
     bindsym u exec "swaypad.py -s smf -p 'top' -c 'alacritty --config-file /home/digo/.config/alacritty/scratchpad.toml --class dropdown_term -e zellij attach --create scratch' -n 'dropdown_term'", mode "default"
     bindsym l exec "swaypad.py -s sm -c 'foot -a lowfi -e lowfi' -n 'lowfi'", mode "default"
 #    bindsym r exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x40% -p 0,20 -- foot -T countdown -e countdown.py", mode "default"
-    bindsym g mode "file"
-    bindsym s mode "study"
-    bindsym i mode "ia"
+    bindsym g mode "file"; exec $update_mode
+    bindsym s mode "study"; exec $update_mode
+    bindsym i mode "ia"; exec $update_mode
 
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+    bindsym Return mode "default"; exec $update_mode
+    bindsym Escape mode "default"; exec $update_mode
 }
 
 # Binds
@@ -144,8 +154,8 @@ mode "workspaces" {
     bindsym g workspace 5, mode "default"
     bindsym d workspace 6, mode "default"
 
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+    bindsym Return mode "default"; exec $update_mode
+    bindsym Escape mode "default"; exec $update_mode
 }
 ## Move workspace binds
 mode "move_workspaces" {
@@ -158,18 +168,30 @@ mode "move_workspaces" {
     bindsym g move container to workspace number 5, mode "default"
     bindsym d move container to workspace number 6, mode "default"
 
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+    bindsym Return mode "default"; exec $update_mode
+    bindsym Escape mode "default"; exec $update_mode
 }
 
 mode "screenshot" {
-        bindsym r exec "swayshot region", mode "default"
-        bindsym s exec "swayshot", mode "default"
-        bindsym h exec "swayshot mon HDMI-A-1", mode "default"
-        bindsym l exec "swayshot mon VGA-1", mode "default"
-        }
+    bindsym r exec "swayshot region", mode "default"
+    bindsym e exec "swayshot edit", mode "default"
+    bindsym s exec "swayshot", mode "default"
+    bindsym h exec "swayshot mon HDMI-A-1", mode "default"
+    bindsym l exec "swayshot mon VGA-1", mode "default"
 
-## action
+    bindsym Return mode "default"; exec $update_mode
+    bindsym Escape mode "default"; exec $update_mode
+}
+
+mode "bar" {
+    bindsym r exec "killall -SIGUSR2 waybar", mode "default"
+    bindsym h exec "killall -SIGUSR1 waybar", mode "default"
+
+    bindsym Return mode "default"; exec $update_mode
+    bindsym Escape mode "default"; exec $update_mode
+}
+
+# SAB
 mode "action" {
     bindsym k kill, mode "default"
     bindsym r reload, mode "default"
@@ -177,34 +199,28 @@ mode "action" {
     bindsym n exec "dunstctl close-all", mode "default"
     bindsym l exec "killall -USR1 swayidle", mode "default"
     bindsym m exec "360.sh 80", mode "default"
-    bindsym w exec "swayprop id", mode "default"
-    bindsym s mode "screenshot"
     bindsym z exec "swayshot zoom", mode "default"
+    bindsym w exec "swayprop id", mode "default"
+    # extended modes
+    bindsym s mode "screenshot"; exec $update_mode
 
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+    bindsym Return mode "default"; exec $update_mode
+    bindsym Escape mode "default"; exec $update_mode
 }
 
-## bar
-mode "bar" {
-    bindsym r exec "killall -SIGUSR2 waybar", mode "default"
-    bindsym h exec "killall -SIGUSR1 waybar", mode "default"
-
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-## exec
+# ESCA
 mode "exec" {
     bindsym r exec $menu, mode "default"
     bindsym t exec "kitty -T alt_term -e zellij", mode "default"
     bindsym h exec "cliphist list | wofi --dmenu | cliphist decode | wl-copy", mode "default"
     bindsym m exec "maps.sh", mode "default"
+    bindsym f exec "figma-run", mode "default"
     bindsym n exec "ankivim.sh", mode "default"
     bindsym c exec "hyprpicker | wl-copy", mode "default"
+    bindsym d exec "imdrag ~/Downloads ~/.pictures ~/.wallpapers", mode "default"
 
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+    bindsym Return mode "default"; exec $update_mode
+    bindsym Escape mode "default"; exec $update_mode
 }
 
 ## layout
@@ -215,8 +231,8 @@ mode "layout" {
     bindsym v splitv, mode "default"
     bindsym b splith, mode "default"
 
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+    bindsym Return mode "default"; exec $update_mode
+    bindsym Escape mode "default"; exec $update_mode
 }
 
 ## volume
@@ -226,20 +242,20 @@ mode "volume" {
     bindsym k exec volume.sh up_slow, mode "default"
     bindsym j exec volume.sh down_slow, mode "default"
 
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+    bindsym Return mode "default"; exec $update_mode
+    bindsym Escape mode "default"; exec $update_mode
 }
 
 ## modes-bind
-bindsym $mod+s mode "scratchpad"
-bindsym $mod+w mode "workspaces"
-bindsym $mod+Shift+w mode "move_workspaces"
-bindsym $mod+e mode "exec"
-bindsym $mod+a mode "action"
-bindsym $mod+y mode "layout"
-bindsym $mod+r mode "resize"
-bindsym $mod+v mode "volume"
-bindsym $mod+b mode "bar"
+bindsym $mod+s mode "scratchpad"; exec $update_mode
+bindsym $mod+w mode "workspaces"; exec $update_mode
+bindsym $mod+Shift+w mode "move_workspaces"; exec $update_mode
+bindsym $mod+e mode "exec"; exec $update_mode
+bindsym $mod+a mode "action"; exec $update_mode
+bindsym $mod+y mode "layout"; exec $update_mode
+bindsym $mod+r mode "resize"; exec $update_mode
+bindsym $mod+v mode "volume"; exec $update_mode
+bindsym $mod+b mode "bar"; exec $update_mode
 
 # normal-binds
 bindsym $mod+t exec $term
@@ -289,16 +305,7 @@ for_window [app_id="^firefox$"] inhibit_idle fullscreen
 for_window [class="^Firefox$"] move to workspace 1
 for_window [app_id="^firefox$"] move to workspace 1
 for_window [app_id="^brave-browser$"] move to workspace 4
-
-# tab related
-workspace_layout tabbed
-#                       border background text indicator floating border
-client.focused          $warning      $bg      $fg  $bg  $warning
-client.focused_inactive $fg      $bg      $fg $warning  $bg1
-client.unfocused        $bg      $bg      $fg $warning  $bg1
-
-# hide mouse
-seat seat0 hide_cursor 3000
+for_window [app_id="it.catboy.ripdrag"] move position 10 10
 
 include /etc/sway/config.d/*
 include ~/.config/sway/rules.conf
