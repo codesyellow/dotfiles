@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+source $HOME/.config/waybar/custom_widgets/config
+
+state="normal"
+mode=$(swaymsg -t get_binding_state | jq -r '.name')
+text="${mode:0:3}"
+text_uppercased="${text^^}"
+
+if [[ "$text_uppercased" != "DEF" ]]; then
+    state="warning"
+else
+    state="hidden"
+fi
+
+output="$text_uppercased"
+printf '{"text": "%s", "tooltip": "Updates: %s", "class": "%s"}\n' "$output" "$mode" "$state"

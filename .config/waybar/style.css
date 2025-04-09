@@ -56,12 +56,18 @@ window#waybar {
   border-bottom: 0.5px solid #bf616a;
 }
 
-.normal {
+.normal,
+.hidden {
   padding: 0 4px;
   font-weight: 900;
   font-size: 18px;
   font-family: "Roboto";
   border-bottom: 0.5px solid #4c566a;
+}
+
+.hidden {
+  background-color: #2e3440;
+  color: #2e3440;
 }
 
 #mode {

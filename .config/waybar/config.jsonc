@@ -4,7 +4,7 @@
 	"output": "HDMI-A-1", 
     "modules-left": [
         "sway/workspaces", 
-        "sway/mode",
+        "custom/mode"
     ],
     "modules-right": [
         "custom/gameon",
@@ -50,6 +50,14 @@
     "return-type": "json",
     "tooltip": false
   },
+"custom/mode": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/swaymodes",
+    "interval": 1,
+    "return-type": "json",
+    "signal": 7,
+    "tooltip": false
+  },
+
 "custom/clock": {
     "exec": "/home/digo/.config/waybar/custom_widgets/day hour",
     "interval": 60,
@@ -89,7 +97,7 @@
     "output": "VGA-1",
     "modules-left": [
         "sway/workspaces", 
-        "sway/mode",
+        "custom/mode"
     ],
     "modules-right": [
         "custom/variant",
@@ -179,5 +187,11 @@
     "return-type": "json",
     "tooltip": false
     },
-
+"custom/mode": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/swaymodes",
+    "interval": 1,
+    "return-type": "json",
+    "signal": 7,
+    "tooltip": false
+  },
 }]

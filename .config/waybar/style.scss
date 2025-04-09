@@ -72,12 +72,18 @@ window#waybar {
   border-bottom: $border_size $warning;
 }
 
-.normal {
+.normal,
+.hidden {
   padding: 0 4px;
   font-weight: $weight;
   font-size: $widget_font_size;
   font-family: $widget_font;
   border-bottom: $border_size $bg1;
+}
+
+.hidden {
+  background-color: $bg;
+  color: $bg;
 }
 
 #mode {
