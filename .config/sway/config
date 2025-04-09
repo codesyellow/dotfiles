@@ -16,6 +16,7 @@ set $down j
 set $up k
 set $right l
 set $update_mode "pkill -RTMIN+7 waybar"
+set $mode_reset exec sh -c 'swaymsg mode "default"; pkill -RTMIN+7 waybar'
 #set $term kitty -e zellij
 set $term alacritty -e zellij
 set $scratchpad_term alacritty
@@ -120,8 +121,8 @@ mode "scratchpad" {
     bindsym s mode "study"; exec $update_mode
     bindsym i mode "ia"; exec $update_mode
 
-    bindsym Return mode "default"; exec $update_mode
-    bindsym Escape mode "default"; exec $update_mode
+    bindsym Return $mode_reset
+    bindsym Escape $mode_reset
 }
 
 # Binds
@@ -146,46 +147,46 @@ mode "resize" {
 }
 mode "workspaces" {
     # vertical monitor
-    bindsym w workspace 1, mode "default"
-    bindsym t workspace 2, mode "default"
-    bindsym a workspace 3, mode "default"
+    bindsym w workspace 1, $mode_reset
+    bindsym t workspace 2, $mode_reset
+    bindsym a workspace 3, $mode_reset
     # horizontal monitor
-    bindsym b workspace 4, mode "default"
-    bindsym g workspace 5, mode "default"
-    bindsym d workspace 6, mode "default"
+    bindsym b workspace 4, $mode_reset
+    bindsym g workspace 5, $mode_reset
+    bindsym d workspace 6, $mode_reset
 
-    bindsym Return mode "default"; exec $update_mode
-    bindsym Escape mode "default"; exec $update_mode
+    bindsym Return $mode_reset
+    bindsym Escape $mode_reset
 }
 ## Move workspace binds
 mode "move_workspaces" {
     # vertical monitor
-    bindsym w move container to workspace number 1, mode "default"
-    bindsym t move container to workspace number 2, mode "default"
-    bindsym a move container to workspace number 3, mode "default"
+    bindsym w move container to workspace number 1, $mode_reset
+    bindsym t move container to workspace number 2, $mode_reset
+    bindsym a move container to workspace number 3, $mode_reset
     # horizontal monitor
-    bindsym b move container to workspace number 4, mode "default"
-    bindsym g move container to workspace number 5, mode "default"
-    bindsym d move container to workspace number 6, mode "default"
+    bindsym b move container to workspace number 4, $mode_reset
+    bindsym g move container to workspace number 5, $mode_reset
+    bindsym d move container to workspace number 6, $mode_reset
 
-    bindsym Return mode "default"; exec $update_mode
-    bindsym Escape mode "default"; exec $update_mode
+    bindsym Return $mode_reset
+    bindsym Escape $mode_reset
 }
 
 mode "screenshot" {
-    bindsym r exec "swayshot region", mode "default"
-    bindsym e exec "swayshot edit", mode "default"
-    bindsym s exec "swayshot", mode "default"
-    bindsym h exec "swayshot mon HDMI-A-1", mode "default"
-    bindsym l exec "swayshot mon VGA-1", mode "default"
+    bindsym r exec "swayshot region", $mode_reset
+    bindsym e exec "swayshot edit", $mode_reset
+    bindsym s exec "swayshot", $mode_reset
+    bindsym h exec "swayshot mon HDMI-A-1", $mode_reset
+    bindsym l exec "swayshot mon VGA-1", $mode_reset
 
-    bindsym Return mode "default"; exec $update_mode
-    bindsym Escape mode "default"; exec $update_mode
+    bindsym Return $mode_reset
+    bindsym Escape $mode_reset
 }
 
 mode "bar" {
-    bindsym r exec "killall -SIGUSR2 waybar", mode "default"
-    bindsym h exec "killall -SIGUSR1 waybar", mode "default"
+    bindsym r exec "killall -SIGUSR2 waybar", $mode_reset
+    bindsym h exec "killall -SIGUSR1 waybar", $mode_reset
 
     bindsym Return mode "default"; exec $update_mode
     bindsym Escape mode "default"; exec $update_mode
@@ -193,31 +194,32 @@ mode "bar" {
 
 # SAB
 mode "action" {
-    bindsym k kill, mode "default"
-    bindsym r reload, mode "default"
-    bindsym f fullscreen, mode "default"
-    bindsym n exec "dunstctl close-all", mode "default"
-    bindsym l exec "killall -USR1 swayidle", mode "default"
-    bindsym m exec "360.sh 80", mode "default"
-    bindsym z exec "swayshot zoom", mode "default"
-    bindsym w exec "swayprop id", mode "default"
+    bindsym k kill, $mode_reset
+    bindsym r reload, $mode_reset
+    bindsym f fullscreen, $mode_reset
+    bindsym n exec "dunstctl close-all", $mode_reset
+    bindsym l exec "killall -USR1 swayidle", $mode_reset
+    bindsym m exec "360.sh 80", $mode_reset
+    bindsym z exec "swayshot zoom", $mode_reset
+    bindsym w exec "swayprop id", $mode_reset
+    bindsym d exec "imdrag ~/Downloads ~/.pictures ~/.wallpapers", $mode_reset
     # extended modes
     bindsym s mode "screenshot"; exec $update_mode
+    bindsym b mode "bar"; exec $update_mode
 
-    bindsym Return mode "default"; exec $update_mode
-    bindsym Escape mode "default"; exec $update_mode
+    bindsym Return $mode_reset
+    bindsym Escape $mode_reset
 }
 
 # ESCA
 mode "exec" {
-    bindsym r exec $menu, mode "default"
-    bindsym t exec "kitty -T alt_term -e zellij", mode "default"
-    bindsym h exec "cliphist list | wofi --dmenu | cliphist decode | wl-copy", mode "default"
-    bindsym m exec "maps.sh", mode "default"
-    bindsym f exec "figma-run", mode "default"
-    bindsym n exec "ankivim.sh", mode "default"
-    bindsym c exec "hyprpicker | wl-copy", mode "default"
-    bindsym d exec "imdrag ~/Downloads ~/.pictures ~/.wallpapers", mode "default"
+    bindsym r exec $menu, $mode_reset
+    bindsym t exec "kitty -T alt_term -e zellij", $mode_reset
+    bindsym h exec "cliphist list | wofi --dmenu | cliphist decode | wl-copy", $mode_reset
+    bindsym m exec "maps.sh", $mode_reset
+    bindsym f exec "figma-run", $mode_reset
+    bindsym n exec "ankivim.sh", $mode_reset
+    bindsym c exec "hyprpicker | wl-copy", $mode_reset
 
     bindsym Return mode "default"; exec $update_mode
     bindsym Escape mode "default"; exec $update_mode
@@ -225,25 +227,25 @@ mode "exec" {
 
 ## layout
 mode "layout" {
-    bindsym t layout tabbed, mode "default"
-    bindsym s layout stacking, mode "default"
-    bindsym o layout toggle splitv tabbed, mode "default"
-    bindsym v splitv, mode "default"
-    bindsym b splith, mode "default"
+    bindsym t layout tabbed, $mode_reset
+    bindsym s layout stacking, $mode_reset
+    bindsym o layout toggle splitv tabbed, $mode_reset
+    bindsym v splitv, $mode_reset
+    bindsym b splith, $mode_reset
 
-    bindsym Return mode "default"; exec $update_mode
-    bindsym Escape mode "default"; exec $update_mode
+    bindsym Return $mode_reset
+    bindsym Escape $mode_reset
 }
 
 ## volume
 mode "volume" {
-    bindsym l exec volume.sh up, mode "default"
-    bindsym h exec volume.sh down, mode "default"
-    bindsym k exec volume.sh up_slow, mode "default"
-    bindsym j exec volume.sh down_slow, mode "default"
+    bindsym l exec volume.sh up, $mode_reset
+    bindsym h exec volume.sh down, $mode_reset
+    bindsym k exec volume.sh up_slow, $mode_reset
+    bindsym j exec volume.sh down_slow, $mode_reset
 
-    bindsym Return mode "default"; exec $update_mode
-    bindsym Escape mode "default"; exec $update_mode
+    bindsym Return $mode_reset
+    bindsym Escape $mode_reset
 }
 
 ## modes-bind
@@ -297,6 +299,7 @@ bar {
 #for_window [class="^com.github.th_ch.youtube_music$"] move to workspace 5
 ## sizes
 for_window [title="Open file"] resize set width 900, resize set height 500
+for_window [app_id="^xdg-desktop-portal-gtk$"] resize set width 900, resize set height 500
 for_window [app_id="yad"] floating enable, resize set 100, move position 30 30
 for_window [app_id="imv"] floating enable, resize set 700
 for_window [app_id="com.example.App"] floating enable, resize set 700
