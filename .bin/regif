@@ -16,14 +16,37 @@ function check_dependencies() {
     return $ret
 }
 
-(check_dependencies "wf-recorder" "notify-send.sh") || exit 1
+(check_dependencies "wf-recorder" "notify-send.sh" "swaymsg") || exit 1
 
-if [[ "$MONITOR" == "VGA-1" ]]; then
-    wf-recorder -y -o $MONITOR -c gif -f $HOME/.pictures/wf-recorder$(date +'%Y%m%d%H%M%S').gif &
+record_monitor() {
+    local monitor="$MONITOR"
+    local transform=""
+
+    [[ "$monitor" == "HDMI-A-1" ]] && transform="-F transpose=1"
+
+    wf-recorder -y -o "$monitor" $transform -c gif -f "$HOME/.pictures/wf-recorder$(date +'%Y%m%d%H%M%S').gif" &
+    pid=$!
+    sleep $TIME
+    kill $pid
+    notify-send.sh "$MONITOR was recorded"
+}
+
+record_region() {
+    local monitor="$MONITOR"
+    local transform=""
+
+    [[ "$monitor" == "HDMI-A-1" ]] && transform="-F transpose=1"
+
+    wf-recorder -y -g "$(slurp)" $transform -c gif -f "$HOME/.pictures/wf-recorder$(date +'%Y%m%d%H%M%S').gif" &
+    pid=$!
+    sleep $TIME
+    kill $pid
+    notify-send.sh "Region was recorded"
+}
+
+if [[ "$1" == "region" ]]; then
+    CURRENT_MONITOR=$(swaymsg -t get_outputs | jq -r '.[] | select(.focused).name')
+    record_region "$CURRENT_MONITOR"
 else
-    wf-recorder -y -o $MONITOR --filter "transpose=1" -c gif -f $HOME/.pictures/wf-recorder$(date +'%Y%m%d%H%M%S').gif &
+    record_monitor "$MONITOR"
 fi
-pid=$!
-sleep $TIME
-kill $pid
-notify-send.sh "Recording Ended"
