@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+MONITOR=$1
+TIME=$2
+
+PIC_PATH="$HOME/.pictures"
+if ! [[ -d "$PIC_PATH" ]]; then
+    mkdir "$PIC_PATH"
+    echo "Pictures folder was created"
+fi
+
+function check_dependencies() {
+    local ret=0
+    for cmd in "$@"; do
+        ! [ $(command -v $cmd) ] && echo "Missing dependency: $cmd." && ret=1
+    done
+    return $ret
+}
+
+(check_dependencies "wf-recorder" "notify-send.sh") || exit 1
+
+wf-recorder -y -o $MONITOR -c gif -f $HOME/.pictures/wf-recorder$(date +'%Y%m%d%H%M%S').gif &
+pid=$!
+sleep $TIME
+kill $pid
+notify-send.sh "Recording Ended"
