@@ -18,7 +18,11 @@ function check_dependencies() {
 
 (check_dependencies "wf-recorder" "notify-send.sh") || exit 1
 
-wf-recorder -y -o $MONITOR -c gif -f $HOME/.pictures/wf-recorder$(date +'%Y%m%d%H%M%S').gif &
+if [[ "$MONITOR" == "VGA-1" ]]; then
+    wf-recorder -y -o $MONITOR -c gif -f $HOME/.pictures/wf-recorder$(date +'%Y%m%d%H%M%S').gif &
+else
+    wf-recorder -y -o $MONITOR --filter "transpose=1" -c gif -f $HOME/.pictures/wf-recorder$(date +'%Y%m%d%H%M%S').gif &
+fi
 pid=$!
 sleep $TIME
 kill $pid
