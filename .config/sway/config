@@ -108,7 +108,8 @@ mode "scratchpad" {
     bindsym c exec "swaypad.py -s sm -p 'top-left' -c 'foot -a calculator -e python -q' -n 'calculator'", $mode_reset
     bindsym r exec "swaypad.py -s sm -p 'top' -c 'foot -a countdown -e countdown.py' -n 'countdown'", $mode_reset
     bindsym h exec "swaypad.py -s big -p 'top' -c 'foot -a habits -e vim /home/digo/.vimwiki/habits/index.md' -n 'habits'", $mode_reset
-    bindsym n exec "swaypad.py -s big -p 'bottom' -c 'foot -a notes -e vim /home/digo/.vimwiki/notes/index.md' -n 'notes'", $mode_reset
+    #bindsym n exec "swaypad.py -s big -p 'bottom' -c 'foot -a notes -e vim /home/digo/.vimwiki/notes/index.md' -n 'notes'", $mode_reset
+    bindsym n exec "swaypad.py -s big -p 'bottom' -c 'foot -a notes -e nvim /home/digo/.notes/index.norg' -n 'notes'", $mode_reset
     bindsym b exec "swaypad.py -s big -c 'foot -a monitor -e btop' -n 'monitor'", $mode_reset
     bindsym f exec "swaypad.py -s big -c 'foot -a file-manager -e nnn' -n 'file-manager'", $mode_reset
     bindsym m exec "swaypad.py -s big -c 'foot -a music -e cmus' -n 'music'", $mode_reset
@@ -188,6 +189,7 @@ mode "screenshot" {
 mode "gif_record" {
     bindsym h exec "regif HDMI-A-1 8", $mode_reset
     bindsym l exec "regif VGA-1 8", $mode_reset
+    bindsym r exec "regif region 8", $mode_reset
 
     bindsym Return $mode_reset
     bindsym Escape $mode_reset
