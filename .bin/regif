@@ -4,49 +4,49 @@ TIME=$2
 
 PIC_PATH="$HOME/.pictures"
 if ! [[ -d "$PIC_PATH" ]]; then
-    mkdir "$PIC_PATH"
-    echo "Pictures folder was created"
+  mkdir "$PIC_PATH"
+  echo "Pictures folder was created"
 fi
 
 function check_dependencies() {
-    local ret=0
-    for cmd in "$@"; do
-        ! [ $(command -v $cmd) ] && echo "Missing dependency: $cmd." && ret=1
-    done
-    return $ret
+  local ret=0
+  for cmd in "$@"; do
+    ! [ $(command -v $cmd) ] && echo "Missing dependency: $cmd." && ret=1
+  done
+  return $ret
 }
 
 (check_dependencies "wf-recorder" "notify-send.sh" "swaymsg") || exit 1
 
 record_monitor() {
-    local monitor="$MONITOR"
-    local transform=""
+  local monitor="$MONITOR"
+  local transform=""
 
-    [[ "$monitor" == "HDMI-A-1" ]] && transform="-F transpose=1"
+  [[ "$monitor" == "VGA-1" ]] && transform="-F transpose=2"
 
-    wf-recorder -y -o "$monitor" $transform -c gif -f "$HOME/.pictures/wf-recorder$(date +'%Y%m%d%H%M%S').gif" &
-    pid=$!
-    sleep $TIME
-    kill $pid
-    notify-send.sh "$MONITOR was recorded"
+  wf-recorder -y -o "$monitor" $transform -r 10 -c gif -f "$HOME/.pictures/wf-recorder$(date +'%Y%m%d%H%M%S').gif" &
+  pid=$!
+  sleep $TIME
+  kill $pid
+  notify-send.sh "$MONITOR was recorded"
 }
 
 record_region() {
-    local monitor="$MONITOR"
-    local transform=""
+  local monitor="$MONITOR"
+  local transform=""
 
-    [[ "$monitor" == "HDMI-A-1" ]] && transform="-F transpose=1"
+  [[ "$monitor" == "VGA-1" ]] && transform="-F transpose=2"
 
-    wf-recorder -y -g "$(slurp)" $transform -c gif -f "$HOME/.pictures/wf-recorder$(date +'%Y%m%d%H%M%S').gif" &
-    pid=$!
-    sleep $TIME
-    kill $pid
-    notify-send.sh "Region was recorded"
+  wf-recorder -y -g "$(slurp)" $transform -r 10 -c gif -f "$HOME/.pictures/wf-recorder$(date +'%Y%m%d%H%M%S').gif" &
+  pid=$!
+  sleep $TIME
+  kill $pid
+  notify-send.sh "Region was recorded"
 }
 
 if [[ "$1" == "region" ]]; then
-    CURRENT_MONITOR=$(swaymsg -t get_outputs | jq -r '.[] | select(.focused).name')
-    record_region "$CURRENT_MONITOR"
+  CURRENT_MONITOR=$(swaymsg -t get_outputs | jq -r '.[] | select(.focused).name')
+  record_region "$CURRENT_MONITOR"
 else
-    record_monitor "$MONITOR"
+  record_monitor "$MONITOR"
 fi
