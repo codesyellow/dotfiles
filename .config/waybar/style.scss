@@ -11,7 +11,7 @@ $widget_font: "Roboto";
 $weight: 900;
 $padx: 4px;
 $pady: 2px;
-$widget_font_size: 18px;
+$widget_font_size: 17px;
 $border_size: .5px solid;
 
 * {
@@ -32,7 +32,7 @@ window#waybar {
 
 #workspaces button {
   border-radius: 0;
-  font-size: 18px;
+  font-size: 16px;
   font-family: $main_font;
   font-weight: 900;
   color: $fg;

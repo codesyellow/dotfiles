@@ -7,8 +7,8 @@ preset=$(cat ~/.config/easyeffects_preset)
 text="EQ"
 
 if [[ "$preset" != "LoudnessEqualizer" ]]; then
-    text="MUS"
-    state="warning"
+  text="MUS"
+  state="warning"
 fi
 
 output=$(get_pango "DSP" "$text")

@@ -16,7 +16,7 @@ window#waybar {
 
 #workspaces button {
   border-radius: 0;
-  font-size: 18px;
+  font-size: 16px;
   font-family: "Leckerli One";
   font-weight: 900;
   color: #eceff4;
@@ -51,7 +51,7 @@ window#waybar {
   color: #bf616a;
   background-color: #2e3440;
   font-weight: 900;
-  font-size: 18px;
+  font-size: 17px;
   font-family: "Roboto";
   border-bottom: 0.5px solid #bf616a;
 }
@@ -60,7 +60,7 @@ window#waybar {
 .hidden {
   padding: 0 4px;
   font-weight: 900;
-  font-size: 18px;
+  font-size: 17px;
   font-family: "Roboto";
   border-bottom: 0.5px solid #4c566a;
 }
