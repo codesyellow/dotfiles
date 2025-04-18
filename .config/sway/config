@@ -24,12 +24,12 @@ set $scratchpad_term alacritty
 set $menu uwsm app -- $(rofi -show run -theme-str 'window { width: 60%; x-offset: 20%; y-offset: -25px; }')
 
 # General
-workspace 1 output HDMI-A-1
-workspace 2 output HDMI-A-1
-workspace 3 output HDMI-A-1
-workspace 4 output VGA-1
-workspace 5 output VGA-1
-workspace 6 output VGA-1
+workspace 1 output VGA-1
+workspace 2 output VGA-1
+workspace 3 output VGA-1
+workspace 4 output HDMI-A-1
+workspace 5 output HDMI-A-1
+workspace 6 output HDMI-A-1
 # tab related
 workspace_layout tabbed
 # colors                border background text indicator floating border
@@ -41,8 +41,8 @@ hide_edge_borders --i3 smart
 # hide mouse
 seat seat0 hide_cursor 3000
 # monitors
-output HDMI-A-1 res 1280x1024@75HZ pos 0 0 transform 270 bg ~/.wallpapers/vert.png fill allow_tearing yes max_render_time off
-output VGA-1 res 1360x768@60HZ pos 1025 500 bg ~/.wallpapers/hori.png fill allow_tearing yes max_render_time off
+output HDMI-A-1 res 1280x1024@75HZ pos 0 0 bg ~/.wallpapers/vert.png fill allow_tearing yes max_render_time off
+output VGA-1 res 1360x768@60HZ pos 1280 0 transform 90 bg ~/.wallpapers/hori.png fill allow_tearing yes max_render_time off
 # Read `man 5 sway-input` for more information about this section.
 input type:pointer {
     accel_profile "flat" # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
@@ -151,11 +151,11 @@ mode "workspaces" {
     # vertical monitor
     bindsym w workspace 1, $mode_reset
     bindsym t workspace 2, $mode_reset
-    bindsym a workspace 3, $mode_reset
+    bindsym d workspace 3, $mode_reset
     # horizontal monitor
     bindsym b workspace 4, $mode_reset
     bindsym g workspace 5, $mode_reset
-    bindsym d workspace 6, $mode_reset
+    bindsym a workspace 6, $mode_reset
 
     bindsym Return $mode_reset
     bindsym Escape $mode_reset
@@ -165,11 +165,11 @@ mode "move_workspaces" {
     # vertical monitor
     bindsym w move container to workspace number 1, $mode_reset
     bindsym t move container to workspace number 2, $mode_reset
-    bindsym a move container to workspace number 3, $mode_reset
+    bindsym d move container to workspace number 3, $mode_reset
     # horizontal monitor
     bindsym b move container to workspace number 4, $mode_reset
     bindsym g move container to workspace number 5, $mode_reset
-    bindsym d move container to workspace number 6, $mode_reset
+    bindsym a move container to workspace number 6, $mode_reset
 
     bindsym Return $mode_reset
     bindsym Escape $mode_reset
