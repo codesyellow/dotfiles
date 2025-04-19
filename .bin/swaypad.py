@@ -5,12 +5,12 @@ import argparse
 import time
 
 PADDING = (20, 20)
-SMALL = (400, 400)
-SMALLA = (400, 700)
-SMALLF = (1000, 400)
-MEDIUM = (600, 600)
-MEDIUMA = (600, 700)
-BIG = (1000, 700)
+SMALL = (40, 40)
+SMALLA = (40, 80)
+SMALLF = (90, 40)
+MEDIUM = (50, 50)
+MEDIUMA = (50, 50)
+BIG = (90, 90)
 
 parser = argparse.ArgumentParser(description="Description",
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -34,19 +34,22 @@ class Swaypad():
         monitor_height = self.get_focused_monitor()["rect"]["height"]
         args = parser.parse_args()
         config = vars(args)
+        width = int(monitor_width * (self.size[0] / 100))
+        height = int(monitor_height * (self.size[0] / 100))
+
         match config["position"]:
             case "top":
-                return (monitor_width//2 - self.size[0] // 2, PADDING[1])
+                return (monitor_width//2 - width // 2, PADDING[1])
             case "bottom":
-                return (monitor_width//2 - self.size[0] // 2, monitor_height - self.size[1] - 50)
+                return (monitor_width//2 - width // 2, monitor_height - height - 50)
             case "top-left":
                 return PADDING
             case "top-right":
-                return (monitor_width - self.size[0] - PADDING[0], PADDING[1])
+                return (monitor_width - width - PADDING[0], PADDING[1])
             case "bottom-left":
-                return (PADDING[0], monitor_height - self.size[1] - 50)
+                return (PADDING[0], monitor_height - height - 50)
             case "bottom-right":
-                return (monitor_width - self.size[0] - PADDING[0], monitor_height - self.size[1] - 50)
+                return (monitor_width - width - PADDING[0], monitor_height - height - 50)
             case _:
                 return ("center", "")
 
@@ -103,7 +106,12 @@ class Swaypad():
         else:
             app_name = f"[class='{class_name}']"
         position = f"move position {self.position[0]} {self.position[1]}"
-        resize = f"resize set {self.size[0]} {self.size[1]}"
+        width = self.focused_monitor["rect"]["width"]
+        height = self.focused_monitor["rect"]["height"]
+        scratch_width = int(width * (self.size[0] / 100))
+        scratch_height = int(height * (self.size[1] / 100))
+
+        resize = f"resize set {scratch_width} {scratch_height}"
         app = subprocess.run(f'swaymsg {app_name} scratchpad show', shell=True)
         window_id = subprocess.check_output(
             "swaymsg -t get_tree | jq -r '.. | select(.focused?) | .id'", shell=True).strip().decode()
