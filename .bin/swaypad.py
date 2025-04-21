@@ -112,13 +112,12 @@ class Swaypad():
         scratch_height = int(height * (self.size[1] / 100))
 
         resize = f"resize set {scratch_width} {scratch_height}"
+        subprocess.run(f'swaymsg {app_name} {resize}', shell=True)
         app = subprocess.run(f'swaymsg {app_name} scratchpad show', shell=True)
         window_id = subprocess.check_output(
             "swaymsg -t get_tree | jq -r '.. | select(.focused?) | .id'", shell=True).strip().decode()
         time.sleep(0.1)
         subprocess.run(f'swaymsg {app_name} {resize}', shell=True)
-        time.sleep(0.1)
-        subprocess.run(f'swaymsg {app_name} {position}', shell=True)
         time.sleep(0.1)
         if window_id:
             subprocess.run(f'swaymsg [con_id={window_id}] focus', shell=True)
