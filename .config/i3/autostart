@@ -4,3 +4,7 @@ redshift -oP -O 2000 -b 1 &
 nitrogen --restore &
 easyeffects --gapplication-service &
 unclutter &
+conky -c ~/.config/conky/conky.lua &
+picom &
+dunst &
+xidlehook.sh &

@@ -192,6 +192,26 @@ mode "move_in" {
     bindsym Escape mode "default"
 }
 
+mode "screenshot" {
+    bindsym r exec "i3shot region", mode "default"
+    bindsym e exec "i3shot edit", mode "default"
+    bindsym s exec "i3shot", mode "default"
+    bindsym h exec "i3shot mon HDMI1", mode "default"
+    bindsym l exec "i3shot mon VGA1", mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+mode "gif_record" {
+    bindsym h exec "xregif HDMI1 8", mode "default"
+    bindsym l exec "xregif VGA1 8", mode "default"
+    bindsym r exec "xregif region 8", mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
 ## action
 mode "action" {
     bindsym k kill, mode "default"
@@ -200,11 +220,10 @@ mode "action" {
     bindsym n exec "dunstctl close-all", mode "default"
     bindsym d exec "imdrag ~/Downloads ~/.pictures ~/.wallpapers", mode "default"
     bindsym l exec "killall -USR1 swayidle", mode "default"
-    bindsym s exec grim -g "$(slurp)" "/home/digo/ps_$(date +'%Y%m%d%H%M%S').png", mode "default"
-    bindsym p exec "grim && notify-send 'Screenshot'", mode "default"
     bindsym m exec "360.sh 80", mode "default"
-    bindsym z exec 'TMP=$(mktemp); grim -g "$(slurp)" - > $TMP; imv -u nearest_neighbour $TMP; rm $TMP', mode "default"
-
+    # modes
+    bindsym s mode "screenshot"
+    bindsym g mode "gif_record"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -280,8 +299,8 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
-bindsym $mod+n focus output right
-bindsym $mod+p focus output left
+bindsym $mod+n focus output right; exec "xmon"
+bindsym $mod+p focus output left; exec "xmon"
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
@@ -328,7 +347,7 @@ for_window [class="^com.github.th_ch.youtube_music$"] floating disable, move to 
 for_window [title="Open file"] resize set width 900, resize set height 500
 for_window [class="yad"] floating enable, resize set 100, move position 30 30
 for_window [class="imv"] floating enable, resize set 700
-for_window [class="ripdrag"] floating enable, move position 10 10
+for_window [class="ripdrag"] floating enable, move position 30 200
 
 # tab related
 workspace_layout tabbed
