@@ -3,6 +3,7 @@ from time import sleep
 import os
 import socket
 from datetime import timedelta
+import subprocess
 
 HOME = os.path.expanduser("~/")
 try:
@@ -31,27 +32,6 @@ class Pomodoro():
     def run(self):
         self.countdown(time=self.pomodoro, state="normal")
 
-    # def run(self):
-    #    for times in range(self.breaks_before_long_pause):
-    #        if times <= 3 and not self.should_break:
-    #            print("yes")
-    #            self.play_audio("pomo_start.wav")
-    #            self.countdown(time=self.pomodoro, name="pomo")
-    #            if self.should_break():
-    #                return
-    #            self.play_audio("pomo_pause.wav")
-    #            self.countdown(time=self.pomodoro_pause, name="pausa")
-    #            self.number_of_breaks += 1
-    #        else:
-    #            if not self.should_break:
-    #                self.play_audio("pomo_start.wav")
-    #                self.countdown(time=self.pomodoro, name="pomo")
-    #                self.play_audio("pomo_pause.wav")
-    #                self.number_of_breaks += 1
-    #                self.countdown(time=self.pomodoro_long_pause, name="pausa")
-    #                self.play_audio("stretch_ended.wav")
-    #                self.cleanup()
-
     def should_break(self):
         """Return true or false wheater it should break the loop or not"""
         return os.path.exists("/tmp/pomo_cancel")
@@ -63,21 +43,7 @@ class Pomodoro():
             self.remove_file(self.pomodoro_pause_path)
         if self.file_exist("/tmp/pomo_cancel"):
             self.remove_file("/tmp/pomo_cancel")
-
-    # def countdown(self, time, name):
-    #    while time > 0:
-    #        if self.should_break():
-    #            break
-    #        if name == "pausa" and not self.created_pomo_pause:
-    #            self.created_pomo_pause = True
-    #            f = open(self.pomodoro_pause_path, mode="w")
-    #            f.close()
-    #        elif name == "pomo" and self.created_pomo_pause:
-    #            self.created_pomo_pause = False
-    #            self.remove_file(self.pomodoro_pause_path)
-    #        self.save_time(time)
-    #        time -= 1
-    #        sleep(1)
+        subprocess.run(["pkill", "-RTMIN+8", "waybar"])
 
     def countdown(self, time, state):
         if state != "pause":
@@ -123,7 +89,8 @@ class Pomodoro():
             minutes = str(timedelta(seconds=time))[2:]
 
             pomo_file.write(
-                f"{self.number_of_breaks}[{minutes}]")
+                f"{self.number_of_breaks}[{minutes.strip()}]")
+        subprocess.run(["pkill", "-RTMIN+8", "waybar"])
 
     def remove_file(self, path):
         if os.path.exists(path):

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+MONITOR=$(current_monitor)
+echo "$MONITOR"
+
+if [[ "$MONITOR" == "VGA1" ]]; then
+  pkill -SIGUSR1 herbe
+  herbe_secondary _
+else
+  pkill -SIGUSR1 herbe
+  herbe_primary _
+fi

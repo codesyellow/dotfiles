@@ -15,7 +15,9 @@ elif [[ "$1" == "zoom" ]]; then
     imv -u nearest_neighbour "$TMP"
     rm "$TMP"
 elif [[ "$1" == "mon" ]]; then
-    grim -o "$2" "$PIC_PATH/ps_$2_$(date +'%Y%m%d%H%M%S').jpg"
+    grim -o "$2" "$PIC_PATH/ps_$2_$(date +'%Y%m%d%H%M%S').jpg" && notify-send.sh "Screenshot on monitor $2 was taken"
+elif [[ "$1" == "edit" ]]; then
+    grim -g "$(slurp)" - | swappy -f -
 else
     grim "$PIC_PATH/ps_$(date +'%Y%m%d%H%M%S').png" && notify-send.sh "Full screenshot was taken!"
 fi

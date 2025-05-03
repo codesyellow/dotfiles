@@ -1,0 +1,25 @@
+#!/bin/bash
+
+sleep 3  # Give time for the game window to appear
+
+WINDOW_ID=$(swaymsg -t get_tree | jq -r '
+  def walk_nodes(n):
+    [n.nodes[], n.floating_nodes[]] + (n.nodes[]?, n.floating_nodes[]? | walk_nodes(.));
+
+  .nodes[] | walk_nodes(.)
+  | select(
+      (.app_id? // "") == "steam_app_201790"
+      or
+      (.name? // "" | test("Orcs Must Die 2"))
+    )
+  | .id' | head -n 1)
+
+if [[ -n "$WINDOW_ID" ]]; then
+  swaymsg "[con_id=$WINDOW_ID]" floating enable
+  swaymsg "[con_id=$WINDOW_ID]" move position 0 0
+  swaymsg "[con_id=$WINDOW_ID]" resize set 1920 1080  # your monitor res
+  swaymsg "[con_id=$WINDOW_ID]" border none
+else
+  echo "❌ Could not find window for Orcs Must Die 2"
+fi
+

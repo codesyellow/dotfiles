@@ -4,7 +4,7 @@ import os
 HOME = os.path.expanduser("~")
 
 PRESET_PATH = f"{HOME}/.config/easyeffects_preset"
-EASYEFFECTS_APP_NAME = "flatpak run com.github.wwmm.easyeffects"
+EASYEFFECTS_APP_NAME = "easyeffects"
 
 
 class Easyffects():
@@ -35,7 +35,7 @@ class Easyffects():
 
     def seto(self, preset_name):
         """Set the preset for easyeffects. Options: music, equalizer"""
-        music = "HeavyBass"
+        music = "HB-Mid"
         equalizer = "LoudnessEqualizer"
         if preset_name == "equalizer":
             os.system(f"{EASYEFFECTS_APP_NAME} -l '{equalizer}'")

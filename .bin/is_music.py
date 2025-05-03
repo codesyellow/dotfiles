@@ -83,6 +83,8 @@ class Music():
                     self.easyeffects.write(self.music_preset)
                     print("Preset was set to Heavy Bass",
                           self.easyeffects.read()[0])
+
+                    subprocess.run(["pkill", "-RTMIN+3", "waybar"])
             elif not self.music_playing() and not self.equalizer_state:
                 print("no")
                 if self.easyeffects.read()[0] == self.music_preset:
@@ -92,6 +94,7 @@ class Music():
                     self.music_state = False
                     self.easyeffects.write(self.equalizer_preset)
                     print("Preset was set to Equalizer")
+                    subprocess.run(["pkill", "-RTMIN+3", "waybar"])
             time.sleep(1)
 
 

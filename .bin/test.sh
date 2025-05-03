@@ -1,8 +1,10 @@
 #!/bin/bash
-root_free=$(df -BG / | awk 'NR==2 {print $4}' | tr -d 'G')
-home_free=$(df -BG /home | awk 'NR==2 {print $4}' | tr -d 'G')
-hdd_free=$(df -BG ~/.HDD | awk 'NR==2 {print $4}' | tr -d 'G') # Change if needed
 
-echo "Root Free: ${root_free}G"
-echo "Home Free: ${home_free}G"
-echo "HDD Free: ${hdd_free}G"
+dbus-monitor --system "type='signal',interface='org.freedesktop.login1.Session'" |
+  while read -r line; do
+    if echo "$line" | grep -q "Unlock"; then
+      # Run your command here
+      echo "Unlocked at $(date)" >>~/.unlock.log
+      echo "oi"
+    fi
+  done

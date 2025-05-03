@@ -58,9 +58,15 @@ def check_time():
     user_time = int(input("How many?: "))
 
     if user_choose == "m" or user_choose == "":
+        if os.path.exists("/tmp/countdown_cancel"):
+            os.remove("/tmp/countdown_cancel")
+
         noti("Countdown started", f"{user_time} Minutes")
         start_countdown(user_time * 60)
     else:
+        if os.path.exists("/tmp/countdown_cancel"):
+            os.remove("/tmp/countdown_cancel")
+
         start_countdown(user_time)
 
 

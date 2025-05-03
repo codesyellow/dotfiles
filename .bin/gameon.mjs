@@ -17,10 +17,12 @@ const isGameRunning = async () => {
       //}
       if (!fs.existsSync("/tmp/gameon")) {
         await $`touch /tmp/gameon`;
+        await $`pkill -RTMIN+15 waybar`
       }
     } else {
       if (fs.existsSync("/tmp/gameon")) {
         await $`rm /tmp/gameon`;
+        await $`pkill -RTMIN+15 waybar`
       }
       //const { stdout: picomRunning } = await $`pidof picom || echo 0`;
       //if (picomRunning == 0) {
