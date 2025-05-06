@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+polybar-msg action main_mon hook 0
+polybar-msg action secondary_mon hook 0
