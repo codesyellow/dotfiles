@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+current_monitor=$(i3-msg -t get_tree | jq -r '.. | objects | select(.focused? == true).output')
+
+text="US"
+
+variant=$(xkb-switch)
+
+if echo "$variant" | grep -q "intl"; then
+  text="INTL"
+  echo "%{F#707880}KBD%{F-} %{F#FF8343}$text%{F-}" # 5-space red bar
+else
+  echo "%{F#707880}KBD%{F-} $text" # 5-space red bar
+fi
