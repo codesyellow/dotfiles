@@ -108,7 +108,8 @@ mode "scratchpad" {
     bindsym m exec --no-startup-id "i3pad bigl center-center 'st -e cmus'", mode "default"
     bindsym w exec --no-startup-id "i3pad lrg center-center 'wasistlos'", mode "default"
     bindsym c exec --no-startup-id "i3pad sm top-left 'st -e python -q'", mode "default"
-    bindsym t exec --no-startup-id "i3pad smv center-left 'st -e taskwarrior-tui'", mode "default"
+   # bindsym t exec --no-startup-id "i3pad smv center-left 'st -e taskwarrior-tui'", mode "default"
+    bindsym t exec --no-startup-id "i3pad smv center-left 'kuro'", mode "default"
 #    bindsym l exec "swaypad.py -s sm -c 'foot -a lowfi -e lowfi' -n 'lowfi'", mode "default"
 
 #    bindsym r exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x40% -p 0,20 -- foot -T countdown -e countdown.py", mode "default"
@@ -299,8 +300,8 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
-bindsym $mod+n focus output right; exec "xmon"
-bindsym $mod+p focus output left; exec "xmon"
+bindsym $mod+n focus output right; exec "upmon-polybar"
+bindsym $mod+p focus output left; exec "upmon-polybar"
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
@@ -347,6 +348,7 @@ for_window [class="^com.github.th_ch.youtube_music$"] floating disable, move to 
 for_window [title="Open file"] resize set width 900, resize set height 500
 for_window [class="yad"] floating enable, resize set 100, move position 30 30
 for_window [class="imv"] floating enable, resize set 700
+for_window [class="upc.exe"] floating enable
 for_window [class="ripdrag"] floating enable, move position 30 200
 
 # tab related
