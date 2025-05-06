@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+current_monitor=$(i3-msg -t get_tree | jq -r '.. | objects | select(.focused? == true).output')
+
+if [[ "$current_monitor" == "VGA1" ]]; then
+  echo "%{B#FF8343}        %{B-}" # 5-space red bar
+else
+  echo "%{B#555555}%{B-}" # 5-space gray bar
+fi
