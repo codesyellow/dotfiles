@@ -15,4 +15,3 @@ is_music.py &
 sway-audio-idle-inhibit &
 swayidle -w &
 syncthing &
-xrandr --output VGA-1 --primary & # to fix game spawning on the wrong monitor

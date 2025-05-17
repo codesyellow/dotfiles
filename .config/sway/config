@@ -22,6 +22,7 @@ set $term alacritty -e zellij
 set $scratchpad_term alacritty
 #set $menu rofi -show run -theme-str 'window { width: 60%; x-offset: 20%; y-offset: -28px; }'
 set $menu uwsm app -- $(rofi -show run -theme-str 'window { width: 60%; x-offset: 20%; y-offset: -25px; }')
+#set $menu uwsm app -- $(wmenu-run -N "#2e3440")
 
 # General
 workspace 1 output VGA-1
@@ -41,8 +42,8 @@ hide_edge_borders --i3 smart
 # hide mouse
 seat seat0 hide_cursor 3000
 # monitors
-output HDMI-A-1 res 1280x1024@75HZ pos 0 0 bg ~/.wallpapers/vert.png fill allow_tearing yes max_render_time off
-output VGA-1 res 1360x768@60HZ pos 1280 0 transform 90 bg ~/.wallpapers/hori.png fill allow_tearing yes max_render_time off
+output HDMI-A-1 res 1280x1024@75HZ pos 0 0 bg ~/.wallpapers/ign-0011.png fill allow_tearing yes max_render_time off
+output VGA-1 res 1360x768@60HZ pos 1280 0 transform 90 bg ~/.wallpapers/ign-0011.png fill allow_tearing yes max_render_time off
 # Read `man 5 sway-input` for more information about this section.
 input type:pointer {
     accel_profile "flat" # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
@@ -99,8 +100,8 @@ mode "ia" {
     bindsym g exec --no-startup-id "sway-scratchpad -tmt -atc -d 500x90% -p -180,0 -m left -- foot -T ai -e aichat -r correct_text", mode "default"
     bindsym c exec --no-startup-id "sway-scratchpad -tmt -atc -d 500x90% -p -180,0 -m left -- foot -T ai -e aichat -r %code%", mode "default"
 
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+    bindsym Return $mode_reset
+    bindsym Escape $mode_reset
 }
 
 # TFPB
@@ -149,27 +150,35 @@ mode "resize" {
 }
 mode "workspaces" {
     # vertical monitor
-    bindsym w workspace 1, $mode_reset
-    bindsym t workspace 2, $mode_reset
-    bindsym d workspace 3, $mode_reset
-    # horizontal monitor
-    bindsym b workspace 4, $mode_reset
-    bindsym g workspace 5, $mode_reset
-    bindsym a workspace 6, $mode_reset
+#    bindsym w workspace 1, $mode_reset
+#    bindsym t workspace 2, $mode_reset
+#    bindsym d workspace 3, $mode_reset
+#    # horizontal monitor
+#    bindsym b workspace 4, $mode_reset
+#    bindsym g workspace 5, $mode_reset
+#    bindsym a workspace 6, $mode_reset
+    bindsym w exec "swaysome w", $mode_reset
+    bindsym g exec "swaysome g", $mode_reset
+    bindsym a exec "swaysome a", $mode_reset
+
 
     bindsym Return $mode_reset
     bindsym Escape $mode_reset
 }
 ## Move workspace binds
 mode "move_workspaces" {
-    # vertical monitor
-    bindsym w move container to workspace number 1, $mode_reset
-    bindsym t move container to workspace number 2, $mode_reset
-    bindsym d move container to workspace number 3, $mode_reset
-    # horizontal monitor
-    bindsym b move container to workspace number 4, $mode_reset
-    bindsym g move container to workspace number 5, $mode_reset
-    bindsym a move container to workspace number 6, $mode_reset
+#    # vertical monitor
+#    bindsym w move container to workspace number 1, $mode_reset
+#    bindsym t move container to workspace number 2, $mode_reset
+#    bindsym d move container to workspace number 3, $mode_reset
+#    # horizontal monitor
+#    bindsym b move container to workspace number 4
+#    bindsym g move container to workspace number 5, $mode_reset
+#    bindsym a move container to workspace number 6, $mode_reset
+    bindsym w exec "swaysome w", $mode_reset
+    bindsym g exec "swaysome g", $mode_reset
+    bindsym a exec "swaysome a", $mode_reset
+
 
     bindsym Return $mode_reset
     bindsym Escape $mode_reset
@@ -316,8 +325,8 @@ for_window [app_id="imv"] floating enable, resize set 700
 for_window [app_id="com.example.App"] floating enable, resize set 700
 for_window [class="^Firefox$"] inhibit_idle fullscreen
 for_window [app_id="^firefox$"] inhibit_idle fullscreen
-for_window [class="^Firefox$"] move to workspace 1
-for_window [app_id="^firefox$"] move to workspace 1
+for_window [class="^Firefox$"] move to workspace 4
+for_window [app_id="^firefox$"] move to workspace 4
 for_window [app_id="^brave-browser$"] move to workspace 4
 for_window [app_id="it.catboy.ripdrag"] move position 10 10
 
