@@ -1,17 +1,16 @@
 #!/usr/bin/env bash
-easy_always.sh &
-gameon.mjs &
-#santos_calendar.py &
-
-gammastep -P -O 2500 &
-earphone.sh &
-whatsap_on.sh &
+app2unit -- waybar &
+app2unit -s b -- gameon.mjs &
+app2unit -s b -- easyeffects --gapplication-service &
+app2unit -s b -- gammastep -P -O 2500 &
+app2unit -s b -- earphone.sh &
+app2unit -s b -- whatsap_on.sh &
+app2unit -s b -- dunst &
+app2unit -s b -- is_music.py &
+app2unit -s b -- sway-audio-idle-inhibit &
+app2unit -s b -- swayidle -w &
+app2unit -s b -- syncthing &
+#uwsm app -- easy_always.sh &
 systemctl --user import-environment PATH &
-dunst &
 /usr/lib/polkit-kde-authentication-agent-1 &
-ianny &
 wl-paste --type text --watch cliphist store &
-is_music.py &
-sway-audio-idle-inhibit &
-swayidle -w &
-syncthing &

@@ -21,8 +21,8 @@ set $mode_reset exec sh -c 'swaymsg mode "default"; pkill -RTMIN+7 waybar'
 set $term alacritty -e zellij
 set $scratchpad_term alacritty
 #set $menu rofi -show run -theme-str 'window { width: 60%; x-offset: 20%; y-offset: -28px; }'
-set $menu uwsm app -- $(rofi -show run -theme-str 'window { width: 60%; x-offset: 20%; y-offset: -25px; }')
-#set $menu uwsm app -- $(wmenu-run -N "#2e3440")
+#set $menu j4-dmenu-desktop --dmenu='wmenu-run -N "#2e3440" -i -f "Iosevka Nerd Font 12"'
+set $menu app2unit -- $(wmenu-run -N "#2e3440" -i -f "Iosevka Nerd Font 12")
 
 # General
 workspace 1 output VGA-1
@@ -73,6 +73,7 @@ for_window [app_id="anki-en"]  move scratchpad
 for_window [app_id="anki-ori"]  move scratchpad
 for_window [app_id="anki-mh"]  move scratchpad
 for_window [app_id="countdown"]  move scratchpad
+for_window [app_id="lowfi"]  move scratchpad
 
 # TFPR
 mode "file" {
@@ -118,7 +119,7 @@ mode "scratchpad" {
 
     bindsym t exec "swaypad.py -s sma -p 'top-left' -c 'foot -a todo -e taskwarrior-tui' -n 'todo'", $mode_reset
     bindsym u exec "swaypad.py -s smf -p 'top' -c 'alacritty --config-file /home/digo/.config/alacritty/scratchpad.toml --class dropdown_term -e zellij attach --create scratch' -n 'dropdown_term'", $mode_reset
-    bindsym l exec "swaypad.py -s sm -c 'foot -a lowfi -e lowfi' -n 'lowfi'", $mode_reset
+    bindsym l exec "swaypad.py -s sm -c 'foot -a lowfi -e lowfi -p' -n 'lowfi'", $mode_reset
 #    bindsym r exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x40% -p 0,20 -- foot -T countdown -e countdown.py", mode "default"
     bindsym g mode "file"; exec $update_mode
     bindsym s mode "study"; exec $update_mode
@@ -175,9 +176,27 @@ mode "move_workspaces" {
 #    bindsym b move container to workspace number 4
 #    bindsym g move container to workspace number 5, $mode_reset
 #    bindsym a move container to workspace number 6, $mode_reset
-    bindsym w exec "swaysome w", $mode_reset
-    bindsym g exec "swaysome g", $mode_reset
-    bindsym a exec "swaysome a", $mode_reset
+    bindsym w exec "swaysome move w", $mode_reset
+    bindsym g exec "swaysome move g", $mode_reset
+    bindsym a exec "swaysome move a", $mode_reset
+
+
+    bindsym Return $mode_reset
+    bindsym Escape $mode_reset
+}
+
+mode "movein_workspaces" {
+#    # vertical monitor
+#    bindsym w move container to workspace number 1, $mode_reset
+#    bindsym t move container to workspace number 2, $mode_reset
+#    bindsym d move container to workspace number 3, $mode_reset
+#    # horizontal monitor
+#    bindsym b move container to workspace number 4
+#    bindsym g move container to workspace number 5, $mode_reset
+#    bindsym a move container to workspace number 6, $mode_reset
+    bindsym w exec "swaysome move_in w", $mode_reset
+    bindsym g exec "swaysome move_in g", $mode_reset
+    bindsym a exec "swaysome move_in a", $mode_reset
 
 
     bindsym Return $mode_reset
@@ -215,7 +234,7 @@ mode "bar" {
 # SAB
 mode "action" {
     bindsym k kill, $mode_reset
-    bindsym r reload, mode "default"
+    bindsym r reload, $mode_reset
     bindsym f fullscreen, $mode_reset
     bindsym n exec "dunstctl close-all", $mode_reset
     bindsym l exec "killall -USR1 swayidle", $mode_reset
@@ -273,6 +292,7 @@ mode "volume" {
 bindsym $mod+s mode "scratchpad"; exec $update_mode
 bindsym $mod+w mode "workspaces"; exec $update_mode
 bindsym $mod+Shift+w mode "move_workspaces"; exec $update_mode
+bindsym $mod+Ctrl+w mode "movein_workspaces"; exec $update_mode
 bindsym $mod+e mode "exec"; exec $update_mode
 bindsym $mod+a mode "action"; exec $update_mode
 bindsym $mod+y mode "layout"; exec $update_mode
@@ -311,10 +331,6 @@ floating_modifier $mod normal
 #    bindsym $mod+a focus parent
 
 # Read `man 5 sway-bar` for more information about this section.
-bar {
-    position top
-    swaybar_command "waybar"
-}
 
 #for_window [class="^com.github.th_ch.youtube_music$"] move to workspace 5
 ## sizes
@@ -325,8 +341,6 @@ for_window [app_id="imv"] floating enable, resize set 700
 for_window [app_id="com.example.App"] floating enable, resize set 700
 for_window [class="^Firefox$"] inhibit_idle fullscreen
 for_window [app_id="^firefox$"] inhibit_idle fullscreen
-for_window [class="^Firefox$"] move to workspace 4
-for_window [app_id="^firefox$"] move to workspace 4
 for_window [app_id="^brave-browser$"] move to workspace 4
 for_window [app_id="it.catboy.ripdrag"] move position 10 10
 
