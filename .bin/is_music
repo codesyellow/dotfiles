@@ -10,12 +10,16 @@ while [[ true ]]; do
       echo "playing"
       volume=$(pamixer --get-volume)
       easyeffects -l "Bass"
+      echo "Bass" >~/.config/easyeffects_preset
+      pkill -RTMIN+3 waybar
       state=1
     fi
   else
     if [[ -n $(pgrep -f lowfi) ]] || [[ -n $(pgrep -f cmus) ]] && [[ $state == 1 ]]; then
       echo "paused"
       pamixer --set-volume $volume && easyeffects -l "LoudnessEqualizer"
+      echo "LoudnessEqualizer" >~/.config/easyeffects_preset
+      pkill -RTMIN+3 waybar
       state=0
     fi
   fi
