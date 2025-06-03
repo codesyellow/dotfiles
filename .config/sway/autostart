@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 app2unit -- waybar &
 app2unit -- pavucontrol &
-app2unit -s b -- gameon.mjs &
+app2unit -s b -- gameon &
+app2unit -s b -- upmon &
 app2unit -s b -- easyeffects --gapplication-service &
 app2unit -s b -- gammastep -P -O 2500 &
 app2unit -s b -- earphone.sh &
