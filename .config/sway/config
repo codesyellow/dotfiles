@@ -22,7 +22,7 @@ set $term alacritty -e zellij
 set $scratchpad_term alacritty
 #set $menu rofi -show run -theme-str 'window { width: 60%; x-offset: 20%; y-offset: -28px; }'
 #set $menu j4-dmenu-desktop --dmenu='wmenu-run -N "#2e3440" -i -f "Iosevka Nerd Font 12"'
-set $menu app2unit -- $(wmenu-run -N "#2e3440" -i -f "Iosevka Nerd Font 12")
+set $menu app2unit -- $(wmenu-run -N "#2e3440" -i -f "Iosevka Nerd Font 14")
 
 # General
 workspace 1 output VGA-1
@@ -42,8 +42,8 @@ hide_edge_borders --i3 smart
 # hide mouse
 seat seat0 hide_cursor 3000
 # monitors
-output HDMI-A-1 res 1280x1024@75HZ pos 0 0 bg ~/.wallpapers/ign-0011.png fill allow_tearing yes max_render_time off
-output VGA-1 res 1360x768@60HZ pos 1280 0 transform 90 bg ~/.wallpapers/ign-0011.png fill allow_tearing yes max_render_time off
+output HDMI-A-1 res 1280x1024@75HZ pos 0 172 bg ~/.wallpapers/rocks_hdmi-a-1.png fill allow_tearing yes max_render_time off
+output VGA-1 res 1360x768@60HZ pos 1280 0 transform 90 bg ~/.wallpapers/rocks_vga-1.png fill allow_tearing yes max_render_time off
 # Read `man 5 sway-input` for more information about this section.
 input type:pointer {
     accel_profile "flat" # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
@@ -313,8 +313,8 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
-bindsym $mod+n focus output right; exec which_monitor.sh
-bindsym $mod+p focus output left; exec which_monitor.sh
+bindsym $mod+n focus output right; exec "pkill -RTMIN+14 waybar"
+bindsym $mod+p focus output left; exec "pkill -RTMIN+14 waybar"
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
