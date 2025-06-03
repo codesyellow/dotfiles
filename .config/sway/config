@@ -313,8 +313,8 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
-bindsym $mod+n focus output right; exec "pkill -RTMIN+14 waybar"
-bindsym $mod+p focus output left; exec "pkill -RTMIN+14 waybar"
+bindsym $mod+n focus output right
+bindsym $mod+p focus output left
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
