@@ -21,7 +21,7 @@ window#waybar {
   font-weight: 900;
   color: #eceff4;
   background-color: #2e3440;
-  padding: 0 4px;
+  padding: 0 6px;
 }
 
 #workspaces button.empty {
@@ -47,7 +47,7 @@ window#waybar {
 }
 
 .warning {
-  padding: 0 4px;
+  padding: 0 6px;
   color: #bf616a;
   background-color: #2e3440;
   font-weight: 900;
@@ -58,7 +58,7 @@ window#waybar {
 
 .normal,
 .hidden {
-  padding: 0 4px;
+  padding: 0 6px;
   font-weight: 900;
   font-size: 17px;
   font-family: "Roboto";
@@ -74,6 +74,15 @@ window#waybar {
   color: #bf616a;
   margin-bottom: 1px;
   font-weight: 500;
+}
+
+.block {
+  background-color: #bf616a;
+  color: #bf616a;
+  padding: 0 40px;
+  font-weight: 900;
+  font-size: 17px;
+  font-family: "Roboto";
 }
 
 /*# sourceMappingURL=style.css.map */

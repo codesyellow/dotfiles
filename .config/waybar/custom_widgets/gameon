@@ -6,8 +6,8 @@ state="normal"
 text="OFF"
 
 if [[ -e /tmp/gameon ]]; then
-    state="warning"
-    text="ON"
+  state="warning"
+  text="ON"
 fi
 
 output=$(get_pango "PLY" "$text")

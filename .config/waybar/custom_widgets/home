@@ -6,8 +6,8 @@ state="normal"
 
 home=$(df -h /home/ | awk 'NR==2 {print $4}' | tr -d 'G')
 
-if [[ "$home" -le 15 ]]; then
-    state="warning"
+if awk "BEGIN {exit !($home < 10)}"; then
+  state="warning"
 fi
 
 homefs=$home"G"

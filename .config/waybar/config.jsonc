@@ -6,6 +6,9 @@
         "sway/workspaces", 
         "custom/mode"
     ],
+    "modules-center": [
+        "custom/mon"
+    ],
     "modules-right": [
         "custom/cpu-temp",
         "custom/cpu",
@@ -35,6 +38,13 @@
   "sway/mode": {
     "format": "MODE",
   },
+"custom/mon": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/cur_mon VGA-1",
+    "return-type": "json",
+    "signal": 14,
+    "tooltip": false
+
+  },
 "custom/cpu-temp": {
     "exec": "/home/digo/.config/waybar/custom_widgets/temp",
     "interval": 10,
@@ -57,7 +67,7 @@
     },
   "custom/pymor": {
     "exec": "/home/digo/.config/waybar/custom_widgets/pomodoro",
-    "interval": 1,
+    "signal": 8,
     "on-click": "setsid pomodoro.py &",
     "on-click-middle": "touch /tmp/pomo_cancel; rm /tmp/pomo_timer",
     "return-type": "json",
@@ -72,13 +82,13 @@
   },
   "custom/cpu": {
     "exec": "/home/digo/.config/waybar/custom_widgets/cpu",
-    "interval": 2,
+    "interval": 5,
     "return-type": "json",
     "tooltip": false
   },
   "custom/mem": {
     "exec": "/home/digo/.config/waybar/custom_widgets/mem",
-    "interval": 4,
+    "interval": 10,
     "return-type": "json",
     "tooltip": false
   },
@@ -90,8 +100,13 @@
         "sway/workspaces", 
         "custom/mode"
     ],
+"modules-center": [
+        "custom/mon"
+    ],
+
     "modules-right": [
         "custom/gameon",
+        "idle_inhibitor",
         "custom/variant",
         "custom/easy",
         "custom/disk-root",
@@ -99,6 +114,7 @@
         "custom/disk-hdd",
         "custom/updates",
         "custom/clock",
+
         ],
     "sway/workspaces": {
         "disable-scroll": true,
@@ -123,7 +139,7 @@
   },
   "custom/easy": {
     "exec": "/home/digo/.config/waybar/custom_widgets/preset",
-    "interval": 3,
+    "signal": 3,
     "return-type": "json",
     "tooltip": false
   },
@@ -136,7 +152,7 @@
   },
   "custom/variant": {
     "exec": "/home/digo/.config/waybar/custom_widgets/variant",
-    "interval": 2,
+    "interval": 5,
     "return-type": "json",
     "tooltip": false
   },
@@ -169,7 +185,7 @@
   },
 "custom/gameon": {
     "exec": "/home/digo/.config/waybar/custom_widgets/gameon",
-    "interval": 3,
+    "signal": 15,
     "return-type": "json",
     "tooltip": false
   },
@@ -185,4 +201,17 @@
     "signal": 7,
     "tooltip": false
   },
+"custom/mon": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/cur_mon HDMI-A-1",
+    "return-type": "json",
+    "tooltip": false,
+    "signal": 14,
+  },
+"idle_inhibitor": {
+    "format": "IDLE {icon}",
+    "format-icons": {
+        "activated": "ON",
+        "deactivated": "OFF"
+    }
+}
 }]

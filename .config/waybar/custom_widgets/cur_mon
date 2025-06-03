@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+source $HOME/.config/waybar/custom_widgets/config
+
+state="normal"
+
+text=""
+focused_output=$(swaymsg -t get_outputs --raw | jq '. | map(select(.focused == true)) | .[0].name' -r)
+
+if [[ $focused_output == $1 ]]; then
+  state="block"
+  text="-"
+fi
+
+output=$(get_pango "" "$text")
+printf '{"text": "%s", "tooltip": "Updates: %s", "class": "%s"}\n' "$output" "$text" "$state"

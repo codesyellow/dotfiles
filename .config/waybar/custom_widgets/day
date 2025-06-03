@@ -5,13 +5,13 @@ state="normal"
 
 text=""
 if [[ -z "$1" ]]; then
-    day=$(date +%d)
-    hour=$(date +%H:%M)
-    weekday=$(date +%a)
-    text="$hour $day $weekday"
+  day=$(date +%d)
+  hour=$(date +%H:%M)
+  weekday=$(date +%a)
+  text="$hour $day $weekday"
 else
-    hour=$(date +%H:%M)
-    text=$hour
+  hour=$(date +%H:%M)
+  text=$hour
 fi
 output=$(get_pango "HMS" "$text")
 printf '{"text": "%s", "tooltip": "Updates: %s", "class": "%s"}\n' "$output" "$root" "$state"

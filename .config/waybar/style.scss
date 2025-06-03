@@ -9,7 +9,7 @@ $hover: #891652;
 $main_font: "Leckerli One";
 $widget_font: "Roboto";
 $weight: 900;
-$padx: 4px;
+$padx: 6px;
 $pady: 2px;
 $widget_font_size: 17px;
 $border_size: .5px solid;
@@ -63,7 +63,7 @@ window#waybar {
 }
 
 .warning {
-  padding: 0 4px;
+  padding: 0 $padx;
   color: $warning;
   background-color: $bg;
   font-weight: $weight;
@@ -74,7 +74,7 @@ window#waybar {
 
 .normal,
 .hidden {
-  padding: 0 4px;
+  padding: 0 $padx;
   font-weight: $weight;
   font-size: $widget_font_size;
   font-family: $widget_font;
@@ -90,4 +90,13 @@ window#waybar {
   color: $warning;
   margin-bottom: 1px;
   font-weight: 500;
+}
+
+.block {
+  background-color: $warning;
+  color: $warning;
+  padding: 0 40px;
+  font-weight: $weight;
+  font-size: $widget_font_size;
+  font-family: $widget_font;
 }

@@ -4,26 +4,27 @@ source $HOME/.config/waybar/custom_widgets/config
 state="normal"
 
 get_cpu_usage() {
-    read -r cpu user nice system idle iowait irq softirq steal guest guest_nice </proc/stat
+  read -r cpu user nice system idle iowait irq softirq steal guest guest_nice </proc/stat
 
-    total1=$((user + nice + system + idle + iowait + irq + softirq + steal))
-    idle1=$idle
+  total1=$((user + nice + system + idle + iowait + irq + softirq + steal))
+  idle1=$idle
 
-    sleep 1
+  sleep 1
 
-    read -r cpu user nice system idle iowait irq softirq steal guest guest_nice </proc/stat
-    total2=$((user + nice + system + idle + iowait + irq + softirq + steal))
-    idle2=$idle
+  read -r cpu user nice system idle iowait irq softirq steal guest guest_nice </proc/stat
+  total2=$((user + nice + system + idle + iowait + irq + softirq + steal))
+  idle2=$idle
 
-    cpu_usage=$((100 * ((total2 - total1) - (idle2 - idle1)) / (total2 - total1)))
+  cpu_usage=$((100 * ((total2 - total1) - (idle2 - idle1)) / (total2 - total1)))
 
-    echo "$cpu_usage"
+  echo "$cpu_usage"
 }
 cpu_usage=$(get_cpu_usage)
+output=""
 
-if [[ "$cpu_usage" -ge 80 ]]; then
-    state="warning"
+if [[ "$cpu_usage" -ge 90 ]]; then
+  state="warning"
+  output=$(get_pango "CPU" "$cpu_usage%")
 fi
 
-output=$(get_pango "CPU" "$cpu_usage%")
 printf '{"text": "%s", "tooltip": "Updates: %s", "class": "%s"}\n' "$output" "$cpu_usage" "$state"
