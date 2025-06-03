@@ -1,0 +1,10 @@
+#!/bin/bash
+
+while true; do
+  swaymsg -t subscribe '[ "workspace" ]' | while read -r line; do
+    workspace_name=$(echo "$line" | jq -r '.current.name')
+    output=$(swaymsg -t get_workspaces | jq -r '.[] | select(.name == "'"$workspace_name"'") | .output')
+
+    pkill -RTMIN+14 waybar
+  done
+done
