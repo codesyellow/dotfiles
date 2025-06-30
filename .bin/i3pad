@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-current_monitor=$(current_monitor) # Assuming this is a valid command or shell function
+current_monitor=$(i3-msg -t get_tree | jq -r '.. | objects | select(.focused? == true).output')
 
 declare -A sizes=(
   [sm]='40%x20%'
@@ -18,7 +18,7 @@ declare -A pad=(
   ["top-center"]="0,20"
   ["top-left"]="20,20"
   ["top-right"]="20,20"
-  ["center-right"]="20,0"
+  ["center-right"]="-20,0"
   ["center-center"]="0,0"
   ["center-left"]="20,0"
   ["bottom-center"]="0,-20"
