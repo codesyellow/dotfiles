@@ -1,10 +1,13 @@
 #!/bin/bash
+# One line for i3config :
+exec_always --no-startup-id i3-msg -t subscribe -m '[ "window" ]' | while read line ; do if [ $(echo $line | awk '/"class":"steam","instance":"steamwebhelper"/{print}') ]; then i3-msg '[class="steam"] border pixel 1' && sleep 1 && i3-msg '[class="steam"] border pixel 2'; fi; done
 
-dbus-monitor --system "type='signal',interface='org.freedesktop.login1.Session'" |
-  while read -r line; do
-    if echo "$line" | grep -q "Unlock"; then
-      # Run your command here
-      echo "Unlocked at $(date)" >>~/.unlock.log
-      echo "oi"
-    fi
-  done
+# Better indentation (to put in a script if you prefer)
+i3-msg -t subscribe -m '[ "window" ]' |\
+	while read line ; do
+		if [ $(echo $line | awk '/"class":"steam","instance":"steamwebhelper"/{print}') ]; then
+			i3-msg '[class="steam"] border pixel 1'
+			sleep 1
+			i3-msg '[class="steam"] border pixel 2'
+		fi;
+	done

@@ -7,6 +7,6 @@ xidlehook \
   --timer 150 \
   'betterlockscreen -l' \
   '' \
-  --timer 300 \
+  --timer 75 \
   'xset -display :0.0 dpms force off' \
   'xset -display :0.0 dpms force on'

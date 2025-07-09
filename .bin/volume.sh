@@ -1,58 +1,71 @@
 #!/bin/bash
-
-PIPE="/tmp/volumepipe"
-
-start_xob() {
-  # Create pipe if it doesn't exist
-  [[ -p "$PIPE" ]] || mkfifo "$PIPE"
-
-  # Check if xob pipeline is already running
-  if ! pgrep -f "tail -f $PIPE" >/dev/null; then
-    nohup bash -c "tail -f $PIPE | xob" >/dev/null 2>&1 &
-    echo "xob started"
+start_wob() {
+  wob=$(pgrep -f "volwob")
+  if [ -e "/tmp/volumepipe" ]; then
+    if [ -z "$wob" ]; then
+      nohup tail -f /tmp/volumepipe | wob -c ~/.config/wob/volwob.ini &
+      echo "Wob wasn't running, so process was started again."
+    fi
+  else
+    mkfifo /tmp/volumepipe 2>/dev/null
+    if [ -n "$wob" ]; then
+      wob_pid=$(pgrep -f "volwob")
+      pkill -9 $wob_pid
+      echo "killed wob"
+      nohup tail -f /tmp/volumepipe | wob -c ~/.config/wob/volwob.ini &
+    fi
   fi
 }
 
-check_dependencies() {
-  local missing=0
-  for cmd in "$@"; do
-    if ! command -v "$cmd" >/dev/null; then
-      echo "Missing dependency: $cmd"
-      missing=1
-    fi
-  done
-  return $missing
-}
-
-# Check required commands
-check_dependencies "xob" "pactl" "pamixer" || exit 1
-
-# Handle volume actions
 case "$1" in
-up) pactl set-sink-volume @DEFAULT_SINK@ +5% ;;
-up_slow) pactl set-sink-volume @DEFAULT_SINK@ +1% ;;
-down) pactl set-sink-volume @DEFAULT_SINK@ -5% ;;
-down_slow) pactl set-sink-volume @DEFAULT_SINK@ -1% ;;
-mute) pactl set-sink-mute @DEFAULT_SINK@ toggle ;;
+"up")
+  pactl set-sink-volume @DEFAULT_SINK@ +5%
+  ;;
+"up_slow")
+  pactl set-sink-volume @DEFAULT_SINK@ +1%
+  ;;
+"down")
+  pactl set-sink-volume @DEFAULT_SINK@ -5%
+  ;;
+"down_slow")
+  pactl set-sink-volume @DEFAULT_SINK@ -1%
+  ;;
+"mute")
+  pactl set-sink-mute @DEFAULT_SINK@ toggle
+  ;;
 esac
 
-# Fetch volume info
-VOLUME=$(pamixer --get-volume)
-MUTED=$(pamixer --get-mute)
+function check_dependencies() {
+  local ret=0
+  for cmd in "$@"; do
+    ! [ $(command -v $cmd) ] && echo "Missing dependency: $cmd." && ret=1
+  done
+  return $ret
+}
 
-# Choose icon
-if [ "$MUTED" = "true" ]; then
-  ICON=audio-volume-muted
-elif [ "$VOLUME" -le 20 ]; then
+(check_dependencies "wob" "pamixer") || exit 1
+
+VOLUME=$(pamixer --get-volume)
+MUTE=$(echo $AMIXER | grep -o '\[off\]' | tail -n 1)
+if [ "$VOLUME" -le 20 ]; then
   ICON=audio-volume-low
-elif [ "$VOLUME" -le 60 ]; then
-  ICON=audio-volume-medium
 else
-  ICON=audio-volume-high
+  if [ "$VOLUME" -le 60 ]; then
+    ICON=audio-volume-medium
+  else
+    ICON=audio-volume-high
+  fi
+fi
+if [ "$MUTE" == "[off]" ]; then
+  ICON=audio-volume-muted
 fi
 
-# Start xob if needed and show volume
-start_xob
-echo "$VOLUME" >"$PIPE"
-
-# notify-send.sh "$VOLUME%" --replace=22 -u low -a volume -i "/usr/share/icons/AdwaitaLegacy/32x32/legacy/$ICON.png"
+#start_wov
+#echo $VOLUME
+#echo $VOLUME >/tmp/volumepipe
+#pkill -RTMIN+13 waybar
+notify-send.sh $VOLUME% \
+    --replace=22 \
+    -u low \
+    -a volume \
+    -i /usr/share/icons/AdwaitaLegacy/32x32/legacy/$ICON.png

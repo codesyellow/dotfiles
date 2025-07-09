@@ -5,7 +5,7 @@ state=0
 
 check_processes() {
   for proc in "$@"; do
-    if pgrep -x "$proc" >/dev/null; then
+    if ps -eo pid,cmd | grep -w "$proc" | grep -v grep >/dev/null; then
       return 0
     fi
   done
@@ -17,6 +17,7 @@ while true; do
     if [[ "$state" == 0 ]]; then
       touch "$GAMEON_PATH"
       pkill -RTMIN+15 waybar
+      echo "enable updated waybar"
       state=1
     fi
   else
@@ -24,6 +25,7 @@ while true; do
       state=0
       rm -f "$GAMEON_PATH"
       pkill -RTMIN+15 waybar
+      echo "disable and updated waybar"
     fi
   fi
   sleep 1

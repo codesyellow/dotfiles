@@ -1,52 +1,64 @@
 #!/usr/bin/env bash
+
 MONITOR=$1
 TIME=$2
-
 PIC_PATH="$HOME/.pictures"
-if ! [[ -d "$PIC_PATH" ]]; then
-  mkdir "$PIC_PATH"
-  echo "Pictures folder was created"
-fi
+mkdir -p "$PIC_PATH"
 
 function check_dependencies() {
   local ret=0
   for cmd in "$@"; do
-    ! [ $(command -v $cmd) ] && echo "Missing dependency: $cmd." && ret=1
+    ! command -v "$cmd" &>/dev/null && echo "Missing dependency: $cmd." && ret=1
   done
   return $ret
 }
 
-(check_dependencies "wf-recorder" "notify-send.sh" "swaymsg") || exit 1
+(check_dependencies "notify-send.sh" "swaymsg" "ffmpeg" "slurp" "gpu-screen-recorder") || exit 1
 
 record_monitor() {
   local monitor="$MONITOR"
-  local transform=""
+  local timestamp
+  timestamp=$(date +'%Y%m%d%H%M%S')
+  local video_file="$PIC_PATH/gpu-recorder-$timestamp.mp4"
+  local gif_file="$PIC_PATH/gpu-recorder-$timestamp.gif"
 
-  [[ "$monitor" == "VGA-1" ]] && transform="-F transpose=2"
+  gpu-screen-recorder -w screen -f 60 -o "$video_file" &
 
-  wf-recorder -y -o "$monitor" $transform -r 10 -c gif -f "$HOME/.pictures/wf-recorder$(date +'%Y%m%d%H%M%S').gif" &
   pid=$!
-  sleep $TIME
-  kill $pid
-  notify-send.sh "$MONITOR was recorded"
+  sleep "$TIME"
+  kill -SIGINT "$pid"
+  wait "$pid" 2>/dev/null
+
+  notify-send.sh "Converting to GIF..."
+  ffmpeg -y -i "$video_file" -vf "fps=10,scale=1000:-1:flags=lanczos" -c:v gif "$gif_file"
+  rm "$video_file"
+  notify-send.sh "Recorded to $gif_file"
 }
 
 record_region() {
-  local monitor="$MONITOR"
-  local transform=""
+  local region=$(slurp -f "%wx%h+%x+%y")
+  [[ -z "$region" || "$region" == "0x0+0+0" ]] && echo "Região inválida" && exit 1
 
-  [[ "$monitor" == "VGA-1" ]] && transform="-F transpose=2"
+  local timestamp
+  timestamp=$(date +'%Y%m%d%H%M%S')
+  local video_file="$PIC_PATH/gpu-recorder-$timestamp.mp4"
+  local gif_file="$PIC_PATH/gpu-recorder-$timestamp.gif"
 
-  wf-recorder -y -g "$(slurp)" $transform -r 10 -c gif -f "$HOME/.pictures/wf-recorder$(date +'%Y%m%d%H%M%S').gif" &
+  gpu-screen-recorder -w region -region "$region" -f 30 -o "$video_file" &
+
   pid=$!
-  sleep $TIME
-  kill $pid
-  notify-send.sh "Region was recorded"
+  sleep "$TIME"
+  kill -SIGINT "$pid"
+  wait "$pid" 2>/dev/null
+
+  notify-send.sh "Converting region to GIF..."
+  ffmpeg -y -i "$video_file" -vf "fps=10,scale=480:-1:flags=lanczos" -c:v gif "$gif_file"
+  rm "$video_file"
+  notify-send.sh "Region recorded to $gif_file"
 }
 
 if [[ "$1" == "region" ]]; then
-  CURRENT_MONITOR=$(swaymsg -t get_outputs | jq -r '.[] | select(.focused).name')
-  record_region "$CURRENT_MONITOR"
+  record_region
 else
-  record_monitor "$MONITOR"
+  record_monitor
 fi

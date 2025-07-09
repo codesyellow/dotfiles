@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-monitor=$(current_monitor)
+monitor=$(i3-msg -t get_tree | jq -r '.. | objects | select(.focused? == true).output')
 
 # Define workspace mappings
 declare -A workspace_primary=(

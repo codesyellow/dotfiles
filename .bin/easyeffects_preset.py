@@ -35,7 +35,7 @@ class Easyffects():
 
     def seto(self, preset_name):
         """Set the preset for easyeffects. Options: music, equalizer"""
-        music = "HB-Mid"
+        music = "Bass"
         equalizer = "LoudnessEqualizer"
         if preset_name == "equalizer":
             os.system(f"{EASYEFFECTS_APP_NAME} -l '{equalizer}'")

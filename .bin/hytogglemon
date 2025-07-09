@@ -1,0 +1,8 @@
+#!/bin/bash
+
+monitor=$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')
+if [[ "$monitor" == "VGA-1" ]]; then
+  hyprctl dispatch focusmonitor HDMI-A-1
+else
+  hyprctl dispatch focusmonitor VGA-1
+fi

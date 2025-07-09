@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-MONITOR=$(current_monitor)
+MONITOR=$(i3-msg -t get_tree | jq -r '.. | objects | select(.focused? == true).output'
 echo "$MONITOR"
 
 if [[ "$MONITOR" == "VGA1" ]]; then

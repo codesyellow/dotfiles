@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 notification_sended=false
 while [[ true ]]; do
-    whatsap=$(pgrep wasistlos)
+    whatsap=$(pgrep zapzap)
 
     if [[ -z "$whatsap" ]]; then
         if ! "$notification_sended"; then

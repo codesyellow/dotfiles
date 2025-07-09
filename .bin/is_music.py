@@ -10,8 +10,23 @@ class Music():
         self.music_state = False
         self.equalizer_state = False
         self.volume_perc = self.get_volume()
-        self.music_preset = "Bass Boosted"
+        self.music_preset = "Bass"
         self.equalizer_preset = "LoudnessEqualizer"
+
+    def music_on(self, app):
+        """Check if the app is playing any music using playerctl"""
+        try:
+            app_status = subprocess.check_output(
+                [
+                    "playerctl",
+                    "-p",
+                    app,
+                    "status"
+                ]
+            ).decode("utf-8")
+            print(app_status)
+        except subprocess.SubprocessError:
+            pass
 
     def get_process(self, process):
         """Check if x process is running"""
@@ -99,4 +114,5 @@ class Music():
 
 
 if __name__ == "__main__":
-    Music().run()
+    #    Music().run()
+    Music().music_on("lowfi")
