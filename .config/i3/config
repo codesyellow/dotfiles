@@ -29,19 +29,6 @@ workspace 6 output HDMI-A-1
 default_border pixel
 hide_edge_borders smart
 
-# Monitor
-#output HDMI-A-1 res 1280x1024@75HZ pos 0 0 transform 270 bg ~/.wallpapers/ign_unsplash32_vertical.png fill allow_tearing yes max_render_time off
-#output VGA-1 res 1360x768@60HZ pos 1024 500 bg ~/.wallpapers/ign_unsplash32_horizontal.png fill allow_tearing yes max_render_time off
-## Read `man 5 sway-input` for more information about this section.
-#input type:pointer {
-#    accel_profile "flat" # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
-#}
-#input type:keyboard {
-#    xkb_layout us,us
-#    xkb_variant ,intl
-#    xkb_options caps:ctrl_modifier,caps:escape,grp:alt_shift_toggle
-#} 
-
 # Scratchpads
 ## Rules
 for_window [class="dropdown_math"] move scratchpad
@@ -56,6 +43,7 @@ for_window [class="ai"] move scratchpad
 for_window [class="file-manager"] move scratchpad
 for_window [class="test"] move scratchpad
 for_window [class="wasistlos"]  move scratchpad
+for_window [class="zapzap"]  move scratchpad
 for_window [class="anki-pt"]  move scratchpad
 for_window [class="anki-en"]  move scratchpad
 for_window [class="anki-ori"]  move scratchpad
@@ -97,11 +85,11 @@ mode "scratchpad" {
     bindsym u exec --no-startup-id "i3pad sml top-center $scratchpad_term", mode "default"
     bindsym b exec --no-startup-id "i3pad lrg center-center 'st -e btop'", mode "default"
     #bindsym n exec --no-startup-id "i3pad bigl bottom-center 'st -e nvim ~/.notes/index.norg'", mode "default"
-    bindsym n exec --no-startup-id "i3pad bigl bottom-center 'obsidian'", mode "default"
+    bindsym n exec --no-startup-id "i3pad bigl bottom-center 'st -e vim ~/.vimwiki/index.md'", mode "default"
     bindsym f exec --no-startup-id "i3pad big center-center 'st -e nnn'", mode "default"
     bindsym m exec --no-startup-id "i3pad bigl center-center 'st -e cmus'", mode "default"
     bindsym l exec --no-startup-id "i3pad bigl center-center 'st -e lowfi'", mode "default"
-    bindsym w exec --no-startup-id "i3pad lrg center-center 'wasistlos'", mode "default"
+    bindsym w exec --no-startup-id "i3pad lrg center-center 'zapzap'", mode "default"
     bindsym c exec --no-startup-id "i3pad sm top-left 'st -e python -q'", mode "default"
     bindsym t exec --no-startup-id "i3pad smv center-left 'st -e taskwarrior-tui'", mode "default"
     bindsym i exec --no-startup-id "i3pad smv center-right 'st -e aichat'", mode "default"
@@ -214,6 +202,7 @@ mode "action" {
     bindsym d exec "imdrag ~/Downloads ~/.pictures ~/.wallpapers", mode "default"
     bindsym l exec "killall -USR1 swayidle", mode "default"
     bindsym m exec "360.sh 80", mode "default"
+    bindsym h exec "clipmenu", mode "default"
     # modes
     bindsym s mode "screenshot"
     bindsym g mode "gif_record"
@@ -341,6 +330,9 @@ for_window [title="Open file"] resize set width 900, resize set height 500
 for_window [class="yad"] floating enable, resize set 100, move position 30 30
 for_window [class="imv"] floating enable, resize set 700
 for_window [class="upc.exe"] floating enable
+for_window [class="steam" instance="steamwebhelper" title="Steam"] floating disable
+for_window [class="steam" instance="steamwebhelper"] floating enable
+
 for_window [class="ripdrag"] floating enable, move position 30 200
 
 # tab related
