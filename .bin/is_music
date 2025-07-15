@@ -5,7 +5,8 @@ volume=""
 while [[ true ]]; do
   lowfi_status=$(playerctl -p lowfi status)
   cmus_status=$(playerctl -p cmus status)
-  if [[ $lowfi_status == "Playing" ]] || [[ $cmus_status == "Playing" ]]; then
+  youtube_status=$(playerctl -p YoutubeMusic status)
+  if [[ $lowfi_status == "Playing" ]] || [[ $cmus_status == "Playing" || $youtube_status == "Playing" ]]; then
     if [[ $state == 0 ]]; then
       echo "playing"
       volume=$(pamixer --get-volume)
