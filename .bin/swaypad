@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+was_fullscreen=$(swaymsg -t get_tree | jq '.. | objects | select(.focused == true) | .fullscreen_mode')
+window_info=$(swaymsg -t get_tree | jq -r '
+  .. | objects | select(.focused == true) |
+  {
+    app_id,
+    class: .window_properties.class // null,
+    title: .name
+  } |
+  if .app_id then
+    "App ID: \(.app_id)"
+  elif .class then
+    "Class: \(.class)"
+  else
+    "Title: \(.title)"
+  end
+')
+
+# verify if file with the info exists
+
+# check if the window was fullscreen previous and, if so, send window info to file
+if [[ "$was_fullscreen" == 1 ]]; then
+  echo $window_info | cut -d':' -f1 | xargs
+  echo $window_info | cut -d':' -f2 | xargs
+fi
+
+#swaypad.py -s sma -p 'top-left' -c 'foot -a todo -e taskwarrior-tui' -n 'todo'
+#echo oi
+
+#swaymsg '[title="Firefox"] fullscreen enable'

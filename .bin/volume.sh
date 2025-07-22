@@ -65,7 +65,7 @@ fi
 #echo $VOLUME >/tmp/volumepipe
 #pkill -RTMIN+13 waybar
 notify-send.sh $VOLUME% \
-    --replace=22 \
-    -u low \
-    -a volume \
-    -i /usr/share/icons/AdwaitaLegacy/32x32/legacy/$ICON.png
+  --replace=22 \
+  -u low \
+  -a volume \
+  -i /usr/share/icons/AdwaitaLegacy/32x32/legacy/$ICON.png
