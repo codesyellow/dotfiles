@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
 
-source $HOME/.config/waybar/custom_widgets/config
+source "$HOME/.config/waybar/custom_widgets/config"
 
 state="normal"
 
-root=$(df -h / | awk 'NR==2 {print $4}' | tr -d 'G')
+# Converte vírgula para ponto
+root=$(df -h / | awk 'NR==2 {print $4}' | tr -d 'G' | tr ',' '.')
 
+# Agora comparação com ponto decimal funciona
 if awk "BEGIN {exit !($root < 10)}"; then
   state="warning"
 fi
 
-rootfs=$root"G"
+rootfs="${root}G"
 output=$(get_pango "RFS" "$rootfs")
 printf '{"text": "%s", "tooltip": "Updates: %s", "class": "%s"}\n' "$output" "$root" "$state"
