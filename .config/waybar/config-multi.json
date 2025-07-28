@@ -1,0 +1,209 @@
+[{
+  "layer": "top",
+  "name": "bar1",
+	"output": "VGA-1", 
+    "modules-left": [
+        "sway/workspaces", 
+        "custom/mode"
+    ],
+    "modules-center": [
+        "custom/mon"
+    ],
+    "modules-right": [
+        "custom/cpu-temp",
+        "custom/cpu",
+        "custom/mem",
+        "custom/volume",
+        "custom/pymor",
+        "custom/clock",
+        ],
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": false,
+        "format": "{icon}",
+        "format-icons": {
+            "1": "WEB",
+            "2": "TER",
+            "3": "ALT",
+
+            "urgent": "CIT",
+            "default": "ATT",
+        },
+        "persistent-workspaces": {
+            "1": ["VGA-1"], 
+            "2": ["VGA-1"], 
+            "3": ["VGA-1"],
+        }
+    },
+  "sway/mode": {
+    "format": "MODE",
+  },
+"custom/mon": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/cur_mon VGA-1",
+    "return-type": "json",
+    "signal": 14,
+    "tooltip": false
+
+  },
+"custom/cpu-temp": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/temp",
+    "interval": 10,
+    "return-type": "json",
+    "tooltip": false
+  },
+
+"custom/mode": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/swaymodes",
+    "return-type": "json",
+    "signal": 7,
+    "tooltip": false
+  },
+
+"custom/clock": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/day hour",
+    "interval": 60,
+    "return-type": "json",
+    "tooltip": false
+    },
+  "custom/pymor": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/pomodoro",
+    "signal": 8,
+    "on-click": "setsid pomodoro.py &",
+    "on-click-middle": "touch /tmp/pomo_cancel; rm /tmp/pomo_timer",
+    "return-type": "json",
+    "tooltip": false
+  },
+  "custom/volume": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/volume",
+    "on-click": "pavucontrol",
+    "return-type": "json",
+    "tooltip": false,
+    "signal": 13
+  },
+  "custom/cpu": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/cpu",
+    "interval": 5,
+    "return-type": "json",
+    "tooltip": false
+  },
+  "custom/mem": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/mem",
+    "interval": 10,
+    "return-type": "json",
+    "tooltip": false
+  },
+}, {
+    "layer": "top",
+    "name": "bar2",
+    "output": "HDMI-A-1",
+    "modules-left": [
+        "sway/workspaces", 
+        "custom/mode"
+    ],
+"modules-center": [
+        "custom/mon"
+    ],
+
+    "modules-right": [
+        "custom/gameon",
+        "custom/variant",
+        "custom/easy",
+        "custom/disk-root",
+        "custom/disk-home",
+        "custom/disk-hdd",
+        "custom/updates",
+        "custom/clock",
+
+        ],
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": false,
+        "format": "{icon}",
+        "format-icons": {
+            "4": "WEB",
+            "5": "GAM",
+            "6": "ALT",
+
+            "urgent": "CIT",
+            "default": "ATT",
+        },
+        "persistent-workspaces": {
+            "4": ["HDMI-A-1"], 
+            "5": ["HDMI-A-1"], 
+            "6": ["HDMI-A-1"],
+        }
+    },
+  "sway/mode": {
+    "format": "MODE",
+  },
+  "custom/easy": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/preset",
+    "signal": 3,
+    "return-type": "json",
+    "tooltip": false
+  },
+  
+  "custom/disk-root": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/root",
+    "interval": 60,
+    "return-type": "json",
+    "tooltip": false
+  },
+  "custom/variant": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/variant",
+    "interval": 5,
+    "return-type": "json",
+    "tooltip": false
+  },
+  "custom/updates": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/updates",
+    "interval": 60,
+    "return-type": "json",
+    "tooltip": false,
+    "signal": 30
+  },
+"custom/disk-home": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/home",
+    "interval": 60,
+    "return-type": "json",
+    "tooltip": false
+  },
+  "custom/disk-hdd": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/hdd",
+    "interval": 120,
+    "return-type": "json",
+    "tooltip": false
+  },
+"custom/countdown": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/countdown",
+//    "exec-if": "[ -f /tmp/countdown_timer ]",
+    "on-click-middle": "touch /tmp/countdown_cancel",
+    "interval": 1,
+    "return-type": "json",
+    "tooltip": false
+  },
+"custom/gameon": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/gameon",
+    "signal": 15,
+    "return-type": "json",
+    "tooltip": false
+  },
+"custom/clock": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/day",
+    "interval": 60,
+    "return-type": "json",
+    "tooltip": false
+    },
+"custom/mode": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/swaymodes",
+    "return-type": "json",
+    "signal": 7,
+    "tooltip": false
+  },
+"custom/mon": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/cur_mon HDMI-A-1",
+    "return-type": "json",
+    "tooltip": false,
+    "signal": 14,
+  }
+}]

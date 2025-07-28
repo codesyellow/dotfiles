@@ -13,7 +13,6 @@
     "modules-right": [
         "custom/gameon",
         "custom/variant",
-        "custom/countdown",
         "custom/easy",
         "custom/disk-root",
         "custom/disk-home",
@@ -56,16 +55,6 @@
     "return-type": "json",
     "tooltip": false
   },
-  "custom/countdown": {
-    "exec": "/home/digo/.config/waybar/custom_widgets/countdown",
-    "return-type": "json",
-    "on-scroll-up": "echo $(( $(cat /tmp/countdown_timer) + 1 )) > /tmp/countdown_timer",
-    "on-scroll-down": "echo $(( $(cat /tmp/countdown_timer) - 1 )) > /tmp/countdown_timer",
-    "on-click-middle": "echo 25 > /tmp/countdown_timer",
-    "on-click": "countdown",
-    "signal": 5,
-    "tooltip": false
-  },
   "custom/variant": {
     "exec": "/home/digo/.config/waybar/custom_widgets/variant",
     "interval": 5,
@@ -88,6 +77,14 @@
   "custom/disk-hdd": {
     "exec": "/home/digo/.config/waybar/custom_widgets/hdd",
     "interval": 120,
+    "return-type": "json",
+    "tooltip": false
+  },
+"custom/countdown": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/countdown",
+//    "exec-if": "[ -f /tmp/countdown_timer ]",
+    "on-click-middle": "touch /tmp/countdown_cancel",
+    "interval": 1,
     "return-type": "json",
     "tooltip": false
   },

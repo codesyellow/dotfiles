@@ -3,13 +3,13 @@
 source $HOME/.config/waybar/custom_widgets/config
 
 state="normal"
-text="00:00"
+text="20"
 COUNTDOWN="/tmp/countdown_timer"
 
 if [[ -e "$COUNTDOWN" ]]; then
-    state="warning"
-    text=$(cat "$COUNTDOWN")
+  #  state="warning"
+  text=$(cat "$COUNTDOWN")
 fi
 
-output=$(get_pango "TIK" "$text")
+output=$(get_pango "CTD" "$text")
 printf '{"text": "%s", "tooltip": "Updates: %s", "class": "%s"}\n' "$output" "$text" "$state"

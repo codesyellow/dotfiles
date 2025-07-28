@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
 MAIN_FONT="Caveat"
-TITLE_FONT="Recursive Sans Casual Static"
-CONTENT_FONT="Recursive Mono Linear Static"
+TITLE_FONT="Macondo"
+CONTENT_FONT="Macondo"
 TITLE_BOLD="800"
 CONTENT_BOLD="800"
 FONT_COLOR="#4c566a"
 
 function get_pango() {
-    local title_pango="<span foreground='$FONT_COLOR' font_family='$TITLE_FONT'>$1 </span>"
-    local content_pango="<span font_family='$CONTENT_FONT'>$2</span>"
+  local title_pango="<span foreground='$FONT_COLOR' font_family='$TITLE_FONT'>$1 </span>"
+  local content_pango="<span font_family='$CONTENT_FONT'>$2</span>"
 
-    title_pango=${title_pango//\"/\\\"}
-    content_pango=${content_pango//\"/\\\"}
+  title_pango=${title_pango//\"/\\\"}
+  content_pango=${content_pango//\"/\\\"}
 
-    echo "$title_pango$content_pango"
+  echo "$title_pango$content_pango"
 }
