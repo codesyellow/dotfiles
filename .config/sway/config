@@ -18,19 +18,19 @@ set $right l
 set $update_mode "pkill -RTMIN+7 waybar"
 set $mode_reset exec sh -c 'swaymsg mode "default"; pkill -RTMIN+7 waybar'
 #set $term kitty -e zellij
-set $term alacritty -e zellij
+set $term foot -e zellij
 set $scratchpad_term alacritty
 #set $menu rofi -show run -theme-str 'window { width: 60%; x-offset: 20%; y-offset: -28px; }'
 #set $menu j4-dmenu-desktop --dmenu='wmenu-run -N "#2e3440" -i -f "Iosevka Nerd Font 12"'
-set $menu app2unit -- $(wmenu-run -N "#2e3440" -i -f "Iosevka Nerd Font 14")
+set $menu wmenu-run -N "#2e3440" -i -f "Iosevka Nerd Font 14"
 
 # General
-workspace 1 output VGA-1
-workspace 2 output VGA-1
-workspace 3 output VGA-1
-workspace 4 output HDMI-A-1
-workspace 5 output HDMI-A-1
-workspace 6 output HDMI-A-1
+#workspace 1 output VGA-1
+#workspace 2 output VGA-1
+#workspace 3 output VGA-1
+workspace 4 output HDMI-A-2
+workspace 5 output HDMI-A-2
+workspace 6 output HDMI-A-2
 # tab related
 workspace_layout tabbed
 # colors                border background text indicator floating border
@@ -42,8 +42,8 @@ hide_edge_borders --i3 smart
 # hide mouse
 seat seat0 hide_cursor 3000
 # monitors
-output HDMI-A-1 res 1280x1024@75HZ pos 0 172 bg ~/.wallpapers/rocks_hdmi-a-1.png fill allow_tearing yes max_render_time off
-output VGA-1 res 1360x768@60HZ pos 1280 0 transform 90 bg ~/.wallpapers/rocks_vga-1.png fill allow_tearing yes max_render_time off
+output HDMI-A-2 res 1280x1024@75HZ pos 0 0 bg ~/.wallpapers/rocks_hdmi-a-1.png fill allow_tearing yes max_render_time off
+#output VGA-1 res 1360x768@60HZ pos 1280 0 transform 90 bg ~/.wallpapers/rocks_vga-1.png fill allow_tearing yes max_render_time off
 # Read `man 5 sway-input` for more information about this section.
 input type:pointer {
     accel_profile "flat" # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
@@ -67,7 +67,7 @@ for_window [app_id="calculator"] move scratchpad
 for_window [app_id="habits"] move scratchpad
 for_window [app_id="file-manager"] move scratchpad
 for_window [app_id="test"] move scratchpad
-for_window [app_id="wasistlos"]  move scratchpad
+for_window [app_id="zapzap"]  move scratchpad
 for_window [app_id="anki-pt"]  move scratchpad
 for_window [app_id="anki-en"]  move scratchpad
 for_window [app_id="anki-ori"]  move scratchpad
@@ -107,19 +107,25 @@ mode "ia" {
 
 # TFPB
 mode "scratchpad" {
-    bindsym c exec "swaypad.py -s sm -p 'top-left' -c 'foot -a calculator -e python -q' -n 'calculator'", $mode_reset
+#    bindsym c exec "swaypad.py -s sm -p 'top-left' -c 'foot -a calculator -e python -q' -n 'calculator'", $mode_reset
+    bindsym c exec --no-startup-id "sway-scratchpad -tmt -atl -d 30%x30% -- foot -e python -q", $mode_reset
     bindsym r exec "swaypad.py -s sm -p 'top' -c 'foot -a countdown -e countdown.py' -n 'countdown'", $mode_reset
-    bindsym h exec "swaypad.py -s big -p 'top' -c 'foot -a habits -e vim /home/digo/.vimwiki/habits/index.md' -n 'habits'", $mode_reset
+    bindsym h exec --no-startup-id "swaypad.py -s big -p 'top' -c 'foot -a habits -e vim /home/digo/.vimwiki/habits/index.md' -n 'habits'", $mode_reset
     #bindsym n exec "swaypad.py -s big -p 'bottom' -c 'foot -a notes -e vim /home/digo/.vimwiki/notes/index.md' -n 'notes'", $mode_reset
-    bindsym n exec "swaypad.py -s big -p 'bottom' -c 'foot -a notes -e nvim /home/digo/.notes/index.norg' -n 'notes'", $mode_reset
-    bindsym b exec "swaypad.py -s big -c 'foot -a monitor -e btop' -n 'monitor'", $mode_reset
-    bindsym f exec "swaypad.py -s big -c 'foot -a file-manager -e nnn' -n 'file-manager'", $mode_reset
-    bindsym m exec "swaypad.py -s big -c 'foot -a music -e cmus' -n 'music'", $mode_reset
-    bindsym w exec "swaypad.py -s big -c 'wasistlos' -n 'wasistlos'", $mode_reset
+    bindsym n exec --no-startup-id "swaypad.py -s big -p 'bottom' -c 'foot -a notes -e nvim /home/digo/.notes/index.norg' -n 'notes'", $mode_reset
+#    bindsym b exec "swaypad.py -s big -c 'foot -a monitor -e btop' -n 'monitor'", $mode_reset
+    bindsym b exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- st -e btop", $mode_reset
 
+    bindsym f exec --no-startup-id "swaypad.py -s big -c 'foot -a file-manager -e nnn' -n 'file-manager'", $mode_reset
+#    bindsym m exec "swaypad.py -s big -c 'foot -a music -e cmus' -n 'music'", $mode_reset
+    bindsym m exec --no-startup-id "sway-scratchpad -tmt -acc -d 80%x80% -- youtube-music", $mode_reset
+#    bindsym w exec "swaypad.py -s big -c 'zapzap' -n 'zapzap'", $mode_reset
+    bindsym w exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- zapzap", $mode_reset
     bindsym t exec "swaypad.py -s sma -p 'top-left' -c 'foot -a todo -e taskwarrior-tui' -n 'todo'", $mode_reset
-    bindsym u exec "swaypad.py -s smf -p 'top' -c 'alacritty --config-file /home/digo/.config/alacritty/scratchpad.toml --class dropdown_term -e zellij attach --create scratch' -n 'dropdown_term'", $mode_reset
-    bindsym l exec "swaypad.py -s sm -c 'foot -a lowfi -e lowfi -p' -n 'lowfi'", $mode_reset
+#    bindsym u exec "swaypad.py -s smf -p 'top' -c 'alacritty --config-file /home/digo/.config/alacritty/scratchpad.toml --class dropdown_term -e zellij attach --create scratch' -n 'dropdown_term'", $mode_reset
+    bindsym u exec --no-startup-id "sway-scratchpad -tmt -atc -d 80%x40% -- alacritty --config-file /home/digo/.config/alacritty/scratchpad.toml -e zellij attach --create scratch", $mode_reset
+#    bindsym l exec "swaypad.py -s sm -c 'foot -a lowfi -e lowfi -p' -n 'lowfi'", $mode_reset
+    bindsym l exec --no-startup-id "sway-scratchpad -tmt -acc -d 50%x50% -- foot -e lowfi -p", $mode_reset
 #    bindsym r exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x40% -p 0,20 -- foot -T countdown -e countdown.py", mode "default"
     bindsym g mode "file"; exec $update_mode
     bindsym s mode "study"; exec $update_mode
@@ -207,7 +213,7 @@ mode "screenshot" {
     bindsym r exec "swayshot region", $mode_reset
     bindsym e exec "swayshot edit", $mode_reset
     bindsym s exec "swayshot", $mode_reset
-    bindsym h exec "swayshot mon HDMI-A-1", $mode_reset
+    bindsym h exec "swayshot mon HDMI-A-2", $mode_reset
     bindsym l exec "swayshot mon VGA-1", $mode_reset
 
     bindsym Return $mode_reset
@@ -215,7 +221,7 @@ mode "screenshot" {
 }
 
 mode "gif_record" {
-    bindsym h exec "regif HDMI-A-1 8", $mode_reset
+    bindsym h exec "regif HDMI-A-2 8", $mode_reset
     bindsym l exec "regif VGA-1 8", $mode_reset
     bindsym r exec "regif region 8", $mode_reset
 
@@ -342,7 +348,7 @@ for_window [app_id="com.example.App"] floating enable, resize set 700
 for_window [class="^Firefox$"] inhibit_idle fullscreen
 for_window [app_id="^firefox$"] inhibit_idle fullscreen
 for_window [app_id="^brave-browser$"] move to workspace 4
-for_window [app_id="it.catboy.ripdrag"] move position 10 10
+for_window [app_id="it.catboy.ripdrag"] move position 850 10
 
 include /etc/sway/config.d/*
 include ~/.config/sway/rules.conf

@@ -1,20 +1,26 @@
 #!/usr/bin/env bash
-app2unit -- waybar &
-app2unit -- pavucontrol &
-app2unit -s b -- gameon &
-app2unit -s b -- upmon &
-app2unit -s b -- easyeffects --gapplication-service &
-app2unit -s b -- gammastep -P -O 2500 &
-app2unit -s b -- earphone.sh &
-app2unit -s b -- whatsap_on.sh &
-app2unit -s b -- dunst &
-app2unit -s b -- is_music &
-#app2unit -s b -- sway-audio-idle-inhibit &
-app2unit -s b -- swayidle -w &
-app2unit -s b -- syncthing &
-app2unit -s b -- killall pavucontrol &
-app2unit -s b -- pamixer --set-volume 30 &
+run_unit() {
+  if [[ "$2" == "gui" ]]; then
+    app2unit -s a -- $1 &
+  else
+    app2unit -s b -- $1 &
+  fi
+}
+run_unit waybar
+run_unit pavucontrol "gui"
+run_unit gameon
+run_unit "easyeffects --gapplication-service"
+run_unit "gammastep -P -O 2500"
+run_unit whatsap_on.sh
+run_unit dunst
+run_unit is_music
+run_unit sway-audio-idle-inhibit
+run_unit "swayidle -w"
+run_unit syncthing
 #uwsm app -- easy_always.sh &
-systemctl --user import-environment PATH &
-/usr/lib/polkit-kde-authentication-agent-1 &
-wl-paste --type text --watch cliphist store &
+run_unit /usr/lib/polkit-kde-authentication-agent-1
+run_unit "wl-paste --type text --watch cliphist store"
+run_unit "pw-metadata -n settings 0 c lock.force-quantum"
+run_unit "systemctl --user import-environment PATH"
+run_unit killpavu
+run_unit "pamixer --set-volume 30"
