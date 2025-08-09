@@ -1,22 +1,5 @@
 #!/usr/bin/env bash
 
-was_fullscreen=$(swaymsg -t get_tree | jq '.. | objects | select(.focused == true) | .fullscreen_mode')
-window_info=$(
-  swaymsg -t get_tree | jq -r '
-  .. | objects | select(.focused == true) .id
-'
-)
-
-# verify if file with the info exists
-
-# check if the window was fullscreen previous and, if so, send window info to file
-if [[ "$was_fullscreen" == 1 ]]; then
-  echo $window_info >/tmp/prev_fullscreen_window_id
-fi
-
-#swaypad.py -s sma -p 'top-left' -c 'foot -a todo -e taskwarrior-tui' -n 'todo'
-#swaypad.py "$@"
-
 while getopts "n:C:h:w:p:c:" opt; do
   case "$opt" in
   n) name="$OPTARG" ;;
@@ -32,11 +15,6 @@ while getopts "n:C:h:w:p:c:" opt; do
   esac
 done
 
-screen_height=$(swaymsg -t get_outputs | jq '.[] | select(.active) | .current_mode.height')
-screen_width=$(swaymsg -t get_outputs | jq '.[] | select(.active) | .current_mode.width')
-resize_width=$(echo $screen_width*$width | bc | cut -d'.' -f1)
-resize_height=$(echo $screen_height*$height | bc | cut -d'.' -f1)
-
 if [[ -z "$command" ]]; then
   echo "Err: -c (command) is required"
   exit 1
@@ -48,6 +26,65 @@ else
     fi
   fi
 fi
+
+# check if fullscreen scripts is running, if not, open it.
+if [[ -z $(ps -ef | grep 'bash' | grep "swayscratchfull") ]]; then
+  nohup swayscratchfull &
+fi
+
+# check if the window was fullscreen previous and, if so, send window info to file
+was_fullscreen=$(swaymsg -t get_tree | jq '.. | objects | select(.focused == true) | .fullscreen_mode')
+window_info=$(
+  swaymsg -t get_tree | jq -r '
+  .. | objects | select(.focused == true) .id
+'
+)
+if [[ "$was_fullscreen" == 1 ]]; then
+  echo $window_info >/tmp/prev_fullscreen_window_id
+fi
+
+function inactive_scratch() {
+  echo "opening scratchpad"
+  nohup $command &
+  sleep 0.4
+  while [[ true ]]; do
+    echo "trying to get window app_id"
+    is_floating=$(swaymsg -t get_tree | jq -r --arg name "$name" '.. | objects | select(.app_id == $name) | .scratchpad_state')
+    if [[ -z "$is_floating" ]]; then
+      echo "trying to get window class instead"
+      is_floating=$(swaymsg -t get_tree | jq -r --arg class "$class" '
+        .. | objects
+        | select(.window_properties?.class == $class)
+        | .scratchpad_state
+      ')
+    fi
+    echo "window info is: $is_floating"
+    echo "match info is: $match_info"
+
+    if [[ "$is_floating" == "fresh" ]]; then
+      echo "exiting loop since scratchpad is already present."
+      break
+    else
+      echo "moving $match_info to scratch"
+      swaymsg "[$match_info] move scratchpad"
+      sleep 0.2
+      echo "open scratch"
+      swaymsg "[$match_info] resize set $resize_width $resize_height"
+      swaymsg "[$match_info] move position $position_set"
+      sleep 0.2
+      swaymsg "[$match_info]" move container to workspace "__temp__"
+      sleep 0.2
+      swaymsg "[$match_info] scratchpad show"
+    fi
+    sleep 0.2
+  done
+}
+
+# grab screen size and handle window calculation for what the app size should be.
+screen_height=$(swaymsg -t get_outputs | jq '.[] | select(.active) | .current_mode.height')
+screen_width=$(swaymsg -t get_outputs | jq '.[] | select(.active) | .current_mode.width')
+resize_width=$(echo $screen_width*$width | bc | cut -d'.' -f1)
+resize_height=$(echo $screen_height*$height | bc | cut -d'.' -f1)
 
 case "$position" in
 top)
@@ -77,45 +114,6 @@ else
   match_info=class="$class"
 fi
 
-function inactive_scratch() {
-  echo "opening scratchpad"
-  nohup $command &
-  sleep 0.4
-  while [[ true ]]; do
-    # change floating name to something else
-    echo "trying to get window app_id"
-    is_floating=$(swaymsg -t get_tree | jq -r --arg name "$name" '.. | objects | select(.app_id == $name) | .scratchpad_state')
-    if [[ -z "$is_floating" ]]; then
-      echo "trying to get window class instead"
-      is_floating=$(swaymsg -t get_tree | jq -r --arg class "$class" '
-        .. | objects
-        | select(.window_properties?.class == $class)
-        | .scratchpad_state
-      ')
-    fi
-    echo "window info is: $is_floating"
-    echo "match info is: $match_info"
-
-    if [[ "$is_floating" == "fresh" ]]; then
-      echo "exiting loop since scratchpad is already present."
-      break
-    else
-      echo "moving $match_info to scratch"
-      swaymsg "[$match_info] move scratchpad"
-      sleep 0.2
-      echo "open scratch"
-      swaymsg "[$match_info] resize set $resize_width $resize_height"
-      swaymsg "[$match_info] move position $position_set"
-      swaymsg "[$match_info] scratchpad show"
-    fi
-    sleep 0.2
-  done
-}
-
-# resize it depending on screen witdh and height using %.
 swaymsg "[$match_info] resize set $resize_width $resize_height"
 swaymsg "[$match_info] move position $position_set"
-# set it's position of screen.
-
-echo "$position_set"
 swaymsg "[$match_info] scratchpad show" || inactive_scratch
