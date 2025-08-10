@@ -9,7 +9,7 @@ while getopts "n:C:h:w:p:c:" opt; do
   p) position="$OPTARG" ;;
   c) command="$OPTARG" ;;
   *)
-    echo "Uso: $0 [-n name | -C class] -c comando"
+    echo "Use: $0 [-n name | -C class | -w with(percentage) -h height(percentage) -p position(top, top-left, top-right, center)] -c command"
     exit 1
     ;;
   esac
@@ -58,25 +58,19 @@ function inactive_scratch() {
         | .scratchpad_state
       ')
     fi
-    echo "window info is: $is_floating"
-    echo "match info is: $match_info"
 
     if [[ "$is_floating" == "fresh" ]]; then
       echo "exiting loop since scratchpad is already present."
       break
     else
-      echo "moving $match_info to scratch"
       swaymsg "[$match_info] move scratchpad"
       sleep 0.2
-      echo "open scratch"
       swaymsg "[$match_info] resize set $resize_width $resize_height"
       swaymsg "[$match_info] move position $position_set"
       sleep 0.2
-      swaymsg "[$match_info]" move container to workspace "__temp__"
-      sleep 0.2
       swaymsg "[$match_info] scratchpad show"
     fi
-    sleep 0.2
+    sleep 0.1
   done
 }
 
@@ -104,7 +98,7 @@ top_right)
   position_set="$x 0"
   ;;
 *)
-  echo "no"
+  echo "position does not exist"
   ;;
 esac
 
