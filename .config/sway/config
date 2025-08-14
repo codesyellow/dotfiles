@@ -107,23 +107,22 @@ mode "ia" {
 
 # TFPB
 mode "scratchpad" {
-#    bindsym c exec "swaypad.py -s sm -p 'top-left' -c 'foot -a calculator -e python -q' -n 'calculator'", $mode_reset
-    bindsym c exec --no-startup-id "sway-scratchpad -tmt -atl -d 30%x30% -- foot -e python -q", $mode_reset
+    bindsym c exec "swaypad -n 'calculator' -p 'top_left' -w 0.50 -h 0.30 -c 'foot -a calculator -e python -q'", $mode_reset
     bindsym r exec "swaypad.py -s sm -p 'top' -c 'foot -a countdown -e countdown.py' -n 'countdown'", $mode_reset
     bindsym h exec --no-startup-id "swaypad.py -s big -p 'top' -c 'foot -a habits -e vim /home/digo/.vimwiki/habits/index.md' -n 'habits'", $mode_reset
     #bindsym n exec "swaypad.py -s big -p 'bottom' -c 'foot -a notes -e vim /home/digo/.vimwiki/notes/index.md' -n 'notes'", $mode_reset
-    bindsym n exec --no-startup-id "swaypad.py -s big -p 'bottom' -c 'foot -a notes -e nvim /home/digo/.notes/index.norg' -n 'notes'", $mode_reset
+    bindsym n exec --no-startup-id 'swaypad  -n "notes" -c "foot -a notes -e nvim /home/digo/.notes/index.norg" -w 0.90 -h 0.90 -p center', $mode_reset
 #    bindsym b exec "swaypad.py -s big -c 'foot -a monitor -e btop' -n 'monitor'", $mode_reset
-    bindsym b exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- st -e btop", $mode_reset
+#    bindsym b exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- st -e btop", $mode_reset
+    bindsym b exec 'swaypad -n "monitor" -c "foot -a monitor -e btop" -w 0.90 -h 0.90 -p center', $mode_reset
 
     bindsym f exec --no-startup-id "swaypad.py -s big -c 'foot -a file-manager -e nnn' -n 'file-manager'", $mode_reset
-#    bindsym m exec "swaypad.py -s big -c 'foot -a music -e cmus' -n 'music'", $mode_reset
-    bindsym m exec --no-startup-id "sway-scratchpad -tmt -acc -d 80%x80% -- youtube-music", $mode_reset
+    bindsym m exec 'swaypad -C "com.github.th_ch.youtube_music" -c "youtube-music" -w 0.90 -h 0.90 -p center', $mode_reset
 #    bindsym w exec "swaypad.py -s big -c 'zapzap' -n 'zapzap'", $mode_reset
-    bindsym w exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- zapzap", $mode_reset
-    bindsym t exec "swaypad.py -s sma -p 'top-left' -c 'foot -a todo -e taskwarrior-tui' -n 'todo'", $mode_reset
-#    bindsym u exec "swaypad.py -s smf -p 'top' -c 'alacritty --config-file /home/digo/.config/alacritty/scratchpad.toml --class dropdown_term -e zellij attach --create scratch' -n 'dropdown_term'", $mode_reset
-    bindsym u exec --no-startup-id "sway-scratchpad -tmt -atc -d 80%x40% -- alacritty --config-file /home/digo/.config/alacritty/scratchpad.toml -e zellij attach --create scratch", $mode_reset
+    bindsym w exec --no-startup-id 'swaypad -C "ZapZap" -c "zapzap" -w 0.90 -h 0.90 -p center', $mode_reset
+#    bindsym t exec "swaypad.py -s sma -p 'top-left' -c 'foot -a todo -e taskwarrior-tui' -n 'todo'", $mode_reset
+    bindsym t exec 'swaypad -n "todo" -c "foot -a todo -e taskwarrior-tui" -w 0.40 -h 0.80 -p top_left', $mode_reset
+    bindsym u exec 'swaypad -n "dropdown" -c "foot -a dropdown -e zellij attach --create scratch" -w 0.90 -h 0.40 -p top', $mode_reset
 #    bindsym l exec "swaypad.py -s sm -c 'foot -a lowfi -e lowfi -p' -n 'lowfi'", $mode_reset
     bindsym l exec --no-startup-id "sway-scratchpad -tmt -acc -d 50%x50% -- foot -e lowfi -p", $mode_reset
 #    bindsym r exec --no-startup-id "sway-scratchpad -tmt -atc -d 50%x40% -p 0,20 -- foot -T countdown -e countdown.py", mode "default"
@@ -138,19 +137,10 @@ mode "scratchpad" {
 # Binds
 ## Modes/Keychords
 mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
     bindsym $left resize shrink width 10px
     bindsym $down resize grow height 10px
     bindsym $up resize shrink height 10px
     bindsym $right resize grow width 10px
-    # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
