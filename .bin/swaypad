@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+function check_dependencies() {
+  local ret=0
+  for cmd in "$@"; do
+    ! [ $(command -v $cmd) ] && echo "Missing dependency: $cmd." && ret=1
+  done
+  return $ret
+}
+
+(check_dependencies "bc" "swaymsg" "swayscratchfull") || exit 1
+
 while getopts "n:C:h:w:p:c:" opt; do
   case "$opt" in
   n) name="$OPTARG" ;;
@@ -98,7 +108,7 @@ top_right)
   position_set="$x 0"
   ;;
 *)
-  echo "position does not exist"
+  echo "position does not exist."
   ;;
 esac
 
@@ -108,6 +118,7 @@ else
   match_info=class="$class"
 fi
 
+echo "resize values are: $resize_width $resize_height"
 swaymsg "[$match_info] resize set $resize_width $resize_height"
 swaymsg "[$match_info] move position $position_set"
 swaymsg "[$match_info] scratchpad show" || inactive_scratch
