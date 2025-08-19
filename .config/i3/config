@@ -12,8 +12,9 @@ set $down j
 set $up k
 set $right l
 #set $term kitty -e zellij
-set $term alacritty -e zellij
-set $scratchpad_term 'alacritty --config-file ~/.config/alacritty/scratchpad.toml --class dropdown_term -e zellij'
+set $term alacritty -e tmux
+set $scratchpad_term "st -A 0.5"
+
 #set $menu rofi -show run -theme-str 'window { width: 60%; x-offset: 20%; y-offset: -28px; }'
 set $menu dmenu_run
 
@@ -52,7 +53,7 @@ for_window [class="anki-mh"]  move scratchpad
 ## Binds
 ## file manager
 mode "file" {
-    bindsym c exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T file -e yazi ~/.HDD/courses/", mode "default"
+  bindsym c exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T file -e yazi ~/.HDD/courses/", mode "default"
     bindsym h exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T file -e yazi ~/.HDD/", mode "default"
     bindsym d exec --no-startup-id "sway-scratchpad -tmt -atc -d 90%x90% -- foot -T file -e yazi ~/Downloads/", mode "default"
 
@@ -62,7 +63,7 @@ mode "file" {
 }
 
 mode "study" {
-    bindsym p exec "swaypad.py -s big -p 'top' -c 'foot -a anki-pt -e anki-vim portuguese' -n 'anki-pt'", mode "default"
+  bindsym p exec "swaypad.py -s big -p 'top' -c 'foot -a anki-pt -e anki-vim portuguese' -n 'anki-pt'", mode "default"
     bindsym e exec "swaypad.py -s big -p 'top' -c 'foot -a anki-en -e anki-vim english' -n 'anki-en'", mode "default"
     bindsym o exec "swaypad.py -s big -p 'top' -c 'foot -a anki-ori -e anki-vim origamid' -n 'anki-ori'", mode "default"
 #    bindsym m exec "swaypad.py -s big -p 'top' -c 'foot -a anki-mh -e anki-vim math' -n 'anki-mh'", mode "default"
@@ -73,7 +74,7 @@ mode "study" {
 }
 
 mode "ia" {
-    bindsym i exec --no-startup-id "sway-scratchpad -tmt -atc -d 500x90% -p -180,0 -m left -- foot -T ai -e aichat", mode "default"
+  bindsym i exec --no-startup-id "sway-scratchpad -tmt -atc -d 500x90% -p -180,0 -m left -- foot -T ai -e aichat", mode "default"
     bindsym g exec --no-startup-id "sway-scratchpad -tmt -atc -d 500x90% -p -180,0 -m left -- foot -T ai -e aichat -r correct_text", mode "default"
     bindsym c exec --no-startup-id "sway-scratchpad -tmt -atc -d 500x90% -p -180,0 -m left -- foot -T ai -e aichat -r %code%", mode "default"
 
@@ -82,12 +83,12 @@ mode "ia" {
 }
 
 mode "scratchpad" {
-    bindsym u exec --no-startup-id "i3pad sml top-center $scratchpad_term", mode "default"
+  bindsym u exec --no-startup-id "i3pad sml top-center 'st -A 0.8'", mode "default"
     bindsym b exec --no-startup-id "i3pad lrg center-center 'st -e btop'", mode "default"
-    #bindsym n exec --no-startup-id "i3pad bigl bottom-center 'st -e nvim ~/.notes/index.norg'", mode "default"
+#bindsym n exec --no-startup-id "i3pad bigl bottom-center 'st -e nvim ~/.notes/index.norg'", mode "default"
     bindsym n exec --no-startup-id "i3pad bigl bottom-center 'st -e vim ~/.vimwiki/index.md'", mode "default"
     bindsym f exec --no-startup-id "i3pad big center-center 'st -e nnn'", mode "default"
-    bindsym m exec --no-startup-id "i3pad bigl center-center 'st -e cmus'", mode "default"
+    bindsym m exec --no-startup-id "i3pad bigl center-center 'youtube-music'", mode "default"
     bindsym l exec --no-startup-id "i3pad bigl center-center 'st -e lowfi'", mode "default"
     bindsym w exec --no-startup-id "i3pad lrg center-center 'zapzap'", mode "default"
     bindsym c exec --no-startup-id "i3pad sm top-left 'st -e python -q'", mode "default"
@@ -104,15 +105,15 @@ mode "scratchpad" {
 # Binds
 ## Modes/Keychords
 mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
-    bindsym $left resize shrink width 10px
+# left will shrink the containers width
+# right will grow the containers width
+# up will shrink the containers height
+# down will grow the containers height
+  bindsym $left resize shrink width 10px
     bindsym $down resize grow height 10px
     bindsym $up resize shrink height 10px
     bindsym $right resize grow width 10px
-    # Ditto, with arrow keys
+# Ditto, with arrow keys
     bindsym Left resize shrink width 10px
     bindsym Down resize grow height 10px
     bindsym Up resize shrink height 10px
@@ -122,15 +123,6 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 mode "workspaces" {
-# new workspaces will be browser, gaming and alt
-    # vertical monitor
-#    bindsym t workspace 1, mode "default"
-#    bindsym w workspace 2, mode "default"
-#    bindsym a workspace 3, mode "default"
-#    # horizontal monitor
-#    bindsym b workspace 4, mode "default"
-#    bindsym g workspace 5, mode "default"
-#    bindsym d workspace 6, mode "default"
     bindsym w exec "i3some w", mode "default"
     bindsym g exec "i3some g", mode "default"
     bindsym a exec "i3some a", mode "default"
@@ -140,14 +132,6 @@ mode "workspaces" {
 }
 ## Move workspace binds
 mode "move_workspaces" {
-    # vertical monitor
-    #bindsym t move container to workspace number 1, mode "default"
-    #bindsym w move container to workspace number 2, mode "default"
-    #bindsym a move container to workspace number 3, mode "default"
-    ## horizontal monitor
-    #bindsym b move container to workspace number 4, mode "default"
-    #bindsym g move container to workspace number 5, mode "default"
-    #bindsym d move container to workspace number 6, mode "default"
     bindsym w exec "i3some move w", mode "default"
     bindsym g exec "i3some move g", mode "default"
     bindsym a exec "i3some move a", mode "default"
@@ -157,14 +141,6 @@ mode "move_workspaces" {
 }
 ## Move workspace binds
 mode "move_in" {
-    # vertical monitor
-    #bindsym t move container to workspace number 1, mode "default"
-    #bindsym w move container to workspace number 2, mode "default"
-    #bindsym a move container to workspace number 3, mode "default"
-    ## horizontal monitor
-    #bindsym b move container to workspace number 4, mode "default"
-    #bindsym g move container to workspace number 5, mode "default"
-    #bindsym d move container to workspace number 6, mode "default"
     bindsym w exec "i3some move_in w", mode "default"
     bindsym g exec "i3some move_in g", mode "default"
     bindsym a exec "i3some move_in a", mode "default"
@@ -174,7 +150,7 @@ mode "move_in" {
 }
 
 mode "screenshot" {
-    bindsym r exec "i3shot region", mode "default"
+  bindsym r exec "i3shot region", mode "default"
     bindsym e exec "i3shot edit", mode "default"
     bindsym s exec "i3shot", mode "default"
     bindsym h exec "i3shot mon HDMI-A-1", mode "default"
@@ -185,7 +161,7 @@ mode "screenshot" {
 }
 
 mode "gif_record" {
-    bindsym h exec "regif HDMI-A-1 8", mode "default"
+  bindsym h exec "regif HDMI-A-1 8", mode "default"
     bindsym l exec "xregif VGA1 8", mode "default"
     bindsym r exec "xregif region 8", mode "default"
 
@@ -195,7 +171,7 @@ mode "gif_record" {
 
 ## action
 mode "action" {
-    bindsym k kill, mode "default"
+  bindsym k kill, mode "default"
     bindsym r reload, mode "default"
     bindsym f fullscreen, mode "default"
     bindsym n exec "dunstctl close-all", mode "default"
@@ -203,7 +179,7 @@ mode "action" {
     bindsym l exec "killall -USR1 swayidle", mode "default"
     bindsym m exec "360.sh 80", mode "default"
     bindsym h exec "clipmenu", mode "default"
-    # modes
+# modes
     bindsym s mode "screenshot"
     bindsym g mode "gif_record"
 
@@ -213,7 +189,7 @@ mode "action" {
 
 ## bar
 mode "bar" {
-    bindsym r exec "killall -SIGUSR2 waybar", mode "default"
+  bindsym r exec "killall -SIGUSR2 waybar", mode "default"
     bindsym h exec "killall -SIGUSR1 waybar", mode "default"
 
     bindsym Return mode "default"
@@ -222,9 +198,9 @@ mode "bar" {
 
 ## exec
 mode "exec" {
-    bindsym r exec $menu, mode "default"
+  bindsym r exec $menu, mode "default"
     bindsym t exec "kitty -T alt_term -e zellij", mode "default"
-    bindsym h exec "cliphist list | wofi --dmenu | cliphist decode | wl-copy", mode "default"
+    bindsym h exec "clipcat-menu", mode "default"
     bindsym m exec "maps.sh", mode "default"
     bindsym n exec "ankivim.sh", mode "default"
     bindsym c exec "hyprpicker | wl-copy", mode "default"
@@ -235,7 +211,7 @@ mode "exec" {
 
 ## layout
 mode "layout" {
-    bindsym t layout tabbed, mode "default"
+  bindsym t layout tabbed, mode "default"
     bindsym s layout stacking, mode "default"
     bindsym o layout toggle splitv tabbed, mode "default"
     bindsym v splitv, mode "default"
@@ -247,7 +223,7 @@ mode "layout" {
 
 ## volume
 mode "volume" {
-    bindsym l exec volume.sh up, mode "default"
+  bindsym l exec volume.sh up, mode "default"
     bindsym h exec volume.sh down, mode "default"
     bindsym k exec volume.sh up_slow, mode "default"
     bindsym j exec volume.sh down_slow, mode "default"
@@ -324,15 +300,12 @@ for_window [class="^net.lutris.Lutris$"] move to workspace 5
 for_window [class="^steam$"] move to workspace 5
 for_window [class="^heroic$"] move to workspace 5
 for_window [class="^mpv$"] move to workspace 6
-for_window [class="^com.github.th_ch.youtube_music$"] floating disable, move to workspace 5
+for_window [class="^com.github.th_ch.youtube_music$"] move to workspace 6
 ## sizes
 for_window [title="Open file"] resize set width 900, resize set height 500
 for_window [class="yad"] floating enable, resize set 100, move position 30 30
 for_window [class="imv"] floating enable, resize set 700
 for_window [class="upc.exe"] floating enable
-for_window [class="steam" instance="steamwebhelper" title="Steam"] floating disable
-for_window [class="steam" instance="steamwebhelper"] floating enable
-
 for_window [class="ripdrag"] floating enable, move position 30 200
 
 # tab related

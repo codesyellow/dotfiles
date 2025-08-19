@@ -11,4 +11,4 @@ dunst &
 xidlehook.sh &
 caffeine &
 setxkbmap -layout "us,us" -variant ",intl" -option "grp:alt_shift_toggle,caps:ctrl_modifier,caps:escape" &
-clipmenud &
+clipcatd &
