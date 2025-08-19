@@ -8,9 +8,9 @@ text="${mode:0:3}"
 text_uppercased="${text^^}"
 
 if [[ "$text_uppercased" != "DEF" ]]; then
-    state="warning"
+  state="warning"
 else
-    state="hidden"
+  state="hidden"
 fi
 
 output="$text_uppercased"

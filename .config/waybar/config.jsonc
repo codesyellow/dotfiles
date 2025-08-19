@@ -12,9 +12,11 @@
 
     "modules-right": [
         "custom/gameon",
-        "custom/variant",
         "custom/countdown",
+        "custom/variant",
         "custom/easy",
+        "custom/cpu-temp",
+        "custom/gpu-temp",
         "custom/disk-root",
         "custom/disk-home",
         "custom/disk-hdd",
@@ -114,5 +116,17 @@
     "return-type": "json",
     "tooltip": false,
     "signal": 14,
-  }
+  },
+"custom/cpu-temp": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/temp",
+    "interval": 10,
+    "return-type": "json",
+    "tooltip": false
+  },
+"custom/gpu-temp": {
+    "exec": "/home/digo/.config/waybar/custom_widgets/gpu_temp",
+    "interval": 10,
+    "return-type": "json",
+    "tooltip": false
+  },
 }]

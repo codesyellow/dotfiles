@@ -11,7 +11,7 @@ $widget_font: "Roboto";
 $weight: 900;
 $padx: 6px;
 $pady: 2px;
-$widget_font_size: 17px;
+$widget_font_size: 20px;
 $border_size: .5px solid;
 
 * {
@@ -86,12 +86,6 @@ window#waybar {
   color: $bg;
 }
 
-#mode {
-  color: $warning;
-  margin-bottom: 1px;
-  font-weight: 500;
-}
-
 .block {
   background-color: $warning;
   color: $warning;
@@ -99,4 +93,13 @@ window#waybar {
   font-weight: $weight;
   font-size: $widget_font_size;
   font-family: $widget_font;
+}
+
+.mode {
+  color: $warning;
+  margin-bottom: 1px;
+  font-weight: $weight;
+  font-size: $widget_font_size;
+  font-family: $widget_font;
+
 }

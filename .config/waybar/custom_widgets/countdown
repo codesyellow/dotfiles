@@ -12,4 +12,4 @@ if [[ -e "$COUNTDOWN" ]]; then
 fi
 
 output=$(get_pango "CTD" "$text")
-printf '{"text": "%s", "tooltip": "Updates: %s", "class": "%s"}\n' "$output" "$text" "$state"
+printf '{"text": "%sM", "tooltip": "Updates: %s", "class": "%s"}\n' "$output" "$text" "$state"

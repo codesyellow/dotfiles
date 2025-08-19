@@ -1,15 +1,13 @@
 #!/usr/bin/env bash
 
-MAIN_FONT="Caveat"
-TITLE_FONT="Pacifico"
-CONTENT_FONT="VictorMono Nerd Font Mono"
+MAIN_FONT="Monofur Nerd Font Mono"
 TITLE_BOLD="800"
 CONTENT_BOLD="800"
 FONT_COLOR="#4c566a"
 
 function get_pango() {
-  local title_pango="<span foreground='$FONT_COLOR' size='x-small' font_family='$TITLE_FONT'>$1 </span>"
-  local content_pango="<span font_family='$CONTENT_FONT'>$2</span>"
+  local title_pango="<span foreground='$FONT_COLOR' size='small' font_family='$MAIN_FONT'>$1</span>"
+  local content_pango=" <span font_family='$MAIN_FONT'>$2</span>"
 
   title_pango=${title_pango//\"/\\\"}
   content_pango=${content_pango//\"/\\\"}
