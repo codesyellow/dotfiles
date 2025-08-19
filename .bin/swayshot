@@ -2,22 +2,25 @@
 
 PIC_PATH="$HOME/.pictures"
 if ! [[ -d "$PIC_PATH" ]]; then
-    mkdir "$PIC_PATH"
-    echo "Pictures folder was created"
+  mkdir "$PIC_PATH"
+  echo "Pictures folder was created"
 fi
 
 if [[ "$1" == "region" ]]; then
-    grim -g "$(slurp)" "$PIC_PATH/ps_$(date +'%Y%m%d%H%M%S').jpg" && notify-send.sh "Region screenshot was taken!"
+  grim -g "$(slurp)" "$PIC_PATH/ps_$(date +'%Y%m%d%H%M%S').jpg" && notify-send.sh "Region screenshot was taken!"
 elif [[ "$1" == "zoom" ]]; then
-    TMP=$(mktemp).png
-    grim -g "$(slurp)" - >"$TMP"
-    convert "$TMP" -resize 200% -filter Mitchell "$TMP"
-    imv -u nearest_neighbour "$TMP"
-    rm "$TMP"
+  TMP=$(mktemp).png
+  grim -g "$(slurp)" - >"$TMP"
+  convert "$TMP" -resize 200% -filter Mitchell "$TMP"
+  imv -u nearest_neighbour "$TMP"
+  rm "$TMP"
 elif [[ "$1" == "mon" ]]; then
-    grim -o "$2" "$PIC_PATH/ps_$2_$(date +'%Y%m%d%H%M%S').jpg" && notify-send.sh "Screenshot on monitor $2 was taken"
+  sleep 1
+  grim -o "$2" "$PIC_PATH/ps_$2_$(date +'%Y%m%d%H%M%S').jpg" && notify-send.sh "Screenshot on monitor $2 was taken"
 elif [[ "$1" == "edit" ]]; then
-    grim -g "$(slurp)" - | swappy -f -
+  sleep 1
+  grim -g "$(slurp)" - | swappy -f -
 else
-    grim "$PIC_PATH/ps_$(date +'%Y%m%d%H%M%S').png" && notify-send.sh "Full screenshot was taken!"
+  sleep 1
+  grim "$PIC_PATH/ps_$(date +'%Y%m%d%H%M%S').png" && notify-send.sh "Full screenshot was taken!"
 fi
