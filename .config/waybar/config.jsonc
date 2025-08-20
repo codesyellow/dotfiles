@@ -18,7 +18,6 @@
         "custom/cpu-temp",
         "custom/gpu-temp",
         "custom/disk-root",
-        "custom/disk-home",
         "custom/disk-hdd",
         "custom/updates",
         "custom/clock",

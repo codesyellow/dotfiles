@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
 MAIN_FONT="Monofur Nerd Font Mono"
-TITLE_BOLD="800"
-CONTENT_BOLD="800"
-FONT_COLOR="#4c566a"
+FONT_COLOR="#4F5B58"
 
 function get_pango() {
   local title_pango="<span foreground='$FONT_COLOR' size='small' font_family='$MAIN_FONT'>$1</span>"

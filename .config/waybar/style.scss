@@ -1,13 +1,12 @@
-$fg: #eceff4;
-$warning: #bf616a;
-$bg: #2e3440;
-$bg1: #4c566a;
+$fg: #D3C6AA;
+$warning: #E69875;
+$bg: #272E33;
+$bg1: #2E383C;
 $button: #36C2CE;
 $inactive: #d8dee9;
 $active: #FF8343;
 $hover: #891652;
-$main_font: "Pacifico";
-$widget_font: "Roboto";
+$workspace_font: "Pacifico";
 $weight: 900;
 $padx: 6px;
 $pady: 2px;
@@ -21,7 +20,7 @@ $border_size: .5px solid;
 
 window#waybar {
   background-color: $bg;
-  font-family: $main_font;
+  font-family: $workspace_font;
   border-bottom: $border_size $bg1;
 }
 
@@ -33,7 +32,7 @@ window#waybar {
 #workspaces button {
   border-radius: 0;
   font-size: 14px;
-  font-family: $main_font;
+  font-family: $workspace_font;
   font-weight: 900;
   color: $fg;
   background-color: $bg;
@@ -68,16 +67,15 @@ window#waybar {
   background-color: $bg;
   font-weight: $weight;
   font-size: $widget_font_size;
-  font-family: $widget_font;
   border-bottom: $border_size $warning;
 }
 
 .normal,
 .hidden {
+  color: $fg;
   padding: 0 $padx;
   font-weight: $weight;
   font-size: $widget_font_size;
-  font-family: $widget_font;
   border-bottom: $border_size $bg1;
 }
 
@@ -92,7 +90,6 @@ window#waybar {
   padding: 0 40px;
   font-weight: $weight;
   font-size: $widget_font_size;
-  font-family: $widget_font;
 }
 
 .mode {
@@ -100,6 +97,4 @@ window#waybar {
   margin-bottom: 1px;
   font-weight: $weight;
   font-size: $widget_font_size;
-  font-family: $widget_font;
-
 }

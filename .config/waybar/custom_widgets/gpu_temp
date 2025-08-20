@@ -4,11 +4,11 @@ source $HOME/.config/waybar/custom_widgets/config
 
 state="normal"
 
-temp=$(cat /sys/class/drm/card1/device/hwmon/hwmon*/temp1_input | cut -c1-2)
+temp=$(cat /sys/class/drm/card2/device/hwmon/hwmon*/temp1_input | cut -c1-2)
 
 if [[ "$temp" -ge 70 ]]; then
   state="warning"
 fi
 
-output=$(get_pango "GTP" "$temp°C")
+output=$(get_pango "GPT" "$temp°C")
 printf '{"text": "%s", "tooltip": "Updates: %s", "class": "%s"}\n' "$output" "$temp" "$state"
