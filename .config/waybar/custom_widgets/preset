@@ -3,10 +3,10 @@
 source $HOME/.config/waybar/custom_widgets/config
 
 state="normal"
-preset=$(cat ~/.config/easyeffects_preset)
+preset=$(dconf read /com/github/wwmm/easyeffects/last-loaded-output-preset)
 text="EQ"
 
-if [[ "$preset" != "LoudnessEqualizer" ]]; then
+if [[ "$preset" == "HeavyBass" ]]; then
   text="MUS"
   state="warning"
 fi
