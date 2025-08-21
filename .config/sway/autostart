@@ -20,7 +20,7 @@ run_unit syncthing
 #uwsm app -- easy_always.sh &
 run_unit /usr/lib/polkit-kde-authentication-agent-1
 run_unit "wl-paste --type text --watch cliphist store"
-run_unit "pw-metadata -n settings 0 c lock.force-quantum"
+#run_unit "pw-metadata -n settings 0 c lock.force-quantum 1000"
 run_unit "systemctl --user import-environment PATH"
 run_unit killpavu
 run_unit "pamixer --set-volume 30"
