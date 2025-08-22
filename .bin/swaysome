@@ -76,14 +76,17 @@ move_in)
   swaymsg move container to workspace "$wks"
   ;;
 back)
-  back_and_forth
+  if [[ $(wc -l <"$log_path") == 2 ]]; then
+    back_and_forth
+  else
+    echo "there's no previous workspace to go to."
+  fi
   ;;
 *)
   wks=$(get_workspace "$current_side" "$1")
   current_wks=$(swaymsg -t get_workspaces | jq -r '.[] | select(.focused).name')
   if [[ "$current_wks" != "$wks" ]]; then
     swaymsg workspace "$wks"
-    last_workspace "$wks"
   fi
   ;;
 esac
