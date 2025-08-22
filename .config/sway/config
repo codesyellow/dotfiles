@@ -88,7 +88,8 @@ bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
-bindsym $mod+tab workspace back_and_forth
+#bindsym $mod+tab workspace back_and_forth
+bindsym $mod+tab exec "swaysome back"
 bindsym $mod+f fullscreen
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
