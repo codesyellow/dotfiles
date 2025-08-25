@@ -9,9 +9,9 @@ text_uppercased="${text^^}"
 
 if [[ "$text_uppercased" != "DEF" ]]; then
   state="warning"
+  output=$(get_pango "MDE" "$text_uppercased")
 else
   state="hidden"
 fi
 
-output="$text_uppercased"
-printf '{"text": "%s", "tooltip": "Updates: %s", "class": "%s"}\n' "$output" "$mode" "$state"
+printf '{"text": "%s", "tooltip": "Updates: %s", "class": "%s"}' "$output" "$mode" "$state"

@@ -6,17 +6,19 @@
 window#waybar {
   background-color: #272E33;
   font-family: "Pacifico";
-  border-bottom: 0.5px solid #2E383C;
+}
+
+.modules-right {
+  margin-top: -8px;
 }
 
 #workspaces {
   padding-right: 8px;
-  border-bottom: 0.5px solid #2E383C;
 }
 
 #workspaces button {
   border-radius: 0;
-  font-size: 14px;
+  font-size: 12px;
   font-family: "Pacifico";
   font-weight: 900;
   color: #D3C6AA;
@@ -51,8 +53,7 @@ window#waybar {
   color: #E69875;
   background-color: #272E33;
   font-weight: 900;
-  font-size: 20px;
-  border-bottom: 0.5px solid #E69875;
+  font-size: 18px;
 }
 
 .normal,
@@ -60,8 +61,7 @@ window#waybar {
   color: #D3C6AA;
   padding: 0 6px;
   font-weight: 900;
-  font-size: 20px;
-  border-bottom: 0.5px solid #2E383C;
+  font-size: 18px;
 }
 
 .hidden {
@@ -74,14 +74,7 @@ window#waybar {
   color: #E69875;
   padding: 0 40px;
   font-weight: 900;
-  font-size: 20px;
-}
-
-.mode {
-  color: #E69875;
-  margin-bottom: 1px;
-  font-weight: 900;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 /*# sourceMappingURL=style.css.map */

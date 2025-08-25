@@ -4,13 +4,9 @@
     "output": "HDMI-A-2",
     "modules-left": [
         "sway/workspaces", 
-        "custom/mode"
     ],
-"modules-center": [
-        "custom/mon"
-    ],
-
     "modules-right": [
+        "custom/mode", 
         "custom/gameon",
         "custom/countdown",
         "custom/variant",
@@ -21,7 +17,6 @@
         "custom/disk-hdd",
         "custom/updates",
         "custom/clock",
-
         ],
     "sway/workspaces": {
         "disable-scroll": true,
