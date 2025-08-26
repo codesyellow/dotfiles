@@ -24,7 +24,7 @@ set $down j
 set $up k
 set $right l
 set $term foot
-set $menu wmenu-run
+set $menu wmenu-run -f "Martian Mono Nerd Font 13"  -N "#272E33" -n "#D3C6AA" -S "#272E33" -s "#E69875"
 
 # Autostart
 exec ~/.config/sway/autostart
@@ -119,7 +119,7 @@ mode "exec" {
   # MBE
   bindsym r exec $menu, mode "default"
   bindsym t exec "kitty -T alt_term -e zellij", mode "default"
-  bindsym h exec "cliphist list | wofi --dmenu | cliphist decode | wl-copy", mode "default"
+  bindsym h exec 'cliphist list | wmenu -l 10 -f "Martian Mono Nerd Font 16"  -N "#272E33" -n "#D3C6AA" -S "#272E33" -s "#E69875"  | cliphist decode | wl-copy', mode "default"
   bindsym m exec "maps.sh", mode "default"
   bindsym f exec "figma-run", mode "default"
   bindsym n exec "ankivim.sh", mode "default"
@@ -207,7 +207,7 @@ mode "scratchpad" {
 
   bindsym m exec 'swaypad -C "com.github.th_ch.youtube_music" -c "youtube-music" -w 0.90 -h 0.90 -p center', mode "default"
 
-  bindsym w exec --no-startup-id 'swaypad -C "ZapZap" -c "zapzap" -w 0.90 -h 0.90 -p center', mode "default"
+  bindsym w exec --no-startup-id 'swaypad -n "com.rtosta.zapzap" -c "zapzap" -w 0.90 -h 0.90 -p center', mode "default"
 
   bindsym t exec 'swaypad -n "todo" -c "foot -a todo -e taskwarrior-tui" -w 0.40 -h 0.80 -p top_left', mode "default"
 
@@ -264,7 +264,7 @@ for_window [app_id="^brave-browser$"] move to workspace 4
 for_window [app_id="it.catboy.ripdrag"] move position 850 10
 
 # Read `man 5 sway-bar` for more information about this section.
-bar swaybar_command waybar
+#bar swaybar_command waybar
 
 # import
 include /etc/sway/config.d/*

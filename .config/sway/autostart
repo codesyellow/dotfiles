@@ -7,6 +7,7 @@ run_unit() {
   fi
 }
 run_unit waybar
+run_unit swayforth
 run_unit pavucontrol "gui"
 run_unit gameon
 run_unit "easyeffects --gapplication-service"
@@ -14,7 +15,7 @@ run_unit "gammastep -P -O 2500"
 run_unit whatsap_on.sh
 run_unit dunst
 run_unit is_music
-run_unit sway-audio-idle-inhibit
+#run_unit sway-audio-idle-inhibit
 run_unit "swayidle -w"
 run_unit syncthing
 #uwsm app -- easy_always.sh &
@@ -23,4 +24,5 @@ run_unit "wl-paste --type text --watch cliphist store"
 #run_unit "pw-metadata -n settings 0 c lock.force-quantum 1000"
 run_unit "systemctl --user import-environment PATH"
 run_unit killpavu
+run_unit waybar-swaymode
 run_unit "pamixer --set-volume 30"
