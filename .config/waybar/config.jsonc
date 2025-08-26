@@ -42,6 +42,7 @@
   "custom/easy": {
     "exec": "/home/digo/.config/waybar/custom_widgets/preset",
     "signal": 3,
+    "interval": 5,
     "return-type": "json",
     "tooltip": false
   },
