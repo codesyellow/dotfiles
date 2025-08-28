@@ -17,7 +17,6 @@ window#waybar {
 }
 
 #workspaces button {
-  border-radius: 0;
   font-size: 14px;
   font-family: "Pacifico";
   font-weight: 900;

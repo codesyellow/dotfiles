@@ -1,5 +1,4 @@
 [{
-    "layer": "bottom",
     "name": "bar2",
     "output": "HDMI-A-2",
     "modules-left": [
@@ -20,7 +19,7 @@
         ],
     "sway/workspaces": {
         "disable-scroll": true,
-        "all-outputs": false,
+        "all-outputs": true,
         "format": "{icon}",
         "format-icons": {
             "4": "WEB",
