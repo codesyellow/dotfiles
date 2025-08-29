@@ -8,10 +8,10 @@
 # MBW (Mode Bindings Workspaces)
 
 # Variables
-set $fg #eceff4
-set $warning #bf616a
-set $bg #2e3440
-set $bg1 #4c566a
+set $fg #D3C6AA
+set $warning #E69875
+set $bg #272E33
+set $bg1 #2E383C
 set $mod Mod4
 set $left h
 set $down j
@@ -23,8 +23,8 @@ set $left h
 set $down j
 set $up k
 set $right l
-set $term foot
-set $menu wmenu-run -f "Martian Mono Nerd Font 14"  -N "#272E33" -n "#D3C6AA" -S "#272E33" -s "#E69875"
+set $term foot -e zellij
+set $menu wmenu-run -f "Martian Mono Nerd Font 15"  -N "#272E33" -n "#D3C6AA" -S "#272E33" -s "#E69875"
 
 # Autostart
 exec ~/.config/sway/autostart
