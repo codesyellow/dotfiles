@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+app_id=$(swaymsg -t get_tree | jq -r '.. | select(.focused? == true).app_id')
+win_class=$(swaymsg -t get_tree | jq -r '.. | select(.focused? == true).window_properties.class')
+
+if [[ -n "$app_id" ]]; then
+  echo for_window [app_id='"^$id$"'] move to workspace 6 >>~/.config/sway/rules.conf
+  swaymsg move container to workspace 6
+else
+  echo for_window [class="^$id$"'] move to workspace 6 >>~/.config/sway/rules.conf
+  swaymsg move container to workspace 6
+fi
+
+# check if the rules already exist before adding a new line.
+rules=$(cat ~/.config/sway/rules.conf)
+
+#echo "$rules"

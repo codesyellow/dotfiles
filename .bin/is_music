@@ -11,7 +11,7 @@ while true; do
     if [[ $state == 0 ]]; then
       echo "playing"
       volume=$(pamixer --get-volume)
-      easyeffects -l "Bass"
+      easyeffects -l "HeavyBass"
       echo "Bass" >~/.config/easyeffects_preset
       pkill -RTMIN+3 waybar
       state=1

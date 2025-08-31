@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-/usr/bin/steam -cef-disable-gpu-compositing -cef-disable-gpu steam://open/minigameslist %U

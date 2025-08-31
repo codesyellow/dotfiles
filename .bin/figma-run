@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-figma-linux --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-vulkan --enable-gpu-rasterization --enable-oop-rasterization --enable-gpu-compositing --enable-accelerated-2d-canvas --enable-zero-copy --canvas-oop-rasterization --disable-features=UseChromeOSDirectVideoDecoder --enable-accelerated-video-decode --enable-accelerated-video-encode --enable-features=VaapiVideoDecoder,VaapiVideoEncoder,VaapiIgnoreDriverChecks,Vulkan --enable-hardware-overlays --enable-unsafe-webgpu --disable-features=RawDraw
-
