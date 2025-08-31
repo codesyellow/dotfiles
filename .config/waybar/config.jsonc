@@ -6,8 +6,6 @@
     ],
     "modules-right": [
         "custom/mode", 
-        "custom/gameon",
-        "custom/countdown",
         "custom/variant",
         "custom/easy",
         "custom/cpu-temp",
