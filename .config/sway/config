@@ -197,24 +197,21 @@ mode "scratchpad" {
 
   bindsym r exec "swaypad.py -s sm -p 'top' -c 'foot -a countdown -e countdown.py' -n 'countdown'", mode "default"
 
-  bindsym h exec --no-startup-id "swaypad.py -s big -p 'top' -c 'foot -a habits -e vim /home/digo/.vimwiki/habits/index.md' -n 'habits'", mode "default"
+  bindsym h exec 'swaypad  -n "habits" -c "foot -a habits -e nvim /home/digo/.notes/habits.norg" -w 0.90 -h 0.90 -p center', mode "default"
 
-  bindsym n exec --no-startup-id 'swaypad  -n "notes" -c "foot -a notes -e nvim /home/digo/.notes/index.norg" -w 0.90 -h 0.90 -p center', mode "default"
+  bindsym n exec 'swaypad  -n "notes" -c "foot -a notes -e nvim /home/digo/.notes/index.norg" -w 0.90 -h 0.90 -p center', mode "default"
 
   bindsym b exec 'swaypad -n "monitor" -c "foot -a monitor -e btop" -w 0.90 -h 0.90 -p center', mode "default"
-
-  bindsym f exec --no-startup-id "swaypad.py -s big -c 'foot -a file-manager -e nnn' -n 'file-manager'", mode "default"
-
   bindsym m exec 'swaypad -C "com.github.th_ch.youtube_music" -c "youtube-music" -w 0.90 -h 0.90 -p center', mode "default"
 
-  bindsym w exec --no-startup-id 'swaypad -n "com.rtosta.zapzap" -c "zapzap" -w 0.90 -h 0.90 -p center', mode "default"
+  bindsym w exec 'swaypad -n "com.rtosta.zapzap" -c "zapzap" -w 0.90 -h 0.90 -p center', mode "default"
 
   bindsym t exec 'swaypad -n "todo" -c "foot -a todo -e taskwarrior-tui" -w 0.40 -h 0.80 -p top_left', mode "default"
 
+  bindsym i exec 'swaypad -n "ai" -c "foot -a ai -e aichat" -w 0.40 -h 0.96 -p top_right', mode "default"
+
   bindsym u exec 'swaypad -n "dropdown" -c "foot -a dropdown -e zellij attach --create scratch" -w 0.90 -h 0.40 -p top', mode "default"
 
-  bindsym l exec --no-startup-id "sway-scratchpad -tmt -acc -d 50%x50% -- foot -e lowfi -p", mode "default"
-  
   bindsym Return mode "default"
   bindsym Escape mode "default"
 }
