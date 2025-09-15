@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+windows=$(niri msg --json windows | jq -r '.[] | "\(.id)|\(.title // .app_id)"')
+
+titles=$(echo "$windows" | cut -d"|" -f2-)
+
+choice=$(echo "$titles" | wmenu -i -l 10 -p "GoTo")
+
+[ -z "$choice" ] && exit
+
+id=$(echo "$windows" | grep -F "|${choice}" | cut -d"|" -f1)
+
+[ -n "$id" ] && niri msg action focus-window --id "$id"
