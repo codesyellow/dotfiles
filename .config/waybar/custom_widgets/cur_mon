@@ -4,7 +4,7 @@ source $HOME/.config/waybar/custom_widgets/config
 state="normal"
 
 text=""
-focused_output=$(swaymsg -t get_outputs --raw | jq '. | map(select(.focused == true)) | .[0].name' -r)
+focused_output=$(niri msg --json workspaces | jq -r '.[] | select(.is_focused == true) | .output')
 
 if [[ $focused_output == $1 ]]; then
   state="block"

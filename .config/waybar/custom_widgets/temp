@@ -11,4 +11,4 @@ if [[ "$temp" -ge 80 ]]; then
 fi
 
 output=$(get_pango "CPT" "$temp°C")
-printf '{"text": "%s", "tooltip": "Updates: %s", "class": "%s"}\n' "$output" "$temp" "$state"
+printf '{"text": "%s", "tooltip": "Temperatura: %s°C", "class": "%s"}\n' "$output" "$temp" "$state"

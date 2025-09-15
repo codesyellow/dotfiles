@@ -6,7 +6,7 @@ state="normal"
 preset=$(dconf read /com/github/wwmm/easyeffects/last-loaded-output-preset)
 text="EQ"
 
-if [[ "$preset" == "'HeavyBass'" ]]; then
+if [[ "$preset" == "'Heavy Bass'" ]]; then
   text="MUS"
   state="warning"
 fi

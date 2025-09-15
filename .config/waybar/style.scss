@@ -1,16 +1,17 @@
 $fg: #D3C6AA;
 $warning: #E69875;
 $bg: #272E33;
-$bg1: #2E383C;
+$bg1: #475258;
 $button: #36C2CE;
 $inactive: #d8dee9;
 $active: #FF8343;
 $hover: #891652;
 $workspace_font: "Pacifico";
+$widget_font: "Monofur Nerd Font Mono";
 $weight: 900;
 $padx: 6px;
 $pady: 2px;
-$widget_font_size: 19px;
+$widget_font_size: 20px;
 $border_size: .5px solid;
 
 * {
@@ -24,17 +25,12 @@ window#waybar {
   font-family: $workspace_font;
 }
 
-.modules-right {
-  margin-top: -8px;
-}
-
 #workspaces {
   padding-right: 8px;
 }
 
 #workspaces button {
-//  border-radius: 0;
-  font-size: 14px;
+  font-size: 12px;
   font-family: $workspace_font;
   font-weight: 900;
   color: $fg;
@@ -70,6 +66,7 @@ window#waybar {
   background-color: $bg;
   font-weight: $weight;
   font-size: $widget_font_size;
+  font-family: $widget_font;
 }
 
 .normal,
@@ -78,6 +75,8 @@ window#waybar {
   padding: 0 $padx;
   font-weight: $weight;
   font-size: $widget_font_size;
+  font-family: $widget_font;
+  min-height: 0;
 }
 
 .hidden {
@@ -92,4 +91,3 @@ window#waybar {
   font-weight: $weight;
   font-size: $widget_font_size;
 }
-
