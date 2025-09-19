@@ -2,6 +2,12 @@
 
 spawn-at-startup "~/.config/niri/autostart"
 spawn-at-startup "waybar"
+hotkey-overlay {
+  skip-at-startup
+}
+
+prefer-no-csd
+screenshot-path "/home/digo/.pictures/"
 
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Named-Workspaces
 workspace "main"
@@ -28,6 +34,7 @@ input {
 
 // https://yalter.github.io/niri/Configuration:-Outputs
 output "HDMI-A-2" {
+  focus-at-startup
   mode "1280x1024@75.025"
   position x=0 y=0
 }
@@ -39,17 +46,20 @@ output "DVI-D-1" {
 
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
-  gaps 0
+  gaps 10
 
   center-focused-column "never"
   preset-column-widths {
     proportion 0.9
   }
 
-  default-column-width { proportion 0.9; }
+  default-column-width { proportion 0.95; }
 
   focus-ring {
-    off
+    width 1
+    active-color "#E69875"
+    inactive-color "#2E383C"
+    urgent-color "#891652"
   }
 
   shadow {
@@ -62,13 +72,6 @@ layout {
     color "#0007"
   }
 }
-
-hotkey-overlay {
-  skip-at-startup
-}
-
-prefer-no-csd
-screenshot-path "/home/digo/.pictures/"
 
 // https://yalter.github.io/niri/Configuration:-Animations
 animations {
@@ -86,16 +89,27 @@ window-rule {
   open-floating true
 }
 
-window-rule {
-    match app-id=r#"^notes|btop$"#
-    open-on-workspace "scratch"
-    open-floating true
-    default-column-width { proportion 0.8; }
-    default-window-height { proportion 0.8; }
-}
-
 // https://yalter.github.io/niri/Configuration%3A-Key-Bindings.html
 binds {
+  ISO_Level5_Shift+1 { focus-workspace "main"; }
+  ISO_Level5_Shift+2 { focus-workspace "alt"; }
+  ISO_Level5_Shift+3 { focus-workspace "scratch"; }
+  ISO_Level5_Shift+Ctrl+1 { move-column-to-workspace "main"; }
+  ISO_Level5_Shift+Ctrl+2 { move-column-to-workspace "alt"; }
+  ISO_Level5_Shift+Ctrl+3 { move-column-to-workspace "scratch"; }
+
+  ISO_Level5_Shift+R { spawn-sh "wmenu-run -f 'Martian Mono Nerd Font 15'  -N '#272E33' -n '#D3C6AA' -S '#272E33' -s '#E69875'"; }
+  ISO_Level5_Shift+J { spawn "volume.sh" "down"; }
+  ISO_Level5_Shift+K { spawn "volume.sh" "up"; }
+  ISO_Level5_Shift+D { spawn-sh "imdrag /home/digo/Downloads /home/digo/.pictures /home/digo/.wallpapers"; }
+  ISO_Level5_Shift+G { spawn-sh "regif 8"; }
+  ISO_Level5_Shift+S { spawn "flashy"; }
+  ISO_Level5_Shift+P { spawn-sh "flashy region"; }
+  ISO_Level5_Shift+W { spawn "nirigo"; }
+  ISO_Level5_Shift+N { spawn-sh "foot -a notes -T notes -e nvim ~/.notes/index.norg"; }
+  ISO_Level5_Shift+M { spawn-sh "foot -a btop -T btop -e btop"; }
+  ISO_Level5_Shift+B { spawn-sh "killall -SIGUSR1 waybar"; }
+
   ISO_Level5_Shift+Shift+Slash { show-hotkey-overlay; }
   ISO_Level5_Shift+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "foot" "-e" "zellij"; }
   Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
@@ -112,14 +126,6 @@ binds {
   //   ISO_Level5_Shift+J     { focus-window-down; }
   //    ISO_Level5_Shift+K     { focus-window-up; }
   ISO_Level5_Shift+L     { focus-column-right; }
-
-  ISO_Level5_Shift+D     { spawn-sh "imdrag /home/digo/Downloads /home/digo/.pictures /home/digo/.wallpapers"; }
-  ISO_Level5_Shift+G     { spawn-sh "regif 8"; }
-  ISO_Level5_Shift+S     { spawn "flashy"; }
-  ISO_Level5_Shift+P     { spawn-sh "flashy region"; }
-  ISO_Level5_Shift+W     { spawn "nirigo"; }
-  ISO_Level5_Shift+N     { spawn-sh "niri-scratchpad --app-id notes || foot -a notes -T notes -e nvim ~/.notes/index.norg &"; }
-  ISO_Level5_Shift+M     { spawn-sh "niri-scratchpad --app-id btop || foot -a btop -T btop -e btop &"; }
 
   ISO_Level5_Shift+Ctrl+Left  { move-column-left; }
   ISO_Level5_Shift+Ctrl+Down  { move-window-down; }
@@ -182,50 +188,24 @@ binds {
   ISO_Level5_Shift+Ctrl+Shift+WheelScrollDown { move-column-right; }
   ISO_Level5_Shift+Ctrl+Shift+WheelScrollUp   { move-column-left; }
   
-  ISO_Level5_Shift+1 { focus-workspace "main"; }
-  ISO_Level5_Shift+2 { focus-workspace "alt"; }
-  ISO_Level5_Shift+3 { focus-workspace "scratch"; }
-  ISO_Level5_Shift+Ctrl+1 { move-column-to-workspace "main"; }
-  ISO_Level5_Shift+Ctrl+2 { move-column-to-workspace "alt"; }
-  ISO_Level5_Shift+Ctrl+3 { move-column-to-workspace "scratch"; }
-
-  // ISO_Level5_Shift+R { switch-preset-column-width; }
-  ISO_Level5_Shift+R { spawn-sh "wmenu-run -f 'Martian Mono Nerd Font 15'  -N '#272E33' -n '#D3C6AA' -S '#272E33' -s '#E69875'"; }
-  ISO_Level5_Shift+J { spawn "volume.sh" "down"; }
-  ISO_Level5_Shift+K { spawn "volume.sh" "up"; }
   
-  // Cycling through the presets in reverse order is also possible.
-  // ISO_Level5_Shift+R { switch-preset-column-width-back; }
   ISO_Level5_Shift+Shift+R { switch-preset-window-height; }
   ISO_Level5_Shift+Ctrl+R { reset-window-height; }
   ISO_Level5_Shift+F { maximize-column; }
   ISO_Level5_Shift+Shift+F { fullscreen-window; }
 
-  // Expand the focused column to space not taken up by other fully visible columns.
-  // Makes the column "fill the rest of the space".
   ISO_Level5_Shift+Ctrl+F { expand-column-to-available-width; }
 
   ISO_Level5_Shift+C { center-column; }
 
-  // Center all fully visible columns on screen.
   ISO_Level5_Shift+Ctrl+C { center-visible-columns; }
 
-  // Finer width adjustments.
-  // This command can also:
-  // * set width in pixels: "1000"
-  // * adjust width in pixels: "-5" or "+5"
-  // * set width as a percentage of screen width: "25%"
-  // * adjust width as a percentage of screen width: "-10%" or "+10%"
-  // Pixel sizes use logical, or scaled, pixels. I.e. on an output with scale 2.0,
-  // set-column-width "100" will make the column occupy 200 physical screen pixels.
   ISO_Level5_Shift+Minus { set-column-width "-10%"; }
   ISO_Level5_Shift+Equal { set-column-width "+10%"; }
 
-  // Finer height adjustments when in column with other windows.
   ISO_Level5_Shift+Shift+Minus { set-window-height "-10%"; }
   ISO_Level5_Shift+Shift+Equal { set-window-height "+10%"; }
 
-  // Move the focused window between the floating and the tiling layout.
   ISO_Level5_Shift+V       { toggle-window-floating; }
   ISO_Level5_Shift+Shift+V { switch-focus-between-floating-and-tiling; }
 
@@ -233,18 +213,9 @@ binds {
   Ctrl+Print { screenshot-screen; }
   Alt+Print { screenshot-window; }
 
-  // Applications such as remote-desktop clients and software KVM switches may
-  // request that niri stops processing the keyboard shortcuts defined here
-  // so they may, for example, forward the key presses as-is to a remote machine.
-  // It's a good idea to bind an escape hatch to toggle the inhibitor,
-  // so a buggy application can't hold your session hostage.
-  //
-  // The allow-inhibiting=false property can be applied to other binds as well,
-  // which ensures niri always processes them, even when an inhibitor is active.
   ISO_Level5_Shift+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
   ISO_Level5_Shift+Shift+E { quit; }
   Ctrl+Alt+Delete { quit; }
-
 }
 

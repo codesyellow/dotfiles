@@ -8,12 +8,13 @@ run_unit() {
 }
 
 # Opening pavucontrol solve an audio issue i'm having at boot.
-sleep 5 && pavucontrol &
+#sleep 5 && pavucontrol &
 
 #run_unit waybar
 #run_unit swayforth
 run_unit gameon
 run_unit "easyeffects --gapplication-service"
+run_unit "pavucontrol --gapplication-service"
 run_unit "gammastep -P -O 2500"
 run_unit whatsap_on.sh
 run_unit dunst
@@ -23,7 +24,7 @@ run_unit syncthing
 run_unit /usr/lib/polkit-kde-authentication-agent-1
 run_unit "wl-paste --type text --watch cliphist store"
 run_unit "systemctl --user import-environment PATH"
-run_unit killpavu
+#run_unit killpavu
 swaybg -i ~/.wallpapers/ign_unsplash32.png &
 
 # This is for fixing the audio cracking while using Easyeffects on games.
