@@ -1,7 +1,6 @@
 // https://yalter.github.io/niri/Configuration:-Introduction
 
 spawn-at-startup "~/.config/niri/autostart"
-spawn-at-startup "waybar"
 hotkey-overlay {
   skip-at-startup
 }
@@ -46,14 +45,14 @@ output "DVI-D-1" {
 
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
-  gaps 10
+  gaps 0
 
   center-focused-column "never"
   preset-column-widths {
-    proportion 0.9
+    proportion 1.0
   }
 
-  default-column-width { proportion 0.95; }
+  default-column-width { proportion 1.0; }
 
   focus-ring {
     width 1
@@ -105,10 +104,11 @@ binds {
   ISO_Level5_Shift+G { spawn-sh "regif 8"; }
   ISO_Level5_Shift+S { spawn "flashy"; }
   ISO_Level5_Shift+P { spawn-sh "flashy region"; }
-  ISO_Level5_Shift+W { spawn "nirigo"; }
+  ISO_Level5_Shift+Z { spawn-sh "flashy zoom"; }
+  ISO_Level5_Shift+W { spawn "nirigo.py"; }
   ISO_Level5_Shift+N { spawn-sh "foot -a notes -T notes -e nvim ~/.notes/index.norg"; }
   ISO_Level5_Shift+M { spawn-sh "foot -a btop -T btop -e btop"; }
-  ISO_Level5_Shift+B { spawn-sh "killall -SIGUSR1 waybar"; }
+  ISO_Level5_Shift+B { spawn-sh "pkill -f -10 nwg-wrapper"; }
 
   ISO_Level5_Shift+Shift+Slash { show-hotkey-overlay; }
   ISO_Level5_Shift+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "foot" "-e" "zellij"; }
