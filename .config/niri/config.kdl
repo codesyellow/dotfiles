@@ -9,9 +9,12 @@ prefer-no-csd
 screenshot-path "/home/digo/.pictures/"
 
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Named-Workspaces
-workspace "main"
-workspace "alt"
-workspace "scratch"
+workspace "mon-1" {
+  open-on-output "HDMI-A-2"
+}
+workspace "mon-2" {
+  open-on-output "DVI-D-1"
+}
 
 // https://yalter.github.io/niri/Configuration:-Input
 input {
@@ -88,14 +91,17 @@ window-rule {
   open-floating true
 }
 
+window-rule {
+    match app-id=r#"^heroic|steam|gamescope$"#
+    open-on-workspace "mon-1"
+}
+
 // https://yalter.github.io/niri/Configuration%3A-Key-Bindings.html
 binds {
-  ISO_Level5_Shift+1 { focus-workspace "main"; }
-  ISO_Level5_Shift+2 { focus-workspace "alt"; }
-  ISO_Level5_Shift+3 { focus-workspace "scratch"; }
-  ISO_Level5_Shift+Ctrl+1 { move-column-to-workspace "main"; }
-  ISO_Level5_Shift+Ctrl+2 { move-column-to-workspace "alt"; }
-  ISO_Level5_Shift+Ctrl+3 { move-column-to-workspace "scratch"; }
+  ISO_Level5_Shift+1 { focus-workspace "mon-1"; }
+  ISO_Level5_Shift+2 { focus-workspace "mon-2"; }
+  ISO_Level5_Shift+Ctrl+1 { move-column-to-workspace "mon-1"; }
+  ISO_Level5_Shift+Ctrl+2 { move-column-to-workspace "mon-2"; }
 
   ISO_Level5_Shift+R { spawn-sh "wmenu-run -f 'Martian Mono Nerd Font 15'  -N '#272E33' -n '#D3C6AA' -S '#272E33' -s '#E69875'"; }
   ISO_Level5_Shift+J { spawn "volume.sh" "down"; }
