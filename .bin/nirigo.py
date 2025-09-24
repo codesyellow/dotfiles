@@ -29,7 +29,7 @@ for win in windows:
     )
 
     if output == monitor_name:
-        list_names+=f"{win_id} | {title}\n"
+        list_names+=f"{win_id} | {title[:80]} | {app_id}\n"
         list_info.append({
             "id":win_id,
             "title":title,
