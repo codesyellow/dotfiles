@@ -29,21 +29,19 @@ for win in windows:
     )
 
     if output == monitor_name:
-        list_names+=f"{win_id} | {title[:80]} | {app_id}\n"
+        list_names+=f"{win_id} | {title[:60]} | {app_id}\n"
         list_info.append({
             "id":win_id,
             "title":title,
             "app_id":app_id,
         })
 
-result = subprocess.run(
+choice = subprocess.run(
     ["wmenu", "-f", "Martian Mono Nerd Font 15",  "-N", "#272E33", "-n", "#D3C6AA", "-S", "#272E33", "-s", "#E69875", "-i", "-l", "5", "-p", "GoTo"],
     input=list_names,
     text=True,
     capture_output=True
-)
-
-choice = result.stdout.strip()
+).stdout.strip()
 
 if len(choice) > 0:
     selected_id=choice.split("|")[0].strip()
