@@ -1,5 +1,4 @@
 // https://yalter.github.io/niri/Configuration:-Introduction
-
 spawn-at-startup "~/.config/niri/autostart"
 hotkey-overlay {
   skip-at-startup
@@ -43,7 +42,7 @@ output "HDMI-A-2" {
 
 output "DVI-D-1" {
   mode "1360x768@60.015"
-  position x=1280 y=80
+  position x=1284 y=80
 }
 
 // https://yalter.github.io/niri/Configuration:-Layout
@@ -108,13 +107,16 @@ binds {
   ISO_Level5_Shift+K { spawn "volume.sh" "up"; }
   ISO_Level5_Shift+D { spawn-sh "imdrag /home/digo/Downloads /home/digo/.pictures /home/digo/.wallpapers"; }
   ISO_Level5_Shift+G { spawn-sh "regif 8"; }
+  ISO_Level5_Shift+U { spawn-sh "regif region 8"; }
   ISO_Level5_Shift+S { spawn "flashy"; }
   ISO_Level5_Shift+P { spawn-sh "flashy region"; }
   ISO_Level5_Shift+Z { spawn-sh "flashy zoom"; }
   ISO_Level5_Shift+W { spawn "nirigo.py"; }
-  ISO_Level5_Shift+N { spawn-sh "foot -a notes -T notes -e nvim ~/.notes/index.norg"; }
-  ISO_Level5_Shift+M { spawn-sh "foot -a btop -T btop -e btop"; }
-  ISO_Level5_Shift+B { spawn-sh "pkill -f -10 nwg-wrapper"; }
+  ISO_Level5_Shift+N { spawn-sh "nifocus.sh notes || foot -a notes -T notes -e nvim ~/.notes/index.norg"; }
+  ISO_Level5_Shift+Y { spawn-sh "nifocus.sh habits || foot -a habits -T habits -e nvim ~/.notes/habits.norg"; }
+  ISO_Level5_Shift+M { spawn-sh "nifocus.sh monitor || foot -a btop -T btop -e btop"; }
+  ISO_Level5_Shift+B { spawn-sh "nifocus.sh todo || foot -a todo -T todo -e taskwarrior-tui"; }
+  ISO_Level5_Shift+I { spawn-sh "pkill -f -10 nwg-wrapper"; }
 
   ISO_Level5_Shift+Shift+Slash { show-hotkey-overlay; }
   ISO_Level5_Shift+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "foot" "-e" "zellij"; }

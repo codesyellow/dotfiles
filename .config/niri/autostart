@@ -12,8 +12,8 @@ run_unit() {
 
 #run_unit waybar
 #run_unit swayforth
-run_unit gameon
-run_unit "easyeffects --gapplication-service"
+#run_unit gameon
+#run_unit "easyeffects --gapplication-service"
 run_unit "pavucontrol --gapplication-service"
 run_unit "gammastep -P -O 2500"
 run_unit whatsap_on.sh
