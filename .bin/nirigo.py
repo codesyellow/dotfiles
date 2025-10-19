@@ -14,8 +14,8 @@ def niri_json(cmd):
 monitor_name = niri_json("focused-output")["name"]
 windows = niri_json("windows")
 workspaces = niri_json("workspaces")
-list_names=""
-list_info=[]
+list_names = ""
+list_info = []
 
 for win in windows:
     win_id = win["id"]
@@ -23,30 +23,34 @@ for win in windows:
     app_id = win["app_id"]
     ws_id = win["workspace_id"]
 
-    output = next(
-        (ws["output"] for ws in workspaces if ws["id"] == ws_id),
-        None
-    )
+    ws = next((ws for ws in workspaces if ws["id"] == ws_id), None)
+    if not ws:
+        continue
+
+    if ws.get("name") == "scratch":
+        continue
+
+    output = ws["output"]
 
     if output == monitor_name:
-        list_names+=f"{win_id} | {title[:60]} | {app_id}\n"
+        list_names += f"{win_id} -|- {title[:40]} -|- {app_id}\n"
         list_info.append({
-            "id":win_id,
-            "title":title,
-            "app_id":app_id,
+            "id": win_id,
+            "title": title,
+            "app_id": app_id,
         })
 
 choice = subprocess.run(
-    ["wmenu", "-f", "Martian Mono Nerd Font 15",  "-N", "#272E33", "-n", "#D3C6AA", "-S", "#272E33", "-s", "#E69875", "-i", "-l", "5", "-p", "GoTo"],
+    ["wmenu", "-f", "Martian Mono Nerd Font 15", "-N", "#272E33", "-n", "#D3C6AA",
+     "-S", "#272E33", "-s", "#E69875", "-i", "-l", "5", "-p", "GoTo"],
     input=list_names,
     text=True,
     capture_output=True
 ).stdout.strip()
 
 if len(choice) > 0:
-    selected_id=choice.split("|")[0].strip()
+    selected_id = choice.split("|")[0].strip()
     print(selected_id)
     subprocess.run([
-        "niri", "msg","action",  "focus-window", "--id", f"{selected_id}"
+        "niri", "msg", "action", "focus-window", "--id", f"{selected_id}"
     ])
-
