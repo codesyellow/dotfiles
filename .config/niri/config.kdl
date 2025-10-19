@@ -14,6 +14,9 @@ workspace "mon-1" {
 workspace "mon-2" {
   open-on-output "DVI-D-1"
 }
+workspace "scratch" {
+  open-on-output "HDMI-A-2"
+}
 
 // https://yalter.github.io/niri/Configuration:-Input
 input {
@@ -42,22 +45,22 @@ output "HDMI-A-2" {
 
 output "DVI-D-1" {
   mode "1360x768@60.015"
-  position x=1284 y=80
+  position x=1280 y=80
 }
 
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
-  gaps 0
+  gaps 10
 
-  center-focused-column "never"
+  center-focused-column "always"
   preset-column-widths {
-    proportion 1.0
+    proportion 0.95
   }
 
-  default-column-width { proportion 1.0; }
+  default-column-width { proportion 0.95; }
 
   focus-ring {
-    width 1
+    width 0
     active-color "#E69875"
     inactive-color "#2E383C"
     urgent-color "#891652"
@@ -76,13 +79,31 @@ layout {
 
 // https://yalter.github.io/niri/Configuration:-Animations
 animations {
-  off
+  on
 }
 
 // https://yalter.github.io/niri/Configuration:-Window-Rules
 window-rule {
   match app-id=r#"^org\.wezfurlong\.wezterm$"#
   default-column-width {}
+}
+
+window-rule {
+    match app-id=r#"^notes|monitor$"#
+    open-on-workspace "scratch"
+    open-floating true
+    default-column-width { proportion 0.75; }
+    default-window-height { proportion 0.75; }
+    open-focused false
+}
+
+window-rule {
+    match app-id=r#"^todo$"#
+    open-on-workspace "scratch"
+    open-floating true
+    default-column-width { proportion 0.45; }
+    default-window-height { proportion 0.80; }
+    default-floating-position x=100 y=100 relative-to="bottom-left"
 }
 
 window-rule {
@@ -112,10 +133,10 @@ binds {
   ISO_Level5_Shift+P { spawn-sh "flashy region"; }
   ISO_Level5_Shift+Z { spawn-sh "flashy zoom"; }
   ISO_Level5_Shift+W { spawn "nirigo.py"; }
-  ISO_Level5_Shift+N { spawn-sh "nifocus.sh notes || foot -a notes -T notes -e nvim ~/.notes/index.norg"; }
+  ISO_Level5_Shift+N { spawn-sh "nscratch.py -id notes -m -a || foot -a notes -T notes -e nvim ~/.notes/index.norg"; }
   ISO_Level5_Shift+Y { spawn-sh "nifocus.sh habits || foot -a habits -T habits -e nvim ~/.notes/habits.norg"; }
-  ISO_Level5_Shift+M { spawn-sh "nifocus.sh monitor || foot -a btop -T btop -e btop"; }
-  ISO_Level5_Shift+B { spawn-sh "nifocus.sh todo || foot -a todo -T todo -e taskwarrior-tui"; }
+  ISO_Level5_Shift+M { spawn-sh "nscratch.py -id monitor -m -a || foot -a monitor -T monitor -e btop"; }
+  ISO_Level5_Shift+B { spawn-sh "nscratch.py -id todo -m -a || foot -a todo -T todo -e taskwarrior-tui"; }
   ISO_Level5_Shift+I { spawn-sh "pkill -f -10 nwg-wrapper"; }
 
   ISO_Level5_Shift+Shift+Slash { show-hotkey-overlay; }
@@ -169,12 +190,9 @@ binds {
 
   ISO_Level5_Shift+Page_Down      { focus-workspace-down; }
   ISO_Level5_Shift+Page_Up        { focus-workspace-up; }
-  //    ISO_Level5_Shift+U              { focus-workspace-down; }
-  //   ISO_Level5_Shift+I              { focus-workspace-up; }
+  ISO_Level5_Shift+Tab        { focus-workspace-previous; }
   ISO_Level5_Shift+Ctrl+Page_Down { move-column-to-workspace-down; }
   ISO_Level5_Shift+Ctrl+Page_Up   { move-column-to-workspace-up; }
-  //   ISO_Level5_Shift+Ctrl+U         { move-column-to-workspace-down; }
-  //  ISO_Level5_Shift+Ctrl+I         { move-column-to-workspace-up; }
 
   ISO_Level5_Shift+Shift+Page_Down { move-workspace-down; }
   ISO_Level5_Shift+Shift+Page_Up   { move-workspace-up; }
