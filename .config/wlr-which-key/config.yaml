@@ -44,6 +44,9 @@ menu:
           - key: "z"
             desc: Zoom
             cmd: flashy zoom
+      - key: "k"
+        desc: Close Window
+        cmd: niri msg action close-window
       - key: "g"
         desc: Gif
         submenu:
@@ -71,8 +74,11 @@ menu:
     desc: Scratchpads
     submenu:
       - key: "u"
-        desc: Todo
+        desc: dropdown
         cmd: nscratch.py -id dropdown -m -a || foot -a dropdown -T dropdown
+      - key: "c"
+        desc: calculator
+        cmd: nscratch.py -id calculator -m -a || foot -a calculator -T calculator -e python -q
       - key: "t"
         desc: Todo
         cmd: nscratch.py -id todo -m -a || foot -a todo -T todo -e taskwarrior-tui
