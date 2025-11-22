@@ -10,17 +10,17 @@ run_unit() {
 # Opening pavucontrol solve an audio issue i'm having at boot.
 #sleep 5 && pavucontrol &
 
-run_unit waybar
-run_unit "easyeffects --gapplication-service"
-run_unit "pavucontrol --gapplication-service"
-run_unit "gammastep -P -O 2500"
-run_unit whatsap_on.sh
-run_unit dunst
-run_unit "swayidle -w"
-run_unit syncthing
-run_unit /usr/lib/polkit-kde-authentication-agent-1
-run_unit "wl-paste --type text --watch cliphist store"
-run_unit "systemctl --user import-environment PATH"
+waybar &
+easyeffects --gapplication-service &
+pavucontrol --gapplication-service &
+gammastep -P -O 2500 &
+whatsap_on.sh &
+dunst &
+swayidle -w &
+syncthing &
+/usr/lib/polkit-kde-authentication-agent-1 &
+wl-paste --type text --watch cliphist store &
+systemctl --user import-environment PATH &
 swaybg -i ~/.wallpapers/ign_unsplash32.png &
 nwg-wrapper -s usage.sh -c usage.css -r 1000 -p right -mr 20 -a end -mb 20 -j right -o DVI-D-1 &
 
