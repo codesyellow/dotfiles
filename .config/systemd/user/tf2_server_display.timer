@@ -1,9 +1,0 @@
-[Unit]
-Description=Timer to Update TF2 Player Display Every 30 Seconds
-
-[Timer]
-OnBootSec=5s
-OnUnitActiveSec=30s
-
-[Install]
-WantedBy=timers.target

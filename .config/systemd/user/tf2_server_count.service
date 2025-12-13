@@ -1,6 +1,0 @@
-[Unit]
-Description=Fetch TF2 Player Counts
-After=network.target
-
-[Service]
-ExecStart=/home/cie/.config/systemd/user/scripts/tf2_server_numbers.sh

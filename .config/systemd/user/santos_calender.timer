@@ -1,9 +1,0 @@
-[Unit]
-Description=Run santos_calender script every day
-
-[Timer]
-OnCalendar=*-*-* 06:00
-Persistent=true
-
-[Install]
-WantedBy=timers.target
