@@ -1,21 +1,8 @@
 #!/usr/bin/env bash
-run_unit() {
-  if [[ "$2" == "gui" ]]; then
-    app2unit -s a -- $1 &
-  else
-    app2unit -s b -- $1 &
-  fi
-}
-
-# Opening pavucontrol solve an audio issue i'm having at boot.
-#sleep 5 && pavucontrol &
-
-waybar &
 easyeffects --gapplication-service &
 pavucontrol --gapplication-service &
 gammastep -P -O 2500 &
-whatsap_on.sh &
-dunst &
+#dunst &
 swayidle -w &
 syncthing &
 /usr/lib/polkit-kde-authentication-agent-1 &
