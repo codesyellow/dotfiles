@@ -47,6 +47,9 @@ menu:
       - key: "k"
         desc: Close Window
         cmd: niri msg action close-window
+      - key: "b"
+        desc: Show Info
+        cmd: pkill -f -10 nwg-wrapper
       - key: "g"
         desc: Gif
         submenu:
