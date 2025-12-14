@@ -49,7 +49,7 @@ choice = subprocess.run(
 ).stdout.strip()
 
 if len(choice) > 0:
-    selected_id = choice.split("|")[0].strip()
+    selected_id = choice.split("-|-")[0].strip()
     print(selected_id)
     subprocess.run([
         "niri", "msg", "action", "focus-window", "--id", f"{selected_id}"
