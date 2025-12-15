@@ -1,71 +1,40 @@
 #!/bin/bash
-start_wob() {
-  wob=$(pgrep -f "volwob")
-  if [ -e "/tmp/volumepipe" ]; then
-    if [ -z "$wob" ]; then
-      nohup tail -f /tmp/volumepipe | wob -c ~/.config/wob/volwob.ini &
-      echo "Wob wasn't running, so process was started again."
-    fi
-  else
-    mkfifo /tmp/volumepipe 2>/dev/null
-    if [ -n "$wob" ]; then
-      wob_pid=$(pgrep -f "volwob")
-      pkill -9 $wob_pid
-      echo "killed wob"
-      nohup tail -f /tmp/volumepipe | wob -c ~/.config/wob/volwob.ini &
-    fi
-  fi
-}
-
-case "$1" in
-"up")
-  pactl set-sink-volume @DEFAULT_SINK@ +5%
-  ;;
-"up_slow")
-  pactl set-sink-volume @DEFAULT_SINK@ +1%
-  ;;
-"down")
-  pactl set-sink-volume @DEFAULT_SINK@ -5%
-  ;;
-"down_slow")
-  pactl set-sink-volume @DEFAULT_SINK@ -1%
-  ;;
-"mute")
-  pactl set-sink-mute @DEFAULT_SINK@ toggle
-  ;;
-esac
-
 function check_dependencies() {
   local ret=0
   for cmd in "$@"; do
-    ! [ $(command -v $cmd) ] && echo "Missing dependency: $cmd." && ret=1
+    if ! command -v "$cmd" >/dev/null 2>&1; then
+      echo "Missing dependency: $cmd."
+      ret=1
+    fi
   done
   return $ret
 }
 
-(check_dependencies "wob" "pamixer") || exit 1
+(check_dependencies "pamixer" "dunst") || exit 1
 
-VOLUME=$(pamixer --get-volume)
-MUTE=$(echo $AMIXER | grep -o '\[off\]' | tail -n 1)
-if [ "$VOLUME" -le 20 ]; then
-  ICON=audio-volume-low
-else
-  if [ "$VOLUME" -le 60 ]; then
-    ICON=audio-volume-medium
-  else
-    ICON=audio-volume-high
-  fi
-fi
-if [ "$MUTE" == "[off]" ]; then
-  ICON=audio-volume-muted
-fi
+user_input="$1"
 
-start_wob
-#echo $VOLUME
-echo $VOLUME >/tmp/volumepipe
-#pkill -RTMIN+13 waybar
-#notify-send.sh $VOLUME% \
-#  --replace=22 \
-#  -u low \
-#  -a volume \
-#  -i /usr/share/icons/AdwaitaLegacy/32x32/legacy/$ICON.png
+case "$user_input" in 
+  up)        
+    pamixer -i 5
+    ;;          
+  down)
+    pamixer -d 5
+    ;;
+  mute)
+    pamixer -m
+    ;;
+  small_up)
+    pamixer -i 1
+    ;;
+  small_down)
+    pamixer -d 1
+    ;;
+  *) 
+    pamixer --get-volume
+    ;;
+esac            
+
+current_volume=$(pamixer --get-volume)
+dunstify -r 32 "$current_volume"
+
