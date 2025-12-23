@@ -43,9 +43,13 @@ set history=1000
 set background=dark
 colorscheme gruvbox-material
 set number
+nnoremap <silent> <C-l> :noh<CR>
 
-map <esc> :noh <CR>
+" for being able to undo even after leaving the file
+set undofile
+set undodir=~/.vim/undo//
 
 let g:vimwiki_list = [{'path': '~/.vimwiki/',
                       \ 'syntax': 'markdown', 'ext': 'md'}]
+
 
