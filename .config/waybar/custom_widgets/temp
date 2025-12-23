@@ -10,5 +10,5 @@ if [[ "$temp" -ge 80 ]]; then
   state="warning"
 fi
 
-output=$(get_pango "CPT" "$temp°C")
+output=$(get_pango "TMP" "$temp°C")
 printf '{"text": "%s", "tooltip": "Temperatura: %s°C", "class": "%s"}\n' "$output" "$temp" "$state"

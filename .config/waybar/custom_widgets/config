@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
+TITLE_FONT="Rock Salt"
 MAIN_FONT="Monofur Nerd Font Mono"
 FONT_COLOR="#4F5B58"
 
 function get_pango() {
-  local title_pango="<span foreground='$FONT_COLOR' font_family='$MAIN_FONT'>$1</span>"
+  local title_pango="<span foreground='$FONT_COLOR' size='xx-small' font_family='$TITLE_FONT'>$1</span>"
   local content_pango=" <span font_family='$MAIN_FONT'>$2</span>"
 
   title_pango=${title_pango//\"/\\\"}

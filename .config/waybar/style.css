@@ -4,7 +4,7 @@
 }
 
 window#waybar {
-  background-color: #272E33;
+  background-color: #1D2021;
   font-family: "Pacifico";
 }
 
@@ -16,37 +16,37 @@ window#waybar {
   font-size: 12px;
   font-family: "Pacifico";
   font-weight: 900;
-  color: #D3C6AA;
-  background-color: #272E33;
+  color: #EBDBB2;
+  background-color: #1D2021;
   padding: 0 6px;
 }
 
 #workspaces button.empty {
-  color: #475258;
+  color: #282828;
 }
 
 #workspaces button.urgent {
-  color: #E69875;
+  color: #FB4934;
 }
 
 #workspaces button:hover {
-  color: #272E33;
-  background-color: #D3C6AA;
+  color: #1D2021;
+  background-color: #EBDBB2;
 }
 
 #workspaces button.focused {
-  color: #E69875;
+  color: #FB4934;
   opacity: 1;
 }
 
 #workspaces button.focused:hover {
-  color: #272E33;
+  color: #1D2021;
 }
 
 .warning {
   padding: 0 6px;
-  color: #E69875;
-  background-color: #272E33;
+  color: #FB4934;
+  background-color: #1D2021;
   font-weight: 900;
   font-size: 20px;
   font-family: "Monofur Nerd Font Mono";
@@ -54,7 +54,7 @@ window#waybar {
 
 .normal,
 .hidden {
-  color: #D3C6AA;
+  color: #EBDBB2;
   padding: 0 6px;
   font-weight: 900;
   font-size: 20px;
@@ -63,13 +63,13 @@ window#waybar {
 }
 
 .hidden {
-  background-color: #272E33;
-  color: #272E33;
+  background-color: #1D2021;
+  color: #1D2021;
 }
 
 .block {
-  background-color: #E69875;
-  color: #E69875;
+  background-color: #FB4934;
+  color: #FB4934;
   padding: 0 40px;
   font-weight: 900;
   font-size: 20px;
