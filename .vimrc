@@ -1,16 +1,18 @@
 call plug#begin()
 Plug 'vimwiki/vimwiki'
-Plug 'arcticicestudio/nord-vim'
+Plug 'sainnhe/gruvbox-material'
+Plug 'jasonccox/vim-wayland-clipboard'
 call plug#end()
 
 set nocompatible
 set foldmethod=manual
 filetype plugin indent on  " Load plugins according to detected filetype.
+set clipboard=unnamedplus
 syntax on                  " Enable syntax highlighting.
 set autoindent             " Indent according to previous line.
 set expandtab              " Use spaces instead of tabs.
-set softtabstop =4         " Tab key indents by 4 spaces.
-set shiftwidth  =4         " >> indents by 4 spaces.
+set softtabstop =2         " Tab key indents by 4 spaces.
+set shiftwidth  =2         " >> indents by 4 spaces.
 set shiftround             " >> indents to next multiple of 'shiftwidth'.
 set backspace   =indent,eol,start  " Make backspace work as you would expect.
 set hidden                 " Switch between buffers without having to save first.
@@ -39,7 +41,7 @@ set synmaxcol   =200       " Only highlight the first 200 columns.
 set termguicolors
 set history=1000
 set background=dark
-colorscheme nord
+colorscheme gruvbox-material
 set number
 
 map <esc> :noh <CR>
