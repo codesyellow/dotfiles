@@ -37,13 +37,13 @@ menu:
         submenu:
           - key: "s"
             desc: Current Monitor
-            cmd: flashy
+            cmd: nirishot
           - key: "r"
             desc: Region
-            cmd: flashy region
-          - key: "z"
-            desc: Zoom
-            cmd: flashy zoom
+            cmd: nirishot region
+          - key: "e"
+            desc: Edit
+            cmd: nirishot edit
       - key: "k"
         desc: Close Window
         cmd: niri msg action close-window
