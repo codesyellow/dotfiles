@@ -13,7 +13,7 @@ function check_dependencies() {
 
 (check_dependencies "niri" "slurp" "grim" "dunstify" "swappy") || exit 1
 
-# path to save the file
+# set the default path and also checks if that folder exists
 PIC_PATH="$HOME/.pictures"
 if ! [[ -d "$PIC_PATH" ]]; then
   mkdir "$PIC_PATH"
@@ -25,9 +25,9 @@ current_monitor=$(niri msg -j focused-output | jq -r '.name')
 
 # logic to create a name for the file
 if [[ -z "$1" ]]; then
-  file_name="$PIC_PATH"/"$current_monitor"_$(date +'%Y%m%d%H%M%S').jpg
+  file_name="$PIC_PATH"/"$current_monitor"_$(date +'%Y%m%d%H%M%S').png
 else
-  file_name="$PIC_PATH"/"$current_monitor"_$1_$(date +'%Y%m%d%H%M%S').jpg
+  file_name="$PIC_PATH"/"$current_monitor"_$1_$(date +'%Y%m%d%H%M%S').png
 fi
 
 case "$1" in
