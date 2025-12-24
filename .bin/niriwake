@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# check if focused window is equal to the focused monitor size
+
+idle_state=0
+
+while true;
+do
+focused_monitor_size=$(niri msg --json focused-output | jq -r '"\(.logical.width)x\(.logical.height)"')
+focused_window_size=$(niri msg --json windows |  jq -r '.[] | select(.is_focused) | .layout.window_size | (.[0]|tostring) + "x" + (.[1]|tostring)')
+
+if [[ "$focused_monitor_size" = "$focused_window_size" ]]; then
+  if [[ "$idle_state" = 0 ]]; then
+    idle_state=1
+    systemd-inhibit --what=idle --who=Caffeine --why="Window in Fullscreen" --mode=block sleep inf &
+    CAFFEINE_PID=$!
+    echo "starting systemd-inhibit"
+  fi
+else
+  if [[ "$idle_state" = 1 ]]; then
+    idle_state=0
+    kill $CAFFEINE_PID
+    echo "killing systemd-inhibit"
+  fi
+fi
+
+sleep 3
+done
