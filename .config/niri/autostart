@@ -2,14 +2,16 @@
 easyeffects --gapplication-service &
 pavucontrol --gapplication-service &
 gammastep -P -O 2500 &
-#dunst &
+dunst &
 swayidle -w &
+niriwake &
 syncthing &
 /usr/lib/polkit-kde-authentication-agent-1 &
 wl-paste --type text --watch cliphist store &
 systemctl --user import-environment PATH &
 swaybg -i ~/.wallpapers/ign_unsplash32.png &
-nwg-wrapper -s usage.sh -c usage.css -r 1000 -p right -mr 20 -a end -mb 20 -j right -o DVI-D-1 &
+#nwg-wrapper -s usage.sh -c usage.css -r 1000 -p right -mr 20 -a end -mb 20 -j right -o DVI-D-1 &
+cliphist list | wmenu | cliphist decode | wl-copy &
 
 # This is for fixing the audio cracking while using Easyeffects on games.
 pw-metadata -n settings 0 clock.force-rate 48000 && pw-metadata -n settings 0 clock.force-quantum 1024 &
