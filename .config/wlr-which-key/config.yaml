@@ -1,9 +1,9 @@
 # Theming
-font: JetBrainsMono Nerd Font 12
+font: Rock Salt 12
 background: "#282828d0"
 color: "#fbf1c7"
-border: "#8ec07c"
-separator: " ➜ "
+border: "#FB4934"
+separator: " ▶ "
 border_width: 2
 corner_r: 10
 padding: 15 # Defaults to corner_r
@@ -32,6 +32,9 @@ menu:
   - key: "a"
     desc: Action
     submenu:
+      - key: "c"
+        desc: Clipboard history
+        cmd: cliphist list | wmenu | cliphist decode | wl-copy
       - key: "s"
         desc: Screenshot
         submenu:
@@ -47,9 +50,6 @@ menu:
       - key: "k"
         desc: Close Window
         cmd: niri msg action close-window
-      - key: "b"
-        desc: Show Info
-        cmd: pkill -f -10 nwg-wrapper
       - key: "g"
         desc: Gif
         submenu:
