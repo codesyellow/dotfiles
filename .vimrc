@@ -1,9 +1,17 @@
 call plug#begin()
-Plug 'vimwiki/vimwiki'
-Plug 'sainnhe/gruvbox-material'
-Plug 'jasonccox/vim-wayland-clipboard'
+  Plug 'itchyny/lightline.vim'
+  Plug 'vimwiki/vimwiki'
+  Plug 'sainnhe/gruvbox-material'
+  Plug 'jasonccox/vim-wayland-clipboard'
 call plug#end()
 
+let mapleader = " "
+
+nnoremap <leader>e :Lexplore<CR>
+
+let g:netrw_banner = 0
+let g:netrw_winsize = 25
+let g:netrw_liststyle = 3 " Estilo em árvore (tree style)
 set nocompatible
 set foldmethod=manual
 filetype plugin indent on  " Load plugins according to detected filetype.
@@ -52,4 +60,14 @@ set undodir=~/.vim/undo//
 let g:vimwiki_list = [{'path': '~/.vimwiki/',
                       \ 'syntax': 'markdown', 'ext': 'md'}]
 
+" showtab
+set showtabline=2
 
+" open files in a new tab
+let g:netrw_browse_split = 3 
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+
+nnoremap <S-l> :tabnext<CR>
+nnoremap <S-h> :tabprevious<CR>
+nnoremap <C-t> :tabnew<CR>
