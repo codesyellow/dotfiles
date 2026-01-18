@@ -32,9 +32,9 @@ menu:
   - key: "a"
     desc: Action
     submenu:
-      - key: "c"
+      - key: "h"
         desc: Clipboard history
-        cmd: cliphist list | wmenu | cliphist decode | wl-copy
+        cmd: cliphist list | wmenu -l 10 | cliphist decode | wl-copy
       - key: "s"
         desc: Screenshot
         submenu:
@@ -65,23 +65,29 @@ menu:
     submenu:
       - key: "r"
         desc: Runner
-        cmd: wmenu-run -f 'Martian Mono Nerd Font 15'  -N '#272E33' -n '#D3C6AA' -S '#272E33' -s '#E69875'
+        cmd: wmenu-run -f 'Victor Mono Bold Italic 15'  -N '#272E33' -n '#D3C6AA' -S '#272E33' -s '#E69875'
       - key: "w"
         desc: Windows
         cmd: nirigo.py
       - key: "d"
         desc: Drag 
         cmd: imdrag /home/digo/Downloads /home/digo/.pictures /home/digo/.wallpapers
+      - key: "u"
+        desc: Utilities for some apps
+        submenu:
+            - key: "l"
+              desc: Set LSFG for process
+              cmd: vkpick
 
   - key: "s"
     desc: Scratchpads
     submenu:
       - key: "u"
         desc: dropdown
-        cmd: nscratch.py -id dropdown -m -a || foot -a dropdown -T dropdown
+        cmd: nscratch.py -id dropdown -m -a || alacritty --class dropdown -T dropdown -o "window.opacity=0.5"
       - key: "c"
         desc: calculator
-        cmd: nscratch.py -id calculator -m -a || foot -a calculator -T calculator -e python -q
+        cmd: nscratch.py -id calculator -m -a || foot -a calculator -T calculator -e python3 -q
       - key: "t"
         desc: Todo
         cmd: nscratch.py -id todo -m -a || foot -a todo -T todo -e taskwarrior-tui
