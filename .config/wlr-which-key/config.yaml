@@ -32,6 +32,9 @@ menu:
   - key: "a"
     desc: Action
     submenu:
+      - key: "r"
+        desc: Runner
+        cmd: wmenu-run -f 'Victor Mono Bold Italic 15'  -N '#272E33' -n '#D3C6AA' -S '#272E33' -s '#E69875'
       - key: "h"
         desc: Clipboard history
         cmd: cliphist list | wmenu -l 10 | cliphist decode | wl-copy
@@ -63,9 +66,6 @@ menu:
   - key: "e"
     desc: Exec
     submenu:
-      - key: "r"
-        desc: Runner
-        cmd: wmenu-run -f 'Victor Mono Bold Italic 15'  -N '#272E33' -n '#D3C6AA' -S '#272E33' -s '#E69875'
       - key: "w"
         desc: Windows
         cmd: nirigo.py
@@ -84,7 +84,7 @@ menu:
     submenu:
       - key: "u"
         desc: dropdown
-        cmd: nscratch.py -id dropdown -m -a || alacritty --class dropdown -T dropdown -o "window.opacity=0.5"
+        cmd: nscratch.py -id dropdown -m -a || foot -a dropdown -T dropdown
       - key: "c"
         desc: calculator
         cmd: nscratch.py -id calculator -m -a || foot -a calculator -T calculator -e python3 -q
