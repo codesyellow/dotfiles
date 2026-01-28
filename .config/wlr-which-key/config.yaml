@@ -69,6 +69,9 @@ menu:
       - key: "w"
         desc: Windows
         cmd: nirigo.py
+      - key: "t"
+        desc: Grab Text
+        cmd: "sh -c 'grim -g \"$(slurp)\" - | tesseract - - -l por+eng | wl-copy'"
       - key: "d"
         desc: Drag 
         cmd: imdrag /home/digo/Downloads /home/digo/.pictures /home/digo/.wallpapers
