@@ -70,8 +70,8 @@ menu:
         desc: Windows
         cmd: nirigo.py
       - key: "t"
-        desc: Grab Text
-        cmd: "sh -c 'grim -g \"$(slurp)\" - | tesseract - - -l por+eng | wl-copy'"
+        desc: Grab Text (Enhanced)
+        cmd: grab-text
       - key: "d"
         desc: Drag 
         cmd: imdrag /home/digo/Downloads /home/digo/.pictures /home/digo/.wallpapers
@@ -87,7 +87,7 @@ menu:
     submenu:
       - key: "u"
         desc: dropdown
-        cmd: nscratch.py -id dropdown -m -a || foot -a dropdown -T dropdown
+        cmd: nscratch.py -id dropdown -m -a || alacritty -o window.opacity=0.7 --class dropdown --title dropdown
       - key: "c"
         desc: calculator
         cmd: nscratch.py -id calculator -m -a || foot -a calculator -T calculator -e python3 -q
