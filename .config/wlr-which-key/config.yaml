@@ -93,7 +93,7 @@ menu:
         cmd: nscratch.py -id calculator -m -a || foot -a calculator -T calculator -e python3 -q
       - key: "t"
         desc: Todo
-        cmd: nscratch.py -id todo -m -a || foot -a todo -T todo -e taskwarrior-tui
+        cmd: nscratch.py -id Kuro -m -a || kuro
       - key: "b"
         desc: monitor
         cmd: nscratch.py -id monitor -m -a || foot -a monitor -T monitor -e btop 
