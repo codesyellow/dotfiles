@@ -1,64 +1,77 @@
 #!/usr/bin/env bash
 
-MONITOR=$1
-TIME=$2
+MODE="$1"      # screen | region
+TIME="${2:-5}" # duração padrão: 5s
 PIC_PATH="$HOME/.pictures"
+
 mkdir -p "$PIC_PATH"
 
-function check_dependencies() {
-  local ret=0
+check_dependencies() {
   for cmd in "$@"; do
-    ! command -v "$cmd" &>/dev/null && echo "Missing dependency: $cmd." && ret=1
+    command -v "$cmd" &>/dev/null || {
+      echo "Missing dependency: $cmd"
+      exit 1
+    }
   done
-  return $ret
 }
 
-(check_dependencies "notify-send.sh" "swaymsg" "ffmpeg" "slurp" "gpu-screen-recorder") || exit 1
+check_dependencies dunstify ffmpeg slurp gpu-screen-recorder
 
-record_monitor() {
-  local monitor="$MONITOR"
-  local timestamp
-  timestamp=$(date +'%Y%m%d%H%M%S')
-  local video_file="$PIC_PATH/gpu-recorder-$timestamp.mp4"
-  local gif_file="$PIC_PATH/gpu-recorder-$timestamp.gif"
+timestamp=$(date +'%Y%m%d%H%M%S')
+video_file="$PIC_PATH/record-$timestamp.mp4"
+gif_file="$PIC_PATH/record-$timestamp.gif"
 
-  gpu-screen-recorder -w screen -f 60 -o "$video_file" &
-
-  pid=$!
-  sleep "$TIME"
-  kill -SIGINT "$pid"
-  wait "$pid" 2>/dev/null
-
-  notify-send.sh "Converting to GIF..."
-  ffmpeg -y -i "$video_file" -vf "fps=10,scale=1000:-1:flags=lanczos" -c:v gif "$gif_file"
-  rm "$video_file"
-  notify-send.sh "Recorded to $gif_file"
+record_screen() {
+  gpu-screen-recorder \
+    -w screen \
+    -f 60 \
+    -o "$video_file" &
 }
 
 record_region() {
-  local region=$(slurp -f "%wx%h+%x+%y")
-  [[ -z "$region" || "$region" == "0x0+0+0" ]] && echo "Região inválida" && exit 1
+  region=$(slurp -f "%wx%h+%x+%y")
+  [[ -z "$region" ]] && exit 1
 
-  local timestamp
-  timestamp=$(date +'%Y%m%d%H%M%S')
-  local video_file="$PIC_PATH/gpu-recorder-$timestamp.mp4"
-  local gif_file="$PIC_PATH/gpu-recorder-$timestamp.gif"
-
-  gpu-screen-recorder -w region -region "$region" -f 30 -o "$video_file" &
-
-  pid=$!
-  sleep "$TIME"
-  kill -SIGINT "$pid"
-  wait "$pid" 2>/dev/null
-
-  notify-send.sh "Converting region to GIF..."
-  ffmpeg -y -i "$video_file" -vf "fps=10,scale=480:-1:flags=lanczos" -c:v gif "$gif_file"
-  rm "$video_file"
-  notify-send.sh "Region recorded to $gif_file"
+  gpu-screen-recorder \
+    -w region \
+    -region "$region" \
+    -f 30 \
+    -o "$video_file" &
 }
 
-if [[ "$1" == "region" ]]; then
+convert_to_gif() {
+  dunstify "Convertendo para GIF (Otimizado)..."
+
+  # Definimos variáveis para facilitar o ajuste
+  FPS=10
+  WIDTH=600  # Reduzir de 960 para 600 ajuda muito no tamanho
+  
+  # O segredo do FFmpeg para GIFs leves e bonitos é gerar uma paleta personalizada
+  # para cada vídeo antes de converter.
+  ffmpeg -y -i "$video_file" \
+    -vf "fps=$FPS,scale=$WIDTH:-1:flags=lanczos,palettegen" \
+    "$PIC_PATH/palette.png"
+
+  ffmpeg -y -i "$video_file" -i "$PIC_PATH/palette.png" \
+    -filter_complex "fps=$FPS,scale=$WIDTH:-1:flags=lanczos[x];[x][1:v]paletteuse=dither=sierra2_4a" \
+    "$gif_file"
+
+  rm "$video_file" "$PIC_PATH/palette.png"
+  dunstify "GIF salvo" "$gif_file"
+}
+
+case "$MODE" in
+region)
   record_region
-else
-  record_monitor
-fi
+  ;;
+*)
+  record_screen
+  ;;
+esac
+
+pid=$!
+sleep "$TIME"
+kill -SIGINT "$pid"
+wait "$pid" 2>/dev/null
+
+convert_to_gif
