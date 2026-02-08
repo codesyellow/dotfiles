@@ -41,7 +41,7 @@ for win in windows:
         })
 
 choice = subprocess.run(
-    ["wmenu", "-f", "Martian Mono Nerd Font 15", "-N", "#272E33", "-n", "#D3C6AA",
+    ["wmenu", "-f", "Victor Mono Bold Italic 14", "-N", "#272E33", "-n", "#D3C6AA",
      "-S", "#272E33", "-s", "#E69875", "-i", "-l", "5", "-p", "GoTo"],
     input=list_names,
     text=True,
