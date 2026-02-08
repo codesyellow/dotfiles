@@ -33,7 +33,7 @@ for win in windows:
     output = ws["output"]
 
     if output == monitor_name:
-        list_names += f"{win_id} -|- {title[:40]} -|- {app_id}\n"
+        list_names += f"{win_id}  {title[:40]}  {app_id}\n"
         list_info.append({
             "id": win_id,
             "title": title,
@@ -49,7 +49,7 @@ choice = subprocess.run(
 ).stdout.strip()
 
 if len(choice) > 0:
-    selected_id = choice.split("-|-")[0].strip()
+    selected_id = choice.split("")[0].strip()
     print(selected_id)
     subprocess.run([
         "niri", "msg", "action", "focus-window", "--id", f"{selected_id}"
