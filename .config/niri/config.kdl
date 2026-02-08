@@ -34,7 +34,7 @@ input {
   }
 
   warp-mouse-to-focus
-  }
+}
 
 // https://yalter.github.io/niri/Configuration:-Outputs
 output "HDMI-A-2" {
@@ -42,19 +42,25 @@ output "HDMI-A-2" {
   //  mode "1280x1024@75.025"
   mode "1920x1080@100.000"
   position x=0 y=0
+  layout {
+    gaps 20
+    default-column-width { proportion 0.90; }
+    // Anything else you want.
+  }
 }
 
 output "DVI-D-1" {
   mode "1360x768@60.015"
-  position x=1920 y=130
+  transform "270"
+  position x=1920 y=-180
 }
 
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
-  gaps 10
+  gaps 0
 
   center-focused-column "always"
-  default-column-width { proportion 0.90; }
+  default-column-width { proportion 1.0; }
 
   focus-ring {
     width 0
@@ -86,31 +92,31 @@ window-rule {
 }
 
 window-rule {
-    match app-id=r#"^dropdown|calculator$"#
-    open-on-workspace "scratch"
-    open-floating true
-    default-column-width { proportion 0.80; }
-    default-window-height { proportion 0.50; }
-    open-focused false
-    default-floating-position x=0 y=20 relative-to="top"
+  match app-id=r#"^dropdown|calculator$"#
+  open-on-workspace "scratch"
+  open-floating true
+  default-column-width { proportion 0.80; }
+  default-window-height { proportion 0.50; }
+  open-focused false
+  default-floating-position x=0 y=20 relative-to="top"
 }
 
 window-rule {
-    match app-id=r#"^notes|monitor|habits|todo$"#
-    open-on-workspace "scratch"
-    open-floating true
-    default-column-width { proportion 0.75; }
-    default-window-height { proportion 0.75; }
-    open-focused false
+  match app-id=r#"^notes|monitor|habits|todo|Kuro|IA$"#
+  open-on-workspace "scratch"
+  open-floating true
+  default-column-width { proportion 0.75; }
+  default-window-height { proportion 0.75; }
+  open-focused false
 }
 
 window-rule {
-    match app-id=r#"^todo$"#
-    open-on-workspace "scratch"
-    open-floating true
-    default-column-width { proportion 0.45; }
-    default-window-height { proportion 0.80; }
-    default-floating-position x=20 y=20 relative-to="bottom-left"
+  match app-id=r#"^todo$"#
+  open-on-workspace "scratch"
+  open-floating true
+  default-column-width { proportion 0.45; }
+  default-window-height { proportion 0.80; }
+  default-floating-position x=20 y=20 relative-to="bottom-left"
 }
 
 window-rule {
@@ -119,14 +125,20 @@ window-rule {
 }
 
 window-rule {
-    match app-id=r#"^heroic|steam|gamescope$"#
-    open-on-workspace "mon-1"
+  match app-id=r#"^heroic|steam|gamescope$"#
+  open-on-workspace "mon-1"
+}
+
+// open as floating
+window-rule {
+  match app-id=r#"^ankivim$"#
+  open-floating true
 }
 
 // https://yalter.github.io/niri/Configuration%3A-Miscellaneous.html
 cursor {
-    hide-after-inactive-ms 1000
-    hide-when-typing
+  hide-after-inactive-ms 1000
+  hide-when-typing
 }
 
 environment {
@@ -134,8 +146,8 @@ environment {
   CLUTTER_BACKEND "wayland"
   GTK_IM_MODULE "cedilla"
   QT_IM_MODULE "cedilla"
-//  GTK_THEME "Everforest-Dark"
- // XCURSOR_THEME "GoogleDot-Nord"
+  //  GTK_THEME "Everforest-Dark"
+  // XCURSOR_THEME "GoogleDot-Nord"
   QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
   QT_QPA_PLATFORM "wayland"
   QT_AUTO_SCREEN_SCALE_FACTOR "1"
@@ -231,8 +243,8 @@ binds {
   ISO_Level5_Shift+Shift+WheelScrollUp        { focus-column-left; }
   ISO_Level5_Shift+Ctrl+Shift+WheelScrollDown { move-column-right; }
   ISO_Level5_Shift+Ctrl+Shift+WheelScrollUp   { move-column-left; }
-  
-  
+
+
   ISO_Level5_Shift+Shift+R { switch-preset-window-height; }
   ISO_Level5_Shift+Ctrl+R { reset-window-height; }
   ISO_Level5_Shift+F { maximize-column; }
