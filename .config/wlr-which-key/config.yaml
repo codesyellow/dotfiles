@@ -69,6 +69,9 @@ menu:
       - key: "w"
         desc: Windows
         cmd: nirigo.py
+      - key: "v"
+        desc: AnkiVim
+        cmd: ankivim.sh
       - key: "g"
         desc: Search
         cmd: searchon
@@ -94,6 +97,9 @@ menu:
       - key: "c"
         desc: Calculator
         cmd: nscratch.py -id calculator -m -a || foot -a calculator -T calculator -e python3 -q
+      - key: "i"
+        desc: AI
+        cmd: nscratch.py -id IA -m -a || foot -a IA -T IA -e aichat -r quick-res
       - key: "t"
         desc: Todo
         cmd: nscratch.py -id Kuro -m -a || kuro
