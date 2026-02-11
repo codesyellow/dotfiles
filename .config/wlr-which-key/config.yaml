@@ -34,7 +34,8 @@ menu:
     submenu:
       - key: "r"
         desc: Runner
-        cmd: wmenu-run -f 'Victor Mono Bold Italic 15'  -N '#272E33' -n '#D3C6AA' -S '#272E33' -s '#E69875'
+        cmd: |
+          rofi -show combi -modes "combi,drun,run" -combi-modi "drun,run" -theme-str 'configuration { font: "Victor Mono Bold Italic 15"; display-combi: "cmd"; } * { bg0: #272E33; fg0: #D3C6AA; accent: #E69875; } window { background-color: @bg0; } mainbox { children: [inputbar, listview]; } inputbar { background-color: @bg0; children: [prompt, entry]; padding: 5px; } prompt { background-color: @bg0; text-color: @accent; margin: 0 15px 0 0; } entry { background-color: @bg0; text-color: @fg0; } listview { background-color: @bg0; lines: 12; } element { padding: 4px; background-color: @bg0; text-color: @fg0; } element selected { background-color: @accent; text-color: @bg0; }'
       - key: "h"
         desc: Clipboard history
         cmd: cliphist list | wmenu -l 10 | cliphist decode | wl-copy
