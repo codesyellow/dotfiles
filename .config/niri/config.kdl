@@ -39,13 +39,22 @@ input {
 // https://yalter.github.io/niri/Configuration:-Outputs
 output "HDMI-A-2" {
   focus-at-startup
-  //  mode "1280x1024@75.025"
   mode "1920x1080@100.000"
   position x=0 y=0
   layout {
+    default-column-width { proportion 0.9; }
     gaps 20
-    default-column-width { proportion 0.90; }
-    // Anything else you want.
+
+    preset-window-heights {
+        proportion 0.33333
+        proportion 0.5
+        proportion 1.0
+    }
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.9
+    }
   }
 }
 
@@ -53,18 +62,32 @@ output "DVI-D-1" {
   mode "1360x768@60.015"
   transform "270"
   position x=1920 y=-180
+  layout {
+    gaps 4
+    default-column-width { proportion 0.92; }
+    preset-window-heights {
+        proportion 0.33333
+        proportion 0.5
+        proportion 1.0
+    }
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.92
+    }
+    focus-ring {
+      width 2
+    }
+  }
 }
 
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
-  gaps 0
-
   center-focused-column "always"
-  default-column-width { proportion 1.0; }
 
   focus-ring {
-    width 0
-    active-color "#E69875"
+    width 4
+    active-color "#83C092"
     inactive-color "#2E383C"
     urgent-color "#891652"
   }
@@ -73,10 +96,10 @@ layout {
     // Uncomment the next line to enable shadows.
     on
 
-    softness 30
-    spread 5
+    softness 5
+    spread 4
     offset x=0 y=5
-    color "#0007"
+    color "#1E2326"
   }
 }
 
@@ -152,6 +175,10 @@ environment {
   QT_QPA_PLATFORM "wayland"
   QT_AUTO_SCREEN_SCALE_FACTOR "1"
   QT_QPA_PLATFORMTHEME "qt5ct"
+  ENABLE_LAYER_MESA_ANTI_LAG "1"
+  MANGOHUD "1"
+  PROTON_ENABLE_WAYLAND "1"
+  PROTON_USE_NTSYNC "1"
 }
 
 // https://yalter.github.io/niri/Configuration%3A-Key-Bindings.html
@@ -161,16 +188,16 @@ binds {
   ISO_Level5_Shift+Ctrl+1 { move-column-to-workspace "mon-1"; }
   ISO_Level5_Shift+Ctrl+2 { move-column-to-workspace "mon-2"; }
 
-  ISO_Level5_Shift+J { spawn "volume.sh" "down"; }
-  ISO_Level5_Shift+W { spawn "nirigo.py"; }
-  ISO_Level5_Shift+K { spawn "volume.sh" "up"; }
-  ISO_Level5_Shift+S { spawn-sh "wlr-which-key --initial-keys 's'"; }
-  ISO_Level5_Shift+A { spawn-sh "wlr-which-key --initial-keys 'a'"; }
-  ISO_Level5_Shift+E { spawn-sh "wlr-which-key --initial-keys 'e'"; }
-  ISO_Level5_Shift+I { spawn-sh "pkill -f -10 nwg-wrapper"; }
+  ISO_Level5_Shift+J hotkey-overlay-title="Change volume down" { spawn "volume.sh" "down"; }
+  ISO_Level5_Shift+W hotkey-overlay-title="Use Nirigo" { spawn "nirigo.py"; }
+  ISO_Level5_Shift+K hotkey-overlay-title="Change volume up" { spawn "volume.sh" "up"; }
+  ISO_Level5_Shift+S hotkey-overlay-title="Scratchpads Keychords" { spawn-sh "wlr-which-key --initial-keys 's'"; }
+  ISO_Level5_Shift+A hotkey-overlay-title="Action Keychords" { spawn-sh "wlr-which-key --initial-keys 'a'"; }
+  ISO_Level5_Shift+E hotkey-overlay-title="Exec Keychords" { spawn-sh "wlr-which-key --initial-keys 'e'"; }
+  ISO_Level5_Shift+I hotkey-overlay-title="Toggle nwg-wrapper" { spawn-sh "pkill -f -10 nwg-wrapper"; }
 
-  ISO_Level5_Shift+Shift+Slash { show-hotkey-overlay; }
-  ISO_Level5_Shift+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "foot" "-e" "zellij"; }
+  ISO_Level5_Shift+Shift+k { show-hotkey-overlay; }
+  ISO_Level5_Shift+T hotkey-overlay-title="Open a Terminal: Foot" { spawn "foot" "-e" "zellij"; }
   Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
   ISO_Level5_Shift+O repeat=false { toggle-overview; }
@@ -206,7 +233,7 @@ binds {
   ISO_Level5_Shift+Shift+Right { focus-monitor-right; }
   ISO_Level5_Shift+Shift+H     { focus-monitor-left; }
   ISO_Level5_Shift+Shift+J     { focus-monitor-down; }
-  ISO_Level5_Shift+Shift+K     { focus-monitor-up; }
+//  ISO_Level5_Shift+Shift+K     { focus-monitor-up; }
   ISO_Level5_Shift+Shift+L     { focus-monitor-right; }
 
   ISO_Level5_Shift+Shift+Ctrl+Left  { move-column-to-monitor-left; }
@@ -244,8 +271,8 @@ binds {
   ISO_Level5_Shift+Ctrl+Shift+WheelScrollDown { move-column-right; }
   ISO_Level5_Shift+Ctrl+Shift+WheelScrollUp   { move-column-left; }
 
-
   ISO_Level5_Shift+Shift+R { switch-preset-window-height; }
+  ISO_Level5_Shift+R { switch-preset-column-width; }
   ISO_Level5_Shift+Ctrl+R { reset-window-height; }
   ISO_Level5_Shift+F { maximize-column; }
   ISO_Level5_Shift+Shift+F { fullscreen-window; }

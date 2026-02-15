@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-waybar &
+#waybar &
 easyeffects --gapplication-service &
 pavucontrol --gapplication-service &
 gammastep -P -O 2500 &
