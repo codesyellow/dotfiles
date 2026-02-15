@@ -11,7 +11,7 @@ syncthing &
 wl-paste --watch cliphist store &
 systemctl --user import-environment PATH &
 swaybg -o DVI-D-1 -i ~/.wallpapers/branislav-rodman-SZuHuORT0fE-unsplash.jpg -o HDMI-A-2 -i ~/.wallpapers/forest_stairs.jpg
-#nwg-wrapper -s usage.sh -c usage.css -r 1000 -p right -mr 20 -a end -mb 20 -j right -o DVI-D-1 &
+nwg-wrapper -s sysinfo.sh -c sysinfo.css -r 1000 -p right -mr 50 -a start -mt 50 -j right
 
 # This is for fixing the audio cracking while using Easyeffects on games.
 pw-metadata -n settings 0 clock.force-rate 48000 && pw-metadata -n settings 0 clock.force-quantum 1024 &
