@@ -1,7 +1,7 @@
 call plug#begin()
   Plug 'itchyny/lightline.vim'
   Plug 'vimwiki/vimwiki'
-  Plug 'sainnhe/gruvbox-material'
+  Plug 'sainnhe/everforest'
   Plug 'jasonccox/vim-wayland-clipboard'
 call plug#end()
 
@@ -49,8 +49,11 @@ set synmaxcol   =200       " Only highlight the first 200 columns.
 set termguicolors
 set history=1000
 set background=dark
-colorscheme gruvbox-material
+let g:everforest_background = 'hard'
+let g:everforest_better_performance = 1
 set number
+colorscheme everforest
+let g:lightline = {'colorscheme' : 'everforest'}
 nnoremap <silent> <C-l> :noh<CR>
 
 " for being able to undo even after leaving the file
