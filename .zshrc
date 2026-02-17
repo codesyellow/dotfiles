@@ -1,17 +1,14 @@
 # Lines configured by zsh-newuser-install
-
+export XMODIFIERS="@im=local"
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_STATE_HOME=$HOME/.local/state
 export XDG_CACHE_HOME=$HOME/.cache
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
-#export TERM="alacritty"
-export EDITOR=/usr/bin/nvim
-export CM_LAUNCHER=dmenu
-export VISUAL=/usr/bin/nvim
-export NNN_USE_EDITOR=1
-export NNN_OPENER="xdg-open"
+export EDITOR=/usr/bin/vim
+export VISUAL=/usr/bin/vim
+export DISPLAY=:0
 
 bindkey -v
 source ~/.aliases.zsh
@@ -70,7 +67,3 @@ setopt hist_find_no_dups
 setopt autocd beep extendedglob nomatch
 
 eval "$(zoxide init --cmd cd zsh)"
-eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/posh.toml)"
-
-
-export PATH=$PATH:/home/digo/.spicetify
