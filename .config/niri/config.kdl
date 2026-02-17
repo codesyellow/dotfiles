@@ -194,7 +194,7 @@ binds {
   ISO_Level5_Shift+S hotkey-overlay-title="Scratchpads Keychords" { spawn-sh "wlr-which-key --initial-keys 's'"; }
   ISO_Level5_Shift+A hotkey-overlay-title="Action Keychords" { spawn-sh "wlr-which-key --initial-keys 'a'"; }
   ISO_Level5_Shift+E hotkey-overlay-title="Exec Keychords" { spawn-sh "wlr-which-key --initial-keys 'e'"; }
-  ISO_Level5_Shift+I hotkey-overlay-title="Toggle nwg-wrapper" { spawn-sh "pkill -f -10 nwg-wrapper"; }
+  ISO_Level5_Shift+I hotkey-overlay-title="Toggle nwg-wrapper" { spawn-sh "nwg-focus.sh"; }
 
   ISO_Level5_Shift+Shift+k { show-hotkey-overlay; }
   ISO_Level5_Shift+T hotkey-overlay-title="Open a Terminal: Foot" { spawn "foot" "-e" "zellij"; }
