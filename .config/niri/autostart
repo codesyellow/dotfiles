@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 #waybar &
 easyeffects --gapplication-service &
-pavucontrol --gapplication-service &
-wsunset -t 4000 &
+gammastep -P -O 2500 &
+eww daemon &
 dunst &
+swayidle -w &
 niriwake &
 /usr/lib/polkit-kde-authentication-agent-1 &
 wl-paste --watch cliphist store &
 systemctl --user import-environment PATH &
+swaybg -o DVI-D-1 -i ~/.wallpapers/branislav-rodman-SZuHuORT0fE-unsplash.jpg -o HDMI-A-1 -i ~/.wallpapers/forest_stairs.jpg
 nwg-wrapper -s sysinfo.sh -c sysinfo.css -r 1000 -p right -mr 50 -a start -mt 50 -j right
 
 # This is for fixing the audio cracking while using Easyeffects on games.

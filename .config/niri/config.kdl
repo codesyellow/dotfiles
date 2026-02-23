@@ -9,13 +9,13 @@ screenshot-path "/home/digo/.pictures/"
 
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Named-Workspaces
 workspace "mon-1" {
-  open-on-output "HDMI-A-2"
+  open-on-output "HDMI-A-1"
 }
 workspace "mon-2" {
   open-on-output "DVI-D-1"
 }
 workspace "scratch" {
-  open-on-output "HDMI-A-2"
+  open-on-output "HDMI-A-1"
 }
 
 // https://yalter.github.io/niri/Configuration:-Input
@@ -37,7 +37,7 @@ input {
 }
 
 // https://yalter.github.io/niri/Configuration:-Outputs
-output "HDMI-A-2" {
+output "HDMI-A-1" {
   focus-at-startup
   mode "1920x1080@100.000"
   position x=0 y=0
@@ -194,7 +194,7 @@ binds {
   ISO_Level5_Shift+S hotkey-overlay-title="Scratchpads Keychords" { spawn-sh "wlr-which-key --initial-keys 's'"; }
   ISO_Level5_Shift+A hotkey-overlay-title="Action Keychords" { spawn-sh "wlr-which-key --initial-keys 'a'"; }
   ISO_Level5_Shift+E hotkey-overlay-title="Exec Keychords" { spawn-sh "wlr-which-key --initial-keys 'e'"; }
-  ISO_Level5_Shift+I hotkey-overlay-title="Toggle nwg-wrapper" { spawn-sh "nwg-focus.sh"; }
+  ISO_Level5_Shift+I hotkey-overlay-title="Toggle eww" { spawn-sh "eww open --toggle hud"; }
 
   ISO_Level5_Shift+Shift+k { show-hotkey-overlay; }
   ISO_Level5_Shift+T hotkey-overlay-title="Open a Terminal: Foot" { spawn "foot" "-e" "zellij"; }
