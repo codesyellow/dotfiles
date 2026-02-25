@@ -68,8 +68,8 @@ menu:
     desc: Exec
     submenu:
       - key: "w"
-        desc: Windows
-        cmd: nirigo.py
+        desc: Copy window title
+        cmd: copy_window_title.sh
       - key: "v"
         desc: AnkiVim
         cmd: ankivim.sh
