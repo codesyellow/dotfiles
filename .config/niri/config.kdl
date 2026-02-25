@@ -124,22 +124,36 @@ window-rule {
   default-floating-position x=0 y=20 relative-to="top"
 }
 
+// top right
 window-rule {
-  match app-id=r#"^notes|monitor|habits|todo|Kuro|IA$"#
+  match app-id=r#"^IA$"#
+  open-on-workspace "scratch"
+  open-floating true
+  default-column-width { proportion 0.40; }
+  default-window-height { proportion 0.95; }
+  open-focused false
+  default-floating-position x=20 y=20 relative-to="top-right"
+}
+
+// top left
+window-rule {
+  match app-id=r#"^Kuro|todo$"#
+  open-on-workspace "scratch"
+  open-floating true
+  default-column-width { proportion 0.40; }
+  default-window-height { proportion 0.95; }
+  open-focused false
+  default-floating-position x=20 y=20 relative-to="top-left"
+}
+
+// center
+window-rule {
+  match app-id=r#"^notes|monitor|habits$"#
   open-on-workspace "scratch"
   open-floating true
   default-column-width { proportion 0.75; }
   default-window-height { proportion 0.75; }
   open-focused false
-}
-
-window-rule {
-  match app-id=r#"^todo$"#
-  open-on-workspace "scratch"
-  open-floating true
-  default-column-width { proportion 0.45; }
-  default-window-height { proportion 0.80; }
-  default-floating-position x=20 y=20 relative-to="bottom-left"
 }
 
 window-rule {
