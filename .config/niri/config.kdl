@@ -1,5 +1,6 @@
 // https://yalter.github.io/niri/Configuration:-Introduction
-spawn-at-startup "~/.config/niri/autostart"
+spawn-at-startup "niriwake"
+spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" "PATH"
 hotkey-overlay {
   skip-at-startup
 }
@@ -42,7 +43,7 @@ output "HDMI-A-1" {
   mode "1920x1080@100.000"
   position x=0 y=0
   layout {
-    default-column-width { proportion 0.9; }
+    default-column-width { proportion 0.94; }
     gaps 20
 
     preset-window-heights {
@@ -51,9 +52,9 @@ output "HDMI-A-1" {
         proportion 1.0
     }
     preset-column-widths {
-        proportion 0.33333
-        proportion 0.5
-        proportion 0.9
+        proportion 0.33
+        proportion 0.50
+        proportion 0.94
     }
   }
 }
@@ -83,10 +84,9 @@ output "DVI-D-1" {
 
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
-  center-focused-column "always"
-
+  always-center-single-column
   focus-ring {
-    width 4
+    width 2
     active-color "#83C092"
     inactive-color "#2E383C"
     urgent-color "#891652"
@@ -148,7 +148,7 @@ window-rule {
 
 // center
 window-rule {
-  match app-id=r#"^notes|monitor|habits$"#
+  match app-id=r#"^notes|monitor|habits|lowfi$"#
   open-on-workspace "scratch"
   open-floating true
   default-column-width { proportion 0.75; }
@@ -261,7 +261,7 @@ binds {
 
   ISO_Level5_Shift+Page_Down      { focus-workspace-down; }
   ISO_Level5_Shift+Page_Up        { focus-workspace-up; }
-  ISO_Level5_Shift+Tab        { focus-workspace-previous; }
+  ISO_Level5_Shift+Tab        { focus-window-previous; }
   ISO_Level5_Shift+Ctrl+Page_Down { move-column-to-workspace-down; }
   ISO_Level5_Shift+Ctrl+Page_Up   { move-column-to-workspace-up; }
 
