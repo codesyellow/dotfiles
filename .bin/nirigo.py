@@ -28,59 +28,12 @@ for win in windows:
 
 input_str = "\n".join(list_items)
 
-rofi_theme = f"""
-* {{
-    font: "Victor Mono Bold Italic 14";
-    bg: #272E33;
-    fg: #D3C6AA;
-    accent: #E69875;
-    background-color: @bg;
-    text-color: @fg;
-}}
-window {{
-    width: 35%;
-    border: 2px;
-    border-color: @accent;
-    background-color: @bg;
-}}
-mainbox {{
-    children: [ inputbar, listview ];
-}}
-inputbar {{
-    children: [ prompt, entry ];
-    background-color: @bg;
-}}
-prompt {{
-    background-color: @accent;
-    text-color: @bg;
-    padding: 4px 10px;
-}}
-entry {{
-    padding: 4px;
-    text-color: @fg;
-    placeholder: "Search...";
-}}
-listview {{
-    lines: 8;
-    scrollbar: false;
-}}
-element {{
-    padding: 4px;
-}}
-element selected {{
-    background-color: @accent;
-    text-color: @bg;
-}}
-"""
-
-# --- 3. Execução ---
 try:
     proc = subprocess.run(
         [
             "rofi", "-dmenu", 
             "-i", 
             "-p", "GoTo",
-            "-theme-str", rofi_theme
         ],
         input=input_str,
         text=True,
@@ -94,4 +47,4 @@ try:
         subprocess.run(["niri", "msg", "action", "focus-window", "--id", selected_id])
 
 except FileNotFoundError:
-    print("Erro: Instale o rofi-wayland.")
+    print("Err: install rofi-wayland.")
