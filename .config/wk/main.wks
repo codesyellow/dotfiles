@@ -1,0 +1,34 @@
+
+v "+Volume" 
+{
+    k "Aumentar" %{{pactl set-sink-volume @DEFAULT_SINK@ +5%}}
+    j "Diminuir" %{{pactl set-sink-volume @DEFAULT_SINK@ -5%}}
+}
+
+a "+Action"
+{
+    s "+Screenshot" {
+      s "Current Monitor" %{{xshot.sh screen}}
+      r "Select Region" %{{xshot.sh region}}
+    }
+}
+
+e "+Exec"
+{
+    d "Drag and Drop" %{{imdrag /home/digo/Downloads /home/digo/.pictures /home/digo/.wallpapers}}
+    v "AnkiVim" %{{ankivim.sh}}
+    u "+Utilities" {
+      l "Set LSFG for process" %{{vkpick}}
+    }
+}
+
+s "+Scrachpads"
+{
+    u "Term" %{{tdrop -ma -w 70% -h 40% -x 15% -y 40 -n drop-term st -c dropdown}}
+    c "Calc" %{{tdrop -ma -w 40% -x 20 -y 40 -n drop-calc st -c dropdown -e python3 -q}}
+    l "Lowfi" %{{tdrop -ma -w 40% -x 20 -y 40 -n drop-lowfi st -c dropdown -e lowfi -p}}
+    i "AI" %{{tdrop -ma -w 40% -h 95% -x 20 -y 40 -n drop-ai st -c dropdown -e aichat -r quick-res}}
+    t "Kuro" %{{tdrop -ma -w 40% -h 95% -x 20 -y 40 kuro}}
+    n "Notes" %{{tdrop -ma -w 70% -h 70% -x 15% -y 15% -n drop-notes st -c dropdown -e vim ~/.vimwiki/index.md}}
+    b "Btop" %{{tdrop -ma -w 70% -h 70% -x 15% -y 15% -n drop-btop st -c dropdown -e btop}}
+}
