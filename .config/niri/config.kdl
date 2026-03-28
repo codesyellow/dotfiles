@@ -1,6 +1,13 @@
 // https://yalter.github.io/niri/Configuration:-Introduction
 spawn-at-startup "niriwake"
+spawn-at-startup "eww-hide-bghud.sh"
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" "PATH"
+
+// this is for scratchpad
+spawn-at-startup "alacritty -o window.opacity=0.7 --class dropdown --title dropdown"
+spawn-at-startup "kuro"
+spawn-at-startup "foot -a IA -T IA -e aichat -r quick-res"
+
 hotkey-overlay {
   skip-at-startup
 }
@@ -43,7 +50,7 @@ output "HDMI-A-1" {
   mode "1920x1080@100.000"
   position x=0 y=0
   layout {
-    default-column-width { proportion 0.94; }
+    //default-column-width { proportion 0.94; }
     gaps 20
 
     preset-window-heights {
@@ -84,9 +91,9 @@ output "DVI-D-1" {
 
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
-  always-center-single-column
+  center-focused-column "always"
   focus-ring {
-    width 2
+    width 4
     active-color "#83C092"
     inactive-color "#2E383C"
     urgent-color "#891652"
@@ -202,9 +209,7 @@ binds {
   ISO_Level5_Shift+Ctrl+1 { move-column-to-workspace "mon-1"; }
   ISO_Level5_Shift+Ctrl+2 { move-column-to-workspace "mon-2"; }
 
-  ISO_Level5_Shift+J hotkey-overlay-title="Change volume down" { spawn "volume.sh" "down"; }
   ISO_Level5_Shift+W hotkey-overlay-title="Use Nirigo" { spawn "nirigo.py"; }
-  ISO_Level5_Shift+K hotkey-overlay-title="Change volume up" { spawn "volume.sh" "up"; }
   ISO_Level5_Shift+S hotkey-overlay-title="Scratchpads Keychords" { spawn-sh "wlr-which-key --initial-keys 's'"; }
   ISO_Level5_Shift+A hotkey-overlay-title="Action Keychords" { spawn-sh "wlr-which-key --initial-keys 'a'"; }
   ISO_Level5_Shift+E hotkey-overlay-title="Exec Keychords" { spawn-sh "wlr-which-key --initial-keys 'e'"; }
@@ -223,8 +228,8 @@ binds {
   ISO_Level5_Shift+Up    { focus-window-up; }
   ISO_Level5_Shift+Right { focus-column-right; }
   ISO_Level5_Shift+H     { focus-column-left; }
-  //   ISO_Level5_Shift+J     { focus-window-down; }
-  //    ISO_Level5_Shift+K     { focus-window-up; }
+  ISO_Level5_Shift+J     { focus-window-down; }
+  ISO_Level5_Shift+K     { focus-window-up; }
   ISO_Level5_Shift+L     { focus-column-right; }
 
   ISO_Level5_Shift+Ctrl+Left  { move-column-left; }
@@ -245,10 +250,10 @@ binds {
   ISO_Level5_Shift+Shift+Down  { focus-monitor-down; }
   ISO_Level5_Shift+Shift+Up    { focus-monitor-up; }
   ISO_Level5_Shift+Shift+Right { focus-monitor-right; }
-  ISO_Level5_Shift+Shift+H     { focus-monitor-left; }
+//  ISO_Level5_Shift+Shift+H     { focus-monitor-left; }
   ISO_Level5_Shift+Shift+J     { focus-monitor-down; }
 //  ISO_Level5_Shift+Shift+K     { focus-monitor-up; }
-  ISO_Level5_Shift+Shift+L     { focus-monitor-right; }
+//  ISO_Level5_Shift+Shift+L     { focus-monitor-right; }
 
   ISO_Level5_Shift+Shift+Ctrl+Left  { move-column-to-monitor-left; }
   ISO_Level5_Shift+Shift+Ctrl+Down  { move-column-to-monitor-down; }
@@ -297,8 +302,10 @@ binds {
 
   ISO_Level5_Shift+Ctrl+C { center-visible-columns; }
 
-  ISO_Level5_Shift+Minus { set-column-width "-10%"; }
-  ISO_Level5_Shift+Equal { set-column-width "+10%"; }
+  ISO_Level5_Shift+Shift+H { set-column-width "-10%"; }
+  ISO_Level5_Shift+Shift+L { set-column-width "+10%"; }
+  ISO_Level5_Shift+Comma  { consume-window-into-column; }
+  ISO_Level5_Shift+Period { expel-window-from-column; }
 
   ISO_Level5_Shift+Shift+Minus { set-window-height "-10%"; }
   ISO_Level5_Shift+Shift+Equal { set-window-height "+10%"; }
