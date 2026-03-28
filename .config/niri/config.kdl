@@ -76,7 +76,7 @@ output "DVI-D-1" {
     preset-window-heights {
         proportion 0.33333
         proportion 0.5
-        proportion 1.0
+        proportion 0.92
     }
     preset-column-widths {
         proportion 0.33333
@@ -91,7 +91,7 @@ output "DVI-D-1" {
 
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
-  center-focused-column "always"
+  center-focused-column "never" // or always
   focus-ring {
     width 4
     active-color "#83C092"
@@ -215,7 +215,7 @@ binds {
   ISO_Level5_Shift+E hotkey-overlay-title="Exec Keychords" { spawn-sh "wlr-which-key --initial-keys 'e'"; }
   ISO_Level5_Shift+I hotkey-overlay-title="Toggle eww" { spawn-sh "eww open --toggle hud"; }
 
-  ISO_Level5_Shift+Shift+k { show-hotkey-overlay; }
+  ISO_Level5_Shift+Shift+I { show-hotkey-overlay; }
   ISO_Level5_Shift+T hotkey-overlay-title="Open a Terminal: Foot" { spawn "foot" "-e" "zellij"; }
   Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
@@ -251,7 +251,7 @@ binds {
   ISO_Level5_Shift+Shift+Up    { focus-monitor-up; }
   ISO_Level5_Shift+Shift+Right { focus-monitor-right; }
 //  ISO_Level5_Shift+Shift+H     { focus-monitor-left; }
-  ISO_Level5_Shift+Shift+J     { focus-monitor-down; }
+//  ISO_Level5_Shift+Shift+J     { focus-monitor-down; }
 //  ISO_Level5_Shift+Shift+K     { focus-monitor-up; }
 //  ISO_Level5_Shift+Shift+L     { focus-monitor-right; }
 
@@ -273,7 +273,7 @@ binds {
   ISO_Level5_Shift+Shift+Page_Down { move-workspace-down; }
   ISO_Level5_Shift+Shift+Page_Up   { move-workspace-up; }
   ISO_Level5_Shift+Shift+U         { move-workspace-down; }
-  ISO_Level5_Shift+Shift+I         { move-workspace-up; }
+  // ISO_Level5_Shift+Shift+I         { move-workspace-up; }
 
   ISO_Level5_Shift+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
   ISO_Level5_Shift+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
@@ -304,11 +304,12 @@ binds {
 
   ISO_Level5_Shift+Shift+H { set-column-width "-10%"; }
   ISO_Level5_Shift+Shift+L { set-column-width "+10%"; }
+  ISO_Level5_Shift+Shift+J { set-window-height "-10%"; }
+  ISO_Level5_Shift+Shift+K { set-window-height "+10%"; }
+
   ISO_Level5_Shift+Comma  { consume-window-into-column; }
   ISO_Level5_Shift+Period { expel-window-from-column; }
 
-  ISO_Level5_Shift+Shift+Minus { set-window-height "-10%"; }
-  ISO_Level5_Shift+Shift+Equal { set-window-height "+10%"; }
 
   ISO_Level5_Shift+V       { toggle-window-floating; }
   ISO_Level5_Shift+Shift+V { switch-focus-between-floating-and-tiling; }
