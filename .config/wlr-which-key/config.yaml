@@ -56,6 +56,18 @@ menu:
           - key: "l"
             desc: "Comsume or Expel right window"
             cmd: "niri msg action consume-or-expel-window-right"
+          - key: "K"
+            desc: "Decrease the height of the window"
+            cmd: "niri msg action set-window-height '-20%'"
+          - key: "J"
+            desc: "Increase the height of the window"
+            cmd: "niri msg action set-window-height '+20%'"
+          - key: "H"
+            desc: "Decrease the width of the window"
+            cmd: "niri msg action set-window-width '-20%'"
+          - key: "L"
+            desc: "Increase the width of the window"
+            cmd: "niri msg action set-window-width '+20%'"
 
       - key: "r"
         desc: Runner
