@@ -32,13 +32,38 @@ menu:
   - key: "a"
     desc: Action
     submenu:
+      - key: "v"
+        desc: "Volume"
+        submenu:
+          - key: "k"
+            desc: "Increase Volume"
+            cmd: "volume.sh up"
+          - key: "j"
+            desc: "Decrease Volume"
+            cmd: "volume.sh down"
+      - key: "l"
+        desc: Niri Layout
+        submenu:
+          - key: "+"
+            desc: "Combine into column"
+            cmd: "niri msg action consume-window-into-column"
+          - key: "-"
+            desc: "Expel bottom window"
+            cmd: "niri msg action expel-window-from-column"
+          - key: "h"
+            desc: "Comsume or Expel left window"
+            cmd: "niri msg action consume-or-expel-window-left"
+          - key: "l"
+            desc: "Comsume or Expel right window"
+            cmd: "niri msg action consume-or-expel-window-right"
+
       - key: "r"
         desc: Runner
         cmd: |
           rofi -show combi -modes "combi,drun,run" -combi-modi "drun,run" -theme-str 'configuration { font: "Victor Mono Bold Italic 15"; display-combi: "cmd"; } * { bg0: #272E33; fg0: #D3C6AA; accent: #E69875; } window { background-color: @bg0; } mainbox { children: [inputbar, listview]; } inputbar { background-color: @bg0; children: [prompt, entry]; padding: 5px; } prompt { background-color: @bg0; text-color: @accent; margin: 0 15px 0 0; } entry { background-color: @bg0; text-color: @fg0; } listview { background-color: @bg0; lines: 12; } element { padding: 4px; background-color: @bg0; text-color: @fg0; } element selected { background-color: @accent; text-color: @bg0; }'
       - key: "h"
         desc: Clipboard history
-        cmd: cliphist list | wmenu -l 10 | cliphist decode | wl-copy
+        cmd: cliphist list | rofi -dmenu | cliphist decode | wl-copy
       - key: "s"
         desc: Screenshot
         submenu:
@@ -95,6 +120,9 @@ menu:
       - key: "u"
         desc: Dropdown
         cmd: nscratch.py -id dropdown -m -a || alacritty -o window.opacity=0.7 --class dropdown --title dropdown
+      - key: "l"
+        desc: lowfi
+        cmd: nscratch.py -id lowfi -m -a || foot -a lowfi -T lowfi -e lowfi -p
       - key: "c"
         desc: Calculator
         cmd: nscratch.py -id calculator -m -a || foot -a calculator -T calculator -e python3 -q
