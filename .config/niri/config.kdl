@@ -122,6 +122,12 @@ window-rule {
 }
 
 window-rule {
+  match app-id=r#"^it.catboy.ripdrag$"#
+  open-floating true
+  default-floating-position x=-730 y=20 relative-to="top"
+}
+
+window-rule {
   match app-id=r#"^dropdown|calculator$"#
   open-on-workspace "scratch"
   open-floating true
@@ -221,7 +227,7 @@ binds {
 
   ISO_Level5_Shift+O repeat=false { toggle-overview; }
 
-  ISO_Level5_Shift+U repeat=false { close-window; }
+  ISO_Level5_Shift+Shift+C repeat=false { close-window; }
 
   ISO_Level5_Shift+Left  { focus-column-left; }
   ISO_Level5_Shift+Down  { focus-window-down; }
