@@ -1,11 +1,11 @@
 # Theming
-font: Victor Mono Bold Italic 14
-background: "#282828d0"
-color: "#fbf1c7"
-border: "#FB4934"
-separator: " ▶ "
+font: JetBrainsMono Nerd Font 18
+background: "#2e3440d0"
+color: "#eceff4"
+border: "#a3be8c"
+separator: "   "
 border_width: 2
-corner_r: 10
+corner_r: 0
 padding: 15 # Defaults to corner_r
 rows_per_column: 5 # No limit by default
 column_padding: 25 # Defaults to padding
@@ -32,18 +32,41 @@ menu:
   - key: "a"
     desc: Action
     submenu:
+      - key: "Return"
+        desc: "Exit"
+        cmd: ""
       - key: "v"
         desc: "Volume"
         submenu:
+          - key: "Return"
+            desc: "Exit"
+            cmd: ""
           - key: "k"
             desc: "Increase Volume"
             cmd: "volume.sh up"
+            keep_open: true
+          - key: "l"
+            desc: "Increase volume slowly"
+            cmd: "volume.sh small_up"
+            keep_open: true
+          - key: "h"
+            desc: "Decrease volume slowly"
+            cmd: "volume.sh small_down"
+            keep_open: true
+          - key: "m"
+            desc: "Mute"
+            cmd: "volume.sh mute"
+            keep_open: true
           - key: "j"
             desc: "Decrease Volume"
             cmd: "volume.sh down"
+            keep_open: true
       - key: "l"
         desc: Niri Layout
         submenu:
+          - key: "Return"
+            desc: "Exit"
+            cmd: ""
           - key: "+"
             desc: "Combine into column"
             cmd: "niri msg action consume-window-into-column"
@@ -79,6 +102,9 @@ menu:
       - key: "s"
         desc: Screenshot
         submenu:
+          - key: "Return"
+            desc: "Exit"
+            cmd: ""
           - key: "s"
             desc: Current Monitor
             cmd: nirishot
@@ -94,6 +120,9 @@ menu:
       - key: "g"
         desc: Gif
         submenu:
+          - key: "Return"
+            desc: "Exit"
+            cmd: ""
           - key: "g"
             desc: Current Monitor
             cmd: regif 8
@@ -104,6 +133,9 @@ menu:
   - key: "e"
     desc: Exec
     submenu:
+      - key: "Return"
+        desc: "Exit"
+        cmd: ""
       - key: "w"
         desc: Copy window title
         cmd: copy_window_title.sh
@@ -122,6 +154,9 @@ menu:
       - key: "u"
         desc: Utilities for some apps
         submenu:
+            - key: "Return"
+              desc: "Exit"
+              cmd: ""
             - key: "l"
               desc: Set LSFG for process
               cmd: vkpick
@@ -129,6 +164,9 @@ menu:
   - key: "s"
     desc: Scratchpads
     submenu:
+      - key: "Return"
+        desc: "Exit"
+        cmd: ""
       - key: "u"
         desc: Dropdown
         cmd: nscratch.py -id dropdown -m -a || alacritty -o window.opacity=0.7 --class dropdown --title dropdown
