@@ -4,7 +4,7 @@
     ### Display ###
 
     # Which monitor should the notifications be displayed on.
-    monitor = 1
+    monitor = 0
 
     # Display notification on focused monitor.  Possible modes are:
     #   mouse: follow mouse pointer
@@ -24,7 +24,7 @@
     # dynamic width from 0 to 300
     # width = (0, 300)
     # constant width of 300
-    width = (0, 300)
+    width = (200, 600)
 
     # The maximum height of a single notification, excluding the frame.
     height = (0, 300)
@@ -34,7 +34,7 @@
     origin = top-center
 
     # Offset from the origin
-    offset = (50,50)
+    offset = (0,0)
 
     # Scale factor. It is auto-detected if value is 0.
     scale = 0
@@ -124,7 +124,7 @@
 
     ### Text ###
 
-    font = Monofur Nerd Font Mono 16
+    font = Victor Mono Bold Italic 18
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
@@ -251,6 +251,7 @@
     # corners.
     # The radius will be automatically lowered if it exceeds half of the
     # notification height to avoid clipping text and/or icons.
+    corners = bottom
     corner_radius = 0
 
     # Ignore the dbus closeNotification message.
@@ -311,17 +312,20 @@
     per_monitor_dpi = false
 
 [urgency_low]
-background = "#d8dee9"
-foreground = "#2e3440"
+background = "#272E33"
+foreground = "#D3C6AA"
 
 [urgency_normal]
-background = "#d8dee9"
-foreground = "#2e3440"
+background = "#272E33"
+foreground = "#D3C6AA"
 
 [urgency_critical]
-background = "#EF5A6F"
-foreground = "#2e3440"
+background = "#272E33"
+foreground = "#E67E80"
 
+[play_sound]
+    summary = "*"
+    script = ~/.config/dunst/play_sound.sh
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
 #
