@@ -1,78 +1,84 @@
 * {
-  padding: 0;
-  margin: 0;
+  font-family: "JetbrainsMono Nerd Font";
+  font-size: 14px;
+  color: #272E33;
 }
 
 window#waybar {
-  background-color: #1D2021;
-  font-family: "Pacifico";
+  background-color: #272E33;
 }
 
-#workspaces {
-  padding-right: 8px;
+tooltip {
+  background: rgba(46, 52, 64, 0.9);
+  color: #ffffff;
+  border-radius: 4px;
+  border: 1px solid #D3C6AA;
 }
 
-#workspaces button {
-  font-size: 12px;
-  font-family: "Pacifico";
-  font-weight: 900;
-  color: #EBDBB2;
-  background-color: #1D2021;
-  padding: 0 6px;
+tooltip label {
+  color: #D3C6AA;
 }
 
-#workspaces button.empty {
-  color: #282828;
+label.module {
+  border-left: 1px solid rgba(211, 198, 170, 0.2);
+  color: #D3C6AA;
+  padding: 4px 8px;
+  margin: 0 2px;
 }
 
-#workspaces button.urgent {
-  color: #FB4934;
+#tray {
+  border-left: 1px solid rgba(211, 198, 170, 0.2);
+  color: #D3C6AA;
+  padding: 4px 8px;
+  padding-right: 6px;
 }
 
-#workspaces button:hover {
-  color: #1D2021;
-  background-color: #EBDBB2;
+#custom-power {
+  padding: 0 4px 0 10px;
 }
 
-#workspaces button.focused {
-  color: #FB4934;
-  opacity: 1;
+#idle_inhibitor {
+  padding-right: 12px;
 }
 
-#workspaces button.focused:hover {
-  color: #1D2021;
+#idle_inhibitor.activated {
+  color: #E67E80;
+  padding-right: 11px;
 }
 
-.warning {
-  padding: 0 6px;
-  color: #FB4934;
-  background-color: #1D2021;
-  font-weight: 900;
-  font-size: 20px;
-  font-family: "Monofur Nerd Font Mono";
+#memory,
+#cpu {
+  padding-right: 11px;
 }
 
-.normal,
-.hidden {
-  color: #EBDBB2;
-  padding: 0 6px;
-  font-weight: 900;
-  font-size: 20px;
-  font-family: "Monofur Nerd Font Mono";
-  min-height: 0;
+#clock {
+  border: none;
 }
 
-.hidden {
-  background-color: #1D2021;
-  color: #1D2021;
+#language {
+  padding-right: 12px;
 }
 
-.block {
-  background-color: #FB4934;
-  color: #FB4934;
-  padding: 0 40px;
-  font-weight: 900;
-  font-size: 20px;
+#pulseaudio.muted,
+#language.INTL {
+  background-color: #E67E80;
 }
 
-/*# sourceMappingURL=style.css.map */
+#pulseaudio.bluetooth {
+  background-color: #DBBC7F;
+}
+
+menu {
+  background: rgba(46, 52, 64, 0.9);
+  border: 1px solid #D3C6AA;
+}
+
+menu menuitem label {
+  color: #D3C6AA;
+}
+
+menu item:hover {
+  background: rgba(46, 52, 64, 0.9);
+  border: 1px solid #D3C6AA;
+  color: #D3C6AA;
+}
