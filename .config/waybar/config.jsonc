@@ -5,6 +5,7 @@
   //  "spacing": 4, // Gaps between modules (4px)
   // Choose the order of the modules
   "modules-left": [
+    "custom/pymor"
   ],
   "modules-center": [
     "clock",
@@ -44,6 +45,21 @@
   },
   "memory": {
     "format": "{}% "
+  },
+  "custom/pymor": {
+      "format": "{} ",
+      "exec": "$HOME/.config/waybar/scripts/pomodoro.sh",
+      "return-type": "json",
+      "format-icons": {
+        "pomo_full": "",
+        "pomo_half": "",
+        "pomo_empty": ""
+      },
+      "signal": 25,
+      "interval": "once",
+      "on-click": "$HOME/.bin/pymor.py",
+      "on-click-right": "kill $(cat /tmp/pymor_pid.pid)",
+      "on-click-middle": "niri msg action switch-layout 0"
   },
   "temperature": {
     "thermal-zone": 2,

@@ -82,3 +82,18 @@ menu item:hover {
   border: 1px solid #D3C6AA;
   color: #D3C6AA;
 }
+
+#custom-pymor {
+  border-left: none;
+  border-right: 1px solid rgba(211, 198, 170, 0.2);
+  padding-right: 5px;
+  color: #D3C6AA;
+}
+
+#custom-pymor.critical {
+  color: #E67E80;
+}
+
+#custom_pymor.normal {
+  color: #D3C6AA;
+}

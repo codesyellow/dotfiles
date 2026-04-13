@@ -7,6 +7,7 @@
     "sass": "^1.99.0"
   },
   "scripts": {
+    "setup": "chmod +x scripts/*",
     "dev": "sass --watch src/style.sass style.css --no-source-map"
   }
 }
