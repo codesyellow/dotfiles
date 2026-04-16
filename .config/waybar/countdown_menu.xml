@@ -16,14 +16,15 @@
         <property name="label">10 minutes</property>
       </object>
     </child>
-    <child>
-      <object class="GtkSeparatorMenuItem" id="delimiter1"/>
-    </child>
+    
     <child>
       <object class="GtkMenuItem" id="15_minutes">
         <property name="label">15 minutes</property>
       </object>
     </child>
+ <child>
+      <object class="GtkSeparatorMenuItem" id="delimiter1"/>
+    </child> 
   <child>
       <object class="GtkMenuItem" id="20_minutes">
         <property name="label">20 minutes</property>

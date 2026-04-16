@@ -68,9 +68,16 @@ label.module {
   background-color: #DBBC7F;
 }
 
+#custom-lock {
+  border-left: none;
+  border-right: 1px solid rgba(211, 198, 170, 0.2);
+  padding-right: 13px;
+}
+
 menu {
   background: rgba(46, 52, 64, 0.9);
   border: 1px solid #D3C6AA;
+  border-radius: 0;
 }
 
 menu menuitem label {

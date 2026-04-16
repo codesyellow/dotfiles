@@ -7,6 +7,7 @@
   "modules-left": [
     "custom/pymor",
     "custom/countdown",
+    "custom/lock",
   ],
   "modules-center": [
     "clock",
@@ -75,6 +76,15 @@
       "20_minutes": "$HOME/.config/waybar/scripts/countdown.py -t 20",
       "25_minutes": "$HOME/.config/waybar/scripts/countdown.py -t 25",
       "30_minutes": "$HOME/.config/waybar/scripts/countdown.py -t 30",
+    }
+  },
+ "custom/lock": {
+    "format": "󰌿",
+    "menu": "on-click",
+    "menu-file": "$HOME/.config/waybar/lock_menu.xml", // Menu file in resources folder
+    "menu-actions": {
+      "lock": "swaylock -f",
+      "lock_turnoff": "killall -USR1 swayidle",
     }
   },
   "temperature": {
