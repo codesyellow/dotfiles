@@ -83,13 +83,15 @@ menu item:hover {
   color: #D3C6AA;
 }
 
-#custom-pymor {
+#custom-pymor,
+#custom-countdown {
   border-left: none;
   border-right: 1px solid rgba(211, 198, 170, 0.2);
   padding-right: 5px;
   color: #D3C6AA;
 }
 
+#custom-countdown.critical,
 #custom-pymor.critical {
   color: #E67E80;
 }

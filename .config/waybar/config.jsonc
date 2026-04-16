@@ -5,7 +5,8 @@
   //  "spacing": 4, // Gaps between modules (4px)
   // Choose the order of the modules
   "modules-left": [
-    "custom/pymor"
+    "custom/pymor",
+    "custom/countdown",
   ],
   "modules-center": [
     "clock",
@@ -50,16 +51,31 @@
       "format": "{} ",
       "exec": "$HOME/.config/waybar/scripts/pomodoro.sh",
       "return-type": "json",
-      "format-icons": {
-        "pomo_full": "",
-        "pomo_half": "",
-        "pomo_empty": ""
-      },
       "signal": 25,
       "interval": "once",
-      "on-click": "$HOME/.bin/pymor.py",
+      "on-click": "setsid $HOME/config/waybar/scripts/pymor.py &",
       "on-click-right": "kill $(cat /tmp/pymor_pid.pid)",
-      "on-click-middle": "niri msg action switch-layout 0"
+  },
+ "custom/countdown": {
+      "format": "{} ",
+      "exec": "$HOME/.config/waybar/scripts/countdown_widget.sh",
+      "return-type": "json",
+      "signal": 5,
+      "interval": "once",
+//      "on-click": "$HOME/.config/waybar/scripts/countdown_gui.sh",
+      "on-click-right": "kill $(cat /tmp/countdown_pid.pid)",
+      "on-scroll-up": "",
+      "menu": "on-click",
+      "menu-file": "$HOME/.config/waybar/countdown_menu.xml", // Menu file in resources folder
+      "menu-actions": {
+      "3_minutes": "$HOME/.config/waybar/scripts/countdown.py -t 3",
+      "5_minutes": "$HOME/.config/waybar/scripts/countdown.py -t 5",
+      "10_minutes": "$HOME/.config/waybar/scripts/countdown.py -t 10",
+      "15_minutes": "$HOME/.config/waybar/scripts/countdown.py -t 15",
+      "20_minutes": "$HOME/.config/waybar/scripts/countdown.py -t 20",
+      "25_minutes": "$HOME/.config/waybar/scripts/countdown.py -t 25",
+      "30_minutes": "$HOME/.config/waybar/scripts/countdown.py -t 30",
+    }
   },
   "temperature": {
     "thermal-zone": 2,
